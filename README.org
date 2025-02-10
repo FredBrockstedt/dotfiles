@@ -16,5 +16,13 @@ To setup the dotfiles run
   make
 #+end_src
 
+** Testing
+test stowing config files with
+
+#+begin_src bash
+  make test
+#+end_src
+
+
 * License
 For further information on the terms and conditions of the license, please refer to the LICENSE file provided along side this project.
