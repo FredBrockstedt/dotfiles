@@ -5,6 +5,10 @@
 alias ls='ls --color=auto'
 alias ll='ls -lAh --color=auto'
 
-
 # reproduce the open command from macos
 alias open=xdg-open
+
+# copying
+alias rsync="rsync --no-i-r"
+alias cp="cp -v"
+alias mv="mv -v"
