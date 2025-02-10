@@ -12,3 +12,4 @@ alias open=xdg-open
 alias rsync="rsync --no-i-r"
 alias cp="cp -v"
 alias mv="mv -v"
+

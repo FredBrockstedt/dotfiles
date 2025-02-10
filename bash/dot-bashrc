@@ -3,3 +3,5 @@
 
 source ${HOME}/.bash.d/aliases
 source ${HOME}/.bash.d/exports
+source ${HOME}/.bash.d/completion
+

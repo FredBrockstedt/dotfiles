@@ -1,0 +1,6 @@
+# Freds Dotfiles 2025
+# the full BSD 2-Clause License can be found in the LICENSE file
+
+source /usr/share/bash-completion/*
+bind -s 'set completion-ignore-case on'
+complete -cf sudo
