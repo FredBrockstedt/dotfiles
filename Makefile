@@ -14,9 +14,8 @@ default:
 	@stow --verbose \
 	     --restow \
 	     --dotfiles \
-	     --adopt \
 	     --target ${HOME} \
-	     bash
+	     bash vim
 
 test:
 	podman build .
