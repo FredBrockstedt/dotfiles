@@ -1,0 +1,19 @@
+# Freds Dotfiles 2025
+# the full BSD 2-Clause License can be found in the LICENSE file
+set nocompatible
+
+" Syntax and highlighting
+syntax on
+colorscheme desert
+set autoindent
+set smartindent
+set hlsearch
+set incsearch
+set showmatch
+filetype plugin indent on
+
+" Set the default tab width to 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
