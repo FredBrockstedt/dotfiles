@@ -9,4 +9,5 @@ FROM fedora:latest
 WORKDIR /dotfiles
 COPY . .
 RUN dnf -y install make stow
-RUN make
+RUN make delete && make
+RUN ls -lA ${HOME}

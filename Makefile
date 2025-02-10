@@ -17,5 +17,11 @@ default:
 	     --target ${HOME} \
 	     bash vim
 
+# remove files commonly found on a blank install
+delete:
+	@rm -fv ${HOME}/.bashrc \
+	       ${HOME}/.vimrc
+
 test:
 	podman build .
+

@@ -16,6 +16,14 @@ To setup the dotfiles run
   make
 #+end_src
 
+If you have trouble, because your distro already set up some files by default
+you can try to delete them, be careful as this doesn't keep any backups.
+
+#+begin_src bash
+  make delete
+#+end_src
+
+
 ** Testing
 test stowing config files with
 
