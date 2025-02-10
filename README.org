@@ -3,7 +3,7 @@ This repository is exactly what you think it is.
 Should you be tempted to try these settings, proceed with caution.
 
 ** Requirements
-The following software packages are required to run setup the dotfiles:
+The following software packages are required to setup the dotfiles:
 - [[https://www.gnu.org/software/stow/manual/stow.html][stow]]
 - [[https://www.gnu.org/software/make/][make]]
 
