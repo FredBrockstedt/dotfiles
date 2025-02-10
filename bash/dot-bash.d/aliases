@@ -1,0 +1,10 @@
+# Freds Dotfiles 2025
+# the full BSD 2-Clause License can be found in the LICENSE file
+
+# ls command
+alias ls='ls --color=auto'
+alias ll='ls -lAh --color=auto'
+
+
+# reproduce the open command from macos
+alias open=xdg-open

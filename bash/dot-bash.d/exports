@@ -1,5 +1,4 @@
 # Freds Dotfiles 2025
 # the full BSD 2-Clause License can be found in the LICENSE file
 
-source ${HOME}/.bash.d/aliases
-source ${HOME}/.bash.d/exports
+export LS_COLORS="di=1;32"
