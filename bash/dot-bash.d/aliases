@@ -13,3 +13,13 @@ alias rsync="rsync --no-i-r"
 alias cp="cp -v"
 alias mv="mv -v"
 
+# re/moving
+alias mv="mv -v"
+alias rm="rm -frv"
+
+# less in color
+alias less="less -r"
+
+# searching
+alias locate="localte -i"
+alias grep="grep --color"
