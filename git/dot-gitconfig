@@ -1,0 +1,8 @@
+# Freds Dotfiles 2025
+# the full BSD 2-Clause License can be found in the LICENSE file
+
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+name = fred
+email = FredBrockstedt@gMail.com

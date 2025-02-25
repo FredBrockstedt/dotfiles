@@ -15,7 +15,7 @@ default:
 	     --restow \
 	     --dotfiles \
 	     --target ${HOME} \
-	     bash vim zsh oh-my-zsh
+	     git bash vim zsh oh-my-zsh
 
 # update the submodules
 submodule:
