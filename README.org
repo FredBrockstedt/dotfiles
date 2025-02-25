@@ -31,6 +31,13 @@ test stowing config files with
   make test
 #+end_src
 
+* Todo List
+Add the following configurations to the dot files
+
+- [ ] z-shell config
+- [ ] tmux
+- [ ] mpv
+- [ ] git
 
 * License
 For further information on the terms and conditions of the license, please refer to the LICENSE file provided along side this project.
