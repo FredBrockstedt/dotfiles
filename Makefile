@@ -7,7 +7,7 @@ SOURCE_DIR = .
 TARGET_DIR = ~
 BACKUP_DIR = "${HOME}/backup"
 
-.PHONY: default backup
+.PHONY: default backup submodule
 
 default:
 	@echo "* Stowing ..."
@@ -16,6 +16,10 @@ default:
 	     --dotfiles \
 	     --target ${HOME} \
 	     bash vim
+
+# update the submodules
+submodule:
+	git submodule update --init --recursive
 
 # remove files commonly found on a blank install
 delete:
