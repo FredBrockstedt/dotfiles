@@ -35,7 +35,7 @@ test stowing config files with
 * Todo List
 Add the following configurations to the dot files
 
-- [ ] z-shell config
+- [X] z-shell config
 - [ ] tmux
 - [ ] mpv
 - [ ] git

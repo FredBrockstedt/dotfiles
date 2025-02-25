@@ -9,7 +9,7 @@ BACKUP_DIR = "${HOME}/backup"
 
 .PHONY: default backup submodule
 
-default:
+default: submodule
 	@echo "* Stowing ..."
 	@stow --verbose \
 	     --restow \
@@ -19,6 +19,7 @@ default:
 
 # update the submodules
 submodule:
+	@git submodule add --force 'https://github.com/ohmyzsh/ohmyzsh.git' zsh/dot-oh-my-zsh 
 	@git submodule update --init --recursive
 
 # remove files commonly found on a blank install
@@ -27,7 +28,8 @@ delete:
 	         ${HOME}/.vimrc \
 		 ${HOME}/.gitconfig \
 		 ${HOME}/.zshrc \
-		 ${HOME}/.oh-my-zsh
+		 ${HOME}/.oh-my-zsh \
+		 ${HOME}/oh-my-zsh
 
 test:
 	podman build .
