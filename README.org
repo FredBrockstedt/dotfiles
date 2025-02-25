@@ -4,6 +4,7 @@ Should you be tempted to try these settings, proceed with caution.
 
 ** Requirements
 The following software packages are required to setup the dotfiles:
+- git
 - [[https://www.gnu.org/software/stow/manual/stow.html][stow]]
 - [[https://www.gnu.org/software/make/][make]]
 
