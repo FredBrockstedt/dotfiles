@@ -8,6 +8,8 @@ FROM fedora:latest
 
 WORKDIR /dotfiles
 COPY . .
-RUN dnf -y install make stow
-RUN make delete && make
+RUN dnf -y install make stow git
+RUN make delete
+RUN make submodule
+RUN make
 RUN ls -lA ${HOME}
