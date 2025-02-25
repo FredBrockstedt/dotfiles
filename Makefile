@@ -4,7 +4,7 @@
 PROJECT = dotfiles
 
 SOURCE_DIR = .
-TARGET_DIR = ~
+TARGET_DIR = "${HOME}"
 BACKUP_DIR = "${HOME}/backup"
 
 .PHONY: default backup submodule
@@ -15,16 +15,19 @@ default:
 	     --restow \
 	     --dotfiles \
 	     --target ${HOME} \
-	     git bash vim zsh oh-my-zsh
+	     git bash vim zsh
 
 # update the submodules
 submodule:
-	git submodule update --init --recursive
+	@git submodule update --init --recursive
 
 # remove files commonly found on a blank install
 delete:
-	@rm -fv ${HOME}/.bashrc \
-	       ${HOME}/.vimrc
+	@rm -fvr ${HOME}/.bashrc \
+	         ${HOME}/.vimrc \
+		 ${HOME}/.gitconfig \
+		 ${HOME}/.zshrc \
+		 ${HOME}/.oh-my-zsh
 
 test:
 	podman build .
