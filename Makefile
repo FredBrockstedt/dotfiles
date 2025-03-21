@@ -18,8 +18,10 @@ endef
 
 .PHONY: default zsh zsh_submodule backup config git bash vim tmux
 
+# this is what is run when you call make
 default: git bash vim tmux config
 
+# actually mpv.conf
 config:
 	stow --verbose \
 	     --restow \
@@ -27,6 +29,7 @@ config:
 	     --target ${HOME}/.config \
 	     config
 
+# individual programs
 git: 
 	$(call my_stow)
 
