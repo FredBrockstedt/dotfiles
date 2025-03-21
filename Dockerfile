@@ -15,4 +15,6 @@ RUN make
 RUN make zsh
 RUN make emacs \
     && emacs --batch --eval "(load-file \"~/.emacs\")"
+RUN make vim \
+    && vim -c "q"
 RUN ls -lA ${HOME}
