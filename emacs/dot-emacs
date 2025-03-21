@@ -1,17 +1,22 @@
-;; color themes
+;; Themes
 (load-theme 'wombat)
+
+;; Startup message
+(setq inhibit-startup-message t)
 
 ;; behavior 
 (line-number-mode t)
 (column-number-mode t)
 (when (display-graphic-p)
   (tool-bar-mode -1)
-  (scroll-bar-mode -1)
-  (windmove-default-keybindings))
+  (scroll-bar-mode -1))
 
+;; Cursor movement
+(windmove-default-keybindings)
+;; make forward word behave more like vim
+(global-set-key  (kbd "M-f") 'forward-to-word)
 
-(setq inhibit-startup-message t)
-
+;; Spellchecking
 (setenv "DICTIONARY" "de_DE")
 
 ;; package repositorie
