@@ -29,30 +29,24 @@ config:
 	     config
 
 # individual programs
-git: 
+git bash vim tmux: 
 	$(call my_stow)
 
-bash:
-	$(call my_stow)
+# Z-Shell mostly used on Macintosh systems
+zsh: update_submodules
+	$(call mystow)
 
-vim: 
-	$(call my_stow)
-
-tmux:
-	$(call my_stow)	
-
-emacs: 
+emacs: update_submodules
 	$(call my_stow)	
 	(cd emacs/dot-emacs.d/extensions/avy && git checkout 0.5.0)
+
+update_submodules:
+	@git submodule update --init --recursive
 
 add_submodules:
 	@git submodule add --force 'https://github.com/ohmyzsh/ohmyzsh.git' zsh/dot-oh-my-zsh 
 	@git submodule add --force 'https://github.com/abo-abo/avy.git' emacs/dot-emacs.d/extensions/avy
 	@git submodule update --init --recursive
-
-# Z-Shell mostly used on Macintosh systems
-zsh: 
-	$(call mystow)
 
 # remove files commonly found on a blank install
 delete:
