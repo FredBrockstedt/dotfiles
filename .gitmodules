@@ -4,3 +4,6 @@
 [submodule "emacs/dot-emacs.d/extensions/avy"]
 	path = emacs/dot-emacs.d/extensions/avy
 	url = https://github.com/abo-abo/avy.git
+[submodule "emacs/dot-emacs.d/extensions/ace-window"]
+	path = emacs/dot-emacs.d/extensions/ace-window
+	url = https://github.com/abo-abo/ace-window.git

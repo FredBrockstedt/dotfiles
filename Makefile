@@ -46,6 +46,7 @@ update_submodules:
 add_submodules:
 	@git submodule add --force 'https://github.com/ohmyzsh/ohmyzsh.git' zsh/dot-oh-my-zsh 
 	@git submodule add --force 'https://github.com/abo-abo/avy.git' emacs/dot-emacs.d/extensions/avy
+	@git submodule add --force 'https://github.com/abo-abo/ace-window.git' emacs/dot-emacs.d/extensions/ace-window
 	@git submodule update --init --recursive
 
 # remove files commonly found on a blank install
