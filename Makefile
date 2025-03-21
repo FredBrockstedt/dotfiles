@@ -7,23 +7,32 @@ SOURCE_DIR = .
 TARGET_DIR = "${HOME}"
 BACKUP_DIR = "${HOME}/backup"
 
-.PHONY: default backup submodule
+.PHONY: default zsh zsh_submodule backup
 
-default: submodule
+default: 
 	@echo "* Stowing ..."
 	@stow --verbose \
 	     --restow \
 	     --dotfiles \
 	     --target ${HOME} \
-	     git bash vim zsh tmux
+	     git bash vim tmux
 	@stow --verbose \
 	     --restow \
 	     --dotfiles \
 	     --target ${HOME}/.config \
 	     config
 
+# Z-Shell mostly used on Macintosh systems
+zsh: zsh_submodule
+	@echo "* Stowing ..."
+	@stow --verbose \
+	     --restow \
+	     --dotfiles \
+	     --target ${HOME} \
+	     zsh
+
 # update the submodules
-submodule:
+zsh_submodule:
 	@git submodule add --force 'https://github.com/ohmyzsh/ohmyzsh.git' zsh/dot-oh-my-zsh 
 	@git submodule update --init --recursive
 

@@ -12,4 +12,5 @@ RUN dnf -y install make stow git vim bash-completion
 RUN mkdir -p ~/.config
 RUN make delete
 RUN make
+RUN make zsh
 RUN ls -lA ${HOME}
