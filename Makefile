@@ -5,7 +5,6 @@ PROJECT = dotfiles
 
 SOURCE_DIR = .
 TARGET_DIR = "${HOME}"
-BACKUP_DIR = "${HOME}/backup"
 
 define my_stow
 	@echo "* Stowing $@..."
@@ -16,10 +15,10 @@ define my_stow
 	     "$@"
 endef
 
-.PHONY: default zsh zsh_submodule backup config git bash vim tmux
+.PHONY: default config git bash vim tmux emacs zsh zsh_submodule 
 
 # this is what is run when you call make
-default: git bash vim tmux config
+default: git bash emacs vim tmux config
 
 # actually mpv.conf
 config:
@@ -40,6 +39,9 @@ vim:
 	$(call my_stow)
 
 tmux:
+	$(call my_stow)	
+
+emacs:
 	$(call my_stow)	
 
 # Z-Shell mostly used on Macintosh systems
