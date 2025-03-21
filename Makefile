@@ -15,7 +15,7 @@ default: submodule
 	     --restow \
 	     --dotfiles \
 	     --target ${HOME} \
-	     git bash vim zsh
+	     git bash vim zsh tmux
 
 # update the submodules
 submodule:
@@ -27,6 +27,7 @@ delete:
 	@rm -fvr ${HOME}/.bashrc \
 	         ${HOME}/.vimrc \
 		 ${HOME}/.gitconfig \
+		 ${HOME}/.tmux.conf \
 		 ${HOME}/.zshrc \
 		 ${HOME}/.oh-my-zsh \
 		 ${HOME}/oh-my-zsh
