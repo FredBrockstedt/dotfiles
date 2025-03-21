@@ -1,6 +1,4 @@
 * Freds Dotfiles
-[[https://img.shields.io/badge/Maintained-yes-green]]
-https://img.shields.io/github/last-commit/FredBrockstedt/dotfiles
 
 This repository is exactly what you think it is.
 Should you be tempted to try these settings, proceed with caution.
