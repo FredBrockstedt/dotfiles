@@ -16,6 +16,11 @@ default: submodule
 	     --dotfiles \
 	     --target ${HOME} \
 	     git bash vim zsh tmux
+	@stow --verbose \
+	     --restow \
+	     --dotfiles \
+	     --target ${HOME}/.config \
+	     config
 
 # update the submodules
 submodule:
@@ -29,6 +34,7 @@ delete:
 		 ${HOME}/.gitconfig \
 		 ${HOME}/.tmux.conf \
 		 ${HOME}/.zshrc \
+		 ${HOME}/.config/mpv/mpv.conf \
 		 ${HOME}/.oh-my-zsh \
 		 ${HOME}/oh-my-zsh
 

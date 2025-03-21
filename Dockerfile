@@ -9,6 +9,7 @@ FROM fedora:latest
 WORKDIR /dotfiles
 COPY . .
 RUN dnf -y install make stow git vim bash-completion
+RUN mkdir -p ~/.config
 RUN make delete
 RUN make
 RUN ls -lA ${HOME}

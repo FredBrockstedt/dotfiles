@@ -38,7 +38,8 @@ Add the following configurations to the dot files
 - [X] z-shell config
 - [X] tmux
 - [X] git
-- [ ] mpv
+- [X] mpv
+- [ ] emacs
 
 * License
 For further information on the terms and conditions of the license, please refer to the LICENSE file provided along side this project.
