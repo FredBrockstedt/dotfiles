@@ -58,5 +58,9 @@
 (require 'avy)
 (global-set-key (kbd "M-s") 'avy-goto-char)
 
+;; ace-window
+(require 'ace-window)
+(global-set-key (kbd "M-o") 'ace-window)
+
 ;; open default org-file
 (find-file "~/todo.org")
