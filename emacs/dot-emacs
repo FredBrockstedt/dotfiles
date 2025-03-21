@@ -11,6 +11,10 @@
   (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
+;; Macintosh
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta))
+
 ;; Cursor movement
 (windmove-default-keybindings)
 ;; make forward word behave more like vim
