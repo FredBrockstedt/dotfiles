@@ -41,17 +41,18 @@ vim:
 tmux:
 	$(call my_stow)	
 
-emacs:
+emacs: 
 	$(call my_stow)	
+	(cd emacs/dot-emacs.d/extensions/avy && git checkout 0.5.0)
+
+add_submodules:
+	@git submodule add --force 'https://github.com/ohmyzsh/ohmyzsh.git' zsh/dot-oh-my-zsh 
+	@git submodule add --force 'https://github.com/abo-abo/avy.git' emacs/dot-emacs.d/extensions/avy
+	@git submodule update --init --recursive
 
 # Z-Shell mostly used on Macintosh systems
-zsh: zsh_submodule
+zsh: 
 	$(call mystow)
-
-# update the submodules
-zsh_submodule:
-	@git submodule add --force 'https://github.com/ohmyzsh/ohmyzsh.git' zsh/dot-oh-my-zsh 
-	@git submodule update --init --recursive
 
 # remove files commonly found on a blank install
 delete:

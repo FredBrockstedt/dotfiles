@@ -1,3 +1,6 @@
 [submodule "zsh/dot-oh-my-zsh"]
 	path = zsh/dot-oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule "emacs/dot-emacs.d/extensions/avy"]
+	path = emacs/dot-emacs.d/extensions/avy
+	url = https://github.com/abo-abo/avy.git
