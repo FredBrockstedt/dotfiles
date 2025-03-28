@@ -60,5 +60,5 @@ delete:
 		 ${HOME}/oh-my-zsh
 
 test:
-	podman build .
+	time podman build .
 
