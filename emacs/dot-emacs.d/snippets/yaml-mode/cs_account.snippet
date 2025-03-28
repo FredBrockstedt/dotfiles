@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manages accounts on Apache CloudStack based clouds.
+# prefix: cs_account_snippet
+# key: cs_account
+# group: ansible
+# --
+
+- name: ${0:Manages accounts on Apache CloudStack based clouds.}
+  cs_account:                                                              
+    name: ${1:Name of account}                                             #
+    username: ${2:value}                                                   # Username of the user to be created if account did not exist  Required on I(state=present) 
+    password: ${3:value}                                                   # Password of the user to be created if account did not exist  Required on I(state=present) if I(ldap_domain) is not set 
+    first_name: ${4:value}                                                 # First name of the user to be created if account did not exist  Required on I(state=present) if I(ldap_domain) is not set
+    last_name: ${5:value}                                                  # Last name of the user to be created if account did not exist  Required on I(state=present) if I(ldap_domain) is not set 
+    email: ${6:value}                                                      # Email of the user to be created if account did not exist  Required on I(state=present) if I(ldap_domain) is not set 
+    timezone: ${7:value}                                                   # Timezone of the user to be created if account did not exist 
+    network_domain: ${8:value}                                             # Network domain of the account 
+    account_type: ${9$$(yas-choose-value '("user" "root_admin" "domain_admin"))}# choices: user;root_admin;domain_admin  Type of the account 
+    domain: ${10:ROOT}                                                     # Domain the account is related to 
+    role: ${11:value}                                                      # Creates the account under the specified role name or id 
+    ldap_domain: ${12:value}                                               # Name of the LDAP group or OU to bind  If set, account will be linked to LDAP 
+    ldap_type: ${13$$(yas-choose-value '("GROUP" "OU"))}                   # choices: GROUP;OU  Type of the ldap name  GROUP or OU, defaults to GROUP 
+    state: ${14$$(yas-choose-value '("present" "absent" "enabled" "disabled" "locked" "unlocked"))}# choices: present;absent;enabled;disabled;locked;unlocked  State of the account  C(unlocked) is a
+    poll_async: ${15:True}                                                 # Poll async jobs until job has finished 
+    api_key: ${16:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${17:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${18:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${19$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${20:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${21:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

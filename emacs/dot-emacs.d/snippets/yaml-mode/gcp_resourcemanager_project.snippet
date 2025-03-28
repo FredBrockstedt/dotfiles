@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Project
+# prefix: gcp_resourcemanager_project_snippet
+# key: gcp_resourcemanager_project
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Project}
+  gcp_resourcemanager_project:                                             
+    id: ${1:The unique, user-assigned ID of the Project}                   # It must be 6 to 30 lowercase letters, digits, or hyphens  It must start with a letter  Trailing hyphens are prohibited 
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    name: ${4:value}                                                       # The user-assigned display name of the Project  It must be 4 to 30 characters  Allowed characters are: lowercase and uppe
+    labels: ${5:value}                                                     # The labels associated with this Project  Label keys must be between 1 and 63 characters long and must conform to the fol
+    parent: ${6:value}                                                     # A parent organization 
+    project: ${7:value}                                                    # The Google Cloud Platform project to use 
+    service_account_contents: ${8:value}                                   # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${9:value}                                       # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${10:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${11:value}                                                    # Array of scopes to be used 
+    env_type: ${12:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

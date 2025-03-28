@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Efficiently upload multiple files to S3
+# prefix: s3_sync_snippet
+# key: 3_sync
+# group: ansible
+# --
+
+- name: ${0:Efficiently upload multiple files to S3}
+  s3_sync:                                                                 
+    bucket: ${1:Bucket name}                                               #
+    file_root: ${2:File/directory path for synchronization}                # This is a local path  This root path is scrubbed from the key name, so subdirectories will remain as keys 
+    mode: ${3$$(yas-choose-value '("push"))}                               # choices: push  sync direction 
+    file_change_strategy: ${4$$(yas-choose-value '("force" "checksum" "date_size"))}# choices: force;checksum;date_size  Difference determination method to allow changes-only syncing  Unlike rsync,
+    key_prefix: ${5:value}                                                 # In addition to file path, prepend s3 path with this prefix  Module will add slash at end of prefix if necessary 
+    permission: ${6$$(yas-choose-value '("" "private" "public-read" "public-read-write" "authenticated-read" "aws-exec-read" "bucket-owner-read" "bucket-owner-full-control"))}# choices: ;private;pu
+    mime_map: ${7:value}                                                   # Dict entry from extension to MIME type  This will override any default/sniffed MIME type  For example C({" txt": "applic
+    include: ${8:*}                                                        # Shell pattern-style file matching  Used before exclude to determine eligible files (for instance, only "* gif") For mult
+    exclude: ${{9:}                                                        #*} # not required  Shell pattern-style file matching  Used after include to remove files (for instance, skip "* txt") For
+    cache_control: ${10:value}                                             # This is a string  Cache-Control header set on uploaded objects  Directives are separated by commas 
+    delete: ${11:False}                                                    # Remove remote files that exist in bucket but are not present in the file root 
+    debug_botocore_endpoint_logs: ${12:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${13:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${14:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${15:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${16:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${17:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${18:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${19:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

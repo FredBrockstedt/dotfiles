@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Gather information on OpenNebula images
+# prefix: one_image_info_snippet
+# key: one_image_info
+# group: ansible
+# --
+
+- name: ${0:Gather information on OpenNebula images}
+  one_image_info:                                                          
+    api_url: ${1:value}                                                    # URL of the OpenNebula RPC server  It is recommended to use HTTPS so that the username/password are not transferred over 
+    api_username: ${2:value}                                               # Name of the user to login into the OpenNebula RPC server  If not set then the value of the C(ONE_USERNAME) environment v
+    api_password: ${3:value}                                               # Password of the user to login into OpenNebula RPC server  If not set then the value of the C(ONE_PASSWORD) environment v
+    ids: ${4:value}                                                        # A list of images ids whose facts you want to gather 
+    name: ${5:value}                                                       # A C(name) of the image whose facts will be gathered  If the C(name) begins with '~' the C(name) will be used as regex pa

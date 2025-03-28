@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage VLAN
+# prefix: na_elementsw_vlan_snippet
+# key: mentsw_v
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage VLAN}
+  na_elementsw_vlan:                                                       
+    vlan_tag: ${1:Virtual Network Tag}                                     #
+    hostname: ${2:The hostname or IP address of the SolidFire cluster}     #
+    username: ${3:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified vlan should exist or not 
+    name: ${6:value}                                                       # User defined name for the new VLAN Name of the vlan is unique Required for create
+    svip: ${7:value}                                                       # Storage virtual IP which is unique Required for create
+    address_blocks: ${8:value}                                             # List of address blocks for the VLAN Each address block contains the starting IP address and size for the block Required 
+    netmask: ${9:value}                                                    # Netmask for the VLAN Required for create
+    gateway: ${10:value}                                                   # Gateway for the VLAN
+    namespace: ${11:value}                                                 # Enable or disable namespaces
+    attributes: ${12:value}                                                # Dictionary of attributes with name and value for each attribute

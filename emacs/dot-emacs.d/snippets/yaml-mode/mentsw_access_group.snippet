@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage Access Groups
+# prefix: na_elementsw_access_group_snippet
+# key: mentsw_access_group
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage Access Groups}
+  na_elementsw_access_group:                                               
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified access group should exist or not 
+    name: ${2:Name for the access group for create, modify and delete operations}#
+    hostname: ${3:The hostname or IP address of the SolidFire cluster}     #
+    username: ${4:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${5:Password for the specified user}                         #
+    from_name: ${6:value}                                                  # ID or Name of the access group to rename  Required to create a new access group called 'name' by renaming 'from_name' 
+    initiators: ${7:value}                                                 # List of initiators to include in the access group  If unspecified, the access group will start out without configured in
+    volumes: ${8:value}                                                    # List of volumes to initially include in the volume access group  If unspecified, the access group will start without any
+    account_id: ${9:value}                                                 # Account ID for the owner of this volume  It accepts either account_name or account_id if account_id is digit, it will co
+    virtual_network_id: ${10:value}                                        # The ID of the Element SW Software Cluster Virtual Network ID to associate the access group with 
+    virtual_network_tags: ${11:value}                                      # The ID of the VLAN Virtual Network Tag to associate the access group with 
+    attributes: ${12:value}                                                # L i s t   o f   N a m e / V a l u e   p a i r s   i n   J S O N   o b j e c t   f o r m a t  

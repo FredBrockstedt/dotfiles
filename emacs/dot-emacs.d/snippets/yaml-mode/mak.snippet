@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Run targets in a Makefile
+# prefix: make_snippet
+# key: mak
+# group: ansible
+# --
+
+- name: ${0:Run targets in a Makefile}
+  make:                                                                    
+    chdir: ${1:Change to this directory before running make}               #
+    target: ${2:value}                                                     # The target to run  Typically this would be something like C(install),C(test) or C(all) "
+    params: ${3:value}                                                     # Any extra parameters to pass to make 
+    file: ${4:value}                                                       # Use a custom Makefile 

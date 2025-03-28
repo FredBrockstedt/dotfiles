@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage HTTPD related settings on BIG-IP
+# prefix: bigip_device_httpd_snippet
+# key: gip_device_httpd
+# group: ansible
+# --
+
+- name: ${0:Manage HTTPD related settings on BIG-IP}
+  bigip_device_httpd:                                                      
+    allow: ${1:value}                                                      # Specifies, if you have enabled HTTPD access, the IP address or address range for other systems that can communicate with
+    auth_name: ${2:value}                                                  # Sets the BIG-IP authentication realm name 
+    auth_pam_idle_timeout: ${3:value}                                      # Sets the GUI timeout for automatic logout, in seconds 
+    auth_pam_validate_ip: ${4:value}                                       # Sets the authPamValidateIp setting 
+    auth_pam_dashboard_timeout: ${5:value}                                 # Sets whether or not the BIG-IP dashboard will timeout 
+    fast_cgi_timeout: ${6:value}                                           # Sets the timeout of FastCGI 
+    hostname_lookup: ${7:value}                                            # Sets whether or not to display the hostname, if possible 
+    log_level: ${8$$(yas-choose-value '("alert" "crit" "debug" "emerg" "error" "info" "notice" "warn"))}# choices: alert;crit;debug;emerg;error;info;notice;warn  Sets the minimum httpd log level 
+    max_clients: ${9:value}                                                # Sets the maximum number of clients that can connect to the GUI at once 
+    redirect_http_to_https: ${10:value}                                    # Whether or not to redirect http requests to the GUI to https 
+    ssl_port: ${11:value}                                                  # The HTTPS port to listen on 
+    ssl_cipher_suite: ${12:value}                                          # Specifies the ciphers that the system uses  The values in the suite are separated by colons (:)  Can be specified in eit
+    ssl_protocols: ${13:value}                                             # The list of SSL protocols to accept on the management console  A space-separated list of tokens in the format accepted b
+    provider: ${14:value}                                                  # A dict object containing connection details 

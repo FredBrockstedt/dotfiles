@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Tests reachability using ping from Cisco IOS network devices
+# prefix: ios_ping_snippet
+# key: os_ping
+# group: ansible
+# --
+
+- name: ${0:Tests reachability using ping from Cisco IOS network devices}
+  ios_ping:                                                                
+    dest: ${1:The IP Address or hostname (resolvable by switch) of the remote node}#
+    count: ${2:5}                                                          # Number of packets to send 
+    source: ${3:value}                                                     # The source IP Address 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Determines if the expected result is success or fail 
+    vrf: ${5:default}                                                      # The VRF to use for forwarding 
+    authorize: ${6:False}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  For more infor
+    auth_pass: ${7:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes) with C(become_p
+    provider: ${8:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

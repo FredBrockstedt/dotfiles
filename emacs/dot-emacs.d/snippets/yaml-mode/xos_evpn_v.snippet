@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages Cisco EVPN VXLAN Network Identifier (VNI).
+# prefix: nxos_evpn_vni_snippet
+# key: xos_evpn_v
+# group: ansible
+# --
+
+- name: ${0:Manages Cisco EVPN VXLAN Network Identifier (VNI).}
+  nxos_evpn_vni:                                                           
+    vni: ${1:The EVPN VXLAN Network Identifier}                            #
+    route_distinguisher: ${2:The VPN Route Distinguisher (RD)}             # The RD is combined with the IPv4 or IPv6 prefix learned by the PE router to create a globally unique address 
+    route_target_both: ${3:value}                                          # Enables/Disables route-target settings for both import and export target communities using a single property 
+    route_target_import: ${4:value}                                        # Sets the route-target 'import' extended communities 
+    route_target_export: ${5:value}                                        # Sets the route-target 'export' extended communities 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${7:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

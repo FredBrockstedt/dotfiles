@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manages BIG-IP SNMP data collecting agent (DCA) monitors
+# prefix: bigip_monitor_snmp_dca_snippet
+# key: gip_monitor_snmp_dc
+# group: ansible
+# --
+
+- name: ${0:Manages BIG-IP SNMP data collecting agent (DCA) monitors}
+  bigip_monitor_snmp_dca:                                                  
+    name: ${1:Monitor name}                                                #
+    description: ${2:value}                                                # Specifies descriptive text that identifies the monitor 
+    parent: ${3:/Common/snmp_dca}                                          # The parent template of this monitor template  Once this value has been set, it cannot be changed  By default, this value
+    interval: ${4:value}                                                   # Specifies, in seconds, the frequency at which the system issues the monitor check when either the resource is down or th
+    timeout: ${5:value}                                                    # Specifies the number of seconds the target has in which to respond to the monitor request  When creating a new monitor, 
+    time_until_up: ${6:value}                                              # Specifies the number of seconds to wait after a resource first responds correctly to the monitor before setting the reso
+    community: ${7:value}                                                  # Specifies the community name that the system must use to authenticate with the host server through SNMP  When creating a
+    version: ${8$$(yas-choose-value '("v1" "v2c"))}                        # choices: v1;v2c  Specifies the version of SNMP that the host server uses  When creating a new monitor, the default is C(
+    agent_type: ${9$$(yas-choose-value '("UCD" "WIN2000" "GENERIC"))}      # choices: UCD;WIN2000;GENERIC  Specifies the SNMP agent running on the monitored server  When creating a new monitor, the
+    cpu_coefficient: ${10:value}                                           # Specifies the coefficient that the system uses to calculate the weight of the CPU threshold in the dynamic ratio load ba
+    cpu_threshold: ${11:value}                                             # Specifies the maximum acceptable CPU usage on the target server  When creating a new monitor, the default is C(80) perce
+    memory_coefficient: ${12:value}                                        # Specifies the coefficient that the system uses to calculate the weight of the memory threshold in the dynamic ratio load
+    memory_threshold: ${13:value}                                          # Specifies the maximum acceptable memory usage on the target server  When creating a new monitor, the default is C(70) pe
+    disk_coefficient: ${14:value}                                          # Specifies the coefficient that the system uses to calculate the weight of the disk threshold in the dynamic ratio load b
+    disk_threshold: ${15:value}                                            # Specifies the maximum acceptable disk usage on the target server  When creating a new monitor, the default is C(90) perc
+    partition: ${16:Common}                                                # Device partition to manage resources on 
+    state: ${17$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the monitor exists  When C(absent), ensures the monitor is remove
+    provider: ${18:value}                                                  # A dict object containing connection details 

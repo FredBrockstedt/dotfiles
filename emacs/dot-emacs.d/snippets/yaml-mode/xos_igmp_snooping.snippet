@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages IGMP snooping global configuration.
+# prefix: nxos_igmp_snooping_snippet
+# key: xos_igmp_snooping
+# group: ansible
+# --
+
+- name: ${0:Manages IGMP snooping global configuration.}
+  nxos_igmp_snooping:                                                      
+    snooping: ${1:value}                                                   # Enables/disables IGMP snooping on the switch 
+    group_timeout: ${2:value}                                              # Group membership timeout value for all VLANs on the device  Accepted values are integer in range 1-10080, I(never) and I
+    link_local_grp_supp: ${3:value}                                        # Global link-local groups suppression 
+    report_supp: ${4:value}                                                # Global IGMPv1/IGMPv2 Report Suppression 
+    v3_report_supp: ${5:value}                                             # Global IGMPv3 Report Suppression and Proxy Reporting 
+    state: ${6$$(yas-choose-value '("present" "default"))}                 # choices: present;default  Manage the state of the resource 
+    provider: ${7:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

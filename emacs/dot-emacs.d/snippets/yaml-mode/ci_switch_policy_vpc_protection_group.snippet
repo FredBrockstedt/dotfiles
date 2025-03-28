@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage switch policy explicit vPC protection groups (fabric:ExplicitGEp, fabric:NodePEp).
+# prefix: aci_switch_policy_vpc_protection_group_snippet
+# key: ci_switch_policy_vpc_protection_group
+# group: ansible
+# --
+
+- name: ${0:Manage switch policy explicit vPC protection groups (fabric:ExplicitGEp, fabric:NodePEp).}
+  aci_switch_policy_vpc_protection_group:                                  
+    protection_group: ${1:The name of the Explicit vPC Protection Group}   #
+    protection_group_id: ${2:The Explicit vPC Protection Group ID}         #
+    switch_1_id: ${3:The ID of the first Leaf Switch for the Explicit vPC Protection Group}#
+    switch_2_id: ${4:The ID of the Second Leaf Switch for the Explicit vPC Protection Group}#
+    host: ${5:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${6:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${7:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    vpc_domain_policy: ${8:value}                                          # The vPC domain policy to be associated with the Explicit vPC Protection Group 
+    state: ${9$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${10:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${11:admin}                                                  # The username to use for authentication 
+    certificate_name: ${12:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${13$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${14:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${15:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${16:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${17:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

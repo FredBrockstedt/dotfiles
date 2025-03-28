@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage link layer discovery protocol (LLDP) attributes of interfaces on Cisco IOS devices.
+# prefix: ios_lldp_interfaces_snippet
+# key: os_lldp_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage link layer discovery protocol (LLDP) attributes of interfaces on Cisco IOS devices.}
+  ios_lldp_interfaces:                                                     
+    config: ${1:value}                                                     # A   d i c t i o n a r y   o f   L L D P   o p t i o n s
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion

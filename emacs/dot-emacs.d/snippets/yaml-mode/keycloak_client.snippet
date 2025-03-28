@@ -1,0 +1,54 @@
+# -*- mode: snippet -*-
+# name: Allows administration of Keycloak clients via Keycloak API
+# prefix: keycloak_client_snippet
+# key: keycloak_client
+# group: ansible
+# --
+
+- name: ${0:Allows administration of Keycloak clients via Keycloak API}
+  keycloak_client:                                                         
+    auth_keycloak_url: ${1:URL to the Keycloak instance}                   #
+    auth_client_id: ${2:admin-cli}:OpenID Connect I(client_id) to authenticate to the API with}#
+    auth_realm: ${3:Keycloak realm name to authenticate to for API access} #
+    auth_username: ${4:Username to authenticate for API access with}       #
+    auth_password: ${5:Password to authenticate for API access with}       #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the client On C(present), the client will be created (or updated if it exists already)
+    realm: ${7:value}                                                      # The realm to create the client in 
+    client_id: ${8:value}                                                  # Client id of client to be worked on  This is usually an alphanumeric name chosen by you  Either this or I(id) is require
+    id: ${9:value}                                                         # Id of client to be worked on  This is usually an UUID  Either this or I(client_id) is required  If you specify both, thi
+    name: ${10:value}                                                      # Name of the client (this is not the same as I(client_id))
+    description: ${11:value}                                               # Description of the client in Keycloak
+    root_url: ${12:value}                                                  # Root URL appended to relative URLs for this client This is 'rootUrl' in the Keycloak REST API 
+    admin_url: ${13:value}                                                 # URL to the admin interface of the client This is 'adminUrl' in the Keycloak REST API 
+    base_url: ${14:value}                                                  # Default URL to use when the auth server needs to redirect or link back to the client This is 'baseUrl' in the Keycloak R
+    enabled: ${15:value}                                                   # Is this client enabled or not?
+    client_authenticator_type: ${16$$(yas-choose-value '("client-secret" "client-jwt"))}# choices: client-secret;client-jwt  How do clients authenticate with the auth server? Either C(client-secret
+    secret: ${17:value}                                                    # When using I(client_authenticator_type) C(client-secret) (the default), you can specify a secret here (otherwise one wil
+    registration_access_token: ${18:value}                                 # The registration access token provides access for clients to the client registration service  This is 'registrationAcces
+    default_roles: ${19:value}                                             # list of default roles for this client  If the client roles referenced do not exist yet, they will be created  This is 'd
+    redirect_uris: ${20:value}                                             # Acceptable redirect URIs for this client  This is 'redirectUris' in the Keycloak REST API 
+    web_origins: ${21:value}                                               # List of allowed CORS origins  This is 'webOrigins' in the Keycloak REST API 
+    not_before: ${22:value}                                                # Revoke any tokens issued before this date for this client (this is a UNIX timestamp)  This is 'notBefore' in the Keycloa
+    bearer_only: ${23:value}                                               # The access type of this client is bearer-only  This is 'bearerOnly' in the Keycloak REST API 
+    consent_required: ${24:value}                                          # If enabled, users have to consent to client access  This is 'consentRequired' in the Keycloak REST API 
+    standard_flow_enabled: ${25:value}                                     # Enable standard flow for this client or not (OpenID connect)  This is 'standardFlowEnabled' in the Keycloak REST API 
+    implicit_flow_enabled: ${26:value}                                     # Enable implicit flow for this client or not (OpenID connect)  This is 'implicitFlowEnabled' in the Keycloak REST API 
+    direct_access_grants_enabled: ${27:value}                              # Are direct access grants enabled for this client or not (OpenID connect)  This is 'directAccessGrantsEnabled' in the Key
+    service_accounts_enabled: ${28:value}                                  # Are service accounts enabled for this client or not (OpenID connect)  This is 'serviceAccountsEnabled' in the Keycloak R
+    authorization_services_enabled: ${29:value}                            # Are authorization services enabled for this client or not (OpenID connect)  This is 'authorizationServicesEnabled' in th
+    public_client: ${30:value}                                             # Is the access type for this client public or not  This is 'publicClient' in the Keycloak REST API 
+    frontchannel_logout: ${31:value}                                       # Is frontchannel logout enabled for this client or not  This is 'frontchannelLogout' in the Keycloak REST API 
+    protocol: ${32$$(yas-choose-value '("openid-connect" "saml"))}         # choices: openid-connect;saml  Type of client (either C(openid-connect) or C(saml) 
+    full_scope_allowed: ${33:value}                                        # Is the "Full Scope Allowed" feature set for this client or not  This is 'fullScopeAllowed' in the Keycloak REST API 
+    node_re_registration_timeout: ${34:value}                              # Cluster node re-registration timeout for this client  This is 'nodeReRegistrationTimeout' in the Keycloak REST API 
+    registered_nodes: ${35:value}                                          # dict of registered cluster nodes (with C(nodename) as the key and last registration time as the value)  This is 'registe
+    client_template: ${36:value}                                           # Client template to use for this client  If it does not exist this field will silently be dropped  This is 'clientTemplat
+    use_template_config: ${37:value}                                       # Whether or not to use configuration from the I(client_template)  This is 'useTemplateConfig' in the Keycloak REST API 
+    use_template_scope: ${38:value}                                        # Whether or not to use scope configuration from the I(client_template)  This is 'useTemplateScope' in the Keycloak REST A
+    use_template_mappers: ${39:value}                                      # Whether or not to use mapper configuration from the I(client_template)  This is 'useTemplateMappers' in the Keycloak RES
+    surrogate_auth_required: ${40:value}                                   # Whether or not surrogate auth is required  This is 'surrogateAuthRequired' in the Keycloak REST API 
+    authorization_settings: ${41:value}                                    # a data structure defining the authorization settings for this client  For reference, please see the Keycloak API docs at
+    protocol_mappers: ${42:value}                                          # a list of dicts defining protocol mappers for this client  This is 'protocolMappers' in the Keycloak REST API 
+    attributes: ${43:value}                                                # A dict of further attributes for this client  This can contain various configuration settings; an example is given in th
+    auth_client_secret: ${44:value}                                        # Client Secret to use in conjunction with I(auth_client_id) (if required) 
+    validate_certs: ${45:True}                                             # Verify TLS certificates (do not disable this in production) 

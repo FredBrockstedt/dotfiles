@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP RegionDisk
+# prefix: gcp_compute_region_disk_snippet
+# key: gcp_compute_region_disk
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP RegionDisk}
+  gcp_compute_region_disk:                                                 
+    name: ${1:Name of the resource}                                        # Provided by the client when the resource is created  The name must be 1-63 characters long, and comply with RFC1035  Spe
+    replica_zones: ${2:URLs of the zones where the disk should be replicated to}#
+    region: ${3:A reference to the region where the disk resides}          #
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${6:value}                                                # An optional description of this resource  Provide this property when you create the resource 
+    labels: ${7:value}                                                     # Labels to apply to this disk  A list of key->value pairs 
+    licenses: ${8:value}                                                   # Any applicable publicly visible licenses 
+    size_gb: ${9:value}                                                    # Size of the persistent disk, specified in GB  You can specify this field when creating a persistent disk using the sourc
+    physical_block_size_bytes: ${10:value}                                 # Physical block size of the persistent disk, in bytes  If not present in a request, a default value is used  Currently su
+    type: ${11:value}                                                      # URL of the disk type resource describing which disk type to use to create the disk  Provide this when creating the disk 
+    disk_encryption_key: ${12:value}                                       # Encrypts the disk using a customer-supplied encryption key  After you encrypt a disk with a customer-supplied key, you m
+    source_snapshot: ${13:value}                                           # The source snapshot used to create this disk  You can provide this as a partial or full URL to the resource  This field 
+    source_snapshot_encryption_key: ${14:value}                            # The customer-supplied encryption key of the source snapshot  Required if the source snapshot is protected by a customer-
+    project: ${15:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${16:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${17:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${18:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${19:value}                                                    # Array of scopes to be used 
+    env_type: ${20:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

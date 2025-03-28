@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages interface DLDP configuration on HUAWEI CloudEngine switches.
+# prefix: ce_dldp_interface_snippet
+# key: ce_dldp_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages interface DLDP configuration on HUAWEI CloudEngine switches.}
+  ce_dldp_interface:                                                       
+    interface: ${1:Must be fully qualified interface name, i}              #e  GE1/0/1, 10GE1/0/1, 40GE1/0/22, 100GE1/0/1 
+    enable: ${2$$(yas-choose-value '("enable" "disable"))}                 # choices: enable;disable  Set interface DLDP enable state 
+    mode_enable: ${3$$(yas-choose-value '("enable" "disable"))}            # choices: enable;disable  Set DLDP compatible-mode enable state 
+    local_mac: ${4:value}                                                  # Set the source MAC address for DLDP packets sent in the DLDP-compatible mode  The value of MAC address is in H-H-H forma
+    reset: ${5$$(yas-choose-value '("enable" "disable"))}                  # choices: enable;disable  Specify whether reseting interface DLDP state 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage Direct Connect virtual interfaces.
+# prefix: aws_direct_connect_virtual_interface_snippet
+# key: ws_direct_connect_virtual_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Direct Connect virtual interfaces.}
+  aws_direct_connect_virtual_interface:                                    
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The desired state of the Direct Connect virtual interface 
+    id_to_associate: ${2:value}                                            # The ID of the link aggregation group or connection to associate with the virtual interface 
+    public: ${3:value}                                                     # The type of virtual interface 
+    name: ${4:value}                                                       # The name of the virtual interface 
+    vlan: ${5:100}                                                         # The VLAN ID 
+    bgp_asn: ${6:65000}                                                    # The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration 
+    authentication_key: ${7:value}                                         # The authentication key for BGP configuration 
+    amazon_address: ${8:value}                                             # The amazon address CIDR with which to create the virtual interface 
+    customer_address: ${9:value}                                           # The customer address CIDR with which to create the virtual interface 
+    address_type: ${10:value}                                              # The type of IP address for the BGP peer 
+    cidr: ${11:value}                                                      # A list of route filter prefix CIDRs with which to create the public virtual interface 
+    virtual_gateway_id: ${12:value}                                        # The virtual gateway ID required for creating a private virtual interface 
+    virtual_interface_id: ${13:value}                                      # The virtual interface ID 
+    debug_botocore_endpoint_logs: ${14:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${15:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${16:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${17:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${18:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${19:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${20:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${21:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

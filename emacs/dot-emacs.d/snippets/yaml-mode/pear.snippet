@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage pear/pecl packages
+# prefix: pear_snippet
+# key: pear
+# group: ansible
+# --
+
+- name: ${0:Manage pear/pecl packages}
+  pear:                                                                    
+    name: ${1:Name of the package to install, upgrade, or remove}          #
+    state: ${2$$(yas-choose-value '("present" "absent" "latest"))}         # choices: present;absent;latest  Desired state of the package 
+    executable: ${3:value}                                                 # Path to the pear executable

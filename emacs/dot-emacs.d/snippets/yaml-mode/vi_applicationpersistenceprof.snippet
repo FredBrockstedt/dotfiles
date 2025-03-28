@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Module for setup of ApplicationPersistenceProfile Avi RESTful Object
+# prefix: avi_applicationpersistenceprofile_snippet
+# key: vi_applicationpersistenceprof
+# group: ansible
+# --
+
+- name: ${0:Module for setup of ApplicationPersistenceProfile Avi RESTful Object}
+  avi_applicationpersistenceprofile:                                       
+    name: ${1:A user-friendly name for the persistence profile}            #
+    persistence_type: ${2:Method used to persist clients to the same server for a duration of time or a session}# Enum options - PERSISTENCE_TYPE_CLIENT_IP_ADDRESS, PERSISTENCE_TYPE_HTTP_COOKIE, PE
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${4$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${5$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    app_cookie_persistence_profile: ${6:value}                             # Specifies the application cookie persistence profile parameters 
+    description: ${7:value}                                                # User defined description for the object 
+    hdr_persistence_profile: ${8:value}                                    # Specifies the custom http header persistence profile parameters 
+    http_cookie_persistence_profile: ${9:value}                            # Specifies the http cookie persistence profile parameters 
+    ip_persistence_profile: ${10:value}                                    # Specifies the client ip persistence profile parameters 
+    is_federated: ${11:value}                                              # This field describes the object's replication scope  If the field is set to false, then the object is visible within the
+    server_hm_down_recovery: ${12:value}                                   # Specifies behavior when a persistent server has been marked down by a health monitor  Enum options - HM_DOWN_PICK_NEW_SE
+    tenant_ref: ${13:value}                                                # It is a reference to an object of type tenant 
+    url: ${14:value}                                                       # Avi controller URL of the object 
+    uuid: ${15:value}                                                      # Uuid of the persistence profile 
+    controller: ${16:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${17:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${18:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${19:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${20:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{21:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${22:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${23:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${24:value}                         # It disables avi session information to be cached as a fact 

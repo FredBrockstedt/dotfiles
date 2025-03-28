@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Package manager for SmartOS, NetBSD, et al.
+# prefix: pkgin_snippet
+# key: pkg
+# group: ansible
+# --
+
+- name: ${0:Package manager for SmartOS, NetBSD, et al.}
+  pkgin:                                                                   
+    name: ${1:value}                                                       # Name of package to install/remove; multiple names may be given, separated by commas
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Intended state of the package
+    update_cache: ${3:false}                                               # Update repository database  Can be run with other steps or on it's own 
+    upgrade: ${4:false}                                                    # Upgrade main packages to their newer versions
+    full_upgrade: ${5:false}                                               # Upgrade all packages to their newer versions
+    clean: ${6:false}                                                      # Clean packages cache
+    force: ${7:false}                                                      # Force package reinstall

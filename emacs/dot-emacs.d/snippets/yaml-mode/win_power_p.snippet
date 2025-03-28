@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Changes the power plan of a Windows system
+# prefix: win_power_plan_snippet
+# key: win_power_p
+# group: ansible
+# --
+
+- name: ${0:Changes the power plan of a Windows system}
+  win_power_plan:                                                          
+    name: ${1:String value that indicates the desired power plan}          # The power plan must already be present on the system  Commonly there will be options for C(balanced) and C(high performa

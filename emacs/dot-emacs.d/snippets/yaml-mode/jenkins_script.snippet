@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Executes a groovy script in the jenkins instance
+# prefix: jenkins_script_snippet
+# key: jenkins_script
+# group: ansible
+# --
+
+- name: ${0:Executes a groovy script in the jenkins instance}
+  jenkins_script:                                                          
+    script: ${1:The groovy script to be executed}                          # This gets passed as a string Template if args is defined 
+    url: ${2:http://localhost:8080}                                        # The jenkins server to execute the script against  The default is a local jenkins instance that is not being proxied thro
+    validate_certs: ${3:true}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled
+    user: ${4:value}                                                       # The username to connect to the jenkins server with 
+    password: ${5:value}                                                   # The password to connect to the jenkins server with 
+    timeout: ${6:10}                                                       # The request timeout in seconds
+    args: ${7:value}                                                       # A dict of key-value pairs used in formatting the script using string Template (see https://docs python org/2/library/str

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage logging on Ruckus ICX 7000 series switches
+# prefix: icx_logging_snippet
+# key: cx_logging
+# group: ansible
+# --
+
+- name: ${0:Manage logging on Ruckus ICX 7000 series switches}
+  icx_logging:                                                             
+    dest: ${1$$(yas-choose-value '("on" "host" "console" "buffered" "persistence" "rfc5424"))}# choices: on;host;console;buffered;persistence;rfc5424  Destination of the logs 
+    name: ${2:value}                                                       # ipv4 address/ipv6 address/name of  syslog server 
+    udp_port: ${3:value}                                                   # UDP port of destination host(syslog server) 
+    facility: ${4$$(yas-choose-value '("auth" "cron" "daemon" "kern" "local0" "local1" "local2" "local3" "local4" "local5" "local6" "local7" "user" "lpr" "mail" "news" "syslog" "sys9" "sys10" "sys1
+    level: ${5$$(yas-choose-value '("alerts" "critical" "debugging" "emergencies" "errors" "informational" "notifications" "warnings"))}# choices: alerts;critical;debugging;emergencies;errors;infor
+    aggregate: ${6:value}                                                  # List of logging definitions 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the logging configuration 
+    check_running_config: ${8:True}                                        # Check running configuration  This can be set as environment variable  Module will use environment variable value(default

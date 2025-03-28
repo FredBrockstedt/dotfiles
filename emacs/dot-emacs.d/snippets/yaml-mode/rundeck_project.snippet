@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage Rundeck projects.
+# prefix: rundeck_project_snippet
+# key: rundeck_project
+# group: ansible
+# --
+
+- name: ${0:Manage Rundeck projects.}
+  rundeck_project:                                                         
+    name: ${1:Sets the project name}                                       #
+    url: ${2:Sets the rundeck instance URL}                                #
+    token: ${3:Sets the token to authenticate against Rundeck API}         #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or remove Rundeck project 
+    api_version: ${5:14}                                                   # Sets the API version used by module  API version must be at least 14 

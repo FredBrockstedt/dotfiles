@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more OpenStack users
+# prefix: os_user_info_snippet
+# key: os_user_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more OpenStack users}
+  os_user_info:                                                            
+    name: ${1:Name or ID of the user}                                      #
+    domain: ${2:value}                                                     # Name or ID of the domain containing the user if the cloud supports domains
+    filters: ${3:value}                                                    # A dictionary of meta data to use for further filtering   Elements of this dictionary may be additional dictionaries 
+    availability_zone: ${4:value}                                          # Ignored  Present for backwards compatibility
+    cloud: ${5:value}                                                      # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${6:value}                                                       # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${7:value}                                                  # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${8:value}                                                # Name of the region 
+    wait: ${9:True}                                                        # Should ansible wait until the requested resource is complete 
+    timeout: ${10:180}                                                     # How long should ansible wait for the requested resource 
+    api_timeout: ${11:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${12:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${13:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${14:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${15:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${16$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

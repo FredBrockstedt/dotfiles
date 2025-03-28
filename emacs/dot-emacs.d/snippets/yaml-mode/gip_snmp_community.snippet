@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP communities on a BIG-IP.
+# prefix: bigip_snmp_community_snippet
+# key: gip_snmp_community
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP communities on a BIG-IP.}
+  bigip_snmp_community:                                                    
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the address list and entries exists  When C(absent), ensures the 
+    version: ${2$$(yas-choose-value '("v1" "v2c" "v3"))}                   # choices: v1;v2c;v3  Specifies to which Simple Network Management Protocol (SNMP) version the trap destination applies 
+    name: ${3:value}                                                       # Name that identifies the SNMP community  When C(version) is C(v1) or C(v2c), this parameter is required  The name C(publ
+    community: ${4:value}                                                  # Specifies the community string (password) for access to the MIB  This parameter is only relevant when C(version) is C(v1
+    source: ${5:value}                                                     # Specifies the source address for access to the MIB  This parameter can accept a value of C(all)  If this parameter is no
+    port: ${6:value}                                                       # Specifies the port for the trap destination  This parameter is only relevant when C(version) is C(v1), or C(v2c)  If C(v
+    oid: ${7:value}                                                        # Specifies the object identifier (OID) for the record  When C(version) is C(v3), this parameter is required  When C(versi
+    access: ${8$$(yas-choose-value '("ro" "rw" "read-only" "read-write"))} # choices: ro;rw;read-only;read-write  Specifies the user's access level to the MIB  When creating a new community, if thi
+    ip_version: ${9$$(yas-choose-value '("4" "6"))}                        # choices: 4;6  Specifies whether the record applies to IPv4 or IPv6 addresses  When creating a new community, if this val
+    snmp_username: ${10:value}                                             # Specifies the name of the user for whom you want to grant access to the SNMP v3 MIB  This parameter is only relevant whe
+    snmp_auth_protocol: ${11$$(yas-choose-value '("md5" "sha" "none"))}    # choices: md5;sha;none  Specifies the authentication method for the user  When C(md5), specifies that the system uses the
+    snmp_auth_password: ${12:value}                                        # Specifies the password for the user  When creating a new SNMP C(v3) community, this parameter is required  This value mu
+    snmp_privacy_protocol: ${13$$(yas-choose-value '("aes" "des" "none"))} # choices: aes;des;none  Specifies the encryption protocol  When C(aes), specifies that the system encrypts the user infor
+    snmp_privacy_password: ${14:value}                                     # Specifies the password for the user  When creating a new SNMP C(v3) community, this parameter is required  This value mu
+    update_password: ${15$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will allow to update passwords if the user chooses to do so  C(on_create) will only
+    partition: ${16:Common}                                                # Device partition to manage resources on 
+    provider: ${17:value}                                                  # A dict object containing connection details 

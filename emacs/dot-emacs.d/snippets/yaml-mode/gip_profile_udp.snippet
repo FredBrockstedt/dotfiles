@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage UDP profiles on a BIG-IP
+# prefix: bigip_profile_udp_snippet
+# key: gip_profile_udp
+# group: ansible
+# --
+
+- name: ${0:Manage UDP profiles on a BIG-IP}
+  bigip_profile_udp:                                                       
+    name: ${1:Specifies the name of the profile}                           #
+    parent: ${2:value}                                                     # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    idle_timeout: ${3:value}                                               # Specifies the length of time that a connection is idle (has no traffic) before the connection is eligible for deletion  
+    datagram_load_balancing: ${4:value}                                    # Specifies, when C(yes), that the system load balances UDP traffic packet-by-packet 
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${7:value}                                                   # A dict object containing connection details 

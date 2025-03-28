@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage NTP server configuration of an ESXi host
+# prefix: vmware_host_ntp_snippet
+# key: vmware_host_ntp
+# group: ansible
+# --
+
+- name: ${0:Manage NTP server configuration of an ESXi host}
+  vmware_host_ntp:                                                         
+    ntp_servers: ${1:IP or FQDN of NTP server(s)}                          # This accepts a list of NTP servers  For multiple servers, please look at the examples 
+    esxi_hostname: ${2:value}                                              # Name of the host system to work with  This parameter is required if C(cluster_name) is not specified 
+    cluster_name: ${3:value}                                               # Name of the cluster from which all host systems will be used  This parameter is required if C(esxi_hostname) is not spec
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  present: Add NTP server(s), if specified server(s) are absent else do nothing  absent: Remove N
+    verbose: ${5:False}                                                    # Verbose output of the configuration change  Explains if an NTP server was added, removed, or if the NTP server sequence 
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${7:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${8:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${10:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${11:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${12:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Runs commands on a remote Windows host based on the PsExec model
+# prefix: psexec_snippet
+# key: psexec
+# group: ansible
+# --
+
+- name: ${0:Runs commands on a remote Windows host based on the PsExec model}
+  psexec:                                                                  
+    hostname: ${1:The remote Windows host to connect to, can be either an IP address or a hostname}#
+    executable: ${2:The executable to run on the Windows host}             #
+    connection_username: ${3:value}                                        # The username to use when connecting to the remote Windows host  This user must be a member of the C(Administrators) grou
+    connection_password: ${4:value}                                        # The password for I(connection_user)  Required if the Kerberos requirements are not installed or the username is a local 
+    port: ${5:445}                                                         # The port that the remote SMB service is listening on 
+    encrypt: ${6:True}                                                     # Will use SMB encryption to encrypt the SMB messages sent to and from the host  This requires the SMB 3 protocol which is
+    connection_timeout: ${7:60}                                            # The timeout in seconds to wait when receiving the initial SMB negotiate response from the server 
+    arguments: ${8:value}                                                  # Any arguments as a single string to use when running the executable 
+    working_directory: ${9:C:\\Windows\\System32}                          # Changes the working directory set when starting the process 
+    asynchronous: ${10:False}                                              # Will run the command as a detached process and the module returns immediately after starting the process while the proce
+    load_profile: ${11:True}                                               # Runs the remote command with the user's profile loaded 
+    process_username: ${12:value}                                          # The user to run the process as  This can be set to run the process under an Interactive logon of the specified account w
+    process_password: ${13:value}                                          # The password for I(process_username)  Required if I(process_username) is defined and not C(System) 
+    integrity_level: ${14$$(yas-choose-value '("limited" "default" "elevated"))}# choices: limited;default;elevated  The integrity level of the process when I(process_username) is defined and is no
+    interactive: ${15:False}                                               # Will run the process as an interactive process that shows a process Window of the Windows session specified by I(interac
+    interactive_session: ${16:0}                                           # The Windows session ID to use when displaying the interactive process on the remote Windows host  This is only valid whe
+    priority: ${17$$(yas-choose-value '("above_normal" "below_normal" "high" "idle" "normal" "realtime"))}# choices: above_normal;below_normal;high;idle;normal;realtime  Set the command's priority 
+    show_ui_on_logon_screen: ${18:False}                                   # Shows the process UI on the Winlogon secure desktop when I(process_username) is C(System) 
+    process_timeout: ${19:0}                                               # The timeout in seconds that is placed upon the running process  A value of C(0) means no timeout 
+    stdin: ${20:value}                                                     # Data to send on the stdin pipe once the process has started  This option has no effect when I(interactive) or I(asynchro

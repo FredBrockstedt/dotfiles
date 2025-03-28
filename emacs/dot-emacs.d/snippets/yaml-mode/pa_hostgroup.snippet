@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage FreeIPA host-group
+# prefix: ipa_hostgroup_snippet
+# key: pa_hostgroup
+# group: ansible
+# --
+
+- name: ${0:Manage FreeIPA host-group}
+  ipa_hostgroup:                                                           
+    cn: ${1:Name of host-group}                                            # Can not be changed as it is the unique identifier 
+    ipa_pass: ${2:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    description: ${3:value}                                                # Description
+    host: ${4:value}                                                       # List of hosts that belong to the host-group  If an empty list is passed all hosts will be removed from the group  If opt
+    hostgroup: ${5:value}                                                  # List of host-groups than belong to that host-group  If an empty list is passed all host-groups will be removed from the 
+    state: ${6$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  State to ensure 
+    ipa_port: ${7:443}                                                     # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{8:ipa}                                                    #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${9:admin}                                                   # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${10$$(yas-choose-value '("http" "https"))}                  # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${11:True}                                             # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${12:10}                                                  # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

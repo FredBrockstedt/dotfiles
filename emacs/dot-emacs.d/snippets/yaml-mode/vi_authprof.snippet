@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Module for setup of AuthProfile Avi RESTful Object
+# prefix: avi_authprofile_snippet
+# key: vi_authprof
+# group: ansible
+# --
+
+- name: ${0:Module for setup of AuthProfile Avi RESTful Object}
+  avi_authprofile:                                                         
+    name: ${1:Name of the auth profile}                                    #
+    type: ${2:Type of the auth profile}                                    # Enum options - AUTH_PROFILE_LDAP, AUTH_PROFILE_TACACS_PLUS, AUTH_PROFILE_SAML, AUTH_PROFILE_PINGACCESS 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${4$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${5$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    description: ${6:value}                                                # User defined description for the object 
+    http: ${7:value}                                                       # Http user authentication params 
+    ldap: ${8:value}                                                       # Ldap server and directory settings 
+    pa_agent_ref: ${9:value}                                               # Pingaccessagent uuid  It is a reference to an object of type pingaccessagent  Field introduced in 18 2 3 
+    saml: ${10:value}                                                      # Saml settings  Field introduced in 17 2 3 
+    tacacs_plus: ${11:value}                                               # Tacacs+ settings 
+    tenant_ref: ${12:value}                                                # It is a reference to an object of type tenant 
+    url: ${13:value}                                                       # Avi controller URL of the object 
+    uuid: ${14:value}                                                      # Uuid of the auth profile 
+    controller: ${15:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${16:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${17:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${18:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${19:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{20:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${21:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${22:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${23:value}                         # It disables avi session information to be cached as a fact 

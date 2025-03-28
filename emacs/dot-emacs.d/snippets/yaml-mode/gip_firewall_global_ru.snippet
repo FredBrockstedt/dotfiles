@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage AFM global rule settings on BIG-IP
+# prefix: bigip_firewall_global_rules_snippet
+# key: gip_firewall_global_ru
+# group: ansible
+# --
+
+- name: ${0:Manage AFM global rule settings on BIG-IP}
+  bigip_firewall_global_rules:                                             
+    enforced_policy: ${1:value}                                            # Specifies an enforced firewall policy  C(enforced_policy) rules are enforced globally 
+    service_policy: ${2:value}                                             # Specifies a service policy that would apply to traffic globally  The service policy is applied to all flows, provided if
+    staged_policy: ${3:value}                                              # Specifies a staged firewall policy  C(staged_policy) rules are not enforced while all the visibility aspects namely stat
+    description: ${4:value}                                                # Description for the global list of firewall rules 
+    provider: ${5:value}                                                   # A dict object containing connection details 

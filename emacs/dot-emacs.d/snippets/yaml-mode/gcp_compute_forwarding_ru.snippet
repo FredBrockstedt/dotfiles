@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP ForwardingRule
+# prefix: gcp_compute_forwarding_rule_snippet
+# key: gcp_compute_forwarding_ru
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP ForwardingRule}
+  gcp_compute_forwarding_rule:                                             
+    name: ${1:Name of the resource; provided by the client when the resource is created}# The name must be 1-63 characters long, and comply with RFC1035  Specifically, the name must be 1-63 charact
+    region: ${2:A reference to the region where the regional forwarding rule resides}# This field is not applicable to global forwarding rules 
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${5:value}                                                # An optional description of this resource  Provide this property when you create the resource 
+    ip_address: ${6:value}                                                 # The IP address that this forwarding rule is serving on behalf of  Addresses are restricted based on the forwarding rule'
+    ip_protocol: ${7:value}                                                # The IP protocol to which this rule applies  Valid options are TCP, UDP, ESP, AH, SCTP or ICMP  When the load balancing s
+    backend_service: ${8:value}                                            # A BackendService to receive the matched traffic  This is used only for INTERNAL load balancing  This field represents a 
+    ip_version: ${9:value}                                                 # ipVersion is not a valid field for regional forwarding rules  Some valid choices include: "IPV4", "IPV6"
+    load_balancing_scheme: ${10:value}                                     # This signifies what the ForwardingRule will be used for and can only take the following values: INTERNAL, EXTERNAL The v
+    network: ${11:value}                                                   # For internal load balancing, this field identifies the network that the load balanced IP should belong to for this Forwa
+    port_range: ${12:value}                                                # This field is used along with the target field for TargetHttpProxy, TargetHttpsProxy, TargetSslProxy, TargetTcpProxy, Ta
+    ports: ${13:value}                                                     # This field is used along with the backend_service field for internal load balancing  When the load balancing scheme is I
+    subnetwork: ${14:value}                                                # The subnetwork that the load balanced IP should belong to for this Forwarding Rule  This field is only used for INTERNAL
+    target: ${15:value}                                                    # This field is only used for EXTERNAL load balancing  A reference to a TargetPool resource to receive the matched traffic
+    all_ports: ${16:value}                                                 # For internal TCP/UDP load balancing (i e  load balancing scheme is INTERNAL and protocol is TCP/UDP), set this to true t
+    network_tier: ${17:value}                                              # The networking tier used for configuring this address  This field can take the following values: PREMIUM or STANDARD  If
+    service_label: ${18:value}                                             # An optional prefix to the service name for this Forwarding Rule  If specified, will be the first label of the fully qual
+    project: ${19:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${20:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${21:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${22:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${23:value}                                                    # Array of scopes to be used 
+    env_type: ${24:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

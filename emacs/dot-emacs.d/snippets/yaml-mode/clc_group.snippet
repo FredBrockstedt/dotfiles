@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Create/delete Server Groups at Centurylink Cloud
+# prefix: clc_group_snippet
+# key: clc_group
+# group: ansible
+# --
+
+- name: ${0:Create/delete Server Groups at Centurylink Cloud}
+  clc_group:                                                               
+    name: ${1:The name of the Server Group}                                #
+    description: ${2:value}                                                # A description of the Server Group
+    parent: ${3:value}                                                     # The parent group of the server group  If parent is not provided, it creates the group at top level 
+    location: ${4:value}                                                   # Datacenter to create the group in  If location is not provided, the group gets created in the default datacenter associa
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether to create or delete the group
+    wait: ${6:True}                                                        # Whether to wait for the tasks to finish before returning 

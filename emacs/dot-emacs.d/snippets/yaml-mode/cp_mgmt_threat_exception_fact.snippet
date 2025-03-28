@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Get threat-exception objects facts on Check Point over Web Services API
+# prefix: cp_mgmt_threat_exception_facts_snippet
+# key: cp_mgmt_threat_exception_fact
+# group: ansible
+# --
+
+- name: ${0:Get threat-exception objects facts on Check Point over Web Services API}
+  cp_mgmt_threat_exception_facts:                                          
+    name: ${1:value}                                                       # The name of the layer containing the parent threat rule  This parameter is relevant only for getting few objects 
+    exception_group_uid: ${2:value}                                        # The UID of the exception-group 
+    exception_group_name: ${3:value}                                       # The name of the exception-group 
+    layer: ${4:value}                                                      # Layer that the rule belongs to identified by the name or UID 
+    rule_name: ${5:value}                                                  # The name of the parent rule 
+    details_level: ${6$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    filter: ${7:value}                                                     # Search expression to filter the rulebase  The provided text should be exactly the same as it would be given in Smart Con
+    filter_settings: ${8:value}                                            # Sets filter preferences 
+    limit: ${9:value}                                                      # No more than that many results will be returned  This parameter is relevant only for getting few objects 
+    offset: ${10:value}                                                    # Skip that many results before beginning to return them  This parameter is relevant only for getting few objects 
+    order: ${11:value}                                                     # Sorts results by the given field  By default the results are sorted in the ascending order by name  This parameter is re
+    package: ${12:value}                                                   # Name of the package 
+    use_object_dictionary: ${13:value}                                     # N/A
+    dereference_group_members: ${14:value}                                 # Indicates whether to dereference "members" field by details level for every object in reply 
+    show_membership: ${15:value}                                           # Indicates whether to calculate and show "groups" field for every object in reply 
+    version: ${16:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

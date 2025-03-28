@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Configure and manage Link Layer Discovery Protocol(LLDP) attributes on IOS platforms.
+# prefix: ios_lldp_global_snippet
+# key: os_lldp_glo
+# group: ansible
+# --
+
+- name: ${0:Configure and manage Link Layer Discovery Protocol(LLDP) attributes on IOS platforms.}
+  ios_lldp_global:                                                         
+    config: ${1:value}                                                     # A   d i c t i o n a r y   o f   L L D P   o p t i o n s
+    state: ${2$$(yas-choose-value '("merged" "replaced" "deleted"))}       # choices: merged;replaced;deleted  The state of the configuration after module completion

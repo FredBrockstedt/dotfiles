@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manage rabbitMQ queues
+# prefix: rabbitmq_queue_snippet
+# key: rabbitmq_queu
+# group: ansible
+# --
+
+- name: ${0:Manage rabbitMQ queues}
+  rabbitmq_queue:                                                          
+    name: ${1:Name of the queue}                                           #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the queue should be present or absent
+    durable: ${3:true}                                                     # whether queue is durable or not
+    auto_delete: ${4:false}                                                # if the queue should delete itself after all queues/queues unbound from it
+    message_ttl: ${5:forever}                                              # How long a message can live in queue before it is discarded (milliseconds)
+    auto_expires: ${6:forever}                                             # How long a queue can be unused before it is automatically deleted (milliseconds)
+    max_length: ${7:"no limit"}                                            # How many messages can the queue contain before it starts rejecting
+    dead_letter_exchange: ${8:value}                                       # Optional name of an exchange to which messages will be republished if they are rejected or expire
+    dead_letter_routing_key: ${9:value}                                    # Optional replacement routing key to use when a message is dead-lettered  Original routing key will be used if unset
+    max_priority: ${10:value}                                              # Maximum number of priority levels for the queue to support  If not set, the queue will not support message priorities  L
+    arguments: ${11:namespace()}                                           # extra arguments for queue  If defined this argument is a key/value dictionary
+    login_user: ${12:guest}                                                # RabbitMQ user for connection 
+    login_password: ${13:value}                                            # RabbitMQ password for connection 
+    login_host: ${14:localhost}                                            # RabbitMQ host for connection 
+    login_port: ${15:15672}                                                # RabbitMQ management API port 
+    login_protocol: ${16$$(yas-choose-value '("http" "https"))}            # choices: http;https  RabbitMQ management API protocol 
+    ca_cert: ${17:value}                                                   # CA certificate to verify SSL connection to management API 
+    client_cert: ${18:value}                                               # Client certificate to send on SSL connections to management API 
+    client_key: ${19:value}                                                # Private key matching the client certificate 
+    vhost: ${20:/}                                                         # RabbitMQ virtual host 

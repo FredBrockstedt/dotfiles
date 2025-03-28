@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage route tables for AWS virtual private clouds
+# prefix: ec2_vpc_route_table_snippet
+# key: c2_vpc_route_t
+# group: ansible
+# --
+
+- name: ${0:Manage route tables for AWS virtual private clouds}
+  ec2_vpc_route_table:                                                     
+    vpc_id: ${1:V P C   I D   o f   t h e   V P C   i n   w h i c h   t o   c r e a t e   t h e   r o u t e   t a b l e }#
+    lookup: ${2$$(yas-choose-value '("tag" "id"))}                         # choices: tag;id  L o o k   u p   r o u t e   t a b l e   b y   e i t h e r   t a g s   o r   b y   r o u t e   t a b l e
+    propagating_vgw_ids: ${3:value}                                        # E n a b l e   r o u t e   p r o p a g a t i o n   f r o m   v i r t u a l   g a t e w a y s   s p e c i f i e d   b y   
+    purge_routes: ${4:true}                                                # P u r g e   e x i s t i n g   r o u t e s   t h a t   a r e   n o t   f o u n d   i n   r o u t e s  
+    purge_subnets: ${5:true}                                               # P u r g e   e x i s t i n g   s u b n e t s   t h a t   a r e   n o t   f o u n d   i n   s u b n e t s     I g n o r e 
+    purge_tags: ${6:false}                                                 # P u r g e   e x i s t i n g   t a g s   t h a t   a r e   n o t   f o u n d   i n   r o u t e   t a b l e
+    route_table_id: ${7:value}                                             # T h e   I D   o f   t h e   r o u t e   t a b l e   t o   u p d a t e   o r   d e l e t e  
+    routes: ${8:value}                                                     # L i s t   o f   r o u t e s   i n   t h e   r o u t e   t a b l e     R o u t e s   a r e   s p e c i f i e d   a s   d 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  C r e a t e   o r   d e s t r o y   t h e   V P C   r o u t e   t a b l e
+    subnets: ${10:value}                                                   # A n   a r r a y   o f   s u b n e t s   t o   a d d   t o   t h i s   r o u t e   t a b l e     S u b n e t s   m a y   
+    tags: ${11:value}                                                      # A   d i c t i o n a r y   o f   r e s o u r c e   t a g s   o f   t h e   f o r m :   {   t a g 1 :   v a l u e 1 ,   t 
+    debug_botocore_endpoint_logs: ${12:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${13:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${14:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${15:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${16:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${17:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${18:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${19:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

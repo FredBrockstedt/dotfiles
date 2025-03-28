@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Create/update/delete Zabbix hosts
+# prefix: zabbix_host_snippet
+# key: zabbix_host
+# group: ansible
+# --
+
+- name: ${0:Create/update/delete Zabbix hosts}
+  zabbix_host:                                                             
+    host_name: ${1:Name of the host in Zabbix}                             # I(host_name) is the unique identifier used and cannot be updated using this module 
+    server_url: ${2:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${3:Zabbix user name}                                      #
+    login_password: ${4:Zabbix user password}                              #
+    http_login_user: ${5:Basic Auth login}                                 #
+    visible_name: ${6:value}                                               # Visible name of the host in Zabbix 
+    description: ${7:value}                                                # Description of the host in Zabbix 
+    host_groups: ${8:value}                                                # List of host groups the host is part of 
+    link_templates: ${9:value}                                             # List of templates linked to the host 
+    inventory_mode: ${10$$(yas-choose-value '("automatic" "manual" "disabled"))}# choices: automatic;manual;disabled  Configure the inventory mode 
+    inventory_zabbix: ${11:value}                                          # Add Facts for a zabbix inventory (e g  Tag) (see example below)  Please review the interface documentation for more info
+    status: ${12$$(yas-choose-value '("enabled" "disabled"))}              # choices: enabled;disabled  Monitoring status of the host 
+    state: ${13$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the host  On C(present), it will create if host does not exist or update the host if t
+    proxy: ${14:value}                                                     # The name of the Zabbix proxy to be used 
+    interfaces: ${15:[]}                                                   # List of interfaces to be created for the host (see example below)  For more information, review host interface documenta
+    tls_connect: ${16:1}                                                   # Specifies what encryption to use for outgoing connections  Possible values, 1 (no encryption), 2 (PSK), 4 (certificate) 
+    tls_accept: ${17:1}                                                    # Specifies what types of connections are allowed for incoming connections  The tls_accept parameter accepts values of 1 t
+    tls_psk_identity: ${18:value}                                          # It is a unique name by which this specific PSK is referred to by Zabbix components Do not put sensitive information in t
+    tls_psk: ${19:value}                                                   # PSK value is a hard to guess string of hexadecimal digits  The preshared key, at least 32 hex digits  Required if either
+    ca_cert: ${20:value}                                                   # Required certificate issuer  Works only with >= Zabbix 3 0
+    tls_subject: ${21:value}                                               # Required certificate subject  Works only with >= Zabbix 3 0
+    ipmi_authtype: ${22:value}                                             # IPMI authentication algorithm  Please review the Host object documentation for more information on the supported propert
+    ipmi_privilege: ${23:value}                                            # IPMI privilege level  Please review the Host object documentation for more information on the supported properties https
+    ipmi_username: ${24:value}                                             # IPMI username  also see the last note in the I(ipmi_authtype) documentation
+    ipmi_password: ${25:value}                                             # IPMI password  also see the last note in the I(ipmi_authtype) documentation
+    force: ${26:true}                                                      # Overwrite the host configuration, even if already present 
+    http_login_password: ${27:value}                                       # Basic Auth password
+    timeout: ${28:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${29:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

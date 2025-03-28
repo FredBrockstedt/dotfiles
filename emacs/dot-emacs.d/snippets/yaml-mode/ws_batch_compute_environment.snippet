@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Manage AWS Batch Compute Environments
+# prefix: aws_batch_compute_environment_snippet
+# key: ws_batch_compute_environment
+# group: ansible
+# --
+
+- name: ${0:Manage AWS Batch Compute Environments}
+  aws_batch_compute_environment:                                           
+    compute_environment_name: ${1:The name for your compute environment}   # Up to 128 letters (uppercase and lowercase), numbers, and underscores are allowed 
+    type: ${2$$(yas-choose-value '("MANAGED" "UNMANAGED"))}                # The type of the compute environment 
+    service_role: ${3:The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf}#
+    compute_resource_type: ${4$$(yas-choose-value '("EC2" "SPOT"))}        # The type of compute resource 
+    minv_cpus: ${5:The minimum number of EC2 vCPUs that an environment should maintain}#
+    maxv_cpus: ${6:The maximum number of EC2 vCPUs that an environment can reach}#
+    instance_types: ${7:The instance types that may be launched}           #
+    subnets: ${8:The VPC subnets into which the compute resources are launched}#
+    security_group_ids: ${9:The EC2 security groups that are associated with instances launched in the compute environment}#
+    instance_role: ${10:The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment}#
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Describes the desired state 
+    compute_environment_state: ${12$$(yas-choose-value '("ENABLED" "DISABLED"))}# choices: ENABLED;DISABLED  The state of the compute environment  If the state is ENABLED, then the compute environm
+    desiredv_cpus: ${13:value}                                             # The desired number of EC2 vCPUS in the compute environment 
+    image_id: ${14:value}                                                  # The Amazon Machine Image (AMI) ID used for instances launched in the compute environment 
+    ec2_key_pair: ${15:value}                                              # The EC2 key pair that is used for instances launched in the compute environment 
+    tags: ${16:value}                                                      # Key-value pair tags to be applied to resources that are launched in the compute environment 
+    bid_percentage: ${17:value}                                            # The minimum percentage that a Spot Instance price must be when compared with the On-Demand price for that instance type 
+    spot_iam_fleet_role: ${18:value}                                       # The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment 
+    debug_botocore_endpoint_logs: ${19:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${20:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${21:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${22:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${23:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${24:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${25:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${26:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

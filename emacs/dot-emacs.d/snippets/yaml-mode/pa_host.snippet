@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage FreeIPA host
+# prefix: ipa_host_snippet
+# key: pa_host
+# group: ansible
+# --
+
+- name: ${0:Manage FreeIPA host}
+  ipa_host:                                                                
+    fqdn: ${1:Full qualified domain name}                                  # Can not be changed as it is the unique identifier 
+    ipa_pass: ${2:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    description: ${3:value}                                                # A description of this host 
+    force: ${4:value}                                                      # Force host name even if not in DNS 
+    ip_address: ${5:value}                                                 # Add the host to DNS with this IP address 
+    mac_address: ${6:value}                                                # List of Hardware MAC address(es) off this host  If option is omitted MAC addresses will not be checked or changed  If an
+    ns_host_location: ${7:value}                                           # Host location (e g  "Lab 2")
+    ns_hardware_platform: ${8:value}                                       # Host hardware platform (e g  "Lenovo T61")
+    ns_os_version: ${9:value}                                              # Host operating system and version (e g  "Fedora 9")
+    user_certificate: ${10:value}                                          # List of Base-64 encoded server certificates  If option is omitted certificates will not be checked or changed  If an emp
+    state: ${11$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  S t a t e   t o   e n s u r e
+    update_dns: ${12:False}                                                # If set C("True") with state as C("absent"), then removes DNS records of the host managed by FreeIPA DNS  This option has
+    random_password: ${13:False}                                           # G e n e r a t e   a   r a n d o m   p a s s w o r d   t o   b e   u s e d   i n   b u l k   e n r o l l m e n t
+    ipa_port: ${14:443}                                                    # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{15:ipa}                                                   #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${16:admin}                                                  # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${17$$(yas-choose-value '("http" "https"))}                  # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${18:True}                                             # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${19:10}                                                  # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

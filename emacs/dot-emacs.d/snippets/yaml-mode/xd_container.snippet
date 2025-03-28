@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage LXD Containers
+# prefix: lxd_container_snippet
+# key: xd_container
+# group: ansible
+# --
+
+- name: ${0:Manage LXD Containers}
+  lxd_container:                                                           
+    name: ${1:Name of a container}                                         #
+    architecture: ${2:value}                                               # The architecture for the container (e g  "x86_64" or "i686")  See U(https://github com/lxc/lxd/blob/master/doc/rest-api 
+    config: ${3:value}                                                     # The config for the container (e g  {"limits cpu": "2"\})  See U(https://github com/lxc/lxd/blob/master/doc/rest-api md#p
+    devices: ${4:value}                                                    # The devices for the container (e g  { "rootfs": { "path": "/dev/kvm", "type": "unix-char" \})  See U(https://github com/
+    ephemeral: ${5:value}                                                  # Whether or not the container is ephemeral (e g  true or false)  See U(https://github com/lxc/lxd/blob/master/doc/rest-ap
+    source: ${6:value}                                                     # The source for the container (e g  { "type": "image", "mode": "pull", "server": "https://images linuxcontainers org", "p
+    state: ${7$$(yas-choose-value '("started" "stopped" "restarted" "absent" "frozen"))}# choices: started;stopped;restarted;absent;frozen  Define the state of a container 
+    timeout: ${8:30}                                                       # A timeout for changing the state of the container  This is also used as a timeout for waiting until IPv4 addresses are s
+    wait_for_ipv4_addresses: ${9:False}                                    # If this is true, the C(lxd_container) waits until IPv4 addresses are set to the all network interfaces in the container 
+    force_stop: ${10:False}                                                # If this is true, the C(lxd_container) forces to stop the container when it stops or restarts the container 
+    url: ${{11:unix:/var/lib/lxd/unix}                                     #socket} # not required  The unix domain socket path or the https URL for the LXD server 
+    snap_url: ${{12:unix:/var/snap/lxd/common/lxd/unix}                    #socket} # not required  The unix domain socket path when LXD is installed by snap package manager 
+    client_key: ${{13:""{\}/}                                              #config/lxc/client key"  format(os environ["HOME"])"} # not required  The client certificate key file path 
+    client_cert: ${{14:""{\}/}                                             #config/lxc/client crt"  format(os environ["HOME"])"} # not required  The client certificate file path 
+    trust_password: ${15:value}                                            # The client trusted password  You need to set this password on the LXD server before running this module using the follow

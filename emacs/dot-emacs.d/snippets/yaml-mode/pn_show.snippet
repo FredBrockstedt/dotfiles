@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Run show commands on nvOS device.
+# prefix: pn_show_snippet
+# key: pn_show
+# group: ansible
+# --
+
+- name: ${0:Run show commands on nvOS device.}
+  pn_show:                                                                 
+    pn_command: ${1:The C(pn_command) takes a CLI show command as value}   #
+    pn_cliusername: ${2:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${3:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${4:value}                                               # Target switch(es) to run the cli on 
+    pn_parameters: ${5:all}                                                # Display output using a specific parameter  Use 'all' to display possible output  List of comma separated parameters 
+    pn_options: ${6:value}                                                 # Specify formatting options 

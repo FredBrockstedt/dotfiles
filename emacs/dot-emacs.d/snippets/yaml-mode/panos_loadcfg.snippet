@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: load configuration on PAN-OS device
+# prefix: panos_loadcfg_snippet
+# key: panos_loadcfg
+# group: ansible
+# --
+
+- name: ${0:load configuration on PAN-OS device}
+  panos_loadcfg:                                                           
+    ip_address: ${1:IP address (or hostname) of PAN-OS device}             #
+    password: ${2:Password for authentication}                             #
+    file: ${3:value}                                                       # configuration file to load
+    commit: ${4:true}                                                      # commit if changed
+    username: ${5:admin}                                                   # Username for authentication 

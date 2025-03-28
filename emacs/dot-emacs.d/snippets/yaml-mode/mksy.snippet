@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Generates AIX mksysb rootvg backups.
+# prefix: mksysb_snippet
+# key: mksy
+# group: ansible
+# --
+
+- name: ${0:Generates AIX mksysb rootvg backups.}
+  mksysb:                                                                  
+    name: ${1:Backup name}                                                 #
+    storage_path: ${2:Storage path where the mksysb will stored}           #
+    backup_crypt_files: ${3:true}                                          # Backup encrypted files 
+    backup_dmapi_fs: ${4:true}                                             # Back up DMAPI filesystem files 
+    create_map_files: ${5:false}                                           # Creates a new MAP files 
+    exclude_files: ${6:false}                                              # Excludes files using C(/etc/rootvg exclude) 
+    exclude_wpar_files: ${7:false}                                         # Excludes WPAR files 
+    extended_attrs: ${8:true}                                              # Backup extended attributes 
+    new_image_data: ${9:true}                                              # Creates a new file data 
+    software_packing: ${10:false}                                          # Exclude files from packing option listed in C(/etc/exclude_packing rootvg) 
+    use_snapshot: ${11:false}                                              # Creates backup using snapshots 

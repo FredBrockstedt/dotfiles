@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Create and delete records in Memset DNS zones.
+# prefix: memset_zone_record_snippet
+# key: memset_zone_record
+# group: ansible
+# --
+
+- name: ${0:Create and delete records in Memset DNS zones.}
+  memset_zone_record:                                                      
+    api_key: ${1:The API key obtained from the Memset control panel}       #
+    address: ${2:The address for this record (can be IP or text string depending on record type)}#
+    type: ${3$$(yas-choose-value '("A" "AAAA" "CNAME" "MX" "NS" "SRV" "TXT"))}# The type of DNS record to create 
+    zone: ${4:The name of the zone to which to add the record to}          #
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicates desired state of resource 
+    priority: ${6:value}                                                   # C(SRV) and C(TXT) record priority, in the range 0 > 999 (inclusive) 
+    record: ${7:value}                                                     # The subdomain to create 
+    relative: ${8:value}                                                   # If set then the current domain is added onto the address field for C(CNAME), C(MX), C(NS) and C(SRV)record types 
+    ttl: ${9$$(yas-choose-value '("0" "300" "600" "900" "1800" "3600" "7200" "10800" "21600" "43200" "86400"))}# choices: 0;300;600;900;1800;3600;7200;10800;21600;43200;86400  The record's TTL in s

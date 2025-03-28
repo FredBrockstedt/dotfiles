@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages applying ACLs to interfaces.
+# prefix: nxos_acl_interface_snippet
+# key: xos_acl_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages applying ACLs to interfaces.}
+  nxos_acl_interface:                                                      
+    name: ${1:Case sensitive name of the access list (ACL)}                #
+    interface: ${2:Full name of interface, e}                              #g  I(Ethernet1/1) 
+    direction: ${3$$(yas-choose-value '("ingress" "egress"))}              # Direction ACL to be applied in on the interface 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

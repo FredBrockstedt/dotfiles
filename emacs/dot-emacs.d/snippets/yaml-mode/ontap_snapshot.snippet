@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage Snapshots
+# prefix: na_ontap_snapshot_snippet
+# key: ontap_snapshot
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage Snapshots}
+  na_ontap_snapshot:                                                       
+    snapshot: ${1:N a m e   o f   t h e   s n a p s h o t   t o   b e   m a n a g e d }#   T h e   m a x i m u m   s t r i n g   l e n g t h   i s   2 5 6   c h a r a c t e r s  
+    volume: ${2:Name of the volume on which the snapshot is to be created} #
+    vserver: ${3:The Vserver name}                                         #
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If you want to create/modify a snapshot, or delete it 
+    from_name: ${8:value}                                                  # Name of the existing snapshot to be renamed to 
+    async_bool: ${9:value}                                                 # If true, the snapshot is to be created asynchronously 
+    comment: ${10:value}                                                   # A   h u m a n   r e a d a b l e   c o m m e n t   a t t a c h e d   w i t h   t h e   s n a p s h o t     T h e   s i z 
+    snapmirror_label: ${11:value}                                          # A   h u m a n   r e a d a b l e   S n a p M i r r o r   L a b e l   a t t a c h e d   w i t h   t h e   s n a p s h o t 
+    ignore_owners: ${12:value}                                             # if this field is true, snapshot will be deleted even if some other processes are accessing it 
+    snapshot_instance_uuid: ${13:value}                                    # The 128 bit unique snapshot identifier expressed in the form of UUID 
+    https: ${14:False}                                                     # Enable and disable https
+    validate_certs: ${15:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${16:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${17:value}                                                    # The ontap api version to use
+    use_rest: ${18$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

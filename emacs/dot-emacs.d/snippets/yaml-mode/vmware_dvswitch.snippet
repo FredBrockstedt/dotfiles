@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Create or remove a Distributed Switch
+# prefix: vmware_dvswitch_snippet
+# key: vmware_dvswitch
+# group: ansible
+# --
+
+- name: ${0:Create or remove a Distributed Switch}
+  vmware_dvswitch:                                                         
+    switch_name: ${1:The name of the distribute vSwitch to create or remove}#
+    datacenter_name: ${2:value}                                            # The name of the datacenter that will contain the Distributed Switch  This parameter is optional, if C(folder) is provide
+    switch_version: ${{3$$(yas-choose-value '("5}                          #0 0,5 1 0,5 5 0,6 0 0,6 5 0,6 6 0|} # not required  choices: 5 0 0;5 1 0;5 5 0;6 0 0;6 5 0;6 6 0  The version of the Dist
+    mtu: ${4:1500}                                                         # The switch maximum transmission unit  Required parameter for C(state) both C(present) and C(absent), before Ansible 2 6 
+    multicast_filtering_mode: ${5$$(yas-choose-value '("basic" "snooping"))}# choices: basic;snooping  The multicast filtering mode  C(basic) mode: multicast traffic for virtual machines is forward
+    uplink_quantity: ${6:value}                                            # Quantity of uplink per ESXi host added to the Distributed Switch  The uplink quantity can be increased or decreased, but
+    uplink_prefix: ${7:"Uplink "}                                          # The prefix used for the naming of the uplinks  Only valid if the Distributed Switch will be created  Not used if the Dis
+    discovery_proto: ${8$$(yas-choose-value '("cdp" "lldp" "disabled"))}   # choices: cdp;lldp;disabled  Link discovery protocol between Cisco and Link Layer discovery  Required parameter for C(sta
+    discovery_operation: ${9$$(yas-choose-value '("both" "advertise" "listen"))}# choices: both;advertise;listen  Select the discovery operation  Required parameter for C(state) both C(present) and
+    contact: ${10:value}                                                   # Dictionary which configures administrator contact name and description for the Distributed Switch  Valid attributes are:
+    description: ${11:value}                                               # Description of the Distributed Switch 
+    health_check: ${12:"namespace(vlan_mtu=False, teaming_failover=False, vlan_mtu_interval=0, teaming_failover_interval=0)"}# Dictionary which configures Health Check for the Distributed Switch  V
+    state: ${13$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  If set to C(present) and the Distributed Switch doesn't exists then the Distributed Switch will
+    folder: ${14:value}                                                    # Destination folder, absolute path to place dvswitch in  The folder should include the datacenter  This parameter is case
+    hostname: ${15:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${16:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${17:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${18:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${19:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${20:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${21:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

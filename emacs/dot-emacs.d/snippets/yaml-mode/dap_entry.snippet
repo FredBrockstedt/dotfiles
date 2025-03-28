@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Add or remove LDAP entries.
+# prefix: ldap_entry_snippet
+# key: dap_entry
+# group: ansible
+# --
+
+- name: ${0:Add or remove LDAP entries.}
+  ldap_entry:                                                              
+    dn: ${1:The DN of the entry to add or remove}                          #
+    attributes: ${2:value}                                                 # If I(state=present), attributes necessary to create an entry  Existing entries are never modified  To assert specific at
+    objectClass: ${3:value}                                                # If I(state=present), value or list of values to use when creating the entry  It can either be a string or an actual list
+    params: ${4:value}                                                     # List of options which allows to overwrite any of the task or the I(attributes) options  To remove an option, set the val
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The target state of the entry 
+    bind_dn: ${6:value}                                                    # A DN to bind with  If this is omitted, we'll try a SASL bind with the EXTERNAL mechanism  If this is blank, we'll use an
+    bind_pw: ${7:value}                                                    # The password to use with I(bind_dn) 
+    server_uri: ${8:ldapi:///}                                             # A URI to the LDAP server  The default value lets the underlying LDAP client library look for a UNIX domain socket in its
+    start_tls: ${9:False}                                                  # If true, we'll use the START_TLS LDAP extension 
+    validate_certs: ${10:True}                                             # If set to C(no), SSL certificates will not be validated  This should only be used on sites using self-signed certificate

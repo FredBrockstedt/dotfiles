@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Manages global configuration of EVPN on HUAWEI CloudEngine switches.
+# prefix: ce_evpn_global_snippet
+# key: ce_evpn_glo
+# group: ansible
+# --
+
+- name: ${0:Manages global configuration of EVPN on HUAWEI CloudEngine switches.}
+  ce_evpn_global:                                                          
+    evpn_overlay_enable: ${1$$(yas-choose-value '("enable" "disable"))}    # Configure EVPN as the VXLAN control plane 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage Windows path environment variables
+# prefix: win_path_snippet
+# key: win_path
+# group: ansible
+# --
+
+- name: ${0:Manage Windows path environment variables}
+  win_path:                                                                
+    elements: ${1:A single path element, or a list of path elements (ie, directories) to add or remove}# When multiple elements are included in the list (and C(state) is C(present)), the elements a
+    name: ${2:PATH}                                                        # Target path environment variable name 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the path elements specified in C(elements) should be present or absent 
+    scope: ${4$$(yas-choose-value '("machine" "user"))}                    # choices: machine;user  The level at which the environment variable specified by C(name) should be managed (either for th

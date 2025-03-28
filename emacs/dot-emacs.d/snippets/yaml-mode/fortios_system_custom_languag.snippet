@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Configure custom languages in Fortinet's FortiOS and FortiGate.
+# prefix: fortios_system_custom_language_snippet
+# key: fortios_system_custom_languag
+# group: ansible
+# --
+
+- name: ${0:Configure custom languages in Fortinet's FortiOS and FortiGate.}
+  fortios_system_custom_language:                                          
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Indicates whether to create or remove the object 
+    host: ${2:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${3:value}                                                   # FortiOS or FortiGate username 
+    password: ${4:}                                                        # FortiOS or FortiGate password 
+    vdom: ${5:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${6:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${7:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 
+    system_custom_language: ${8:None}                                      # Configure custom languages 

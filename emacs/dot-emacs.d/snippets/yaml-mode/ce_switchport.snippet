@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages Layer 2 switchport interfaces on HUAWEI CloudEngine switches.
+# prefix: ce_switchport_snippet
+# key: ce_switchport
+# group: ansible
+# --
+
+- name: ${0:Manages Layer 2 switchport interfaces on HUAWEI CloudEngine switches.}
+  ce_switchport:                                                           
+    interface: ${1:Full name of the interface, i}                          #e  40GE1/0/22 
+    mode: ${2$$(yas-choose-value '("access" "trunk" "hybrid" "dot1qtunnel"))}# choices: access;trunk;hybrid;dot1qtunnel  The link type of an interface 
+    default_vlan: ${3:value}                                               # If C(mode=access, or mode=dot1qtunnel), used as the access VLAN ID, in the range from 1 to 4094 
+    pvid_vlan: ${4:value}                                                  # If C(mode=trunk, or mode=hybrid), used as the trunk native VLAN ID, in the range from 1 to 4094 
+    trunk_vlans: ${5:value}                                                # If C(mode=trunk), used as the VLAN range to ADD or REMOVE from the trunk, such as 2-10 or 2,5,10-15, etc 
+    untagged_vlans: ${6:value}                                             # If C(mode=hybrid), used as the VLAN range to ADD or REMOVE from the trunk, such as 2-10 or 2,5,10-15, etc 
+    tagged_vlans: ${7:value}                                               # If C(mode=hybrid), used as the VLAN range to ADD or REMOVE from the trunk, such as 2-10 or 2,5,10-15, etc 
+    state: ${8$$(yas-choose-value '("present" "absent" "unconfigured"))}   # choices: present;absent;unconfigured  Manage the state of the resource 

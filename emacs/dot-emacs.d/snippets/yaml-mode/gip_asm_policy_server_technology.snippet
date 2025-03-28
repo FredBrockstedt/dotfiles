@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages Server Technology on ASM policy
+# prefix: bigip_asm_policy_server_technology_snippet
+# key: gip_asm_policy_server_technology
+# group: ansible
+# --
+
+- name: ${0:Manages Server Technology on ASM policy}
+  bigip_asm_policy_server_technology:                                      
+    name: ${{1$$(yas-choose-value '("jQuery" "Java Servlets/JSP" "ASP" "WebDAV" "IIS" "Front Page Server Extensions (FPSE)" "ASP}#NET,Microsoft Windows,Unix/Linux,Macromedia ColdFusion,WordPress,Ap
+    policy_name: ${2:Specifies the name of an existing ASM policy to add or remove server technology}#
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    partition: ${4:Common}                                                 # This parameter is only used when identifying ASM policy 
+    provider: ${5:value}                                                   # A dict object containing connection details 

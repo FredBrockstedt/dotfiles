@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage OSPF protocol on Mellanox ONYX network devices
+# prefix: onyx_ospf_snippet
+# key: onyx_ospf
+# group: ansible
+# --
+
+- name: ${0:Manage OSPF protocol on Mellanox ONYX network devices}
+  onyx_ospf:                                                               
+    ospf: ${1:OSPF instance number 1-65535}                                #
+    router_id: ${2:value}                                                  # OSPF router ID  Required if I(state=present) 
+    interfaces: ${3:value}                                                 # List of interfaces and areas  Required if I(state=present) 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  OSPF state 

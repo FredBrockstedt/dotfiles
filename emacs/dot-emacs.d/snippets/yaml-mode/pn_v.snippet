@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete a VLAN.
+# prefix: pn_vlan_snippet
+# key: pn_v
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete a VLAN.}
+  pn_vlan:                                                                 
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use 'present' to create vlan and 'absent' to delete vlan 
+    pn_vlanid: ${2:Specify a VLAN identifier for the VLAN}                 # This is a value between 2 and 4092 
+    pn_cliusername: ${3:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${4:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${5:local}                                               # Target switch(es) to run the cli on 
+    pn_scope: ${6$$(yas-choose-value '("fabric" "local"))}                 # choices: fabric;local  Specify a scope for the VLAN  Required for vlan-create 
+    pn_description: ${7:value}                                             # Specify a description for the VLAN 
+    pn_stats: ${8:value}                                                   # Specify if you want to collect statistics for a VLAN  Statistic collection is enabled by default 
+    pn_ports: ${9:value}                                                   # Specifies the switch network data port number, list of ports, or range of ports  Port numbers must ne in the range of 1 
+    pn_untagged_ports: ${10:value}                                         # Specifies the ports that should have untagged packets mapped to the VLAN  Untagged packets are packets that do not conta

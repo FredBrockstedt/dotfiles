@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages information center trap configuration on HUAWEI CloudEngine switches.
+# prefix: ce_info_center_trap_snippet
+# key: ce_info_center_trap
+# group: ansible
+# --
+
+- name: ${0:Manages information center trap configuration on HUAWEI CloudEngine switches.}
+  ce_info_center_trap:                                                     
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    trap_time_stamp: ${2$$(yas-choose-value '("date_boot" "date_second" "date_tenthsecond" "date_millisecond" "shortdate_second" "shortdate_tenthsecond" "shortdate_millisecond" "formatdate_second" 
+    trap_buff_enable: ${3$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  Whether a trap buffer is enabled to output information 
+    trap_buff_size: ${4:value}                                             # Size of a trap buffer  The value is an integer ranging from 0 to 1024  The default value is 256 
+    module_name: ${5:value}                                                # Module name of the rule  The value is a string of 1 to 31 case-insensitive characters  The default value is default  Ple
+    channel_id: ${6:value}                                                 # Number of a channel  The value is an integer ranging from 0 to 9  The default value is 0 
+    trap_enable: ${7$$(yas-choose-value '("no_use" "true" "false"))}       # choices: no_use;true;false  Whether a device is enabled to output alarms 
+    trap_level: ${8$$(yas-choose-value '("emergencies" "alert" "critical" "error" "warning" "notification" "informational" "debugging"))}# choices: emergencies;alert;critical;error;warning;notifica

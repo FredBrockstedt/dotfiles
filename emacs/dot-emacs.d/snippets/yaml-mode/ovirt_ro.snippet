@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Module to manage roles in oVirt/RHV
+# prefix: ovirt_role_snippet
+# key: ovirt_ro
+# group: ansible
+# --
+
+- name: ${0:Module to manage roles in oVirt/RHV}
+  ovirt_role:                                                              
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    name: ${2:value}                                                       # Name of the role to manage 
+    id: ${3:value}                                                         # ID of the role to manage 
+    description: ${4:value}                                                # Description of the role 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the role be present/absent 
+    administrative: ${6:value}                                             # Defines the role as administrative-only or not 
+    permits: ${7:value}                                                    # List of permits which role will have Permit 'login' is default and all roles will have it  List can contain name of perm
+    wait: ${8:True}                                                        # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${9:value}                                               # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${10:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${11:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${12:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

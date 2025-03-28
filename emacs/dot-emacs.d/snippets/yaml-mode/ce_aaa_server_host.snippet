@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Manages AAA server host configuration on HUAWEI CloudEngine switches.
+# prefix: ce_aaa_server_host_snippet
+# key: ce_aaa_server_host
+# group: ansible
+# --
+
+- name: ${0:Manages AAA server host configuration on HUAWEI CloudEngine switches.}
+  ce_aaa_server_host:                                                      
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    local_user_name: ${2:value}                                            # Name of a local user  The value is a string of 1 to 253 characters 
+    local_password: ${3:value}                                             # Login password of a user  The password can contain letters, numbers, and special characters  The value is a string of 1 
+    local_service_type: ${4:value}                                         # The type of local user login through, such as ftp ssh snmp telnet 
+    local_ftp_dir: ${5:value}                                              # FTP user directory  The value is a string of 1 to 255 characters 
+    local_user_level: ${6:value}                                           # Login level of a local user  The value is an integer ranging from 0 to 15 
+    local_user_group: ${7:value}                                           # Name of the user group where the user belongs  The user inherits all the rights of the user group  The value is a string
+    radius_group_name: ${8:value}                                          # RADIUS server group's name  The value is a string of 1 to 32 case-insensitive characters 
+    radius_server_type: ${9$$(yas-choose-value '("Authentication" "Accounting"))}# choices: Authentication;Accounting  Type of Radius Server 
+    radius_server_ip: ${10:value}                                          # IPv4 address of configured server  The value is a string of 0 to 255 characters, in dotted decimal notation 
+    radius_server_ipv6: ${11:value}                                        # IPv6 address of configured server  The total length is 128 bits 
+    radius_server_port: ${12:value}                                        # Configured server port for a particular server  The value is an integer ranging from 1 to 65535 
+    radius_server_mode: ${13$$(yas-choose-value '("Secondary-server" "Primary-server"))}# choices: Secondary-server;Primary-server  Configured primary or secondary server for a particular server 
+    radius_vpn_name: ${14:value}                                           # Set VPN instance  The value is a string of 1 to 31 case-sensitive characters 
+    radius_server_name: ${15:value}                                        # Hostname of configured server  The value is a string of 0 to 255 case-sensitive characters 
+    hwtacacs_template: ${16:value}                                         # Name of a HWTACACS template  The value is a string of 1 to 32 case-insensitive characters 
+    hwtacacs_server_ip: ${17:value}                                        # Server IPv4 address  Must be a valid unicast IP address  The value is a string of 0 to 255 characters, in dotted decimal
+    hwtacacs_server_ipv6: ${18:value}                                      # Server IPv6 address  Must be a valid unicast IP address  The total length is 128 bits 
+    hwtacacs_server_type: ${19$$(yas-choose-value '("Authentication" "Authorization" "Accounting" "Common"))}# choices: Authentication;Authorization;Accounting;Common  Hwtacacs server type 
+    hwtacacs_is_secondary_server: ${20:false}                              # Whether the server is secondary 
+    hwtacacs_vpn_name: ${21:value}                                         # VPN instance name 
+    hwtacacs_is_public_net: ${22:false}                                    # Set the public-net 
+    hwtacacs_server_host_name: ${23:value}                                 # Hwtacacs server host name 

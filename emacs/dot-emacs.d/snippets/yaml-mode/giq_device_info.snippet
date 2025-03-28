@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Collect information from F5 BIG-IQ devices
+# prefix: bigiq_device_info_snippet
+# key: giq_device_info
+# group: ansible
+# --
+
+- name: ${0:Collect information from F5 BIG-IQ devices}
+  bigiq_device_info:                                                       
+    gather_subset: ${1$$(yas-choose-value '("all" "applications" "managed-devices" "purchased-pool-licenses" "regkey-pools" "system-info" "vlans" "!all" "!applications" "!managed-devices" "!purchas
+    provider: ${2:value}                                                   # A dict object containing connection details 

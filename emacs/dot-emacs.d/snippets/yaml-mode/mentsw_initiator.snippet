@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage Element SW initiators
+# prefix: na_elementsw_initiators_snippet
+# key: mentsw_initiator
+# group: ansible
+# --
+
+- name: ${0:Manage Element SW initiators}
+  na_elementsw_initiators:                                                 
+    hostname: ${1:The hostname or IP address of the SolidFire cluster}     #
+    username: ${2:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${3:Password for the specified user}                         #
+    initiators: ${4:value}                                                 # A   l i s t   o f   o b j e c t s   c o n t a i n i n g   c h a r a c t e r i s t i c s   o f   e a c h   i n i t i a t 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified initiator should exist or not 

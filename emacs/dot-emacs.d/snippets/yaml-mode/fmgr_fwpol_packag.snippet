@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages FortiManager Firewall Policies Packages.
+# prefix: fmgr_fwpol_package_snippet
+# key: fmgr_fwpol_packag
+# group: ansible
+# --
+
+- name: ${0:Manages FortiManager Firewall Policies Packages.}
+  fmgr_fwpol_package:                                                      
+    name: ${1:Name of the FortiManager package or folder}                  #
+    object_type: ${2$$(yas-choose-value '("pkg" "folder" "install"))}      # Are we managing packages or folders, or installing packages?
+    adom: ${3:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${4$$(yas-choose-value '("add" "set" "delete"))}                 # choices: add;set;delete  Sets one of three modes for managing the object 
+    package_folder: ${5:value}                                             # Name of the folder you want to put the package into 
+    central_nat: ${6$$(yas-choose-value '("enable" "disable"))}            # choices: enable;disable  Central NAT setting 
+    fwpolicy_implicit_log: ${7$$(yas-choose-value '("enable" "disable"))}  # choices: enable;disable  Implicit Log setting for all IPv4 policies in package 
+    fwpolicy6_implicit_log: ${8$$(yas-choose-value '("enable" "disable"))} # choices: enable;disable  Implicit Log setting for all IPv6 policies in package 
+    inspection_mode: ${9$$(yas-choose-value '("flow" "proxy"))}            # choices: flow;proxy  Inspection mode setting for the policies flow or proxy 
+    ngfw_mode: ${10$$(yas-choose-value '("profile-based" "policy-based"))} # choices: profile-based;policy-based  NGFW mode setting for the policies flow or proxy 
+    ssl_ssh_profile: ${11:value}                                           # if policy-based ngfw-mode, refer to firewall ssl-ssh-profile 
+    scope_members: ${12:value}                                             # The devices or scope that you want to assign this policy package to 
+    scope_members_vdom: ${13:root}                                         # The members VDOM you want to assign the package to 
+    parent_folder: ${14:value}                                             # The parent folder name you want to add this object under 

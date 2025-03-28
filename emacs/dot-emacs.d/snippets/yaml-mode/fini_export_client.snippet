@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create, Delete or Modify NFS Client(s) for existing exports on Infinibox
+# prefix: infini_export_client_snippet
+# key: fini_export_client
+# group: ansible
+# --
+
+- name: ${0:Create, Delete or Modify NFS Client(s) for existing exports on Infinibox}
+  infini_export_client:                                                    
+    client: ${1:Client IP or Range}                                        # Ranges can be defined as follows 192 168 0 1-192 168 0 254 
+    export: ${2:Name of the export}                                        #
+    system: ${3:Infinibox Hostname or IPv4 Address}                        #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates/Modifies client when present and removes when absent 
+    access_mode: ${5$$(yas-choose-value '("RW" "RO"))}                     # choices: RW;RO  Read Write or Read Only Access 
+    no_root_squash: ${6:False}                                             # Don't squash root user to anonymous  Will be set to "no" on creation if not specified explicitly 
+    user: ${7:value}                                                       # Infinibox User username with sufficient priveledges ( see notes ) 
+    password: ${8:value}                                                   # Infinibox User password 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage volume snapshots on Pure Storage FlashArrays
+# prefix: purefa_snap_snippet
+# key: purefa_snap
+# group: ansible
+# --
+
+- name: ${0:Manage volume snapshots on Pure Storage FlashArrays}
+  purefa_snap:                                                             
+    name: ${1:The name of the source volume}                               #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    suffix: ${4:value}                                                     # Suffix of snapshot name 
+    target: ${5:value}                                                     # Name of target volume if creating from snapshot 
+    overwrite: ${6:false}                                                  # Define whether to overwrite existing volume when creating from snapshot 
+    state: ${7$$(yas-choose-value '("absent" "copy" "present"))}           # choices: absent;copy;present  Define whether the volume snapshot should exist or not 
+    eradicate: ${8:false}                                                  # Define whether to eradicate the snapshot on delete or leave in trash 

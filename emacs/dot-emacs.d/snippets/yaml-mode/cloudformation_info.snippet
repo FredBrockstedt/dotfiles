@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Obtain information about an AWS CloudFormation stack
+# prefix: cloudformation_info_snippet
+# key: cloudformation_info
+# group: ansible
+# --
+
+- name: ${0:Obtain information about an AWS CloudFormation stack}
+  cloudformation_info:                                                     
+    stack_name: ${1:value}                                                 # The name or id of the CloudFormation stack  Gathers information on all stacks by default 
+    all_facts: ${2:false}                                                  # Get all stack information for the stack
+    stack_events: ${3:false}                                               # Get stack events for the stack
+    stack_template: ${4:false}                                             # Get stack template body for the stack
+    stack_resources: ${5:false}                                            # Get stack resources for the stack
+    stack_policy: ${6:false}                                               # Get stack policy for the stack
+    debug_botocore_endpoint_logs: ${7:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${8:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${9:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${10:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${11:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${12:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${13:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${14:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

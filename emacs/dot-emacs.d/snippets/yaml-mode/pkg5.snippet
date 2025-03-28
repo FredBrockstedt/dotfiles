@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages packages with the Solaris 11 Image Packaging System
+# prefix: pkg5_snippet
+# key: pkg5
+# group: ansible
+# --
+
+- name: ${0:Manages packages with the Solaris 11 Image Packaging System}
+  pkg5:                                                                    
+    name: ${1:An FRMI of the package(s) to be installed/removed/updated}   # Multiple packages may be specified, separated by C(,) 
+    state: ${2$$(yas-choose-value '("absent" "latest" "present"))}         # choices: absent;latest;present  Whether to install (I(present), I(latest)), or remove (I(absent)) a package 
+    accept_licenses: ${3:False}                                            # Accept any licences 
+    be_name: ${4:value}                                                    # Creates a new boot environment with the given name 
+    refresh: ${5:True}                                                     # Refresh publishers before execution 

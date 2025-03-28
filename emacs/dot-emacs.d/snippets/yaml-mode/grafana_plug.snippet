@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Grafana plugins via grafana-cli
+# prefix: grafana_plugin_snippet
+# key: grafana_plug
+# group: ansible
+# --
+
+- name: ${0:Manage Grafana plugins via grafana-cli}
+  grafana_plugin:                                                          
+    name: ${1:Name of the plugin}                                          #
+    version: ${2:value}                                                    # Version of the plugin to install  Defaults to C(latest) 
+    grafana_plugins_dir: ${3:value}                                        # Directory where the Grafana plugin will be installed  If omitted, defaults to C(/var/lib/grafana/plugins) 
+    grafana_repo: ${4:value}                                               # URL to the Grafana plugin repository  If omitted, grafana-cli will use the default value: U(https://grafana com/api/plug
+    grafana_plugin_url: ${5:value}                                         # Full URL to the plugin zip file instead of downloading the file from U(https://grafana com/api/plugins)  Requires grafan
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the plugin should be installed 

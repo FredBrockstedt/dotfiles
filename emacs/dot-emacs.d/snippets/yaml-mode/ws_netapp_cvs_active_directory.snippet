@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: NetApp AWS CloudVolumes Service Manage Active Directory.
+# prefix: aws_netapp_cvs_active_directory_snippet
+# key: ws_netapp_cvs_active_directory
+# group: ansible
+# --
+
+- name: ${0:NetApp AWS CloudVolumes Service Manage Active Directory.}
+  aws_netapp_cvs_active_directory:                                         
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified ActiveDirectory should exist or not 
+    region: ${2:The region to which the Active Directory credentials are associated}#
+    domain: ${3:Name of the Active Directory domain}                       #
+    api_key: ${4:The access key to authenticate with the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    secret_key: ${5:The secret_key to authenticate with the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    api_url: ${6:The url to the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    DNS: ${7:value}                                                        # DNS server address for the Active Directory domain Required when C(state=present) Required when C(state=present), to mod
+    netBIOS: ${8:value}                                                    # NetBIOS name of the server 
+    username: ${9:value}                                                   # Username of the Active Directory domain administrator
+    password: ${10:value}                                                  # Password of the Active Directory domain administrator
+    validate_certs: ${11:True}                                             # Should https certificates be validated?

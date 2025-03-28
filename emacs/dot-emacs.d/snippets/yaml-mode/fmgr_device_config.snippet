@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Edit device configurations
+# prefix: fmgr_device_config_snippet
+# key: fmgr_device_config
+# group: ansible
+# --
+
+- name: ${0:Edit device configurations}
+  fmgr_device_config:                                                      
+    device_unique_name: ${1:The unique device's name that you are editing} # A K A  Friendly name of the device in FortiManager 
+    adom: ${2:root}                                                        # The ADOM the configuration should belong to 
+    device_hostname: ${3:value}                                            # The device's new hostname 
+    install_config: ${4:disable}                                           # Tells FMGR to attempt to install the config after making it 
+    interface: ${5:value}                                                  # The interface/port number you are editing 
+    interface_ip: ${6:value}                                               # The IP and subnet of the interface/port you are editing 
+    interface_allow_access: ${7:value}                                     # Specify what protocols are allowed on the interface, comma-separated list (see examples) 

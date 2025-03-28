@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Create, update or destroy an aaa group object in Sophos UTM.
+# prefix: utm_aaa_group_snippet
+# key: utm_aaa_group
+# group: ansible
+# --
+
+- name: ${0:Create, update or destroy an aaa group object in Sophos UTM.}
+  utm_aaa_group:                                                           
+    name: ${1:The name of the object}                                      # Will be used to identify the entry 
+    utm_host: ${2:The REST Endpoint of the Sophos UTM}                     #
+    utm_token: ${3:The token used to identify at the REST-API}             # See U(https://www sophos com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API pdf?la=en), Chapter 2
+    adirectory_groups: ${4:value}                                          # List of adirectory group strings 
+    adirectory_groups_sids: ${5:value}                                     # Dictionary of group sids 
+    backend_match: ${6$$(yas-choose-value '("none" "adirectory" "edirectory" "radius" "tacacs" "ldap"))}# choices: none;adirectory;edirectory;radius;tacacs;ldap  The backend for the group 
+    comment: ${7:}                                                         # Comment that describes the AAA group 
+    dynamic: ${8$$(yas-choose-value '("none" "ipsec_dn" "directory_groups"))}# choices: none;ipsec_dn;directory_groups  Group type  Is static if none is selected 
+    edirectory_groups: ${9:value}                                          # List of edirectory group strings 
+    ipsec_dn: ${10:value}                                                  # The ipsec dn string 
+    ldap_attribute: ${11:value}                                            # The ldap attribute to check against 
+    ldap_attribute_value: ${12:value}                                      # The ldap attribute value to check against 
+    members: ${13:[]}                                                      # A list of user ref names (aaa/user) 
+    network: ${14:}                                                        # The network reference name  The objects contains the known ip addresses for the authentication object (network/aaa) 
+    radius_groups: ${15:[]}                                                # A list of radius group strings 
+    tacacs_groups: ${16:[]}                                                # A list of tacacs group strings 
+    headers: ${17:value}                                                   # A dictionary of additional headers to be sent to POST and PUT requests  Is needed for some modules
+    utm_port: ${18:4444}                                                   # The port of the REST interface 
+    utm_protocol: ${19$$(yas-choose-value '("http" "https"))}              # choices: http;https  The protocol of the REST Endpoint 
+    validate_certs: ${20:True}                                             # Whether the REST interface's ssl certificate should be verified or not 
+    state: ${21$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The desired state of the object  C(present) will create or update an object C(absent) will dele

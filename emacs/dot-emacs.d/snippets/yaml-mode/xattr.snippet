@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage user defined extended attributes
+# prefix: xattr_snippet
+# key: xattr
+# group: ansible
+# --
+
+- name: ${0:Manage user defined extended attributes}
+  xattr:                                                                   
+    path: ${1:The full path of the file/object to get the facts of}        # Before 2 3 this option was only usable as I(name) 
+    namespace: ${2:user}                                                   # Namespace of the named name/key 
+    key: ${3:value}                                                        # The name of a specific Extended attribute key to set/retrieve 
+    value: ${4:value}                                                      # The value to set the named name/key to, it automatically sets the C(state) to 'set' 
+    state: ${5$$(yas-choose-value '("absent" "all" "keys" "present" "read"))}# choices: absent;all;keys;present;read  defines which state you want to do  C(read) retrieves the current value for a C
+    follow: ${6:True}                                                      # If C(yes), dereferences symlinks and sets/gets attributes on symlink target, otherwise acts on symlink itself 

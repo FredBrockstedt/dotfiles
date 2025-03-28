@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Get SmartOS image details.
+# prefix: smartos_image_info_snippet
+# key: martos_image_info
+# group: ansible
+# --
+
+- name: ${0:Get SmartOS image details.}
+  smartos_image_info:                                                      
+    filters: ${1:value}                                                    # Criteria for selecting image  Can be any value from image manifest and 'published_date', 'published', 'source', 'clones'

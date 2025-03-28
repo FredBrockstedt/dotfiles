@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP configuration sections
+# prefix: bigip_config_snippet
+# key: gip_config
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP configuration sections}
+  bigip_config:                                                            
+    save: ${1:True}                                                        # The C(save) argument instructs the module to save the running-config to startup-config  This operation is performed afte
+    reset: ${2:False}                                                      # Loads the default configuration on the device  If this option is specified, the default configuration will be loaded bef
+    merge_content: ${3:value}                                              # Loads the specified configuration that you want to merge into the running configuration  This is equivalent to using the
+    verify: ${4:False}                                                     # Validates the specified configuration to see whether they are valid to replace the running configuration  The running co
+    provider: ${5:value}                                                   # A dict object containing connection details 

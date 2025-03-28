@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Notify BigPanda about deployments
+# prefix: bigpanda_snippet
+# key: gpand
+# group: ansible
+# --
+
+- name: ${0:Notify BigPanda about deployments}
+  bigpanda:                                                                
+    component: ${1:The name of the component being deployed}               # Ex: billing
+    version: ${2:The deployment version}                                   #
+    token: ${3:API token}                                                  #
+    state: ${4$$(yas-choose-value '("started" "finished" "failed"))}       # State of the deployment 
+    hosts: ${5:"machine's hostname"}                                       # Name of affected host name  Can be a list 
+    env: ${6:value}                                                        # The environment name, typically 'production', 'staging', etc 
+    owner: ${7:value}                                                      # The person responsible for the deployment 
+    description: ${8:value}                                                # Free text description of the deployment 
+    url: ${{9:https://api}                                                 #bigpanda io} # not required  Base URL of the API server 
+    validate_certs: ${10:true}                                             # If C(no), SSL certificates for the target url will not be validated  This should only be used on personally controlled s

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manages Out-Of-Band controllers using Redfish APIs
+# prefix: redfish_command_snippet
+# key: redfish_command
+# group: ansible
+# --
+
+- name: ${0:Manages Out-Of-Band controllers using Redfish APIs}
+  redfish_command:                                                         
+    category: ${1:Category to execute on OOB controller}                   #
+    command: ${2:List of commands to execute on OOB controller}            #
+    baseuri: ${3:Base URI of OOB controller}                               #
+    username: ${4:User for authentication with OOB controller}             #
+    password: ${5:Password for authentication with OOB controller}         #
+    id: ${6:value}                                                         # ID of user to add/delete/modify
+    new_username: ${7:value}                                               # name of user to add/delete/modify
+    new_password: ${8:value}                                               # password of user to add/delete/modify
+    roleid: ${9:value}                                                     # role of user to add/delete/modify
+    bootdevice: ${10:value}                                                # bootdevice when setting boot configuration
+    timeout: ${11:10}                                                      # Timeout in seconds for URL requests to OOB controller
+    uefi_target: ${12:value}                                               # UEFI target when bootdevice is "UefiTarget"
+    boot_next: ${13:value}                                                 # BootNext target when bootdevice is "UefiBootNext"

@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Manages BGP configuration on HUAWEI CloudEngine switches.
+# prefix: ce_bgp_snippet
+# key: ce_bgp
+# group: ansible
+# --
+
+- name: ${0:Manages BGP configuration on HUAWEI CloudEngine switches.}
+  ce_bgp:                                                                  
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    as_number: ${2:value}                                                  # Local AS number  The value is a string of 1 to 11 characters 
+    graceful_restart: ${3$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  Enable GR of the BGP speaker in the specified address family, peer address, or peer group 
+    time_wait_for_rib: ${4:value}                                          # Period of waiting for the End-Of-RIB flag  The value is an integer ranging from 3 to 3000  The default value is 600 
+    as_path_limit: ${5:value}                                              # Maximum number of AS numbers in the AS_Path attribute  The default value is 255 
+    check_first_as: ${6$$(yas-choose-value '("no_use" "true" "false"))}    # choices: no_use;true;false  Check the first AS in the AS_Path of the update messages from EBGP peers 
+    confed_id_number: ${7:value}                                           # Confederation ID  The value is a string of 1 to 11 characters 
+    confed_nonstanded: ${8$$(yas-choose-value '("no_use" "true" "false"))} # choices: no_use;true;false  Configure the device to be compatible with devices in a nonstandard confederation 
+    bgp_rid_auto_sel: ${9$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  The function to automatically select router IDs for all VPN BGP instances is enabled 
+    keep_all_routes: ${10$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  If the value is true, the system stores all route update messages received from all peers (g
+    memory_limit: ${11$$(yas-choose-value '("no_use" "true" "false"))}     # choices: no_use;true;false  Support BGP RIB memory protection 
+    gr_peer_reset: ${12$$(yas-choose-value '("no_use" "true" "false"))}    # choices: no_use;true;false  Peer disconnection through GR 
+    is_shutdown: ${13$$(yas-choose-value '("no_use" "true" "false"))}      # choices: no_use;true;false  Interrupt BGP all neighbor 
+    suppress_interval: ${14:value}                                         # Suppress interval 
+    hold_interval: ${15:value}                                             # Hold interval 
+    clear_interval: ${16:value}                                            # Clear interval 
+    confed_peer_as_num: ${17:value}                                        # Confederation AS number, in two-byte or four-byte format  The value is a string of 1 to 11 characters 
+    vrf_name: ${18:value}                                                  # Name of a BGP instance  The name is a case-sensitive string of characters 
+    vrf_rid_auto_sel: ${19$$(yas-choose-value '("no_use" "true" "false"))} # choices: no_use;true;false  If the value is true, VPN BGP instances are enabled to automatically select router IDs  If t
+    router_id: ${20:value}                                                 # ID of a router that is in IPv4 address format 
+    keepalive_time: ${21:value}                                            # If the value of a timer changes, the BGP peer relationship between the routers is disconnected  The value is an integer 
+    hold_time: ${22:value}                                                 # Hold time, in seconds  The value of the hold time can be 0 or range from 3 to 65535 
+    min_hold_time: ${23:value}                                             # Min hold time, in seconds  The value of the hold time can be 0 or range from 20 to 65535 
+    conn_retry_time: ${24:value}                                           # ConnectRetry interval  The value is an integer, in seconds  The default value is 32s 
+    ebgp_if_sensitive: ${25$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, After the fast EBGP interface awareness function is enabled, EBGP sess
+    default_af_type: ${26$$(yas-choose-value '("ipv4uni" "ipv6uni"))}      # choices: ipv4uni;ipv6uni  Type of a created address family, which can be IPv4 unicast or IPv6 unicast  The default type 

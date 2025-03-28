@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Configure IIS Web Application Pools
+# prefix: win_iis_webapppool_snippet
+# key: win_iis_webapppoo
+# group: ansible
+# --
+
+- name: ${0:Configure IIS Web Application Pools}
+  win_iis_webapppool:                                                      
+    name: ${1:Name of the application pool}                                #
+    attributes: ${2:value}                                                 # This field is a free form dictionary value for the application pool attributes  These attributes are based on the naming
+    state: ${3$$(yas-choose-value '("absent" "present" "restarted" "started" "stopped"))}# choices: absent;present;restarted;started;stopped  The state of the application pool  If C(absent) will en

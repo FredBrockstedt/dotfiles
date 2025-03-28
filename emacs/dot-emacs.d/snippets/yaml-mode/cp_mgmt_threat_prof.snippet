@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Manages threat-profile objects on Check Point over Web Services API
+# prefix: cp_mgmt_threat_profile_snippet
+# key: cp_mgmt_threat_prof
+# group: ansible
+# --
+
+- name: ${0:Manages threat-profile objects on Check Point over Web Services API}
+  cp_mgmt_threat_profile:                                                  
+    name: ${1:Object name}                                                 #
+    active_protections_performance_impact: ${2$$(yas-choose-value '("high" "medium" "low" "very_low"))}# choices: high;medium;low;very_low  Protections with this performance impact only will be act
+    active_protections_severity: ${3$$(yas-choose-value '("Critical" "High" "Medium or above" "Low or above"))}# choices: Critical;High;Medium or above;Low or above  Protections with this severity 
+    confidence_level_high: ${4$$(yas-choose-value '("Inactive" "Ask" "Prevent" "Detect"))}# choices: Inactive;Ask;Prevent;Detect  Action for protections with high confidence level 
+    confidence_level_low: ${5$$(yas-choose-value '("Inactive" "Ask" "Prevent" "Detect"))}# choices: Inactive;Ask;Prevent;Detect  Action for protections with low confidence level 
+    confidence_level_medium: ${6$$(yas-choose-value '("Inactive" "Ask" "Prevent" "Detect"))}# choices: Inactive;Ask;Prevent;Detect  Action for protections with medium confidence level 
+    indicator_overrides: ${7:value}                                        # Indicators whose action will be overridden in this profile 
+    ips_settings: ${8:value}                                               # IPS blade settings 
+    malicious_mail_policy_settings: ${9:value}                             # Malicious Mail Policy for MTA Gateways 
+    overrides: ${10:value}                                                 # Overrides per profile for this protection 
+    tags: ${11:value}                                                      # Collection of tag identifiers 
+    use_indicators: ${12:value}                                            # Indicates whether the profile should make use of indicators 
+    anti_bot: ${13:value}                                                  # Is Anti-Bot blade activated 
+    anti_virus: ${14:value}                                                # Is Anti-Virus blade activated 
+    ips: ${15:value}                                                       # Is IPS blade activated 
+    threat_emulation: ${16:value}                                          # Is Threat Emulation blade activated 
+    activate_protections_by_extended_attributes: ${17:value}               # Activate protections by these extended attributes 
+    deactivate_protections_by_extended_attributes: ${18:value}             # Deactivate protections by these extended attributes 
+    use_extended_attributes: ${19:value}                                   # Whether to activate/deactivate IPS protections according to the extended attributes 
+    color: ${20$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${21:value}                                                  # Comments string 
+    details_level: ${22$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${23:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${24:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${25$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${26:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${27:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${28:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

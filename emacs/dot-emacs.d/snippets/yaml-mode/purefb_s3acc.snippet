@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Create or delete FlashBlade Object Store accounts
+# prefix: purefb_s3acc_snippet
+# key: purefb_s3acc
+# group: ansible
+# --
+
+- name: ${0:Create or delete FlashBlade Object Store accounts}
+  purefb_s3acc:                                                            
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete object store account
+    name: ${2:value}                                                       # The name of object store account
+    fb_url: ${3:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${4:value}                                                  # FlashBlade API token for admin privileged user 

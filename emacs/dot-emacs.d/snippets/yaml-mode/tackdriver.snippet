@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Send code deploy and annotation events to stackdriver
+# prefix: stackdriver_snippet
+# key: tackdriver
+# group: ansible
+# --
+
+- name: ${0:Send code deploy and annotation events to stackdriver}
+  stackdriver:                                                             
+    key: ${1:API key}                                                      #
+    event: ${2$$(yas-choose-value '("annotation" "deploy"))}               # choices: annotation;deploy  The type of event to send, either annotation or deploy
+    revision_id: ${3:value}                                                # The revision of the code that was deployed  Required for deploy events
+    deployed_by: ${4:Ansible}                                              # The person or robot responsible for deploying the code
+    deployed_to: ${5:value}                                                # The environment code was deployed to  (ie: development, staging, production)
+    repository: ${6:value}                                                 # The repository (or project) deployed
+    msg: ${7:value}                                                        # The contents of the annotation message, in plain text   Limited to 256 characters  Required for annotation 
+    annotated_by: ${8:Ansible}                                             # The person or robot who the annotation should be attributed to 
+    level: ${9$$(yas-choose-value '("INFO" "WARN" "ERROR"))}               # choices: INFO;WARN;ERROR  one of INFO/WARN/ERROR, defaults to INFO if not supplied   May affect display 
+    instance_id: ${10:value}                                               # id of an EC2 instance that this event should be attached to, which will limit the contexts where this event is shown
+    event_epoch: ${11:value}                                               # Unix timestamp of where the event should appear in the timeline, defaults to now  Be careful with this 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage the system attributes on Cisco NXOS devices
+# prefix: nxos_system_snippet
+# key: xos_system
+# group: ansible
+# --
+
+- name: ${0:Manage the system attributes on Cisco NXOS devices}
+  nxos_system:                                                             
+    hostname: ${1:value}                                                   # Configure the device hostname parameter  This option takes an ASCII string value or keyword 'default'
+    domain_name: ${2:value}                                                # Configures the default domain name suffix to be used when referencing this node by its FQDN   This argument accepts eith
+    domain_lookup: ${3:value}                                              # Enables or disables the DNS lookup feature in Cisco NXOS   This argument accepts boolean values   When enabled, the syst
+    domain_search: ${4:value}                                              # Configures a list of domain name suffixes to search when performing DNS name resolution  This argument accepts either a 
+    name_servers: ${5:value}                                               # List of DNS name servers by IP address to use to perform name resolution lookups   This argument accepts either a list o
+    system_mtu: ${6:value}                                                 # Specifies the mtu, must be an integer or keyword 'default' 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the configuration values in the device's current active configuration   When set to I(
+    provider: ${8:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

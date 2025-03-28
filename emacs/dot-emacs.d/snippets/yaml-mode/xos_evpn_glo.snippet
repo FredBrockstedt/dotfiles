@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Handles the EVPN control plane for VXLAN.
+# prefix: nxos_evpn_global_snippet
+# key: xos_evpn_glo
+# group: ansible
+# --
+
+- name: ${0:Handles the EVPN control plane for VXLAN.}
+  nxos_evpn_global:                                                        
+    nv_overlay_evpn: ${1:EVPN control plane}                               #
+    provider: ${2:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Route
+# prefix: gcp_compute_route_snippet
+# key: gcp_compute_rout
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Route}
+  gcp_compute_route:                                                       
+    dest_range: ${1:The destination range of outgoing packets that this route applies to}# Only IPv4 is supported 
+    name: ${2:Name of the resource}                                        # Provided by the client when the resource is created  The name must be 1-63 characters long, and comply with RFC1035  Spe
+    network: ${3:The network that this route applies to}                   # This field represents a link to a Network resource in GCP  It can be specified in two ways  First, you can place a dicti
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${6:value}                                                # An optional description of this resource  Provide this property when you create the resource 
+    priority: ${7:value}                                                   # The priority of this route  Priority is used to break ties in cases where there is more than one matching route of equal
+    tags: ${8:value}                                                       # A list of instance tags to which this route applies 
+    next_hop_gateway: ${9:value}                                           # URL to a gateway that should handle matching packets  Currently, you can only specify the internet gateway, using a full
+    next_hop_instance: ${10:value}                                         # URL to an instance that should handle matching packets  You can specify this as a full or partial URL  For example: * U(
+    next_hop_ip: ${11:value}                                               # Network IP address of an instance that should handle matching packets 
+    next_hop_vpn_tunnel: ${12:value}                                       # URL to a VpnTunnel that should handle matching packets  This field represents a link to a VpnTunnel resource in GCP  It 
+    project: ${13:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${14:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${15:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${16:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${17:value}                                                    # Array of scopes to be used 
+    env_type: ${18:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

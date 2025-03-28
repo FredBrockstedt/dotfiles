@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Instance
+# prefix: gcp_compute_instance_snippet
+# key: gcp_compute_instanc
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Instance}
+  gcp_compute_instance:                                                    
+    zone: ${1:A reference to the zone where the machine resides}           #
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    can_ip_forward: ${4:value}                                             # Allows this instance to send and receive packets with non-matching destination or source IPs  This is required if you pl
+    deletion_protection: ${5:value}                                        # Whether the resource should be protected against deletion 
+    disks: ${6:value}                                                      # An array of disks that are associated with the instances that are created from this template 
+    guest_accelerators: ${7:value}                                         # List of the type and count of accelerator cards attached to the instance  
+    hostname: ${8:value}                                                   # The hostname of the instance to be created  The specified hostname must be RFC1035 compliant  If hostname is not specifi
+    labels: ${9:value}                                                     # Labels to apply to this instance  A list of key->value pairs 
+    metadata: ${10:value}                                                  # The metadata key/value pairs to assign to instances that are created from this template  These pairs can consist of cust
+    machine_type: ${11:value}                                              # A reference to a machine type which defines VM kind 
+    min_cpu_platform: ${12:value}                                          # Specifies a minimum CPU platform for the VM instance  Applicable values are the friendly names of CPU platforms  
+    name: ${13:value}                                                      # The name of the resource, provided by the client when initially creating the resource  The resource name must be 1-63 ch
+    network_interfaces: ${14:value}                                        # An array of configurations for this interface  This specifies how this interface is configured to interact with other ne
+    scheduling: ${15:value}                                                # Sets the scheduling options for this instance 
+    service_accounts: ${16:value}                                          # A list of service accounts, with their specified scopes, authorized for this instance  Only one service account per VM i
+    shielded_instance_config: ${17:value}                                  # Configuration for various parameters related to shielded instances 
+    status: ${18:value}                                                    # The status of the instance  One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED
+    tags: ${19:value}                                                      # A list of tags to apply to this instance  Tags are used to identify valid sources or targets for network firewalls and a
+    project: ${20:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${21:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${22:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${23:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${24:value}                                                    # Array of scopes to be used 
+    env_type: ${25:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

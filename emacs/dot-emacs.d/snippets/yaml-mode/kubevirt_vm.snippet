@@ -1,0 +1,55 @@
+# -*- mode: snippet -*-
+# name: Manage KubeVirt virtual machine
+# prefix: kubevirt_vm_snippet
+# key: kubevirt_vm
+# group: ansible
+# --
+
+- name: ${0:Manage KubeVirt virtual machine}
+  kubevirt_vm:                                                             
+    name: ${1:Name of the virtual machine}                                 #
+    namespace: ${2:Namespace where the virtual machine exists}             #
+    state: ${3$$(yas-choose-value '("present" "absent" "running" "stopped"))}# choices: present;absent;running;stopped  Set the virtual machine to either I(present), I(absent), I(running) or I(stop
+    ephemeral: ${4:False}                                                  # If (true) ephemeral virtual machine will be created  When destroyed it won't be accessible again  Works only with C(stat
+    datavolumes: ${5:value}                                                # DataVolumes are a way to automate importing virtual machine disks onto pvcs during the virtual machine's launch flow  Wi
+    template: ${6:value}                                                   # Name of Template to be used in creation of a virtual machine 
+    template_parameters: ${7:value}                                        # New values of parameters from Template 
+    host: ${8:value}                                                       # Provide a URL for accessing the API  Can also be specified via K8S_AUTH_HOST environment variable 
+    api_key: ${9:value}                                                    # Token used to authenticate with the API  Can also be specified via K8S_AUTH_API_KEY environment variable 
+    kubeconfig: ${10:value}                                                # Path to an existing Kubernetes config file  If not provided, and no other connection options are provided, the openshift
+    context: ${11:value}                                                   # The name of a context found in the config file  Can also be specified via K8S_AUTH_CONTEXT environment variable 
+    username: ${12:value}                                                  # Provide a username for authenticating with the API  Can also be specified via K8S_AUTH_USERNAME environment variable  Pl
+    password: ${13:value}                                                  # Provide a password for authenticating with the API  Can also be specified via K8S_AUTH_PASSWORD environment variable  Pl
+    client_cert: ${14:value}                                               # Path to a certificate used to authenticate with the API  Can also be specified via K8S_AUTH_CERT_FILE environment variab
+    client_key: ${15:value}                                                # Path to a key file used to authenticate with the API  Can also be specified via K8S_AUTH_KEY_FILE environment variable 
+    ca_cert: ${16:value}                                                   # Path to a CA certificate used to authenticate with the API  The full certificate chain must be provided to avoid certifi
+    validate_certs: ${17:value}                                            # Whether or not to verify the API server's SSL certificates  Can also be specified via K8S_AUTH_VERIFY_SSL environment va
+    proxy: ${18:value}                                                     # The URL of an HTTP proxy to use for the connection  Can also be specified via K8S_AUTH_PROXY environment variable  Pleas
+    disks: ${19:value}                                                     # List of dictionaries which specify disks of the virtual machine  A disk can be made accessible via four different types:
+    labels: ${20:value}                                                    # Labels are key/value pairs that are attached to virtual machines  Labels are intended to be used to specify identifying 
+    interfaces: ${21:value}                                                # An interface defines a virtual network interface of a virtual machine (also called a frontend)  All possible configurati
+    cloud_init_nocloud: ${22:value}                                        # Represents a cloud-init NoCloud user-data source  The NoCloud data will be added as a disk to the virtual machine  A pro
+    affinity: ${23:value}                                                  # Describes node affinity scheduling rules for the vm 
+    node_affinity: ${24:value}                                             # Describes vm affinity scheduling rules e g  co-locate this vm in the same node, zone, etc  as some other vms
+    anti_affinity: ${25:value}                                             # Describes vm anti-affinity scheduling rules e g  avoid putting this vm in the same node, zone, etc  as some other vms 
+    resource_definition: ${26:value}                                       # A partial YAML definition of the object being created/updated  Here you can define Kubernetes resource parameters not co
+    wait: ${27:True}                                                       # I(True) if the module should wait for the resource to get into desired state 
+    force: ${28:False}                                                     # If set to C(no), and I(state) is C(present), an existing object will be replaced 
+    wait_timeout: ${29:120}                                                # The amount of time in seconds the module should wait for the resource to get into desired state 
+    wait_sleep: ${30:5}                                                    # Number of seconds to sleep between checks 
+    memory: ${31:value}                                                    # The amount of memory to be requested by virtual machine  For example 1024Mi 
+    memory_limit: ${32:value}                                              # The maximum memory to be used by virtual machine  For example 1024Mi 
+    machine_type: ${33:value}                                              # QEMU machine type is the actual chipset of the virtual machine 
+    merge_type: ${34$$(yas-choose-value '("json" "merge" "strategic-merge"))}# choices: json;merge;strategic-merge  Whether to override the default patch merge approach with a specific type  If mor
+    cpu_shares: ${35:value}                                                # Specify CPU shares 
+    cpu_limit: ${36:value}                                                 # Is converted to its millicore value and multiplied by 100  The resulting value is the total amount of CPU time that a co
+    cpu_cores: ${37:value}                                                 # Number of CPU cores 
+    cpu_model: ${38:value}                                                 # CPU model  You can check list of available models here: U(https://github com/libvirt/libvirt/blob/master/src/cpu_map/ind
+    bootloader: ${39:value}                                                # Specify the bootloader of the virtual machine  All virtual machines use BIOS by default for booting 
+    smbios_uuid: ${40:value}                                               # In order to provide a consistent view on the virtualized hardware for the guest OS, the SMBIOS UUID can be set 
+    cpu_features: ${41:value}                                              # List of dictionary to fine-tune features provided by the selected CPU model  I(Note): Policy attribute can either be omi
+    headless: ${42:value}                                                  # Specify if the virtual machine should have attached a  minimal Video and Graphics device configuration  By default a min
+    hugepage_size: ${43:value}                                             # Specify huge page size 
+    tablets: ${44:value}                                                   # Specify tablets to be used as input devices
+    hostname: ${45:value}                                                  # Specifies the hostname of the virtual machine  The hostname will be set either by dhcp, cloud-init if configured or virt
+    subdomain: ${46:value}                                                 # If specified, the fully qualified virtual machine hostname will be hostname subdomain namespace svc cluster_domain  If n

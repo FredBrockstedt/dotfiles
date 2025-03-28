@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage self-signed device certificates
+# prefix: bigip_device_certificate_snippet
+# key: gip_device_certificat
+# group: ansible
+# --
+
+- name: ${0:Manage self-signed device certificates}
+  bigip_device_certificate:                                                
+    days_valid: ${1:Specifies the interval for which the self-signed certificate is valid}# The maximum value is 25 years: C(9125) days
+    transport: ${2$$(yas-choose-value '("cli"))}                           # Configures the transport connection to use when connecting to the remote device  This module currently supports only con
+    cert_name: ${{3:server}                                                #crt} # not required  Specifies the full name of the certificate file  If the name is not default C(server crt), the modul
+    key_name: ${{4:server}                                                 #key} # not required  Specifies the full name of the key file  If the name is not default C(server key), the module will c
+    key_size: ${5$$(yas-choose-value '("512" "1024" "2048" "4096"))}       # choices: 512;1024;2048;4096  Specifies the desired key size in bits  Mandatory option when generating a new certificate 
+    issuer: ${6:value}                                                     # Certificate properties, required when generating new certificates 
+    add_to_trusted: ${7:False}                                             # Specified if the certificate should be added to the trusted client and server certificate files 
+    new_cert: ${8:False}                                                   # Specified if the module should generate new certificate  When C(yes) the device certificate and key will be replaced
+    force: ${9:False}                                                      # When C(yes), will update or overwrite the existing certificate when it is not expired device  When C(no), the certificat
+    provider: ${10:value}                                                  # A dict object containing connection details 

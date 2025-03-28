@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Manage AWS Batch Job Definitions
+# prefix: aws_batch_job_definition_snippet
+# key: ws_batch_job_definitio
+# group: ansible
+# --
+
+- name: ${0:Manage AWS Batch Job Definitions}
+  aws_batch_job_definition:                                                
+    job_definition_name: ${1:The name for the job definition}              #
+    type: ${2:The type of job definition}                                  #
+    job_definition_arn: ${3:value}                                         # The arn for the job definition
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Describes the desired state 
+    parameters: ${5:value}                                                 # Default parameter substitution placeholders to set in the job definition  Parameters are specified as a key-value pair m
+    image: ${6:value}                                                      # The image used to start a container  This string is passed directly to the Docker daemon  Images in the Docker Hub regis
+    vcpus: ${7:value}                                                      # The number of vCPUs reserved for the container  This parameter maps to CpuShares in the Create a container section of th
+    memory: ${8:value}                                                     # The hard limit (in MiB) of memory to present to the container  If your container attempts to exceed the memory specified
+    command: ${9:value}                                                    # The command that is passed to the container  This parameter maps to Cmd in the Create a container section of the Docker 
+    job_role_arn: ${10:value}                                              # The Amazon Resource Name (ARN) of the IAM role that the container can assume for AWS permissions 
+    volumes: ${11:value}                                                   # A list of data volumes used in a job  List of dictionaries 
+    environment: ${12:value}                                               # The environment variables to pass to a container  This parameter maps to Env in the Create a container section of the Do
+    mount_points: ${13:value}                                              # The mount points for data volumes in your container  This parameter maps to Volumes in the Create a container section of
+    readonly_root_filesystem: ${14:value}                                  # When this parameter is true, the container is given read-only access to its root file system  This parameter maps to Rea
+    privileged: ${15:value}                                                # When this parameter is true, the container is given elevated privileges on the host container instance (similar to the r
+    ulimits: ${16:value}                                                   # A list of ulimits to set in the container  This parameter maps to Ulimits in the Create a container section of the Docke
+    user: ${17:value}                                                      # The user name to use inside the container  This parameter maps to User in the Create a container section of the Docker R
+    attempts: ${18:value}                                                  # Retry strategy - The number of times to move a job to the RUNNABLE status  You may specify between 1 and 10 attempts  If
+    debug_botocore_endpoint_logs: ${19:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${20:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${21:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${22:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${23:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${24:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${25:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${26:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

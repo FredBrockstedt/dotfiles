@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Configures IIS web applications
+# prefix: win_iis_webapplication_snippet
+# key: win_iis_webapplicatio
+# group: ansible
+# --
+
+- name: ${0:Configures IIS web applications}
+  win_iis_webapplication:                                                  
+    name: ${1:Name of the web application}                                 #
+    site: ${2:Name of the site on which the application is created}        #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the web application 
+    physical_path: ${4:value}                                              # The physical path on the remote host to use for the new application  The specified folder must already exist 
+    application_pool: ${5:value}                                           # The application pool in which the new site executes 

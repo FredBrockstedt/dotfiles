@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages NetStream template configuration on HUAWEI CloudEngine switches.
+# prefix: ce_netstream_template_snippet
+# key: ce_netstream_templat
+# group: ansible
+# --
+
+- name: ${0:Manages NetStream template configuration on HUAWEI CloudEngine switches.}
+  ce_netstream_template:                                                   
+    type: ${1$$(yas-choose-value '("ip" "vxlan"))}                         # Configure the type of netstream record 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    record_name: ${3:value}                                                # Configure the name of netstream record  The value is a string of 1 to 32 case-insensitive characters 
+    match: ${4$$(yas-choose-value '("destination-address" "destination-port" "tos" "protocol" "source-address" "source-port"))}# choices: destination-address;destination-port;tos;protocol;source-ad
+    collect_counter: ${5$$(yas-choose-value '("bytes" "packets"))}         # choices: bytes;packets  Configure the number of packets and bytes that are included in the flexible flow statistics sent
+    collect_interface: ${6$$(yas-choose-value '("input" "output"))}        # choices: input;output  Configure the input or output interface that are included in the flexible flow statistics sent to
+    description: ${7:value}                                                # Configure the description of netstream record  The value is a string of 1 to 80 case-insensitive characters 

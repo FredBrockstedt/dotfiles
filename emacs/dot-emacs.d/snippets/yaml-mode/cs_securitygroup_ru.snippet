@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manages security group rules on Apache CloudStack based clouds.
+# prefix: cs_securitygroup_rule_snippet
+# key: cs_securitygroup_ru
+# group: ansible
+# --
+
+- name: ${0:Manages security group rules on Apache CloudStack based clouds.}
+  cs_securitygroup_rule:                                                   
+    security_group: ${1:Name of the security group the rule is related to} # The security group must be existing 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the security group rule 
+    protocol: ${3$$(yas-choose-value '("tcp" "udp" "icmp" "ah" "esp" "gre"))}# choices: tcp;udp;icmp;ah;esp;gre  Protocol of the security group rule 
+    type: ${4$$(yas-choose-value '("ingress" "egress"))}                   # choices: ingress;egress  Ingress or egress security group rule 
+    cidr: ${{5:0}                                                          #0 0 0/0} # not required  CIDR (full notation) to be used for security group rule 
+    user_security_group: ${6:value}                                        # Security group this rule is based of 
+    start_port: ${7:value}                                                 # Start port for this rule  Required if I(protocol=tcp) or I(protocol=udp) 
+    end_port: ${8:value}                                                   # End port for this rule  Required if I(protocol=tcp) or I(protocol=udp), but I(start_port) will be used if not set 
+    icmp_type: ${9:value}                                                  # Type of the icmp message being sent  Required if I(protocol=icmp) 
+    icmp_code: ${10:value}                                                 # Error code for this icmp message  Required if I(protocol=icmp) 
+    project: ${11:value}                                                   # Name of the project the security group to be created in 
+    poll_async: ${12:True}                                                 # Poll async jobs until job has finished 
+    api_key: ${13:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${14:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${15:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${16$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${17:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${18:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

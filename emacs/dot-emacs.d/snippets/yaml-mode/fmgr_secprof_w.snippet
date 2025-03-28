@@ -1,0 +1,93 @@
+# -*- mode: snippet -*-
+# name: Manage web filter security profiles in FortiManager
+# prefix: fmgr_secprof_web_snippet
+# key: fmgr_secprof_w
+# group: ansible
+# --
+
+- name: ${0:Manage web filter security profiles in FortiManager}
+  fmgr_secprof_web:                                                        
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    youtube_channel_status: ${3$$(yas-choose-value '("disable" "blacklist" "whitelist"))}# choices: disable;blacklist;whitelist  YouTube channel filter status  choice | disable | Disable YouTube ch
+    wisp_servers: ${4:value}                                               # WISP servers 
+    wisp_algorithm: ${5$$(yas-choose-value '("auto-learning" "primary-secondary" "round-robin"))}# choices: auto-learning;primary-secondary;round-robin  WISP server selection algorithm  choice | au
+    wisp: ${6$$(yas-choose-value '("disable" "enable"))}                   # choices: disable;enable  Enable/disable web proxy WISP  choice | disable | Disable web proxy WISP  choice | enable | Ena
+    web_url_log: ${7$$(yas-choose-value '("disable" "enable"))}            # choices: disable;enable  Enable/disable logging URL filtering  choice | disable | Disable setting  choice | enable | Ena
+    web_invalid_domain_log: ${8$$(yas-choose-value '("disable" "enable"))} # choices: disable;enable  Enable/disable logging invalid domain names  choice | disable | Disable setting  choice | enabl
+    web_ftgd_quota_usage: ${9$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable/disable logging daily quota usage  choice | disable | Disable setting  choice | enable |
+    web_ftgd_err_log: ${10$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable logging rating errors  choice | disable | Disable setting  choice | enable | Ena
+    web_filter_vbs_log: ${11$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable logging VBS scripts  choice | disable | Disable setting  choice | enable | Enabl
+    web_filter_unknown_log: ${12$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging unknown scripts  choice | disable | Disable setting  choice | enable | E
+    web_filter_referer_log: ${13$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging referrers  choice | disable | Disable setting  choice | enable | Enable 
+    web_filter_jscript_log: ${14$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging JScripts  choice | disable | Disable setting  choice | enable | Enable s
+    web_filter_js_log: ${15$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable logging Java scripts  choice | disable | Disable setting  choice | enable | Enab
+    web_filter_cookie_removal_log: ${16$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging blocked cookies  choice | disable | Disable setting  choice | ena
+    web_filter_cookie_log: ${17$$(yas-choose-value '("disable" "enable"))} # choices: disable;enable  Enable/disable logging cookie filtering  choice | disable | Disable setting  choice | enable | 
+    web_filter_command_block_log: ${18$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging blocked commands  choice | disable | Disable setting  choice | ena
+    web_filter_applet_log: ${19$$(yas-choose-value '("disable" "enable"))} # choices: disable;enable  Enable/disable logging Java applets  choice | disable | Disable setting  choice | enable | Enab
+    web_filter_activex_log: ${20$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging ActiveX  choice | disable | Disable setting  choice | enable | Enable se
+    web_extended_all_action_log: ${21$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable extended any filter action logging for web filtering  choice | disable | Di
+    web_content_log: ${22$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable logging logging blocked web content  choice | disable | Disable setting  choice 
+    replacemsg_group: ${23:value}                                          # Replacement message group 
+    post_action: ${24$$(yas-choose-value '("normal" "block"))}             # choices: normal;block  Action taken for HTTP POST traffic  choice | normal | Normal, POST requests are allowed  choice |
+    ovrd_perm: ${25$$(yas-choose-value '("bannedword-override" "urlfilter-override" "fortiguard-wf-override" "contenttype-check-override"))}# choices: bannedword-override;urlfilter-override;fortigu
+    options: ${26$$(yas-choose-value '("block-invalid-url" "jscript" "js" "vbs" "unknown" "wf-referer" "intrinsic" "wf-cookie" "per-user-bwl" "activexfilter" "cookiefilter" "javafilter"))}# choices
+    name: ${27:value}                                                      # Profile name 
+    log_all_url: ${28$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable logging all URLs visited  choice | disable | Disable setting  choice | enable | 
+    inspection_mode: ${29$$(yas-choose-value '("proxy" "flow-based"))}     # choices: proxy;flow-based  Web filtering inspection mode  choice | proxy | Proxy  choice | flow-based | Flow based 
+    https_replacemsg: ${30$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable replacement messages for HTTPS  choice | disable | Disable setting  choice | enable | En
+    extended_log: ${31$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable extended logging for web filtering  choice | disable | Disable setting  choice |
+    comment: ${32:value}                                                   # Optional comments 
+    ftgd_wf: ${33:value}                                                   # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ftgd_wf_exempt_quota: ${34:value}                                      # Do not stop quota for these categories 
+    ftgd_wf_max_quota_timeout: ${35:value}                                 # Maximum FortiGuard quota used by single page view in seconds (excludes streams) 
+    ftgd_wf_options: ${36$$(yas-choose-value '("error-allow" "rate-server-ip" "connect-request-bypass" "ftgd-disable"))}# choices: error-allow;rate-server-ip;connect-request-bypass;ftgd-disable  Op
+    ftgd_wf_ovrd: ${37:value}                                              # Allow web filter profile overrides 
+    ftgd_wf_rate_crl_urls: ${38$$(yas-choose-value '("disable" "enable"))} # choices: disable;enable  Enable/disable rating CRL by URL  choice | disable | Disable rating CRL by URL  choice | enable
+    ftgd_wf_rate_css_urls: ${39$$(yas-choose-value '("disable" "enable"))} # choices: disable;enable  Enable/disable rating CSS by URL  choice | disable | Disable rating CSS by URL  choice | enable
+    ftgd_wf_rate_image_urls: ${40$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable rating images by URL  choice | disable | Disable rating images by URL (blocked 
+    ftgd_wf_rate_javascript_urls: ${41$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable rating JavaScript by URL  choice | disable | Disable rating JavaScript by 
+    ftgd_wf_filters_action: ${42$$(yas-choose-value '("block" "monitor" "warning" "authenticate"))}# choices: block;monitor;warning;authenticate  Action to take for matches  choice | block | Block 
+    ftgd_wf_filters_auth_usr_grp: ${43:value}                              # Groups with permission to authenticate 
+    ftgd_wf_filters_category: ${44:value}                                  # Categories and groups the filter examines 
+    ftgd_wf_filters_log: ${45$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting 
+    ftgd_wf_filters_override_replacemsg: ${46:value}                       # Override replacement message 
+    ftgd_wf_filters_warn_duration: ${47:value}                             # Duration of warnings 
+    ftgd_wf_filters_warning_duration_type: ${48$$(yas-choose-value '("session" "timeout"))}# choices: session;timeout  Re-display warning after closing browser or after a timeout  choice | session 
+    ftgd_wf_filters_warning_prompt: ${49$$(yas-choose-value '("per-domain" "per-category"))}# choices: per-domain;per-category  Warning prompts in each category or each domain  choice | per-domain 
+    ftgd_wf_quota_category: ${50:value}                                    # FortiGuard categories to apply quota to (category action must be set to monitor) 
+    ftgd_wf_quota_duration: ${51:value}                                    # Duration of quota 
+    ftgd_wf_quota_override_replacemsg: ${52:value}                         # Override replacement message 
+    ftgd_wf_quota_type: ${53$$(yas-choose-value '("time" "traffic"))}      # choices: time;traffic  Quota type  choice | time | Use a time-based quota  choice | traffic | Use a traffic-based quota 
+    ftgd_wf_quota_unit: ${54$$(yas-choose-value '("B" "KB" "MB" "GB"))}    # choices: B;KB;MB;GB  Traffic quota unit of measurement  choice | B | Quota in bytes  choice | KB | Quota in kilobytes  c
+    ftgd_wf_quota_value: ${55:value}                                       # Traffic quota value 
+    override: ${56:value}                                                  # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    override_ovrd_cookie: ${57$$(yas-choose-value '("deny" "allow"))}      # choices: deny;allow  Allow/deny browser-based (cookie) overrides  choice | deny | Deny browser-based (cookie) override  
+    override_ovrd_dur: ${58:value}                                         # Override duration 
+    override_ovrd_dur_mode: ${59$$(yas-choose-value '("constant" "ask"))}  # choices: constant;ask  Override duration mode  choice | constant | Constant mode  choice | ask | Prompt for duration whe
+    override_ovrd_scope: ${60$$(yas-choose-value '("user" "user-group" "ip" "ask" "browser"))}# choices: user;user-group;ip;ask;browser  Override scope  choice | user | Override for the user  choic
+    override_ovrd_user_group: ${61:value}                                  # User groups with permission to use the override 
+    override_profile: ${62:value}                                          # Web filter profile with permission to create overrides 
+    override_profile_attribute: ${63$$(yas-choose-value '("User-Name" "NAS-IP-Address" "Framed-IP-Address" "Framed-IP-Netmask" "Filter-Id" "Login-IP-Host" "Reply-Message" "Callback-Number" "Callbac
+    override_profile_type: ${64$$(yas-choose-value '("list" "radius"))}    # choices: list;radius  Override profile type  choice | list | Profile chosen from list  choice | radius | Profile determi
+    url_extraction: ${65:value}                                            # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    url_extraction_redirect_header: ${66:value}                            # HTTP header name to use for client redirect on blocked requests
+    url_extraction_redirect_no_content: ${67$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable / Disable empty message-body entity in HTTP response choice | disable | Disa
+    url_extraction_redirect_url: ${68:value}                               # HTTP header value to use for client redirect on blocked requests
+    url_extraction_server_fqdn: ${69:value}                                # URL extraction server FQDN (fully qualified domain name)
+    url_extraction_status: ${70$$(yas-choose-value '("disable" "enable"))} # choices: disable;enable  Enable URL Extraction choice | disable | Disable setting  choice | enable | Enable setting 
+    web: ${71:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    web_blacklist: ${72$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable automatic addition of URLs detected by FortiSandbox to blacklist  choice | disab
+    web_bword_table: ${73:value}                                           # Banned word table ID 
+    web_bword_threshold: ${74:value}                                       # Banned word score threshold 
+    web_content_header_list: ${75:value}                                   # Content header list 
+    web_keyword_match: ${76:value}                                         # Search keywords to log when match is found 
+    web_log_search: ${77$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable/disable logging all search phrases  choice | disable | Disable setting  choice | enable 
+    web_safe_search: ${78$$(yas-choose-value '("url" "header"))}           # choices: url;header  Safe search type  FLAG Based Options  Specify multiple in list form  flag | url | Insert safe searc
+    web_urlfilter_table: ${79:value}                                       # URL filter table ID 
+    web_whitelist: ${80$$(yas-choose-value '("exempt-av" "exempt-webcontent" "exempt-activex-java-cookie" "exempt-dlp" "exempt-rangeblock" "extended-log-others"))}# choices: exempt-av;exempt-webcon
+    web_youtube_restrict: ${81$$(yas-choose-value '("strict" "none" "moderate"))}# choices: strict;none;moderate  YouTube EDU filter level  choice | strict | Strict access for YouTube  choice | non
+    youtube_channel_filter: ${82:value}                                    # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    youtube_channel_filter_channel_id: ${83:value}                         # YouTube channel ID to be filtered 
+    youtube_channel_filter_comment: ${84:value}                            # Comment 

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP host configuration.
+# prefix: nxos_snmp_host_snippet
+# key: xos_snmp_host
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP host configuration.}
+  nxos_snmp_host:                                                          
+    snmp_host: ${1:IP address of hostname of target host}                  #
+    version: ${2$$(yas-choose-value '("v1" "v2c" "v3"))}                   # choices: v1;v2c;v3  SNMP version  If this is not specified, v1 is used 
+    v3: ${3$$(yas-choose-value '("noauth" "auth" "priv"))}                 # choices: noauth;auth;priv  Use this when verion is v3  SNMPv3 Security level 
+    community: ${4:value}                                                  # Community string or v3 username 
+    udp: ${5:162}                                                          # UDP port number (0-65535) 
+    snmp_type: ${6$$(yas-choose-value '("trap" "inform"))}                 # choices: trap;inform  type of message to send to host  If this is not specified, trap type is used 
+    vrf: ${7:value}                                                        # VRF to use to source traffic to source  If state = absent, the vrf is removed 
+    vrf_filter: ${8:value}                                                 # Name of VRF to filter  If state = absent, the vrf is removed from the filter 
+    src_intf: ${9:value}                                                   # Source interface  Must be fully qualified interface name  If state = absent, the interface is removed 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Manage the state of the resource  If state = present, the host is added to the configuration  I
+    provider: ${11:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: create and delete WAF Conditions
+# prefix: aws_waf_condition_snippet
+# key: ws_waf_conditio
+# group: ansible
+# --
+
+- name: ${0:create and delete WAF Conditions}
+  aws_waf_condition:                                                       
+    name: ${1:N a m e   o f   t h e   W e b   A p p l i c a t i o n   F i r e w a l l   c o n d i t i o n   t o   m a n a g e }#
+    type: ${2$$(yas-choose-value '("byte" "geo" "ip" "regex" "size" "sql" "xss"))}# choices: byte;geo;ip;regex;size;sql;xss  t h e   t y p e   o f   m a t c h i n g   t o   p e r f o r m  
+    filters: ${3:value}                                                    # A list of the filters against which to match  For I(type)=C(byte), valid keys are C(field_to_match), C(position), C(head
+    purge_filters: ${4:False}                                              # Whether to remove existing filters from a condition if not passed in I(filters) 
+    waf_regional: ${5:False}                                               # W h e t h e r   t o   u s e   w a f _ r e g i o n a l   m o d u l e     D e f a u l t s   t o   f a l s e  
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  W h e t h e r   t h e   c o n d i t i o n   s h o u l d   b e   C ( p r e s e n t )   o r   C (
+    debug_botocore_endpoint_logs: ${7:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${8:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${9:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${10:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${11:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${12:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${13:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${14:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Module for setup of VrfContext Avi RESTful Object
+# prefix: avi_vrfcontext_snippet
+# key: vi_vrfcontext
+# group: ansible
+# --
+
+- name: ${0:Module for setup of VrfContext Avi RESTful Object}
+  avi_vrfcontext:                                                          
+    name: ${1:Name of the object}                                          #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    bgp_profile: ${5:value}                                                # Bgp local and peer info 
+    cloud_ref: ${6:value}                                                  # It is a reference to an object of type cloud 
+    debugvrfcontext: ${7:value}                                            # Configure debug flags for vrf  Field introduced in 17 1 1 
+    description: ${8:value}                                                # User defined description for the object 
+    gateway_mon: ${9:value}                                                # Configure ping based heartbeat check for gateway in service engines of vrf 
+    internal_gateway_monitor: ${10:value}                                  # Configure ping based heartbeat check for all default gateways in service engines of vrf  Field introduced in 17 1 1 
+    static_routes: ${11:value}                                             # List of staticroute 
+    system_default: ${12:value}                                            # Boolean flag to set system_default  Default value when not specified in API or module is interpreted by Avi Controller a
+    tenant_ref: ${13:value}                                                # It is a reference to an object of type tenant 
+    url: ${14:value}                                                       # Avi controller URL of the object 
+    uuid: ${15:value}                                                      # Unique object identifier of the object 
+    controller: ${16:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${17:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${18:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${19:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${20:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{21:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${22:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${23:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${24:value}                         # It disables avi session information to be cached as a fact 

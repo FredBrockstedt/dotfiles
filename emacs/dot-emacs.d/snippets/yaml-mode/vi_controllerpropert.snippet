@@ -1,0 +1,81 @@
+# -*- mode: snippet -*-
+# name: Module for setup of ControllerProperties Avi RESTful Object
+# prefix: avi_controllerproperties_snippet
+# key: vi_controllerpropert
+# group: ansible
+# --
+
+- name: ${0:Module for setup of ControllerProperties Avi RESTful Object}
+  avi_controllerproperties:                                                
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${2$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${3$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    allow_ip_forwarding: ${4:value}                                        # Field introduced in 17 1 1  Default value when not specified in API or module is interpreted by Avi Controller as False 
+    allow_unauthenticated_apis: ${5:value}                                 # Allow unauthenticated access for special apis  Default value when not specified in API or module is interpreted by Avi C
+    allow_unauthenticated_nodes: ${6:value}                                # Boolean flag to set allow_unauthenticated_nodes  Default value when not specified in API or module is interpreted by Avi
+    api_idle_timeout: ${7:value}                                           # Allowed values are 0-1440  Default value when not specified in API or module is interpreted by Avi Controller as 15 
+    api_perf_logging_threshold: ${8:value}                                 # Threshold to log request timing in portal_performance log and server-timing response header  Any stage taking longer tha
+    appviewx_compat_mode: ${9:value}                                       # Export configuration in appviewx compatibility mode  Field introduced in 17 1 1  Default value when not specified in API
+    attach_ip_retry_interval: ${10:value}                                  # Number of attach_ip_retry_interval  Default value when not specified in API or module is interpreted by Avi Controller a
+    attach_ip_retry_limit: ${11:value}                                     # Number of attach_ip_retry_limit  Default value when not specified in API or module is interpreted by Avi Controller as 4
+    bm_use_ansible: ${12:value}                                            # Use ansible for se creation in baremetal  Field introduced in 17 2 2  Default value when not specified in API or module 
+    cleanup_expired_authtoken_timeout_period: ${13:value}                  # Period for auth token cleanup job  Field introduced in 18 1 1  Default value when not specified in API or module is inte
+    cleanup_sessions_timeout_period: ${14:value}                           # Period for sessions cleanup job  Field introduced in 18 1 1  Default value when not specified in API or module is interp
+    cloud_reconcile: ${15:value}                                           # Enable/disable periodic reconcile for all the clouds  Field introduced in 17 2 14,18 1 5,18 2 1  Default value when not 
+    cluster_ip_gratuitous_arp_period: ${16:value}                          # Period for cluster ip gratuitous arp job  Default value when not specified in API or module is interpreted by Avi Contro
+    consistency_check_timeout_period: ${17:value}                          # Period for consistency check job  Field introduced in 18 1 1  Default value when not specified in API or module is inter
+    crashed_se_reboot: ${18:value}                                         # Number of crashed_se_reboot  Default value when not specified in API or module is interpreted by Avi Controller as 900 
+    dead_se_detection_timer: ${19:value}                                   # Number of dead_se_detection_timer  Default value when not specified in API or module is interpreted by Avi Controller as
+    dns_refresh_period: ${20:value}                                        # Period for refresh pool and gslb dns job  Default value when not specified in API or module is interpreted by Avi Contro
+    dummy: ${21:value}                                                     # Number of dummy 
+    enable_api_sharding: ${22:value}                                       # This setting enables the controller leader to shard api requests to the followers (if any)  Field introduced in 18 1 5, 
+    enable_memory_balancer: ${23:value}                                    # Enable/disable memory balancer  Field introduced in 17 2 8  Default value when not specified in API or module is interpr
+    fatal_error_lease_time: ${24:value}                                    # Number of fatal_error_lease_time  Default value when not specified in API or module is interpreted by Avi Controller as 
+    max_dead_se_in_grp: ${25:value}                                        # Number of max_dead_se_in_grp  Default value when not specified in API or module is interpreted by Avi Controller as 1 
+    max_pcap_per_tenant: ${26:value}                                       # Maximum number of pcap files stored per tenant  Default value when not specified in API or module is interpreted by Avi 
+    max_seq_attach_ip_failures: ${27:value}                                # Maximum number of consecutive attach ip failures that halts vs placement  Field introduced in 17 2 2  Default value when
+    max_seq_vnic_failures: ${28:value}                                     # Number of max_seq_vnic_failures  Default value when not specified in API or module is interpreted by Avi Controller as 3
+    persistence_key_rotate_period: ${29:value}                             # Period for rotate app persistence keys job  Allowed values are 1-1051200  Special values are 0 - 'disabled'  Default val
+    portal_token: ${30:value}                                              # Token used for uploading tech-support to portal  Field introduced in 16 4 6,17 1 2 
+    process_locked_useraccounts_timeout_period: ${31:value}                # Period for process locked user accounts job  Field introduced in 18 1 1  Default value when not specified in API or modu
+    process_pki_profile_timeout_period: ${32:value}                        # Period for process pki profile job  Field introduced in 18 1 1  Default value when not specified in API or module is int
+    query_host_fail: ${33:value}                                           # Number of query_host_fail  Default value when not specified in API or module is interpreted by Avi Controller as 180 
+    safenet_hsm_version: ${34:value}                                       # Version of the safenet package installed on the controller  Field introduced in 16 5 2,17 2 3 
+    se_create_timeout: ${35:value}                                         # Number of se_create_timeout  Default value when not specified in API or module is interpreted by Avi Controller as 900 
+    se_failover_attempt_interval: ${36:value}                              # Interval between attempting failovers to an se  Default value when not specified in API or module is interpreted by Avi 
+    se_from_marketplace: ${37:value}                                       # This setting decides whether se is to be deployed from the cloud marketplace or to be created by the controller  The set
+    se_offline_del: ${38:value}                                            # Number of se_offline_del  Default value when not specified in API or module is interpreted by Avi Controller as 172000 
+    se_vnic_cooldown: ${39:value}                                          # Number of se_vnic_cooldown  Default value when not specified in API or module is interpreted by Avi Controller as 120 
+    secure_channel_cleanup_timeout: ${40:value}                            # Period for secure channel cleanup job  Default value when not specified in API or module is interpreted by Avi Controlle
+    secure_channel_controller_token_timeout: ${41:value}                   # Number of secure_channel_controller_token_timeout  Default value when not specified in API or module is interpreted by A
+    secure_channel_se_token_timeout: ${42:value}                           # Number of secure_channel_se_token_timeout  Default value when not specified in API or module is interpreted by Avi Contr
+    seupgrade_fabric_pool_size: ${43:value}                                # Pool size used for all fabric commands during se upgrade  Default value when not specified in API or module is interpret
+    seupgrade_segroup_min_dead_timeout: ${44:value}                        # Time to wait before marking segroup upgrade as stuck  Default value when not specified in API or module is interpreted b
+    ssl_certificate_expiry_warning_days: ${45:value}                       # Number of days for ssl certificate expiry warning 
+    unresponsive_se_reboot: ${46:value}                                    # Number of unresponsive_se_reboot  Default value when not specified in API or module is interpreted by Avi Controller as 
+    upgrade_dns_ttl: ${47:value}                                           # Time to account for dns ttl during upgrade  This is in addition to vs_scalein_timeout_for_upgrade in se_group  Field int
+    upgrade_lease_time: ${48:value}                                        # Number of upgrade_lease_time  Default value when not specified in API or module is interpreted by Avi Controller as 360 
+    url: ${49:value}                                                       # Avi controller URL of the object 
+    uuid: ${50:value}                                                      # Unique object identifier of the object 
+    vnic_op_fail_time: ${51:value}                                         # Number of vnic_op_fail_time  Default value when not specified in API or module is interpreted by Avi Controller as 180 
+    vs_apic_scaleout_timeout: ${52:value}                                  # Time to wait for the scaled out se to become ready before marking the scaleout done, applies to apic configuration only 
+    vs_awaiting_se_timeout: ${53:value}                                    # Number of vs_awaiting_se_timeout  Default value when not specified in API or module is interpreted by Avi Controller as 
+    vs_key_rotate_period: ${54:value}                                      # Period for rotate vs keys job  Allowed values are 1-1051200  Special values are 0 - 'disabled'  Default value when not s
+    vs_scaleout_ready_check_interval: ${55:value}                          # Interval for checking scaleout_ready status while controller is waiting for scaleoutready rpc from the service engine  F
+    vs_se_attach_ip_fail: ${56:value}                                      # Time to wait before marking attach ip operation on an se as failed  Field introduced in 17 2 2  Default value when not s
+    vs_se_bootup_fail: ${57:value}                                         # Number of vs_se_bootup_fail  Default value when not specified in API or module is interpreted by Avi Controller as 480 
+    vs_se_create_fail: ${58:value}                                         # Number of vs_se_create_fail  Default value when not specified in API or module is interpreted by Avi Controller as 1500 
+    vs_se_ping_fail: ${59:value}                                           # Number of vs_se_ping_fail  Default value when not specified in API or module is interpreted by Avi Controller as 60 
+    vs_se_vnic_fail: ${60:value}                                           # Number of vs_se_vnic_fail  Default value when not specified in API or module is interpreted by Avi Controller as 300 
+    vs_se_vnic_ip_fail: ${61:value}                                        # Number of vs_se_vnic_ip_fail  Default value when not specified in API or module is interpreted by Avi Controller as 120 
+    warmstart_se_reconnect_wait_time: ${62:value}                          # Number of warmstart_se_reconnect_wait_time  Default value when not specified in API or module is interpreted by Avi Cont
+    warmstart_vs_resync_wait_time: ${63:value}                             # Timeout for warmstart vs resync  Field introduced in 18 1 4, 18 2 1  Default value when not specified in API or module i
+    controller: ${64:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${65:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${66:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${67:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${68:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{69:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${70:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${71:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${72:value}                         # It disables avi session information to be cached as a fact 

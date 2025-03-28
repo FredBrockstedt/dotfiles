@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Retrieve file or file system status
+# prefix: stat_snippet
+# key: tat
+# group: ansible
+# --
+
+- name: ${0:Retrieve file or file system status}
+  stat:                                                                    
+    path: ${1:The full path of the file/object to get the facts of}        #
+    follow: ${2:False}                                                     # Whether to follow symlinks 
+    get_checksum: ${3:True}                                                # Whether to return a checksum of the file 
+    checksum_algorithm: ${4$$(yas-choose-value '("md5" "sha1" "sha224" "sha256" "sha384" "sha512"))}# choices: md5;sha1;sha224;sha256;sha384;sha512  Algorithm to determine checksum of file  Will th
+    get_mime: ${5:True}                                                    # Use file magic and return data about the nature of the file  this uses the 'file' utility found on most Linux/Unix syste
+    get_attributes: ${6:True}                                              # Get file attributes using lsattr tool if present 

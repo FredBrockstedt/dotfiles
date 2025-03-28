@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: create / delete an instance in Rackspace Public Cloud
+# prefix: rax_snippet
+# key: rax
+# group: ansible
+# --
+
+- name: ${0:create / delete an instance in Rackspace Public Cloud}
+  rax:                                                                     
+    auto_increment: ${1:true}                                              # Whether or not to increment a single number with the name of the created servers  Only applicable when used with the I(g
+    boot_from_volume: ${2:false}                                           # Whether or not to boot the instance from a Cloud Block Storage volume  If C(yes) and I(image) is specified a new volume 
+    boot_volume: ${3:value}                                                # Cloud Block Storage ID or Name to use as the boot volume of the instance
+    boot_volume_size: ${4:100}                                             # Size of the volume to create in Gigabytes  This is only required with I(image) and I(boot_from_volume) 
+    boot_volume_terminate: ${5:false}                                      # Whether the I(boot_volume) or newly created volume from I(image) will be terminated when the server is terminated
+    config_drive: ${6:false}                                               # Attach read-only configuration drive to server as label config-2
+    count: ${7:1}                                                          # number of instances to launch
+    count_offset: ${8:1}                                                   # number count to start at
+    disk_config: ${9$$(yas-choose-value '("auto" "manual"))}               # choices: auto;manual  Disk partitioning strategy
+    exact_count: ${10:false}                                               # Explicitly ensure an exact count of instances, used with state=active/present  If specified as C(yes) and I(count) is le
+    extra_client_args: ${11:value}                                         # A hash of key/value pairs to be used when creating the cloudservers client  This is considered an advanced option, use i
+    extra_create_args: ${12:value}                                         # A hash of key/value pairs to be used when creating a new server  This is considered an advanced option, use it wisely an
+    files: ${13:value}                                                     # Files to insert into the instance  remotefilename:localcontent
+    flavor: ${14:value}                                                    # flavor to use for the instance
+    group: ${15:value}                                                     # host group to assign to server, is also used for idempotent operations to ensure a specific number of instances
+    image: ${16:value}                                                     # image to use for the instance  Can be an C(id), C(human_id) or C(name)  With I(boot_from_volume), a Cloud Block Storage 
+    instance_ids: ${17:value}                                              # list of instance ids, currently only used when state='absent' to remove instances
+    key_name: ${18:value}                                                  # key pair to use on the instance
+    meta: ${19:value}                                                      # A hash of metadata to associate with the instance
+    name: ${20:value}                                                      # Name to give the instance
+    networks: ${21:"['public', 'private']"}                                # The network to attach to the instances  If specified, you must include ALL networks including the public and private int
+    state: ${22$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Indicate desired state of the resource
+    user_data: ${23:value}                                                 # Data to be uploaded to the servers config drive  This option implies I(config_drive)  Can be a file path or a string
+    wait: ${24:false}                                                      # wait for the instance to be in state 'running' before returning
+    wait_timeout: ${25:300}                                                # how long before wait gives up, in seconds
+    api_key: ${26:value}                                                   # Rackspace API key, overrides I(credentials) 
+    auth_endpoint: ${{27:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    credentials: ${28:value}                                               # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${29:value}                                                       # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    identity_type: ${30:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    region: ${31:DFW}                                                      # Region to create an instance in 
+    tenant_id: ${32:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${33:value}                                               # The tenant name used for authentication 
+    username: ${34:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${35:value}                                            # Whether or not to require SSL validation of API endpoints 

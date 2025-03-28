@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage Ruby gems
+# prefix: gem_snippet
+# key: gem
+# group: ansible
+# --
+
+- name: ${0:Manage Ruby gems}
+  gem:                                                                     
+    name: ${1:The name of the gem to be managed}                           #
+    state: ${2$$(yas-choose-value '("present" "absent" "latest"))}         # choices: present;absent;latest  The desired state of the gem  C(latest) ensures that the latest version is installed 
+    gem_source: ${3:value}                                                 # The path to a local gem used as installation source 
+    include_dependencies: ${4:true}                                        # Whether to include dependencies or not 
+    repository: ${5:value}                                                 # The repository from which the gem will be installed
+    user_install: ${6:true}                                                # Install gem in user's local gems cache or for all users
+    executable: ${7:value}                                                 # Override the path to the gem executable
+    install_dir: ${8:value}                                                # Install the gems into a specific directory  These gems will be independent from the global installed ones  Specifying th
+    env_shebang: ${9:false}                                                # Rewrite the shebang line on installed scripts to use /usr/bin/env 
+    version: ${10:value}                                                   # Version of the gem to be installed/removed 
+    pre_release: ${11:false}                                               # Allow installation of pre-release versions of the gem 
+    include_doc: ${12:false}                                               # Install with or without docs 
+    build_flags: ${13:value}                                               # Allow adding build flags for gem compilation
+    force: ${14:false}                                                     # Force gem to install, bypassing dependency checks 

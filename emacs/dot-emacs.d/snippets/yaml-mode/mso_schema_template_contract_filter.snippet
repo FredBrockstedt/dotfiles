@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage contract filters in schema templates
+# prefix: mso_schema_template_contract_filter_snippet
+# key: mso_schema_template_contract_filter
+# group: ansible
+# --
+
+- name: ${0:Manage contract filters in schema templates}
+  mso_schema_template_contract_filter:                                     
+    schema: ${1:The name of the schema}                                    #
+    template: ${2:The name of the template}                                #
+    contract: ${3:The name of the contract to manage}                      #
+    host: ${4:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${5:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    contract_display_name: ${6:value}                                      # The name as displayed on the MSO web interface  This defaults to the contract name when unset on creation 
+    contract_filter_type: ${7$$(yas-choose-value '("both-way" "one-way"))} # choices: both-way;one-way  The type of filters defined in this contract  This defaults to C(both-way) when unset on crea
+    contract_scope: ${8$$(yas-choose-value '("application-profile" "global" "tenant" "vrf"))}# choices: application-profile;global;tenant;vrf  The scope of the contract  This defaults to C(vrf) whe
+    filter: ${9:value}                                                     # The filter to associate with this contract 
+    filter_template: ${10:value}                                           # The template name in which the filter is located 
+    filter_schema: ${11:value}                                             # The schema name in which the filter is located 
+    filter_type: ${12$$(yas-choose-value '("both-way" "consumer-to-provider" "provider-to-consumer"))}# choices: both-way;consumer-to-provider;provider-to-consumer  The type of filter to manage 
+    filter_directives: ${13$$(yas-choose-value '("log" "none"))}           # choices: log;none  A list of filter directives 
+    state: ${14$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${15:value}                                                      # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${16:admin}                                                  # The username to use for authentication 
+    output_level: ${17$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${18:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${19:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${20:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${21:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

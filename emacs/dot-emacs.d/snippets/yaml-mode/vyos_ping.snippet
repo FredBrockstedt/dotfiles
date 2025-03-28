@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Tests reachability using ping from VyOS network devices
+# prefix: vyos_ping_snippet
+# key: vyos_ping
+# group: ansible
+# --
+
+- name: ${0:Tests reachability using ping from VyOS network devices}
+  vyos_ping:                                                               
+    dest: ${1:The IP Address or hostname (resolvable by the device) of the remote node}#
+    count: ${2:5}                                                          # Number of packets to send to check reachability 
+    source: ${3:value}                                                     # The source interface or IP Address to use while sending the ping packet(s) 
+    ttl: ${4:value}                                                        # The time-to-live value for the ICMP packet(s) 
+    size: ${5:value}                                                       # Determines the size (in bytes) of the ping packet(s) 
+    interval: ${6:value}                                                   # Determines the interval (in seconds) between consecutive pings 
+    state: ${7$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Determines if the expected result is success or fail 
+    provider: ${8:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

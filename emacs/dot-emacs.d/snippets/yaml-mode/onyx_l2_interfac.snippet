@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Layer-2 interface on Mellanox ONYX network devices
+# prefix: onyx_l2_interface_snippet
+# key: onyx_l2_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Layer-2 interface on Mellanox ONYX network devices}
+  onyx_l2_interface:                                                       
+    name: ${1:value}                                                       # Name of the interface 
+    aggregate: ${2:value}                                                  # List of Layer-2 interface definitions 
+    mode: ${3$$(yas-choose-value '("access" "trunk" "hybrid"))}            # choices: access;trunk;hybrid  Mode in which interface needs to be configured 
+    access_vlan: ${4:value}                                                # Configure given VLAN in access port 
+    trunk_allowed_vlans: ${5:value}                                        # List of allowed VLANs in a given trunk port 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the Layer-2 Interface configuration 

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete/modify role
+# prefix: pn_role_snippet
+# key: pn_ro
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete/modify role}
+  pn_role:                                                                 
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use C(present) to create role and C(absent) to delete role and C(update) to modify role 
+    pn_name: ${2:role name}                                                #
+    pn_cliswitch: ${3:value}                                               # Target switch to run the CLI on 
+    pn_scope: ${4$$(yas-choose-value '("local" "fabric"))}                 # choices: local;fabric  local or fabric 
+    pn_access: ${5$$(yas-choose-value '("read-only" "read-write"))}        # choices: read-only;read-write  type of access 
+    pn_shell: ${6:value}                                                   # allow shell command 
+    pn_sudo: ${7:value}                                                    # allow sudo from shell 
+    pn_running_config: ${8:value}                                          # display running configuration of switch 
+    pn_delete_from_users: ${9:value}                                       # delete from users 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage SysV services.
+# prefix: sysvinit_snippet
+# key: ysvinit
+# group: ansible
+# --
+
+- name: ${0:Manage SysV services.}
+  sysvinit:                                                                
+    name: ${1:Name of the service}                                         #
+    state: ${2$$(yas-choose-value '("started" "stopped" "restarted" "reloaded"))}# choices: started;stopped;restarted;reloaded  C(started)/C(stopped) are idempotent actions that will not run comman
+    enabled: ${3:value}                                                    # Whether the service should start on boot  B(At least one of state and enabled are required )
+    sleep: ${4:1}                                                          # If the service is being C(restarted) or C(reloaded) then sleep this many seconds between the stop and start command  Thi
+    pattern: ${5:value}                                                    # A substring to look for as would be found in the output of the I(ps) command as a stand-in for a status result  If the s
+    runlevels: ${6:value}                                                  # The runlevels this script should be enabled/disabled from  Use this to override the defaults set by the package or init 
+    arguments: ${7:value}                                                  # Additional arguments provided on the command line that some init scripts accept 
+    daemonize: ${8:False}                                                  # Have the module daemonize as the service itself might not do so properly  This is useful with badly written init scripts

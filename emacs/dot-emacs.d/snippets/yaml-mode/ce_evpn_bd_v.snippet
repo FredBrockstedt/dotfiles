@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages EVPN VXLAN Network Identifier (VNI) on HUAWEI CloudEngine switches.
+# prefix: ce_evpn_bd_vni_snippet
+# key: ce_evpn_bd_v
+# group: ansible
+# --
+
+- name: ${0:Manages EVPN VXLAN Network Identifier (VNI) on HUAWEI CloudEngine switches.}
+  ce_evpn_bd_vni:                                                          
+    bridge_domain_id: ${1:Specify an existed bridge domain (BD)}           #The value is an integer ranging from 1 to 16777215 
+    vpn_target_import: ${2:Add VPN targets to the import VPN target list of a BD EVPN instance}# The format is the same as route_distinguisher 
+    evpn: ${3$$(yas-choose-value '("enable" "disable"))}                   # choices: enable;disable  Create or delete an EVPN instance for a VXLAN in BD view 
+    route_distinguisher: ${4:value}                                        # Configures a route distinguisher (RD) for a BD EVPN instance  The format of an RD can be as follows 1) 2-byte AS number:
+    vpn_target_both: ${5:value}                                            # Add VPN targets to both the import and export VPN target lists of a BD EVPN instance  The format is the same as route_di
+    vpn_target_export: ${6:value}                                          # Add VPN targets to the export VPN target list of a BD EVPN instance  The format is the same as route_distinguisher 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

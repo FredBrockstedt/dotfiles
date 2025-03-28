@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Set Serial port parameters in WTI OOB and PDU devices
+# prefix: cpm_serial_port_config_snippet
+# key: cpm_serial_port_config
+# group: ansible
+# --
+
+- name: ${0:Set Serial port parameters in WTI OOB and PDU devices}
+  cpm_serial_port_config:                                                  
+    cpm_url: ${1:This is the URL of the WTI device to send the module}     #
+    cpm_username: ${2:This is the Username of the WTI device to send the module}#
+    cpm_password: ${3:This is the Password of the WTI device to send the module}#
+    port: ${4:This is the port number that is getting the action performed on}#
+    use_https: ${5:True}                                                   # Designates to use an https connection or http connection 
+    validate_certs: ${6:True}                                              # If false, SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    use_proxy: ${7:False}                                                  # F l a g   t o   c o n t r o l   i f   t h e   l o o k u p   w i l l   o b s e r v e   H T T P   p r o x y   e n v i r o 
+    portname: ${8:value}                                                   # This is the Name of the Port that is displayed 
+    baud: ${9$$(yas-choose-value '("0" "1" "2" "3" "4" "5" "6" "7" "8" "9" "10"))}# choices: 0;1;2;3;4;5;6;7;8;9;10  This is the baud rate to assign to the port  0=300, 1=1200, 2=2400, 3=4800, 4=96
+    handshake: ${10$$(yas-choose-value '("0" "1" "2" "3"))}                # choices: 0;1;2;3  This is the handshake to assign to the port, 0=None, 1=XON/XOFF, 2=RTS/CTS, 3=Both 
+    stopbits: ${11$$(yas-choose-value '("0" "1"))}                         # choices: 0;1  This is the stop bits to assign to the port, 0=1 Stop Bit, 1=2 Stop Bit 
+    parity: ${12$$(yas-choose-value '("0" "1" "2" "3" "4" "5"))}           # choices: 0;1;2;3;4;5  This is the parity to assign to the port, 0=7-None, 1=7-Even, 2=7-Odd, 3=8-None, 4=8-Even, 5=8-Odd
+    mode: ${13$$(yas-choose-value '("0" "1" "2" "3" "4"))}                 # choices: 0;1;2;3;4  This is the port mode to assign to the port, 0=Any-to-Any  1=Passive, 2=Buffer, 3=Modem, 4=ModemPPP 
+    cmd: ${14$$(yas-choose-value '("0" "1"))}                              # choices: 0;1  This is the Admin Mode to assign to the port, 0=Deny, 1=Permit 
+    seq: ${15$$(yas-choose-value '("1" "2" "3"))}                          # choices: 1;2;3  This is the type of Sequence Disconnect to assign to the port, 0=Three Characters (before and after), 1=
+    tout: ${16$$(yas-choose-value '("0" "1" "2" "3" "4" "5"))}             # choices: 0;1;2;3;4;5  This is the Port Activity Timeout to assign to the port, 0=Off, 1=5 Min, 2=15 Min, 3=30 Min, 4=90 
+    echo: ${17:value}                                                      # - T h i s   i s   t h e   c o m m a n d   e c h o   p a r a m e t e r   t o   a s s i g n   t o   t h e   p o r t ,   0 
+    break_allow: ${18:value}                                               # This is if the break character is allowed to be passed through the port, 0=Off, 1=On
+    logoff: ${19:value}                                                    # This is the logout character to assign to the port If preceded by a ^ character, the sequence will be a control characte

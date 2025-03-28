@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: Manage user accounts
+# prefix: user_snippet
+# key: user
+# group: ansible
+# --
+
+- name: ${0:Manage user accounts}
+  user:                                                                    
+    name: ${1:Name of the user to create, remove or modify}                #
+    uid: ${2:value}                                                        # Optionally sets the I(UID) of the user 
+    comment: ${3:value}                                                    # Optionally sets the description (aka I(GECOS)) of user account 
+    hidden: ${4:value}                                                     # macOS only, optionally hide the user from the login window and system preferences  The default will be C(yes) if the I(s
+    non_unique: ${5:False}                                                 # Optionally when used with the -u option, this option allows to change the user ID to a non-unique value 
+    seuser: ${6:value}                                                     # Optionally sets the seuser type (user_u) on selinux enabled systems 
+    group: ${7:value}                                                      # Optionally sets the user's primary group (takes a group name) 
+    groups: ${8:value}                                                     # List of groups user will be added to  When set to an empty string C(''), the user is removed from all groups except the 
+    append: ${9:False}                                                     # If C(yes), add the user to the groups specified in C(groups)  If C(no), user will only be added to the groups specified 
+    shell: ${10:value}                                                     # Optionally set the user's shell  On macOS, before Ansible 2 5, the default shell for non-system users was C(/usr/bin/fal
+    home: ${11:value}                                                      # Optionally set the user's home directory 
+    skeleton: ${12:value}                                                  # Optionally set a home skeleton directory  Requires C(create_home) option!
+    password: ${13:value}                                                  # Optionally set the user's password to this crypted value  On macOS systems, this value has to be cleartext  Beware of se
+    state: ${14$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Whether the account should exist or not, taking action if the state is different from what is s
+    create_home: ${15:True}                                                # Unless set to C(no), a home directory will be made for the user when the account is created or if the home directory doe
+    move_home: ${16:False}                                                 # If set to C(yes) when used with C(home: ), attempt to move the user's old home directory to the specified directory if i
+    system: ${17:False}                                                    # When creating an account C(state=present), setting this to C(yes) makes the user a system account  This setting cannot b
+    force: ${18:False}                                                     # This only affects C(state=absent), it forces removal of the user and associated directories on supported platforms  The 
+    remove: ${19:False}                                                    # This only affects C(state=absent), it attempts to remove directories associated with the user  The behavior is the same 
+    login_class: ${20:value}                                               # Optionally sets the user's login class, a feature of most BSD OSs 
+    generate_ssh_key: ${21:False}                                          # Whether to generate a SSH key for the user in question  This will B(not) overwrite an existing SSH key unless used with 
+    ssh_key_bits: ${22:"default set by ssh-keygen"}                        # Optionally specify number of bits in SSH key to create 
+    ssh_key_type: ${23:rsa}                                                # Optionally specify the type of SSH key to generate  Available SSH key types will depend on implementation present on tar
+    ssh_key_file: ${24:value}                                              # Optionally specify the SSH key filename  If this is a relative filename then it will be relative to the user's home dire
+    ssh_key_comment: ${25:"ansible-generated on \$HOSTNAME"}               # Optionally define the comment for the SSH key 
+    ssh_key_passphrase: ${26:value}                                        # Set a passphrase for the SSH key  If no passphrase is provided, the SSH key will default to having no passphrase 
+    update_password: ${27$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will update passwords if they differ  C(on_create) will only set the password for n
+    expires: ${28:value}                                                   # An expiry time for the user in epoch, it will be ignored on platforms that do not support this  Currently supported on G
+    password_lock: ${29:value}                                             # Lock the password (usermod -L, pw lock, usermod -C)  BUT implementation differs on different platforms, this option does
+    local: ${30:False}                                                     # Forces the use of "local" command alternatives on platforms that implement it  This is useful in environments that use c
+    profile: ${31:value}                                                   # Sets the profile of the user  Does nothing when used with other platforms  Can set multiple profiles using comma separat
+    authorization: ${32:value}                                             # Sets the authorization of the user  Does nothing when used with other platforms  Can set multiple authorizations using c
+    role: ${33:value}                                                      # Sets the role of the user  Does nothing when used with other platforms  Can set multiple roles using comma separation  T

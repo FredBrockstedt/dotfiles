@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Create and delete domains in Memset DNS zones.
+# prefix: memset_zone_domain_snippet
+# key: memset_zone_dom
+# group: ansible
+# --
+
+- name: ${0:Create and delete domains in Memset DNS zones.}
+  memset_zone_domain:                                                      
+    api_key: ${1:The API key obtained from the Memset control panel}       #
+    domain: ${2:The zone domain name}                                      # Ensure this value has at most 250 characters 
+    zone: ${3:The zone to add the domain to (this must already exist)}     #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicates desired state of resource 

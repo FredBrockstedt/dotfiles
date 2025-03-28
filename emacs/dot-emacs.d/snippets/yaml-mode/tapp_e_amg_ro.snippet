@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series update the role of a storage array within an Asynchronous Mirror Group (AMG).
+# prefix: netapp_e_amg_role_snippet
+# key: tapp_e_amg_ro
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series update the role of a storage array within an Asynchronous Mirror Group (AMG).}
+  netapp_e_amg_role:                                                       
+    api_username: ${1:The username to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_password: ${2:The password to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_url: ${3:The url to the SANtricity WebServices Proxy or embedded REST API}#
+    ssid: ${4:The ID of the primary storage array for the async mirror action}#
+    role: ${5$$(yas-choose-value '("primary" "secondary"))}                # Whether the array should be the primary or secondary array for the AMG
+    validate_certs: ${6:True}                                              # Should https certificates be validated?
+    noSync: ${7:False}                                                     # Whether to avoid synchronization prior to role reversal
+    force: ${8:False}                                                      # Whether to force the role reversal regardless of the online-state of the primary

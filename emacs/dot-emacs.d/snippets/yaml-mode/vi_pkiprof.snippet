@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Module for setup of PKIProfile Avi RESTful Object
+# prefix: avi_pkiprofile_snippet
+# key: vi_pkiprof
+# group: ansible
+# --
+
+- name: ${0:Module for setup of PKIProfile Avi RESTful Object}
+  avi_pkiprofile:                                                          
+    name: ${1:Name of the pki profile}                                     #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    ca_certs: ${5:value}                                                   # List of certificate authorities (root and intermediate) trusted that is used for certificate validation 
+    created_by: ${6:value}                                                 # Creator name 
+    crl_check: ${7:value}                                                  # When enabled, avi will verify via crl checks that certificates in the trust chain have not been revoked  Default value w
+    crls: ${8:value}                                                       # Certificate revocation lists 
+    ignore_peer_chain: ${9:value}                                          # When enabled, avi will not trust intermediate and root certs presented by a client  Instead, only the chain certs config
+    is_federated: ${10:value}                                              # This field describes the object's replication scope  If the field is set to false, then the object is visible within the
+    tenant_ref: ${11:value}                                                # It is a reference to an object of type tenant 
+    url: ${12:value}                                                       # Avi controller URL of the object 
+    uuid: ${13:value}                                                      # Unique object identifier of the object 
+    validate_only_leaf_crl: ${14:value}                                    # When enabled, avi will only validate the revocation status of the leaf certificate using crl  To enable validation for t
+    controller: ${15:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${16:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${17:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${18:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${19:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{20:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${21:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${22:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${23:value}                         # It disables avi session information to be cached as a fact 

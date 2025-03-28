@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manipulate SNMP trap information on a BIG-IP
+# prefix: bigip_snmp_trap_snippet
+# key: gip_snmp_trap
+# group: ansible
+# --
+
+- name: ${0:Manipulate SNMP trap information on a BIG-IP}
+  bigip_snmp_trap:                                                         
+    name: ${1:Name of the SNMP configuration endpoint}                     #
+    snmp_version: ${2$$(yas-choose-value '("1" "2c"))}                     # choices: 1;2c  Specifies to which Simple Network Management Protocol (SNMP) version the trap destination applies 
+    community: ${3:value}                                                  # Specifies the community name for the trap destination 
+    destination: ${4:value}                                                # Specifies the address for the trap destination  This can be either an IP address or a hostname 
+    port: ${5:value}                                                       # Specifies the port for the trap destination 
+    network: ${6$$(yas-choose-value '("other" "management" "default"))}    # choices: other;management;default  Specifies the name of the trap network  This option is not supported in versions of B
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures that the resource do
+    partition: ${8:Common}                                                 # Device partition to manage resources on 
+    provider: ${9:value}                                                   # A dict object containing connection details 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove vrouter-loopback-interface.
+# prefix: pn_vrouterlbif_snippet
+# key: pn_vrouterlbif
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove vrouter-loopback-interface.}
+  pn_vrouterlbif:                                                          
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use 'present' to add vrouter loopback interface and 'absent' to remove vrouter loopback int
+    pn_vrouter_name: ${2:Specify the name of the vRouter}                  #
+    pn_interface_ip: ${3:Specify the IP address}                           #
+    pn_cliusername: ${4:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${5:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${6:local}                                               # Target switch(es) to run the cli on 
+    pn_index: ${7:value}                                                   # Specify the interface index from 1 to 255 

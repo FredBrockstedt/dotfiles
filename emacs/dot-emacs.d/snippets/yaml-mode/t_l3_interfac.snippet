@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage L3 interfaces on network devices
+# prefix: net_l3_interface_snippet
+# key: t_l3_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage L3 interfaces on network devices}
+  net_l3_interface:                                                        
+    name: ${1:value}                                                       # Name of the L3 interface 
+    ipv4: ${2:value}                                                       # IPv4 of the L3 interface 
+    ipv6: ${3:value}                                                       # IPv6 of the L3 interface 
+    aggregate: ${4:value}                                                  # L i s t   o f   L 3   i n t e r f a c e s   d e f i n i t i o n s
+    purge: ${5:False}                                                      # Purge L3 interfaces not defined in the I(aggregate) parameter 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the L3 interface configuration 

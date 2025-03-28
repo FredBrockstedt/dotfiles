@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Create, modify and delete NFS or S3 offload targets
+# prefix: purefa_offload_snippet
+# key: purefa_offload
+# group: ansible
+# --
+
+- name: ${0:Create, modify and delete NFS or S3 offload targets}
+  purefa_offload:                                                          
+    name: ${1:The name of the offload target}                              #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Define state of offload
+    protocol: ${5$$(yas-choose-value '("nfs" "s3"))}                       # choices: nfs;s3  Define which protocol the offload engine uses
+    address: ${6:value}                                                    # The IP or FQDN address of the NFS server
+    share: ${7:value}                                                      # NFS export on the NFS server
+    options: ${8:}                                                         # Additional mount options for the NFS share Supported mount options include I(port), I(rsize), I(wsize), I(nfsvers), and 
+    access_key: ${9:value}                                                 # Access Key ID of the S3 target
+    bucket: ${10:value}                                                    # Name of the bucket for the S3 target
+    secret: ${11:value}                                                    # Secret Access Key for the S3 target
+    initialize: ${12:True}                                                 # Define whether to initialize the S3 bucket

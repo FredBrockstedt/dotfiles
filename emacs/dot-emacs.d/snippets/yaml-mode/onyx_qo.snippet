@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Configures QoS
+# prefix: onyx_qos_snippet
+# key: onyx_qo
+# group: ansible
+# --
+
+- name: ${0:Configures QoS}
+  onyx_qos:                                                                
+    interfaces: ${1:list of interfaces name}                               #
+    trust: ${2$$(yas-choose-value '("L2" "L3" "both"))}                    # choices: L2;L3;both  trust type 
+    rewrite_pcp: ${3$$(yas-choose-value '("enabled" "disabled"))}          # choices: enabled;disabled  rewrite with type pcp 
+    rewrite_dscp: ${4$$(yas-choose-value '("enabled" "disabled"))}         # choices: enabled;disabled  rewrite with type dscp 

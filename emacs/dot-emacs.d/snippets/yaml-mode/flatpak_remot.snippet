@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage flatpak repository remotes
+# prefix: flatpak_remote_snippet
+# key: flatpak_remot
+# group: ansible
+# --
+
+- name: ${0:Manage flatpak repository remotes}
+  flatpak_remote:                                                          
+    name: ${1:The desired name for the flatpak remote to be registered under on the managed host}# When used with I(state=present), the remote will be added to the managed host under the specified 
+    executable: ${2:flatpak}                                               # The path to the C(flatpak) executable to use  By default, this module looks for the C(flatpak) executable on the path 
+    flatpakrepo_url: ${3:value}                                            # The URL to the I(flatpakrepo) file representing the repository remote to add  When used with I(state=present), the flatp
+    method: ${4$$(yas-choose-value '("system" "user"))}                    # choices: system;user  The installation method to use  Defines if the I(flatpak) is supposed to be installed globally for
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicates the desired package state 

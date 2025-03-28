@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Add and Delete public ips on servers in CenturyLink Cloud.
+# prefix: clc_publicip_snippet
+# key: clc_publicip
+# group: ansible
+# --
+
+- name: ${0:Add and Delete public ips on servers in CenturyLink Cloud.}
+  clc_publicip:                                                            
+    server_ids: ${1:A list of servers to create public ips on}             #
+    protocol: ${2$$(yas-choose-value '("TCP" "UDP" "ICMP"))}               # choices: TCP;UDP;ICMP  The protocol that the public IP will listen for 
+    ports: ${3:value}                                                      # A list of ports to expose  This is required when state is 'present'
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determine whether to create or delete public IPs  If present module will not create a second pu
+    wait: ${5:true}                                                        # Whether to wait for the tasks to finish before returning 

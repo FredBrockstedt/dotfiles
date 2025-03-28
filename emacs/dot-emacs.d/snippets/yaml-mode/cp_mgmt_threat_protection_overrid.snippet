@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Edit existing object using object name or uid.
+# prefix: cp_mgmt_threat_protection_override_snippet
+# key: cp_mgmt_threat_protection_overrid
+# group: ansible
+# --
+
+- name: ${0:Edit existing object using object name or uid.}
+  cp_mgmt_threat_protection_override:                                      
+    name: ${1:value}                                                       # Object name 
+    comments: ${2:value}                                                   # Protection comments 
+    follow_up: ${3:value}                                                  # Tag the protection with pre-defined follow-up flag 
+    overrides: ${4:value}                                                  # Overrides per profile for this protection<br> Note, Remove override for Core protections removes only the action's overr
+    details_level: ${5$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    wait_for_task: ${6:True}                                               # Wait for the task to end  Such as publish task 
+    version: ${7:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

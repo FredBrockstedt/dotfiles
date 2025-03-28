@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage the relationship between Hetzner Cloud Networks and servers
+# prefix: hcloud_server_network_snippet
+# key: hcloud_server_network
+# group: ansible
+# --
+
+- name: ${0:Manage the relationship between Hetzner Cloud Networks and servers}
+  hcloud_server_network:                                                   
+    network: ${1:The name of the Hetzner Cloud Networks}                   #
+    server: ${2:The name of the Hetzner Cloud server}                      #
+    api_token: ${3:This is the API Token for the Hetzner Cloud}            #
+    ip: ${4:value}                                                         # The IP the server should have 
+    alias_ips: ${5:value}                                                  # Alias IPs the server has 
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the server_network 
+    endpoint: ${{7:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

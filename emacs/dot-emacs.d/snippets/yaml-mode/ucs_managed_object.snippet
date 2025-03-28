@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Configures Managed Objects on Cisco UCS Manager
+# prefix: ucs_managed_objects_snippet
+# key: ucs_managed_object
+# group: ansible
+# --
+
+- name: ${0:Configures Managed Objects on Cisco UCS Manager}
+  ucs_managed_objects:                                                     
+    objects: ${1:List of managed objects to configure}                     #  Each managed object has suboptions the specify the Python SDK module, class, and properties to configure 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If C(present), will verify that the Managed Objects are present and will create if needed  If C
+    username: ${5:admin}                                                   # Username for Cisco UCS Manager authentication 
+    port: ${6:value}                                                       # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${7:True}                                                     # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${8:True}                                                   # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${9:value}                                                      # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

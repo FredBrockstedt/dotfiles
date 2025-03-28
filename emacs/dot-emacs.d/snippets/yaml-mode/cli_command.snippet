@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Run a cli command on cli-based network devices
+# prefix: cli_command_snippet
+# key: cli_command
+# group: ansible
+# --
+
+- name: ${0:Run a cli command on cli-based network devices}
+  cli_command:                                                             
+    command: ${1:The command to send to the remote network device}         #  The resulting output from the command is returned, unless I(sendonly) is set 
+    prompt: ${2:value}                                                     # A single regex pattern or a sequence of patterns to evaluate the expected prompt from I(command) 
+    answer: ${3:value}                                                     # The answer to reply with if I(prompt) is matched  The value can be a single answer or a list of answer for multiple prom
+    sendonly: ${4:False}                                                   # The boolean value, that when set to true will send I(command) to the device but not wait for a result 
+    newline: ${5:True}                                                     # The boolean value, that when set to false will send I(answer) to the device without a trailing newline 
+    check_all: ${6:False}                                                  # By default if any one of the prompts mentioned in C(prompt) option is matched it won't check for other prompts  This boo

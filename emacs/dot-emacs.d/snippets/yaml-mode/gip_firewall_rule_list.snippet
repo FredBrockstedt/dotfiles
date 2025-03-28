@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage AFM security firewall policies on a BIG-IP
+# prefix: bigip_firewall_rule_list_snippet
+# key: gip_firewall_rule_list
+# group: ansible
+# --
+
+- name: ${0:Manage AFM security firewall policies on a BIG-IP}
+  bigip_firewall_rule_list:                                                
+    name: ${1:The name of the policy to create}                            #
+    description: ${2:value}                                                # The description to attach to the policy  This parameter is only supported on versions of BIG-IP >= 12 1 0  On earlier ve
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(state) is C(present), ensures that the rule list exists  When C(state) is C(absent), ens
+    rules: ${4:value}                                                      # Specifies a list of rules that you want associated with this policy  The order of this list is the order they will be ev
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    provider: ${6:value}                                                   # A dict object containing connection details 

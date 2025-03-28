@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage priority flow control on ONYX network devices
+# prefix: onyx_pfc_interface_snippet
+# key: onyx_pfc_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage priority flow control on ONYX network devices}
+  onyx_pfc_interface:                                                      
+    name: ${1:value}                                                       # Name of the interface PFC should be configured on 
+    aggregate: ${2:value}                                                  # L i s t   o f   i n t e r f a c e s   P F C   s h o u l d   b e   c o n f i g u r e d   o n  
+    purge: ${3:False}                                                      # Purge interfaces not defined in the aggregate parameter 
+    state: ${4$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  State of the PFC configuration 

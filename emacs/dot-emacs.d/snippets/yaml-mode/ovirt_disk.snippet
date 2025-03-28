@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: Module to manage Virtual Machine and floating disks in oVirt/RHV
+# prefix: ovirt_disk_snippet
+# key: ovirt_disk
+# group: ansible
+# --
+
+- name: ${0:Module to manage Virtual Machine and floating disks in oVirt/RHV}
+  ovirt_disk:                                                              
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${2:value}                                                         # ID of the disk to manage  Either C(id) or C(name) is required 
+    name: ${3:value}                                                       # Name of the disk to manage  Either C(id) or C(name)/C(alias) is required 
+    description: ${4:value}                                                # Description of the disk image to manage 
+    vm_name: ${5:value}                                                    # Name of the Virtual Machine to manage  Either C(vm_id) or C(vm_name) is required if C(state) is I(attached) or I(detache
+    vm_id: ${6:value}                                                      # ID of the Virtual Machine to manage  Either C(vm_id) or C(vm_name) is required if C(state) is I(attached) or I(detached)
+    state: ${7$$(yas-choose-value '("present" "absent" "attached" "detached" "exported"))}# choices: present;absent;attached;detached;exported  Should the Virtual Machine disk be present/absent/att
+    download_image_path: ${8:value}                                        # Path on a file system where disk should be downloaded  Note that you must have an valid oVirt/RHV engine CA in your syst
+    upload_image_path: ${9:value}                                          # Path to disk image, which should be uploaded  Note that currently we support only compatibility version 0 10 of the qcow
+    size: ${10:value}                                                      # Size of the disk  Size should be specified using IEC standard units  For example 10GiB, 1024MiB, etc  Size can be only i
+    interface: ${11$$(yas-choose-value '("virtio" "ide" "virtio_scsi"))}   # choices: virtio;ide;virtio_scsi  Driver of the storage interface  It's required parameter when creating the new disk 
+    format: ${12$$(yas-choose-value '("raw" "cow"))}                       # choices: raw;cow  Specify format of the disk  Note that this option isn't idempotent as it's not currently possible to c
+    content_type: ${13$$(yas-choose-value '("data" "iso" "hosted_engine" "hosted_engine_sanlock" "hosted_engine_metadata" "hosted_engine_configuration"))}# choices: data;iso;hosted_engine;hosted_en
+    sparse: ${14:value}                                                    # I(True) if the disk should be sparse (also known as I(thin provision))  If the parameter is omitted, cow disks will be c
+    storage_domain: ${15:value}                                            # Storage domain name where disk should be created 
+    storage_domains: ${16:value}                                           # Storage domain names where disk should be copied  C(**IMPORTANT**) There is no reliable way to achieve idempotency, so e
+    force: ${17:value}                                                     # Please take a look at C(image_path) documentation to see the correct usage of this parameter 
+    profile: ${18:value}                                                   # Disk profile name to be attached to disk  By default profile is chosen by oVirt/RHV engine 
+    quota_id: ${19:value}                                                  # Disk quota ID to be used for disk  By default quota is chosen by oVirt/RHV engine 
+    bootable: ${20:false}                                                  # I(True) if the disk should be bootable  By default when disk is created it isn't bootable 
+    shareable: ${21:value}                                                 # I(True) if the disk should be shareable  By default when disk is created it isn't shareable 
+    logical_unit: ${22:value}                                              # Dictionary which describes LUN to be directly attached to VM:
+    sparsify: ${23:value}                                                  # I(True) if the disk should be sparsified  Sparsification frees space in the disk image that is not used by its filesyste
+    openstack_volume_type: ${24:value}                                     # Name of the openstack volume type  This is valid when working with cinder 
+    image_provider: ${25:value}                                            # When C(state) is I(exported) disk is exported to given Glance image provider  C(**IMPORTANT**) There is no reliable way 
+    host: ${26:value}                                                      # When the hypervisor name is specified the newly created disk or an existing disk will refresh its information about the 
+    wipe_after_delete: ${27:value}                                         # If the disk's Wipe After Delete is enabled, then the disk is first wiped 
+    activate: ${28:value}                                                  # I(True) if the disk should be activated  When creating disk of virtual machine it is set to I(True) 
+    wait: ${29:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${30:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${31:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${32:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${33:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

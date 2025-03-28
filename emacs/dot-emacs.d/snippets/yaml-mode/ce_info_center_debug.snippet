@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages information center debug configuration on HUAWEI CloudEngine switches.
+# prefix: ce_info_center_debug_snippet
+# key: ce_info_center_debug
+# group: ansible
+# --
+
+- name: ${0:Manages information center debug configuration on HUAWEI CloudEngine switches.}
+  ce_info_center_debug:                                                    
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    debug_time_stamp: ${2$$(yas-choose-value '("date_boot" "date_second" "date_tenthsecond" "date_millisecond" "shortdate_second" "shortdate_tenthsecond" "shortdate_millisecond" "formatdate_second"
+    module_name: ${3:value}                                                # Module name of the rule  The value is a string of 1 to 31 case-insensitive characters  The default value is default  Ple
+    channel_id: ${4:value}                                                 # Number of a channel  The value is an integer ranging from 0 to 9  The default value is 0 
+    debug_enable: ${5$$(yas-choose-value '("no_use" "true" "false"))}      # choices: no_use;true;false  Whether a device is enabled to output debugging information 
+    debug_level: ${6$$(yas-choose-value '("emergencies" "alert" "critical" "error" "warning" "notification" "informational" "debugging"))}# choices: emergencies;alert;critical;error;warning;notific

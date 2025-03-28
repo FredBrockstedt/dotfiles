@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Traffic Manager endpoint
+# prefix: azure_rm_trafficmanagerendpoint_snippet
+# key: zure_rm_trafficmanagerendpoint
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Traffic Manager endpoint}
+  azure_rm_trafficmanagerendpoint:                                         
+    resource_group: ${1:Name of a resource group where the Traffic Manager endpoint exists or will be created}#
+    name: ${2:The name of the endpoint}                                    #
+    profile_name: ${3:Name of Traffic Manager profile where this endpoints attaches to}#
+    type: ${4$$(yas-choose-value '("azure_endpoints" "external_endpoints" "nested_endpoints"))}# The type of the endpoint 
+    target_resource_id: ${5:value}                                         # The Azure Resource URI of the of the endpoint  Not applicable to endpoints of I(type=external_endpoints) 
+    target: ${6:value}                                                     # The fully-qualified DNS name of the endpoint 
+    enabled: ${7:True}                                                     # The status of the endpoint 
+    weight: ${8:value}                                                     # The weight of this endpoint when traffic manager profile has routing_method of C(weighted)  Possible values are from 1 t
+    priority: ${9:value}                                                   # The priority of this endpoint when traffic manager profile has routing_method of I(priority)  Possible values are from 1
+    location: ${10:value}                                                  # Specifies the location of the external or nested endpoints when using the 'Performance' traffic routing method 
+    min_child_endpoints: ${11:value}                                       # The minimum number of endpoints that must be available in the child profile in order for the parent profile to be consid
+    geo_mapping: ${12:value}                                               # The list of countries/regions mapped to this endpoint when traffic manager profile has routing_method of C(geographic) 
+    state: ${13$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the Traffic Manager endpoint  Use C(present) to create or update a Traffic 
+    ad_user: ${14:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${15:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${16:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${17:value}                                           # Your Azure subscription Id 
+    client_id: ${18:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${19:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${20:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${21:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${22:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${23$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${24$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${25:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

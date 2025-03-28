@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Add/remove resource pools to/from vCenter
+# prefix: vmware_resource_pool_snippet
+# key: vmware_resource_poo
+# group: ansible
+# --
+
+- name: ${0:Add/remove resource pools to/from vCenter}
+  vmware_resource_pool:                                                    
+    datacenter: ${1:Name of the datacenter to add the host}                #
+    cluster: ${2:Name of the cluster to add the host}                      #
+    resource_pool: ${3:Resource pool name to manage}                       #
+    cpu_expandable_reservations: ${4:True}                                 # In a resource pool with an expandable reservation, the reservation on a resource pool can grow beyond the specified valu
+    cpu_reservation: ${5:0}                                                # Amount of resource that is guaranteed available to the virtual machine or resource pool 
+    cpu_limit: ${6:-1}                                                     # The utilization of a virtual machine/resource pool will not exceed this limit, even if there are available resources  Th
+    cpu_shares: ${7$$(yas-choose-value '("high" "custom" "low" "normal"))} # choices: high;custom;low;normal  Memory shares are used in case of resource contention 
+    mem_expandable_reservations: ${8:True}                                 # In a resource pool with an expandable reservation, the reservation on a resource pool can grow beyond the specified valu
+    mem_reservation: ${9:0}                                                # Amount of resource that is guaranteed available to the virtual machine or resource pool 
+    mem_limit: ${10:-1}                                                    # The utilization of a virtual machine/resource pool will not exceed this limit, even if there are available resources  Th
+    mem_shares: ${11$$(yas-choose-value '("high" "custom" "low" "normal"))}# choices: high;custom;low;normal  Memory shares are used in case of resource contention 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Add or remove the resource pool
+    hostname: ${13:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${14:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${15:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${16:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${17:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${18:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${19:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

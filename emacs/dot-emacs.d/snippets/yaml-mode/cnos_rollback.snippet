@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Roll back the running or startup configuration from a remote server on devices running Lenovo CNOS
+# prefix: cnos_rollback_snippet
+# key: cnos_rollback
+# group: ansible
+# --
+
+- name: ${0:Roll back the running or startup configuration from a remote server on devices running Lenovo CNOS}
+  cnos_rollback:                                                           
+    configType: ${1$$(yas-choose-value '("running-config" "startup-config"))}# This refers to the type of configuration which will be used for the rolling back process  The choices are the running 
+    protocol: ${2$$(yas-choose-value '("SFTP" "SCP" "FTP" "TFTP"))}        # This refers to the protocol used by the network device to interact with the remote server from where to download the bac
+    rcserverip: ${3:None}:This specifies the IP Address of the remote server from where the backup configuration will be downloaded}#
+    rcpath: ${4:None}:This specifies the full file path of the configuration file located on the remote server}# In case the relative path is used as the variable value, the root folder for the use
+    serverusername: ${5:None}:Specify username for the server relating to the protocol used}#
+    serverpassword: ${6:None}:Specify password for the server relating to the protocol used}#
+    outputfile: ${7:This specifies the file path where the output of each command execution is saved}# Each command that is specified in the merged template file and each response from the device a
+    host: ${8:This is the variable used to search the hosts file at /etc/ansible/hosts and identify the IP address of the device on which the template is going to be applied}# Usually the Ansible k
+    username: ${9:Configures the username used to authenticate the connection to the remote device}# The value of the username parameter is used to authenticate the SSH session  While generally the
+    password: ${10:Configures the password used to authenticate the connection to the remote device}# The value of the password parameter is used to authenticate the SSH session  While generally th
+    deviceType: ${11$$(yas-choose-value '("g8272_cnos" "g8296_cnos" "g8332_cnos" "NE0152T" "NE1072T" "NE1032" "NE1032T" "NE10032" "NE2572"))}# This specifies the type of device where the method is 
+    enablePassword: ${12:value}                                            # Configures the password used to enter Global Configuration command mode on the switch  If the switch does not request th

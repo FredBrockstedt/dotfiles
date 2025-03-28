@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage main settings of a Remote Desktop Gateway server
+# prefix: win_rds_settings_snippet
+# key: win_rds_setting
+# group: ansible
+# --
+
+- name: ${0:Manage main settings of a Remote Desktop Gateway server}
+  win_rds_settings:                                                        
+    certificate_hash: ${1:value}                                           # Certificate hash (thumbprint) for the Remote Desktop Gateway server  The certificate hash is the unique identifier for t
+    max_connections: ${2:value}                                            # The maximum number of connections allowed  If set to C(0), no new connections are allowed  If set to C(-1), the number o
+    ssl_bridging: ${3$$(yas-choose-value '("https_http" "https_https" "none"))}# choices: https_http;https_https;none  Specifies whether to use SSL Bridging  C(none): no SSL bridging  C(https_http)
+    enable_only_messaging_capable_clients: ${4:value}                      # If enabled, only clients that support logon messages and administrator messages can connect 

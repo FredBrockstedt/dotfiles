@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Configure Infoblox NIOS DHCP Fixed Address
+# prefix: nios_fixed_address_snippet
+# key: os_fixed_addr
+# group: ansible
+# --
+
+- name: ${0:Configure Infoblox NIOS DHCP Fixed Address}
+  nios_fixed_address:                                                      
+    ipaddr: ${1:IPV4/V6 address of the fixed address}                      #
+    mac: ${2:The MAC address of the interface}                             #
+    network: ${3:Specifies the network range in which ipaddr exists}       #
+    name: ${4:value}                                                       # Specifies the hostname with which fixed DHCP ip-address is stored for respective mac 
+    network_view: ${5:default}                                             # Configures the name of the network view to associate with this configured instance 
+    options: ${6:value}                                                    # Configures the set of DHCP options to be included as part of the configured network instance   This argument accepts a l
+    extattrs: ${7:value}                                                   # Allows for the configuration of Extensible Attributes on the instance of the object   This argument accepts a set of key
+    comment: ${8:value}                                                    # Configures a text string comment to be associated with the instance of this object   The provided text string will be co
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the intended state of the instance of the object on the NIOS server   When this valu
+    provider: ${10:value}                                                  # A dict object containing connection details 

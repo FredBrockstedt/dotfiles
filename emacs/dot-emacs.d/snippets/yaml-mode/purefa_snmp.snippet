@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Configure FlashArray SNMP Managers
+# prefix: purefa_snmp_snippet
+# key: purefa_snmp
+# group: ansible
+# --
+
+- name: ${0:Configure FlashArray SNMP Managers}
+  purefa_snmp:                                                             
+    name: ${1:Name of SNMP Manager}                                        #
+    host: ${2:IPv4 or IPv6 address or FQDN to send trap messages to}       #
+    fa_url: ${3:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${4:FlashArray API token for admin privileged user}         #
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete SNMP manager
+    auth_passphrase: ${6:value}                                            # SNMPv3 only  Passphrase of 8 - 32 characters 
+    auth_protocol: ${7$$(yas-choose-value '("MD5" "SHA"))}                 # choices: MD5;SHA  SNMP v3 only  Hash algorithm to use
+    community: ${8:value}                                                  # SNMP v2c only  Manager community ID  Between 1 and 32 characters long 
+    user: ${9:value}                                                       # SNMP v3 only  User ID recognized by the specified SNMP manager  Must be between 1 and 32 characters 
+    version: ${10$$(yas-choose-value '("v2c" "v3"))}                       # choices: v2c;v3  Version of SNMP protocol to use for the manager 
+    notification: ${11$$(yas-choose-value '("inform" "trap"))}             # choices: inform;trap  Action to perform on event 
+    privacy_passphrase: ${12:value}                                        # SNMPv3 only  Passphrase to encrypt SNMP messages  Must be between 8 and 63 non-space ASCII characters 
+    privacy_protocol: ${13$$(yas-choose-value '("AES" "DES"))}             # choices: AES;DES  SNMP v3 only  Encryption protocol to use

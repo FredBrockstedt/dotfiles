@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages volumes on the cloudscale.ch IaaS service.
+# prefix: cloudscale_volume_snippet
+# key: cloudscale_volum
+# group: ansible
+# --
+
+- name: ${0:Manages volumes on the cloudscale.ch IaaS service.}
+  cloudscale_volume:                                                       
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the volume 
+    name: ${2:value}                                                       # Name of the volume  Either name or UUID must be present to change an existing volume 
+    uuid: ${3:value}                                                       # UUID of the volume  Either name or UUID must be present to change an existing volume 
+    size_gb: ${4:value}                                                    # Size of the volume in GB 
+    type: ${5$$(yas-choose-value '("ssd" "bulk"))}                         # choices: ssd;bulk  Type of the volume  Cannot be changed after creating the volume  Defaults to C(ssd) on volume creatio
+    server_uuids: ${6:value}                                               # UUIDs of the servers this volume is attached to  Set this to C([]) to detach the volume  Currently a volume can only be 
+    tags: ${7:value}                                                       # Tags associated with the volume  Set this to C({\}) to clear any tags 
+    api_token: ${8:value}                                                  # cloudscale ch API token  This can also be passed in the C(CLOUDSCALE_API_TOKEN) environment variable 
+    api_timeout: ${9:30}                                                   # Timeout in seconds for calls to the cloudscale ch API 

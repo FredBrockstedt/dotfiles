@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage Windows shares
+# prefix: win_share_snippet
+# key: win_shar
+# group: ansible
+# --
+
+- name: ${0:Manage Windows shares}
+  win_share:                                                               
+    name: ${1:Share name}                                                  #
+    path: ${2:Share directory}                                             #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Specify whether to add C(present) or remove C(absent) the specified share 
+    description: ${4:value}                                                # Share description 
+    list: ${5:False}                                                       # Specify whether to allow or deny file listing, in case user has no permission on share  Also known as Access-Based Enume
+    read: ${6:value}                                                       # Specify user list that should get read access on share, separated by comma 
+    change: ${7:value}                                                     # Specify user list that should get read and write access on share, separated by comma 
+    full: ${8:value}                                                       # Specify user list that should get full access on share, separated by comma 
+    deny: ${9:value}                                                       # Specify user list that should get no access, regardless of implied access on share, separated by comma 
+    caching_mode: ${10$$(yas-choose-value '("BranchCache" "Documents" "Manual" "None" "Programs" "Unknown"))}# choices: BranchCache;Documents;Manual;None;Programs;Unknown  Set the CachingMode for t
+    encrypt: ${11:False}                                                   # S e t s   w h e t h e r   t o   e n c r y p t   t h e   t r a f f i c   t o   t h e   s h a r e   o r   n o t  

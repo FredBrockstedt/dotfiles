@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: check if PAN-OS device is ready for configuration
+# prefix: panos_check_snippet
+# key: panos_check
+# group: ansible
+# --
+
+- name: ${0:check if PAN-OS device is ready for configuration}
+  panos_check:                                                             
+    ip_address: ${1:IP address (or hostname) of PAN-OS device}             #
+    password: ${2:Password for authentication}                             #
+    timeout: ${3:0}                                                        # timeout of API calls
+    interval: ${4:0}                                                       # time waited between checks
+    username: ${5:admin}                                                   # Username for authentication 

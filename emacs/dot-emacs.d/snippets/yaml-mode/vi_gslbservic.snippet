@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: Module for setup of GslbService Avi RESTful Object
+# prefix: avi_gslbservice_snippet
+# key: vi_gslbservic
+# group: ansible
+# --
+
+- name: ${0:Module for setup of GslbService Avi RESTful Object}
+  avi_gslbservice:                                                         
+    name: ${1:Name for the gslb service}                                   #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    application_persistence_profile_ref: ${5:value}                        # The federated application persistence associated with gslbservice site persistence functionality  It is a reference to a
+    controller_health_status_enabled: ${6:value}                           # Gs member's overall health status is derived based on a combination of controller and datapath health-status inputs  Not
+    created_by: ${7:value}                                                 # Creator name  Field introduced in 17 1 2 
+    description: ${8:value}                                                # User defined description for the object 
+    domain_names: ${9:value}                                               # Fully qualified domain name of the gslb service 
+    down_response: ${10:value}                                             # Response to the client query when the gslb service is down 
+    enabled: ${11:value}                                                   # Enable or disable the gslb service  If the gslb service is enabled, then the vips are sent in the dns responses based on
+    groups: ${12:value}                                                    # Select list of pools belonging to this gslb service 
+    health_monitor_refs: ${13:value}                                       # Verify vs health by applying one or more health monitors  Active monitors generate synthetic traffic from dns service en
+    health_monitor_scope: ${14:value}                                      # Health monitor probe can be executed for all the members or it can be executed only for third-party members  This operat
+    hm_off: ${15:value}                                                    # This field is an internal field and is used in se  Field introduced in 18 2 2 
+    is_federated: ${16:value}                                              # This field indicates that this object is replicated across gslb federation  Field introduced in 17 1 3  Default value wh
+    min_members: ${17:value}                                               # The minimum number of members to distribute traffic to  Allowed values are 1-65535  Special values are 0 - 'disable'  Fi
+    num_dns_ip: ${18:value}                                                # Number of ip addresses of this gslb service to be returned by the dns service  Enter 0 to return all ip addresses  Allow
+    pool_algorithm: ${19:value}                                            # The load balancing algorithm will pick a gslb pool within the gslb service list of available pools  Enum options - GSLB_
+    site_persistence_enabled: ${20:value}                                  # Enable site-persistence for the gslbservice  Field introduced in 17 2 1  Default value when not specified in API or modu
+    tenant_ref: ${21:value}                                                # It is a reference to an object of type tenant 
+    ttl: ${22:value}                                                       # Ttl value (in seconds) for records served for this gslb service by the dns service  Allowed values are 0-86400 
+    url: ${23:value}                                                       # Avi controller URL of the object 
+    use_edns_client_subnet: ${24:value}                                    # Use the client ip subnet from the edns option as source ipaddress for client geo-location and consistent hash algorithm 
+    uuid: ${25:value}                                                      # Uuid of the gslb service 
+    wildcard_match: ${26:value}                                            # Enable wild-card match of fqdn  if an exact match is not found in the dns table, the longest match is chosen by wild-car
+    controller: ${27:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${28:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${29:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${30:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${31:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{32:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${33:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${34:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${35:value}                         # It disables avi session information to be cached as a fact 

@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Module to manage storage domains in oVirt/RHV
+# prefix: ovirt_storage_domain_snippet
+# key: ovirt_storage_dom
+# group: ansible
+# --
+
+- name: ${0:Module to manage storage domains in oVirt/RHV}
+  ovirt_storage_domain:                                                    
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${2:value}                                                         # Id of the storage domain to be imported 
+    name: ${3:value}                                                       # Name of the storage domain to manage  (Not required when state is I(imported))
+    state: ${4$$(yas-choose-value '("present" "absent" "maintenance" "unattached" "imported" "update_ovf_store"))}# choices: present;absent;maintenance;unattached;imported;update_ovf_store  Should 
+    description: ${5:value}                                                # Description of the storage domain 
+    comment: ${6:value}                                                    # Comment of the storage domain 
+    data_center: ${7:value}                                                # Data center name where storage domain should be attached  This parameter isn't idempotent, it's not possible to change d
+    domain_function: ${8$$(yas-choose-value '("data" "iso" "export"))}     # choices: data;iso;export  Function of the storage domain  This parameter isn't idempotent, it's not possible to change d
+    host: ${9:value}                                                       # Host to be used to mount storage 
+    localfs: ${10:value}                                                   # Dictionary with values for localfs storage type: Note that these parameters are not idempotent 
+    nfs: ${11:value}                                                       # Dictionary with values for NFS storage type: Note that these parameters are not idempotent 
+    iscsi: ${12:value}                                                     # Dictionary with values for iSCSI storage type: Note that these parameters are not idempotent 
+    posixfs: ${13:value}                                                   # Dictionary with values for PosixFS storage type: Note that these parameters are not idempotent 
+    glusterfs: ${14:value}                                                 # Dictionary with values for GlusterFS storage type: Note that these parameters are not idempotent 
+    managed_block_storage: ${15:value}                                     # Dictionary with values for managed block storage type Note: available from ovirt 4 3
+    fcp: ${16:value}                                                       # Dictionary with values for fibre channel storage type: Note that these parameters are not idempotent 
+    wipe_after_delete: ${17:value}                                         # Boolean flag which indicates whether the storage domain should wipe the data after delete 
+    backup: ${18:value}                                                    # Boolean flag which indicates whether the storage domain is configured as backup or not 
+    critical_space_action_blocker: ${19:value}                             # Indicates the minimal free space the storage domain should contain in percentages 
+    warning_low_space: ${20:value}                                         # Indicates the minimum percentage of a free space in a storage domain to present a warning 
+    destroy: ${21:value}                                                   # Logical remove of the storage domain  If I(true) retains the storage domain's data for import  This parameter is relevan
+    format: ${22:value}                                                    # If I(True) storage domain will be formatted after removing it from oVirt/RHV  This parameter is relevant only when C(sta
+    discard_after_delete: ${23:value}                                      # If I(True) storage domain blocks will be discarded upon deletion  Enabled by default  This parameter is relevant only fo
+    wait: ${24:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${25:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${26:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${27:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${28:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

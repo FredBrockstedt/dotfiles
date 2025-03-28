@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Fetch configuration/state data from NETCONF enabled network devices.
+# prefix: netconf_get_snippet
+# key: tconf_get
+# group: ansible
+# --
+
+- name: ${0:Fetch configuration/state data from NETCONF enabled network devices.}
+  netconf_get:                                                             
+    source: ${1$$(yas-choose-value '("running" "candidate" "startup"))}    # choices: running;candidate;startup  This argument specifies the datastore from which configuration data should be fetche
+    filter: ${2:value}                                                     # This argument specifies the XML string which acts as a filter to restrict the portions of the data to be are retrieved f
+    display: ${3$$(yas-choose-value '("json" "pretty" "xml"))}             # choices: json;pretty;xml  Encoding scheme to use when serializing output from the device  The option I(json) will serial
+    lock: ${4$$(yas-choose-value '("never" "always" "if-supported"))}      # choices: never;always;if-supported  Instructs the module to explicitly lock the datastore specified as C(source)  If no 

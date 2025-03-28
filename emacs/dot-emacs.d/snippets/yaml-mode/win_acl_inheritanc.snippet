@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Change ACL inheritance
+# prefix: win_acl_inheritance_snippet
+# key: win_acl_inheritanc
+# group: ansible
+# --
+
+- name: ${0:Change ACL inheritance}
+  win_acl_inheritance:                                                     
+    path: ${1:Path to be used for changing inheritance}                    #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Specify whether to enable I(present) or disable I(absent) ACL inheritance 
+    reorganize: ${3:False}                                                 # For P(state) = I(absent), indicates if the inherited ACE's should be copied from the parent directory  This is necessary

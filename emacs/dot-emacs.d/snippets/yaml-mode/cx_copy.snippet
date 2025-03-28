@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Transfer files from or to remote Ruckus ICX 7000 series switches
+# prefix: icx_copy_snippet
+# key: cx_copy
+# group: ansible
+# --
+
+- name: ${0:Transfer files from or to remote Ruckus ICX 7000 series switches}
+  icx_copy:                                                                
+    protocol: ${1$$(yas-choose-value '("scp" "https"))}                    # Data transfer protocol to be used
+    remote_server: ${2:IP address of the remote server}                    #
+    remote_filename: ${3:The name or path of the remote file/resource to be uploaded or downloaded}#
+    upload: ${4$$(yas-choose-value '("running-config" "startup-config" "flash_primary" "flash_secondary"))}# choices: running-config;startup-config;flash_primary;flash_secondary  Name of the resour
+    download: ${5$$(yas-choose-value '("running-config" "startup-config" "flash_primary" "flash_secondary" "bootrom" "fips-primary-sig" "fips-secondary-sig" "fips-bootrom-sig"))}# choices: running-
+    remote_port: ${6:value}                                                # The port number of the remote host  Default values will be selected based on protocol type  Default scp:22, http:443
+    remote_user: ${7:value}                                                # remote username to be used for scp login 
+    remote_pass: ${8:value}                                                # remote password to be used for scp login 
+    public_key: ${9$$(yas-choose-value '("rsa" "dsa"))}                    # choices: rsa;dsa  public key type to be used to login to scp server

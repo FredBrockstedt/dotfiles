@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Create/update/delete Zabbix host macros
+# prefix: zabbix_hostmacro_snippet
+# key: zabbix_hostmacro
+# group: ansible
+# --
+
+- name: ${0:Create/update/delete Zabbix host macros}
+  zabbix_hostmacro:                                                        
+    host_name: ${1:Name of the host}                                       #
+    macro_name: ${2:Name of the host macro without the enclosing curly braces and the leading dollar sign}#
+    server_url: ${3:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${4:Zabbix user name}                                      #
+    login_password: ${5:Zabbix user password}                              #
+    http_login_user: ${6:Basic Auth login}                                 #
+    macro_value: ${7:value}                                                # Value of the host macro  Required if I(state=present) 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the macro  On C(present), it will create if macro does not exist or update the macro i
+    force: ${9:true}                                                       # Only updates an existing macro if set to C(yes) 
+    http_login_password: ${10:value}                                       # Basic Auth password
+    timeout: ${11:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${12:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

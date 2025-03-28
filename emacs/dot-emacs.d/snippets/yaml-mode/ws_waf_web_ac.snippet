@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: create and delete WAF Web ACLs
+# prefix: aws_waf_web_acl_snippet
+# key: ws_waf_web_ac
+# group: ansible
+# --
+
+- name: ${0:create and delete WAF Web ACLs}
+  aws_waf_web_acl:                                                         
+    name: ${1:N a m e   o f   t h e   W e b   A p p l i c a t i o n   F i r e w a l l   A C L   t o   m a n a g e}#
+    default_action: ${2$$(yas-choose-value '("block" "allow" "count"))}    # choices: block;allow;count  T h e   a c t i o n   t h a t   y o u   w a n t   A W S   W A F   t o   t a k e   w h e n   
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  w h e t h e r   t h e   W e b   A C L   s h o u l d   b e   p r e s e n t   o r   a b s e n t
+    metric_name: ${4:value}                                                # A friendly name or description for the metrics for this WebACL The name can contain only alphanumeric characters (A-Z, a
+    rules: ${5:value}                                                      # A list of rules that the Web ACL will enforce  Each rule must contain I(name), I(action), I(priority) keys  Priorities m
+    purge_rules: ${6:False}                                                # Whether to remove rules that aren't passed with C(rules) 
+    waf_regional: ${7:False}                                               # W h e t h e r   t o   u s e   w a f _ r e g i o n a l   m o d u l e     D e f a u l t s   t o   f a l s e  
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

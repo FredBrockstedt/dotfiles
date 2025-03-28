@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Manage fabric interface policy leaf policy groups (infra:AccBndlGrp, infra:AccPortGrp)
+# prefix: aci_interface_policy_leaf_policy_group_snippet
+# key: ci_interface_policy_leaf_policy_group
+# group: ansible
+# --
+
+- name: ${0:Manage fabric interface policy leaf policy groups (infra:AccBndlGrp, infra:AccPortGrp)}
+  aci_interface_policy_leaf_policy_group:                                  
+    lag_type: ${1$$(yas-choose-value '("leaf" "link" "node"))}             # Selector for the type of leaf policy group we want to create  C(leaf) for Leaf Access Port Policy Group C(link) for Port
+    host: ${2:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${4:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    policy_group: ${5:value}                                               # Name of the leaf policy group to be added/deleted 
+    description: ${6:value}                                                # Description for the leaf policy group to be created 
+    link_level_policy: ${7:value}                                          # Choice of link_level_policy to be used as part of the leaf policy group to be created 
+    cdp_policy: ${8:value}                                                 # Choice of cdp_policy to be used as part of the leaf policy group to be created 
+    mcp_policy: ${9:value}                                                 # Choice of mcp_policy to be used as part of the leaf policy group to be created 
+    lldp_policy: ${10:value}                                               # Choice of lldp_policy to be used as part of the leaf policy group to be created 
+    stp_interface_policy: ${11:value}                                      # Choice of stp_interface_policy to be used as part of the leaf policy group to be created 
+    egress_data_plane_policing_policy: ${12:value}                         # Choice of egress_data_plane_policing_policy to be used as part of the leaf policy group to be created 
+    ingress_data_plane_policing_policy: ${13:value}                        # Choice of ingress_data_plane_policing_policy to be used as part of the leaf policy group to be created 
+    priority_flow_control_policy: ${14:value}                              # Choice of priority_flow_control_policy to be used as part of the leaf policy group to be created 
+    fibre_channel_interface_policy: ${15:value}                            # Choice of fibre_channel_interface_policy to be used as part of the leaf policy group to be created 
+    slow_drain_policy: ${16:value}                                         # Choice of slow_drain_policy to be used as part of the leaf policy group to be created 
+    port_channel_policy: ${17:value}                                       # Choice of port_channel_policy to be used as part of the leaf policy group to be created 
+    monitoring_policy: ${18:value}                                         # Choice of monitoring_policy to be used as part of the leaf policy group to be created 
+    storm_control_interface_policy: ${19:value}                            # Choice of storm_control_interface_policy to be used as part of the leaf policy group to be created 
+    l2_interface_policy: ${20:value}                                       # Choice of l2_interface_policy to be used as part of the leaf policy group to be created 
+    port_security_policy: ${21:value}                                      # Choice of port_security_policy to be used as part of the leaf policy group to be created 
+    aep: ${22:value}                                                       # Choice of attached_entity_profile (AEP) to be used as part of the leaf policy group to be created 
+    state: ${23$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${24:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${25:admin}                                                  # The username to use for authentication 
+    certificate_name: ${26:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${27$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${28:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${29:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${30:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${31:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

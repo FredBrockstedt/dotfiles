@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage the SSHD settings of a BIG-IP
+# prefix: bigip_device_sshd_snippet
+# key: gip_device_sshd
+# group: ansible
+# --
+
+- name: ${0:Manage the SSHD settings of a BIG-IP}
+  bigip_device_sshd:                                                       
+    allow: ${1:value}                                                      # Specifies, if you have enabled SSH access, the IP address or address range for other systems that can use SSH to communi
+    banner: ${2$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  Whether to enable the banner or not 
+    banner_text: ${3:value}                                                # Specifies the text to include on the pre-login banner that displays when a user attempts to login to the system using SS
+    inactivity_timeout: ${4:value}                                         # Specifies the number of seconds before inactivity causes an SSH session to log out 
+    log_level: ${5$$(yas-choose-value '("debug" "debug1" "debug2" "debug3" "error" "fatal" "info" "quiet" "verbose"))}# choices: debug;debug1;debug2;debug3;error;fatal;info;quiet;verbose  Specifies
+    login: ${6$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  Specifies, when checked C(enabled), that the system accepts SSH communications 
+    port: ${7:value}                                                       # Port that you want the SSH daemon to run on 
+    provider: ${8:value}                                                   # A dict object containing connection details 

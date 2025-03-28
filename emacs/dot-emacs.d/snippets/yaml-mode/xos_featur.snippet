@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage features in NX-OS switches.
+# prefix: nxos_feature_snippet
+# key: xos_featur
+# group: ansible
+# --
+
+- name: ${0:Manage features in NX-OS switches.}
+  nxos_feature:                                                            
+    feature: ${1:Name of feature}                                          #
+    state: ${2$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  Desired state of the feature 
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

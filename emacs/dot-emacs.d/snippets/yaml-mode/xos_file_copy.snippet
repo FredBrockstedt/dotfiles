@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Copy a file to a remote NXOS device.
+# prefix: nxos_file_copy_snippet
+# key: xos_file_copy
+# group: ansible
+# --
+
+- name: ${0:Copy a file to a remote NXOS device.}
+  nxos_file_copy:                                                          
+    local_file: ${1:value}                                                 # When (file_pull is False) this is the path to the local file on the Ansible controller  The local directory must exist  
+    remote_file: ${2:value}                                                # When (file_pull is False) this is the remote file path on the NXOS device  If omitted, the name of the local file will b
+    file_system: ${3:bootflash:}                                           # The remote file system on the nxos device  If omitted, devices that support a I(file_system) parameter will use their de
+    connect_ssh_port: ${4:22}                                              # SSH server port used for file transfer 
+    file_pull: ${5:False}                                                  # When (False) file is copied from the Ansible controller to the NXOS device  When (True) file is copied from a remote SCP
+    file_pull_compact: ${6:False}                                          # When file_pull is True, this is used to compact nxos image files  This option can only be used with nxos image files  Wh
+    file_pull_kstack: ${7:False}                                           # When file_pull is True, this can be used to speed up file copies when the nxos running image supports the use-kstack opt
+    local_file_directory: ${8:value}                                       # When (file_pull is True) file is copied from a remote SCP server to the NXOS device, and written to this directory on th
+    file_pull_timeout: ${9:300}                                            # Use this parameter to set timeout in seconds, when transferring large files or when the network is slow  When (file_pull
+    remote_scp_server: ${10:value}                                         # The remote scp server address when file_pull is True  This is required if file_pull is True  When (file_pull is False), 
+    remote_scp_server_user: ${11:value}                                    # The remote scp server username when file_pull is True  This is required if file_pull is True  When (file_pull is False),
+    remote_scp_server_password: ${12:value}                                # The remote scp server password when file_pull is True  This is required if file_pull is True  When (file_pull is False),
+    vrf: ${13:management}                                                  # The VRF used to pull the file  Useful when no vrf management is defined
+    provider: ${14:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

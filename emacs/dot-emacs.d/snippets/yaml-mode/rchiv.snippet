@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Creates a compressed archive of one or more files or trees
+# prefix: archive_snippet
+# key: rchiv
+# group: ansible
+# --
+
+- name: ${0:Creates a compressed archive of one or more files or trees}
+  archive:                                                                 
+    path: ${1:Remote absolute path, glob, or list of paths or globs for the file or files to compress or archive}#
+    format: ${2$$(yas-choose-value '("bz2" "gz" "tar" "xz" "zip"))}        # choices: bz2;gz;tar;xz;zip  The type of compression to use  Support for xz was added in Ansible 2 5 
+    dest: ${3:value}                                                       # The file name of the destination archive  This is required when C(path) refers to multiple files by either specifying a 
+    exclude_path: ${4:value}                                               # Remote absolute path, glob, or list of paths or globs for the file or files to exclude from the archive 
+    force_archive: ${5:False}                                              # Allow you to force the module to treat this as an archive even if only a single file is specified  By default behaviour 
+    remove: ${6:False}                                                     # Remove any added source files and trees after adding to archive 
+    mode: ${7:value}                                                       # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${8:value}                                                      # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${9:value}                                                      # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${10:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${11:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${12:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${13:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${14:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${15:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

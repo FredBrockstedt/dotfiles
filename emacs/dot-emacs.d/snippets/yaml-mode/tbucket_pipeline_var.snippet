@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages Bitbucket pipeline variables
+# prefix: bitbucket_pipeline_variable_snippet
+# key: tbucket_pipeline_var
+# group: ansible
+# --
+
+- name: ${0:Manages Bitbucket pipeline variables}
+  bitbucket_pipeline_variable:                                             
+    repository: ${1:The repository name}                                   #
+    username: ${2:The repository owner}                                    #
+    name: ${3:The pipeline variable name}                                  #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # Indicates desired state of the variable 
+    client_id: ${5:value}                                                  # The OAuth consumer key  If not set the environment variable C(BITBUCKET_CLIENT_ID) will be used 
+    client_secret: ${6:value}                                              # The OAuth consumer secret  If not set the environment variable C(BITBUCKET_CLIENT_SECRET) will be used 
+    value: ${7:value}                                                      # The pipeline variable value 
+    secured: ${8:False}                                                    # Whether to encrypt the variable value 

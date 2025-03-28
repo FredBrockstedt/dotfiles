@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage local roles on an ESXi host
+# prefix: vmware_object_role_permission_snippet
+# key: vmware_object_role_permissio
+# group: ansible
+# --
+
+- name: ${0:Manage local roles on an ESXi host}
+  vmware_object_role_permission:                                           
+    role: ${1:The role to be assigned permission}                          #
+    object_name: ${2:The object name to assigned permission}               #
+    principal: ${3:value}                                                  # The user to be assigned permission  Required if C(group) is not specified 
+    group: ${4:value}                                                      # The group to be assigned permission  Required if C(principal) is not specified 
+    object_type: ${5$$(yas-choose-value '("Folder" "VirtualMachine" "Datacenter" "ResourcePool" "Datastore" "Network" "HostSystem" "ComputeResource" "ClusterComputeResource" "DistributedVirtualSwit
+    recursive: ${6:True}                                                   # Should the permissions be recursively applied 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the object's permission  When C(state=present), the permission will b
+    hostname: ${8:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${9:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${10:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${11:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${12:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${13:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${14:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

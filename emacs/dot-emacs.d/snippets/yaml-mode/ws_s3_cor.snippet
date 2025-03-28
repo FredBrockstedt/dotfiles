@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage CORS for S3 buckets in AWS
+# prefix: aws_s3_cors_snippet
+# key: ws_s3_cor
+# group: ansible
+# --
+
+- name: ${0:Manage CORS for S3 buckets in AWS}
+  aws_s3_cors:                                                             
+    name: ${1:Name of the s3 bucket}                                       #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Create or remove cors on the s3 bucket
+    rules: ${3:value}                                                      # Cors rules to put on the s3 bucket
+    debug_botocore_endpoint_logs: ${4:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${5:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${6:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${7:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${8:value}                                             # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${9:True}                                              # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${10:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${11:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

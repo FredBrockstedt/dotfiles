@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP HttpsHealthCheck
+# prefix: gcp_compute_https_health_check_snippet
+# key: gcp_compute_https_health_check
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP HttpsHealthCheck}
+  gcp_compute_https_health_check:                                          
+    name: ${1:Name of the resource}                                        # Provided by the client when the resource is created  The name must be 1-63 characters long, and comply with RFC1035  Spe
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    check_interval_sec: ${4:value}                                         # How often (in seconds) to send a health check  The default value is 5 seconds 
+    description: ${5:value}                                                # An optional description of this resource  Provide this property when you create the resource 
+    healthy_threshold: ${6:value}                                          # A so-far unhealthy instance will be marked healthy after this many consecutive successes  The default value is 2 
+    host: ${7:value}                                                       # The value of the host header in the HTTPS health check request  If left empty (default value), the public IP on behalf o
+    port: ${8:value}                                                       # The TCP port number for the HTTPS health check request  The default value is 80 
+    request_path: ${9:value}                                               # The request path of the HTTPS health check request  The default value is / 
+    timeout_sec: ${10:value}                                               # How long (in seconds) to wait before claiming failure  The default value is 5 seconds  It is invalid for timeoutSec to h
+    unhealthy_threshold: ${11:value}                                       # A so-far healthy instance will be marked unhealthy after this many consecutive failures  The default value is 2 
+    project: ${12:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${13:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${14:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${15:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${16:value}                                                    # Array of scopes to be used 
+    env_type: ${17:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

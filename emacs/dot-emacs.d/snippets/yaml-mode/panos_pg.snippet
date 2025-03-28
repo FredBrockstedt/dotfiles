@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: create a security profiles group
+# prefix: panos_pg_snippet
+# key: panos_pg
+# group: ansible
+# --
+
+- name: ${0:create a security profiles group}
+  panos_pg:                                                                
+    pg_name: ${1:name of the security profile group}                       #
+    ip_address: ${2:IP address (or hostname) of PAN-OS device}             #
+    password: ${3:Password for authentication}                             #
+    data_filtering: ${4:value}                                             # name of the data filtering profile
+    file_blocking: ${5:value}                                              # name of the file blocking profile
+    spyware: ${6:value}                                                    # name of the spyware profile
+    url_filtering: ${7:value}                                              # name of the url filtering profile
+    virus: ${8:value}                                                      # name of the anti-virus profile
+    vulnerability: ${9:value}                                              # name of the vulnerability profile
+    wildfire: ${10:value}                                                  # name of the wildfire analysis profile
+    commit: ${11:true}                                                     # commit if changed
+    username: ${12:admin}                                                  # Username for authentication 

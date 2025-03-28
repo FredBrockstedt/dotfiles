@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage Rundeck ACL policies.
+# prefix: rundeck_acl_policy_snippet
+# key: rundeck_acl_policy
+# group: ansible
+# --
+
+- name: ${0:Manage Rundeck ACL policies.}
+  rundeck_acl_policy:                                                      
+    name: ${1:Sets the project name}                                       #
+    url: ${2:Sets the rundeck instance URL}                                #
+    token: ${3:Sets the token to authenticate against Rundeck API}         #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or remove Rundeck project 
+    api_version: ${5:14}                                                   # Sets the API version used by module  API version must be at least 14 
+    project: ${6:value}                                                    # Sets the project which receive the ACL policy  If unset, it's a system ACL policy 
+    policy: ${7:value}                                                     # Sets the ACL policy content  ACL policy content is a YAML object as described in http://rundeck org/docs/man5/aclpolicy 

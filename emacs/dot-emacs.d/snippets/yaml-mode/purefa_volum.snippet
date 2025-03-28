@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage volumes on Pure Storage FlashArrays
+# prefix: purefa_volume_snippet
+# key: purefa_volum
+# group: ansible
+# --
+
+- name: ${0:Manage volumes on Pure Storage FlashArrays}
+  purefa_volume:                                                           
+    name: ${1:The name of the volume}                                      #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    target: ${4:value}                                                     # The name of the target volume, if copying 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Define whether the volume should exist or not 
+    eradicate: ${6:false}                                                  # Define whether to eradicate the volume on delete or leave in trash 
+    overwrite: ${7:false}                                                  # Define whether to overwrite a target volume if it already exists 
+    size: ${8:value}                                                       # Volume size in M, G, T or P units 
+    qos: ${9:value}                                                        # Bandwidth limit for volume in M or G units  M will set MB/s G will set GB/s To clear an existing Qos setting using 0 (ze

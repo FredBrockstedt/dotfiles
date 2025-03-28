@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage libvirt network configuration
+# prefix: virt_net_snippet
+# key: virt_net
+# group: ansible
+# --
+
+- name: ${0:Manage libvirt network configuration}
+  virt_net:                                                                
+    name: ${1:name of the network being managed}                           # Note that network must be previously defined with xml 
+    state: ${2$$(yas-choose-value '("active" "inactive" "present" "absent"))}# choices: active;inactive;present;absent  specify which state you want a network to be in  If 'active', network will be
+    command: ${3$$(yas-choose-value '("define" "create" "start" "stop" "destroy" "undefine" "get_xml" "list_nets" "facts" "info" "status" "modify"))}# choices: define;create;start;stop;destroy;unde
+    autostart: ${4:value}                                                  # Specify if a given network should be started automatically on system boot 
+    uri: ${5:qemu:///system}                                               # libvirt connection uri 
+    xml: ${6:value}                                                        # XML document used with the define command 

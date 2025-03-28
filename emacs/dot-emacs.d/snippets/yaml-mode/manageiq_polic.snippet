@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Management of resource policy_profiles in ManageIQ.
+# prefix: manageiq_policies_snippet
+# key: manageiq_polic
+# group: ansible
+# --
+
+- name: ${0:Management of resource policy_profiles in ManageIQ.}
+  manageiq_policies:                                                       
+    resource_type: ${1$$(yas-choose-value '("provider" "host" "vm" "blueprint" "category" "cluster" "data store" "group" "resource pool" "service" "service template" "template" "tenant" "user"))}# 
+    resource_name: ${2:the name of the resource to which the profile should be [un]assigned}#
+    manageiq_connection: ${3:ManageIQ connection configuration information}#
+    state: ${4$$(yas-choose-value '("absent" "present" "list"))}           # choices: absent;present;list  absent - policy_profiles should not exist, present - policy_profiles should exist, list - 
+    policy_profiles: ${5:value}                                            # list of dictionaries, each includes the policy_profile 'name' key  required if state is present or absent 

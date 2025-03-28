@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: Create & manage EC2 instances
+# prefix: ec2_instance_snippet
+# key: c2_instanc
+# group: ansible
+# --
+
+- name: ${0:Create & manage EC2 instances}
+  ec2_instance:                                                            
+    instance_ids: ${1:value}                                               # If you specify one or more instance IDs, only instances that have the specified IDs are returned 
+    state: ${2$$(yas-choose-value '("present" "terminated" "running" "started" "stopped" "restarted" "rebooted" "absent"))}# choices: present;terminated;running;started;stopped;restarted;rebooted;a
+    wait: ${3:True}                                                        # Whether or not to wait for the desired state (use wait_timeout to customize this) 
+    wait_timeout: ${4:600}                                                 # How long to wait (in seconds) for the instance to finish booting/terminating 
+    instance_type: ${{5:t2}                                                #micro} # not required  Instance type to use for the instance, see U(https://docs aws amazon com/AWSEC2/latest/UserGuide/i
+    user_data: ${6:value}                                                  # Opaque blob of data which is made available to the ec2 instance
+    tower_callback: ${7:value}                                             # Preconfigured user-data to enable an instance to perform a Tower callback (Linux only)  Mutually exclusive with I(user_d
+    tags: ${8:value}                                                       # A hash/dictionary of tags to add to the new instance or to add/remove from an existing one 
+    purge_tags: ${9:False}                                                 # Delete any tags not specified in the task that are on the instance  This means you have to specify all the desired tags 
+    image: ${10:value}                                                     # An image to use for the instance  The M(ec2_ami_info) module may be used to retrieve images  One of I(image) or I(image_
+    image_id: ${11:value}                                                  # I(ami) ID to use for the instance  One of I(image) or I(image_id) are required when instance is not already present  Thi
+    security_groups: ${12:value}                                           # A list of security group IDs or names (strings)  Mutually exclusive with I(security_group) 
+    security_group: ${13:value}                                            # A security group ID or name  Mutually exclusive with I(security_groups) 
+    name: ${14:value}                                                      # The Name tag for the instance 
+    vpc_subnet_id: ${15:value}                                             # The subnet ID in which to launch the instance (VPC) If none is provided, ec2_instance will chose the default zone of the
+    network: ${16:value}                                                   # Either a dictionary containing the key 'interfaces' corresponding to a list of network interface IDs or containing speci
+    volumes: ${17:value}                                                   # A list of block device mappings, by default this will always use the AMI root device so the volumes option is primarily 
+    launch_template: ${18:value}                                           # The EC2 launch template to base instance configuration on  I(launch_template id) the ID or the launch template (optional
+    key_name: ${19:value}                                                  # Name of the SSH access key to assign to the instance - must exist in the region the instance is created 
+    availability_zone: ${20:value}                                         # Specify an availability zone to use the default subnet it  Useful if not specifying the I(vpc_subnet_id) parameter  If n
+    instance_initiated_shutdown_behavior: ${21$$(yas-choose-value '("stop" "terminate"))}# choices: stop;terminate  Whether to stop or terminate an instance upon shutdown 
+    tenancy: ${22$$(yas-choose-value '("dedicated" "default"))}            # choices: dedicated;default  What type of tenancy to allow an instance to use  Default is shared tenancy  Dedicated tenan
+    termination_protection: ${23:value}                                    # Whether to enable termination protection  This module will not terminate an instance with termination protection active,
+    cpu_credit_specification: ${24$$(yas-choose-value '("unlimited" "standard"))}# choices: unlimited;standard  For T2 series instances, choose whether to allow increased charges to buy CPU credits
+    cpu_options: ${25:value}                                               # Reduce the number of vCPU exposed to the instance  Those parameters can only be set at instance launch  The two suboptio
+    detailed_monitoring: ${26:value}                                       # Whether to allow detailed cloudwatch metrics to be collected, enabling more detailed alerting 
+    ebs_optimized: ${27:value}                                             # Whether instance is should use optimized EBS volumes, see U(https://docs aws amazon com/AWSEC2/latest/UserGuide/EBSOptim
+    filters: ${28:"namespace(tag:Name='<provided-Name-attribute>', subnet-id='<provided-or-default subnet>')"}# A dict of filters to apply when deciding whether existing instances match and should 
+    instance_role: ${29:value}                                             # The ARN or name of an EC2-enabled instance role to be used  If a name is not provided in arn format then the ListInstanc
+    placement_group: ${30:value}                                           # The placement group that needs to be assigned to the instance
+    debug_botocore_endpoint_logs: ${31:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${32:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${33:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${34:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${35:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${36:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${37:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${38:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Configure timezone setting
+# prefix: timezone_snippet
+# key: timezo
+# group: ansible
+# --
+
+- name: ${0:Configure timezone setting}
+  timezone:                                                                
+    name: ${1:value}                                                       # Name of the timezone for the system clock  Default is to keep current setting  B(At least one of name and hwclock are re
+    hwclock: ${2$$(yas-choose-value '("local" "UTC"))}                     # choices: local;UTC  Whether the hardware clock is in UTC or in local timezone  Default is to keep current setting  Note 

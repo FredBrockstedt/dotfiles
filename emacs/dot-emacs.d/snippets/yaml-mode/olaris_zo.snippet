@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage Solaris zones
+# prefix: solaris_zone_snippet
+# key: olaris_zo
+# group: ansible
+# --
+
+- name: ${0:Manage Solaris zones}
+  solaris_zone:                                                            
+    state: ${1$$(yas-choose-value '("absent" "attached" "configured" "detached" "installed" "present" "running" "started" "stopped"))}# C(present), configure and install the zone  C(installed), syn
+    name: ${2:Zone name}                                                   # A zone name must be unique name  A zone name must begin with an alpha-numeric character  The name can contain alpha-nume
+    path: ${3:value}                                                       # The path where the zone will be created  This is required when the zone is created, but not used otherwise 
+    sparse: ${4:False}                                                     # Whether to create a sparse (C(true)) or whole root (C(false)) zone 
+    root_password: ${5:value}                                              # The password hash for the root account  If not specified, the zone's root account will not have a password 
+    config: ${6:}                                                          # The zonecfg configuration commands for this zone  See zonecfg(1M) for the valid options and syntax  Typically this is a 
+    create_options: ${7:}                                                  # Extra options to the zonecfg(1M) create command 
+    install_options: ${8:}                                                 # Extra options to the zoneadm(1M) install command  To automate Solaris 11 zone creation, use this to specify the profile 
+    attach_options: ${9:}                                                  # Extra options to the zoneadm attach command  For example, this can be used to specify whether a minimum or full update o
+    timeout: ${10:600}                                                     # Timeout, in seconds, for zone to boot 

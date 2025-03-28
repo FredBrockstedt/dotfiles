@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Change policy and state of SELinux
+# prefix: selinux_snippet
+# key: ux
+# group: ansible
+# --
+
+- name: ${0:Change policy and state of SELinux}
+  selinux:                                                                 
+    state: ${1$$(yas-choose-value '("disabled" "enforcing" "permissive"))} # The SELinux mode 
+    policy: ${2:value}                                                     # The name of the SELinux policy to use (e g  C(targeted)) will be required if state is not C(disabled) 
+    configfile: ${3:/etc/selinux/config}                                   # The path to the SELinux configuration file, if non-standard 

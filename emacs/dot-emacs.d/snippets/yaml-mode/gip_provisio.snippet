@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP module provisioning
+# prefix: bigip_provision_snippet
+# key: gip_provisio
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP module provisioning}
+  bigip_provision:                                                         
+    module: ${1$$(yas-choose-value '("am" "afm" "apm" "asm" "avr" "cgnat" "fps" "gtm" "ilx" "lc" "ltm" "mgmt" "pem" "sam" "sslo" "swg" "urldb" "vcmp"))}# The module to provision in BIG-IP 
+    level: ${2$$(yas-choose-value '("dedicated" "nominal" "minimum"))}     # choices: dedicated;nominal;minimum  Sets the provisioning level for the requested modules  Changing the level for one mo
+    memory: ${3:value}                                                     # Sets additional memory for management module  This is in addition to minimum allocated RAM of 1264MB  The accepted value
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state of the provisioned module on the system  When C(present), guarantees that the specifi
+    provider: ${5:value}                                                   # A dict object containing connection details 

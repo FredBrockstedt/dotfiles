@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: apply authcode to a device/instance
+# prefix: panos_lic_snippet
+# key: panos_lic
+# group: ansible
+# --
+
+- name: ${0:apply authcode to a device/instance}
+  panos_lic:                                                               
+    auth_code: ${1:authcode to be applied}                                 #
+    ip_address: ${2:IP address (or hostname) of PAN-OS device}             #
+    password: ${3:Password for authentication}                             #
+    force: ${4:false}                                                      # whether to apply authcode even if device is already licensed
+    username: ${5:admin}                                                   # Username for authentication 

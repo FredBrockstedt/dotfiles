@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage config on Fortinet FortiOS firewall devices
+# prefix: fortios_config_snippet
+# key: fortios_config
+# group: ansible
+# --
+
+- name: ${0:Manage config on Fortinet FortiOS firewall devices}
+  fortios_config:                                                          
+    src: ${1:value}                                                        # The I(src) argument provides a path to the configuration template to load into the remote device 
+    filter: ${2:}                                                          # Only for partial backup, you can restrict by giving expected configuration path (ex  firewall address) 
+    file_mode: ${3:False}                                                  # Don't connect to any device, only use I(config_file) as input and Output 
+    config_file: ${4:value}                                                # Path to configuration file  Required when I(file_mode) is True 
+    host: ${5:value}                                                       # Specifies the DNS hostname or IP address for connecting to the remote fortios device  Required when I(file_mode) is Fals
+    username: ${6:value}                                                   # Configures the username used to authenticate to the remote device  Required when I(file_mode) is True 
+    password: ${7:value}                                                   # Specifies the password used to authenticate to the remote device  Required when I(file_mode) is True 
+    timeout: ${8:60}                                                       # Timeout in seconds for connecting to the remote device 
+    vdom: ${9:value}                                                       # Specifies on which vdom to apply configuration
+    backup: ${10:False}                                                    # This argument will cause the module to create a backup of the current C(running-config) from the remote device before an
+    backup_path: ${11:value}                                               # Specifies where to store backup files  Required if I(backup=yes) 
+    backup_filename: ${12:value}                                           # Specifies the backup filename  If omitted filename will be formatted like HOST_config YYYY-MM-DD@HH:MM:SS

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Create/delete/get/update Zabbix proxies
+# prefix: zabbix_proxy_snippet
+# key: zabbix_proxy
+# group: ansible
+# --
+
+- name: ${0:Create/delete/get/update Zabbix proxies}
+  zabbix_proxy:                                                            
+    proxy_name: ${1:Name of the proxy in Zabbix}                           #
+    server_url: ${2:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${3:Zabbix user name}                                      #
+    login_password: ${4:Zabbix user password}                              #
+    http_login_user: ${5:Basic Auth login}                                 #
+    description: ${6:value}                                                # Description of the proxy 
+    status: ${7$$(yas-choose-value '("active" "passive"))}                 # choices: active;passive  Type of proxy  (4 - active, 5 - passive)
+    tls_connect: ${8$$(yas-choose-value '("no_encryption" "PSK" "certificate"))}# choices: no_encryption;PSK;certificate  Connections to proxy 
+    tls_accept: ${9$$(yas-choose-value '("no_encryption" "PSK" "certificate"))}# choices: no_encryption;PSK;certificate  Connections from proxy 
+    ca_cert: ${10:value}                                                   # Certificate issuer 
+    tls_subject: ${11:value}                                               # Certificate subject 
+    tls_psk_identity: ${12:value}                                          # PSK identity  Required if either I(tls_connect) or I(tls_accept) has PSK enabled 
+    tls_psk: ${13:value}                                                   # The preshared key, at least 32 hex digits  Required if either I(tls_connect) or I(tls_accept) has PSK enabled 
+    state: ${14$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the proxy  On C(present), it will create if proxy does not exist or update the proxy i
+    interface: ${15:namespace()}                                           # Dictionary with params for the interface when proxy is in passive mode Available values are: dns, ip, main, port, type a
+    http_login_password: ${16:value}                                       # Basic Auth password
+    timeout: ${17:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${18:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

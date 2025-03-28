@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages L3 interface attributes of VyOS network devices.
+# prefix: vyos_l3_interfaces_snippet
+# key: vyos_l3_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages L3 interface attributes of VyOS network devices.}
+  vyos_l3_interfaces:                                                      
+    config: ${1:value}                                                     # T h e   p r o v i d e d   L 3   i n t e r f a c e s   c o n f i g u r a t i o n  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion 

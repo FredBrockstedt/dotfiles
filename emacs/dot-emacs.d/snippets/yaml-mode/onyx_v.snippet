@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage VLANs on Mellanox ONYX network devices
+# prefix: onyx_vlan_snippet
+# key: onyx_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLANs on Mellanox ONYX network devices}
+  onyx_vlan:                                                               
+    name: ${1:value}                                                       # Name of the VLAN 
+    vlan_id: ${2:value}                                                    # ID of the VLAN 
+    aggregate: ${3:value}                                                  # L i s t   o f   V L A N s   d e f i n i t i o n s  
+    purge: ${4:False}                                                      # Purge VLANs not defined in the I(aggregate) parameter 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the VLAN configuration 

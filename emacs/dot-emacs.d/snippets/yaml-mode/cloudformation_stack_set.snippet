@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Manage groups of CloudFormation stacks
+# prefix: cloudformation_stack_set_snippet
+# key: cloudformation_stack_set
+# group: ansible
+# --
+
+- name: ${0:Manage groups of CloudFormation stacks}
+  cloudformation_stack_set:                                                
+    name: ${1:name of the cloudformation stack set}                        #
+    description: ${2:value}                                                # A description of what this stack set creates
+    parameters: ${3:namespace()}                                           # A list of hashes of all the template variables for the stack  The value can be a string or a dict  Dict can be used to s
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If state is "present", stack will be created   If state is "present" and if stack exists and te
+    template: ${5:value}                                                   # The local path of the cloudformation template  This must be the full path to the file, relative to the working directory
+    template_body: ${6:value}                                              # Template body  Use this to pass in the actual body of the Cloudformation template  If 'state' is 'present' and the stack
+    template_url: ${7:value}                                               # Location of file containing the template body  The URL must point to a template (max size 307,200 bytes) located in an S
+    purge_stacks: ${8:True}                                                # Only applicable when I(state=absent)  Sets whether, when deleting a stack set, the stack instances should also be delete
+    wait: ${9:False}                                                       # Whether or not to wait for stack operation to complete  This includes waiting for stack instances to reach UPDATE_COMPLE
+    wait_timeout: ${10:900}                                                # How long to wait (in seconds) for stacks to complete create/update/delete operations 
+    capabilities: ${11$$(yas-choose-value '("CAPABILITY_IAM" "CAPABILITY_NAMED_IAM"))}# choices: CAPABILITY_IAM;CAPABILITY_NAMED_IAM  Capabilities allow stacks to create and modify IAM resources, w
+    regions: ${12:value}                                                   # A list of AWS regions to create instances of a stack in  The I(region) parameter chooses where the Stack Set is created,
+    accounts: ${13:value}                                                  # A list of AWS accounts in which to create instance of CloudFormation stacks  At least one region must be specified to cr
+    administration_role_arn: ${14:value}                                   # ARN of the administration role, meaning the role that CloudFormation Stack Sets use to assume the roles in your child ac
+    execution_role_name: ${15:value}                                       # ARN of the execution role, meaning the role that CloudFormation Stack Sets assumes in your child accounts  This MUST NOT
+    tags: ${16:value}                                                      # Dictionary of tags to associate with stack and its resources during stack creation  Can be updated later, updating tags 
+    failure_tolerance: ${17:value}                                         # Settings to change what is considered "failed" when running stack instance updates, and how many to do at a time 
+    debug_botocore_endpoint_logs: ${18:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${19:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${20:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${21:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${22:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${23:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${24:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${25:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

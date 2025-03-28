@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manages a VRF for an OSPF router.
+# prefix: nxos_ospf_vrf_snippet
+# key: xos_ospf_vrf
+# group: ansible
+# --
+
+- name: ${0:Manages a VRF for an OSPF router.}
+  nxos_ospf_vrf:                                                           
+    ospf: ${1:Name of the OSPF instance}                                   #
+    vrf: ${2:default}                                                      # Name of the resource instance  Valid value is a string  The name 'default' is a valid VRF representing the global OSPF 
+    router_id: ${3:value}                                                  # Router Identifier (ID) of the OSPF router VRF instance 
+    default_metric: ${4:value}                                             # Specify the default Metric value  Valid values are an integer or the keyword 'default' 
+    log_adjacency: ${5$$(yas-choose-value '("log" "detail" "default"))}    # choices: log;detail;default  Controls the level of log messages generated whenever a neighbor changes state  Valid value
+    timer_throttle_lsa_start: ${6:value}                                   # Specify the start interval for rate-limiting Link-State Advertisement (LSA) generation  Valid values are an integer, in 
+    timer_throttle_lsa_hold: ${7:value}                                    # Specify the hold interval for rate-limiting Link-State Advertisement (LSA) generation  Valid values are an integer, in m
+    timer_throttle_lsa_max: ${8:value}                                     # Specify the max interval for rate-limiting Link-State Advertisement (LSA) generation  Valid values are an integer, in mi
+    timer_throttle_spf_start: ${9:value}                                   # Specify initial Shortest Path First (SPF) schedule delay  Valid values are an integer, in milliseconds, or the keyword '
+    timer_throttle_spf_hold: ${10:value}                                   # Specify minimum hold time between Shortest Path First (SPF) calculations  Valid values are an integer, in milliseconds, 
+    timer_throttle_spf_max: ${11:value}                                    # Specify the maximum wait time between Shortest Path First (SPF) calculations  Valid values are an integer, in millisecon
+    auto_cost: ${12:value}                                                 # Specifies the reference bandwidth used to assign OSPF cost  Valid values are an integer, in Mbps, or the keyword 'defaul
+    bfd: ${13$$(yas-choose-value '("enable" "disable"))}                   # choices: enable;disable  Enables BFD on all OSPF interfaces  Dependency: 'feature bfd'
+    passive_interface: ${14:value}                                         # Setting to C(yes) will suppress routing update on interface 
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of ospf vrf configuration 
+    provider: ${16:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

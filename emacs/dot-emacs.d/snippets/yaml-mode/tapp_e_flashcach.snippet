@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage SSD caches
+# prefix: netapp_e_flashcache_snippet
+# key: tapp_e_flashcach
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage SSD caches}
+  netapp_e_flashcache:                                                     
+    api_username: ${1:The username to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_password: ${2:The password to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_url: ${3:The url to the SANtricity WebServices Proxy or embedded REST API}#
+    ssid: ${4:The ID of the array to manage (as configured on the web services proxy)}#
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # Whether the specified SSD cache should exist or not 
+    name: ${6:The name of the SSD cache to manage}                         #
+    validate_certs: ${7:True}                                              # Should https certificates be validated?
+    io_type: ${8$$(yas-choose-value '("filesystem" "database" "media"))}   # choices: filesystem;database;media  The type of workload to optimize the cache for 
+    disk_count: ${9:value}                                                 # The minimum number of disks to use for building the cache  The cache will be expanded if this number exceeds the number 
+    size_unit: ${10$$(yas-choose-value '("bytes" "b" "kb" "mb" "gb" "tb" "pb" "eb" "zb" "yb"))}# choices: bytes;b;kb;mb;gb;tb;pb;eb;zb;yb  The unit to be applied to size arguments
+    cache_size_min: ${11:value}                                            # The minimum size (in size_units) of the ssd cache  The cache will be expanded if this exceeds the current size of the ca

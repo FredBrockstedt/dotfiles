@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Modify environment variables on windows hosts
+# prefix: win_environment_snippet
+# key: win_environment
+# group: ansible
+# --
+
+- name: ${0:Modify environment variables on windows hosts}
+  win_environment:                                                         
+    name: ${1:The name of the environment variable}                        #
+    level: ${2$$(yas-choose-value '("machine" "process" "user"))}          # The level at which to set the environment variable  Use C(machine) to set for all users  Use C(user) to set for the curr
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Set to C(present) to ensure environment variable is set  Set to C(absent) to ensure it is remov
+    value: ${4:value}                                                      # The value to store in the environment variable  Must be set when C(state=present) and cannot be an empty string  Can be 

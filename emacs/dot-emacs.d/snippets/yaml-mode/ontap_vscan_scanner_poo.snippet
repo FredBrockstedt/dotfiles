@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Vscan Scanner Pools Configuration.
+# prefix: na_ontap_vscan_scanner_pool_snippet
+# key: ontap_vscan_scanner_poo
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Vscan Scanner Pools Configuration.}
+  na_ontap_vscan_scanner_pool:                                             
+    vserver: ${1:the name of the data vserver to use}                      #
+    scanner_pool: ${2:the name of the virus scanner pool}                  #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether a Vscan Scanner pool is present or not
+    hostnames: ${7:value}                                                  # List of hostnames of Vscan servers which are allowed to connect to Data ONTAP
+    privileged_users: ${8:value}                                           # List of privileged usernames  Username must be in the form "domain-name\\user-name"
+    scanner_policy: ${9$$(yas-choose-value '("primary" "secondary" "idle"))}# choices: primary;secondary;idle  The name of the Virus scanner Policy
+    https: ${10:False}                                                     # Enable and disable https
+    validate_certs: ${11:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${12:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${13:value}                                                    # The ontap api version to use
+    use_rest: ${14$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

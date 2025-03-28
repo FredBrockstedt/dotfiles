@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Bind leaf selectors to switch policy leaf profiles (infra:LeafS, infra:NodeBlk, infra:RsAccNodePGrep)
+# prefix: aci_switch_leaf_selector_snippet
+# key: ci_switch_leaf_selector
+# group: ansible
+# --
+
+- name: ${0:Bind leaf selectors to switch policy leaf profiles (infra:LeafS, infra:NodeBlk, infra:RsAccNodePGrep)}
+  aci_switch_leaf_selector:                                                
+    host: ${1:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${2:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${3:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    description: ${4:value}                                                # The description to assign to the C(leaf) 
+    leaf_profile: ${5:value}                                               # Name of the Leaf Profile to which we add a Selector 
+    leaf: ${6:value}                                                       # Name of Leaf Selector 
+    leaf_node_blk: ${7:value}                                              # Name of Node Block range to be added to Leaf Selector of given Leaf Profile 
+    leaf_node_blk_description: ${8:value}                                  # The description to assign to the C(leaf_node_blk)
+    from: ${9:value}                                                       # Start of Node Block range 
+    to: ${10:value}                                                        # Start of Node Block range 
+    policy_group: ${11:value}                                              # Name of the Policy Group to be added to Leaf Selector of given Leaf Profile 
+    state: ${12$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${13:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${14:admin}                                                  # The username to use for authentication 
+    certificate_name: ${15:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${16$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${17:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${18:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${19:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${20:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

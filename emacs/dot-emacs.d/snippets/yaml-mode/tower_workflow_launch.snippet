@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Run a workflow in Ansible Tower
+# prefix: tower_workflow_launch_snippet
+# key: tower_workflow_launch
+# group: ansible
+# --
+
+- name: ${0:Run a workflow in Ansible Tower}
+  tower_workflow_launch:                                                   
+    workflow_template: ${1:The name of the workflow template to run}       #
+    extra_vars: ${2:value}                                                 # Any extra vars required to launch the job 
+    wait: ${3:True}                                                        # Wait for the workflow to complete 
+    timeout: ${4:value}                                                    # If waiting for the workflow to complete this will abort after this amount of seconds
+    tower_host: ${5:value}                                                 # URL to your Tower instance 
+    tower_username: ${6:value}                                             # Username for your Tower instance 
+    tower_password: ${7:value}                                             # Password for your Tower instance 
+    validate_certs: ${8:value}                                             # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${9:value}                                          # Path to the Tower config file 

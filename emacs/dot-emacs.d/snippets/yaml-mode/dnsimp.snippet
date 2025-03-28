@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Interface with dnsimple.com (a DNS hosting service)
+# prefix: dnsimple_snippet
+# key: dnsimp
+# group: ansible
+# --
+
+- name: ${0:Interface with dnsimple.com (a DNS hosting service)}
+  dnsimple:                                                                
+    account_email: ${1:value}                                              # Account email  If omitted, the environment variables C(DNSIMPLE_EMAIL) and C(DNSIMPLE_API_TOKEN) will be looked for  If 
+    account_api_token: ${2:value}                                          # Account API token  See I(account_email) for more information 
+    domain: ${3:value}                                                     # Domain to work with  Can be the domain name (e g  "mydomain com") or the numeric ID of the domain in DNSimple  If omitte
+    record: ${4:value}                                                     # Record to add, if blank a record for the domain will be created, supports the wildcard (*) 
+    record_ids: ${5:value}                                                 # List of records to ensure they either exist or do not exist 
+    type: ${6$$(yas-choose-value '("A" "ALIAS" "CNAME" "MX" "SPF" "URL" "TXT" "NS" "SRV" "NAPTR" "PTR" "AAAA" "SSHFP" "HINFO" "POOL"))}# choices: A;ALIAS;CNAME;MX;SPF;URL;TXT;NS;SRV;NAPTR;PTR;AAAA;
+    ttl: ${7:3600}                                                         # The TTL to give the new record in seconds 
+    value: ${8:value}                                                      # Record value  Must be specified when trying to ensure a record exists 
+    priority: ${9:value}                                                   # Record priority 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  whether the record should exist or not 
+    solo: ${11:False}                                                      # Whether the record should be the only one for that record type and record name  Only use with C(state) is set to C(prese

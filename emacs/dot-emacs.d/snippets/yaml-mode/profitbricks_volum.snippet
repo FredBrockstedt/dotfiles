@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Create or destroy a volume.
+# prefix: profitbricks_volume_snippet
+# key: profitbricks_volum
+# group: ansible
+# --
+
+- name: ${0:Create or destroy a volume.}
+  profitbricks_volume:                                                     
+    datacenter: ${1:The datacenter in which to create the volumes}         #
+    name: ${2:The name of the volumes}                                     # You can enumerate the names using auto_increment 
+    image: ${3:The system image ID for the volume, e}                      #g  a3eae284-a2fe-11e4-b187-5f1f641608c8  This can also be a snapshot image ID 
+    size: ${4:10}                                                          # The size of the volume 
+    bus: ${5$$(yas-choose-value '("IDE" "VIRTIO"))}                        # choices: IDE;VIRTIO  The bus type 
+    image_password: ${6:value}                                             # Password set for the administrative user 
+    ssh_keys: ${7:value}                                                   # Public SSH keys allowing access to the virtual machine 
+    disk_type: ${8$$(yas-choose-value '("HDD" "SSD"))}                     # choices: HDD;SSD  The disk type of the volume 
+    licence_type: ${9$$(yas-choose-value '("LINUX" "WINDOWS" "UNKNOWN" "OTHER"))}# choices: LINUX;WINDOWS;UNKNOWN;OTHER  The licence type for the volume  This is used when the image is non-standard
+    count: ${10:1}                                                         # The number of volumes you wish to create 
+    auto_increment: ${11:True}                                             # Whether or not to increment a single number in the name for created virtual machines 
+    instance_ids: ${12:value}                                              # list of instance ids, currently only used when state='absent' to remove instances 
+    subscription_user: ${13:value}                                         # The ProfitBricks username  Overrides the PB_SUBSCRIPTION_ID environment variable 
+    subscription_password: ${14:value}                                     # THe ProfitBricks password  Overrides the PB_PASSWORD environment variable 
+    wait: ${15:true}                                                       # wait for the datacenter to be created before returning
+    wait_timeout: ${16:600}                                                # how long before wait gives up, in seconds
+    state: ${17$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  create or terminate datacenters

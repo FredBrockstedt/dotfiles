@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage docker configs.
+# prefix: docker_config_snippet
+# key: docker_config
+# group: ansible
+# --
+
+- name: ${0:Manage docker configs.}
+  docker_config:                                                           
+    name: ${1:The name of the config}                                      #
+    data: ${2:value}                                                       # The value of the config  Required when state is C(present) 
+    data_is_b64: ${3:False}                                                # If set to C(true), the data is assumed to be Base64 encoded and will be decoded before being used  To use binary I(data)
+    labels: ${4:value}                                                     # A map of key:value meta data, where both the I(key) and I(value) are expected to be a string  If new meta data is provid
+    force: ${5:False}                                                      # Use with state C(present) to always remove and recreate an existing config  If C(true), an existing config will be repla
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Set to C(present), if the config should exist, and C(absent), if it should not 
+    docker_host: ${{7:unix://var/run/docker}                               #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${8:localhost}                                           # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${9:auto}                                                 # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${10:60}                                                      # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${11:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${12:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${13:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${14:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${15:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${16:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${17:False}                                                     # Debug mode

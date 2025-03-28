@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Revoke certificates with the ACME protocol
+# prefix: acme_certificate_revoke_snippet
+# key: cme_certificate_revok
+# group: ansible
+# --
+
+- name: ${0:Revoke certificates with the ACME protocol}
+  acme_certificate_revoke:                                                 
+    certificate: ${1:Path to the certificate to revoke}                    #
+    account_key_src: ${2:value}                                            # Path to a file containing the ACME account RSA or Elliptic Curve key  RSA keys can be created with C(openssl rsa    )  E
+    account_key_content: ${3:value}                                        # Content of the ACME account RSA or Elliptic Curve key  Note that exactly one of C(account_key_src), C(account_key_conten
+    private_key_src: ${4:value}                                            # Path to the certificate's private key  Note that exactly one of C(account_key_src), C(account_key_content), C(private_ke
+    private_key_content: ${5:value}                                        # Content of the certificate's private key  Note that exactly one of C(account_key_src), C(account_key_content), C(private
+    revoke_reason: ${6:value}                                              # One of the revocation reasonCodes defined in L(Section 5 3 1 of RFC5280,https://tools ietf org/html/rfc5280#section-5 3 
+    account_uri: ${7:value}                                                # If specified, assumes that the account URI is as given  If the account key does not match this account, or an account wi
+    acme_version: ${8$$(yas-choose-value '("1" "2"))}                      # choices: 1;2  The ACME version of the endpoint  Must be 1 for the classic Let's Encrypt and Buypass ACME endpoints, or 2
+    acme_directory: ${{9:https://acme-staging}                             #api letsencrypt org/directory} # not required  The ACME directory to use  This is the entry point URL to access CA server
+    validate_certs: ${10:True}                                             # Whether calls to the ACME directory will validate TLS certificates  I(Warning): Should I(only ever) be set to C(no) for 
+    select_crypto_backend: ${11$$(yas-choose-value '("auto" "cryptography" "openssl"))}# choices: auto;cryptography;openssl  Determines which crypto backend to use  The default choice is C(auto), w

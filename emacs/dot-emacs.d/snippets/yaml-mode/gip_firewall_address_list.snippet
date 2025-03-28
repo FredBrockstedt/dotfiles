@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage address lists on BIG-IP AFM
+# prefix: bigip_firewall_address_list_snippet
+# key: gip_firewall_address_list
+# group: ansible
+# --
+
+- name: ${0:Manage address lists on BIG-IP AFM}
+  bigip_firewall_address_list:                                             
+    name: ${1:Specifies the name of the address list}                      #
+    partition: ${2:Common}                                                 # Device partition to manage resources on 
+    description: ${3:value}                                                # Description of the address list
+    geo_locations: ${4:value}                                              # List of geolocations specified by their C(country) and C(region) 
+    addresses: ${5:value}                                                  # Individual addresses that you want to add to the list  These addresses differ from ranges, and lists of lists such as wh
+    address_ranges: ${6:value}                                             # A list of address ranges where the range starts with a port number, is followed by a dash (-) and then a second number  
+    address_lists: ${7:value}                                              # Simple list of existing address lists to add to this list  Address lists can be specified in either their fully qualifie
+    fqdns: ${8:value}                                                      # A list of fully qualified domain names (FQDNs)  An FQDN has at least one decimal point in it, separating the host from t
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the address list and entries exists  When C(absent), ensures the 
+    provider: ${10:value}                                                  # A dict object containing connection details 

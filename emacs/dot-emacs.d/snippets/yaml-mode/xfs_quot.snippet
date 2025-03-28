@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage quotas on XFS filesystems
+# prefix: xfs_quota_snippet
+# key: xfs_quot
+# group: ansible
+# --
+
+- name: ${0:Manage quotas on XFS filesystems}
+  xfs_quota:                                                               
+    type: ${1$$(yas-choose-value '("user" "group" "project"))}             # The XFS quota type 
+    mountpoint: ${2:The mount point on which to apply the quotas}          #
+    name: ${3:value}                                                       # The name of the user, group or project to apply the quota to, if other than default 
+    bhard: ${4:value}                                                      # Hard blocks quota limit  This argument supports human readable sizes 
+    bsoft: ${5:value}                                                      # Soft blocks quota limit  This argument supports human readable sizes 
+    ihard: ${6:value}                                                      # Hard inodes quota limit 
+    isoft: ${7:value}                                                      # Soft inodes quota limit 
+    rtbhard: ${8:value}                                                    # Hard realtime blocks quota limit  This argument supports human readable sizes 
+    rtbsoft: ${9:value}                                                    # Soft realtime blocks quota limit  This argument supports human readable sizes 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Whether to apply the limits or remove them  When removing limit, they are set to 0, and not qui

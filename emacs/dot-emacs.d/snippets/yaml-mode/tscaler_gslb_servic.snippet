@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: Manage gslb service entities in Netscaler.
+# prefix: netscaler_gslb_service_snippet
+# key: tscaler_gslb_servic
+# group: ansible
+# --
+
+- name: ${0:Manage gslb service entities in Netscaler.}
+  netscaler_gslb_service:                                                  
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    servicename: ${4:value}                                                # Name for the GSLB service  Must begin with an ASCII alphanumeric or underscore C(_) character, and must contain only ASC
+    cnameentry: ${5:value}                                                 # Canonical name of the GSLB service  Used in CNAME-based GSLB  Minimum length = 1
+    servername: ${6:value}                                                 # Name of the server hosting the GSLB service  Minimum length = 1
+    servicetype: ${7$$(yas-choose-value '("HTTP" "FTP" "TCP" "UDP" "SSL" "SSL_BRIDGE" "SSL_TCP" "NNTP" "ANY" "SIP_UDP" "SIP_TCP" "SIP_SSL" "RADIUS" "RDP" "RTSP" "MYSQL" "MSSQL" "ORACLE"))}# choices
+    port: ${8:value}                                                       # Port on which the load balancing entity represented by this GSLB service listens  Minimum value = 1 Range 1 - 65535 * in
+    publicip: ${9:value}                                                   # The public IP address that a NAT device translates to the GSLB service's private IP address  Optional 
+    publicport: ${10:value}                                                # The public port associated with the GSLB service's public IP address  The port is mapped to the service's private port n
+    maxclient: ${11:value}                                                 # The maximum number of open connections that the service can support at any given time  A GSLB service whose connection c
+    healthmonitor: ${12:value}                                             # Monitor the health of the GSLB service 
+    sitename: ${13:value}                                                  # Name of the GSLB site to which the service belongs  Minimum length = 1
+    cip: ${14$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  In the request that is forwarded to the GSLB service, insert a header that stores the client'
+    cipheader: ${15:value}                                                 # Name for the HTTP header that stores the client's IP address  Used with the Client IP option  If client IP header insert
+    sitepersistence: ${16$$(yas-choose-value '("ConnectionProxy" "HTTPRedirect" "NONE"))}# choices: ConnectionProxy;HTTPRedirect;NONE  Use cookie-based site persistence  Applicable only to C(HTTP) 
+    siteprefix: ${17:value}                                                # The site's prefix string  When the service is bound to a GSLB virtual server, a GSLB site domain is generated internally
+    clttimeout: ${18:value}                                                # Idle time, in seconds, after which a client connection is terminated  Applicable if connection proxy based site persiste
+    maxbandwidth: ${19:value}                                              # Integer specifying the maximum bandwidth allowed for the service  A GSLB service whose bandwidth reaches the maximum is 
+    downstateflush: ${20$$(yas-choose-value '("enabled" "disabled"))}      # choices: enabled;disabled  Flush all active transactions associated with the GSLB service when its state transitions fro
+    maxaaausers: ${21:value}                                               # Maximum number of SSL VPN users that can be logged on concurrently to the VPN virtual server that is represented by this
+    monthreshold: ${22:value}                                              # Monitoring threshold value for the GSLB service  If the sum of the weights of the monitors that are bound to this GSLB s
+    hashid: ${23:value}                                                    # Unique hash identifier for the GSLB service, used by hash based load balancing methods  Minimum value = C(1)
+    comment: ${24:value}                                                   # Any comments that you might want to associate with the GSLB service 
+    appflowlog: ${25$$(yas-choose-value '("enabled" "disabled"))}          # choices: enabled;disabled  Enable logging appflow flow information 
+    ipaddress: ${26:value}                                                 # IP address for the GSLB service  Should represent a load balancing, content switching, or VPN virtual server on the NetS
+    monitor_bindings: ${27:value}                                          # Bind monitors to this gslb service
+    nitro_protocol: ${28$$(yas-choose-value '("http" "https"))}            # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${29:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${30:310}                                               # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    state: ${31$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource being configured by the module on the netscaler node  When present th
+    save_config: ${32:True}                                                # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

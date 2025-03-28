@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: add remove nat rules in a gateway  in a vca
+# prefix: vca_nat_snippet
+# key: vca_nat
+# group: ansible
+# --
+
+- name: ${0:add remove nat rules in a gateway  in a vca}
+  vca_nat:                                                                 
+    nat_rules: ${1:False}:A list of rules to be added to the gateway, Please see examples on valid entries}#
+    purge_rules: ${2:False}                                                # If set to true, it will delete all rules in the gateway that are not given as parameter to this module 
+    username: ${3:value}                                                   # The vca username or email address, if not set the environment variable C(VCA_USER) is checked for the username 
+    password: ${4:value}                                                   # The vca password, if not set the environment variable C(VCA_PASS) is checked for the password 
+    org: ${5:value}                                                        # The org to login to for creating vapp  This option is required when the C(service_type) is I(vdc) 
+    instance_id: ${6:value}                                                # The instance ID in a vchs environment to be used for creating the vapp 
+    host: ${7:value}                                                       # The authentication host to be used when service type is vcd 
+    api_version: ${{8:5}                                                   #7} # not required  The API version to be used with the vca 
+    service_type: ${9$$(yas-choose-value '("vca" "vcd" "vchs"))}           # choices: vca;vcd;vchs  The type of service we are authenticating against 
+    state: ${10$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Whether the object should be added or removed 
+    validate_certs: ${11:True}                                             # If the certificates of the authentication is to be verified 
+    vdc_name: ${12:value}                                                  # The name of the vdc where the gateway is located 
+    gateway_name: ${13:gateway}                                            # The name of the gateway of the vdc where the rule should be added 

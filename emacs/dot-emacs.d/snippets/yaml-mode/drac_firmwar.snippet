@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Firmware update from a repository on a network share (CIFS, NFS).
+# prefix: idrac_firmware_snippet
+# key: drac_firmwar
+# group: ansible
+# --
+
+- name: ${0:Firmware update from a repository on a network share (CIFS, NFS).}
+  idrac_firmware:                                                          
+    idrac_ip: ${1:i D R A C   I P   A d d r e s s }                        #
+    idrac_user: ${2:i D R A C   u s e r n a m e }                          #
+    idrac_password: ${3:i D R A C   u s e r   p a s s w o r d }            #
+    share_name: ${4:C I F S   o r   N F S   N e t w o r k   s h a r e }    #
+    share_mnt: ${5:L o c a l   m o u n t   p a t h   o f   t h e   n e t w o r k   s h a r e   w i t h   r e a d - w r i t e   p e r m i s s i o n   f o r   a n s i b l e   u s e r }#   T h i s   o
+    idrac_port: ${6:443}                                                   # i D R A C   p o r t  
+    share_user: ${7:value}                                                 # N e t w o r k   s h a r e   u s e r   i n   t h e   f o r m a t   ' u s e r @ d o m a i n '   o r   ' d o m a i n \\ \\ 
+    share_password: ${8:value}                                             # N e t w o r k   s h a r e   u s e r   p a s s w o r d     T h i s   o p t i o n   i s   m a n d a t o r y   f o r   C I 
+    reboot: ${9:False}                                                     # W h e t h e r   t o   r e b o o t s   a f t e r   a p p l y i n g   t h e   u p d a t e s   o r   n o t  
+    job_wait: ${10:True}                                                   # W h e t h e r   t o   w a i t   f o r   j o b   c o m p l e t i o n   o r   n o t  
+    catalog_file_name: ${{11:Catalog}                                      #xml} # not required  C a t a l o g   f i l e   n a m e   r e l a t i v e   t o   t h e   I ( s h a r e _ n a m e )  

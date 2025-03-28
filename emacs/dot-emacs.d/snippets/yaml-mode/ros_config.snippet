@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage Nokia SR OS device configuration
+# prefix: sros_config_snippet
+# key: ros_config
+# group: ansible
+# --
+
+- name: ${0:Manage Nokia SR OS device configuration}
+  sros_config:                                                             
+    lines: ${1:value}                                                      # The ordered set of commands that should be configured in the section   The commands must be the exact same commands as f
+    parents: ${2:value}                                                    # The ordered set of parents that uniquely identify the section or hierarchy the commands should be checked against   If t
+    src: ${3:value}                                                        # Specifies the source path to the file that contains the configuration or configuration template to load   The path to th
+    before: ${4:value}                                                     # The ordered set of commands to push on to the command stack if a change needs to be made   This allows the playbook desi
+    after: ${5:value}                                                      # The ordered set of commands to append to the end of the command stack if a change needs to be made   Just like with I(be
+    match: ${6$$(yas-choose-value '("line" "none"))}                       # choices: line;none  Instructs the module on the way to perform the matching of the set of commands against the current d
+    replace: ${7$$(yas-choose-value '("line" "block"))}                    # choices: line;block  Instructs the module on the way to perform the configuration on the device   If the replace argumen
+    force: ${8:value}                                                      # The force argument instructs the module to not consider the current devices running-config   When set to true, this will
+    backup: ${9:false}                                                     # This argument will cause the module to create a full backup of the current C(running-config) from the remote device befo
+    config: ${10:value}                                                    # The C(config) argument allows the playbook designer to supply the base configuration to be used to validate configuratio
+    defaults: ${11:false}                                                  # This argument specifies whether or not to collect all defaults when getting the remote device running config   When enab
+    save: ${12:false}                                                      # The C(save) argument instructs the module to save the running- config to the startup-config at the conclusion of the mod
+    backup_options: ${13:value}                                            # This is a dict object containing configurable options related to backup file path  The value of this option is read only
+    provider: ${14:value}                                                  # A dict object containing connection details 

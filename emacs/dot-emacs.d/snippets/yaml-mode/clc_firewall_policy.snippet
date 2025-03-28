@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Create/delete/update firewall policies
+# prefix: clc_firewall_policy_snippet
+# key: clc_firewall_policy
+# group: ansible
+# --
+
+- name: ${0:Create/delete/update firewall policies}
+  clc_firewall_policy:                                                     
+    location: ${1:Target datacenter for the firewall policy}               #
+    source_account_alias: ${2:CLC alias for the source account}            #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether to create or delete the firewall policy
+    source: ${4:value}                                                     # The list  of source addresses for traffic on the originating firewall  This is required when state is 'present'
+    destination: ${5:value}                                                # The list of destination addresses for traffic on the terminating firewall  This is required when state is 'present'
+    ports: ${6$$(yas-choose-value '("any" "icmp" "TCP/123" "UDP/123" "TCP/123-456" "UDP/123-456"))}# choices: any;icmp;TCP/123;UDP/123;TCP/123-456;UDP/123-456  The list of ports associated with the
+    firewall_policy_id: ${7:value}                                         # Id of the firewall policy  This is required to update or delete an existing firewall policy
+    destination_account_alias: ${8:value}                                  # CLC alias for the destination account
+    wait: ${9:true}                                                        # Whether to wait for the provisioning tasks to finish before returning 
+    enabled: ${10$$(yas-choose-value '("True" "False"))}                   # choices: True;False  Whether the firewall policy is enabled or disabled

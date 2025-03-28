@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages NTP authentication.
+# prefix: nxos_ntp_auth_snippet
+# key: xos_ntp_auth
+# group: ansible
+# --
+
+- name: ${0:Manages NTP authentication.}
+  nxos_ntp_auth:                                                           
+    key_id: ${1:value}                                                     # Authentication key identifier (numeric) 
+    md5string: ${2:value}                                                  # MD5 String 
+    auth_type: ${3$$(yas-choose-value '("text" "encrypt"))}                # choices: text;encrypt  Whether the given md5string is in cleartext or has been encrypted  If in cleartext, the device wi
+    trusted_key: ${4$$(yas-choose-value '("false" "true"))}                # choices: false;true  Whether the given key is required to be supplied by a time source for the device to synchronize to 
+    authentication: ${5$$(yas-choose-value '("on" "off"))}                 # choices: on;off  Turns NTP authentication on or off 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 
+    provider: ${7:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

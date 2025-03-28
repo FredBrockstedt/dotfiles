@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Set stats for the current ansible run
+# prefix: set_stats_snippet
+# key: t_stat
+# group: ansible
+# --
+
+- name: ${0:Set stats for the current ansible run}
+  set_stats:                                                               
+    data: ${1:A dictionary of which each key represents a stat (or variable) you want to keep track of}#
+    per_host: ${2:False}                                                   # whether the stats are per host or for all hosts in the run 
+    aggregate: ${3:True}                                                   # Whether the provided value is aggregated to the existing stat C(yes) or will replace it C(no) 

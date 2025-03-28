@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage VLANs on network devices
+# prefix: net_vlan_snippet
+# key: t_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLANs on network devices}
+  net_vlan:                                                                
+    name: ${1:value}                                                       # Name of the VLAN 
+    vlan_id: ${2:value}                                                    # ID of the VLAN 
+    interfaces: ${3:value}                                                 # List of interfaces the VLAN should be configured on 
+    aggregate: ${4:value}                                                  # L i s t   o f   V L A N s   d e f i n i t i o n s  
+    purge: ${5:False}                                                      # Purge VLANs not defined in the I(aggregate) parameter 
+    state: ${6$$(yas-choose-value '("present" "absent" "active" "suspend"))}# choices: present;absent;active;suspend  State of the VLAN configuration 

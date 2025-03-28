@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages Mercurial (hg) repositories
+# prefix: hg_snippet
+# key: hg
+# group: ansible
+# --
+
+- name: ${0:Manages Mercurial (hg) repositories}
+  hg:                                                                      
+    repo: ${1:The repository address}                                      #
+    dest: ${2:Absolute path of where the repository should be cloned to}   # This parameter is required, unless clone and update are set to no
+    revision: ${3:value}                                                   # Equivalent C(-r) option in hg command which could be the changeset, revision number, branch name or even tag 
+    force: ${4:false}                                                      # Discards uncommitted changes  Runs C(hg update -C)   Prior to 1 9, the default was `yes` 
+    purge: ${5:false}                                                      # Deletes untracked files  Runs C(hg purge) 
+    update: ${6:true}                                                      # If C(no), do not retrieve new revisions from the origin repository
+    clone: ${7:true}                                                       # If C(no), do not clone the repository if it does not exist locally 
+    executable: ${8:value}                                                 # Path to hg executable to use  If not supplied, the normal mechanism for resolving binary paths will be used 

@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Create any Azure resource
+# prefix: azure_rm_resource_snippet
+# key: zure_rm_resourc
+# group: ansible
+# --
+
+- name: ${0:Create any Azure resource}
+  azure_rm_resource:                                                       
+    url: ${1:value}                                                        # Azure RM Resource URL 
+    api_version: ${2:value}                                                # Specific API version to be used 
+    provider: ${3:value}                                                   # Provider type  Required if URL is not specified 
+    resource_group: ${4:value}                                             # Resource group to be used  Required if URL is not specified 
+    resource_type: ${5:value}                                              # Resource type  Required if URL is not specified 
+    resource_name: ${6:value}                                              # Resource name  Required if URL Is not specified 
+    subresource: ${7:value}                                                # List of subresources 
+    body: ${8:value}                                                       # The body of the HTTP request/response to the web service 
+    method: ${9$$(yas-choose-value '("GET" "PUT" "POST" "HEAD" "PATCH" "DELETE" "MERGE"))}# choices: GET;PUT;POST;HEAD;PATCH;DELETE;MERGE  The HTTP method of the request or response  It must be upp
+    status_code: ${10:"[200, 201, 202]"}                                   # A valid, numeric, HTTP status code that signifies success of the request  Can also be comma separated list of status cod
+    idempotency: ${11:False}                                               # If enabled, idempotency check will be done by using I(method=GET) first and then comparing with I(body) 
+    polling_timeout: ${12:0}                                               # If enabled, idempotency check will be done by using I(method=GET) first and then comparing with I(body) 
+    polling_interval: ${13:60}                                             # If enabled, idempotency check will be done by using I(method=GET) first and then comparing with I(body) 
+    state: ${14$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the resource  Use C(present) to create or update resource or C(absent) to d
+    ad_user: ${15:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${16:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${17:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${18:value}                                           # Your Azure subscription Id 
+    client_id: ${19:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${20:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${21:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${22:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${23:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${24$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${25$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${26:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

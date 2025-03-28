@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage pacemaker clusters
+# prefix: pacemaker_cluster_snippet
+# key: pacemaker_cluster
+# group: ansible
+# --
+
+- name: ${0:Manage pacemaker clusters}
+  pacemaker_cluster:                                                       
+    state: ${1$$(yas-choose-value '("cleanup" "offline" "online" "restart"))}# Indicate desired state of the cluster
+    node: ${2:value}                                                       # Specify which node of the cluster you want to manage  None == the cluster status itself, 'all' == check the status of al
+    timeout: ${3:300}                                                      # Timeout when the module should considered that the action has failed
+    force: ${4:true}                                                       # Force the change of the cluster state

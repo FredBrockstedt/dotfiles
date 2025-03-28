@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages configuration on Cisco FTD devices over REST API
+# prefix: ftd_configuration_snippet
+# key: ftd_configuratio
+# group: ansible
+# --
+
+- name: ${0:Manages configuration on Cisco FTD devices over REST API}
+  ftd_configuration:                                                       
+    operation: ${1:The name of the operation to execute}                   # Commonly, the operation starts with 'add', 'edit', 'get', 'upsert' or 'delete' verbs, but can have an arbitrary name too
+    data: ${2:value}                                                       # Key-value pairs that should be sent as body parameters in a REST API call
+    query_params: ${3:value}                                               # Key-value pairs that should be sent as query parameters in a REST API call 
+    path_params: ${4:value}                                                # Key-value pairs that should be sent as path parameters in a REST API call 
+    register_as: ${5:value}                                                # Specifies Ansible fact name that is used to register received response from the FTD device 
+    filters: ${6:value}                                                    # Key-value dict that represents equality filters  Every key is a property name and value is its desired value  If multipl

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configure Pure Storage FlashArray syslog settings
+# prefix: purefa_syslog_snippet
+# key: purefa_syslog
+# group: ansible
+# --
+
+- name: ${0:Configure Pure Storage FlashArray syslog settings}
+  purefa_syslog:                                                           
+    protocol: ${1$$(yas-choose-value '("tcp" "tls" "udp"))}                # Protocol which server uses
+    address: ${2:Syslog server address}                                    # This field supports IPv4, IPv6 or FQDN  An invalid IP addresses will cause the module to fail  No validation is performe
+    fa_url: ${3:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${4:FlashArray API token for admin privileged user}         #
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete syslog servers configuration
+    port: ${6:value}                                                       # Port at which the server is listening  If no port is specified the system will use 514

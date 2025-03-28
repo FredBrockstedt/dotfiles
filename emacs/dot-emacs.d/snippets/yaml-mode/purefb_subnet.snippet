@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage network subnets in a Pure Storage FlashBlade
+# prefix: purefb_subnet_snippet
+# key: purefb_subnet
+# group: ansible
+# --
+
+- name: ${0:Manage network subnets in a Pure Storage FlashBlade}
+  purefb_subnet:                                                           
+    name: ${1:Subnet Name}                                                 #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create, delete or modifies a subnet 
+    gateway: ${3:value}                                                    # IPv4 or IPv6 address of subnet gateway 
+    mtu: ${4:1500}                                                         # MTU size of the subnet  Range is 1280 to 9216 
+    prefix: ${5:value}                                                     # IPv4 or IPv6 address associated with the subnet  Supply the prefix length (CIDR) as well as the IP address 
+    vlan: ${6:0}                                                           # VLAN ID of the subnet 
+    fb_url: ${7:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${8:value}                                                  # FlashBlade API token for admin privileged user 

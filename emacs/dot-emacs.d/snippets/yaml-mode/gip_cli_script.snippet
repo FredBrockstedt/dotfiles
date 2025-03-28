@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage CLI scripts on a BIG-IP
+# prefix: bigip_cli_script_snippet
+# key: gip_cli_script
+# group: ansible
+# --
+
+- name: ${0:Manage CLI scripts on a BIG-IP}
+  bigip_cli_script:                                                        
+    name: ${1:Specifies the name of the script}                            #
+    content: ${2:value}                                                    # The content of the script  This parameter is typically used in conjunction with Ansible's C(file), or template lookup pl
+    description: ${3:value}                                                # Description of the cli script 
+    partition: ${4:Common}                                                 # Device partition to manage resources on 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the script exists  When C(absent), ensures the script is removed 
+    provider: ${6:value}                                                   # A dict object containing connection details 

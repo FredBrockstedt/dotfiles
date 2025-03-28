@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage packages with I(pacman)
+# prefix: pacman_snippet
+# key: pacm
+# group: ansible
+# --
+
+- name: ${0:Manage packages with I(pacman)}
+  pacman:                                                                  
+    name: ${1:value}                                                       # Name or list of names of the package(s) or file(s) to install, upgrade, or remove  Can't be used in combination with C(u
+    state: ${2$$(yas-choose-value '("absent" "latest" "present"))}         # choices: absent;latest;present  Desired state of the package 
+    recurse: ${3:False}                                                    # When removing a package, also remove its dependencies, provided that they are not required by other packages and were no
+    force: ${4:False}                                                      # When removing package, force remove package, without any checks  Same as `extra_args="--nodeps --nodeps"`  When update_c
+    extra_args: ${5:None}                                                  # Additional option to pass to pacman when enforcing C(state) 
+    update_cache: ${6:False}                                               # Whether or not to refresh the master package lists  This can be run as part of a package installation or as a separate s
+    update_cache_extra_args: ${7:None}                                     # Additional option to pass to pacman when enforcing C(update_cache) 
+    upgrade: ${8:False}                                                    # Whether or not to upgrade the whole system  Can't be used in combination with C(name) 
+    upgrade_extra_args: ${9:None}                                          # Additional option to pass to pacman when enforcing C(upgrade) 

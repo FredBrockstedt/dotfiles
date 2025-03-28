@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: create or destroy an image in ec2
+# prefix: ec2_ami_snippet
+# key: c2_am
+# group: ansible
+# --
+
+- name: ${0:create or destroy an image in ec2}
+  ec2_ami:                                                                 
+    instance_id: ${1:value}                                                # Instance ID to create the AMI from 
+    name: ${2:value}                                                       # The name of the new AMI 
+    architecture: ${3:value}                                               # The target architecture of the image to register
+    kernel_id: ${4:value}                                                  # The target kernel id of the image to register 
+    virtualization_type: ${5:value}                                        # The virtualization type of the image to register 
+    root_device_name: ${6:value}                                           # The root device name of the image to register 
+    wait: ${7:false}                                                       # Wait for the AMI to be in state 'available' before returning 
+    wait_timeout: ${8:900}                                                 # How long before wait gives up, in seconds 
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Register or deregister an AMI 
+    description: ${10:value}                                               # Human-readable string describing the contents and purpose of the AMI 
+    no_reboot: ${11:False}                                                 # Flag indicating that the bundling process should not attempt to shutdown the instance before bundling  If this flag is T
+    image_id: ${12:value}                                                  # Image ID to be deregistered 
+    device_mapping: ${13:value}                                            # List of device hashes/dictionaries with custom configurations (same block-device-mapping parameters)  Valid properties i
+    delete_snapshot: ${14:false}                                           # Delete snapshots when deregistering the AMI 
+    tags: ${15:value}                                                      # A dictionary of tags to add to the new image; '{"key":"value"\}' and '{"key":"value","key":"value"\}'
+    purge_tags: ${16:false}                                                # W h e t h e r   t o   r e m o v e   e x i s t i n g   t a g s   t h a t   a r e n ' t   p a s s e d   i n   t h e   C ( 
+    launch_permissions: ${17:value}                                        # Users and groups that should be able to launch the AMI  Expects dictionary with a key of user_ids and/or group_names  us
+    image_location: ${18:value}                                            # The s3 location of an image to use for the AMI 
+    enhanced_networking: ${19:value}                                       # A boolean representing whether enhanced networking with ENA is enabled or not 
+    billing_products: ${20:value}                                          # A list of valid billing codes  To be used with valid accounts by aws marketplace vendors 
+    ramdisk_id: ${21:value}                                                # The ID of the RAM disk 
+    sriov_net_support: ${22:value}                                         # Set to simple to enable enhanced networking with the Intel 82599 Virtual Function interface for the AMI and any instance
+    debug_botocore_endpoint_logs: ${23:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${24:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${25:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${26:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${27:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${28:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${29:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${30:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

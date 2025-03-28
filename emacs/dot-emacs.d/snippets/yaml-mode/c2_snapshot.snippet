@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: creates a snapshot from an existing volume
+# prefix: ec2_snapshot_snippet
+# key: c2_snapshot
+# group: ansible
+# --
+
+- name: ${0:creates a snapshot from an existing volume}
+  ec2_snapshot:                                                            
+    volume_id: ${1:value}                                                  # volume from which to take the snapshot
+    description: ${2:value}                                                # description to be applied to the snapshot
+    instance_id: ${3:value}                                                # instance that has the required volume to snapshot mounted
+    device_name: ${4:value}                                                # device name of a mounted volume to be snapshotted
+    snapshot_tags: ${5:value}                                              # a hash/dictionary of tags to add to the snapshot
+    wait: ${6:True}                                                        # wait for the snapshot to be ready
+    wait_timeout: ${7:0}                                                   # how long before wait gives up, in seconds specify 0 to wait forever
+    state: ${8$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  whether to add or create a snapshot
+    snapshot_id: ${9:value}                                                # snapshot id to remove
+    last_snapshot_min_age: ${10:0}                                         # If the volume's most recent snapshot has started less than `last_snapshot_min_age' minutes ago, a new snapshot will not 
+    debug_botocore_endpoint_logs: ${11:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${12:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${13:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${14:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${15:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${16:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${17:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${18:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

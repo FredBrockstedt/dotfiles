@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Create or delete FlashBlade Object Store account users
+# prefix: purefb_s3user_snippet
+# key: purefb_s3user
+# group: ansible
+# --
+
+- name: ${0:Create or delete FlashBlade Object Store account users}
+  purefb_s3user:                                                           
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete object store account user
+    name: ${2:value}                                                       # The name of object store user
+    account: ${3:value}                                                    # The name of object store account associated with user
+    access_key: ${4:True}                                                  # Create secret access key  Key can be exposed using the I(debug) module
+    fb_url: ${5:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${6:value}                                                  # FlashBlade API token for admin privileged user 

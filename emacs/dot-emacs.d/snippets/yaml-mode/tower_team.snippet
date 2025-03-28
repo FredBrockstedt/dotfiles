@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower team.
+# prefix: tower_team_snippet
+# key: tower_team
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower team.}
+  tower_team:                                                              
+    name: ${1:Name to use for the team}                                    #
+    organization: ${2:Organization the team should be made a member of}    #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of the resource 
+    tower_host: ${4:value}                                                 # URL to your Tower instance 
+    tower_username: ${5:value}                                             # Username for your Tower instance 
+    tower_password: ${6:value}                                             # Password for your Tower instance 
+    validate_certs: ${7:value}                                             # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${8:value}                                          # Path to the Tower config file 

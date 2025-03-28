@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Reboot a network device.
+# prefix: nxos_reboot_snippet
+# key: xos_reboot
+# group: ansible
+# --
+
+- name: ${0:Reboot a network device.}
+  nxos_reboot:                                                             
+    confirm: ${1:False}                                                    # Safeguard boolean  Set to true if you're sure you want to reboot 
+    provider: ${2:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Configures IGMP global parameters
+# prefix: onyx_igmp_snippet
+# key: onyx_igmp
+# group: ansible
+# --
+
+- name: ${0:Configures IGMP global parameters}
+  onyx_igmp:                                                               
+    state: ${1$$(yas-choose-value '("enabled" "disabled"))}                # IGMP state 
+    last_member_query_interval: ${2:value}                                 # Configure the last member query interval, range 1-25
+    mrouter_timeout: ${3:value}                                            # Configure the mrouter timeout, range 60-600
+    port_purge_timeout: ${4:value}                                         # Configure the host port purge timeout, range 130-1225
+    proxy_reporting: ${5$$(yas-choose-value '("enabled" "disabled"))}      # choices: enabled;disabled  Configure ip igmp snooping proxy and enable reporting mode
+    report_suppression_interval: ${6:value}                                # Configure the report suppression interval, range 1-25
+    unregistered_multicast: ${7$$(yas-choose-value '("flood" "forward-to-mrouter-ports"))}# choices: flood;forward-to-mrouter-ports  Configure the unregistered multicast mode Flood unregistered mul
+    default_version: ${8$$(yas-choose-value '("V2" "V3"))}                 # choices: V2;V3  Configure the default operating version of the IGMP snooping

@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Manage multi-container Docker applications with Docker Compose.
+# prefix: docker_compose_snippet
+# key: docker_compo
+# group: ansible
+# --
+
+- name: ${0:Manage multi-container Docker applications with Docker Compose.}
+  docker_compose:                                                          
+    project_src: ${1:value}                                                # Path to a directory containing a C(docker-compose yml) or C(docker-compose yaml) file  Mutually exclusive with I(definit
+    project_name: ${2:value}                                               # Provide a project name  If not provided, the project name is taken from the basename of I(project_src)  Required when I(
+    files: ${3:value}                                                      # List of Compose file names relative to I(project_src)  Overrides C(docker-compose yml) or C(docker-compose yaml)  Files 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Desired state of the project  Specifying C(present) is the same as running C(docker-compose up)
+    services: ${5:value}                                                   # When I(state) is C(present) run C(docker-compose up) resp  C(docker-compose stop) (with I(stopped)) resp  C(docker-compo
+    scale: ${6:value}                                                      # When I(state) is C(present) scale services  Provide a dictionary of key/value pairs where the key is the name of the ser
+    dependencies: ${7:True}                                                # When I(state) is C(present) specify whether or not to include linked services 
+    definition: ${8:value}                                                 # Compose file describing one or more services, networks and volumes  Mutually exclusive with I(project_src) and I(files) 
+    hostname_check: ${9:False}                                             # Whether or not to check the Docker daemon's hostname against the name provided in the client certificate 
+    recreate: ${10$$(yas-choose-value '("always" "never" "smart"))}        # choices: always;never;smart  By default containers will be recreated when their configuration differs from the service d
+    build: ${11:False}                                                     # Use with I(state) C(present) to always build images prior to starting the application  Same as running C(docker-compose 
+    pull: ${12:False}                                                      # Use with I(state) C(present) to always pull images prior to starting the application  Same as running C(docker-compose p
+    nocache: ${13:False}                                                   # Use with the I(build) option to ignore the cache during the image build process 
+    remove_images: ${14$$(yas-choose-value '("all" "local"))}              # choices: all;local  Use with I(state) C(absent) to remove all images or only local images 
+    remove_volumes: ${15:False}                                            # Use with I(state) C(absent) to remove data volumes 
+    stopped: ${16:False}                                                   # Use with I(state) C(present) to stop all containers defined in the Compose file  If I(services) is defined, only the con
+    restarted: ${17:False}                                                 # Use with I(state) C(present) to restart all containers defined in the Compose file  If I(services) is defined, only the 
+    remove_orphans: ${18:False}                                            # Remove containers for services not defined in the Compose file 
+    timeout: ${19:10}                                                      # timeout in seconds for container shutdown when attached or when containers are already running 
+    docker_host: ${{20:unix://var/run/docker}                              #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${21:localhost}                                          # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${22:auto}                                                # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    ca_cert: ${23:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${24:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${25:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${26:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${27:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${28:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${29:False}                                                     # Debug mode

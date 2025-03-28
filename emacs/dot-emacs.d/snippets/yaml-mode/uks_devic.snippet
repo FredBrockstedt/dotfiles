@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage encrypted (LUKS) devices
+# prefix: luks_device_snippet
+# key: uks_devic
+# group: ansible
+# --
+
+- name: ${0:Manage encrypted (LUKS) devices}
+  luks_device:                                                             
+    device: ${1:value}                                                     # Device to work with (e g  C(/dev/sda1))  Needed in most cases  Can be omitted only when I(state=closed) together with I(
+    state: ${2$$(yas-choose-value '("present" "absent" "opened" "closed"))}# choices: present;absent;opened;closed  Desired state of the LUKS container  Based on its value creates, destroys, opens 
+    name: ${3:value}                                                       # Sets container name when I(state=opened)  Can be used instead of I(device) when closing the existing container (i e  whe
+    keyfile: ${4:value}                                                    # Used to unlock the container and needed for most of the operations  Parameter value is the path to the keyfile with the 
+    new_keyfile: ${5:value}                                                # Adds additional key to given container on I(device)  Needs I(keyfile) option for authorization  LUKS container supports 
+    remove_keyfile: ${6:value}                                             # Removes given key from the container on I(device)  Does not remove the keyfile from filesystem  Parameter value is the p
+    force_remove_last_key: ${7:False}                                      # If set to C(yes), allows removing the last key from a container  BEWARE that when the last key has been removed from a c

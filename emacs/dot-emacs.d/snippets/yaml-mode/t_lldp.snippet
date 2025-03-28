@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP service configuration on network devices
+# prefix: net_lldp_snippet
+# key: t_lldp
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP service configuration on network devices}
+  net_lldp:                                                                
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the LLDP service configuration 

@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Manage Sensu checks
+# prefix: sensu_check_snippet
+# key: u_check
+# group: ansible
+# --
+
+- name: ${0:Manage Sensu checks}
+  sensu_check:                                                             
+    name: ${1:The name of the check This is the key that is used to determine whether a check exists}#
+    command: ${2:Path to the sensu check to run (not required when I(state=absent))}#
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the check should be present or not
+    path: ${{4:/etc/sensu/conf}                                            #d/checks json} # not required  Path to the json file of the check to be added/removed  Will be created if it does not exi
+    backup: ${5:false}                                                     # Create a backup file (if yes), including the timestamp information so you can get the original file back if you somehow 
+    handlers: ${6:[]}                                                      # List of handlers to notify when the check fails
+    subscribers: ${7:[]}                                                   # List of subscribers/channels this check should run for See sensu_subscribers to subscribe a machine to a channel
+    interval: ${8:value}                                                   # Check interval in seconds
+    timeout: ${9:10}                                                       # Timeout for the check
+    ttl: ${10:value}                                                       # Time to live in seconds until the check is considered stale
+    handle: ${11:true}                                                     # Whether the check should be handled or not
+    subdue_begin: ${12:value}                                              # When to disable handling of check failures
+    subdue_end: ${13:value}                                                # When to enable handling of check failures
+    dependencies: ${14:[]}                                                 # Other checks this check depends on, if dependencies fail, handling of this check will be disabled
+    metric: ${15:false}                                                    # Whether the check is a metric
+    standalone: ${16:false}                                                # Whether the check should be scheduled by the sensu client or server This option obviates the need for specifying the I(s
+    publish: ${17:true}                                                    # Whether the check should be scheduled at all  You can still issue it via the sensu api
+    occurrences: ${18:1}                                                   # Number of event occurrences before the handler should take action
+    refresh: ${19:value}                                                   # Number of seconds handlers should wait before taking second action
+    aggregate: ${20:false}                                                 # Classifies the check as an aggregate check, making it available via the aggregate API
+    low_flap_threshold: ${21:value}                                        # The low threshold for flap detection
+    high_flap_threshold: ${22:value}                                       # The high threshold for flap detection
+    custom: ${23:namespace()}                                              # A hash/dictionary of custom parameters for mixing to the configuration  You can't rewrite others module parameters using
+    source: ${24:value}                                                    # The check source, used to create a JIT Sensu client for an external resource (e g  a network switch) 

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage Cisco WLC configurations
+# prefix: aireos_config_snippet
+# key: reos_config
+# group: ansible
+# --
+
+- name: ${0:Manage Cisco WLC configurations}
+  aireos_config:                                                           
+    lines: ${1:value}                                                      # The ordered set of commands that should be configured  The commands must be the exact same commands as found in the devi
+    src: ${2:value}                                                        # Specifies the source path to the file that contains the configuration or configuration template to load   The path to th
+    before: ${3:value}                                                     # The ordered set of commands to push on to the command stack if a change needs to be made   This allows the playbook desi
+    after: ${4:value}                                                      # The ordered set of commands to append to the end of the command stack if a change needs to be made   Just like with I(be
+    match: ${5$$(yas-choose-value '("line" "none"))}                       # choices: line;none  Instructs the module on the way to perform the matching of the set of commands against the current d
+    backup: ${6:false}                                                     # This argument will cause the module to create a full backup of the current C(running-config) from the remote device befo
+    running_config: ${7:value}                                             # The module, by default, will connect to the remote device and retrieve the current running-config to use as a base for c
+    save: ${8:false}                                                       # The C(save) argument instructs the module to save the running-config to startup-config   This operation is performed aft
+    save_when: ${9$$(yas-choose-value '("always" "never" "changed"))}      # choices: always;never;changed  When changes are made to the device running-configuration, the changes are not copied to 
+    diff_against: ${10$$(yas-choose-value '("intended" "running"))}        # choices: intended;running  When using the C(ansible-playbook --diff) command line argument the module can generate diffs
+    diff_ignore_lines: ${11:value}                                         # Use this argument to specify one or more lines that should be ignored during the diff   This is used for lines in the co
+    intended_config: ${12:value}                                           # The C(intended_config) provides the master configuration that the node should conform to and is used to check the final 
+    backup_options: ${13:value}                                            # This is a dict object containing configurable options related to backup file path  The value of this option is read only
+    provider: ${14:value}                                                  # A dict object containing connection details 

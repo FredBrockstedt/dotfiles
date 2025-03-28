@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage utility licenses on a BIG-IQ
+# prefix: bigiq_utility_license_snippet
+# key: giq_utility_lic
+# group: ansible
+# --
+
+- name: ${0:Manage utility licenses on a BIG-IQ}
+  bigiq_utility_license:                                                   
+    license_key: ${1:The license key to install and activate}              #
+    accept_eula: ${2:value}                                                # A key that signifies that you accept the F5 EULA for this license  A copy of the EULA can be found here https://askf5 f5
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state of the utility license on the system  When C(present), guarantees that the license ex
+    provider: ${4:value}                                                   # A dict object containing connection details 

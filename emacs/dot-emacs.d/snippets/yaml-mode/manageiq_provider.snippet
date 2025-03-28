@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Management of provider in ManageIQ.
+# prefix: manageiq_provider_snippet
+# key: manageiq_provider
+# group: ansible
+# --
+
+- name: ${0:Management of provider in ManageIQ.}
+  manageiq_provider:                                                       
+    name: ${1:T h e   p r o v i d e r ' s   n a m e }                      #
+    type: ${2$$(yas-choose-value '("Openshift" "Amazon" "oVirt" "VMware" "Azure" "Director" "OpenStack" "GCE"))}# T h e   p r o v i d e r ' s   t y p e  
+    manageiq_connection: ${3:ManageIQ connection configuration information}#
+    state: ${4$$(yas-choose-value '("absent" "present" "refresh"))}        # choices: absent;present;refresh  absent - provider should not exist, present - provider should be present, refresh - pro
+    zone: ${5:default}                                                     # T h e   M a n a g e I Q   z o n e   n a m e   t h a t   w i l l   m a n a g e   t h e   p r o v i d e r  
+    provider_region: ${6:value}                                            # T h e   p r o v i d e r   r e g i o n   n a m e   t o   c o n n e c t   t o   ( e   g     A W S   r e g i o n   f o r   
+    host_default_vnc_port_start: ${7:value}                                # T h e   f i r s t   p o r t   i n   t h e   h o s t   V N C   r a n g e     d e f a u l t s   t o   N o n e  
+    host_default_vnc_port_end: ${8:value}                                  # T h e   l a s t   p o r t   i n   t h e   h o s t   V N C   r a n g e     d e f a u l t s   t o   N o n e  
+    subscription: ${9:value}                                               # M i c r o s o f t   A z u r e   s u b s c r i p t i o n   I D     d e f a u l t s   t o   N o n e  
+    project: ${10:value}                                                   # G o o g l e   C o m p u t e   E n g i n e   P r o j e c t   I D     d e f a u l t s   t o   N o n e  
+    azure_tenant_id: ${11:value}                                           # T e n a n t   I D     d e f a u l t s   t o   N o n e  
+    tenant_mapping_enabled: ${12:false}                                    # W h e t h e r   t o   e n a b l e   m a p p i n g   o f   e x i s t i n g   t e n a n t s     d e f a u l t s   t o   F 
+    api_version: ${13$$(yas-choose-value '("v2" "v3"))}                    # choices: v2;v3  T h e   O p e n S t a c k   K e y s t o n e   A P I   v e r s i o n     d e f a u l t s   t o   N o n e 
+    provider: ${14:value}                                                  # D e f a u l t   e n d p o i n t   c o n n e c t i o n   i n f o r m a t i o n ,   r e q u i r e d   i f   s t a t e   i 
+    metrics: ${15:value}                                                   # M e t r i c s   e n d p o i n t   c o n n e c t i o n   i n f o r m a t i o n  
+    alerts: ${16:value}                                                    # A l e r t s   e n d p o i n t   c o n n e c t i o n   i n f o r m a t i o n  
+    ssh_keypair: ${17:value}                                               # S S H   k e y   p a i r   u s e d   f o r   S S H   c o n n e c t i o n s   t o   a l l   h o s t s   i n   t h i s   p 

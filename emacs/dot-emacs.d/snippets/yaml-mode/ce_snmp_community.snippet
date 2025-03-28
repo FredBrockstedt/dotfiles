@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP community configuration on HUAWEI CloudEngine switches.
+# prefix: ce_snmp_community_snippet
+# key: ce_snmp_community
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP community configuration on HUAWEI CloudEngine switches.}
+  ce_snmp_community:                                                       
+    acl_number: ${1:value}                                                 # Access control list number 
+    community_name: ${2:value}                                             # Unique name to identify the community 
+    access_right: ${3$$(yas-choose-value '("read" "write"))}               # choices: read;write  Access right read or write 
+    community_mib_view: ${4:value}                                         # Mib view name 
+    group_name: ${5:value}                                                 # Unique name to identify the SNMPv3 group 
+    security_level: ${6$$(yas-choose-value '("noAuthNoPriv" "authentication" "privacy"))}# choices: noAuthNoPriv;authentication;privacy  Security level indicating whether to use authentication and 
+    read_view: ${7:value}                                                  # Mib view name for read 
+    write_view: ${8:value}                                                 # Mib view name for write 
+    notify_view: ${9:value}                                                # Mib view name for notification 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Manage the state of the resource 

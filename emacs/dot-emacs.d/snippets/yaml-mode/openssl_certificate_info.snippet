@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Provide information of OpenSSL X.509 certificates
+# prefix: openssl_certificate_info_snippet
+# key: openssl_certificate_info
+# group: ansible
+# --
+
+- name: ${0:Provide information of OpenSSL X.509 certificates}
+  openssl_certificate_info:                                                
+    path: ${1:Remote absolute path where the certificate file is loaded from}#
+    valid_at: ${2:value}                                                   # A dict of names mapping to time specifications  Every time specified here will be checked whether the certificate is val
+    select_crypto_backend: ${3$$(yas-choose-value '("auto" "cryptography" "pyopenssl"))}# choices: auto;cryptography;pyopenssl  Determines which crypto backend to use  The default choice is C(auto)

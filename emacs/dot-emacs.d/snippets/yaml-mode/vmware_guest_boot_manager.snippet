@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage boot options for the given virtual machine
+# prefix: vmware_guest_boot_manager_snippet
+# key: vmware_guest_boot_manager
+# group: ansible
+# --
+
+- name: ${0:Manage boot options for the given virtual machine}
+  vmware_guest_boot_manager:                                               
+    name: ${1:value}                                                       # Name of the VM to work with  This is required if C(uuid) or C(moid) parameter is not supplied 
+    uuid: ${2:value}                                                       # UUID of the instance to manage if known, this is VMware's BIOS UUID by default  This is required if C(name) or C(moid) p
+    moid: ${3:value}                                                       # Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance 
+    use_instance_uuid: ${4:False}                                          # Whether to use the VMware instance UUID rather than the BIOS UUID 
+    boot_order: ${5:[]}                                                    # List of the boot devices 
+    name_match: ${6$$(yas-choose-value '("first" "last"))}                 # choices: first;last  If multiple virtual machines matching the name, use the first or last found 
+    boot_delay: ${7:0}                                                     # Delay in milliseconds before starting the boot sequence 
+    enter_bios_setup: ${8:False}                                           # If set to C(True), the virtual machine automatically enters BIOS setup the next time it boots  The virtual machine reset
+    boot_retry_enabled: ${9:False}                                         # If set to C(True), the virtual machine that fails to boot, will try to boot again after C(boot_retry_delay) is expired  
+    boot_retry_delay: ${10:0}                                              # Specify the time in milliseconds between virtual machine boot failure and subsequent attempt to boot again  If set, will
+    boot_firmware: ${11$$(yas-choose-value '("bios" "efi"))}               # choices: bios;efi  Choose which firmware should be used to boot the virtual machine 
+    secure_boot_enabled: ${12:False}                                       # Choose if EFI secure boot should be enabled   EFI secure boot can only be enabled with boot_firmware = efi
+    hostname: ${13:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${14:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${15:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${16:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${17:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${18:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${19:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

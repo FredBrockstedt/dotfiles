@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages configuration of an PIM static RP address instance.
+# prefix: nxos_pim_rp_address_snippet
+# key: xos_pim_rp_addr
+# group: ansible
+# --
+
+- name: ${0:Manages configuration of an PIM static RP address instance.}
+  nxos_pim_rp_address:                                                     
+    rp_address: ${1:Configures a Protocol Independent Multicast (PIM) static rendezvous point (RP) address}# Valid values are unicast addresses 
+    state: ${2$$(yas-choose-value '("present" "absent" "default"))}        # Specify desired state of the resource 
+    group_list: ${3:value}                                                 # Group range for static RP  Valid values are multicast addresses 
+    prefix_list: ${4:value}                                                # Prefix list policy for static RP  Valid values are prefix-list policy names 
+    route_map: ${5:value}                                                  # Route map policy for static RP  Valid values are route-map policy names 
+    bidir: ${6:value}                                                      # Group range is treated in PIM bidirectional mode 
+    provider: ${7:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

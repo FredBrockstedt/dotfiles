@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage multiline banners on Cisco IOS XR devices
+# prefix: iosxr_banner_snippet
+# key: osxr_banner
+# group: ansible
+# --
+
+- name: ${0:Manage multiline banners on Cisco IOS XR devices}
+  iosxr_banner:                                                            
+    banner: ${1$$(yas-choose-value '("login" "motd"))}                     # Specifies the type of banner to configure on remote device 
+    text: ${2:value}                                                       # Banner text to be configured  Accepts multiline string, without empty lines  Requires I(state=present) 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Existential state of the configuration on the device 
+    provider: ${4:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

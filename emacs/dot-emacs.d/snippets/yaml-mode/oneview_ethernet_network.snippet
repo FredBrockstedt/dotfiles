@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage OneView Ethernet Network resources
+# prefix: oneview_ethernet_network_snippet
+# key: oneview_ethernet_network
+# group: ansible
+# --
+
+- name: ${0:Manage OneView Ethernet Network resources}
+  oneview_ethernet_network:                                                
+    data: ${1:List with Ethernet Network properties}                       #
+    state: ${2$$(yas-choose-value '("present" "absent" "default_bandwidth_reset"))}# choices: present;absent;default_bandwidth_reset  Indicates the desired state for the Ethernet Network resource  
+    config: ${3:value}                                                     # Path to a  json configuration file containing the OneView client configuration  The configuration file is optional and w
+    validate_etag: ${4:True}                                               # When the ETag Validation is enabled, the request will be conditionally processed only if the current ETag for the resour

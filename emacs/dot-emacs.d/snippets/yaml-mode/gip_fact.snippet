@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Collect facts from F5 BIG-IP devices
+# prefix: bigip_facts_snippet
+# key: gip_fact
+# group: ansible
+# --
+
+- name: ${0:Collect facts from F5 BIG-IP devices}
+  bigip_facts:                                                             
+    include: ${1$$(yas-choose-value '("address_class" "certificate" "client_ssl_profile" "device" "device_group" "interface" "key" "node" "pool" "provision" "rule" "self_ip" "software" "system_info
+    session: ${2:False}                                                    # BIG-IP session support; may be useful to avoid concurrency issues in certain circumstances 
+    filter: ${3:value}                                                     # Shell-style glob matching string used to filter fact keys  Not applicable for software, provision, and system_info fact 
+    provider: ${4:value}                                                   # A dict object containing connection details 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Configure Infoblox NIOS AAAA records
+# prefix: nios_aaaa_record_snippet
+# key: os_aaaa_record
+# group: ansible
+# --
+
+- name: ${0:Configure Infoblox NIOS AAAA records}
+  nios_aaaa_record:                                                        
+    name: ${1:Specifies the fully qualified hostname to add or remove from the system}#
+    view: ${2:default}:Sets the DNS view to associate this AAAA record with}#  The DNS view must already be configured on the system
+    ipv6addr: ${3:Configures the IPv6 address for this AAAA record}        #
+    ttl: ${4:value}                                                        # Configures the TTL to be associated with this AAAA record
+    extattrs: ${5:value}                                                   # Allows for the configuration of Extensible Attributes on the instance of the object   This argument accepts a set of key
+    comment: ${6:value}                                                    # Configures a text string comment to be associated with the instance of this object   The provided text string will be co
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the intended state of the instance of the object on the NIOS server   When this valu
+    provider: ${8:value}                                                   # A dict object containing connection details 

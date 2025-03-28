@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: All changes done by user are discarded and removed from database.
+# prefix: cp_mgmt_discard_snippet
+# key: cp_mgmt_discard
+# group: ansible
+# --
+
+- name: ${0:All changes done by user are discarded and removed from database.}
+  cp_mgmt_discard:                                                         
+    uid: ${1:value}                                                        # Session unique identifier  Specify it to discard a different session than the one you currently use 
+    wait_for_task: ${2:True}                                               # Wait for the task to end  Such as publish task 
+    version: ${3:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

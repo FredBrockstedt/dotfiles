@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Template a file out to a remote server
+# prefix: win_template_snippet
+# key: win_templat
+# group: ansible
+# --
+
+- name: ${0:Template a file out to a remote server}
+  win_template:                                                            
+    src: ${1:Path of a Jinja2 formatted template on the Ansible controller}# This can be a relative or an absolute path  The file must be encoded with C(utf-8) but I(output_encoding) can be used to
+    dest: ${2:Location to render the template to on the remote machine}    #
+    backup: ${3:False}                                                     # Determine whether a backup should be created  When set to C(yes), create a backup file including the timestamp informati
+    newline_sequence: ${4$$(yas-choose-value '("\n" "\r" "\r\n"))}         # choices: \n;\r;\r\n  Specify the newline sequence to use for templating files 
+    force: ${5:True}                                                       # Determine when the file is being transferred if the destination already exists  When set to C(yes), replace the remote f
+    block_start_string: ${6:{%}                                            # The string marking the beginning of a block 
+    block_end_string: ${7:%\}}                                             # The string marking the end of a block 
+    variable_start_string: ${8:{{}                                         # The string marking the beginning of a print statement 
+    variable_end_string: ${9:\}\}}                                         # The string marking the end of a print statement 
+    trim_blocks: ${10:True}                                                # Determine when newlines should be removed from blocks  When set to C(yes) the first newline after a block is removed (bl
+    lstrip_blocks: ${11:False}                                             # Determine when leading spaces and tabs should be stripped  When set to C(yes) leading spaces and tabs are stripped from 
+    output_encoding: ${12:utf-8}                                           # Overrides the encoding used to write the template file defined by C(dest)  It defaults to C(utf-8), but any encoding sup

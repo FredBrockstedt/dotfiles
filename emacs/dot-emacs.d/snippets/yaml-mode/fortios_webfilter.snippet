@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configure webfilter capabilities of FortiGate and FortiOS.
+# prefix: fortios_webfilter_snippet
+# key: fortios_webfilter
+# group: ansible
+# --
+
+- name: ${0:Configure webfilter capabilities of FortiGate and FortiOS.}
+  fortios_webfilter:                                                       
+    host: ${1:FortiOS or FortiGate ip address}                             #
+    username: ${2:FortiOS or FortiGate username}                           #
+    password: ${3:}                                                        # FortiOS or FortiGate password 
+    vdom: ${4:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    webfilter_url: ${5:value}                                              # Container for a group of url entries that the FortiGate must act upon
+    webfilter_content: ${6:value}                                          # Container for a group of content-filtering entries that the FortiGate must act upon

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create, modify or delete FlashArray local user account
+# prefix: purefa_user_snippet
+# key: purefa_user
+# group: ansible
+# --
+
+- name: ${0:Create, modify or delete FlashArray local user account}
+  purefa_user:                                                             
+    fa_url: ${1:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${2:FlashArray API token for admin privileged user}         #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create, delete or update local user account
+    name: ${4:value}                                                       # The name of the local user account
+    role: ${5$$(yas-choose-value '("readonly" "storage_admin" "array_admin"))}# choices: readonly;storage_admin;array_admin  Sets the local user's access level to the array
+    password: ${6:value}                                                   # Password for the local user 
+    old_password: ${7:value}                                               # If changing an existing password, you must provide the old password for security
+    api: ${8:False}                                                        # Define whether to create an API token for this user Token can be exposed using the I(debug) module

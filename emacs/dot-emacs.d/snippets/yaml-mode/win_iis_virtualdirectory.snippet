@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Configures a virtual directory in IIS
+# prefix: win_iis_virtualdirectory_snippet
+# key: win_iis_virtualdirectory
+# group: ansible
+# --
+
+- name: ${0:Configures a virtual directory in IIS}
+  win_iis_virtualdirectory:                                                
+    name: ${1:The name of the virtual directory to create or remove}       #
+    site: ${2:The site name under which the virtual directory is created or exists}#
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether to add or remove the specified virtual directory  Removing will remove the virtual dire
+    application: ${4:value}                                                # The application under which the virtual directory is created or exists 
+    physical_path: ${5:value}                                              # The physical path to the folder in which the new virtual directory is created  The specified folder must already exist 

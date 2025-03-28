@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage filesystem snapshots on Pure Storage FlashBlades
+# prefix: purefb_snap_snippet
+# key: purefb_snap
+# group: ansible
+# --
+
+- name: ${0:Manage filesystem snapshots on Pure Storage FlashBlades}
+  purefb_snap:                                                             
+    name: ${1:The name of the source filesystem}                           #
+    suffix: ${2:value}                                                     # Suffix of snapshot name 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Define whether the filesystem snapshot should exist or not 
+    eradicate: ${4:false}                                                  # Define whether to eradicate the snapshot on delete or leave in trash 
+    fb_url: ${5:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${6:value}                                                  # FlashBlade API token for admin privileged user 

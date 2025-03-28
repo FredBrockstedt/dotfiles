@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create, Update or Destroy a Forwarding_Rule.
+# prefix: gcp_forwarding_rule_snippet
+# key: gcp_forwarding_ru
+# group: ansible
+# --
+
+- name: ${0:Create, Update or Destroy a Forwarding_Rule.}
+  gcp_forwarding_rule:                                                     
+    forwarding_rule_name: ${1:Name of the Forwarding_Rule}                 #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # The state of the Forwarding Rule  'present' or 'absent'
+    address: ${3:value}                                                    # IPv4 or named IP address  Must be of the same scope (regional, global)  Reserved addresses can (and probably should) be 
+    port_range: ${4:value}                                                 # For global forwarding rules, must be set to 80 or 8080 for TargetHttpProxy, and 443 for TargetHttpsProxy or TargetSslPro
+    protocol: ${5:value}                                                   # For global forwarding rules, TCP, UDP, ESP, AH, SCTP or ICMP  Default is TCP 
+    region: ${6:value}                                                     # The region for this forwarding rule  Currently, only 'global' is supported 
+    target: ${7:value}                                                     # Target resource for forwarding rule  For global proxy, this is a Global TargetProxy resource  Required for external load

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages linux user to SELinux user mapping
+# prefix: selogin_snippet
+# key: og
+# group: ansible
+# --
+
+- name: ${0:Manages linux user to SELinux user mapping}
+  selogin:                                                                 
+    login: ${1:a Linux user}                                               #
+    seuser: ${2:SELinux user name}                                         #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # Desired mapping value 
+    selevel: ${4:s0}                                                       # MLS/MCS Security Range (MLS/MCS Systems only) SELinux Range for SELinux login mapping defaults to the SELinux user recor
+    reload: ${5:True}                                                      # Reload SELinux policy after commit 
+    ignore_selinux_state: ${6:False}                                       # Run independent of selinux runtime state

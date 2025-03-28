@@ -1,0 +1,60 @@
+# -*- mode: snippet -*-
+# name: Manage service configuration in Netscaler
+# prefix: netscaler_service_snippet
+# key: tscaler_servic
+# group: ansible
+# --
+
+- name: ${0:Manage service configuration in Netscaler}
+  netscaler_service:                                                       
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    name: ${4:value}                                                       # Name for the service  Must begin with an ASCII alphabetic or underscore C(_) character, and must contain only ASCII alph
+    ip: ${5:value}                                                         # IP to assign to the service  Minimum length = 1
+    servername: ${6:value}                                                 # Name of the server that hosts the service  Minimum length = 1
+    servicetype: ${7$$(yas-choose-value '("HTTP" "FTP" "TCP" "UDP" "SSL" "SSL_BRIDGE" "SSL_TCP" "DTLS" "NNTP" "RPCSVR" "DNS" "ADNS" "SNMP" "RTSP" "DHCPRA" "ANY" "SIP_UDP" "SIP_TCP" "SIP_SSL" "DNS_T
+    port: ${8:value}                                                       # Port number of the service  Range 1 - 65535 * in CLI is represented as 65535 in NITRO API
+    cleartextport: ${9:value}                                              # Port to which clear text data must be sent after the appliance decrypts incoming SSL traffic  Applicable to transparent 
+    cachetype: ${10$$(yas-choose-value '("TRANSPARENT" "REVERSE" "FORWARD"))}# choices: TRANSPARENT;REVERSE;FORWARD  Cache type supported by the cache server 
+    maxclient: ${11:value}                                                 # Maximum number of simultaneous open connections to the service  Minimum value = 0 Maximum value = 4294967294
+    healthmonitor: ${12:True}                                              # Monitor the health of this service
+    maxreq: ${13:value}                                                    # Maximum number of requests that can be sent on a persistent connection to the service  Note: Connection requests beyond 
+    cacheable: ${14:False}                                                 # Use the transparent cache redirection virtual server to forward requests to the cache server  Note: Do not specify this 
+    cip: ${15$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  Before forwarding a request to the service, insert an HTTP header with the client's IPv4 or I
+    cipheader: ${16:value}                                                 # Name for the HTTP header whose value must be set to the IP address of the client  Used with the Client IP parameter  If 
+    usip: ${17:value}                                                      # Use the client's IP address as the source IP address when initiating a connection to the server  When creating a service
+    pathmonitor: ${18:value}                                               # Path monitoring for clustering 
+    pathmonitorindv: ${19:value}                                           # Individual Path monitoring decisions 
+    useproxyport: ${20:value}                                              # Use the proxy port as the source port when initiating connections with the server  With the NO setting, the client-side 
+    sp: ${21:value}                                                        # Enable surge protection for the service 
+    rtspsessionidremap: ${22:False}                                        # Enable RTSP session ID mapping for the service 
+    clttimeout: ${23:value}                                                # Time, in seconds, after which to terminate an idle client connection  Minimum value = 0 Maximum value = 31536000
+    svrtimeout: ${24:value}                                                # Time, in seconds, after which to terminate an idle server connection  Minimum value = 0 Maximum value = 31536000
+    customserverid: ${25:None}                                             # Unique identifier for the service  Used when the persistency type for the virtual server is set to Custom Server ID 
+    serverid: ${26:value}                                                  # The identifier for the service  This is used when the persistency type is set to Custom Server ID 
+    cka: ${27:value}                                                       # Enable client keep-alive for the service 
+    tcpb: ${28:value}                                                      # Enable TCP buffering for the service 
+    cmp: ${29:value}                                                       # Enable compression for the service 
+    maxbandwidth: ${30:value}                                              # Maximum bandwidth, in Kbps, allocated to the service  Minimum value = 0 Maximum value = 4294967287
+    accessdown: ${31:False}                                                # Use Layer 2 mode to bridge the packets sent to this service if it is marked as DOWN  If the service is DOWN, and this pa
+    monthreshold: ${32:value}                                              # Minimum sum of weights of the monitors that are bound to this service  Used to determine whether to mark a service as UP
+    downstateflush: ${33$$(yas-choose-value '("enabled" "disabled"))}      # choices: enabled;disabled  Flush all active transactions associated with a service whose state transitions from UP to DO
+    tcpprofilename: ${34:value}                                            # Name of the TCP profile that contains TCP configuration settings for the service  Minimum length = 1 Maximum length = 12
+    httpprofilename: ${35:value}                                           # Name of the HTTP profile that contains HTTP configuration settings for the service  Minimum length = 1 Maximum length = 
+    hashid: ${36:value}                                                    # A numerical identifier that can be used by hash based load balancing methods  Must be unique for each service  Minimum v
+    comment: ${37:value}                                                   # Any information about the service 
+    appflowlog: ${38$$(yas-choose-value '("enabled" "disabled"))}          # choices: enabled;disabled  Enable logging of AppFlow information 
+    netprofile: ${39:value}                                                # Network profile to use for the service  Minimum length = 1 Maximum length = 127
+    td: ${40:value}                                                        # Integer value that uniquely identifies the traffic domain in which you want to configure the entity  If you do not speci
+    processlocal: ${41$$(yas-choose-value '("enabled" "disabled"))}        # choices: enabled;disabled  By turning on this option packets destined to a service in a cluster will not under go any st
+    dnsprofilename: ${42:value}                                            # Name of the DNS profile to be associated with the service  DNS profile properties will applied to the transactions proce
+    ipaddress: ${43:value}                                                 # The new IP address of the service 
+    graceful: ${44:False}                                                  # Shut down gracefully, not accepting any new connections, and disabling the service when all of its connections are close
+    monitor_bindings: ${45:value}                                          # A list of load balancing monitors to bind to this service  Each monitor entry is a dictionary which may contain the foll
+    disabled: ${46:False}                                                  # When set to C(yes) the service state will be set to DISABLED  When set to C(no) the service state will be set to ENABLED
+    nitro_protocol: ${47$$(yas-choose-value '("http" "https"))}            # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${48:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${49:310}                                               # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    state: ${50$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource being configured by the module on the netscaler node  When present th
+    save_config: ${51:True}                                                # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

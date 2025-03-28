@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete vtep
+# prefix: pn_vtep_snippet
+# key: pn_vtep
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete vtep}
+  pn_vtep:                                                                 
+    pn_cliswitch: ${1:value}                                               # Target switch to run the CLI on 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  vtep configuration command 
+    pn_name: ${3:value}                                                    # vtep name 
+    pn_ip: ${4:value}                                                      # Primary IP address 
+    pn_vrouter_name: ${5:value}                                            # name of the vrouter service 
+    pn_virtual_ip: ${6:value}                                              # Virtual/Secondary IP address 
+    pn_location: ${7:value}                                                # switch name 
+    pn_switch_in_cluster: ${8:True}                                        # Tells whether switch in cluster or not 

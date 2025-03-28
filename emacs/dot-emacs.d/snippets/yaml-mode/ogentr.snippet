@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Module for tracking logs via logentries.com
+# prefix: logentries_snippet
+# key: ogentr
+# group: ansible
+# --
+
+- name: ${0:Module for tracking logs via logentries.com}
+  logentries:                                                              
+    path: ${1:path to a log file}                                          #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  following state of the log
+    name: ${3:value}                                                       # name of the log
+    logtype: ${4:value}                                                    # type of the log

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages Out-Of-Band controllers using iDRAC OEM Redfish APIs
+# prefix: idrac_redfish_command_snippet
+# key: drac_redfish_command
+# group: ansible
+# --
+
+- name: ${0:Manages Out-Of-Band controllers using iDRAC OEM Redfish APIs}
+  idrac_redfish_command:                                                   
+    category: ${1:Category to execute on OOB controller}                   #
+    command: ${2:List of commands to execute on OOB controller}            #
+    baseuri: ${3:Base URI of OOB controller}                               #
+    username: ${4:User for authentication with OOB controller}             #
+    password: ${5:Password for authentication with OOB controller}         #
+    timeout: ${6:10}                                                       # Timeout in seconds for URL requests to OOB controller

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages BFD global configuration on HUAWEI CloudEngine devices.
+# prefix: ce_bfd_global_snippet
+# key: ce_bfd_glo
+# group: ansible
+# --
+
+- name: ${0:Manages BFD global configuration on HUAWEI CloudEngine devices.}
+  ce_bfd_global:                                                           
+    bfd_enable: ${1$$(yas-choose-value '("enable" "disable"))}             # choices: enable;disable  Enables the global Bidirectional Forwarding Detection (BFD) function 
+    default_ip: ${2:value}                                                 # Specifies the default multicast IP address  The value ranges from 224 0 0 107 to 224 0 0 250 
+    tos_exp_dynamic: ${3:value}                                            # Indicates the priority of BFD control packets for dynamic BFD sessions  The value is an integer ranging from 0 to 7  The
+    tos_exp_static: ${4:value}                                             # Indicates the priority of BFD control packets for static BFD sessions  The value is an integer ranging from 0 to 7  The 
+    damp_init_wait_time: ${5:value}                                        # Specifies an initial flapping suppression time for a BFD session  The value is an integer ranging from 1 to 3600000, in 
+    damp_max_wait_time: ${6:value}                                         # Specifies a maximum flapping suppression time for a BFD session  The value is an integer ranging from 1 to 3600000, in m
+    damp_second_wait_time: ${7:value}                                      # Specifies a secondary flapping suppression time for a BFD session  The value is an integer ranging from 1 to 3600000, in
+    delay_up_time: ${8:value}                                              # Specifies the delay before a BFD session becomes Up  The value is an integer ranging from 1 to 600, in seconds  The defa
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 

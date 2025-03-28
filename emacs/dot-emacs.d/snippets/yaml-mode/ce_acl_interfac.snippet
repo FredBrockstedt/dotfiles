@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manages applying ACLs to interfaces on HUAWEI CloudEngine switches.
+# prefix: ce_acl_interface_snippet
+# key: ce_acl_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages applying ACLs to interfaces on HUAWEI CloudEngine switches.}
+  ce_acl_interface:                                                        
+    acl_name: ${1:ACL number or name}                                      # For a numbered rule group, the value ranging from 2000 to 4999  For a named rule group, the value is a string of 1 to 32
+    interface: ${2:Interface name}                                         # Only support interface full name, such as "40GE2/0/1" 
+    direction: ${3$$(yas-choose-value '("inbound" "outbound"))}            # Direction ACL to be applied in on the interface 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 

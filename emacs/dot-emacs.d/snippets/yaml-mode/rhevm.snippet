@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: RHEV/oVirt automation
+# prefix: rhevm_snippet
+# key: rhevm
+# group: ansible
+# --
+
+- name: ${0:RHEV/oVirt automation}
+  rhevm:                                                                   
+    user: ${1:admin@internal}                                              # The user to authenticate with 
+    password: ${2:value}                                                   # The password for user authentication 
+    server: ${{3:127}                                                      #0 0 1} # not required  The name/IP of your RHEV-m/oVirt instance 
+    port: ${4:443}                                                         # The port on which the API is reachable 
+    insecure_api: ${5:False}                                               # A boolean switch to make a secure or insecure connection to the server 
+    name: ${6:value}                                                       # The name of the VM 
+    cluster: ${7:value}                                                    # The RHEV/oVirt cluster in which you want you VM to start 
+    datacenter: ${8:Default}                                               # The RHEV/oVirt datacenter in which you want you VM to start 
+    state: ${9$$(yas-choose-value '("absent" "cd" "down" "info" "ping" "present" "restarted" "up"))}# choices: absent;cd;down;info;ping;present;restarted;up  This serves to create/remove/update or 
+    image: ${10:value}                                                     # The template to use for the VM 
+    type: ${11$$(yas-choose-value '("desktop" "host" "server"))}           # choices: desktop;host;server  To define if the VM is a server or desktop 
+    vmhost: ${12:value}                                                    # The host you wish your VM to run on 
+    vmcpu: ${13:2}                                                         # The number of CPUs you want in your VM 
+    cpu_share: ${14:0}                                                     # This parameter is used to configure the CPU share 
+    vmmem: ${15:1}                                                         # The amount of memory you want your VM to use (in GB) 
+    osver: ${16:rhel_6x64}                                                 # The operating system option in RHEV/oVirt 
+    mempol: ${17:1}                                                        # The minimum amount of memory you wish to reserve for this system 
+    vm_ha: ${18:True}                                                      # To make your VM High Available 
+    disks: ${19:value}                                                     # This option uses complex arguments and is a list of disks with the options name, size and domain 
+    ifaces: ${20:value}                                                    # This option uses complex arguments and is a list of interfaces with the options name and vlan 
+    boot_order: ${21:"['hd', 'network']"}                                  # This option uses complex arguments and is a list of items that specify the bootorder 
+    del_prot: ${22:True}                                                   # This option sets the delete protection checkbox 
+    cd_drive: ${23:value}                                                  # The CD you wish to have mounted on the VM when I(state = 'CD') 
+    timeout: ${24:value}                                                   # The timeout you wish to define for power actions  When I(state = 'up')  When I(state = 'down')  When I(state = 'restarte

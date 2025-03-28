@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Create and delete cloud routes on the Hetzner Cloud.
+# prefix: hcloud_route_snippet
+# key: hcloud_rout
+# group: ansible
+# --
+
+- name: ${0:Create and delete cloud routes on the Hetzner Cloud.}
+  hcloud_route:                                                            
+    network: ${1:The name of the Hetzner Cloud Network}                    #
+    destination: ${2:Destination network or host of this route}            #
+    gateway: ${3:Gateway for the route}                                    #
+    api_token: ${4:This is the API Token for the Hetzner Cloud}            #
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the route 
+    endpoint: ${{6:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

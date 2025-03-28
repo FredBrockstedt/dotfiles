@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Fetches a UCS file from remote nodes
+# prefix: bigip_ucs_fetch_snippet
+# key: gip_ucs_fetch
+# group: ansible
+# --
+
+- name: ${0:Fetches a UCS file from remote nodes}
+  bigip_ucs_fetch:                                                         
+    dest: ${1:A directory to save the UCS file into}                       #
+    backup: ${2:False}                                                     # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    create_on_missing: ${3:True}                                           # Creates the UCS based on the value of C(src) if the file does not already exist on the remote system 
+    encryption_password: ${4:value}                                        # Password to use to encrypt the UCS file if desired 
+    fail_on_missing: ${5:False}                                            # Make the module fail if the UCS file on the remote system is missing 
+    force: ${6:True}                                                       # If C(no), the file will only be transferred if the destination does not exist 
+    src: ${7:value}                                                        # The name of the UCS file to create on the remote server for downloading
+    provider: ${8:value}                                                   # A dict object containing connection details 

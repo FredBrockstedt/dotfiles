@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: manage Amazon RDS snapshots.
+# prefix: rds_snapshot_snippet
+# key: rds_snapshot
+# group: ansible
+# --
+
+- name: ${0:manage Amazon RDS snapshots.}
+  rds_snapshot:                                                            
+    db_snapshot_identifier: ${1:The snapshot to manage}                    #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify the desired state of the snapshot 
+    db_instance_identifier: ${3:value}                                     # Database instance identifier  Required when state is present 
+    wait: ${4:false}                                                       # Whether or not to wait for snapshot creation or deletion 
+    wait_timeout: ${5:300}                                                 # how long before wait gives up, in seconds 
+    tags: ${6:value}                                                       # tags dict to apply to a snapshot 
+    purge_tags: ${7:True}                                                  # whether to remove tags not present in the C(tags) parameter 
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

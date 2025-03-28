@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage user-defined APM ACLs
+# prefix: bigip_apm_acl_snippet
+# key: gip_apm_ac
+# group: ansible
+# --
+
+- name: ${0:Manage user-defined APM ACLs}
+  bigip_apm_acl:                                                           
+    name: ${1:Specifies the name of the ACL to manage}                     #
+    description: ${2:value}                                                # User created ACL description 
+    type: ${3$$(yas-choose-value '("static" "dynamic"))}                   # choices: static;dynamic  Specifies the type of ACL to create  Once the type is set it cannot be changed 
+    acl_order: ${4:value}                                                  # Specifies a number that indicates the order of this ACL relative to other ACLs  When not set, the device will always pla
+    path_match_case: ${5:value}                                            # Specifies whether alphabetic case is considered when matching paths in an access control entry 
+    entries: ${6:value}                                                    # Access control entries that define the ACL matching and its respective behavior  The order in which the rules are placed
+    partition: ${7:Common}                                                 # Device partition to manage resources on 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(state) is C(present), ensures that the ACL exists  When C(state) is C(absent), ensures t
+    provider: ${9:value}                                                   # A dict object containing connection details 

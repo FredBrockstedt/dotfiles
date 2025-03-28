@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP SVM
+# prefix: na_ontap_svm_snippet
+# key: ontap_svm
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP SVM}
+  na_ontap_svm:                                                            
+    name: ${1:The name of the SVM to manage}                               #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified SVM should exist or not 
+    from_name: ${6:value}                                                  # Name of the SVM to be renamed
+    root_volume: ${7:value}                                                # Root volume of the SVM  Cannot be modified after creation 
+    root_volume_aggregate: ${8:value}                                      # The aggregate on which the root volume will be created  Cannot be modified after creation 
+    root_volume_security_style: ${9$$(yas-choose-value '("unix" "ntfs" "mixed" "unified"))}# choices: unix;ntfs;mixed;unified  Security Style of the root volume  When specified as part of the vserv
+    allowed_protocols: ${10:value}                                         # Allowed Protocols  When specified as part of a vserver-create, this field represent the list of protocols allowed on the
+    aggr_list: ${11:value}                                                 # List of aggregates assigned for volume operations  These aggregates could be shared for use with other Vservers  When sp
+    ipspace: ${12:value}                                                   # IPSpace name Cannot be modified after creation 
+    snapshot_policy: ${13:value}                                           # Default snapshot policy setting for all volumes of the Vserver  This policy will be assigned to all volumes created in t
+    language: ${14:value}                                                  # Language to use for the SVM Default to C UTF-8 Possible values   Language c                 POSIX ar                Arab
+    subtype: ${15$$(yas-choose-value '("default" "dp_destination" "sync_source" "sync_destination"))}# choices: default;dp_destination;sync_source;sync_destination  The subtype for vserver to be cr
+    comment: ${16:value}                                                   # When specified as part of a vserver-create, this field represents the comment associated with the Vserver  When part of 
+    https: ${17:False}                                                     # Enable and disable https
+    validate_certs: ${18:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${19:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${20:value}                                                    # The ontap api version to use
+    use_rest: ${21$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

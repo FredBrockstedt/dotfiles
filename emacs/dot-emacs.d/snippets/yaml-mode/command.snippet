@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Execute commands on targets
+# prefix: command_snippet
+# key: command
+# group: ansible
+# --
+
+- name: ${0:Execute commands on targets}
+  command:                                                                 
+    free_form: ${1:value}                                                  # The command module takes a free form command to run  There is no actual parameter named 'free form' 
+    cmd: ${2:value}                                                        # The command to run 
+    argv: ${3:value}                                                       # Passes the command as a list rather than a string  Use C(argv) to avoid quoting values that would otherwise be interpret
+    creates: ${4:value}                                                    # A filename or (since 2 0) glob pattern  If it already exists, this step B(won't) be run 
+    removes: ${5:value}                                                    # A filename or (since 2 0) glob pattern  If it already exists, this step B(will) be run 
+    chdir: ${6:value}                                                      # Change into this directory before running the command 
+    warn: ${7:True}                                                        # Enable or disable task warnings 
+    stdin: ${8:value}                                                      # Set the stdin of the command directly to the specified value 
+    stdin_add_newline: ${9:True}                                           # If set to C(yes), append a newline to stdin data 
+    strip_empty_ends: ${10:True}                                           # Strip empty lines from the end of stdout/stderr in result 

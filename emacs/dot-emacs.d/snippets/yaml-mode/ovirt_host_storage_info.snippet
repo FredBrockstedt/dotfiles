@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more oVirt/RHV HostStorages (applicable only for block storage)
+# prefix: ovirt_host_storage_info_snippet
+# key: ovirt_host_storage_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more oVirt/RHV HostStorages (applicable only for block storage)}
+  ovirt_host_storage_info:                                                 
+    host: ${1:Host to get device list from}                                #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt: C(username)[I(required)] - The name of the user, something like I(admin@internal)}# Default value is set by I(O
+    iscsi: ${3:value}                                                      # Dictionary with values for iSCSI storage type: C(address) - Address of the iSCSI storage server  C(target) - The target 
+    fcp: ${4:value}                                                        # Dictionary with values for fibre channel storage type: C(address) - Address of the fibre channel storage server  C(port)
+    fetch_nested: ${5:value}                                               # If I(yes) the module will fetch additional data from the API  It will fetch only IDs of nested entity  It doesn't fetch 
+    nested_attributes: ${6:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is

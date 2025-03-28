@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Configure global BGP settings on Free Range Routing(FRR).
+# prefix: frr_bgp_snippet
+# key: frr_bgp
+# group: ansible
+# --
+
+- name: ${0:Configure global BGP settings on Free Range Routing(FRR).}
+  frr_bgp:                                                                 
+    config: ${1:value}                                                     # Specifies the BGP related configuration 
+    operation: ${2$$(yas-choose-value '("merge" "replace" "override" "delete"))}# choices: merge;replace;override;delete  Specifies the operation to be performed on the BGP process configured on th

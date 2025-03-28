@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage drive firmware
+# prefix: netapp_e_drive_firmware_snippet
+# key: tapp_e_drive_firmwar
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage drive firmware}
+  netapp_e_drive_firmware:                                                 
+    firmware: ${1:list of drive firmware file paths}                       # NetApp E-Series drives require special firmware which can be downloaded from https://mysupport netapp com/NOW/download/t
+    api_username: ${2:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${3:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${4:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    wait_for_completion: ${5:False}                                        # This flag will cause module to wait for any upgrade actions to complete 
+    ignore_inaccessible_drives: ${6:False}                                 # This flag will determine whether drive firmware upgrade should fail if any affected drives are inaccessible 
+    upgrade_drives_online: ${7:True}                                       # This flag will determine whether drive firmware can be upgrade while drives are accepting I/O  When I(upgrade_drives_onl
+    validate_certs: ${8:True}                                              # Should https certificates be validated?
+    ssid: ${9:1}                                                           # The ID of the array to manage  This value must be unique for each array 

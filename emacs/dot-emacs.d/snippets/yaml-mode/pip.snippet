@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manages Python library dependencies
+# prefix: pip_snippet
+# key: pip
+# group: ansible
+# --
+
+- name: ${0:Manages Python library dependencies}
+  pip:                                                                     
+    name: ${1:value}                                                       # The name of a Python library to install or the url(bzr+,hg+,git+,svn+) of the remote package  This can be a list (since 
+    version: ${2:value}                                                    # The version number to install of the Python library specified in the I(name) parameter 
+    requirements: ${3:value}                                               # The path to a pip requirements file, which should be local to the remote system  File can be specified as a relative pat
+    virtualenv: ${4:value}                                                 # An optional path to a I(virtualenv) directory to install into  It cannot be specified together with the 'executable' par
+    virtualenv_site_packages: ${5:false}                                   # Whether the virtual environment will inherit packages from the global site-packages directory   Note that if this settin
+    virtualenv_command: ${6:virtualenv}                                    # The command or a pathname to the command to create the virtual environment with  For example C(pyvenv), C(virtualenv), C
+    virtualenv_python: ${7:value}                                          # The Python executable used for creating the virtual environment  For example C(python3 5), C(python2 7)  When not specif
+    state: ${8$$(yas-choose-value '("absent" "forcereinstall" "latest" "present"))}# choices: absent;forcereinstall;latest;present  The state of module The 'forcereinstall' option is only available
+    extra_args: ${9:value}                                                 # Extra arguments passed to pip 
+    editable: ${10:false}                                                  # Pass the editable flag 
+    chdir: ${11:value}                                                     # cd into this directory before running the command
+    executable: ${12:value}                                                # The explicit executable or pathname for the pip executable, if different from the Ansible Python interpreter  For exampl
+    umask: ${13:value}                                                     # The system umask to apply before installing the pip package  This is useful, for example, when installing on systems tha

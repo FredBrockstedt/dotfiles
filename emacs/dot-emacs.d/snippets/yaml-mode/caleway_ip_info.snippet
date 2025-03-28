@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Gather information about the Scaleway ips available.
+# prefix: scaleway_ip_info_snippet
+# key: caleway_ip_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about the Scaleway ips available.}
+  scaleway_ip_info:                                                        
+    region: ${1$$(yas-choose-value '("ams1" "EMEA-NL-EVS" "par1" "EMEA-FR-PAR1"))}# Scaleway region to use (for example C(par1)) 
+    api_token: ${2:value}                                                  # Scaleway OAuth token 
+    api_url: ${{3:https://api}                                             #scaleway com} # not required  Scaleway API URL 
+    api_timeout: ${4:30}                                                   # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${5:namespace()}                                     # List of parameters passed to the query string 
+    validate_certs: ${6:True}                                              # Validate SSL certs of the Scaleway API 

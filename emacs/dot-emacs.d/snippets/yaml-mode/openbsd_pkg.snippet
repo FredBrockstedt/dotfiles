@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage packages on OpenBSD
+# prefix: openbsd_pkg_snippet
+# key: openbsd_pkg
+# group: ansible
+# --
+
+- name: ${0:Manage packages on OpenBSD}
+  openbsd_pkg:                                                             
+    name: ${1:A name or a list of names of the packages}                   #
+    state: ${2$$(yas-choose-value '("absent" "latest" "present"))}         # choices: absent;latest;present  C(present) will make sure the package is installed  C(latest) will make sure the latest 
+    build: ${3:false}                                                      # Build the package from source instead of downloading and installing a binary  Requires that the port source tree is alre
+    ports_dir: ${4:/usr/ports}                                             # When used in combination with the C(build) option, allows overriding the default ports source directory 
+    clean: ${5:false}                                                      # When updating or removing packages, delete the extra configuration file(s) in the old packages which are annotated with 
+    quick: ${6:false}                                                      # Replace or delete packages quickly; do not bother with checksums before removing normal files 

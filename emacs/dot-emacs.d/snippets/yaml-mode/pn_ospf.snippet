@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove ospf protocol to a vRouter.
+# prefix: pn_ospf_snippet
+# key: pn_ospf
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove ospf protocol to a vRouter.}
+  pn_ospf:                                                                 
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Assert the state of the ospf  Use 'present' to add ospf and 'absent' to remove ospf 
+    pn_vrouter_name: ${2:Specify the name of the vRouter}                  #
+    pn_network_ip: ${3:Specify the network IP (IPv4 or IPv6) address}      #
+    pn_cliusername: ${4:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${5:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${6:local}                                               # Target switch to run the CLI on 
+    pn_ospf_area: ${7:value}                                               # Stub area number for the configuration  Required for vrouter-ospf-add 

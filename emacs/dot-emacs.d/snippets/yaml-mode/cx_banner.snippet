@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage multiline banners on Ruckus ICX 7000 series switches
+# prefix: icx_banner_snippet
+# key: cx_banner
+# group: ansible
+# --
+
+- name: ${0:Manage multiline banners on Ruckus ICX 7000 series switches}
+  icx_banner:                                                              
+    banner: ${1$$(yas-choose-value '("motd" "exec" "incoming"))}           # Specifies which banner should be configured on the remote device 
+    text: ${2:value}                                                       # The banner text that should be present in the remote device running configuration  This argument accepts a multiline str
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies whether or not the configuration is present in the current devices active running con
+    enterkey: ${4:False}                                                   # Specifies whether or not the motd configuration should accept the require-enter-key
+    check_running_config: ${5:True}                                        # Check running configuration  This can be set as environment variable  Module will use environment variable value(default

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage AWS Direct Connect Gateway.
+# prefix: aws_direct_connect_gateway_snippet
+# key: ws_direct_connect_gateway
+# group: ansible
+# --
+
+- name: ${0:Manage AWS Direct Connect Gateway.}
+  aws_direct_connect_gateway:                                              
+    amazon_asn: ${1:amazon side asn}                                       #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  present to ensure resource is created  absent to remove resource
+    name: ${3:value}                                                       # name of the dxgw to be created or deleted
+    direct_connect_gateway_id: ${4:value}                                  # id of an existing direct connect gateway
+    virtual_gateway_id: ${5:value}                                         # vpn gateway id of an existing virtual gateway
+    debug_botocore_endpoint_logs: ${6:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${7:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${8:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${9:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${10:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${11:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${12:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${13:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

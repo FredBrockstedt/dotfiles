@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage the system attributes on Cisco IOS XR devices
+# prefix: iosxr_system_snippet
+# key: osxr_system
+# group: ansible
+# --
+
+- name: ${0:Manage the system attributes on Cisco IOS XR devices}
+  iosxr_system:                                                            
+    hostname: ${1:value}                                                   # Configure the device hostname parameter  This option takes an ASCII string value 
+    vrf: ${2:value}                                                        # VRF name for domain services
+    domain_name: ${3:value}                                                # Configure the IP domain name on the remote device to the provided value  Value should be in the dotted name form and wil
+    domain_search: ${4:value}                                              # Provides the list of domain suffixes to append to the hostname for the purpose of doing name resolution  This argument a
+    lookup_source: ${5:value}                                              # The C(lookup_source) argument provides one or more source interfaces to use for performing DNS lookups   The interface p
+    lookup_enabled: ${6:value}                                             # Provides administrative control for enabling or disabling DNS lookups   When this argument is set to True, lookups are p
+    name_servers: ${7:value}                                               # The C(name_serves) argument accepts a list of DNS name servers by way of either FQDN or IP address to use to perform nam
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the configuration values in the device's current active configuration   When set to I(
+    provider: ${9:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

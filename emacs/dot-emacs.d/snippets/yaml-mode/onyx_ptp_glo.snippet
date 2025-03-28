@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Configures PTP Global parameters
+# prefix: onyx_ptp_global_snippet
+# key: onyx_ptp_glo
+# group: ansible
+# --
+
+- name: ${0:Configures PTP Global parameters}
+  onyx_ptp_global:                                                         
+    ptp_state: ${1$$(yas-choose-value '("enabled" "disabled"))}            # choices: enabled;disabled  PTP state 
+    ntp_state: ${2$$(yas-choose-value '("enabled" "disabled"))}            # choices: enabled;disabled  NTP state 
+    domain: ${3:value}                                                     # set PTP domain number Range 0-127
+    primary_priority: ${4:value}                                           # set PTP primary priority Range 0-225
+    secondary_priority: ${5:value}                                         # set PTP secondary priority Range 0-225

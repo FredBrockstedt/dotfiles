@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages some of the steps common in deploying projects.
+# prefix: deploy_helper_snippet
+# key: deploy_helper
+# group: ansible
+# --
+
+- name: ${0:Manages some of the steps common in deploying projects.}
+  deploy_helper:                                                           
+    path: ${1:the root path of the project}                                # Alias I(dest)  Returned in the C(deploy_helper project_path) fact 
+    state: ${2$$(yas-choose-value '("present" "finalize" "absent" "clean" "query"))}# choices: present;finalize;absent;clean;query  the state of the project  C(query) will only gather facts, C(pres
+    release: ${3:value}                                                    # the release version that is being deployed  Defaults to a timestamp format %Y%m%d%H%M%S (i e  '20141119223359')  This pa
+    releases_path: ${4:releases}                                           # the name of the folder that will hold the releases  This can be relative to C(path) or absolute  Returned in the C(deplo
+    shared_path: ${5:shared}                                               # the name of the folder that will hold the shared resources  This can be relative to C(path) or absolute  If this is set 
+    current_path: ${6:current}                                             # the name of the symlink that is created when the deploy is finalized  Used in C(finalize) and C(clean)  Returned in the 
+    unfinished_filename: ${7:DEPLOY_UNFINISHED}                            # the name of the file that indicates a deploy has not finished  All folders in the releases_path that contain this file w
+    clean: ${8:true}                                                       # Whether to run the clean procedure in case of C(state=finalize) 
+    keep_releases: ${9:5}                                                  # the number of old releases to keep when cleaning  Used in C(finalize) and C(clean)  Any unfinished builds will be delete

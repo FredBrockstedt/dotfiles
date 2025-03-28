@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Configures MAC address pools on Cisco UCS Manager
+# prefix: ucs_mac_pool_snippet
+# key: ucs_mac_poo
+# group: ansible
+# --
+
+- name: ${0:Configures MAC address pools on Cisco UCS Manager}
+  ucs_mac_pool:                                                            
+    name: ${1:The name of the MAC pool}                                    # This name can be between 1 and 32 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify MAC pool is present and will create if needed  If C(absent), will ve
+    description: ${5:value}                                                # A description of the MAC pool  Enter up to 256 characters  You can use any characters or spaces except the following: ` 
+    order: ${6$$(yas-choose-value '("default" "sequential"))}              # choices: default;sequential  The Assignment Order field  This can be one of the following: default - Cisco UCS Manager s
+    first_addr: ${7:value}                                                 # The first MAC address in the block of addresses  This is the From field in the UCS Manager MAC Blocks menu 
+    last_addr: ${8:value}                                                  # The last MAC address in the block of addresses  This is the To field in the UCS Manager Add MAC Blocks menu 
+    org_dn: ${9:org-root}                                                  # The distinguished name (dn) of the organization where the resource is assigned 
+    username: ${10:admin}                                                  # Username for Cisco UCS Manager authentication 
+    port: ${11:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${12:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${13:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${14:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

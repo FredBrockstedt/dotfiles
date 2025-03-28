@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove access-list-ip
+# prefix: pn_access_list_ip_snippet
+# key: pn_access_list_ip
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove access-list-ip}
+  pn_access_list_ip:                                                       
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use 'present' to add access-list-ip and 'absent' to remove access-list-ip 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_ip: ${3:::}                                                         # IP associated with the access list 
+    pn_name: ${4:value}                                                    # Access List Name 

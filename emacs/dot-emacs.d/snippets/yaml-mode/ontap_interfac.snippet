@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP LIF configuration
+# prefix: na_ontap_interface_snippet
+# key: ontap_interfac
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP LIF configuration}
+  na_ontap_interface:                                                      
+    interface_name: ${1:Specifies the logical interface (LIF) name}        #
+    vserver: ${2:The name of the vserver to use}                           #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified interface should exist or not 
+    home_node: ${7:value}                                                  # Specifies the LIF's home node  By default, the first node from the cluster is considered as home node
+    home_port: ${8:value}                                                  # Specifies the LIF's home port  Required when C(state=present)
+    role: ${9:value}                                                       # Specifies the role of the LIF  When setting role as "intercluster", setting protocol is not supported  Required when C(s
+    address: ${10:value}                                                   # Specifies the LIF's IP address  Required when C(state=present)
+    netmask: ${11:value}                                                   # Specifies the LIF's netmask  Required when C(state=present) 
+    firewall_policy: ${12:value}                                           # Specifies the firewall policy for the LIF 
+    failover_policy: ${13$$(yas-choose-value '("disabled" "system-defined" "local-only" "sfo-partner-only" "broadcast-domain-wide"))}# choices: disabled;system-defined;local-only;sfo-partner-only;b
+    subnet_name: ${14:value}                                               # Subnet where the interface address is allocated from  If the option is not used, the IP address will need to be provided
+    admin_status: ${15$$(yas-choose-value '("up" "down"))}                 # choices: up;down  Specifies the administrative status of the LIF 
+    is_auto_revert: ${16:value}                                            # I f   t r u e ,   d a t a   L I F   w i l l   r e v e r t   t o   i t s   h o m e   n o d e   u n d e r   c e r t a i n 
+    force_subnet_association: ${17:value}                                  # S e t   t h i s   t o   t r u e   t o   a c q u i r e   t h e   a d d r e s s   f r o m   t h e   n a m e d   s u b n e 
+    protocols: ${18:value}                                                 # Specifies the list of data protocols configured on the LIF  By default, the values in this element are nfs, cifs and fca
+    dns_domain_name: ${19:value}                                           # Specifies the unique, fully qualified domain name of the DNS zone of this LIF 
+    listen_for_dns_query: ${20:value}                                      # If True, this IP address will listen for DNS queries for the dnszone specified 
+    is_dns_update_enabled: ${21:value}                                     # Specifies if DNS update is enabled for this LIF  Dynamic updates will be sent for this LIF if updates are enabled at Vse
+    https: ${22:False}                                                     # Enable and disable https
+    validate_certs: ${23:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${24:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${25:value}                                                    # The ontap api version to use
+    use_rest: ${26$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

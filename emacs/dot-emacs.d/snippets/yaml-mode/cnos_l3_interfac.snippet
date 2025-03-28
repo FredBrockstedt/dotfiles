@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Layer-3 interfaces on Lenovo CNOS network devices.
+# prefix: cnos_l3_interface_snippet
+# key: cnos_l3_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Layer-3 interfaces on Lenovo CNOS network devices.}
+  cnos_l3_interface:                                                       
+    name: ${1:value}                                                       # Name of the Layer-3 interface to be configured eg  Ethernet1/2
+    ipv4: ${2:value}                                                       # IPv4 address to be set for the Layer-3 interface mentioned in I(name) option  The address format is <ipv4 address>/<mask
+    ipv6: ${3:value}                                                       # IPv6 address to be set for the Layer-3 interface mentioned in I(name) option  The address format is <ipv6 address>/<mask
+    aggregate: ${4:value}                                                  # List of Layer-3 interfaces definitions  Each of the entry in aggregate list should define name of interface C(name) and 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the Layer-3 interface configuration  It indicates if the configuration should be prese
+    provider: ${6:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

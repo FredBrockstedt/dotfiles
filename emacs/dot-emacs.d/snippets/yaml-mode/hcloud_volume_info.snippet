@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Gather infos about your Hetzner Cloud volumes.
+# prefix: hcloud_volume_info_snippet
+# key: hcloud_volume_info
+# group: ansible
+# --
+
+- name: ${0:Gather infos about your Hetzner Cloud volumes.}
+  hcloud_volume_info:                                                      
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the volume you want to get 
+    name: ${3:value}                                                       # The name of the volume you want to get 
+    label_selector: ${4:value}                                             # The label selector for the volume you want to get 
+    endpoint: ${{5:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

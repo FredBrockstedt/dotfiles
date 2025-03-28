@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Show python path and assert dependency versions
+# prefix: python_requirements_info_snippet
+# key: python_requirements_info
+# group: ansible
+# --
+
+- name: ${0:Show python path and assert dependency versions}
+  python_requirements_info:                                                
+    dependencies: ${1:value}                                               # A   l i s t   o f   v e r s i o n - l i k e s   o r   m o d u l e   n a m e s   t o   c h e c k   f o r   i n s t a l l 

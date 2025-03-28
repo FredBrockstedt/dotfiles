@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages configuration for an outgoing connection
+# prefix: bigip_message_routing_transport_config_snippet
+# key: gip_message_routing_transport_config
+# group: ansible
+# --
+
+- name: ${0:Manages configuration for an outgoing connection}
+  bigip_message_routing_transport_config:                                  
+    name: ${1:Specifies the name of the transport config to manage}        #
+    description: ${2:value}                                                # The user defined description of the transport config 
+    profiles: ${3:value}                                                   # Specifies a list profiles for the outgoing connection to use to direct and manage traffic 
+    src_addr_translation: ${4:value}                                       # Specifies the type of source address translation enabled for the transport config and the pool that the source address t
+    src_port: ${5:value}                                                   # Specifies the source port to be used for the connection being created  If no value is specified an ephemeral port is cho
+    rules: ${6:value}                                                      # The iRules you want run on this transport config  iRules help automate the intercepting, processing, and routing of appl
+    type: ${7$$(yas-choose-value '("generic"))}                            # choices: generic  Parameter used to specify the type of the transport-config object to manage  Default setting is C(gene
+    partition: ${8:Common}                                                 # Device partition to create transport-config object on 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the transport-config object exists  When C(absent), ensures the t
+    provider: ${10:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Exports a VMware virtual machine to an OVF file, device files and a manifest file
+# prefix: vmware_export_ovf_snippet
+# key: vmware_export_ovf
+# group: ansible
+# --
+
+- name: ${0:Exports a VMware virtual machine to an OVF file, device files and a manifest file}
+  vmware_export_ovf:                                                       
+    export_dir: ${1:Absolute path to place the exported files on the server running this task, must have write permission}# If folder not exist will create it, also create a folder under this path 
+    name: ${2:value}                                                       # Name of the virtual machine to export  This is a required parameter, if parameter C(uuid) or C(moid) is not supplied 
+    uuid: ${3:value}                                                       # Uuid of the virtual machine to export  This is a required parameter, if parameter C(name) or C(moid) is not supplied 
+    moid: ${4:value}                                                       # Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance 
+    datacenter: ${5:ha-datacenter}                                         # Datacenter name of the virtual machine to export  This parameter is case sensitive 
+    folder: ${6:value}                                                     # Destination folder, absolute path to find the specified guest  The folder should include the datacenter  ESX's datacente
+    export_with_images: ${7:False}                                         # Export an ISO image of the media mounted on the CD/DVD Drive within the virtual machine 
+    download_timeout: ${8:10}                                              # The user defined timeout in minute of exporting file  If the vmdk file is too large to export in 10 minutes, specify the
+    hostname: ${9:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${10:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${11:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${12:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${13:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${14:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${15:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

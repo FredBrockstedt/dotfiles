@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Virtual Network Peering
+# prefix: azure_rm_virtualnetworkpeering_snippet
+# key: zure_rm_virtualnetworkpeering
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Virtual Network Peering}
+  azure_rm_virtualnetworkpeering:                                          
+    resource_group: ${1:Name of a resource group where the vnet exists}    #
+    name: ${2:Name of the virtual network peering}                         #
+    virtual_network: ${3:Name or resource ID of the virtual network to be peered}#
+    remote_virtual_network: ${4:value}                                     # Remote virtual network to be peered  It can be name of remote virtual network in same resource group  It can be remote v
+    allow_virtual_network_access: ${5:False}                               # Allows VMs in the remote VNet to access all VMs in the local VNet 
+    allow_forwarded_traffic: ${6:False}                                    # Allows forwarded traffic from the VMs in the remote VNet 
+    use_remote_gateways: ${7:False}                                        # If remote gateways can be used on this virtual network 
+    allow_gateway_transit: ${8:False}                                      # Allows VNet to use the remote VNet's gateway  Remote VNet gateway must have --allow-gateway-transit enabled for remote p
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the virtual network peering  Use C(present) to create or update a peering and C(absent
+    ad_user: ${10:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${11:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${12:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${13:value}                                           # Your Azure subscription Id 
+    client_id: ${14:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${15:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${16:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${17:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${18:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${19$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${20$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${21:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

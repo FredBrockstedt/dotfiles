@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series create, remove, and update asynchronous mirror groups
+# prefix: netapp_e_amg_snippet
+# key: tapp_e_amg
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series create, remove, and update asynchronous mirror groups}
+  netapp_e_amg:                                                            
+    name: ${1:The name of the async array you wish to target, or create}   # If C(state) is present and the name isn't found, it will attempt to create 
+    secondaryArrayId: ${2:The ID of the secondary array to be used in mirroring process}#
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # A C(state) of present will either create or update the async mirror group  A C(state) of absent will remove the async mi
+    api_username: ${4:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${5:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${6:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    syncIntervalMinutes: ${7:10}                                           # The synchronization interval in minutes
+    manualSync: ${8:false}                                                 # Setting this to true will cause other synchronization values to be ignored
+    recoveryWarnThresholdMinutes: ${9:20}                                  # Recovery point warning threshold (minutes)  The user will be warned when the age of the last good failures point exceeds
+    repoUtilizationWarnThreshold: ${10:80}                                 # Recovery point warning threshold
+    interfaceType: ${11$$(yas-choose-value '("iscsi" "fibre"))}            # choices: iscsi;fibre  The intended protocol to use if both Fibre and iSCSI are available 
+    syncWarnThresholdMinutes: ${12:10}                                     # The threshold (in minutes) for notifying the user that periodic synchronization has taken too long to complete 
+    validate_certs: ${13:True}                                             # Should https certificates be validated?
+    ssid: ${14:1}                                                          # The ID of the array to manage  This value must be unique for each array 

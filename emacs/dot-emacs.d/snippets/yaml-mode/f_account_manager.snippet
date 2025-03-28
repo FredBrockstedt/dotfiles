@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage SolidFire accounts
+# prefix: sf_account_manager_snippet
+# key: f_account_manager
+# group: ansible
+# --
+
+- name: ${0:Manage SolidFire accounts}
+  sf_account_manager:                                                      
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified account should exist or not 
+    name: ${2:Unique username for this account}                            # (May be 1 to 64 characters in length) 
+    hostname: ${3:The hostname or IP address of the SolidFire cluster}     #
+    username: ${4:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${5:Password for the specified user}                         #
+    new_name: ${6:value}                                                   # New name for the user account 
+    initiator_secret: ${7:value}                                           # CHAP secret to use for the initiator  Should be 12-16 characters long and impenetrable  The CHAP initiator secrets must 
+    target_secret: ${8:value}                                              # CHAP secret to use for the target (mutual CHAP authentication)  Should be 12-16 characters long and impenetrable  The CH
+    attributes: ${9:value}                                                 # L i s t   o f   N a m e / V a l u e   p a i r s   i n   J S O N   o b j e c t   f o r m a t  
+    account_id: ${10:value}                                                # The ID of the account to manage or update 
+    status: ${11:value}                                                    # Status of the account 

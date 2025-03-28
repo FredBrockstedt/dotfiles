@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages BGP EVPN configuration on HUAWEI CloudEngine switches.
+# prefix: ce_evpn_bgp_snippet
+# key: ce_evpn_bgp
+# group: ansible
+# --
+
+- name: ${0:Manages BGP EVPN configuration on HUAWEI CloudEngine switches.}
+  ce_evpn_bgp:                                                             
+    bgp_instance: ${1:Name of a BGP instance}                              # The value is a string of 1 to 31 case-sensitive characters, spaces not supported 
+    as_number: ${2:value}                                                  # Specifies integral AS number  The value is an integer ranging from 1 to 4294967295 
+    peer_address: ${3:value}                                               # Specifies the IPv4 address of a BGP EVPN peer  The value is in dotted decimal notation 
+    peer_group_name: ${4:value}                                            # Specify the name of a peer group that BGP peers need to join  The value is a string of 1 to 47 case-sensitive characters
+    peer_enable: ${5$$(yas-choose-value '("true" "false"))}                # choices: true;false  Enable or disable a BGP device to exchange routes with a specified peer or peer group in the addres
+    advertise_router_type: ${6$$(yas-choose-value '("arp" "irb"))}         # choices: arp;irb  Configures a device to advertise routes to its BGP EVPN peers 
+    vpn_name: ${7:value}                                                   # Associates a specified VPN instance with the IPv4 address family  The value is a string of 1 to 31 case-sensitive charac
+    advertise_l2vpn_evpn: ${8$$(yas-choose-value '("enable" "disable"))}   # choices: enable;disable  Enable or disable a device to advertise IP routes imported to a VPN instance to its EVPN instan
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

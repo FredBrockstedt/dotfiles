@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages domain records on Exoscale DNS API.
+# prefix: exo_dns_domain_snippet
+# key: xo_dns_dom
+# group: ansible
+# --
+
+- name: ${0:Manages domain records on Exoscale DNS API.}
+  exo_dns_domain:                                                          
+    name: ${1:Name of the record}                                          #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the resource 
+    api_key: ${3:value}                                                    # API key of the Exoscale DNS API  Since 2 4, the ENV variable C(CLOUDSTACK_KEY) is used as default, when defined 
+    api_secret: ${4:value}                                                 # Secret key of the Exoscale DNS API  Since 2 4, the ENV variable C(CLOUDSTACK_SECRET) is used as default, when defined 
+    api_timeout: ${5:10}                                                   # HTTP timeout to Exoscale DNS API  Since 2 4, the ENV variable C(CLOUDSTACK_TIMEOUT) is used as default, when defined 
+    api_region: ${6:cloudstack}                                            # Name of the ini section in the C(cloustack ini) file  Since 2 4, the ENV variable C(CLOUDSTACK_REGION) is used as defaul
+    validate_certs: ${7:True}                                              # Validate SSL certs of the Exoscale DNS API 

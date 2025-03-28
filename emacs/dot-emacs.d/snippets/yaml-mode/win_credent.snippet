@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages Windows Credentials in the Credential Manager
+# prefix: win_credential_snippet
+# key: win_credent
+# group: ansible
+# --
+
+- name: ${0:Manages Windows Credentials in the Credential Manager}
+  win_credential:                                                          
+    name: ${1:The target that identifies the server or servers that the credential is to be used for}# If the value can be a NetBIOS name, DNS server name, DNS host name suffix with a wildcard char
+    type: ${2$$(yas-choose-value '("domain_certificate" "domain_password" "generic_certificate" "generic_password"))}# The type of credential to store  This is used with I(name) to produce a unique
+    alias: ${3:value}                                                      # Adds an alias for the credential  Typically this is the NetBIOS name of a host if I(name) is set to the DNS name 
+    attributes: ${4:value}                                                 # A list of dicts that set application specific attributes for a credential  When set, existing attributes will be compare
+    comment: ${5:value}                                                    # A user defined comment for the credential 
+    persistence: ${6$$(yas-choose-value '("enterprise" "local"))}          # choices: enterprise;local  Defines the persistence of the credential  If C(local), the credential will persist for all l
+    secret: ${7:value}                                                     # The secret for the credential  When omitted, then no secret is used for the credential if a new credentials is created  
+    secret_format: ${8$$(yas-choose-value '("base64" "text"))}             # choices: base64;text  Controls the input type for I(secret)  If C(text), I(secret) is a text string that is UTF-16LE enc
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(absent), the credential specified by I(name) and I(type) is removed  When C(present), th
+    update_secret: ${10$$(yas-choose-value '("always" "on_create"))}       # choices: always;on_create  When C(always), the secret will always be updated if they differ  When C(on_create), the secr
+    username: ${11:value}                                                  # When I(type) is a password type, then this is the username to store for the credential  When I(type) is a credential typ

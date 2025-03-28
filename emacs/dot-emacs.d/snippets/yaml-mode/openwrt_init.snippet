@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage services on OpenWrt.
+# prefix: openwrt_init_snippet
+# key: openwrt_init
+# group: ansible
+# --
+
+- name: ${0:Manage services on OpenWrt.}
+  openwrt_init:                                                            
+    name: ${1:Name of the service}                                         #
+    state: ${2$$(yas-choose-value '("started" "stopped" "restarted" "reloaded"))}# choices: started;stopped;restarted;reloaded  C(started)/C(stopped) are idempotent actions that will not run comman
+    enabled: ${3:value}                                                    # Whether the service should start on boot  B(At least one of state and enabled are required )
+    pattern: ${4:value}                                                    # If the service does not respond to the 'running' command, name a substring to look for as would be found in the output o

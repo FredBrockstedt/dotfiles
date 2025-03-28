@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages Kubernetes packages with the Helm package manager
+# prefix: helm_snippet
+# key: helm
+# group: ansible
+# --
+
+- name: ${0:Manages Kubernetes packages with the Helm package manager}
+  helm:                                                                    
+    host: ${1:localhost}                                                   # Tiller's server host 
+    port: ${2:44134}                                                       # Tiller's server port 
+    namespace: ${3:default}                                                # Kubernetes namespace where the chart should be installed 
+    name: ${4:value}                                                       # Release name to manage 
+    state: ${5$$(yas-choose-value '("absent" "purged" "present"))}         # choices: absent;purged;present  Whether to install C(present), remove C(absent), or purge C(purged) a package 
+    chart: ${6:namespace()}                                                # A   m a p   d e s c r i b i n g   t h e   c h a r t   t o   i n s t a l l     S e e   e x a m p l e s   f o r   a v a i 
+    values: ${7:namespace()}                                               # A map of value options for the chart 
+    disable_hooks: ${8:false}                                              # Whether to disable hooks during the uninstall process 

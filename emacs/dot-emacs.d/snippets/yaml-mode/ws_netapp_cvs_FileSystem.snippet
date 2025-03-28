@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: NetApp AWS Cloud Volumes Service Manage FileSystem.
+# prefix: aws_netapp_cvs_FileSystems_snippet
+# key: ws_netapp_cvs_FileSystem
+# group: ansible
+# --
+
+- name: ${0:NetApp AWS Cloud Volumes Service Manage FileSystem.}
+  aws_netapp_cvs_FileSystems:                                              
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified fileSystem should exist or not 
+    region: ${2:The region to which the filesystem belongs to}             #
+    creationToken: ${3:Name of the filesystem}                             #
+    api_key: ${4:The access key to authenticate with the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    secret_key: ${5:The secret_key to authenticate with the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    api_url: ${6:The url to the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    quotaInBytes: ${7:value}                                               # Size of the filesystem Required for create
+    serviceLevel: ${8$$(yas-choose-value '("standard" "premium" "extreme"))}# choices: standard;premium;extreme  Service Level of a filesystem 
+    exportPolicy: ${9:value}                                               # The policy rules to export the filesystem
+    validate_certs: ${10:True}                                             # Should https certificates be validated?

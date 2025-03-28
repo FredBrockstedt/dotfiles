@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Configure FlashBlade Directory Service
+# prefix: purefb_ds_snippet
+# key: purefb_d
+# group: ansible
+# --
+
+- name: ${0:Configure FlashBlade Directory Service}
+  purefb_ds:                                                               
+    base_dn: ${1:Sets the base of the Distinguished Name (DN) of the directory service groups}# The base should consist of only Domain Components (DCs)  The base_dn will populate with a default val
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete directory service configuration
+    dstype: ${3$$(yas-choose-value '("management" "nfs" "smb"))}           # choices: management;nfs;smb  The type of directory service to work on
+    enable: ${4:False}                                                     # Whether to enable or disable directory service support 
+    uri: ${5:value}                                                        # A list of up to 30 URIs of the directory servers  Each URI must include the scheme ldap:// or ldaps:// (for LDAP over SS
+    bind_password: ${6:value}                                              # Sets the password of the bind_user user name account 
+    bind_user: ${7:value}                                                  # Sets the user name that can be used to bind to and query the directory  For Active Directory, enter the username - often
+    nis_servers: ${8:value}                                                # A list of up to 30 IP addresses or FQDNs for NIS servers  This cannot be used in conjunction with LDAP configurations 
+    nis_domain: ${9:value}                                                 # The NIS domain to search This cannot be used in conjunction with LDAP configurations 
+    join_ou: ${10:value}                                                   # The optional organizational unit (OU) where the machine account for the directory service will be created 
+    fb_url: ${11:value}                                                    # FlashBlade management IP address or Hostname 
+    api_token: ${12:value}                                                 # FlashBlade API token for admin privileged user 

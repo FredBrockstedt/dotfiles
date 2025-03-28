@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: utilize GCE image resources
+# prefix: gce_img_snippet
+# key: gce_img
+# group: ansible
+# --
+
+- name: ${0:utilize GCE image resources}
+  gce_img:                                                                 
+    name: ${1:the name of the image to create or delete}                   #
+    description: ${2:value}                                                # an optional description
+    family: ${3:value}                                                     # an optional family name
+    source: ${4:value}                                                     # the source disk or the Google Cloud Storage URI to create the image from
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  desired state of the image
+    zone: ${6:us-central1-a}                                               # the zone of the disk specified by source
+    timeout: ${7:180}                                                      # timeout for the operation
+    service_account_email: ${8:value}                                      # service account email
+    pem_file: ${9:value}                                                   # path to the pem file associated with the service account email
+    project_id: ${10:value}                                                # your GCE project ID

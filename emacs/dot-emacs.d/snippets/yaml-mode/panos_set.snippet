@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Execute arbitrary commands on a PAN-OS device using XPath and element
+# prefix: panos_set_snippet
+# key: panos_set
+# group: ansible
+# --
+
+- name: ${0:Execute arbitrary commands on a PAN-OS device using XPath and element}
+  panos_set:                                                               
+    ip_address: ${1:IP address or host FQDN of the target PAN-OS NVA}      #
+    password: ${2:Password for the given 'username'}                       #
+    xpath: ${3:The 'xpath' for the commands configurable}                  #
+    username: ${4:admin}                                                   # User name for a user with admin rights on the PAN-OS NVA
+    command: ${5$$(yas-choose-value '("set" "edit" "delete" "get" "show" "override"))}# choices: set;edit;delete;get;show;override  Xapi method name which supports 'xpath' or 'xpath' and 'element'
+    element: ${6:value}                                                    # The 'element' for the 'xpath' if required

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage Connection Authorization Policies (CAP) on a Remote Desktop Gateway server
+# prefix: win_rds_cap_snippet
+# key: win_rds_cap
+# group: ansible
+# --
+
+- name: ${0:Manage Connection Authorization Policies (CAP) on a Remote Desktop Gateway server}
+  win_rds_cap:                                                             
+    name: ${1:Name of the connection authorization policy}                 #
+    state: ${2$$(yas-choose-value '("absent" "enabled" "disabled" "present"))}# choices: absent;enabled;disabled;present  The state of connection authorization policy  If C(absent) will ensure the 
+    auth_method: ${3$$(yas-choose-value '("both" "none" "password" "smartcard"))}# choices: both;none;password;smartcard  Specifies how the RD Gateway server authenticates users  When a new CAP is 
+    order: ${4:value}                                                      # Evaluation order of the policy  The CAP in which I(order) is set to a value of '1' is evaluated first  By default, a new
+    session_timeout: ${5:value}                                            # The maximum time, in minutes, that a session can be idle  A value of zero disables session timeout 
+    session_timeout_action: ${6$$(yas-choose-value '("disconnect" "reauth"))}# choices: disconnect;reauth  The action the server takes when a session times out  C(disconnect): disconnect the sessio
+    idle_timeout: ${7:value}                                               # Specifies the time interval, in minutes, after which an idle session is disconnected  A value of zero disables idle time
+    allow_only_sdrts_servers: ${8:value}                                   # Specifies whether connections are allowed only to Remote Desktop Session Host servers that enforce Remote Desktop Gatewa
+    user_groups: ${9:value}                                                # A list of user groups that is allowed to connect to the Remote Gateway server  Required when a new CAP is created 
+    computer_groups: ${10:value}                                           # A list of computer groups that is allowed to connect to the Remote Gateway server 
+    redirect_clipboard: ${11:value}                                        # Allow clipboard redirection 
+    redirect_drives: ${12:value}                                           # Allow disk drive redirection 
+    redirect_printers: ${13:value}                                         # Allow printers redirection 
+    redirect_serial: ${14:value}                                           # Allow serial port redirection 
+    redirect_pnp: ${15:value}                                              # Allow Plug and Play devices redirection 

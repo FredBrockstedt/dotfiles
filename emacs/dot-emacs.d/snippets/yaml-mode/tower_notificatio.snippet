@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower notification.
+# prefix: tower_notification_snippet
+# key: tower_notificatio
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower notification.}
+  tower_notification:                                                      
+    name: ${1:The name of the notification}                                #
+    notification_type: ${2$$(yas-choose-value '("email" "slack" "twilio" "pagerduty" "hipchat" "webhook" "irc"))}# The type of notification to be sent 
+    description: ${3:value}                                                # The description of the notification 
+    organization: ${4:value}                                               # The organization the notification belongs to 
+    notification_configuration: ${5:value}                                 # The notification configuration file  Note providing this field would disable all notification-configuration-related fiel
+    username: ${6:value}                                                   # The mail server username  Required if I(notification_type=email) 
+    sender: ${7:value}                                                     # The sender email address  Required if I(notification_type=email) 
+    recipients: ${8:value}                                                 # The recipients email addresses  Required if I(notification_type=email) 
+    use_tls: ${9:value}                                                    # The TLS trigger  Required if I(notification_type=email) 
+    host: ${10:value}                                                      # The mail server host  Required if I(notification_type=email) 
+    use_ssl: ${11:value}                                                   # The SSL trigger  Required if I(notification_type=email) or if I(notification_type=irc) 
+    password: ${12:value}                                                  # The mail server password  Required if I(notification_type=email) or if I(notification_type=irc) 
+    port: ${13:value}                                                      # The mail server port  Required if I(notification_type=email) or if I(notification_type=irc) 
+    channels: ${14:value}                                                  # The destination Slack channels  Required if I(notification_type=slack) 
+    token: ${15:value}                                                     # The access token  Required if I(notification_type=slack), if I(notification_type=pagerduty) or if I(notification_type=hi
+    account_token: ${16:value}                                             # The Twillio account token  Required if I(notification_type=twillio) 
+    from_number: ${17:value}                                               # The source phone number  Required if I(notification_type=twillio) 
+    to_numbers: ${18:value}                                                # The destination phone numbers  Required if I(notification_type=twillio) 
+    account_sid: ${19:value}                                               # The Twillio account SID  Required if I(notification_type=twillio) 
+    subdomain: ${20:value}                                                 # The PagerDuty subdomain  Required if I(notification_type=pagerduty) 
+    service_key: ${21:value}                                               # The PagerDuty service/integration API key  Required if I(notification_type=pagerduty) 
+    client_name: ${22:value}                                               # The PagerDuty client identifier  Required if I(notification_type=pagerduty) 
+    message_from: ${23:value}                                              # The label to be shown with the notification  Required if I(notification_type=hipchat) 
+    api_url: ${24:value}                                                   # The HipChat API URL  Required if I(notification_type=hipchat) 
+    color: ${25$$(yas-choose-value '("yellow" "green" "red" "purple" "gray" "random"))}# choices: yellow;green;red;purple;gray;random  The notification color  Required if I(notification_type=hipcha
+    rooms: ${26:value}                                                     # HipChat rooms to send the notification to  Required if I(notification_type=hipchat) 
+    notify: ${27:value}                                                    # The notify channel trigger  Required if I(notification_type=hipchat) 
+    url: ${28:value}                                                       # The target URL  Required if I(notification_type=webhook) 
+    headers: ${29:value}                                                   # The HTTP headers as JSON string  Required if I(notification_type=webhook) 
+    server: ${30:value}                                                    # The IRC server address  Required if I(notification_type=irc) 
+    nickname: ${31:value}                                                  # The IRC nickname  Required if I(notification_type=irc) 
+    targets: ${32:value}                                                   # The destination channels or users  Required if I(notification_type=irc) 
+    state: ${33$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Desired state of the resource 
+    tower_host: ${34:value}                                                # URL to your Tower instance 
+    tower_username: ${35:value}                                            # Username for your Tower instance 
+    tower_password: ${36:value}                                            # Password for your Tower instance 
+    validate_certs: ${37:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${38:value}                                         # Path to the Tower config file 

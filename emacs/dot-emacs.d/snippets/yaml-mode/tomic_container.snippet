@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage the containers on the atomic host platform
+# prefix: atomic_container_snippet
+# key: tomic_container
+# group: ansible
+# --
+
+- name: ${0:Manage the containers on the atomic host platform}
+  atomic_container:                                                        
+    backend: ${1$$(yas-choose-value '("docker" "ostree"))}                 # Define the backend to use for the container
+    name: ${2:Name of the container}                                       #
+    image: ${3:The image to use to install the container}                  #
+    state: ${4$$(yas-choose-value '("latest" "present" "absent" "rollback"))}# State of the container
+    mode: ${5$$(yas-choose-value '("user" "system"))}                      # Define if it is an user or a system container
+    rootfs: ${6:value}                                                     # Define the rootfs of the image
+    values: ${7:value}                                                     # Values for the installation of the container   This option is permitted only with mode 'user' or 'system'  The values sp

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series conduct synchronization actions on asynchronous mirror groups.
+# prefix: netapp_e_amg_sync_snippet
+# key: tapp_e_amg_sync
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series conduct synchronization actions on asynchronous mirror groups.}
+  netapp_e_amg_sync:                                                       
+    api_username: ${1:The username to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_password: ${2:The password to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_url: ${3:The url to the SANtricity WebServices Proxy or embedded REST API}#
+    name: ${4:The name of the async mirror group you wish to target}       #
+    state: ${5$$(yas-choose-value '("running" "suspended"))}               # The synchronization action you'd like to take  If C(running) then it will begin syncing if there is no active sync or wi
+    validate_certs: ${6:True}                                              # Should https certificates be validated?
+    ssid: ${7:value}                                                       # The ID of the storage array containing the AMG you wish to target
+    delete_recovery_point: ${8:False}                                      # Indicates whether the failures point can be deleted on the secondary if necessary to achieve the synchronization  If tru

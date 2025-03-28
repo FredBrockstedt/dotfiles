@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage VMware categories
+# prefix: vmware_category_snippet
+# key: vmware_category
+# group: ansible
+# --
+
+- name: ${0:Manage VMware categories}
+  vmware_category:                                                         
+    category_name: ${1:The name of category to manage}                     #
+    category_description: ${2:}                                            # The category description  This is required only if C(state) is set to C(present)  This parameter is ignored, when C(stat
+    category_cardinality: ${3$$(yas-choose-value '("multiple" "single"))}  # choices: multiple;single  The category cardinality  This parameter is ignored, when updating existing category 
+    new_category_name: ${4:value}                                          # The new name for an existing category  This value is used while updating an existing category 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state of category  If set to C(present) and category does not exists, then category is crea
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter server  If the value is not specified in the task, the value of enviro
+    username: ${7:value}                                                   # The username of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    password: ${8:value}                                                   # The password of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(no) when certificates are not trusted  If the value is n
+    protocol: ${10$$(yas-choose-value '("http" "https"))}                  # choices: http;https  The connection to protocol 

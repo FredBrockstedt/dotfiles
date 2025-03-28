@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: NetApp AWS Cloud Volumes Service Manage Snapshots.
+# prefix: aws_netapp_cvs_snapshots_snippet
+# key: ws_netapp_cvs_snapshot
+# group: ansible
+# --
+
+- name: ${0:NetApp AWS Cloud Volumes Service Manage Snapshots.}
+  aws_netapp_cvs_snapshots:                                                
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified snapshot should exist or not 
+    region: ${2:The region to which the snapshot belongs to}               #
+    name: ${3:Name of the snapshot}                                        #
+    api_key: ${4:The access key to authenticate with the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    secret_key: ${5:The secret_key to authenticate with the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    api_url: ${6:The url to the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    fileSystemId: ${7:value}                                               # Name or Id of the filesystem  Required for create operation
+    from_name: ${8:value}                                                  # ID or Name of the snapshot to rename  Required to create an snapshot called 'name' by renaming 'from_name' 
+    validate_certs: ${9:True}                                              # Should https certificates be validated?

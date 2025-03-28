@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Gather info about your Hetzner Cloud networks.
+# prefix: hcloud_network_info_snippet
+# key: hcloud_network_info
+# group: ansible
+# --
+
+- name: ${0:Gather info about your Hetzner Cloud networks.}
+  hcloud_network_info:                                                     
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the network you want to get 
+    name: ${3:value}                                                       # The name of the network you want to get 
+    label_selector: ${4:value}                                             # The label selector for the network you want to get 
+    endpoint: ${{5:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

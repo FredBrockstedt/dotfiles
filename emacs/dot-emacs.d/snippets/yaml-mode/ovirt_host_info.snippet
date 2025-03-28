@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more oVirt/RHV hosts
+# prefix: ovirt_host_info_snippet
+# key: ovirt_host_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more oVirt/RHV hosts}
+  ovirt_host_info:                                                         
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt: C(username)[I(required)] - The name of the user, something like I(admin@internal)}# Default value is set by I(O
+    pattern: ${2:value}                                                    # Search term which is accepted by oVirt/RHV search backend  For example to search host X from datacenter Y use following 
+    all_content: ${3:False}                                                # If I(true) all the attributes of the hosts should be included in the response 
+    cluster_version: ${4:value}                                            # Filter the hosts based on the cluster version 
+    fetch_nested: ${5:value}                                               # If I(yes) the module will fetch additional data from the API  It will fetch only IDs of nested entity  It doesn't fetch 
+    nested_attributes: ${6:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is

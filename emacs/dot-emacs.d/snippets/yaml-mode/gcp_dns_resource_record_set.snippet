@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP ResourceRecordSet
+# prefix: gcp_dns_resource_record_set_snippet
+# key: gcp_dns_resource_record_set
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP ResourceRecordSet}
+  gcp_dns_resource_record_set:                                             
+    name: ${1:For example, U(www}                                          #example com) 
+    type: ${2:One of valid DNS resource types}                             # Some valid choices include: "A", "AAAA", "CAA", "CNAME", "MX", "NAPTR", "NS", "PTR", "SOA", "SPF", "SRV", "TLSA", "TXT"
+    managed_zone: ${3:Identifies the managed zone addressed by this request}# This must be a dictionary that contains both a 'name' key and a 'dnsName' key  You can pass in the results of the gcp_d
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    ttl: ${6:value}                                                        # Number of seconds that this ResourceRecordSet can be cached by resolvers 
+    target: ${7:value}                                                     # As defined in RFC 1035 (section 5) and RFC 1034 (section 3 6 1)  
+    project: ${8:value}                                                    # The Google Cloud Platform project to use 
+    service_account_contents: ${9:value}                                   # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${10:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${11:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${12:value}                                                    # Array of scopes to be used 
+    env_type: ${13:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

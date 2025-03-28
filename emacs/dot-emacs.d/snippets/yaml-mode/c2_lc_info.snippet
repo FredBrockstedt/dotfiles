@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Gather information about AWS Autoscaling Launch Configurations
+# prefix: ec2_lc_info_snippet
+# key: c2_lc_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about AWS Autoscaling Launch Configurations}
+  ec2_lc_info:                                                             
+    name: ${1:[]}                                                          # A name or a list of name to match 
+    sort: ${2$$(yas-choose-value '("launch_configuration_name" "image_id" "created_time" "instance_type" "kernel_id" "ramdisk_id" "key_name"))}# choices: launch_configuration_name;image_id;created_
+    sort_order: ${3$$(yas-choose-value '("ascending" "descending"))}       # choices: ascending;descending  Order in which to sort results  Only used when the 'sort' parameter is specified 
+    sort_start: ${4:value}                                                 # Which result to start with (when sorting)  Corresponds to Python slice notation 
+    sort_end: ${5:value}                                                   # Which result to end with (when sorting)  Corresponds to Python slice notation 
+    debug_botocore_endpoint_logs: ${6:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${7:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${8:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${9:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${10:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${11:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${12:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${13:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

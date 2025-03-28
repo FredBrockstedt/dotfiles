@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage Linux capabilities
+# prefix: capabilities_snippet
+# key: capabilit
+# group: ansible
+# --
+
+- name: ${0:Manage Linux capabilities}
+  capabilities:                                                            
+    path: ${1:Specifies the path to the file to be managed}                #
+    capability: ${2:Desired capability to set (with operator and flags, if state is C(present)) or remove (if state is C(absent))}#
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the entry should be present or absent in the file's capabilities 

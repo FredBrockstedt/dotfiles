@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about the OneView Data Centers
+# prefix: oneview_datacenter_info_snippet
+# key: oneview_datacenter_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about the OneView Data Centers}
+  oneview_datacenter_info:                                                 
+    name: ${1:value}                                                       # Data Center name 
+    options: ${2:value}                                                    # Retrieve additional information  Options available: 'visualContent' 
+    config: ${3:value}                                                     # Path to a  json configuration file containing the OneView client configuration  The configuration file is optional and w
+    params: ${4:value}                                                     # List of params to delimit, filter and sort the list of resources  params allowed: - C(start): The first item to return, 

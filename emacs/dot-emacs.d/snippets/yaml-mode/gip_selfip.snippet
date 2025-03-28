@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage Self-IPs on a BIG-IP system
+# prefix: bigip_selfip_snippet
+# key: gip_selfip
+# group: ansible
+# --
+
+- name: ${0:Manage Self-IPs on a BIG-IP system}
+  bigip_selfip:                                                            
+    name: ${1:The self IP to create}                                       # If this parameter is not specified, then it will default to the value supplied in the C(address) parameter 
+    address: ${2:value}                                                    # The IP addresses for the new self IP  This value is ignored upon update as addresses themselves cannot be changed after 
+    allow_service: ${3:value}                                              # Configure port lockdown for the Self IP  By default, the Self IP has a "default deny" policy  This can be changed to all
+    description: ${4:value}                                                # Description of the traffic selector 
+    netmask: ${5:value}                                                    # The netmask for the self IP  When creating a new Self IP, this value is required 
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(present), guarantees that the Self-IP exists with the provided attributes  When C(absent
+    traffic_group: ${7:value}                                              # The traffic group for the Self IP addresses in an active-active, redundant load balancer configuration  When creating a 
+    vlan: ${8:value}                                                       # The VLAN that the new self IPs will be on  When creating a new Self IP, this value is required 
+    route_domain: ${9:value}                                               # The route domain id of the system  When creating a new Self IP, if this value is not specified, a default value of C(0) 
+    partition: ${10:Common}                                                # Device partition to manage resources on  You can set different partitions for Self IPs, but the address used may not mat
+    provider: ${11:value}                                                  # A dict object containing connection details 

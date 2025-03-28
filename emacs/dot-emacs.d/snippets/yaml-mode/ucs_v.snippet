@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Configures VSANs on Cisco UCS Manager
+# prefix: ucs_vsans_snippet
+# key: ucs_v
+# group: ansible
+# --
+
+- name: ${0:Configures VSANs on Cisco UCS Manager}
+  ucs_vsans:                                                               
+    name: ${1:The name assigned to the VSAN}                               # This name can be between 1 and 32 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    vsan_id: ${2:The unique identifier assigned to the VSAN}               # The ID can be a string between '1' and '4078', or between '4080' and '4093'  '4079' is a reserved VSAN ID  In addition, 
+    vlan_id: ${3:The unique string identifier assigned to the VLAN used for Fibre Channel connections}# Note that Cisco UCS Manager uses VLAN '4048'   See the UCS Manager configuration guide if you
+    hostname: ${4:IP address or hostname of Cisco UCS Manager}             #
+    password: ${5:Password for Cisco UCS Manager authentication}           #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify VSANs are present and will create if needed  If C(absent), will veri
+    fc_zoning: ${7$$(yas-choose-value '("disabled" "enabled"))}            # choices: disabled;enabled  Fibre Channel zoning configuration for the Cisco UCS domain  Fibre Channel zoning can be set 
+    fabric: ${8$$(yas-choose-value '("common" "A" "B"))}                   # choices: common;A;B  The fabric configuration of the VSAN   This can be one of the following: common - The VSAN maps to 
+    username: ${9:admin}                                                   # Username for Cisco UCS Manager authentication 
+    port: ${10:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${11:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${12:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${13:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Manage Azure SIG Image instance.
+# prefix: azure_rm_galleryimage_snippet
+# key: zure_rm_galleryimag
+# group: ansible
+# --
+
+- name: ${0:Manage Azure SIG Image instance.}
+  azure_rm_galleryimage:                                                   
+    resource_group: ${1:The name of the resource group}                    #
+    gallery_name: ${2:The name of the Shared Image Gallery in which the Image Definition is to be created}#
+    name: ${3:The name of the gallery Image Definition to be created or updated}# The allowed characters are alphabets and numbers with dots, dashes, and periods allowed in the middle  The maximum 
+    os_type: ${4$$(yas-choose-value '("windows" "linux"))}                 # This property allows you to specify the type of the OS that is included in the disk when creating a VM from a managed im
+    os_state: ${5$$(yas-choose-value '("generalized" "specialized"))}      # The allowed values for OS State are 'Generalized' 
+    identifier: ${6:Image identifier}                                      #
+    location: ${7:value}                                                   # Resource location
+    description: ${8:value}                                                # The description of this gallery Image Definition resource  This property is updatable 
+    eula: ${9:value}                                                       # The Eula agreement for the gallery Image Definition 
+    privacy_statement_uri: ${10:value}                                     # The privacy statement uri 
+    release_note_uri: ${11:value}                                          # The release note uri 
+    end_of_life_date: ${12:value}                                          # The end of life date of the gallery Image Definition  This property can be used for decommissioning purposes  This prope
+    recommended: ${13:value}                                               # Recommended parameter values 
+    disallowed: ${14:value}                                                # Disallowed parameter values 
+    purchase_plan: ${15:value}                                             # Purchase plan 
+    state: ${16$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the GalleryImage  Use C(present) to create or update an GalleryImage and C(
+    ad_user: ${17:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${18:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${19:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${20:value}                                           # Your Azure subscription Id 
+    client_id: ${21:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${22:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${23:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${24:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${25:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${26$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${27$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${28:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${29:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${30:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

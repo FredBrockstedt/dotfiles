@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Gathers info about an ESXi host's Port Group configuration
+# prefix: vmware_portgroup_info_snippet
+# key: vmware_portgroup_info
+# group: ansible
+# --
+
+- name: ${0:Gathers info about an ESXi host's Port Group configuration}
+  vmware_portgroup_info:                                                   
+    policies: ${1:False}                                                   # Gather information about Security, Traffic Shaping, as well as Teaming and failover  The property C(ts) stands for Traff
+    cluster_name: ${2:value}                                               # Name of the cluster  Info will be returned for all hostsystem belonging to this cluster name  If C(esxi_hostname) is not
+    esxi_hostname: ${3:value}                                              # ESXi hostname to gather information from  If C(cluster_name) is not given, this parameter is required 
+    hostname: ${4:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${5:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${6:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${7:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${8:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${9:value}                                                 # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${10:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Uploads files to Cisco FTD devices over HTTP(S)
+# prefix: ftd_file_upload_snippet
+# key: ftd_file_upload
+# group: ansible
+# --
+
+- name: ${0:Uploads files to Cisco FTD devices over HTTP(S)}
+  ftd_file_upload:                                                         
+    operation: ${1:The name of the operation to execute}                   # Only operations that upload file can be used in this module 
+    file_to_upload: ${2:Absolute path to the file that should be uploaded} #
+    register_as: ${3:value}                                                # Specifies Ansible fact name that is used to register received response from the FTD device 

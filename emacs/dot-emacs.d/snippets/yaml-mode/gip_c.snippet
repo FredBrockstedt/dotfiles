@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage CLI aliases on a BIG-IP
+# prefix: bigip_cli_alias_snippet
+# key: gip_c
+# group: ansible
+# --
+
+- name: ${0:Manage CLI aliases on a BIG-IP}
+  bigip_cli_alias:                                                         
+    name: ${1:Specifies the name of the alias}                             #
+    scope: ${2$$(yas-choose-value '("private" "shared"))}                  # choices: private;shared  The scope of the alias; whether it is shared on the system, or usable only for the user who cre
+    command: ${3:value}                                                    # The command to alias 
+    description: ${4:value}                                                # Description of the alias 
+    partition: ${5:Common}                                                 # Device partition to manage resources on  This parameter is disregarded when the C(scope) is C(private) 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${7:value}                                                   # A dict object containing connection details 

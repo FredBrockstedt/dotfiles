@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Run scripts on Check Point devices over Web Services API
+# prefix: checkpoint_run_script_snippet
+# key: checkpoint_run_script
+# group: ansible
+# --
+
+- name: ${0:Run scripts on Check Point devices over Web Services API}
+  checkpoint_run_script:                                                   
+    script_name: ${1:Name of the script}                                   #
+    script: ${2:Script body contents}                                      #
+    targets: ${3:Targets the script should be run against}                 # Can reference either name or UID 

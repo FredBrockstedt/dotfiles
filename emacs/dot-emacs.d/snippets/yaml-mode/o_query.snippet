@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Query data from Cisco NSO.
+# prefix: nso_query_snippet
+# key: o_query
+# group: ansible
+# --
+
+- name: ${0:Query data from Cisco NSO.}
+  nso_query:                                                               
+    xpath: ${1:X P a t h   s e l e c t i o n   r e l a t i v e   t o   t h e   r o o t }#
+    fields: ${2:L i s t   o f   f i e l d s   t o   s e l e c t   f r o m   m a t c h i n g   n o d e s }# 
+
+    url: ${3:N S O   J S O N - R P C   U R L ,   h t t p : / / l o c a l h o s t : 8 0 8 0 / j s o n r p c}#
+    username: ${4:N S O   u s e r n a m e}                                 #
+    password: ${5:N S O   p a s s w o r d}                                 #
+    timeout: ${6:300}                                                      # J S O N - R P C   r e q u e s t   t i m e o u t   i n   s e c o n d s
+    validate_certs: ${7:False}                                             # W h e n   s e t   t o   t r u e ,   v a l i d a t e s   t h e   S S L   c e r t i f i c a t e   o f   N S O   w h e n   

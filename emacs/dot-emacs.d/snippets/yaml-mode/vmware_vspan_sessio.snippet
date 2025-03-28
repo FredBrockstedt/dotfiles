@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Create or remove a Port Mirroring session.
+# prefix: vmware_vspan_session_snippet
+# key: vmware_vspan_sessio
+# group: ansible
+# --
+
+- name: ${0:Create or remove a Port Mirroring session.}
+  vmware_vspan_session:                                                    
+    switch: ${1:The name of the distributed vSwitch on which to add or remove the mirroring session}#
+    name: ${2:Name of the session}                                         #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # Create or remove the session 
+    session_type: ${4$$(yas-choose-value '("encapsulatedRemoteMirrorSource" "remoteMirrorDest" "remoteMirrorSource" "dvPortMirror"))}# choices: encapsulatedRemoteMirrorSource;remoteMirrorDest;remot
+    enabled: ${5:True}                                                     # Whether the session is enabled 
+    description: ${6:value}                                                # The description for the session 
+    source_port_transmitted: ${7:value}                                    # Source port for which transmitted packets are mirrored 
+    source_port_received: ${8:value}                                       # Source port for which received packets are mirrored 
+    destination_port: ${9:value}                                           # Destination port that received the mirrored packets  Also any port designated in the value of this property can not matc
+    encapsulation_vlan_id: ${10:value}                                     # VLAN ID used to encapsulate the mirrored traffic 
+    strip_original_vlan: ${11:value}                                       # Whether to strip the original VLAN tag  if false, the original VLAN tag will be preserved on the mirrored traffic  If en
+    mirrored_packet_length: ${12:value}                                    # An integer that describes how much of each frame to mirror  If unset, all of the frame would be mirrored  Setting this p
+    normal_traffic_allowed: ${13:value}                                    # Whether or not destination ports can send and receive "normal" traffic  Setting this to false will make mirror ports be 
+    sampling_rate: ${14:value}                                             # Sampling rate of the session  If its value is n, one of every n packets is mirrored  Valid values are between 1 to 65535
+    source_vm_transmitted: ${15:value}                                     # With this parameter it is possible, to add a NIC of a VM to a port mirroring session  Valid attributes are: - C(name) (s
+    source_vm_received: ${16:value}                                        # With this parameter it is possible, to add a NIC of a VM to a port mirroring session  Valid attributes are: - C(name) (s
+    destination_vm: ${17:value}                                            # With this parameter it is possible, to add a NIC of a VM to a port mirroring session  Valid attributes are: - C(name) (s
+    hostname: ${18:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${19:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${20:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${21:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${22:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${23:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${24:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

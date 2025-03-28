@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Configures SAN Connectivity Policies on Cisco UCS Manager
+# prefix: ucs_san_connectivity_snippet
+# key: ucs_san_connectivity
+# group: ansible
+# --
+
+- name: ${0:Configures SAN Connectivity Policies on Cisco UCS Manager}
+  ucs_san_connectivity:                                                    
+    name: ${1:The name of the SAN Connectivity Policy}                     # This name can be between 1 and 16 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify SAN Connectivity Policies are present and will create if needed  If 
+    description: ${5:value}                                                # A description of the policy  Cisco recommends including information about where and when to use the policy  Enter up to 
+    wwnn_pool: ${6:default}                                                # Name of the WWNN pool to use for WWNN assignment 
+    vhba_list: ${7:value}                                                  # List of vHBAs used by the SAN Connectivity Policy  vHBAs used by the SAN Connectivity Policy must be created from a vHBA
+    org_dn: ${8:org-root}                                                  # Org dn (distinguished name)
+    username: ${9:admin}                                                   # Username for Cisco UCS Manager authentication 
+    port: ${10:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${11:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${12:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${13:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

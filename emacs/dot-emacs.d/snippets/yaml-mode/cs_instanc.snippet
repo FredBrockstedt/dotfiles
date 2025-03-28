@@ -1,0 +1,49 @@
+# -*- mode: snippet -*-
+# name: Manages instances and virtual machines on Apache CloudStack based clouds.
+# prefix: cs_instance_snippet
+# key: cs_instanc
+# group: ansible
+# --
+
+- name: ${0:Manages instances and virtual machines on Apache CloudStack based clouds.}
+  cs_instance:                                                             
+    name: ${1:value}                                                       # Host name of the instance  C(name) can only contain ASCII letters  Name will be generated (UUID) by CloudStack if not sp
+    display_name: ${2:value}                                               # Custom display name of the instances  Display name will be set to I(name) if not specified  Either I(name) or I(display_
+    group: ${3:value}                                                      # Group in where the new instance should be in 
+    state: ${4$$(yas-choose-value '("deployed" "started" "stopped" "restarted" "restored" "destroyed" "expunged" "present" "absent"))}# choices: deployed;started;stopped;restarted;restored;destroye
+    service_offering: ${5:value}                                           # Name or id of the service offering of the new instance  If not set, first found service offering is used 
+    cpu: ${6:value}                                                        # The number of CPUs to allocate to the instance, used with custom service offerings
+    cpu_speed: ${7:value}                                                  # The clock speed/shares allocated to the instance, used with custom service offerings
+    memory: ${8:value}                                                     # The memory allocated to the instance, used with custom service offerings
+    template: ${9:value}                                                   # Name, display text or id of the template to be used for creating the new instance  Required when using I(state=present) 
+    iso: ${10:value}                                                       # Name or id of the ISO to be used for creating the new instance  Required when using I(state=present)  Mutually exclusive
+    template_filter: ${11$$(yas-choose-value '("all" "featured" "self" "selfexecutable" "sharedexecutable" "executable" "community"))}# choices: all;featured;self;selfexecutable;sharedexecutable;ex
+    hypervisor: ${12:value}                                                # Name the hypervisor to be used for creating the new instance  Relevant when using I(state=present), but only considered 
+    keyboard: ${13$$(yas-choose-value '("de" "de-ch" "es" "fi" "fr" "fr-be" "fr-ch" "is" "it" "jp" "nl-be" "false" "pt" "uk" "us"))}# choices: de;de-ch;es;fi;fr;fr-be;fr-ch;is;it;jp;nl-be;no;pt;uk;
+    networks: ${14:value}                                                  # List of networks to use for the new instance 
+    ip_address: ${15:value}                                                # IPv4 address for default instance's network during creation 
+    ip6_address: ${16:value}                                               # IPv6 address for default instance's network 
+    ip_to_networks: ${17:value}                                            # List of mappings in the form I({'network': NetworkName, 'ip': 1 2 3 4\}) Mutually exclusive with I(networks) option 
+    disk_offering: ${18:value}                                             # Name of the disk offering to be used 
+    disk_size: ${19:value}                                                 # Disk size in GByte required if deploying instance from ISO 
+    root_disk_size: ${20:value}                                            # Root disk size in GByte required if deploying instance with KVM hypervisor and want resize the root disk size at startup
+    security_groups: ${21:value}                                           # List of security groups the instance to be applied to 
+    host: ${22:value}                                                      # Host on which an instance should be deployed or started on  Only considered when I(state=started) or instance is running
+    domain: ${23:value}                                                    # Domain the instance is related to 
+    account: ${24:value}                                                   # Account the instance is related to 
+    project: ${25:value}                                                   # Name of the project the instance to be deployed in 
+    zone: ${26:value}                                                      # Name of the zone in which the instance should be deployed  If not set, default zone is used 
+    ssh_key: ${27:value}                                                   # Name of the SSH key to be deployed on the new instance 
+    affinity_groups: ${28:value}                                           # Affinity groups names to be applied to the new instance 
+    user_data: ${29:value}                                                 # Optional data (ASCII) that can be sent to the instance upon a successful deployment  The data will be automatically base
+    force: ${30:False}                                                     # Force stop/start the instance if required to apply changes, otherwise a running instance will not be changed 
+    allow_root_disk_shrink: ${31:False}                                    # Enables a volume shrinkage when the new size is smaller than the old one 
+    tags: ${32:value}                                                      # List of tags  Tags are a list of dictionaries having keys C(key) and C(value)  If you want to delete all tags, set a emp
+    poll_async: ${33:True}                                                 # Poll async jobs until job has finished 
+    details: ${34:value}                                                   # Map to specify custom parameters 
+    api_key: ${35:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${36:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${37:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${38$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${39:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${40:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

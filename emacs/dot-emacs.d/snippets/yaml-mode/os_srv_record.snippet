@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Configure Infoblox NIOS SRV records
+# prefix: nios_srv_record_snippet
+# key: os_srv_record
+# group: ansible
+# --
+
+- name: ${0:Configure Infoblox NIOS SRV records}
+  nios_srv_record:                                                         
+    name: ${1:Specifies the fully qualified hostname to add or remove from the system}#
+    view: ${2:default}:Sets the DNS view to associate this a record with}  #  The DNS view must already be configured on the system
+    port: ${3:Configures the port (0-65535) of this SRV record}            #
+    priority: ${4:Configures the priority (0-65535) for this SRV record}   #
+    target: ${5:Configures the target FQDN for this SRV record}            #
+    weight: ${6:Configures the weight (0-65535) for this SRV record}       #
+    ttl: ${7:value}                                                        # Configures the TTL to be associated with this host record
+    extattrs: ${8:value}                                                   # Allows for the configuration of Extensible Attributes on the instance of the object   This argument accepts a set of key
+    comment: ${9:value}                                                    # Configures a text string comment to be associated with the instance of this object   The provided text string will be co
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Configures the intended state of the instance of the object on the NIOS server   When this valu
+    provider: ${11:value}                                                  # A dict object containing connection details 

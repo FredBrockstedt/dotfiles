@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Authenticate to Kubernetes clusters which require an explicit login step
+# prefix: k8s_auth_snippet
+# key: k8s_auth
+# group: ansible
+# --
+
+- name: ${0:Authenticate to Kubernetes clusters which require an explicit login step}
+  k8s_auth:                                                                
+    host: ${1:Provide a URL for accessing the API server}                  #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If set to I(present) connect to the API server using the URL specified in C(host) and attempt t
+    username: ${3:value}                                                   # Provide a username for authenticating with the API server 
+    password: ${4:value}                                                   # Provide a password for authenticating with the API server 
+    ca_cert: ${5:value}                                                    # Path to a CA certificate file used to verify connection to the API server  The full certificate chain must be provided t
+    validate_certs: ${6:True}                                              # Whether or not to verify the API server's SSL certificates 
+    api_key: ${7:value}                                                    # When C(state) is set to I(absent), this specifies the token to revoke 

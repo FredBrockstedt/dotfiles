@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manages projects on Apache CloudStack based clouds.
+# prefix: cs_project_snippet
+# key: cs_project
+# group: ansible
+# --
+
+- name: ${0:Manages projects on Apache CloudStack based clouds.}
+  cs_project:                                                              
+    name: ${1:Name of the project}                                         #
+    display_text: ${2:value}                                               # Display text of the project  If not specified, I(name) will be used as I(display_text) 
+    state: ${3$$(yas-choose-value '("present" "absent" "active" "suspended"))}# choices: present;absent;active;suspended  State of the project 
+    domain: ${4:value}                                                     # Domain the project is related to 
+    account: ${5:value}                                                    # Account the project is related to 
+    tags: ${6:value}                                                       # List of tags  Tags are a list of dictionaries having keys I(key) and I(value)  If you want to delete all tags, set a emp
+    poll_async: ${7:True}                                                  # Poll async jobs until job has finished 
+    api_key: ${8:value}                                                    # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${9:value}                                                 # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${10:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${11$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${12:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${13:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage packages using chocolatey
+# prefix: win_chocolatey_snippet
+# key: win_chocolatey
+# group: ansible
+# --
+
+- name: ${0:Manage packages using chocolatey}
+  win_chocolatey:                                                          
+    name: ${1:Name of the package(s) to be installed}                      # Set to C(all) to run the action on all the installed packages 
+    allow_empty_checksums: ${2:False}                                      # Allow empty checksums to be used for downloaded resource from non-secure locations  Use M(win_chocolatey_feature) with t
+    allow_multiple: ${3:False}                                             # Allow the installation of multiple packages when I(version) is specified  Having multiple packages at different versions
+    allow_prerelease: ${4:False}                                           # Allow the installation of pre-release packages  If I(state) is C(latest), the latest pre-release package will be install
+    architecture: ${5$$(yas-choose-value '("default" "x86"))}              # choices: default;x86  Force Chocolatey to install the package of a specific process architecture  When setting C(x86), w
+    force: ${6:False}                                                      # Forces the install of a package, even if it already is installed  Using I(force) will cause Ansible to always report tha
+    install_args: ${7:value}                                               # Arguments to pass to the native installer  These are arguments that are passed directly to the installer the Chocolatey 
+    ignore_checksums: ${8:False}                                           # Ignore the checksums provided by the package  Use M(win_chocolatey_feature) with the name C(checksumFiles) to control th
+    ignore_dependencies: ${9:False}                                        # Ignore dependencies, only install/upgrade the package itself 
+    package_params: ${10:value}                                            # Parameters to pass to the package  These are parameters specific to the Chocolatey package and are generally documented 
+    pinned: ${11:value}                                                    # Whether to pin the Chocolatey package or not  If omitted then no checks on package pins are done  Will pin/unpin the spe
+    proxy_url: ${12:value}                                                 # Proxy URL used to install chocolatey and the package  Use M(win_chocolatey_config) with the name C(proxy) to control thi
+    proxy_username: ${13:value}                                            # Proxy username used to install Chocolatey and the package  Before Ansible 2 7, users with double quote characters C(") w
+    proxy_password: ${14:value}                                            # Proxy password used to install Chocolatey and the package  This value is exposed as a command argument and any privilege
+    skip_scripts: ${15:False}                                              # Do not run I(chocolateyInstall ps1) or I(chocolateyUninstall ps1) scripts when installing a package 
+    source: ${16:value}                                                    # Specify the source to retrieve the package from  Use M(win_chocolatey_source) to manage global sources  This value can e
+    source_username: ${17:value}                                           # A username to use with I(source) when accessing a feed that requires authentication  It is recommended you define the cr
+    source_password: ${18:value}                                           # The password for I(source_username)  This value is exposed as a command argument and any privileged account can see this
+    state: ${19$$(yas-choose-value '("absent" "downgrade" "latest" "present" "reinstalled"))}# choices: absent;downgrade;latest;present;reinstalled  State of the package on the system  When C(absen
+    timeout: ${20:2700}                                                    # The time to allow chocolatey to finish before timing out 
+    validate_certs: ${21:True}                                             # Used when downloading the Chocolatey install script if Chocolatey is not already installed, this does not affect the Cho
+    version: ${22:value}                                                   # Specific version of the package to be installed  When I(state) is set to C(absent), will uninstall the specific version 

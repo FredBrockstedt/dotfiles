@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage the aggregate of local users on network device
+# prefix: net_user_snippet
+# key: t_user
+# group: ansible
+# --
+
+- name: ${0:Manage the aggregate of local users on network device}
+  net_user:                                                                
+    aggregate: ${1:value}                                                  # The set of username objects to be configured on the remote network device  The list entries can either be the username o
+    name: ${2:value}                                                       # The username to be configured on the remote network device  This argument accepts a string value and is mutually exclusi
+    configured_password: ${3:value}                                        # The password to be configured on the remote network device  The password needs to be provided in clear and it will be en
+    update_password: ${4$$(yas-choose-value '("on_create" "always"))}      # choices: on_create;always  Since passwords are encrypted in the device running config, this argument will instruct the m
+    privilege: ${5:value}                                                  # The C(privilege) argument configures the privilege level of the user when logged into the system  This argument accepts 
+    role: ${6:value}                                                       # Configures the role for the username in the device running configuration  The argument accepts a string value defining t
+    sshkey: ${7:value}                                                     # Specifies the SSH public key to configure for the given username  This argument accepts a valid SSH key value 
+    nopassword: ${8:value}                                                 # Defines the username without assigning a password  This will allow the user to login to the system without being authent
+    purge: ${9:False}                                                      # Instructs the module to consider the resource definition absolute  It will remove any previously configured usernames on
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Configures the state of the username definition as it relates to the device operational configu

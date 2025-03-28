@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage HPE OneView Network Set resources
+# prefix: oneview_network_set_snippet
+# key: oneview_network_set
+# group: ansible
+# --
+
+- name: ${0:Manage HPE OneView Network Set resources}
+  oneview_network_set:                                                     
+    data: ${1:List with the Network Set properties}                        #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicates the desired state for the Network Set resource  - C(present) will ensure data propert
+    config: ${3:value}                                                     # Path to a  json configuration file containing the OneView client configuration  The configuration file is optional and w
+    validate_etag: ${4:True}                                               # When the ETag Validation is enabled, the request will be conditionally processed only if the current ETag for the resour

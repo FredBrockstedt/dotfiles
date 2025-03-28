@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage syslog settings
+# prefix: netapp_e_syslog_snippet
+# key: tapp_e_syslog
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage syslog settings}
+  netapp_e_syslog:                                                         
+    api_username: ${1:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${2:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${3:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Add or remove the syslog server configuration for E-Series storage array  Existing syslog serve
+    address: ${5:value}                                                    # The syslog server's IPv4 address or a fully qualified hostname  All existing syslog configurations will be removed when 
+    port: ${6:514}                                                         # This is the port the syslog server is using 
+    protocol: ${7$$(yas-choose-value '("udp" "tcp" "tls"))}                # choices: udp;tcp;tls  This is the transmission protocol the syslog server's using to receive syslog messages 
+    components: ${8:['auditLog']}                                          # The e-series logging components define the specific logs to transfer to the syslog server  At the time of writing, 'audi
+    test: ${9:False}                                                       # This forces a test syslog message to be sent to the stated syslog server  Only attempts transmission when I(state=presen
+    log_path: ${10:value}                                                  # This argument specifies a local path for logging purposes 
+    validate_certs: ${11:True}                                             # Should https certificates be validated?
+    ssid: ${12:1}                                                          # The ID of the array to manage  This value must be unique for each array 

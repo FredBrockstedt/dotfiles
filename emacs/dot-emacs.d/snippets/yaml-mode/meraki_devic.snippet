@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Manage devices in the Meraki cloud
+# prefix: meraki_device_snippet
+# key: meraki_devic
+# group: ansible
+# --
+
+- name: ${0:Manage devices in the Meraki cloud}
+  meraki_device:                                                           
+    auth_key: ${1:Authentication key provided by the dashboard}            # Required if environmental variable C(MERAKI_KEY) is not set 
+    state: ${2$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Query an organization 
+    net_name: ${3:value}                                                   # Name of a network 
+    net_id: ${4:value}                                                     # ID of a network 
+    serial: ${5:value}                                                     # Serial number of a device to query 
+    hostname: ${6:value}                                                   # Hostname of network device to search for 
+    model: ${7:value}                                                      # Model of network device to search for 
+    tags: ${8:value}                                                       # Space delimited list of tags to assign to device 
+    lat: ${9:value}                                                        # Latitude of device's geographic location  Use negative number for southern hemisphere 
+    lng: ${10:value}                                                       # Longitude of device's geographic location  Use negative number for western hemisphere 
+    address: ${11:value}                                                   # Postal address of device's location 
+    move_map_marker: ${12:value}                                           # Whether or not to set the latitude and longitude of a device based on the new address  Only applies when C(lat) and C(ln
+    serial_lldp_cdp: ${13:value}                                           # Serial number of device to query LLDP/CDP information from 
+    lldp_cdp_timespan: ${14:value}                                         # Timespan, in seconds, used to query LLDP and CDP information  Must be less than 1 month 
+    serial_uplink: ${15:value}                                             # Serial number of device to query uplink information from 
+    note: ${16:value}                                                      # Informational notes about a device  Limited to 255 characters 
+    host: ${{17:api}                                                       #meraki com} # not required  Hostname for Meraki dashboard  Can be used to access regional Meraki environments, such as Ch
+    use_proxy: ${18:value}                                                 # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_https: ${19:True}                                                  # If C(no), it will use HTTP  Otherwise it will use HTTPS  Only useful for internal Meraki developers 
+    output_format: ${20$$(yas-choose-value '("snakecase" "camelcase"))}    # choices: snakecase;camelcase  Instructs module whether response keys should be snake case (ex  C(net_id)) or camel case 
+    output_level: ${21$$(yas-choose-value '("debug" "normal"))}            # choices: debug;normal  Set amount of debug output during module execution 
+    timeout: ${22:30}                                                      # Time to timeout for HTTP requests 
+    validate_certs: ${23:True}                                             # Whether to validate HTTP certificates 
+    org_name: ${24:value}                                                  # Name of organization 
+    org_id: ${25:value}                                                    # ID of organization 
+    rate_limit_retry_time: ${26:165}                                       # Number of seconds to retry if rate limiter is triggered 
+    internal_error_retry_time: ${27:60}                                    # Number of seconds to retry if server returns an internal server error 

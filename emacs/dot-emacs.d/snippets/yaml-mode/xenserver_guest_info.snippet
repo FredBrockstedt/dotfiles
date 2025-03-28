@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Gathers information for virtual machines running on Citrix Hypervisor/XenServer host or pool
+# prefix: xenserver_guest_info_snippet
+# key: xenserver_guest_info
+# group: ansible
+# --
+
+- name: ${0:Gathers information for virtual machines running on Citrix Hypervisor/XenServer host or pool}
+  xenserver_guest_info:                                                    
+    name: ${1:Name of the VM to gather facts from}                         # VMs running on XenServer do not necessarily have unique names  The module will fail if multiple VMs with same name are f
+    uuid: ${2:value}                                                       # UUID of the VM to gather fact of  This is XenServer's unique identifier  It is required if name is not unique 
+    hostname: ${3:localhost}                                               # The hostname or IP address of the XenServer host or XenServer pool master  If the value is not specified in the task, th
+    username: ${4:root}                                                    # The username to use for connecting to XenServer  If the value is not specified in the task, the value of environment var
+    password: ${5:value}                                                   # The password to use for connecting to XenServer  If the value is not specified in the task, the value of environment var
+    validate_certs: ${6:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i

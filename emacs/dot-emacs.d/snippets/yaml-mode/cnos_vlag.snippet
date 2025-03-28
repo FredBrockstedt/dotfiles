@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage VLAG resources and attributes on devices running Lenovo CNOS
+# prefix: cnos_vlag_snippet
+# key: cnos_vlag
+# group: ansible
+# --
+
+- name: ${0:Manage VLAG resources and attributes on devices running Lenovo CNOS}
+  cnos_vlag:                                                               
+    vlagArg1: ${1$$(yas-choose-value '("enable" "auto-recovery" "config-consistency" "isl" "mac-address-table" "peer-gateway" "priority" "startup-delay" "tier-id" "vrrp" "instance" "hlthchk"))}# Th
+    outputfile: ${2:This specifies the file path where the output of each command execution is saved}# Each command that is specified in the merged template file and each response from the device a
+    host: ${3:This is the variable used to search the hosts file at /etc/ansible/hosts and identify the IP address of the device on which the template is going to be applied}# Usually the Ansible k
+    username: ${4:Configures the username used to authenticate the connection to the remote device}# The value of the username parameter is used to authenticate the SSH session  While generally the
+    password: ${5:Configures the password used to authenticate the connection to the remote device}# The value of the password parameter is used to authenticate the SSH session  While generally the
+    deviceType: ${6$$(yas-choose-value '("g8272_cnos" "g8296_cnos" "g8332_cnos" "NE0152T" "NE1072T" "NE1032" "NE1032T" "NE10032" "NE2572"))}# This specifies the type of device where the method is e
+    vlagArg2: ${7$$(yas-choose-value '("Interval in seconds" "disable or strict" "Port Aggregation Number" "VLAG priority" "Delay time in seconds" "VLAG tier-id value" "VLAG instance number" "keepa
+    vlagArg3: ${8$$(yas-choose-value '("enable or port-aggregation" "Number of keepalive attempts" "Interval in seconds" "Interval in seconds" "VLAG health check peer IP4 address"))}# choices: enab
+    vlagArg4: ${9$$(yas-choose-value '("Port Aggregation Number" "default or management"))}# choices: Port Aggregation Number;default or management  This is an overloaded vlag fourth argument  Usag
+    enablePassword: ${10:value}                                            # Configures the password used to enter Global Configuration command mode on the switch  If the switch does not request th

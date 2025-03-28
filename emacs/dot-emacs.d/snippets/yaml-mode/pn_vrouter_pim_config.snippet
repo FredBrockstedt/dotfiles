@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify vrouter-pim-config
+# prefix: pn_vrouter_pim_config_snippet
+# key: pn_vrouter_pim_config
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify vrouter-pim-config}
+  pn_vrouter_pim_config:                                                   
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the vrouter-pim-config 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_query_interval: ${3:value}                                          # igmp query interval in seconds 
+    pn_querier_timeout: ${4:value}                                         # igmp querier timeout in seconds 
+    pn_hello_interval: ${5:value}                                          # hello interval in seconds 
+    pn_vrouter_name: ${6:value}                                            # name of service config 

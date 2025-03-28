@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Map network drives for users
+# prefix: win_mapped_drive_snippet
+# key: win_mapped_driv
+# group: ansible
+# --
+
+- name: ${0:Map network drives for users}
+  win_mapped_drive:                                                        
+    letter: ${1:The letter of the network path to map to}                  # This letter must not already be in use with Windows 
+    password: ${2:value}                                                   # The password for C(username) that is used when testing the initial connection  This is never saved with a mapped drive, 
+    path: ${3:value}                                                       # The UNC path to map the drive to  If pointing to a WebDAV location this must still be in a UNC path in the format C(\\\\
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If C(present) will ensure the mapped drive exists  If C(absent) will ensure the mapped drive do
+    username: ${5:value}                                                   # The username that is used when testing the initial connection  This is never saved with a mapped drive, the the M(win_cr

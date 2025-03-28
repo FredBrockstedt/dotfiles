@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Pull images for use by podman
+# prefix: podman_image_snippet
+# key: podman_imag
+# group: ansible
+# --
+
+- name: ${0:Pull images for use by podman}
+  podman_image:                                                            
+    name: ${1:Name of the image to pull, push, or delete}                  # It may contain a tag using the format C(image:tag) 
+    executable: ${2:podman}                                                # Path to C(podman) executable if it is not in the C(\$PATH) on the machine running C(podman)
+    ca_cert_dir: ${3:value}                                                # Path to directory containing TLS certificates and keys to use
+    tag: ${4:latest}                                                       # Tag of the image to pull, push, or delete 
+    pull: ${5:True}                                                        # W h e t h e r   o r   n o t   t o   p u l l   t h e   i m a g e  
+    push: ${6:False}                                                       # W h e t h e r   o r   n o t   t o   p u s h   a n   i m a g e  
+    path: ${7:value}                                                       # P a t h   t o   d i r e c t o r y   c o n t a i n i n g   t h e   b u i l d   f i l e  
+    force: ${8:value}                                                      # Whether or not to force push or pull an image  When building, force the build even if the image already exists 
+    state: ${9$$(yas-choose-value '("present" "absent" "build"))}          # choices: present;absent;build  Whether an image should be present, absent, or built 
+    validate_certs: ${10:True}                                             # Require HTTPS and validate certificates when pulling or pushing  Also used during build if a pull or push is necessary 
+    password: ${11:value}                                                  # Password to use when authenticating to remote registries 
+    username: ${12:value}                                                  # username to use when authenticating to remote registries 
+    auth_file: ${13:value}                                                 # Path to file containing authorization credentials to the remote registry
+    build: ${14:value}                                                     # A r g u m e n t s   t h a t   c o n t r o l   i m a g e   b u i l d  
+    push_args: ${15:value}                                                 # A r g u m e n t s   t h a t   c o n t r o l   p u s h i n g   i m a g e s  

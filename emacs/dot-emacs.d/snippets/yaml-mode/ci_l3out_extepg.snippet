@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage External Network Instance Profile (ExtEpg) objects (l3extInstP:instP)
+# prefix: aci_l3out_extepg_snippet
+# key: ci_l3out_extepg
+# group: ansible
+# --
+
+- name: ${0:Manage External Network Instance Profile (ExtEpg) objects (l3extInstP:instP)}
+  aci_l3out_extepg:                                                        
+    tenant: ${1:Name of an existing tenant}                                #
+    l3out: ${2:Name of an existing L3Out}                                  #
+    extepg: ${3:Name of ExtEpg being created}                              #
+    host: ${4:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${5:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${6:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    description: ${7:value}                                                # Description for the ExtEpg 
+    preferred_group: ${8:value}                                            # Whether ot not the EPG is part of the Preferred Group and can communicate without contracts  This is very convenient for
+    dscp: ${9$$(yas-choose-value '("AF11" "AF12" "AF13" "AF21" "AF22" "AF23" "AF31" "AF32" "AF33" "AF41" "AF42" "AF43" "CS0" "CS1" "CS2" "CS3" "CS4" "CS5" "CS6" "CS7" "EF" "VA" "unspecified"))}# ch
+    state: ${10$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${11:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${12:admin}                                                  # The username to use for authentication 
+    certificate_name: ${13:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${14$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${15:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${16:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${17:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${18:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

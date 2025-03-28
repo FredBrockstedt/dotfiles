@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Foreman Resources
+# prefix: foreman_snippet
+# key: forem
+# group: ansible
+# --
+
+- name: ${0:Manage Foreman Resources}
+  foreman:                                                                 
+    server_url: ${1:URL of Foreman server}                                 #
+    username: ${2:Username on Foreman server}                              #
+    password: ${3:Password for user accessing Foreman server}              #
+    entity: ${4:The Foreman resource that the action will be performed on (e}#g  organization, host) 
+    params: ${5:Parameters associated to the entity resource to set or edit in dictionary format (e}#g  name, description) 
+    verify_ssl: ${6:False}                                                 # Whether to verify an SSL connection to Foreman server 

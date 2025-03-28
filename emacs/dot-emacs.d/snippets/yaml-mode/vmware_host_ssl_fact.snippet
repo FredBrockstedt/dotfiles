@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Gather facts of ESXi host system about SSL
+# prefix: vmware_host_ssl_facts_snippet
+# key: vmware_host_ssl_fact
+# group: ansible
+# --
+
+- name: ${0:Gather facts of ESXi host system about SSL}
+  vmware_host_ssl_facts:                                                   
+    cluster_name: ${1:value}                                               # Name of the cluster  SSL thumbprint information about all ESXi host system in the given cluster will be reported  If C(e
+    esxi_hostname: ${2:value}                                              # ESXi hostname  SSL thumbprint information of this ESXi host system will be reported  If C(cluster_name) is not given, th
+    hostname: ${3:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${4:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${5:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${6:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${7:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${8:value}                                                 # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${9:value}                                                 # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

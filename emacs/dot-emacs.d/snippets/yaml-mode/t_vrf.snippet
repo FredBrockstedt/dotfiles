@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage VRFs on network devices
+# prefix: net_vrf_snippet
+# key: t_vrf
+# group: ansible
+# --
+
+- name: ${0:Manage VRFs on network devices}
+  net_vrf:                                                                 
+    name: ${1:value}                                                       # Name of the VRF 
+    interfaces: ${2:value}                                                 # List of interfaces the VRF should be configured on 
+    aggregate: ${3:value}                                                  # L i s t   o f   V R F s   d e f i n i t i o n s
+    purge: ${4:False}                                                      # Purge VRFs not defined in the I(aggregate) parameter 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the VRF configuration 

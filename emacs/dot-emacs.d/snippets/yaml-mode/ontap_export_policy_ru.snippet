@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage export policy rules
+# prefix: na_ontap_export_policy_rule_snippet
+# key: ontap_export_policy_ru
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage export policy rules}
+  na_ontap_export_policy_rule:                                             
+    name: ${1:The name of the export rule to manage}                       #
+    vserver: ${2:Name of the vserver to use}                               #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified export policy rule should exist or not 
+    client_match: ${7:value}                                               # List of Client Match host names, IP Addresses, Netgroups, or Domains If rule_index is not provided, client_match is used
+    ro_rule: ${8$$(yas-choose-value '("any" "none" "never" "krb5" "krb5i" "krb5p" "ntlm" "sys"))}# choices: any;none;never;krb5;krb5i;krb5p;ntlm;sys  List of Read only access specifications for the
+    rw_rule: ${9$$(yas-choose-value '("any" "none" "never" "krb5" "krb5i" "krb5p" "ntlm" "sys"))}# choices: any;none;never;krb5;krb5i;krb5p;ntlm;sys  List of Read Write access specifications for th
+    super_user_security: ${10$$(yas-choose-value '("any" "none" "never" "krb5" "krb5i" "krb5p" "ntlm" "sys"))}# choices: any;none;never;krb5;krb5i;krb5p;ntlm;sys  List of Read Write access specific
+    allow_suid: ${11:value}                                                # If 'true', NFS server will honor SetUID bits in SETATTR operation  Default value on creation is 'true'
+    protocol: ${12$$(yas-choose-value '("any" "nfs" "nfs3" "nfs4" "cifs" "flexcache"))}# choices: any;nfs;nfs3;nfs4;cifs;flexcache  List of Client access protocols  Default value is set to 'any' du
+    rule_index: ${13:value}                                                # rule index of the export policy
+    https: ${14:False}                                                     # Enable and disable https
+    validate_certs: ${15:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${16:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${17:value}                                                    # The ontap api version to use
+    use_rest: ${18$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

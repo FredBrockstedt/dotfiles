@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Interface with dnsmadeeasy.com (a DNS hosting service).
+# prefix: dnsmadeeasy_snippet
+# key: dnsmadeeasy
+# group: ansible
+# --
+
+- name: ${0:Interface with dnsmadeeasy.com (a DNS hosting service).}
+  dnsmadeeasy:                                                             
+    account_key: ${1:Account API Key}                                      #
+    account_secret: ${2:Account Secret Key}                                #
+    domain: ${3:Domain to work with}                                       # Can be the domain name (e g  "mydomain com") or the numeric ID of the domain in DNS Made Easy (e g  "839989") for faster
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # whether the record should exist or not
+    systemDescription: ${5:}:Description used by the monitor}              #
+    maxEmails: ${6:1}:Number of emails sent to the contact list by the monitor}#
+    protocol: ${7$$(yas-choose-value '("TCP" "UDP" "HTTP" "DNS" "SMTP" "HTTPS"))}# Protocol used by the monitor 
+    port: ${8:80}:Port used by the monitor}                                #
+    sensitivity: ${9$$(yas-choose-value '("Low" "Medium" "High"))}         # Number of checks the monitor performs before a failover occurs where Low = 8, Medium = 5,and High = 3 
+    contactList: ${10:}:Name or id of the contact list that the monitor will notify}# The default C('') means the Account Owner 
+    sandbox: ${11:false}                                                   # Decides if the sandbox API should be used  Otherwise (default) the production API of DNS Made Easy is used 
+    record_name: ${12:value}                                               # Record name to get/create/delete/update  If record_name is not specified; all records for the domain will be returned in
+    record_type: ${13$$(yas-choose-value '("A" "AAAA" "CNAME" "ANAME" "HTTPRED" "MX" "NS" "PTR" "SRV" "TXT"))}# choices: A;AAAA;CNAME;ANAME;HTTPRED;MX;NS;PTR;SRV;TXT  Record type 
+    record_value: ${14:value}                                              # Record value  HTTPRED: <redirection URL>, MX: <priority> <target name>, NS: <name server>, PTR: <target name>, SRV: <pri
+    record_ttl: ${15:1800}                                                 # record's "Time to live"   Number of seconds the record remains cached in DNS servers 
+    validate_certs: ${16:true}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    monitor: ${17:false}                                                   # If C(yes), add or change the monitor   This is applicable only for A records 
+    httpFqdn: ${18:value}                                                  # The fully qualified domain name used by the monitor 
+    httpFile: ${19:value}                                                  # The file at the Fqdn that the monitor queries for HTTP or HTTPS 
+    httpQueryString: ${20:value}                                           # The string in the httpFile that the monitor queries for HTTP or HTTPS 
+    failover: ${21:false}                                                  # If C(yes), add or change the failover   This is applicable only for A records 
+    autoFailover: ${22:false}                                              # If true, fallback to the primary IP address is manual after a failover  If false, fallback to the primary IP address is 
+    ip1: ${23:value}                                                       # Primary IP address for the failover  Required if adding or changing the monitor or failover 
+    ip2: ${24:value}                                                       # Secondary IP address for the failover  Required if adding or changing the failover 
+    ip3: ${25:value}                                                       # Tertiary IP address for the failover 
+    ip4: ${26:value}                                                       # Quaternary IP address for the failover 
+    ip5: ${27:value}                                                       # Quinary IP address for the failover 

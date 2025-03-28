@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage the system attributes on Cisco IOS devices
+# prefix: ios_system_snippet
+# key: os_system
+# group: ansible
+# --
+
+- name: ${0:Manage the system attributes on Cisco IOS devices}
+  ios_system:                                                              
+    hostname: ${1:value}                                                   # Configure the device hostname parameter  This option takes an ASCII string value 
+    domain_name: ${2:value}                                                # Configure the IP domain name on the remote device to the provided value  Value should be in the dotted name form and wil
+    domain_search: ${3:value}                                              # Provides the list of domain suffixes to append to the hostname for the purpose of doing name resolution  This argument a
+    lookup_source: ${4:value}                                              # Provides one or more source interfaces to use for performing DNS lookups   The interface provided in C(lookup_source) mu
+    lookup_enabled: ${5:value}                                             # Administrative control for enabling or disabling DNS lookups   When this argument is set to True, lookups are performed 
+    name_servers: ${6:value}                                               # List of DNS name servers by IP address to use to perform name resolution lookups   This argument accepts either a list o
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the configuration values in the device's current active configuration   When set to I(
+    authorize: ${8:False}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  For more infor
+    auth_pass: ${9:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes) with C(become_p
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

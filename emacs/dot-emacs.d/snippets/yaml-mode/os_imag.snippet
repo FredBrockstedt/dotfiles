@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Add/Delete images from OpenStack Cloud
+# prefix: os_image_snippet
+# key: os_imag
+# group: ansible
+# --
+
+- name: ${0:Add/Delete images from OpenStack Cloud}
+  os_image:                                                                
+    name: ${1:The name of the image when uploading - or the name/ID of the image if deleting}#
+    id: ${2:value}                                                         # The ID of the image when uploading an image
+    checksum: ${3:value}                                                   # The checksum of the image
+    disk_format: ${4:qcow2}                                                # The format of the disk that is getting uploaded
+    container_format: ${5:bare}                                            # The format of the container
+    owner: ${6:value}                                                      # The owner of the image
+    min_disk: ${7:value}                                                   # The minimum disk space (in GB) required to boot this image
+    min_ram: ${8:value}                                                    # The minimum ram (in MB) required to boot this image
+    is_public: ${9:true}                                                   # Whether the image can be accessed publicly  Note that publicizing an image requires admin role by default 
+    protected: ${10:false}                                                 # Prevent image from being deleted
+    filename: ${11:value}                                                  # The path to the file which has to be uploaded
+    ramdisk: ${12:value}                                                   # The name of an existing ramdisk image that will be associated with this image
+    kernel: ${13:value}                                                    # The name of an existing kernel image that will be associated with this image
+    properties: ${14:namespace()}                                          # Additional properties to be associated with this image
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Should the resource be present or absent 
+    availability_zone: ${16:value}                                         # Ignored  Present for backwards compatibility
+    cloud: ${17:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${18:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${19:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${20:value}                                               # Name of the region 
+    wait: ${21:True}                                                       # Should ansible wait until the requested resource is complete 
+    timeout: ${22:180}                                                     # How long should ansible wait for the requested resource 
+    api_timeout: ${23:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${24:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${25:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${26:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${27:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${28$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

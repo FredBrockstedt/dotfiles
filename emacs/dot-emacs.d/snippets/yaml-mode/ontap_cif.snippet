@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Manage cifs-share
+# prefix: na_ontap_cifs_snippet
+# key: ontap_cif
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Manage cifs-share}
+  na_ontap_cifs:                                                           
+    vserver: ${1:Vserver containing the CIFS share}                        #
+    share_name: ${2:T h e   n a m e   o f   t h e   C I F S   s h a r e }  #   T h e   C I F S   s h a r e   n a m e   i s   a   U T F - 8   s t r i n g   w i t h   t h e   f o l l o w i n g   c h 
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    path: ${6:value}                                                       # T h e   f i l e   s y s t e m   p a t h   t h a t   i s   s h a r e d   t h r o u g h   t h i s   C I F S   s h a r e   
+    share_properties: ${7:value}                                           # The list of properties for the CIFS share
+    symlink_properties: ${8:value}                                         # The list of symlink properties for this CIFS share
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified CIFS share should exist or not 
+    vscan_fileop_profile: ${10$$(yas-choose-value '("no_scan" "standard" "strict" "writes_only"))}# choices: no_scan;standard;strict;writes_only  Profile_set of file_ops to which vscan on access sc
+    https: ${11:False}                                                     # Enable and disable https
+    validate_certs: ${12:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${13:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${14:value}                                                    # The ontap api version to use
+    use_rest: ${15$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

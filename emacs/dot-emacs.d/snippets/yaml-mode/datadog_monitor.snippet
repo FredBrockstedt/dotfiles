@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manages Datadog monitors
+# prefix: datadog_monitor_snippet
+# key: datadog_monitor
+# group: ansible
+# --
+
+- name: ${0:Manages Datadog monitors}
+  datadog_monitor:                                                         
+    api_key: ${1:Your Datadog API key}                                     #
+    app_key: ${2:Your Datadog app key}                                     #
+    state: ${3$$(yas-choose-value '("present" "absent" "mute" "unmute"))}  # The designated state of the monitor 
+    name: ${4:The name of the alert}                                       #
+    tags: ${5:value}                                                       # A list of tags to associate with your monitor when creating or updating  This can help you categorize and filter monitor
+    type: ${6$$(yas-choose-value '("metric alert" "service check" "event alert"))}# choices: metric alert;service check;event alert  The type of the monitor 
+    query: ${7:value}                                                      # The monitor query to notify on  Syntax varies depending on what type of monitor you are creating 
+    message: ${8:value}                                                    # A message to include with notifications for this monitor  Email notifications can be sent to specific users by using the
+    silenced: ${9:}                                                        # Dictionary of scopes to silence, with timestamps or None  Each scope will be muted until the given POSIX timestamp or fo
+    notify_no_data: ${10:false}                                            # Whether this monitor will notify when data stops reporting 
+    no_data_timeframe: ${11:"2x timeframe for metric, 2 minutes for service"}# The number of minutes before a monitor will notify when data stops reporting  Must be at least 2x the monitor timefram
+    timeout_h: ${12:value}                                                 # The number of hours of the monitor not reporting data before it will automatically resolve from a triggered state 
+    renotify_interval: ${13:value}                                         # The number of minutes after the last notification before a monitor will re-notify on the current status  It will only re
+    escalation_message: ${14:value}                                        # A message to include with a re-notification  Supports the '@username' notification we allow elsewhere  Not applicable if
+    notify_audit: ${15:false}                                              # Whether tagged users will be notified on changes to this monitor 
+    thresholds: ${16:"namespace(ok=1, critical=1, warning=1)"}             # A dictionary of thresholds by status  Only available for service checks and metric alerts  Because each of them can have
+    locked: ${17:false}                                                    # Whether changes to this monitor should be restricted to the creator or admins 
+    require_full_window: ${18:value}                                       # Whether this monitor needs a full window of data before it gets evaluated  We highly recommend you set this to False for
+    new_host_delay: ${19:value}                                            # A positive integer representing the number of seconds to wait before evaluating the monitor for new hosts  This gives th
+    evaluation_delay: ${20:value}                                          # Time to delay evaluation (in seconds)  Effective for sparse values 
+    id: ${21:value}                                                        # The ID of the alert  If set, will be used instead of the name to locate the alert 

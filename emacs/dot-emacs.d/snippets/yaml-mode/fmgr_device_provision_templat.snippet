@@ -1,0 +1,75 @@
+# -*- mode: snippet -*-
+# name: Manages Device Provisioning Templates in FortiManager.
+# prefix: fmgr_device_provision_template_snippet
+# key: fmgr_device_provision_templat
+# group: ansible
+# --
+
+- name: ${0:Manages Device Provisioning Templates in FortiManager.}
+  fmgr_device_provision_template:                                          
+    adom: ${1:The ADOM the configuration should belong to}                 #
+    device_unique_name: ${2:The unique device's name that you are editing} #
+    provisioning_template: ${3:The provisioning template you want to apply (default = default)}#
+    provision_targets: ${4:The friendly names of devices in FortiManager to assign the provisioning template to}# CSV separated list 
+    mode: ${5$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    snmp_status: ${6$$(yas-choose-value '("enable" "disable"))}            # choices: enable;disable  Enables or disables SNMP globally 
+    snmp_v2c_query_port: ${7:value}                                        # Sets the snmp v2c community query port 
+    snmp_v2c_trap_port: ${8:value}                                         # Sets the snmp v2c community trap port 
+    snmp_v2c_status: ${9$$(yas-choose-value '("enable" "disable"))}        # choices: enable;disable  Enables or disables the v2c community specified 
+    snmp_v2c_trap_status: ${10$$(yas-choose-value '("enable" "disable"))}  # choices: enable;disable  Enables or disables the v2c community specified for traps 
+    snmp_v2c_query_status: ${11$$(yas-choose-value '("enable" "disable"))} # choices: enable;disable  Enables or disables the v2c community specified for queries 
+    snmp_v2c_name: ${12:value}                                             # Specifies the v2c community name 
+    snmp_v2c_id: ${13:value}                                               # Primary key for the snmp community  this must be unique!
+    snmp_v2c_trap_src_ipv4: ${14:value}                                    # Source ip the traps should come from IPv4 
+    snmp_v2c_trap_hosts_ipv4: ${15:value}                                  # -   I P v 4   a d d r e s s e s   o f   t h e   h o s t s   t h a t   s h o u l d   g e t   S N M P   v 2 c   t r a p s 
+    snmp_v2c_query_hosts_ipv4: ${16:value}                                 # -   I P v 4   a d d r e s s e s   o r   s u b n e t s   t h a t   a r e   a l l o w e d   t o   q u e r y   S N M P   v 
+    snmpv3_auth_proto: ${17$$(yas-choose-value '("md5" "sha"))}            # choices: md5;sha  SNMPv3 auth protocol 
+    snmpv3_auth_pwd: ${18:value}                                           # SNMPv3 auth pwd __ currently not encrypted! ensure this file is locked down permissions wise!
+    snmpv3_name: ${19:value}                                               # SNMPv3 user name 
+    snmpv3_notify_hosts: ${20:value}                                       # List of ipv4 hosts to send snmpv3 traps to  Comma separated IPv4 list 
+    snmpv3_priv_proto: ${21$$(yas-choose-value '("aes" "des" "aes256" "aes256cisco"))}# choices: aes;des;aes256;aes256cisco  SNMPv3 priv protocol 
+    snmpv3_priv_pwd: ${22:value}                                           # SNMPv3 priv pwd currently not encrypted! ensure this file is locked down permissions wise!
+    snmpv3_queries: ${23$$(yas-choose-value '("enable" "disable"))}        # choices: enable;disable  Allow snmpv3_queries 
+    snmpv3_query_port: ${24:value}                                         # SNMPv3 query port 
+    snmpv3_security_level: ${25$$(yas-choose-value '("no-auth-no-priv" "auth-no-priv" "auth-priv"))}# choices: no-auth-no-priv;auth-no-priv;auth-priv  SNMPv3 security level 
+    snmpv3_source_ip: ${26:value}                                          # SNMPv3 source ipv4 address for traps 
+    snmpv3_status: ${27$$(yas-choose-value '("enable" "disable"))}         # choices: enable;disable  SNMPv3 user is enabled or disabled 
+    snmpv3_trap_rport: ${28:value}                                         # SNMPv3 trap remote port 
+    snmpv3_trap_status: ${29$$(yas-choose-value '("enable" "disable"))}    # choices: enable;disable  SNMPv3 traps is enabled or disabled 
+    syslog_port: ${30:value}                                               # Syslog port that will be set 
+    syslog_server: ${31:value}                                             # Server the syslogs will be sent to 
+    syslog_status: ${32$$(yas-choose-value '("enable" "disable"))}         # choices: enable;disable  Enables or disables syslogs 
+    syslog_mode: ${33$$(yas-choose-value '("udp" "legacy-reliable" "reliable"))}# choices: udp;legacy-reliable;reliable  Remote syslog logging over UDP/Reliable TCP  choice | udp | Enable sysloggin
+    syslog_filter: ${34$$(yas-choose-value '("emergency" "alert" "critical" "error" "warning" "notification" "information" "debug"))}# choices: emergency;alert;critical;error;warning;notification;i
+    syslog_facility: ${35$$(yas-choose-value '("kernel" "user" "mail" "daemon" "auth" "syslog" "lpr" "news" "uucp" "cron" "authpriv" "ftp" "ntp" "audit" "alert" "clock" "local0" "local1" "local2" "
+    syslog_enc_algorithm: ${36$$(yas-choose-value '("high" "low" "disable" "high-medium"))}# choices: high;low;disable;high-medium  Enable/disable reliable syslogging with TLS encryption  choice | 
+    syslog_certificate: ${37:value}                                        # Certificate used to communicate with Syslog server if encryption on 
+    ntp_status: ${38$$(yas-choose-value '("enable" "disable"))}            # choices: enable;disable  Enables or disables ntp 
+    ntp_sync_interval: ${39:value}                                         # Sets the interval in minutes for ntp sync 
+    ntp_type: ${40$$(yas-choose-value '("fortiguard" "custom"))}           # choices: fortiguard;custom  Enables fortiguard servers or custom servers are the ntp source 
+    ntp_server: ${41:value}                                                # Only used with custom ntp_type -- specifies IP of server to sync to -- comma separated ip addresses for multiples 
+    ntp_auth: ${42$$(yas-choose-value '("enable" "disable"))}              # choices: enable;disable  Enables or disables ntp authentication 
+    ntp_auth_pwd: ${43:value}                                              # Sets the ntp auth password 
+    ntp_v3: ${44$$(yas-choose-value '("enable" "disable"))}                # choices: enable;disable  Enables or disables ntpv3 (default is ntpv4) 
+    admin_https_redirect: ${45$$(yas-choose-value '("enable" "disable"))}  # choices: enable;disable  Enables or disables https redirect from http 
+    admin_https_port: ${46:value}                                          # SSL admin gui port number 
+    admin_http_port: ${47:value}                                           # Non-SSL admin gui port number 
+    admin_timeout: ${48:value}                                             # Admin timeout in minutes 
+    admin_language: ${49$$(yas-choose-value '("english" "simch" "japanese" "korean" "spanish" "trach" "french" "portuguese"))}# choices: english;simch;japanese;korean;spanish;trach;french;portugues
+    admin_switch_controller: ${50$$(yas-choose-value '("enable" "disable"))}# choices: enable;disable  Enables or disables the switch controller 
+    admin_gui_theme: ${51$$(yas-choose-value '("green" "red" "blue" "melongene" "mariner"))}# choices: green;red;blue;melongene;mariner  Changes the admin gui theme 
+    admin_enable_fortiguard: ${52$$(yas-choose-value '("none" "direct" "this-fmg"))}# choices: none;direct;this-fmg  Enables FortiGuard security updates to their default settings 
+    admin_fortianalyzer_target: ${53:value}                                # Configures faz target 
+    admin_fortiguard_target: ${54:value}                                   # Configures fortiguard target  admin_enable_fortiguard must be set to "direct" 
+    smtp_username: ${55:value}                                             # SMTP auth username 
+    smtp_password: ${56:value}                                             # SMTP password 
+    smtp_port: ${57:value}                                                 # SMTP port number 
+    smtp_replyto: ${58:value}                                              # SMTP reply to address 
+    smtp_conn_sec: ${59$$(yas-choose-value '("none" "starttls" "smtps"))}  # choices: none;starttls;smtps  defines the ssl level for smtp 
+    smtp_server: ${60:value}                                               # SMTP server ipv4 address 
+    smtp_source_ipv4: ${61:value}                                          # SMTP source ip address 
+    smtp_validate_cert: ${62$$(yas-choose-value '("enable" "disable"))}    # choices: enable;disable  Enables or disables valid certificate checking for smtp 
+    dns_suffix: ${63:value}                                                # Sets the local dns domain suffix 
+    dns_primary_ipv4: ${64:value}                                          # primary ipv4 dns forwarder 
+    dns_secondary_ipv4: ${65:value}                                        # secondary ipv4 dns forwarder 
+    delete_provisioning_template: ${66:value}                              # If specified, all other options are ignored  The specified provisioning template will be deleted 

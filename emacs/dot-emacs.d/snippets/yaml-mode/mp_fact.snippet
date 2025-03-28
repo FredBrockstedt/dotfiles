@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Retrieve facts for a device using SNMP
+# prefix: snmp_facts_snippet
+# key: mp_fact
+# group: ansible
+# --
+
+- name: ${0:Retrieve facts for a device using SNMP}
+  snmp_facts:                                                              
+    host: ${1:Set to target snmp server (normally C({{ inventory_hostname \}\}))}#
+    version: ${2$$(yas-choose-value '("v2" "v2c" "v3"))}                   # SNMP Version to use, v2/v2c or v3 
+    community: ${3:value}                                                  # The SNMP community string, required if version is v2/v2c 
+    level: ${4$$(yas-choose-value '("authNoPriv" "authPriv"))}             # choices: authNoPriv;authPriv  Authentication level  Required if version is v3 
+    username: ${5:value}                                                   # Username for SNMPv3  Required if version is v3 
+    integrity: ${6$$(yas-choose-value '("md5" "sha"))}                     # choices: md5;sha  Hashing algorithm  Required if version is v3 
+    authkey: ${7:value}                                                    # Authentication key  Required if version is v3 
+    privacy: ${8$$(yas-choose-value '("aes" "des"))}                       # choices: aes;des  Encryption algorithm  Required if level is authPriv 
+    privkey: ${9:value}                                                    # Encryption key  Required if version is authPriv 

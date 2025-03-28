@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage port lists on BIG-IP AFM
+# prefix: bigip_firewall_port_list_snippet
+# key: gip_firewall_port_list
+# group: ansible
+# --
+
+- name: ${0:Manage port lists on BIG-IP AFM}
+  bigip_firewall_port_list:                                                
+    name: ${1:Specifies the name of the port list}                         #
+    partition: ${2:Common}                                                 # Device partition to manage resources on 
+    description: ${3:value}                                                # Description of the port list
+    ports: ${4:value}                                                      # Simple list of port values to add to the list
+    port_ranges: ${5:value}                                                # A list of port ranges where the range starts with a port number, is followed by a dash (-) and then a second number  If 
+    port_lists: ${6:value}                                                 # Simple list of existing port lists to add to this list  Port lists can be specified in either their fully qualified name
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the address list and entries exists  When C(absent), ensures the 
+    provider: ${8:value}                                                   # A dict object containing connection details 

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage iSCSI targets with Open-iSCSI
+# prefix: open_iscsi_snippet
+# key: open_isc
+# group: ansible
+# --
+
+- name: ${0:Manage iSCSI targets with Open-iSCSI}
+  open_iscsi:                                                              
+    portal: ${1:value}                                                     # The IP address of the iSCSI target 
+    port: ${2:3260}                                                        # The port on which the iSCSI target process listens 
+    target: ${3:value}                                                     # The iSCSI target name 
+    login: ${4:value}                                                      # Whether the target node should be connected 
+    node_auth: ${5:CHAP}                                                   # The value for C(discovery sendtargets auth authmethod) 
+    node_user: ${6:value}                                                  # The value for C(discovery sendtargets auth username) 
+    node_pass: ${7:value}                                                  # The value for C(discovery sendtargets auth password) 
+    auto_node_startup: ${8:value}                                          # Whether the target node should be automatically connected at startup 
+    discover: ${9:value}                                                   # Whether the list of target nodes on the portal should be (re)discovered and added to the persistent iSCSI database  Keep
+    show_nodes: ${10:value}                                                # Whether the list of nodes in the persistent iSCSI database should be returned by the module 

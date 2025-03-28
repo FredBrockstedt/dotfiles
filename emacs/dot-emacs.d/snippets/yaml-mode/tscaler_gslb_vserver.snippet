@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: Configure gslb vserver entities in Netscaler.
+# prefix: netscaler_gslb_vserver_snippet
+# key: tscaler_gslb_vserver
+# group: ansible
+# --
+
+- name: ${0:Configure gslb vserver entities in Netscaler.}
+  netscaler_gslb_vserver:                                                  
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    name: ${4:value}                                                       # Name for the GSLB virtual server  Must begin with an ASCII alphanumeric or underscore C(_) character, and must contain o
+    servicetype: ${5$$(yas-choose-value '("HTTP" "FTP" "TCP" "UDP" "SSL" "SSL_BRIDGE" "SSL_TCP" "NNTP" "ANY" "SIP_UDP" "SIP_TCP" "SIP_SSL" "RADIUS" "RDP" "RTSP" "MYSQL" "MSSQL" "ORACLE"))}# choices
+    dnsrecordtype: ${6$$(yas-choose-value '("A" "AAAA" "CNAME" "NAPTR"))}  # choices: A;AAAA;CNAME;NAPTR  DNS record type to associate with the GSLB virtual server's domain name  Default value: A P
+    lbmethod: ${7$$(yas-choose-value '("ROUNDROBIN" "LEASTCONNECTION" "LEASTRESPONSETIME" "SOURCEIPHASH" "LEASTBANDWIDTH" "LEASTPACKETS" "STATICPROXIMITY" "RTT" "CUSTOMLOAD"))}# choices: ROUNDROBIN
+    backuplbmethod: ${8$$(yas-choose-value '("ROUNDROBIN" "LEASTCONNECTION" "LEASTRESPONSETIME" "SOURCEIPHASH" "LEASTBANDWIDTH" "LEASTPACKETS" "STATICPROXIMITY" "RTT" "CUSTOMLOAD"))}# choices: ROUN
+    netmask: ${9:value}                                                    # IPv4 network mask for use in the SOURCEIPHASH load balancing method  Minimum length = 1
+    v6netmasklen: ${10:value}                                              # Number of bits to consider, in an IPv6 source IP address, for creating the hash that is required by the C(SOURCEIPHASH) 
+    tolerance: ${11:value}                                                 # Site selection tolerance, in milliseconds, for implementing the RTT load balancing method  If a site's RTT deviates from
+    persistencetype: ${12$$(yas-choose-value '("SOURCEIP" "NONE"))}        # choices: SOURCEIP;NONE  Use source IP address based persistence for the virtual server  After the load balancing method 
+    persistenceid: ${13:value}                                             # The persistence ID for the GSLB virtual server  The ID is a positive integer that enables GSLB sites to identify the GSL
+    persistmask: ${14:value}                                               # The optional IPv4 network mask applied to IPv4 addresses to establish source IP address based persistence  Minimum lengt
+    v6persistmasklen: ${15:value}                                          # Number of bits to consider in an IPv6 source IP address when creating source IP address based persistence sessions  Defa
+    timeout: ${16:value}                                                   # Idle time, in minutes, after which a persistence entry is cleared  Default value: C(2) Minimum value = C(2) Maximum valu
+    mir: ${17$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  Include multiple IP addresses in the DNS responses sent to clients 
+    disableprimaryondown: ${18$$(yas-choose-value '("enabled" "disabled"))}# choices: enabled;disabled  Continue to direct traffic to the backup chain even after the primary GSLB virtual server ret
+    dynamicweight: ${19$$(yas-choose-value '("SERVICECOUNT" "SERVICEWEIGHT" "DISABLED"))}# choices: SERVICECOUNT;SERVICEWEIGHT;DISABLED  Specify if the appliance should consider the service count, 
+    considereffectivestate: ${20$$(yas-choose-value '("NONE" "STATE_ONLY"))}# choices: NONE;STATE_ONLY  If the primary state of all bound GSLB services is DOWN, consider the effective states of all
+    comment: ${21:value}                                                   # Any comments that you might want to associate with the GSLB virtual server 
+    somethod: ${22$$(yas-choose-value '("CONNECTION" "DYNAMICCONNECTION" "BANDWIDTH" "HEALTH" "NONE"))}# choices: CONNECTION;DYNAMICCONNECTION;BANDWIDTH;HEALTH;NONE  Type of threshold that, when ex
+    sopersistence: ${23$$(yas-choose-value '("enabled" "disabled"))}       # choices: enabled;disabled  If spillover occurs, maintain source IP address based persistence for both primary and backup
+    sopersistencetimeout: ${24:value}                                      # Timeout for spillover persistence, in minutes  Default value: C(2) Minimum value = C(2) Maximum value = C(1440)
+    sothreshold: ${25:value}                                               # Threshold at which spillover occurs  Specify an integer for the CONNECTION spillover method, a bandwidth value in kilobi
+    sobackupaction: ${26$$(yas-choose-value '("DROP" "ACCEPT" "REDIRECT"))}# choices: DROP;ACCEPT;REDIRECT  Action to be performed if spillover is to take effect, but no backup chain to spillover i
+    appflowlog: ${27$$(yas-choose-value '("enabled" "disabled"))}          # choices: enabled;disabled  Enable logging appflow flow information 
+    domain_bindings: ${28:value}                                           # List of bindings for domains for this glsb vserver 
+    service_bindings: ${29:value}                                          # List of bindings for gslb services bound to this gslb virtual server 
+    disabled: ${30:False}                                                  # When set to C(yes) the GSLB Vserver state will be set to C(disabled)  When set to C(no) the GSLB Vserver state will be s
+    nitro_protocol: ${31$$(yas-choose-value '("http" "https"))}            # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${32:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${33:310}                                               # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    state: ${34$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource being configured by the module on the netscaler node  When present th
+    save_config: ${35:True}                                                # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

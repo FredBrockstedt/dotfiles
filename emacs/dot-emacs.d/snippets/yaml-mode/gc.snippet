@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: create/destroy GCE load-balancer resources
+# prefix: gce_lb_snippet
+# key: gc
+# group: ansible
+# --
+
+- name: ${0:create/destroy GCE load-balancer resources}
+  gce_lb:                                                                  
+    httphealthcheck_name: ${1:value}                                       # the name identifier for the HTTP health check
+    httphealthcheck_port: ${2:80}                                          # the TCP port to use for HTTP health checking
+    httphealthcheck_path: ${3:/}                                           # the url path to use for HTTP health checking
+    httphealthcheck_interval: ${4:5}                                       # the duration in seconds between each health check request
+    httphealthcheck_timeout: ${5:5}                                        # the timeout in seconds before a request is considered a failed check
+    httphealthcheck_unhealthy_count: ${6:2}                                # number of consecutive failed checks before marking a node unhealthy
+    httphealthcheck_healthy_count: ${7:2}                                  # number of consecutive successful checks before marking a node healthy
+    httphealthcheck_host: ${8:value}                                       # host header to pass through on HTTP check requests
+    name: ${9:value}                                                       # name of the load-balancer resource
+    protocol: ${10$$(yas-choose-value '("tcp" "udp"))}                     # choices: tcp;udp  the protocol used for the load-balancer packet forwarding, tcp or udp
+    region: ${11:value}                                                    # the GCE region where the load-balancer is defined
+    external_ip: ${12:value}                                               # the external static IPv4 (or auto-assigned) address for the LB
+    port_range: ${13:value}                                                # the port (range) to forward, e g  80 or 8000-8888 defaults to all ports
+    members: ${14:value}                                                   # a list of zone/nodename pairs, e g ['us-central1-a/www-a',    ]
+    state: ${15$$(yas-choose-value '("active" "present" "absent" "deleted"))}# choices: active;present;absent;deleted  desired state of the LB
+    service_account_email: ${16:value}                                     # service account email
+    pem_file: ${17:value}                                                  # path to the pem file associated with the service account email This option is deprecated  Use 'credentials_file' 
+    credentials_file: ${18:value}                                          # path to the JSON file associated with the service account email
+    project_id: ${19:value}                                                # your GCE project ID

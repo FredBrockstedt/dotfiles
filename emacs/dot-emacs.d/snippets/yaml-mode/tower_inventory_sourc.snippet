@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower inventory source.
+# prefix: tower_inventory_source_snippet
+# key: tower_inventory_sourc
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower inventory source.}
+  tower_inventory_source:                                                  
+    name: ${1:The name to use for the inventory source}                    #
+    inventory: ${2:The inventory the source is linked to}                  #
+    source: ${3$$(yas-choose-value '("file" "scm" "ec2" "gce" "azure" "azure_rm" "vmware" "satellite6" "cloudforms" "openstack" "rhv" "tower" "custom"))}# Types of inventory source 
+    description: ${4:value}                                                # The description to use for the inventory source 
+    credential: ${5:value}                                                 # Credential to use to retrieve the inventory from 
+    source_vars: ${6:value}                                                # The source_vars allow to Override variables found in the source config file  For example with Openstack, specifying *pri
+    timeout: ${7:value}                                                    # Number in seconds after which the Tower API methods will time out 
+    source_project: ${8:value}                                             # Use a *project* as a source for the *inventory* 
+    source_path: ${9:value}                                                # Path to the file to use as a source in the selected *project* 
+    update_on_project_update: ${10:value}                                  # That parameter will sync the inventory when the project is synced  It can only be used with a SCM source 
+    source_regions: ${11:value}                                            # List of regions for your cloud provider  You can include multiple all regions  Only Hosts associated with the selected r
+    instance_filters: ${12:value}                                          # Provide a comma-separated list of filter expressions  Hosts are imported when all of the filters match  Refer to Ansible
+    group_by: ${13:value}                                                  # Specify which groups to create automatically  Group names will be created similar to the options selected  If blank, all
+    source_script: ${14:value}                                             # The source custom script to use to build the inventory  It needs to exist 
+    overwrite: ${15:value}                                                 # If set, any hosts and groups that were previously present on the external source but are now removed will be removed fro
+    overwrite_vars: ${16:value}                                            # If set, all variables for child groups and hosts will be removed and replaced by those found on the external source  Whe
+    update_on_launch: ${17:value}                                          # Each time a job runs using this inventory, refresh the inventory from the selected source before executing job tasks 
+    update_cache_timeout: ${18:value}                                      # Time in seconds to consider an inventory sync to be current  During job runs and callbacks the task system will evaluate
+    state: ${19$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Desired state of the resource 
+    validate_certs: ${20:value}                                            # Tower option to avoid certificates check 
+    tower_host: ${21:value}                                                # URL to your Tower instance 
+    tower_username: ${22:value}                                            # Username for your Tower instance 
+    tower_password: ${23:value}                                            # Password for your Tower instance 
+    tower_config_file: ${24:value}                                         # Path to the Tower config file 

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Create, update, and delete MCP 1.0 & 2.0 networks
+# prefix: dimensiondata_network_snippet
+# key: dimensiondata_network
+# group: ansible
+# --
+
+- name: ${0:Create, update, and delete MCP 1.0 & 2.0 networks}
+  dimensiondata_network:                                                   
+    name: ${1:The name of the network domain to create}                    #
+    location: ${2:The target datacenter}                                   #
+    description: ${3:value}                                                # Additional description of the network domain 
+    service_plan: ${4$$(yas-choose-value '("ESSENTIALS" "ADVANCED"))}      # choices: ESSENTIALS;ADVANCED  The service plan, either "ESSENTIALS" or "ADVANCED"  MCP 2 0 Only 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the resource be present or absent 
+    region: ${{6$$(yas-choose-value '("Regions are defined in Apache libcloud project [libcloud/common/dimensiondata}#py],They are also listed in U(https://libcloud readthedocs io/en/latest/compute
+    mcp_user: ${7:value}                                                   # The username used to authenticate to the CloudControl API  If not specified, will fall back to C(MCP_USER) from environm
+    mcp_password: ${8:value}                                               # The password used to authenticate to the CloudControl API  If not specified, will fall back to C(MCP_PASSWORD) from envi
+    validate_certs: ${9:True}                                              # If C(false), SSL certificates will not be validated  This should only be used on private instances of the CloudControl A
+    wait: ${10:False}                                                      # Should we wait for the task to complete before moving onto the next 
+    wait_time: ${11:600}                                                   # The maximum amount of time (in seconds) to wait for the task to complete  Only applicable if I(wait=true) 
+    wait_poll_interval: ${12:2}                                            # The amount of time (in seconds) to wait between checks for task completion  Only applicable if I(wait=true) 

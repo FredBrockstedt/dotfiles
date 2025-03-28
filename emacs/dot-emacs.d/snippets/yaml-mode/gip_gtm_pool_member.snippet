@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage GTM pool member settings
+# prefix: bigip_gtm_pool_member_snippet
+# key: gip_gtm_pool_member
+# group: ansible
+# --
+
+- name: ${0:Manage GTM pool member settings}
+  bigip_gtm_pool_member:                                                   
+    virtual_server: ${1:Specifies the name of the GTM virtual server which is assigned to the specified C(server)}#
+    server_name: ${2:Specifies the GTM server which contains the C(virtual_server)}#
+    type: ${3$$(yas-choose-value '("a" "aaaa" "cname" "mx" "naptr" "srv"))}# The type of GTM pool that the member is in 
+    pool: ${4:Name of the GTM pool}                                        # For pools created on different partitions, you must specify partition of the pool in the full path format, for example, 
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    member_order: ${6:value}                                               # Specifies the order in which the member will appear in the pool  The system uses this number with load balancing methods
+    monitor: ${7:value}                                                    # Specifies the monitor assigned to this pool member  Pool members only support a single monitor  If the C(port) of the C(
+    ratio: ${8:value}                                                      # Specifies the weight of the pool member for load balancing purposes 
+    description: ${9:value}                                                # The description of the pool member 
+    aggregate: ${10:value}                                                 # List of GTM pool member definitions to be created, modified or removed  When using C(aggregates) if one of the aggregate
+    replace_all_with: ${11:False}                                          # Remove members not defined in the C(aggregate) parameter  This operation is all or none, meaning that it will stop if th
+    limits: ${12:value}                                                    # Specifies resource thresholds or limit requirements at the pool member level  When you enable one or more limit settings
+    state: ${13$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  Pool member state  When C(present), ensures that the pool member is create
+    provider: ${14:value}                                                  # A dict object containing connection details 

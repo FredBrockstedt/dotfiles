@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage Firewall Rule instance
+# prefix: azure_rm_sqlfirewallrule_snippet
+# key: zure_rm_sqlfirewallru
+# group: ansible
+# --
+
+- name: ${0:Manage Firewall Rule instance}
+  azure_rm_sqlfirewallrule:                                                
+    resource_group: ${1:The name of the resource group that contains the resource}# You can obtain this value from the Azure Resource Manager API or the portal 
+    server_name: ${2:The name of the server}                               #
+    name: ${3:The name of the firewall rule}                               #
+    start_ip_address: ${4:value}                                           # The start IP address of the firewall rule  Must be IPv4 format  Use value C(0 0 0 0) to represent all Azure-internal IP 
+    end_ip_address: ${5:value}                                             # The end IP address of the firewall rule  Must be IPv4 format  Must be greater than or equal to I(start_ip_address)  Use 
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the SQL Database  Use C(present) to create or update an SQL Database and C(absent) to 
+    ad_user: ${7:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${8:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${9:value}                                                    # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${10:value}                                           # Your Azure subscription Id 
+    client_id: ${11:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${12:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${13:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${14:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${15:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${16$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${17$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${18:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

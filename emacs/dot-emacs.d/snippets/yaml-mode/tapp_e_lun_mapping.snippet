@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series create, delete, or modify lun mappings
+# prefix: netapp_e_lun_mapping_snippet
+# key: tapp_e_lun_mapping
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series create, delete, or modify lun mappings}
+  netapp_e_lun_mapping:                                                    
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Present will ensure the mapping exists, absent will remove the mapping 
+    volume_name: ${2:The name of the volume you wish to include in the mapping}#
+    api_username: ${3:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${4:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${5:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    target: ${6:value}                                                     # The name of host or hostgroup you wish to assign to the mapping If omitted, the default hostgroup is used  If the suppli
+    lun: ${7:value}                                                        # The LUN value you wish to give the mapping  If the supplied I(volume_name) is associated with a different LUN, it will b
+    target_type: ${8$$(yas-choose-value '("host" "group"))}                # choices: host;group  This option specifies the whether the target should be a host or a group of hosts Only necessary wh
+    validate_certs: ${9:True}                                              # Should https certificates be validated?
+    ssid: ${10:1}                                                          # The ID of the array to manage  This value must be unique for each array 

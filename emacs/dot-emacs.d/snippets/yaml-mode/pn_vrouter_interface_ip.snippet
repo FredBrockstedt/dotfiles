@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove vrouter-interface-ip
+# prefix: pn_vrouter_interface_ip_snippet
+# key: pn_vrouter_interface_ip
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove vrouter-interface-ip}
+  pn_vrouter_interface_ip:                                                 
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use C(present) to addvrouter-interface-ip and C(absent) to remove vrouter-interface-ip 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_bd: ${3:value}                                                      # interface Bridge Domain 
+    pn_netmask: ${4:value}                                                 # netmask 
+    pn_vnet: ${5:value}                                                    # interface VLAN VNET 
+    pn_ip: ${6:value}                                                      # IP address 
+    pn_nic: ${7:value}                                                     # virtual NIC assigned to interface 
+    pn_vrouter_name: ${8:value}                                            # name of service config 

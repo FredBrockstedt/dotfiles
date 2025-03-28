@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manages router profiles for message-routing protocols
+# prefix: bigip_message_routing_router_snippet
+# key: gip_message_routing_router
+# group: ansible
+# --
+
+- name: ${0:Manages router profiles for message-routing protocols}
+  bigip_message_routing_router:                                            
+    name: ${1:Specifies the name of the router profile}                    #
+    description: ${2:value}                                                # The user defined description of the router profile 
+    type: ${3$$(yas-choose-value '("generic"))}                            # choices: generic  Parameter used to specify the type of the router profile to manage  Default setting is C(generic) with
+    parent: ${4:value}                                                     # The parent template of this router profile  Once this value has been set, it cannot be changed  The default values are s
+    ignore_client_port: ${5:value}                                         # When C(yes), the remote port on clientside connections ie  connections where the peer connected to the BIG-IP is ignored
+    inherited_traffic_group: ${6:value}                                    # When set to C(yes) the C(traffic_group) will be inherited from the containing folder  When not specified the system sets
+    traffic_group: ${7:value}                                              # Specifies the traffic-group of the router profile  Setting the C(traffic_group) to an empty string value C("") will caus
+    use_local_connection: ${8:value}                                       # If C(yes), the router will route a message to an existing connection on the same TMM as the message was received on 
+    max_pending_bytes: ${9:value}                                          # The maximum number of bytes worth of pending messages that will be held while waiting for a connection to a peer to be c
+    max_pending_messages: ${10:value}                                      # The maximum number of pending messages that will be held while waiting for a connection to a peer to be created  Once re
+    max_retries: ${11:value}                                               # Sets the maximum number of time a message may be resubmitted for rerouting by the C(MR::retry) iRule command  The accept
+    mirror: ${12:value}                                                    # Enables or disables state mirroring  State mirroring can be used to maintain the same state information in the standby u
+    mirrored_msg_sweeper_interval: ${13:value}                             # Specifies the maximum time in milliseconds that a message will be held on the standby device as it waits for the active 
+    routes: ${14:value}                                                    # Specifies a list of static routes for the router instance to use  The route must be on the same partition as router prof
+    partition: ${15:Common}                                                # Device partition to create router profile on 
+    state: ${16$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the router profile exists  When C(absent), ensures the router pro
+    provider: ${17:value}                                                  # A dict object containing connection details 

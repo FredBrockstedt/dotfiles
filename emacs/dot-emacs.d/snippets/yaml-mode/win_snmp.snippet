@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Configures the Windows SNMP service
+# prefix: win_snmp_snippet
+# key: win_snmp
+# group: ansible
+# --
+
+- name: ${0:Configures the Windows SNMP service}
+  win_snmp:                                                                
+    permitted_managers: ${1:value}                                         # The list of permitted SNMP managers 
+    community_strings: ${2:value}                                          # The list of read-only SNMP community strings 
+    action: ${3$$(yas-choose-value '("add" "set" "remove"))}               # choices: add;set;remove  C(add) will add new SNMP community strings and/or SNMP managers C(set) will replace SNMP commun

@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete/modify a trunk.
+# prefix: pn_trunk_snippet
+# key: pn_trunk
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete/modify a trunk.}
+  pn_trunk:                                                                
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use 'present' to create trunk, 'absent' to delete trunk and 'update' to modify trunk 
+    pn_name: ${2:Specify the name for the trunk configuration}             #
+    pn_cliusername: ${3:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${4:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${5:local}                                               # Target switch(es) to run the cli on 
+    pn_ports: ${6:value}                                                   # Specify the port number(s) for the link(s) to aggregate into the trunk  Required for trunk-create 
+    pn_speed: ${{7$$(yas-choose-value '("disable" "10m" "100m" "1g" "2}    #5g,10g,40g|} # not required  choices: disable;10m;100m;1g;2 5g;10g;40g  Specify the port speed or disable the port 
+    pn_egress_rate_limit: ${8:value}                                       # Specify an egress port data rate limit for the configuration 
+    pn_jumbo: ${9:value}                                                   # Specify if the port can receive jumbo frames 
+    pn_lacp_mode: ${10$$(yas-choose-value '("off" "passive" "active"))}    # choices: off;passive;active  Specify the LACP mode for the configuration 
+    pn_lacp_priority: ${11:value}                                          # Specify the LACP priority  This is a number between 1 and 65535 with a default value of 32768 
+    pn_lacp_timeout: ${12$$(yas-choose-value '("slow" "fast"))}            # choices: slow;fast  Specify the LACP time out as slow (30 seconds) or fast (4seconds)  The default value is slow 
+    pn_lacp_fallback: ${13$$(yas-choose-value '("bundle" "individual"))}   # choices: bundle;individual  Specify the LACP fallback mode as bundles or individual 
+    pn_lacp_fallback_timeout: ${14:value}                                  # Specify the LACP fallback timeout in seconds  The range is between 30 and 60 seconds with a default value of 50 seconds 
+    pn_edge_switch: ${15:value}                                            # Specify if the switch is an edge switch 
+    pn_pause: ${16:value}                                                  # Specify if pause frames are sent 
+    pn_description: ${17:value}                                            # Specify a description for the trunk configuration 
+    pn_loopback: ${18:value}                                               # Specify loopback if you want to use loopback 
+    pn_mirror_receive: ${19:value}                                         # Specify if the configuration receives mirrored traffic 
+    pn_unknown_ucast_level: ${20:value}                                    # Specify an unknown unicast level in percent  The default value is 100% 
+    pn_unknown_mcast_level: ${21:value}                                    # Specify an unknown multicast level in percent  The default value is 100% 
+    pn_broadcast_level: ${22:value}                                        # Specify a broadcast level in percent  The default value is 100% 
+    pn_port_macaddr: ${23:value}                                           # Specify the MAC address of the port 
+    pn_loopvlans: ${24:value}                                              # Specify a list of looping vlans 
+    pn_routing: ${25:value}                                                # Specify if the port participates in routing on the network 
+    pn_host: ${26:value}                                                   # Host facing port control setting 

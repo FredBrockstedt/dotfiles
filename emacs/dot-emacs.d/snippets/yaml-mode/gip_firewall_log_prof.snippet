@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages AFM logging profiles configured in the system
+# prefix: bigip_firewall_log_profile_snippet
+# key: gip_firewall_log_prof
+# group: ansible
+# --
+
+- name: ${0:Manages AFM logging profiles configured in the system}
+  bigip_firewall_log_profile:                                              
+    name: ${1:Specifies the name of the log profile}                       #
+    description: ${2:value}                                                # Description of the log profile 
+    dos_protection: ${3:value}                                             # Configures DoS related settings of the log profile 
+    ip_intelligence: ${4:value}                                            # Configures IP Intelligence related settings of the log profile 
+    port_misuse: ${5:value}                                                # Port Misuse log configuration 
+    partition: ${6:Common}                                                 # Device partition to create log profile on  Parameter also used when specifying names for log publishers, unless log publ
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(state) is C(present), ensures the resource exists  When C(state) is C(absent), ensures t
+    provider: ${8:value}                                                   # A dict object containing connection details 

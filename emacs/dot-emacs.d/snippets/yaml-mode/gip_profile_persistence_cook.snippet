@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manage cookie persistence profiles on BIG-IP
+# prefix: bigip_profile_persistence_cookie_snippet
+# key: gip_profile_persistence_cook
+# group: ansible
+# --
+
+- name: ${0:Manage cookie persistence profiles on BIG-IP}
+  bigip_profile_persistence_cookie:                                        
+    name: ${1:Specifies the name of the profile}                           #
+    description: ${2:value}                                                # Description of the profile 
+    parent: ${3:cookie}                                                    # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    cookie_method: ${4$$(yas-choose-value '("hash" "insert" "passive" "rewrite"))}# choices: hash;insert;passive;rewrite  Specifies the type of cookie processing that the system uses  When C(hash),
+    cookie_name: ${5:value}                                                # Specifies a unique name for the cookie 
+    http_only: ${6:value}                                                  # Specifies whether the httponly attribute should be enabled or disabled for the inserted cookies 
+    match_across_services: ${7:value}                                      # When C(yes), specifies that all persistent connections from a client IP address that go to the same virtual IP address a
+    match_across_virtuals: ${8:value}                                      # When C(yes), specifies that all persistent connections from the same client IP address go to the same node  When creatin
+    match_across_pools: ${9:value}                                         # When C(yes), specifies that the system can use any pool that contains this persistence record  When creating a new profi
+    cookie_encryption: ${10$$(yas-choose-value '("disabled" "preferred" "required"))}# choices: disabled;preferred;required  Specifies the way in which the cookie encryption format is used  When C(
+    override_connection_limit: ${11:value}                                 # When C(yes), specifies that the system allows you to specify that pool member connection limits will be overridden for p
+    encrypt_cookie_pool_name: ${12:value}                                  # Specifies whether the pool-name in the inserted BIG-IP default cookie should be encrypted 
+    always_send: ${13:value}                                               # Send the cookie persistence entry on every reply, even if the entry has previously been supplied to the client 
+    secure: ${14:value}                                                    # Specifies whether the secure attribute should be enabled or disabled for the inserted cookies 
+    encryption_passphrase: ${15:value}                                     # Specifies a passphrase to be used for cookie encryption 
+    update_password: ${16$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will allow to update passphrases if the user chooses to do so  C(on_create) will on
+    expiration: ${17:value}                                                # Specifies the expiration time of the cookie  By default the system generates and uses session cookie  This cookie expire
+    partition: ${18:Common}                                                # Device partition to manage resources on 
+    state: ${19$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${20:value}                                                  # A dict object containing connection details 

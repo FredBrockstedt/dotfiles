@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage Open vSwitch ports
+# prefix: openvswitch_port_snippet
+# key: openvswitch_port
+# group: ansible
+# --
+
+- name: ${0:Manage Open vSwitch ports}
+  openvswitch_port:                                                        
+    bridge: ${1:Name of bridge to manage}                                  #
+    port: ${2:Name of port to manage on the bridge}                        #
+    tag: ${3:value}                                                        # VLAN tag for this port  Must be a value between 0 and 4095 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the port should exist
+    timeout: ${5:5}                                                        # How long to wait for ovs-vswitchd to respond
+    external_ids: ${6:namespace()}                                         # Dictionary of external_ids applied to a port 
+    set: ${7:value}                                                        # Set a single property on a port 

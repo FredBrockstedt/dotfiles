@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configures IGMP Vlan parameters
+# prefix: onyx_igmp_vlan_snippet
+# key: onyx_igmp_v
+# group: ansible
+# --
+
+- name: ${0:Configures IGMP Vlan parameters}
+  onyx_igmp_vlan:                                                          
+    vlan_id: ${1:VLAN ID, vlan should exist}                               #
+    state: ${2$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  IGMP state 
+    mrouter: ${3:value}                                                    # Configure ip igmp snooping mrouter port on vlan
+    querier: ${4:value}                                                    # Configure the IGMP querier parameters
+    static_groups: ${5:value}                                              # List of IGMP static groups 
+    version: ${6$$(yas-choose-value '("V2" "V3"))}                         # choices: V2;V3  IGMP snooping operation version on this vlan

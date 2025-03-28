@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Configure connection capability in Fortinet's FortiOS and FortiGate.
+# prefix: fortios_wireless_controller_hotspot20_h2qp_conn_capability_snippet
+# key: fortios_wireless_controller_hotspot20_h2qp_conn_capability
+# group: ansible
+# --
+
+- name: ${0:Configure connection capability in Fortinet's FortiOS and FortiGate.}
+  fortios_wireless_controller_hotspot20_h2qp_conn_capability:              
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Indicates whether to create or remove the object 
+    host: ${2:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${3:value}                                                   # FortiOS or FortiGate username 
+    password: ${4:}                                                        # FortiOS or FortiGate password 
+    vdom: ${5:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${6:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${7:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 
+    wireless_controller_hotspot20_h2qp_conn_capability: ${8:None}          # Configure connection capability 

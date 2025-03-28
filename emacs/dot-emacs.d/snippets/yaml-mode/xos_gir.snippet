@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Trigger a graceful removal or insertion (GIR) of the switch.
+# prefix: nxos_gir_snippet
+# key: xos_gir
+# group: ansible
+# --
+
+- name: ${0:Trigger a graceful removal or insertion (GIR) of the switch.}
+  nxos_gir:                                                                
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Specify desired state of the resource 
+    system_mode_maintenance: ${2:value}                                    # When C(system_mode_maintenance=true) it puts all enabled protocols in maintenance mode (using the isolate command)  When
+    system_mode_maintenance_dont_generate_profile: ${3:value}              # When C(system_mode_maintenance_dont_generate_profile=true) it prevents the dynamic searching of enabled protocols and ex
+    system_mode_maintenance_timeout: ${4:value}                            # Keeps the switch in maintenance mode for a specified number of minutes  Range is 5-65535 
+    system_mode_maintenance_shutdown: ${5:value}                           # Shuts down all protocols, vPC domains, and interfaces except the management interface (using the shutdown command)  This
+    system_mode_maintenance_on_reload_reset_reason: ${6$$(yas-choose-value '("hw_error" "svc_failure" "kern_failure" "wdog_timeout" "fatal_error" "lc_failure" "match_any" "manual_reload" "any_other
+    provider: ${7:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

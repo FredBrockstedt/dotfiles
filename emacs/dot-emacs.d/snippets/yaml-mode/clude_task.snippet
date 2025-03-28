@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Dynamically include a task list
+# prefix: include_tasks_snippet
+# key: clude_task
+# group: ansible
+# --
+
+- name: ${0:Dynamically include a task list}
+  include_tasks:                                                           
+    file: ${1:value}                                                       # The name of the imported file is specified directly without any other option  Unlike M(import_tasks), most keywords, inc
+    apply: ${2:value}                                                      # Accepts a hash of task keywords (e g  C(tags), C(become)) that will be applied to the tasks within the include 
+    free-form: ${3:value}                                                  # Supplying a file name via free-form C(- include_tasks: file yml) of a file to be included is the equivalent
+of specifyin

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Enable or Disable Pure Storage FlashBlade Remote Assist
+# prefix: purefb_ra_snippet
+# key: purefb_r
+# group: ansible
+# --
+
+- name: ${0:Enable or Disable Pure Storage FlashBlade Remote Assist}
+  purefb_ra:                                                               
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Define state of remote assist When set to I(enable) the RA port can be exposed using the I(debu
+    fb_url: ${2:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${3:value}                                                  # FlashBlade API token for admin privileged user 

@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage MySQL Database instance
+# prefix: azure_rm_mysqldatabase_snippet
+# key: zure_rm_mysqldat
+# group: ansible
+# --
+
+- name: ${0:Manage MySQL Database instance}
+  azure_rm_mysqldatabase:                                                  
+    resource_group: ${1:The name of the resource group that contains the resource}# You can obtain this value from the Azure Resource Manager API or the portal 
+    server_name: ${2:The name of the server}                               #
+    name: ${3:The name of the database}                                    #
+    charset: ${4:value}                                                    # The charset of the database  Check MySQL documentation for possible values  This is only set on creation, use I(force_up
+    collation: ${5:value}                                                  # The collation of the database  Check MySQL documentation for possible values  This is only set on creation, use I(force_
+    force_update: ${6:false}                                               # When set to C(true), will delete and recreate the existing MySQL database if any of the properties don't match what is s
+    state: ${7$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the MySQL Database  Use C(present) to create or update a database and C(abs
+    ad_user: ${8:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${9:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${10:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${11:value}                                           # Your Azure subscription Id 
+    client_id: ${12:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${13:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${14:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${15:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${16:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${17$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${18$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${19:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

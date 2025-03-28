@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: creates or destroys a data migration services endpoint
+# prefix: dms_endpoint_snippet
+# key: dms_endpoint
+# group: ansible
+# --
+
+- name: ${0:creates or destroys a data migration services endpoint}
+  dms_endpoint:                                                            
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the endpoint
+    endpointidentifier: ${2:value}                                         # An identifier name for the endpoint
+    endpointtype: ${3$$(yas-choose-value '("source" "target"))}            # choices: source;target  Type of endpoint we want to manage
+    enginename: ${4$$(yas-choose-value '("mysql" "oracle" "postgres" "mariadb" "aurora" "redshift" "s3" "db2" "azuredb" "sybase" "dynamodb" "mongodb" "sqlserver"))}# choices: mysql;oracle;postgres;
+    username: ${5:value}                                                   # Username our endpoint will use to connect to the database
+    password: ${6:value}                                                   # Password used to connect to the database this attribute can only be written the AWS API does not return this parameter
+    servername: ${7:value}                                                 # Servername that the endpoint will connect to
+    port: ${8:value}                                                       # TCP port for access to the database
+    databasename: ${9:value}                                               # Name for the database on the origin or target side
+    extraconnectionattributes: ${10:value}                                 # Extra attributes for the database connection, the AWS documentation states " For more information about extra connection
+    kmskeyid: ${11:value}                                                  # Encryption key to use to encrypt replication storage and connection information
+    tags: ${12:value}                                                      # A list of tags to add to the endpoint
+    certificatearn: ${13:value}                                            # Amazon Resource Name (ARN) for the certificate
+    sslmode: ${14$$(yas-choose-value '("none" "require" "verify-ca" "verify-full"))}# choices: none;require;verify-ca;verify-full  Mode used for the ssl connection
+    serviceaccessrolearn: ${15:value}                                      # Amazon Resource Name (ARN) for the service access role that you want to use to create the endpoint 
+    externaltabledefinition: ${16:value}                                   # The external table definition
+    dynamodbsettings: ${17:value}                                          # Settings in JSON format for the target Amazon DynamoDB endpoint if source or target is dynamodb
+    s3settings: ${18:value}                                                # S3 buckets settings for the target Amazon S3 endpoint 
+    dmstransfersettings: ${19:value}                                       # The settings in JSON format for the DMS transfer type of source endpoint
+    mongodbsettings: ${20:value}                                           # Settings in JSON format for the source MongoDB endpoint
+    kinesissettings: ${21:value}                                           # Settings in JSON format for the target Amazon Kinesis Data Streams endpoint
+    elasticsearchsettings: ${22:value}                                     # Settings in JSON format for the target Elasticsearch endpoint
+    wait: ${23:false}                                                      # should wait for the object to be deleted when state = absent
+    timeout: ${24:value}                                                   # time in seconds we should wait for when deleting a resource
+    retries: ${25:value}                                                   # number of times we should retry when deleting a resource
+    region: ${26:value}                                                    # aws region, should be read from the running aws config
+    ec2_region: ${27:value}                                                # alias for region
+    aws_region: ${28:value}                                                # alias for region
+    debug_botocore_endpoint_logs: ${29:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${30:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${31:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${32:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${33:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${34:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${35:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 

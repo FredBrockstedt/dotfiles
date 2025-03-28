@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage NetApp cDOT protocol and feature licenses
+# prefix: na_cdot_license_snippet
+# key: cdot_lic
+# group: ansible
+# --
+
+- name: ${0:Manage NetApp cDOT protocol and feature licenses}
+  na_cdot_license:                                                         
+    hostname: ${1:The hostname or IP address of the ONTAP instance}        #
+    username: ${2:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${3:Password for the specified user}                         #
+    remove_unused: ${4:value}                                              # Remove licenses that have no controller affiliation in the cluster 
+    remove_expired: ${5:value}                                             # Remove licenses that have expired in the cluster 
+    serial_number: ${6:value}                                              # Serial number of the node associated with the license  This parameter is used primarily when removing license for a spec
+    licenses: ${7:value}                                                   # List of licenses to add or remove  Please note that trying to remove a non-existent license will throw an error 

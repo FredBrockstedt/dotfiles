@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Manages threat-exception objects on Check Point over Web Services API
+# prefix: cp_mgmt_threat_exception_snippet
+# key: cp_mgmt_threat_exceptio
+# group: ansible
+# --
+
+- name: ${0:Manages threat-exception objects on Check Point over Web Services API}
+  cp_mgmt_threat_exception:                                                
+    name: ${1:The name of the exception}                                   #
+    position: ${2:value}                                                   # Position in the rulebase 
+    exception_group_uid: ${3:value}                                        # The UID of the exception-group 
+    exception_group_name: ${4:value}                                       # The name of the exception-group 
+    layer: ${5:value}                                                      # Layer that the rule belongs to identified by the name or UID 
+    rule_name: ${6:value}                                                  # The name of the parent rule 
+    action: ${7:value}                                                     # Action-the enforced profile 
+    destination: ${8:value}                                                # Collection of Network objects identified by the name or UID 
+    destination_negate: ${9:value}                                         # True if negate is set for destination 
+    enabled: ${10:value}                                                   # Enable/Disable the rule 
+    install_on: ${11:value}                                                # Which Gateways identified by the name or UID to install the policy on 
+    protected_scope: ${12:value}                                           # Collection of objects defining Protected Scope identified by the name or UID 
+    protected_scope_negate: ${13:value}                                    # True if negate is set for Protected Scope 
+    protection_or_site: ${14:value}                                        # Name of the protection or site 
+    service: ${15:value}                                                   # Collection of Network objects identified by the name or UID 
+    service_negate: ${16:value}                                            # True if negate is set for Service 
+    source: ${17:value}                                                    # Collection of Network objects identified by the name or UID 
+    source_negate: ${18:value}                                             # True if negate is set for source 
+    track: ${19:value}                                                     # Packet tracking 
+    comments: ${20:value}                                                  # Comments string 
+    details_level: ${21$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${22:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${23:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${24$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${25:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${26:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${27:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Handles create, update, read and delete of configuration data on RESTCONF enabled devices.
+# prefix: restconf_config_snippet
+# key: restconf_config
+# group: ansible
+# --
+
+- name: ${0:Handles create, update, read and delete of configuration data on RESTCONF enabled devices.}
+  restconf_config:                                                         
+    path: ${1:URI being used to execute API calls}                         #
+    content: ${2:value}                                                    # The configuration data in format as specififed in C(format) option  Required unless C(method) is I(delete) 
+    method: ${3$$(yas-choose-value '("post" "put" "patch" "delete"))}      # choices: post;put;patch;delete  The RESTCONF method to manage the configuration change on device  The value I(post) is u
+    format: ${4$$(yas-choose-value '("json" "xml"))}                       # choices: json;xml  The format of the configuration provided as value of C(content)  Accepted values are I(xml) and I(jso

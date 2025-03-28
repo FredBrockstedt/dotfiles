@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Generate OpenSSL Diffie-Hellman Parameters
+# prefix: openssl_dhparam_snippet
+# key: openssl_dhparam
+# group: ansible
+# --
+
+- name: ${0:Generate OpenSSL Diffie-Hellman Parameters}
+  openssl_dhparam:                                                         
+    path: ${1:Name of the file in which the generated parameters will be saved}#
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the parameters should exist or not, taking action if the state is different from what i
+    size: ${3:4096}                                                        # Size (in bits) of the generated DH-params 
+    force: ${4:False}                                                      # Should the parameters be regenerated even it it already exists 
+    backup: ${5:False}                                                     # Create a backup file including a timestamp so you can get the original DH params back if you overwrote them with new one
+    mode: ${6:value}                                                       # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${7:value}                                                      # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${8:value}                                                      # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${9:value}                                                     # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${10:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${11:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${12:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${13:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${14:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

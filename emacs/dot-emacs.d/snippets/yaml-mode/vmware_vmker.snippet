@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Manages a VMware VMkernel Adapter of an ESXi host.
+# prefix: vmware_vmkernel_snippet
+# key: vmware_vmker
+# group: ansible
+# --
+
+- name: ${0:Manages a VMware VMkernel Adapter of an ESXi host.}
+  vmware_vmkernel:                                                         
+    portgroup_name: ${1:The name of the port group for the VMKernel interface}#
+    esxi_hostname: ${2:Name of ESXi host to which VMKernel is to be managed}# From version 2 5 onwards, this parameter is required 
+    vswitch_name: ${3:value}                                               # The name of the vSwitch where to add the VMKernel interface  Required parameter only if C(state) is set to C(present)  O
+    dvswitch_name: ${4:value}                                              # The name of the vSphere Distributed Switch (vDS) where to add the VMKernel interface  Required parameter only if C(state
+    network: ${5:"namespace(type='static', tcpip_stack='default')"}        # A dictionary of network details  The following parameter is required:  - C(type) (string): Type of IP assignment (either
+    ip_address: ${6:value}                                                 # The IP Address for the VMKernel interface  Use C(network) parameter with C(ip_address) instead  Deprecated option, will 
+    subnet_mask: ${7:value}                                                # The Subnet Mask for the VMKernel interface  Use C(network) parameter with C(subnet_mask) instead  Deprecated option, wil
+    mtu: ${8:1500}                                                         # The MTU for the VMKernel interface  The default value of 1500 is valid from version 2 5 and onwards 
+    device: ${9:value}                                                     # Search VMkernel adapter by device name  The parameter is required only in case of C(type) is set to C(dhcp) 
+    enable_vsan: ${10:value}                                               # Enable VSAN traffic on the VMKernel adapter  This option is only allowed if the default TCP/IP stack is used 
+    enable_vmotion: ${11:value}                                            # Enable vMotion traffic on the VMKernel adapter  This option is only allowed if the default TCP/IP stack is used  You can
+    enable_mgmt: ${12:value}                                               # Enable Management traffic on the VMKernel adapter  This option is only allowed if the default TCP/IP stack is used 
+    enable_ft: ${13:value}                                                 # Enable Fault Tolerance traffic on the VMKernel adapter  This option is only allowed if the default TCP/IP stack is used 
+    enable_provisioning: ${14:value}                                       # Enable Provisioning traffic on the VMKernel adapter  This option is only allowed if the default TCP/IP stack is used 
+    enable_replication: ${15:value}                                        # Enable vSphere Replication traffic on the VMKernel adapter  This option is only allowed if the default TCP/IP stack is u
+    enable_replication_nfc: ${16:value}                                    # Enable vSphere Replication NFC traffic on the VMKernel adapter  This option is only allowed if the default TCP/IP stack 
+    state: ${17$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  If set to C(present), the VMKernel adapter will be created with the given specifications  If se
+    hostname: ${18:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${19:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${20:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${21:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${22:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${23:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${24:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

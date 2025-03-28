@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages Bitbucket pipeline SSH key pair
+# prefix: bitbucket_pipeline_key_pair_snippet
+# key: tbucket_pipeline_key_pair
+# group: ansible
+# --
+
+- name: ${0:Manages Bitbucket pipeline SSH key pair}
+  bitbucket_pipeline_key_pair:                                             
+    repository: ${1:The repository name}                                   #
+    username: ${2:The repository owner}                                    #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # Indicates desired state of the key pair 
+    client_id: ${4:value}                                                  # OAuth consumer key  If not set the environment variable C(BITBUCKET_CLIENT_ID) will be used 
+    client_secret: ${5:value}                                              # OAuth consumer secret  If not set the environment variable C(BITBUCKET_CLIENT_SECRET) will be used 
+    public_key: ${6:value}                                                 # The public key 
+    private_key: ${7:value}                                                # The private key 

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Node
+# prefix: gcp_tpu_node_snippet
+# key: gcp_tpu_nod
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Node}
+  gcp_tpu_node:                                                            
+    name: ${1:The immutable name of the TPU}                               #
+    accelerator_type: ${2:The type of hardware accelerators associated with this node}#
+    tensorflow_version: ${3:The version of Tensorflow running in the Node} #
+    cidr_block: ${4:The CIDR block that the TPU node will use when selecting an IP address}# This CIDR block must be a /29 block; the Compute Engine networks API forbids a smaller block, and using 
+    zone: ${5:The GCP location for the TPU}                                #
+    auth_kind: ${6$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${8:value}                                                # The user-supplied description of the TPU  Maximum of 512 characters 
+    network: ${9:value}                                                    # The name of a network to peer the TPU node to  It must be a preexisting Compute Engine network inside of the project on 
+    scheduling_config: ${10:value}                                         # Sets the scheduling options for this TPU instance 
+    labels: ${11:value}                                                    # Resource labels to represent user provided metadata 
+    project: ${12:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${13:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${14:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${15:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${16:value}                                                    # Array of scopes to be used 
+    env_type: ${17:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

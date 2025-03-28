@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Configures WWNN or WWPN pools on Cisco UCS Manager
+# prefix: ucs_wwn_pool_snippet
+# key: ucs_wwn_poo
+# group: ansible
+# --
+
+- name: ${0:Configures WWNN or WWPN pools on Cisco UCS Manager}
+  ucs_wwn_pool:                                                            
+    name: ${1:The name of the World Wide Node Name (WWNN) or World Wide Port Name (WWPN) pool}# This name can be between 1 and 32 alphanumeric characters  You cannot use spaces or any special chara
+    purpose: ${2$$(yas-choose-value '("node" "port"))}                     # Specify whether this is a node (WWNN) or port (WWPN) pool  Optional if state is absent 
+    hostname: ${3:IP address or hostname of Cisco UCS Manager}             #
+    password: ${4:Password for Cisco UCS Manager authentication}           #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify WWNNs/WWPNs are present and will create if needed  If C(absent), wil
+    description: ${6:value}                                                # A description of the WWNN or WWPN pool  Enter up to 256 characters  You can use any characters or spaces except the foll
+    order: ${7$$(yas-choose-value '("default" "sequential"))}              # choices: default;sequential  The Assignment Order field  This can be one of the following: default - Cisco UCS Manager s
+    first_addr: ${8:value}                                                 # The first initiator in the World Wide Name (WWN) block  This is the From field in the UCS Manager Add WWN Blocks menu 
+    last_addr: ${9:value}                                                  # The last initiator in the World Wide Name (WWN) block  This is the To field in the UCS Manager Add WWN Blocks menu  For 
+    org_dn: ${10:org-root}                                                 # Org dn (distinguished name)
+    username: ${11:admin}                                                  # Username for Cisco UCS Manager authentication 
+    port: ${12:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${13:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${14:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${15:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

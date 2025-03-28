@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Asserts given expressions are true
+# prefix: assert_snippet
+# key: rt
+# group: ansible
+# --
+
+- name: ${0:Asserts given expressions are true}
+  assert:                                                                  
+    that: ${1:A list of string expressions of the same form that can be passed to the 'when' statement}#
+    fail_msg: ${2:value}                                                   # The customized message used for a failing assertion  This argument was called 'msg' before Ansible 2 7, now it is rename
+    success_msg: ${3:value}                                                # The customized message used for a successful assertion 
+    quiet: ${4:False}                                                      # Set this to C(yes) to avoid verbose output 

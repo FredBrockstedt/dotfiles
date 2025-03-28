@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Configures Traffic Class
+# prefix: onyx_traffic_class_snippet
+# key: onyx_traffic_c
+# group: ansible
+# --
+
+- name: ${0:Configures Traffic Class}
+  onyx_traffic_class:                                                      
+    interfaces: ${1:list of interfaces name}                               #
+    tc: ${2:traffic class, range 0-7}                                      #
+    state: ${3$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  enable congestion control on interface 
+    congestion_control: ${4:value}                                         # configure congestion control on interface 
+    dcb: ${5:value}                                                        # configure dcb control on interface 

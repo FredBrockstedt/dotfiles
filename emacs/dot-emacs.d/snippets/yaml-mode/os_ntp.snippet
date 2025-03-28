@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages core NTP configuration.
+# prefix: ios_ntp_snippet
+# key: os_ntp
+# group: ansible
+# --
+
+- name: ${0:Manages core NTP configuration.}
+  ios_ntp:                                                                 
+    server: ${1:value}                                                     # Network address of NTP server 
+    source_int: ${2:value}                                                 # Source interface for NTP packets 
+    acl: ${3:value}                                                        # ACL for peer/server access restricition 
+    logging: ${4:False}                                                    # Enable NTP logs  Data type boolean 
+    auth: ${5:False}                                                       # Enable NTP authentication  Data type boolean 
+    auth_key: ${6:value}                                                   # md5 NTP authentication key of tye 7 
+    key_id: ${7:value}                                                     # auth_key id  Data type string
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 
+    authorize: ${9:False}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  For more infor
+    auth_pass: ${10:value}                                                 # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes) with C(become_p
+    provider: ${11:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

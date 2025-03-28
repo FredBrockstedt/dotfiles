@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Collect facts from remote devices running MikroTik RouterOS
+# prefix: routeros_facts_snippet
+# key: routeros_fact
+# group: ansible
+# --
+
+- name: ${0:Collect facts from remote devices running MikroTik RouterOS}
+  routeros_facts:                                                          
+    gather_subset: ${1:!config}                                            # When supplied, this argument will restrict the facts collected to a given subset   Possible values for this argument inc

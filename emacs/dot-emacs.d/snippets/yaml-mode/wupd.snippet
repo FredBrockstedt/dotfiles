@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages updates and bundles in ClearLinux systems.
+# prefix: swupd_snippet
+# key: wupd
+# group: ansible
+# --
+
+- name: ${0:Manages updates and bundles in ClearLinux systems.}
+  swupd:                                                                   
+    contenturl: ${1:value}                                                 # URL pointing to the contents of available bundles  If not specified, the contents are retrieved from clearlinux org 
+    format: ${2:value}                                                     # The format suffix for version file downloads  For example [1,2,3,staging,etc]  If not specified, the default format is u
+    manifest: ${3:value}                                                   # The manifest contains information about the bundles at certain version of the OS  Specify a Manifest version to verify a
+    name: ${4:value}                                                       # Name of the (I)bundle to install or remove 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicates the desired (I)bundle state  C(present) ensures the bundle is installed while C(absen
+    update: ${6:value}                                                     # Updates the OS to the latest version 
+    url: ${7:value}                                                        # Overrides both I(contenturl) and I(versionurl) 
+    verify: ${8:value}                                                     # Verify content for OS version 
+    versionurl: ${9:value}                                                 # URL for version string download 

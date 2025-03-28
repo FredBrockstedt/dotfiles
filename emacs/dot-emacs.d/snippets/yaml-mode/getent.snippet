@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: A wrapper to the unix getent utility
+# prefix: getent_snippet
+# key: getent
+# group: ansible
+# --
+
+- name: ${0:A wrapper to the unix getent utility}
+  getent:                                                                  
+    database: ${1:The name of a getent database supported by the target system (passwd, group, hosts, etc)}#
+    key: ${2:}                                                             # Key from which to return values from the specified database, otherwise the full contents are returned 
+    service: ${3:value}                                                    # Override all databases with the specified service The underlying system must support the service flag which is not alway
+    split: ${4:value}                                                      # Character used to split the database values into lists/arrays such as ':' or '	', otherwise  it will try to pick one dep
+    fail_key: ${5:true}                                                    # If a supplied key is missing this will make the task fail if C(yes) 

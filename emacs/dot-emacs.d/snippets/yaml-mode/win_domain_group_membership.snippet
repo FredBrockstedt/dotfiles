@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Windows domain group membership
+# prefix: win_domain_group_membership_snippet
+# key: win_domain_group_membership
+# group: ansible
+# --
+
+- name: ${0:Manage Windows domain group membership}
+  win_domain_group_membership:                                             
+    name: ${1:Name of the domain group to manage membership on}            #
+    members: ${2:A list of members to ensure are present/absent from the group}# The given names must be a SamAccountName of a user, group, service account, or computer  For computers, you must add
+    state: ${3$$(yas-choose-value '("absent" "present" "pure"))}           # choices: absent;present;pure  Desired state of the members in the group  When C(state) is C(pure), only the members spec
+    domain_username: ${4:value}                                            # The username to use when interacting with AD  If this is not set then the user Ansible used to log in with will be used 
+    domain_password: ${5:value}                                            # The password for I(username) 
+    domain_server: ${6:value}                                              # Specifies the Active Directory Domain Services instance to connect to  Can be in the form of an FQDN or NetBIOS name  If

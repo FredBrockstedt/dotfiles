@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: create a dynamic address group
+# prefix: panos_dag_snippet
+# key: panos_dag
+# group: ansible
+# --
+
+- name: ${0:create a dynamic address group}
+  panos_dag:                                                               
+    dag_name: ${1:name of the dynamic address group}                       #
+    dag_filter: ${2:dynamic filter user by the dynamic address group}      #
+    ip_address: ${3:IP address (or hostname) of PAN-OS device}             #
+    password: ${4:Password for authentication}                             #
+    commit: ${5:true}                                                      # commit if changed
+    username: ${6:admin}                                                   # Username for authentication 

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage of the posix group
+# prefix: udm_group_snippet
+# key: udm_group
+# group: ansible
+# --
+
+- name: ${0:Manage of the posix group}
+  udm_group:                                                               
+    name: ${1:Name of the posix group}                                     #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the group is present or not 
+    description: ${3:value}                                                # Group description 
+    position: ${4:value}                                                   # define the whole ldap position of the group, e g  C(cn=g123m-1A,cn=classes,cn=schueler,cn=groups,ou=schule,dc=example,dc
+    ou: ${5:value}                                                         # LDAP OU, e g  school for LDAP OU C(ou=school,dc=example,dc=com) 
+    subpath: ${6:value}                                                    # Subpath inside the OU, e g  C(cn=classes,cn=students,cn=groups) 

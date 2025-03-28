@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP ASM policies
+# prefix: bigip_asm_policy_snippet
+# key: gip_asm_policy
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP ASM policies}
+  bigip_asm_policy:                                                        
+    name: ${1:The ASM policy to manage or create}                          #
+    active: ${2:False}                                                     # If C(yes) will apply and activate existing inactive policy  If C(no), it will deactivate existing active policy  General
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(state) is C(present), and C(file) or C(template) parameter is provided, new ASM policy i
+    file: ${4:value}                                                       # Full path to a policy file to be imported into the BIG-IP ASM  Policy files exported from newer versions of BIG-IP canno
+    template: ${{5$$(yas-choose-value '("ActiveSync v1}                    #0 v2 0 (http),ActiveSync v1 0 v2 0 (https),Comprehensive,Drupal,Fundamental,Joomla,LotusDomino 6 5 (http),LotusDomino 6 5
+    partition: ${6:Common}                                                 # Device partition to manage resources on 
+    provider: ${7:value}                                                   # A dict object containing connection details 

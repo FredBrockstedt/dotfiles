@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages device IP configuration settings for HA on a BIG-IP
+# prefix: bigip_device_connectivity_snippet
+# key: gip_device_connectivity
+# group: ansible
+# --
+
+- name: ${0:Manages device IP configuration settings for HA on a BIG-IP}
+  bigip_device_connectivity:                                               
+    config_sync_ip: ${1:value}                                             # Local IP address that the system uses for ConfigSync operations 
+    mirror_primary_address: ${2:value}                                     # Specifies the primary IP address for the system to use to mirror connections 
+    mirror_secondary_address: ${3:value}                                   # Specifies the secondary IP address for the system to use to mirror connections 
+    unicast_failover: ${4:value}                                           # Desired addresses to use for failover operations  Options C(address) and C(port) are supported with dictionary structure
+    failover_multicast: ${5:value}                                         # When C(yes), ensures that the Failover Multicast configuration is enabled and if no further multicast configuration is p
+    multicast_interface: ${6:value}                                        # Interface over which the system sends multicast messages associated with failover  When C(failover_multicast) is C(yes) 
+    multicast_address: ${7:value}                                          # IP address for the system to send multicast messages associated with failover  When C(failover_multicast) is C(yes) and 
+    multicast_port: ${8:value}                                             # Port for the system to send multicast messages associated with failover  When C(failover_multicast) is C(yes) and this o
+    cluster_mirroring: ${9$$(yas-choose-value '("between-clusters" "within-cluster"))}# choices: between-clusters;within-cluster  Specifies whether mirroring occurs within the same cluster or betwe
+    provider: ${10:value}                                                  # A dict object containing connection details 

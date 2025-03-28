@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Create, Update or Destroy a Managed Instance Group (MIG).
+# prefix: gce_mig_snippet
+# key: gce_mig
+# group: ansible
+# --
+
+- name: ${0:Create, Update or Destroy a Managed Instance Group (MIG).}
+  gce_mig:                                                                 
+    name: ${1:Name of the Managed Instance Group}                          #
+    zone: ${2:The GCE zone to use for this Managed Instance Group}         #
+    template: ${3:value}                                                   # Instance Template to be used in creating the VMs   See U(https://cloud google com/compute/docs/instance-templates) to le
+    size: ${4:value}                                                       # Size of Managed Instance Group   If MIG already exists, it will be resized to the number provided here   Required for cr
+    service_account_email: ${5:value}                                      # service account email
+    credentials_file: ${6:value}                                           # Path to the JSON file associated with the service account email
+    project_id: ${7:value}                                                 # GCE project ID
+    state: ${8$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  desired state of the resource
+    autoscaling: ${9:value}                                                # A dictionary of configuration for the autoscaler  'enabled (bool)', 'name (str)' and policy max_instances (int) are requ
+    named_ports: ${10:value}                                               # Define named ports that backend services can forward data to   Format is a a list of name:port dictionaries 

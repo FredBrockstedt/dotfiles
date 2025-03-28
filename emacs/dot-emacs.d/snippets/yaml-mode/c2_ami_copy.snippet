@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: copies AMI between AWS regions, return new image id
+# prefix: ec2_ami_copy_snippet
+# key: c2_ami_copy
+# group: ansible
+# --
+
+- name: ${0:copies AMI between AWS regions, return new image id}
+  ec2_ami_copy:                                                            
+    source_region: ${1:The source region the AMI should be copied from}    #
+    source_image_id: ${2:The ID of the AMI in source region that should be copied}#
+    name: ${3:default}                                                     # The name of the new AMI to copy  (As of 2 3 the default is 'default', in prior versions it was 'null' )
+    description: ${4:value}                                                # An optional human-readable string describing the contents and purpose of the new AMI 
+    encrypted: ${5:value}                                                  # Whether or not the destination snapshots of the copied AMI should be encrypted 
+    kms_key_id: ${6:value}                                                 # KMS key id used to encrypt image  If not specified, uses default EBS Customer Master Key (CMK) for your account 
+    wait: ${7:false}                                                       # Wait for the copied AMI to be in state 'available' before returning 
+    wait_timeout: ${8:600}                                                 # How long before wait gives up, in seconds  Prior to 2 3 the default was 1200  From 2 3-2 5 this option was deprecated in
+    tags: ${9:value}                                                       # A hash/dictionary of tags to add to the new copied AMI; '{"key":"value"\}' and '{"key":"value","key":"value"\}'
+    tag_equality: ${10:False}                                              # Whether to use tags if the source AMI already exists in the target region  If this is set, and all tags match in an exis
+    debug_botocore_endpoint_logs: ${11:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${12:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${13:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${14:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${15:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${16:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${17:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${18:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

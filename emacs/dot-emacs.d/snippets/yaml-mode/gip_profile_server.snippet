@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manages server SSL profiles on a BIG-IP
+# prefix: bigip_profile_server_ssl_snippet
+# key: gip_profile_server
+# group: ansible
+# --
+
+- name: ${0:Manages server SSL profiles on a BIG-IP}
+  bigip_profile_server_ssl:                                                
+    name: ${1:Specifies the name of the profile}                           #
+    parent: ${2:/Common/serverssl}                                         # The parent template of this monitor template  Once this value has been set, it cannot be changed 
+    ciphers: ${3:value}                                                    # Specifies the list of ciphers that the system supports  When creating a new profile, the default cipher list is provided
+    secure_renegotiation: ${4$$(yas-choose-value '("require" "require-strict" "request"))}# choices: require;require-strict;request  Specifies the method of secure renegotiations for SSL connection
+    server_name: ${5:value}                                                # Specifies the fully qualified DNS hostname of the server used in Server Name Indication communications  When creating a 
+    sni_default: ${6:value}                                                # Indicates that the system uses this profile as the default SSL profile when there is no match to the server name, or whe
+    sni_require: ${7:value}                                                # Requires that the network peers also provide SNI support, setting only takes effect when C(sni_default) is C(yes)  When 
+    server_certificate: ${8$$(yas-choose-value '("ignore" "require"))}     # choices: ignore;require  Specifies the way the system handles server certificates  When C(ignore), specifies that the sy
+    certificate: ${9:value}                                                # Specifies the name of the certificate that the system uses for server-side SSL processing 
+    key: ${10:value}                                                       # Specifies the file name of the SSL key 
+    chain: ${11:value}                                                     # Specifies the certificates-key chain to associate with the SSL profile 
+    passphrase: ${12:value}                                                # Specifies a passphrase used to encrypt the key 
+    update_password: ${13$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will allow to update passwords if the user chooses to do so  C(on_create) will only
+    ocsp_profile: ${14:value}                                              # Specifies the name of the OCSP profile for purpose of validating status of server certificate 
+    partition: ${15:Common}                                                # Device partition to manage resources on 
+    state: ${16$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${17:value}                                                  # A dict object containing connection details 

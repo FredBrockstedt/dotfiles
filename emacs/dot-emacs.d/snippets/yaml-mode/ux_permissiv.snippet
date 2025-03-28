@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Change permissive domain in SELinux policy
+# prefix: selinux_permissive_snippet
+# key: ux_permissiv
+# group: ansible
+# --
+
+- name: ${0:Change permissive domain in SELinux policy}
+  selinux_permissive:                                                      
+    domain: ${1:}:The domain that will be added or removed from the list of permissive domains}#
+    permissive: ${2:Indicate if the domain should or should not be set as permissive}#
+    no_reload: ${3:False}                                                  # Disable reloading of the SELinux policy after making change to a domain's permissive setting  The default is C(no), whic
+    store: ${4:value}                                                      # Name of the SELinux policy store to use 

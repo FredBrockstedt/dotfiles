@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Gathers facts (instance metadata) about remote hosts within ec2
+# prefix: ec2_metadata_facts_snippet
+# key: c2_metadata_fact
+# group: ansible
+# --
+
+- name: ${0:Gathers facts (instance metadata) about remote hosts within ec2}
+  ec2_metadata_facts:                                                      

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Get object facts on Check Point over Web Services API
+# prefix: checkpoint_object_facts_snippet
+# key: checkpoint_object_fact
+# group: ansible
+# --
+
+- name: ${0:Get object facts on Check Point over Web Services API}
+  checkpoint_object_facts:                                                 
+    uid: ${1:value}                                                        # UID of the object  If UID is not provided, it will do a full search which can be filtered with the filter argument 
+    object_filter: ${2:value}                                              # Filter expression for search  It accepts AND/OR logical operators and performs a textual and IP address search  To searc
+    ip_only: ${3:False}                                                    # Filter only by IP address 
+    object_type: ${4:value}                                                # Type of the object to search  Must be a valid API resource name

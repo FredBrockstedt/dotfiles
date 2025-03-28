@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages BFD session configuration on HUAWEI CloudEngine devices.
+# prefix: ce_bfd_session_snippet
+# key: ce_bfd_sessio
+# group: ansible
+# --
+
+- name: ${0:Manages BFD session configuration on HUAWEI CloudEngine devices.}
+  ce_bfd_session:                                                          
+    session_name: ${1:Specifies the name of a BFD session}                 # The value is a string of 1 to 15 case-sensitive characters without spaces 
+    create_type: ${2$$(yas-choose-value '("static" "auto"))}               # choices: static;auto  BFD session creation mode, the currently created BFD session only supports static or static auto-n
+    addr_type: ${3$$(yas-choose-value '("ipv4"))}                          # choices: ipv4  Specifies the peer IP address type 
+    out_if_name: ${4:value}                                                # Specifies the type and number of the interface bound to the BFD session 
+    dest_addr: ${5:value}                                                  # Specifies the peer IP address bound to the BFD session 
+    src_addr: ${6:value}                                                   # Indicates the source IP address carried in BFD packets 
+    local_discr: ${7:value}                                                # The BFD session local identifier does not need to be configured when the mode is auto 
+    remote_discr: ${8:value}                                               # The BFD session remote identifier does not need to be configured when the mode is auto 
+    vrf_name: ${9:value}                                                   # Specifies the name of a Virtual Private Network (VPN) instance that is bound to a BFD session  The value is a string of 
+    use_default_ip: ${10:false}                                            # Indicates the default multicast IP address that is bound to a BFD session  By default, BFD uses the multicast IP address
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 

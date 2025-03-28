@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage Azure autoscale setting
+# prefix: azure_rm_autoscale_snippet
+# key: zure_rm_autosc
+# group: ansible
+# --
+
+- name: ${0:Manage Azure autoscale setting}
+  azure_rm_autoscale:                                                      
+    resource_group: ${1:Resource group of the resource}                    #
+    name: ${2:name of the resource}                                        #
+    target: ${3:value}                                                     # The identifier of the resource to apply autoscale setting  It could be the resource id string  It also could be a dict c
+    enabled: ${4:True}                                                     # Specifies whether automatic scaling is enabled for the resource 
+    profiles: ${5:value}                                                   # The collection of automatic scaling profiles that specify different scaling parameters for different time periods  A max
+    notifications: ${6:value}                                              # The collection of notifications 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Assert the state of the virtual network  Use C(present) to create or update and C(absent) to de
+    location: ${8:value}                                                   # location of the resource 
+    ad_user: ${9:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${10:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${11:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${12:value}                                           # Your Azure subscription Id 
+    client_id: ${13:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${14:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${15:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${16:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${17:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${18$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${19$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${20:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${21:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${22:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Downloads an Artifact from a Maven Repository
+# prefix: maven_artifact_snippet
+# key: maven_artifact
+# group: ansible
+# --
+
+- name: ${0:Downloads an Artifact from a Maven Repository}
+  maven_artifact:                                                          
+    group_id: ${1:The Maven groupId coordinate}                            #
+    artifact_id: ${2:The maven artifactId coordinate}                      #
+    dest: ${3:The path where the artifact should be written to If file mode or ownerships are specified and destination path already exists, they affect the downloaded file}#
+    version: ${4:latest}                                                   # The maven version coordinate
+    classifier: ${5:value}                                                 # The maven classifier coordinate
+    extension: ${6:jar}                                                    # The maven type/extension coordinate
+    repository_url: ${{7:http://repo1}                                     #maven org/maven2} # not required  The URL of the Maven Repository to download from  Use s3://    if the repository is hos
+    username: ${8:value}                                                   # The username to authenticate as to the Maven Repository  Use AWS secret key of the repository is hosted on S3
+    password: ${9:value}                                                   # The password to authenticate with to the Maven Repository  Use AWS secret access key of the repository is hosted on S3
+    headers: ${10:value}                                                   # Add custom HTTP headers to a request in hash/dict format 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  The desired state of the artifact
+    timeout: ${12:10}                                                      # Specifies a timeout in seconds for the connection attempt
+    validate_certs: ${13:true}                                             # If C(no), SSL certificates will not be validated  This should only be set to C(no) when no other option exists 
+    keep_name: ${14:false}                                                 # If C(yes), the downloaded artifact's name is preserved, i e the version number remains part of it  This option only has 
+    verify_checksum: ${15$$(yas-choose-value '("never" "download" "change" "always"))}# choices: never;download;change;always  If C(never), the md5 checksum will never be downloaded and verified  I
+    mode: ${16:value}                                                      # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${17:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${18:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${19:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${20:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${21:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${22:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${23:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${24:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

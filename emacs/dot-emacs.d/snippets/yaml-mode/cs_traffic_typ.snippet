@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manages traffic types on CloudStack Physical Networks
+# prefix: cs_traffic_type_snippet
+# key: cs_traffic_typ
+# group: ansible
+# --
+
+- name: ${0:Manages traffic types on CloudStack Physical Networks}
+  cs_traffic_type:                                                         
+    physical_network: ${1:the name of the Physical Network}                #
+    traffic_type: ${2$$(yas-choose-value '("Management" "Guest" "Public" "Storage"))}# the trafficType to be added to the physical network 
+    zone: ${3:value}                                                       # Name of the zone with the physical network  Default zone will be used if this is empty 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the traffic type
+    hyperv_networklabel: ${5:value}                                        # The network name label of the physical device dedicated to this traffic on a HyperV host 
+    isolation_method: ${6$$(yas-choose-value '("vlan" "vxlan"))}           # choices: vlan;vxlan  Use if the physical network has multiple isolation types and traffic type is public 
+    kvm_networklabel: ${7:value}                                           # The network name label of the physical device dedicated to this traffic on a KVM host 
+    ovm3_networklabel: ${8:value}                                          # The network name of the physical device dedicated to this traffic on an OVM3 host 
+    vlan: ${9:value}                                                       # The VLAN id to be used for Management traffic by VMware host 
+    vmware_networklabel: ${10:value}                                       # The network name label of the physical device dedicated to this traffic on a VMware host 
+    xen_networklabel: ${11:value}                                          # The network name label of the physical device dedicated to this traffic on a XenServer host 
+    poll_async: ${12:True}                                                 # Poll async jobs until job has finished 
+    api_key: ${13:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${14:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${15:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${16$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${17:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${18:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

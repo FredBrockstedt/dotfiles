@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP network VLAN
+# prefix: na_ontap_net_vlan_snippet
+# key: ontap_net_v
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP network VLAN}
+  na_ontap_net_vlan:                                                       
+    parent_interface: ${1:The interface that hosts the VLAN interface}     #
+    vlanid: ${2:The VLAN id}                                               # Ranges from 1 to 4094 
+    node: ${3:Node name of VLAN interface}                                 #
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified network VLAN should exist or not
+    https: ${8:False}                                                      # Enable and disable https
+    validate_certs: ${9:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${10:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${11:value}                                                    # The ontap api version to use
+    use_rest: ${12$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

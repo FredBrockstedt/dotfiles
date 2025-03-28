@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages Javascript LX packages on a BIG-IP
+# prefix: bigip_lx_package_snippet
+# key: gip_lx_packag
+# group: ansible
+# --
+
+- name: ${0:Manages Javascript LX packages on a BIG-IP}
+  bigip_lx_package:                                                        
+    package: ${1:value}                                                    # The LX package that you want to upload or remove  When C(state) is C(present), and you intend to use this module in a C(
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the LX package should exist or not 
+    provider: ${3:value}                                                   # A dict object containing connection details 

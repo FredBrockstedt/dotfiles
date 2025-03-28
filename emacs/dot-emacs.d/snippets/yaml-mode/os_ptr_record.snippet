@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Configure Infoblox NIOS PTR records
+# prefix: nios_ptr_record_snippet
+# key: os_ptr_record
+# group: ansible
+# --
+
+- name: ${0:Configure Infoblox NIOS PTR records}
+  nios_ptr_record:                                                         
+    ipv4addr: ${1:The IPv4 Address of the record}                          # Mutually exclusive with the ipv6addr 
+    ipv6addr: ${2:The IPv6 Address of the record}                          # Mutually exclusive with the ipv4addr 
+    ptrdname: ${3:The domain name of the DNS PTR record in FQDN format}    #
+    name: ${4:value}                                                       # The name of the DNS PTR record in FQDN format to add or remove from the system  The field is required only for an PTR ob
+    view: ${5:value}                                                       # Sets the DNS view to associate this a record with  The DNS view must already be configured on the system
+    ttl: ${6:value}                                                        # Time To Live (TTL) value for the record  A 32-bit unsigned integer that represents the duration, in seconds, that the re
+    extattrs: ${7:value}                                                   # Allows for the configuration of Extensible Attributes on the instance of the object   This argument accepts a set of key
+    comment: ${8:value}                                                    # Configures a text string comment to be associated with the instance of this object   The provided text string will be co
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the intended state of the instance of the object on the NIOS server   When this valu
+    provider: ${10:value}                                                  # A dict object containing connection details 

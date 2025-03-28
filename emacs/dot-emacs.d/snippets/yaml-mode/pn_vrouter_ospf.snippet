@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove vrouter-ospf
+# prefix: pn_vrouter_ospf_snippet
+# key: pn_vrouter_ospf
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove vrouter-ospf}
+  pn_vrouter_ospf:                                                         
+    pn_network: ${1:OSPF network IP address}                               #
+    pn_vrouter_name: ${2:name of service config}                           #
+    pn_cliswitch: ${3:value}                                               # Target switch to run the CLI on 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  vrouter-ospf configuration command 
+    pn_netmask: ${5:value}                                                 # OSPF network IP address netmask 
+    pn_ospf_area: ${6:value}                                               # stub area number for the configuration 

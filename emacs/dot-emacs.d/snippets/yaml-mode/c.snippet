@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage access-lists on a Cisco ASA
+# prefix: asa_acl_snippet
+# key: c
+# group: ansible
+# --
+
+- name: ${0:Manage access-lists on a Cisco ASA}
+  asa_acl:                                                                 
+    lines: ${1:The ordered set of commands that should be configured in the section}#  The commands must be the exact same commands as found in the device running-config   Be sure to note the confi
+    before: ${2:value}                                                     # The ordered set of commands to push on to the command stack if a change needs to be made   This allows the playbook desi
+    after: ${3:value}                                                      # The ordered set of commands to append to the end of the command stack if a changed needs to be made   Just like with I(b
+    match: ${4$$(yas-choose-value '("line" "strict" "exact"))}             # choices: line;strict;exact  Instructs the module on the way to perform the matching of the set of commands against the c
+    replace: ${5$$(yas-choose-value '("line" "block"))}                    # choices: line;block  Instructs the module on the way to perform the configuration on the device   If the replace argumen
+    force: ${6:false}                                                      # The force argument instructs the module to not consider the current devices running-config   When set to true, this will
+    config: ${7:value}                                                     # The module, by default, will connect to the remote device and retrieve the current running-config to use as a base for c
+    authorize: ${8:False}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  For more infor
+    context: ${9:value}                                                    # Specifies which context to target if you are running in the ASA in multiple context mode  Defaults to the current contex
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

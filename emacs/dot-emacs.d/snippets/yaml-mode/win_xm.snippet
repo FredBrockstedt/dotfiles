@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages XML file content on Windows hosts
+# prefix: win_xml_snippet
+# key: win_xm
+# group: ansible
+# --
+
+- name: ${0:Manages XML file content on Windows hosts}
+  win_xml:                                                                 
+    path: ${1:Path to the file to operate on}                              #
+    type: ${2$$(yas-choose-value '("attribute" "element" "text"))}         # The type of XML node you are working with 
+    xpath: ${3:Xpath to select the node or nodes to operate on}            #
+    attribute: ${4:value}                                                  # The attribute name if the type is 'attribute'  Required if C(type=attribute) 
+    count: ${5:False}                                                      # When set to C(yes), return the number of nodes matched by I(xpath) 
+    backup: ${6:False}                                                     # Determine whether a backup should be created  When set to C(yes), create a backup file including the timestamp informati
+    fragment: ${7:value}                                                   # The string representation of the XML fragment expected at xpath   Since ansible 2 9 not required when I(state=absent), o
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Set or remove the nodes (or attributes) matched by I(xpath) 

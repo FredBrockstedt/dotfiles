@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Perform different actions related to config-sync
+# prefix: bigip_configsync_action_snippet
+# key: gip_configsync_actio
+# group: ansible
+# --
+
+- name: ${0:Perform different actions related to config-sync}
+  bigip_configsync_action:                                                 
+    device_group: ${1:The device group that you want to perform config-sync actions on}#
+    sync_device_to_group: ${2:value}                                       # Specifies that the system synchronizes configuration data from this device to other members of the device group  In this
+    sync_most_recent_to_device: ${3:value}                                 # Specifies that the system synchronizes configuration data from the device with the most recent configuration  In this ca
+    overwrite_config: ${4:False}                                           # Indicates that the sync operation overwrites the configuration on the target 
+    provider: ${5:value}                                                   # A dict object containing connection details 

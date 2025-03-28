@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete snmp-trap-sink
+# prefix: pn_snmp_trap_sink_snippet
+# key: pn_snmp_trap_sink
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete snmp-trap-sink}
+  pn_snmp_trap_sink:                                                       
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use C(present) to create snmp-trap-sink and C(absent) to delete snmp-trap-sink 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_dest_host: ${3:value}                                               # destination host 
+    pn_community: ${4:value}                                               # community type 
+    pn_dest_port: ${5:162}                                                 # destination port 
+    pn_type: ${6$$(yas-choose-value '("TRAP_TYPE_V1_TRAP" "TRAP_TYPE_V2C_TRAP" "TRAP_TYPE_V2_INFORM"))}# choices: TRAP_TYPE_V1_TRAP;TRAP_TYPE_V2C_TRAP;TRAP_TYPE_V2_INFORM  trap type 

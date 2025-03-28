@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Tests reachability using ping from a network device
+# prefix: net_ping_snippet
+# key: t_ping
+# group: ansible
+# --
+
+- name: ${0:Tests reachability using ping from a network device}
+  net_ping:                                                                
+    dest: ${1:The IP Address or hostname (resolvable by switch) of the remote node}#
+    count: ${2:5}                                                          # Number of packets to send 
+    source: ${3:value}                                                     # The source IP Address 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Determines if the expected result is success or fail 
+    vrf: ${5:default}                                                      # The VRF to use for forwarding 

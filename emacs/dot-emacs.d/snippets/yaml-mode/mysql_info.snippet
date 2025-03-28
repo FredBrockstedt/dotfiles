@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Gather information about MySQL servers
+# prefix: mysql_info_snippet
+# key: mysql_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about MySQL servers}
+  mysql_info:                                                              
+    filter: ${1:value}                                                     # Limit the collected information by comma separated string or YAML list  Allowable values are C(version), C(databases), C
+    login_db: ${2:value}                                                   # Database name to connect to  It makes sense if I(login_user) is allowed to connect to a specific database only 
+    login_user: ${3:value}                                                 # The username used to authenticate with 
+    login_password: ${4:value}                                             # The password used to authenticate with 
+    login_host: ${5:localhost}                                             # Host running the database 
+    login_port: ${6:3306}                                                  # Port of the MySQL server  Requires I(login_host) be defined as other than localhost if login_port is used 
+    login_unix_socket: ${7:value}                                          # The path to a Unix domain socket for local connections 
+    connect_timeout: ${8:30}                                               # The connection timeout when connecting to the MySQL server 
+    config_file: ${{9:~/}                                                  #my cnf} # not required  Specify a config file from which user and password are to be read 
+    ca_cert: ${10:value}                                                   # The path to a Certificate Authority (CA) certificate  This option, if used, must specify the same certificate as used by
+    client_cert: ${11:value}                                               # The path to a client public key certificate 
+    client_key: ${12:value}                                                # The path to the client private key 

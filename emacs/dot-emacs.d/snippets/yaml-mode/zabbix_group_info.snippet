@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Gather information about Zabbix hostgroup
+# prefix: zabbix_group_info_snippet
+# key: zabbix_group_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about Zabbix hostgroup}
+  zabbix_group_info:                                                       
+    hostgroup_name: ${1:Name of the hostgroup in Zabbix}                   # hostgroup is the unique identifier used and cannot be updated using this module 
+    server_url: ${2:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${3:Zabbix user name}                                      #
+    login_password: ${4:Zabbix user password}                              #
+    http_login_user: ${5:Basic Auth login}                                 #
+    http_login_password: ${6:value}                                        # Basic Auth password
+    timeout: ${7:10}                                                       # The timeout of API request (seconds) 
+    validate_certs: ${8:True}                                              # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

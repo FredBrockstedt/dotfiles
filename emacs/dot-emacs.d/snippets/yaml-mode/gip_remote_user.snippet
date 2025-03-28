@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages default settings for remote user accounts on a BIG-IP
+# prefix: bigip_remote_user_snippet
+# key: gip_remote_user
+# group: ansible
+# --
+
+- name: ${0:Manages default settings for remote user accounts on a BIG-IP}
+  bigip_remote_user:                                                       
+    default_role: ${1$$(yas-choose-value '("acceleration-policy-editor" "admin" "application-editor" "auditor" "certificate-manager" "firewall-manager" "fraud-protection-manager" "guest" "irule-man
+    default_partition: ${2:value}                                          # Specifies the default partition for all remote user accounts  The default system value is C(all) for all partitions 
+    console_access: ${3:value}                                             # Enables or disables the default console access for all remote user accounts  The default system value is C(disabled) 
+    description: ${4:value}                                                # User defined description 
+    provider: ${5:value}                                                   # A dict object containing connection details 

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage DNS security profiles in FortiManager
+# prefix: fmgr_secprof_dns_snippet
+# key: fmgr_secprof_d
+# group: ansible
+# --
+
+- name: ${0:Manage DNS security profiles in FortiManager}
+  fmgr_secprof_dns:                                                        
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    youtube_restrict: ${3$$(yas-choose-value '("strict" "moderate"))}      # choices: strict;moderate  Set safe search for YouTube restriction level  choice | strict | Enable strict safe seach for 
+    sdns_ftgd_err_log: ${4$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable FortiGuard SDNS rating error logging  choice | disable | Disable FortiGuard SDNS
+    sdns_domain_log: ${5$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable/disable domain filtering and botnet domain logging  choice | disable | Disable domain fi
+    safe_search: ${6$$(yas-choose-value '("disable" "enable"))}            # choices: disable;enable  Enable/disable Google, Bing, and YouTube safe search  choice | disable | Disable Google, Bing, 
+    redirect_portal: ${7:value}                                            # IP address of the SDNS redirect portal 
+    name: ${8:value}                                                       # Profile name 
+    log_all_domain: ${9$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable logging of all domains visited (detailed DNS logging)  choice | disable | Disabl
+    external_ip_blocklist: ${10:value}                                     # One or more external IP block lists 
+    comment: ${11:value}                                                   # Comment for the security profile to show in the FortiManager GUI 
+    block_botnet: ${12$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable blocking botnet C&C; DNS lookups  choice | disable | Disable blocking botnet C&C
+    block_action: ${13$$(yas-choose-value '("block" "redirect"))}          # choices: block;redirect  Action to take for blocked domains  choice | block | Return NXDOMAIN for blocked domains  choic
+    domain_filter_domain_filter_table: ${14:value}                         # DNS domain filter table ID 
+    ftgd_dns_options: ${15$$(yas-choose-value '("error-allow" "ftgd-disable"))}# choices: error-allow;ftgd-disable  FortiGuard DNS filter options  FLAG Based Options  Specify multiple in list form 
+    ftgd_dns_filters_action: ${16$$(yas-choose-value '("monitor" "block"))}# choices: monitor;block  Action to take for DNS requests matching the category  choice | monitor | Allow DNS requests mat
+    ftgd_dns_filters_category: ${17:value}                                 # Category number 
+    ftgd_dns_filters_log: ${18$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable DNS filter logging for this DNS profile  choice | disable | Disable DNS filter l

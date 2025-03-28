@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Downloads files from HTTP, HTTPS, or FTP to node
+# prefix: get_url_snippet
+# key: get_ur
+# group: ansible
+# --
+
+- name: ${0:Downloads files from HTTP, HTTPS, or FTP to node}
+  get_url:                                                                 
+    url: ${1:HTTP" " HTTPS" " or FTP URL in the form (http$$(yas-choose-value '("https"))ftp)://[user[:pass]]@host}#domain[:port]/path
+    dest: ${2:Absolute path of where to download the file to}              # If C(dest) is a directory, either the server provided filename or, if none provided, the base name of the URL on the rem
+    tmp_dest: ${3:value}                                                   # Absolute path of where temporary file is downloaded to  When run on Ansible 2 5 or greater, path defaults to ansible's r
+    force: ${4:False}                                                      # If C(yes) and C(dest) is not a directory, will download the file every time and replace the file if the contents change 
+    backup: ${5:False}                                                     # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    sha256sum: ${6:}                                                       # If a SHA-256 checksum is passed to this parameter, the digest of the destination file will be calculated after it is dow
+    checksum: ${7:}                                                        # If a checksum is passed to this parameter, the digest of the destination file will be calculated after it is downloaded 
+    use_proxy: ${8:True}                                                   # if C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    validate_certs: ${9:True}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    timeout: ${10:10}                                                      # Timeout in seconds for URL request 
+    headers: ${11:value}                                                   # Add custom HTTP headers to a request in hash/dict format  The hash/dict format was added in Ansible 2 6  Previous versio
+    url_username: ${12:value}                                              # The username for use in HTTP basic authentication  This parameter can be used without C(url_password) for sites that all
+    url_password: ${13:value}                                              # The password for use in HTTP basic authentication  If the C(url_username) parameter is not specified, the C(url_password
+    force_basic_auth: ${14:False}                                          # Force the sending of the Basic authentication header upon initial request  httplib2, the library used by the uri module 
+    client_cert: ${15:value}                                               # PEM formatted certificate chain file to be used for SSL client authentication  This file can also include the key as wel
+    client_key: ${16:value}                                                # PEM formatted file that contains your private key to be used for SSL client authentication  If C(client_cert) contains b
+    http_agent: ${17:ansible-httpget}                                      # Header to identify as, generally appears in web server logs 
+    mode: ${18:value}                                                      # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${19:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${20:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${21:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${22:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${23:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${24:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${25:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${26:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

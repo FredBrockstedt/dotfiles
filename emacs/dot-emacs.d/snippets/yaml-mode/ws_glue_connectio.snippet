@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage an AWS Glue connection
+# prefix: aws_glue_connection_snippet
+# key: ws_glue_connectio
+# group: ansible
+# --
+
+- name: ${0:Manage an AWS Glue connection}
+  aws_glue_connection:                                                     
+    connection_properties: ${1:A dict of key-value pairs used as parameters for this connection}#
+    name: ${2:The name of the connection}                                  #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # Create or delete the AWS Glue connection 
+    catalog_id: ${4:value}                                                 # The ID of the Data Catalog in which to create the connection  If none is supplied, the AWS account ID is used by default
+    connection_type: ${5$$(yas-choose-value '("JDBC" "SFTP"))}             # choices: JDBC;SFTP  The type of the connection  Currently, only JDBC is supported; SFTP is not supported 
+    description: ${6:value}                                                # The description of the connection 
+    match_criteria: ${7:value}                                             # A list of UTF-8 strings that specify the criteria that you can use in selecting this connection 
+    security_groups: ${8:value}                                            # A list of security groups to be used by the connection  Use either security group name or ID 
+    subnet_id: ${9:value}                                                  # The subnet ID used by the connection 
+    debug_botocore_endpoint_logs: ${10:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${11:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${12:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${13:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${14:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${15:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${16:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${17:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

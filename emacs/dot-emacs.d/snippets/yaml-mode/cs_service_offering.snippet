@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: Manages service offerings on Apache CloudStack based clouds.
+# prefix: cs_service_offering_snippet
+# key: cs_service_offering
+# group: ansible
+# --
+
+- name: ${0:Manages service offerings on Apache CloudStack based clouds.}
+  cs_service_offering:                                                     
+    name: ${1:Name of the service offering}                                #
+    disk_bytes_read_rate: ${2:value}                                       # Bytes read rate of the disk offering 
+    disk_bytes_write_rate: ${3:value}                                      # Bytes write rate of the disk offering 
+    cpu_number: ${4:value}                                                 # The number of CPUs of the service offering 
+    cpu_speed: ${5:value}                                                  # The CPU speed of the service offering in MHz 
+    limit_cpu_usage: ${6:value}                                            # Restrict the CPU usage to committed service offering 
+    deployment_planner: ${7:value}                                         # The deployment planner heuristics used to deploy a VM of this offering  If not set, the value of global config I(vm depl
+    display_text: ${8:value}                                               # Display text of the service offering  If not set, I(name) will be used as I(display_text) while creating 
+    domain: ${9:value}                                                     # Domain the service offering is related to  Public for all domains and subdomains if not set 
+    host_tags: ${10:value}                                                 # The host tags for this service offering 
+    hypervisor_snapshot_reserve: ${11:value}                               # Hypervisor snapshot reserve space as a percent of a volume  Only for managed storage using Xen or VMware 
+    is_iops_customized: ${12:value}                                        # Whether compute offering iops is custom or not 
+    disk_iops_read_rate: ${13:value}                                       # IO requests read rate of the disk offering 
+    disk_iops_write_rate: ${14:value}                                      # IO requests write rate of the disk offering 
+    disk_iops_max: ${15:value}                                             # Max  iops of the compute offering 
+    disk_iops_min: ${16:value}                                             # Min  iops of the compute offering 
+    is_system: ${17:False}                                                 # Whether it is a system VM offering or not 
+    is_volatile: ${18:value}                                               # Whether the virtual machine needs to be volatile or not  Every reboot of VM the root disk is detached then destroyed and
+    memory: ${19:value}                                                    # The total memory of the service offering in MB 
+    network_rate: ${20:value}                                              # Data transfer rate in Mb/s allowed  Supported only for non-system offering and system offerings having I(system_vm_type=
+    offer_ha: ${21:False}                                                  # Whether HA is set for the service offering 
+    provisioning_type: ${22$$(yas-choose-value '("thin" "sparse" "fat"))}  # choices: thin;sparse;fat  Provisioning type used to create volumes 
+    service_offering_details: ${23:value}                                  # Details for planner, used to store specific parameters  A list of dictionaries having keys C(key) and C(value) 
+    state: ${24$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the service offering 
+    storage_type: ${25$$(yas-choose-value '("local" "shared"))}            # choices: local;shared  The storage type of the service offering 
+    system_vm_type: ${26$$(yas-choose-value '("domainrouter" "consoleproxy" "secondarystoragevm"))}# choices: domainrouter;consoleproxy;secondarystoragevm  The system VM type  Required if I(is_syst
+    storage_tags: ${27:value}                                              # The storage tags for this service offering 
+    is_customized: ${28:value}                                             # Whether the offering is customizable or not 
+    api_key: ${29:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${30:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${31:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${32$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${33:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${34:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

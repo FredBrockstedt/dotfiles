@@ -1,0 +1,51 @@
+# -*- mode: snippet -*-
+# name: Manage service group configuration in Netscaler
+# prefix: netscaler_servicegroup_snippet
+# key: tscaler_servicegroup
+# group: ansible
+# --
+
+- name: ${0:Manage service group configuration in Netscaler}
+  netscaler_servicegroup:                                                  
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    servicegroupname: ${4:value}                                           # Name of the service group  Must begin with an ASCII alphabetic or underscore C(_) character, and must contain only ASCII
+    servicetype: ${5$$(yas-choose-value '("HTTP" "FTP" "TCP" "UDP" "SSL" "SSL_BRIDGE" "SSL_TCP" "DTLS" "NNTP" "RPCSVR" "DNS" "ADNS" "SNMP" "RTSP" "DHCPRA" "ANY" "SIP_UDP" "SIP_TCP" "SIP_SSL" "DNS_T
+    cachetype: ${6$$(yas-choose-value '("TRANSPARENT" "REVERSE" "FORWARD"))}# choices: TRANSPARENT;REVERSE;FORWARD  Cache type supported by the cache server 
+    maxclient: ${7:value}                                                  # Maximum number of simultaneous open connections for the service group  Minimum value = C(0) Maximum value = C(4294967294
+    maxreq: ${8:value}                                                     # Maximum number of requests that can be sent on a persistent connection to the service group  Note: Connection requests b
+    cacheable: ${9:value}                                                  # Use the transparent cache redirection virtual server to forward the request to the cache server  Note: Do not set this p
+    cip: ${10$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  Insert the Client IP header in requests forwarded to the service 
+    cipheader: ${11:value}                                                 # Name of the HTTP header whose value must be set to the IP address of the client  Used with the Client IP parameter  If c
+    usip: ${12:value}                                                      # Use client's IP address as the source IP address when initiating connection to the server  With the NO setting, which is
+    pathmonitor: ${13:value}                                               # Path monitoring for clustering 
+    pathmonitorindv: ${14:value}                                           # Individual Path monitoring decisions 
+    useproxyport: ${15:value}                                              # Use the proxy port as the source port when initiating connections with the server  With the NO setting, the client-side 
+    healthmonitor: ${16:value}                                             # Monitor the health of this service  Available settings function as follows: C(yes) - Send probes to check the health of 
+    sp: ${17:value}                                                        # Enable surge protection for the service group 
+    rtspsessionidremap: ${18:value}                                        # Enable RTSP session ID mapping for the service group 
+    clttimeout: ${19:value}                                                # Time, in seconds, after which to terminate an idle client connection  Minimum value = C(0) Maximum value = C(31536000)
+    svrtimeout: ${20:value}                                                # Time, in seconds, after which to terminate an idle server connection  Minimum value = C(0) Maximum value = C(31536000)
+    cka: ${21:value}                                                       # Enable client keep-alive for the service group 
+    tcpb: ${22:value}                                                      # Enable TCP buffering for the service group 
+    cmp: ${23:value}                                                       # Enable compression for the specified service 
+    maxbandwidth: ${24:value}                                              # Maximum bandwidth, in Kbps, allocated for all the services in the service group  Minimum value = C(0) Maximum value = C(
+    monthreshold: ${25:value}                                              # Minimum sum of weights of the monitors that are bound to this service  Used to determine whether to mark a service as UP
+    downstateflush: ${26$$(yas-choose-value '("enabled" "disabled"))}      # choices: enabled;disabled  Flush all active transactions associated with all the services in the service group whose sta
+    tcpprofilename: ${27:value}                                            # Name of the TCP profile that contains TCP configuration settings for the service group  Minimum length = 1 Maximum lengt
+    httpprofilename: ${28:value}                                           # Name of the HTTP profile that contains HTTP configuration settings for the service group  Minimum length = 1 Maximum len
+    comment: ${29:value}                                                   # Any information about the service group 
+    appflowlog: ${30$$(yas-choose-value '("enabled" "disabled"))}          # choices: enabled;disabled  Enable logging of AppFlow information for the specified service group 
+    netprofile: ${31:value}                                                # Network profile for the service group  Minimum length = 1 Maximum length = 127
+    autoscale: ${32$$(yas-choose-value '("DISABLED" "DNS" "POLICY"))}      # choices: DISABLED;DNS;POLICY  Auto scale option for a servicegroup 
+    memberport: ${33:value}                                                # member port 
+    graceful: ${34:value}                                                  # Wait for all existing connections to the service to terminate before shutting down the service 
+    servicemembers: ${35:value}                                            # A list of dictionaries describing each service member of the service group 
+    monitorbindings: ${36:value}                                           # A list of monitornames to bind to this service Note that the monitors must have already been setup possibly using the M(
+    disabled: ${37:False}                                                  # When set to C(yes) the service group state will be set to DISABLED  When set to C(no) the service group state will be se
+    nitro_protocol: ${38$$(yas-choose-value '("http" "https"))}            # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${39:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${40:310}                                               # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    state: ${41$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource being configured by the module on the netscaler node  When present th
+    save_config: ${42:True}                                                # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

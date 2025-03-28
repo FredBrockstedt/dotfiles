@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: create / delete a database in the Cloud Databases
+# prefix: rax_cdb_database_snippet
+# key: rax_cdb_dat
+# group: ansible
+# --
+
+- name: ${0:create / delete a database in the Cloud Databases}
+  rax_cdb_database:                                                        
+    cdb_id: ${1:value}                                                     # The databases server UUID
+    name: ${2:value}                                                       # Name to give to the database
+    character_set: ${3:utf8}                                               # Set of symbols and encodings
+    collate: ${4:utf8_general_ci}                                          # Set of rules for comparing characters in a character set
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource
+    api_key: ${6:value}                                                    # Rackspace API key, overrides I(credentials) 
+    credentials: ${7:value}                                                # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${8:value}                                                        # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    region: ${9:DFW}                                                       # Region to create an instance in 
+    username: ${10:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${11:value}                                            # Whether or not to require SSL validation of API endpoints 
+    auth_endpoint: ${{12:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    identity_type: ${13:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    tenant_id: ${14:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${15:value}                                               # The tenant name used for authentication 

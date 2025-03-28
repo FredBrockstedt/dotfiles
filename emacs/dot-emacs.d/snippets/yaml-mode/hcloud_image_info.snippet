@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Gather infos about your Hetzner Cloud images.
+# prefix: hcloud_image_info_snippet
+# key: hcloud_image_info
+# group: ansible
+# --
+
+- name: ${0:Gather infos about your Hetzner Cloud images.}
+  hcloud_image_info:                                                       
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the image you want to get 
+    name: ${3:value}                                                       # The name of the image you want to get 
+    label_selector: ${4:value}                                             # The label selector for the images you want to get 
+    type: ${5$$(yas-choose-value '("system" "snapshot" "backup"))}         # choices: system;snapshot;backup  The label selector for the images you want to get 
+    endpoint: ${{6:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

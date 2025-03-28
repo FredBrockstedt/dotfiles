@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage maintenance group nodes
+# prefix: aci_maintenance_group_node_snippet
+# key: ci_maintenance_group_nod
+# group: ansible
+# --
+
+- name: ${0:Manage maintenance group nodes}
+  aci_maintenance_group_node:                                              
+    group: ${1:The maintenance group name that you want to add the node to}#
+    node: ${2:The node to be added to the maintenance group}               # The value equals the nodeid 
+    host: ${3:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${4:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${5:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    state: ${6$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${7:value}                                                       # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${8:admin}                                                   # The username to use for authentication 
+    certificate_name: ${9:value}                                           # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${10$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${11:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${12:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${13:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${14:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

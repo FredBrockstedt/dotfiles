@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage rabbitMQ bindings
+# prefix: rabbitmq_binding_snippet
+# key: rabbitmq_binding
+# group: ansible
+# --
+
+- name: ${0:Manage rabbitMQ bindings}
+  rabbitmq_binding:                                                        
+    name: ${1:source exchange to create binding on}                        #
+    destination: ${2:destination exchange or queue for the binding}        #
+    destination_type: ${3$$(yas-choose-value '("queue" "exchange"))}       # Either queue or exchange 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the bindings should be present or absent 
+    routing_key: ${5:#}                                                    # routing key for the binding 
+    arguments: ${6:namespace()}                                            # extra arguments for exchange  If defined this argument is a key/value dictionary
+    login_user: ${7:guest}                                                 # RabbitMQ user for connection 
+    login_password: ${8:value}                                             # RabbitMQ password for connection 
+    login_host: ${9:localhost}                                             # RabbitMQ host for connection 
+    login_port: ${10:15672}                                                # RabbitMQ management API port 
+    login_protocol: ${11$$(yas-choose-value '("http" "https"))}            # choices: http;https  RabbitMQ management API protocol 
+    ca_cert: ${12:value}                                                   # CA certificate to verify SSL connection to management API 
+    client_cert: ${13:value}                                               # Client certificate to send on SSL connections to management API 
+    client_key: ${14:value}                                                # Private key matching the client certificate 
+    vhost: ${15:/}                                                         # RabbitMQ virtual host 

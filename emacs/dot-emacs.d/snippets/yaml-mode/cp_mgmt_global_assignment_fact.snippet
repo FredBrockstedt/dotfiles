@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Get global-assignment objects facts on Check Point over Web Services API
+# prefix: cp_mgmt_global_assignment_facts_snippet
+# key: cp_mgmt_global_assignment_fact
+# group: ansible
+# --
+
+- name: ${0:Get global-assignment objects facts on Check Point over Web Services API}
+  cp_mgmt_global_assignment_facts:                                         
+    dependent_domain: ${1:value}                                           # N/A
+    global_domain: ${2:value}                                              # N/A
+    details_level: ${3$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    limit: ${4:value}                                                      # No more than that many results will be returned  This parameter is relevant only for getting few objects 
+    offset: ${5:value}                                                     # Skip that many results before beginning to return them  This parameter is relevant only for getting few objects 
+    order: ${6:value}                                                      # Sorts results by the given field  By default the results are sorted in the ascending order by name  This parameter is re
+    version: ${7:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

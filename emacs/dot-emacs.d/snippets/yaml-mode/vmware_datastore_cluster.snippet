@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage VMware vSphere datastore clusters
+# prefix: vmware_datastore_cluster_snippet
+# key: vmware_datastore_cluster
+# group: ansible
+# --
+
+- name: ${0:Manage VMware vSphere datastore clusters}
+  vmware_datastore_cluster:                                                
+    datastore_cluster_name: ${1:The name of the datastore cluster}         #
+    datacenter_name: ${2:value}                                            # The name of the datacenter  You must specify either a C(datacenter_name) or a C(folder)  Mutually exclusive with C(folde
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If the datastore cluster should be present or absent 
+    folder: ${4:value}                                                     # Destination folder, absolute path to place datastore cluster in  The folder should include the datacenter  This paramete
+    hostname: ${5:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${6:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${7:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${8:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${9:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${10:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${11:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

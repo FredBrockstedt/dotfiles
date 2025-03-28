@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage NXAPI configuration on an NXOS device.
+# prefix: nxos_nxapi_snippet
+# key: xos_nxap
+# group: ansible
+# --
+
+- name: ${0:Manage NXAPI configuration on an NXOS device.}
+  nxos_nxapi:                                                              
+    http_port: ${1:80}                                                     # Configure the port with which the HTTP server will listen on for requests   By default, NXAPI will bind the HTTP service
+    http: ${2:True}                                                        # Controls the operating state of the HTTP protocol as one of the underlying transports for NXAPI   By default, NXAPI will
+    https_port: ${3:443}                                                   # Configure the port with which the HTTPS server will listen on for requests   By default, NXAPI will bind the HTTPS servi
+    https: ${4:False}                                                      # Controls the operating state of the HTTPS protocol as one of the underlying transports for NXAPI   By default, NXAPI wil
+    sandbox: ${5:False}                                                    # The NXAPI feature provides a web base UI for developers for entering commands   This feature is initially disabled when 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The C(state) argument controls whether or not the NXAPI feature is configured on the remote dev
+    ssl_strong_ciphers: ${7:False}                                         # Controls the use of whether strong or weak ciphers are configured  By default, this feature is disabled and weak ciphers
+    tlsv1_0: ${8:True}                                                     # Controls the use of the Transport Layer Security version 1 0 is configured   By default, this feature is enabled   To di
+    tlsv1_1: ${9:False}                                                    # Controls the use of the Transport Layer Security version 1 1 is configured   By default, this feature is disabled   To e
+    tlsv1_2: ${10:False}                                                   # Controls the use of the Transport Layer Security version 1 2 is configured   By default, this feature is disabled   To e
+    provider: ${11:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

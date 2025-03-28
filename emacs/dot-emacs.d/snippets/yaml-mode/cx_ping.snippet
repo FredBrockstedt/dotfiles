@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Tests reachability using ping from Ruckus ICX 7000 series switches
+# prefix: icx_ping_snippet
+# key: cx_ping
+# group: ansible
+# --
+
+- name: ${0:Tests reachability using ping from Ruckus ICX 7000 series switches}
+  icx_ping:                                                                
+    dest: ${1:ip-addr $$(yas-choose-value '(" host-name ")) vrf vrf-name | ipv6 [ ipv6-addr | host-name | vrf vrf-name]  (resolvable by switch) of the remote node}#
+    count: ${2:value}                                                      # Number of packets to send  Default is 1 
+    timeout: ${3:value}                                                    # Specifies the time, in milliseconds for which the device waits for a reply from the pinged device  The value can range f
+    ttl: ${4:value}                                                        # Specifies the time to live as a maximum number of hops  The value can range from 1 to 255  The default is 64 
+    size: ${5:value}                                                       # Specifies the size of the ICMP data portion of the packet, in bytes  This is the payload and does not include the header
+    source: ${6:value}                                                     # IP address to be used as the origin of the ping packets 
+    vrf: ${7:value}                                                        # Specifies the Virtual Routing and Forwarding (VRF) instance of the device to be pinged 
+    state: ${8$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Determines if the expected result is success or fail 

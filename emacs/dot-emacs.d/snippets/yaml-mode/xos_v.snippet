@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage VLANs on Extreme Networks SLX-OS network devices
+# prefix: slxos_vlan_snippet
+# key: xos_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLANs on Extreme Networks SLX-OS network devices}
+  slxos_vlan:                                                              
+    vlan_id: ${1:ID of the VLAN}                                           # Range 1-4094 
+    interfaces: ${2:List of interfaces that should be associated to the VLAN}#
+    name: ${3:value}                                                       # Name of the VLAN 
+    delay: ${4:10}                                                         # Delay the play should wait to check for declarative intent params values 
+    aggregate: ${5:value}                                                  # L i s t   o f   V L A N s   d e f i n i t i o n s  
+    purge: ${6:False}                                                      # Purge VLANs not defined in the I(aggregate) parameter 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the VLAN configuration 

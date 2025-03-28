@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Scaleway Security Group Rule management module
+# prefix: scaleway_security_group_rule_snippet
+# key: caleway_security_group_ru
+# group: ansible
+# --
+
+- name: ${0:Scaleway Security Group Rule management module}
+  scaleway_security_group_rule:                                            
+    region: ${1$$(yas-choose-value '("ams1" "EMEA-NL-EVS" "par1" "EMEA-FR-PAR1"))}# Scaleway region to use (for example C(par1)) 
+    protocol: ${2$$(yas-choose-value '("TCP" "UDP" "ICMP"))}               # Network protocol to use
+    port: ${3:Port related to the rule, null value for all the ports}      #
+    direction: ${4$$(yas-choose-value '("inbound" "outbound"))}            # Rule direction
+    action: ${5$$(yas-choose-value '("accept" "drop"))}                    # Rule action
+    security_group: ${6:Security Group unique identifier}                  #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the Security Group Rule 
+    ip_range: ${{8:0}                                                      #0 0 0/0} # not required  IPV4 CIDR notation to apply to the rule
+    api_token: ${9:value}                                                  # Scaleway OAuth token 
+    api_url: ${{10:https://api}                                            #scaleway com} # not required  Scaleway API URL 
+    api_timeout: ${11:30}                                                  # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${12:namespace()}                                    # List of parameters passed to the query string 
+    validate_certs: ${13:True}                                             # Validate SSL certs of the Scaleway API 

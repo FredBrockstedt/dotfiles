@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages global VRF configuration.
+# prefix: nxos_vrf_snippet
+# key: xos_vrf
+# group: ansible
+# --
+
+- name: ${0:Manages global VRF configuration.}
+  nxos_vrf:                                                                
+    name: ${1:Name of VRF to be managed}                                   #
+    admin_state: ${2$$(yas-choose-value '("up" "down"))}                   # choices: up;down  Administrative state of the VRF 
+    vni: ${3:value}                                                        # Specify virtual network identifier  Valid values are Integer or keyword 'default' 
+    rd: ${4:value}                                                         # VPN Route Distinguisher (RD)  Valid values are a string in one of the route-distinguisher formats (ASN2:NN, ASN4:NN, or 
+    interfaces: ${5:value}                                                 # List of interfaces to check the VRF has been configured correctly or keyword 'default' 
+    associated_interfaces: ${6:value}                                      # This is a intent option and checks the operational state of the for given vrf C(name) for associated interfaces  If the 
+    aggregate: ${7:value}                                                  # L i s t   o f   V R F s   d e f i n i t i o n s  
+    purge: ${8:false}                                                      # Purge VRFs not defined in the I(aggregate) parameter 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manages desired state of the resource 
+    description: ${10:value}                                               # Description of the VRF or keyword 'default' 
+    delay: ${11:10}                                                        # Time in seconds to wait before checking for the operational state on remote device  This wait is applicable for operatio
+    provider: ${12:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

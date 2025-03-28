@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage the software update settings of a BIG-IP
+# prefix: bigip_software_update_snippet
+# key: gip_software_updat
+# group: ansible
+# --
+
+- name: ${0:Manage the software update settings of a BIG-IP}
+  bigip_software_update:                                                   
+    auto_check: ${1:value}                                                 # Specifies whether to automatically check for updates on the F5 Networks downloads server 
+    auto_phone_home: ${2:value}                                            # Specifies whether to automatically send phone home data to the F5 Networks PhoneHome server 
+    frequency: ${3$$(yas-choose-value '("daily" "monthly" "weekly"))}      # choices: daily;monthly;weekly  Specifies the schedule for the automatic update check 
+    provider: ${4:value}                                                   # A dict object containing connection details 

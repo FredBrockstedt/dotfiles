@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Module for setup of AutoScaleLaunchConfig Avi RESTful Object
+# prefix: avi_autoscalelaunchconfig_snippet
+# key: vi_autoscalelaunchconfig
+# group: ansible
+# --
+
+- name: ${0:Module for setup of AutoScaleLaunchConfig Avi RESTful Object}
+  avi_autoscalelaunchconfig:                                               
+    name: ${1:Name of the object}                                          #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    description: ${5:value}                                                # User defined description for the object 
+    image_id: ${6:value}                                                   # Unique id of the amazon machine image (ami)  or openstack vm id 
+    mesos: ${7:value}                                                      # Autoscalemesossettings settings for autoscalelaunchconfig 
+    openstack: ${8:value}                                                  # Autoscaleopenstacksettings settings for autoscalelaunchconfig 
+    tenant_ref: ${9:value}                                                 # It is a reference to an object of type tenant 
+    url: ${10:value}                                                       # Avi controller URL of the object 
+    use_external_asg: ${11:value}                                          # If set to true, serverautoscalepolicy will use the autoscaling group (external_autoscaling_groups) from pool to perform 
+    uuid: ${12:value}                                                      # Unique object identifier of the object 
+    controller: ${13:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${14:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${15:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${16:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${17:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{18:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${19:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${20:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${21:value}                         # It disables avi session information to be cached as a fact 

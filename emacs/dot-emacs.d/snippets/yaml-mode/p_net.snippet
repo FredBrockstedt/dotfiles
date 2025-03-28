@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage network namespaces
+# prefix: ip_netns_snippet
+# key: p_net
+# group: ansible
+# --
+
+- name: ${0:Manage network namespaces}
+  ip_netns:                                                                
+    name: ${1:value}                                                       # Name of the namespace
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the namespace should exist

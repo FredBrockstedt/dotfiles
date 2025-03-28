@@ -1,0 +1,134 @@
+# -*- mode: snippet -*-
+# name: FortiManager web application firewall security profile
+# prefix: fmgr_secprof_waf_snippet
+# key: fmgr_secprof_waf
+# group: ansible
+# --
+
+- name: ${0:FortiManager web application firewall security profile}
+  fmgr_secprof_waf:                                                        
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    name: ${3:value}                                                       # WAF Profile name 
+    external: ${4$$(yas-choose-value '("disable" "enable"))}               # choices: disable;enable  Disable/Enable external HTTP Inspection  choice | disable | Disable external inspection  choice
+    extended_log: ${5$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable extended logging  choice | disable | Disable setting  choice | enable | Enable s
+    comment: ${6:value}                                                    # Comment 
+    address_list: ${7:value}                                               # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    address_list_blocked_address: ${8:value}                               # Blocked address 
+    address_list_blocked_log: ${9$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging on blocked addresses  choice | disable | Disable setting  choice | enab
+    address_list_severity: ${10$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice | high | Hi
+    address_list_status: ${11$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Status  choice | disable | Disable setting  choice | enable | Enable setting 
+    address_list_trusted_address: ${12:value}                              # Trusted address 
+    constraint: ${13:value}                                                # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    constraint_content_length_action: ${14$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_content_length_length: ${15:value}                          # Length of HTTP content in bytes (0 to 2147483647) 
+    constraint_content_length_log: ${16$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable set
+    constraint_content_length_severity: ${17$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choic
+    constraint_content_length_status: ${18$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | 
+    constraint_exception_address: ${19:value}                              # Host address 
+    constraint_exception_content_length: ${20$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  HTTP content length in request  choice | disable | Disable setting  choice | enabl
+    constraint_exception_header_length: ${21$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  HTTP header length in request  choice | disable | Disable setting  choice | enable 
+    constraint_exception_hostname: ${22$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable hostname check  choice | disable | Disable setting  choice | enable | Ena
+    constraint_exception_line_length: ${23$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  HTTP line length in request  choice | disable | Disable setting  choice | enable | En
+    constraint_exception_malformed: ${24$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable malformed HTTP request check  choice | disable | Disable setting  choice
+    constraint_exception_max_cookie: ${25$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Maximum number of cookies in HTTP request  choice | disable | Disable setting  choice 
+    constraint_exception_max_header_line: ${26$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Maximum number of HTTP header line  choice | disable | Disable setting  choice | 
+    constraint_exception_max_range_segment: ${27$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Maximum number of range segments in HTTP range line  choice | disable | Disable
+    constraint_exception_max_url_param: ${28$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Maximum number of parameters in URL  choice | disable | Disable setting  choice | e
+    constraint_exception_method: ${29$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable HTTP method check  choice | disable | Disable setting  choice | enable | En
+    constraint_exception_param_length: ${30$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Maximum length of parameter in URL, HTTP POST request or HTTP body  choice | disable
+    constraint_exception_pattern: ${31:value}                              # URL pattern 
+    constraint_exception_regex: ${32$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable regular expression based pattern match  choice | disable | Disable setting  
+    constraint_exception_url_param_length: ${33$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Maximum length of parameter in URL  choice | disable | Disable setting  choice |
+    constraint_exception_version: ${34$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable HTTP version check  choice | disable | Disable setting  choice | enable | 
+    constraint_header_length_action: ${35$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_header_length_length: ${36:value}                           # Length of HTTP header in bytes (0 to 2147483647) 
+    constraint_header_length_log: ${37$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable sett
+    constraint_header_length_severity: ${38$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice
+    constraint_header_length_status: ${39$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | E
+    constraint_hostname_action: ${40$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action for a hostname constraint  choice | allow | Allow  choice | block | Block 
+    constraint_hostname_log: ${41$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting 
+    constraint_hostname_severity: ${42$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice | hi
+    constraint_hostname_status: ${43$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | Enable
+    constraint_line_length_action: ${44$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_line_length_length: ${45:value}                             # Length of HTTP line in bytes (0 to 2147483647) 
+    constraint_line_length_log: ${46$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable settin
+    constraint_line_length_severity: ${47$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice |
+    constraint_line_length_status: ${48$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | Ena
+    constraint_malformed_action: ${49$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_malformed_log: ${50$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting 
+    constraint_malformed_severity: ${51$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice | h
+    constraint_malformed_status: ${52$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | Enabl
+    constraint_max_cookie_action: ${53$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_max_cookie_log: ${54$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting
+    constraint_max_cookie_max_cookie: ${55:value}                          # Maximum number of cookies in HTTP request (0 to 2147483647) 
+    constraint_max_cookie_severity: ${56$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice | 
+    constraint_max_cookie_status: ${57$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | Enab
+    constraint_max_header_line_action: ${58$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_max_header_line_log: ${59$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable se
+    constraint_max_header_line_max_header_line: ${60:value}                # Maximum number HTTP header lines (0 to 2147483647) 
+    constraint_max_header_line_severity: ${61$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choi
+    constraint_max_header_line_status: ${62$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable |
+    constraint_max_range_segment_action: ${63$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_max_range_segment_log: ${64$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable 
+    constraint_max_range_segment_max_range_segment: ${65:value}            # Maximum number of range segments in HTTP range line (0 to 2147483647) 
+    constraint_max_range_segment_severity: ${66$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  ch
+    constraint_max_range_segment_status: ${67$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable
+    constraint_max_url_param_action: ${68$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_max_url_param_log: ${69$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable sett
+    constraint_max_url_param_max_url_param: ${70:value}                    # Maximum number of parameters in URL (0 to 2147483647) 
+    constraint_max_url_param_severity: ${71$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice
+    constraint_max_url_param_status: ${72$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | E
+    constraint_method_action: ${73$$(yas-choose-value '("allow" "block"))} # choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_method_log: ${74$$(yas-choose-value '("disable" "enable"))} # choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting 
+    constraint_method_severity: ${75$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice | high
+    constraint_method_status: ${76$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | Enable s
+    constraint_param_length_action: ${77$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_param_length_length: ${78:value}                            # Maximum length of parameter in URL, HTTP POST request or HTTP body in bytes (0 to 2147483647) 
+    constraint_param_length_log: ${79$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setti
+    constraint_param_length_severity: ${80$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice 
+    constraint_param_length_status: ${81$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | En
+    constraint_url_param_length_action: ${82$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_url_param_length_length: ${83:value}                        # Maximum length of URL parameter in bytes (0 to 2147483647) 
+    constraint_url_param_length_log: ${84$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable s
+    constraint_url_param_length_severity: ${85$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  cho
+    constraint_url_param_length_status: ${86$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable 
+    constraint_version_action: ${87$$(yas-choose-value '("allow" "block"))}# choices: allow;block  Action  choice | allow | Allow  choice | block | Block 
+    constraint_version_log: ${88$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting 
+    constraint_version_severity: ${89$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice | hig
+    constraint_version_status: ${90$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable the constraint  choice | disable | Disable setting  choice | enable | Enable 
+    method: ${91:value}                                                    # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    method_default_allowed_methods: ${92$$(yas-choose-value '("delete" "get" "head" "options" "post" "put" "trace" "others" "connect"))}# choices: delete;get;head;options;post;put;trace;others;conn
+    method_log: ${93$$(yas-choose-value '("disable" "enable"))}            # choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting 
+    method_severity: ${94$$(yas-choose-value '("low" "medium" "high"))}    # choices: low;medium;high  Severity  choice | low | low severity choice | medium | medium severity choice | high | High s
+    method_status: ${95$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Status  choice | disable | Disable setting  choice | enable | Enable setting 
+    method_method_policy_address: ${96:value}                              # Host address 
+    method_method_policy_allowed_methods: ${97$$(yas-choose-value '("delete" "get" "head" "options" "post" "put" "trace" "others" "connect"))}# choices: delete;get;head;options;post;put;trace;other
+    method_method_policy_pattern: ${98:value}                              # URL pattern 
+    method_method_policy_regex: ${99$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable regular expression based pattern match  choice | disable | Disable setting  
+    signature: ${100:value}                                                # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    signature_credit_card_detection_threshold: ${101:value}                # The minimum number of Credit cards to detect violation 
+    signature_disabled_signature: ${102:value}                             # Disabled signatures
+    signature_disabled_sub_class: ${103:value}                             # Disabled signature subclasses 
+    signature_custom_signature_action: ${104$$(yas-choose-value '("allow" "block" "erase"))}# choices: allow;block;erase  Action  choice | allow | Allow  choice | block | Block  choice | erase | Er
+    signature_custom_signature_case_sensitivity: ${105$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Case sensitivity in pattern  choice | disable | Case insensitive in patte
+    signature_custom_signature_direction: ${106$$(yas-choose-value '("request" "response"))}# choices: request;response  Traffic direction  choice | request | Match HTTP request  choice | response 
+    signature_custom_signature_log: ${107$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable s
+    signature_custom_signature_name: ${108:value}                          # Signature name 
+    signature_custom_signature_pattern: ${109:value}                       # Match pattern 
+    signature_custom_signature_severity: ${110$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  cho
+    signature_custom_signature_status: ${111$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Status  choice | disable | Disable setting  choice | enable | Enable setting 
+    signature_custom_signature_target: ${112$$(yas-choose-value '("arg" "arg-name" "req-body" "req-cookie" "req-cookie-name" "req-filename" "req-header" "req-header-name" "req-raw-uri" "req-uri" "r
+    signature_main_class_action: ${113$$(yas-choose-value '("allow" "block" "erase"))}# choices: allow;block;erase  Action  choice | allow | Allow  choice | block | Block  choice | erase | Erase cr
+    signature_main_class_log: ${114$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting
+    signature_main_class_severity: ${115$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice | 
+    signature_main_class_status: ${116$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Status  choice | disable | Disable setting  choice | enable | Enable setting 
+    url_access: ${117:value}                                               # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    url_access_action: ${118$$(yas-choose-value '("bypass" "permit" "block"))}# choices: bypass;permit;block  Action  choice | bypass | Allow the HTTP request, also bypass further WAF scanning  cho
+    url_access_address: ${119:value}                                       # Host address 
+    url_access_log: ${120$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable logging  choice | disable | Disable setting  choice | enable | Enable setting 
+    url_access_severity: ${121$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Severity  choice | low | Low severity  choice | medium | Medium severity  choice | high | Hig
+    url_access_access_pattern_negate: ${122$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable match negation  choice | disable | Disable setting  choice | enable |
+    url_access_access_pattern_pattern: ${123:value}                        # URL pattern 
+    url_access_access_pattern_regex: ${124$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable regular expression based pattern match  choice | disable | Disable set
+    url_access_access_pattern_srcaddr: ${125:value}                        # Source address 

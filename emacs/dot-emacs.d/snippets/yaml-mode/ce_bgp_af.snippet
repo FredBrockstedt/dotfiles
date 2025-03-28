@@ -1,0 +1,63 @@
+# -*- mode: snippet -*-
+# name: Manages BGP Address-family configuration on HUAWEI CloudEngine switches.
+# prefix: ce_bgp_af_snippet
+# key: ce_bgp_af
+# group: ansible
+# --
+
+- name: ${0:Manages BGP Address-family configuration on HUAWEI CloudEngine switches.}
+  ce_bgp_af:                                                               
+    vrf_name: ${1:Name of a BGP instance}                                  # The name is a case-sensitive string of characters  The BGP instance can be used only after the corresponding VPN instanc
+    af_type: ${2$$(yas-choose-value '("ipv4uni" "ipv4multi" "ipv4vpn" "ipv6uni" "ipv6vpn" "evpn"))}# Address family type of a BGP instance 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    max_load_ibgp_num: ${4:value}                                          # Specify the maximum number of equal-cost IBGP routes  The value is an integer ranging from 1 to 65535 
+    ibgp_ecmp_nexthop_changed: ${5$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the next hop of an advertised route is changed to the advertise
+    max_load_ebgp_num: ${6:value}                                          # Specify the maximum number of equal-cost EBGP routes  The value is an integer ranging from 1 to 65535 
+    ebgp_ecmp_nexthop_changed: ${7$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the next hop of an advertised route is changed to the advertise
+    maximum_load_balance: ${8:value}                                       # Specify the maximum number of equal-cost routes in the BGP routing table  The value is an integer ranging from 1 to 6553
+    ecmp_nexthop_changed: ${9$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the next hop of an advertised route is changed to the advertiser its
+    default_local_pref: ${10:value}                                        # Set the Local-Preference attribute  The value is an integer  The value is an integer ranging from 0 to 4294967295 
+    default_med: ${11:value}                                               # Specify the Multi-Exit-Discriminator (MED) of BGP routes  The value is an integer ranging from 0 to 4294967295 
+    default_rt_import_enable: ${12$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, importing default routes to the BGP routing table is allowed  I
+    router_id: ${13:value}                                                 # ID of a router that is in IPv4 address format  The value is a string of 0 to 255 characters  The value is in dotted deci
+    vrf_rid_auto_sel: ${14$$(yas-choose-value '("no_use" "true" "false"))} # choices: no_use;true;false  If the value is true, VPN BGP instances are enabled to automatically select router IDs  If t
+    nexthop_third_party: ${15$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the third-party next hop function is enabled  If the value is false,
+    summary_automatic: ${16$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, automatic aggregation is enabled for locally imported routes  If the v
+    auto_frr_enable: ${17$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  If the value is true, BGP auto FRR is enabled  If the value is false, BGP auto FRR is disabl
+    load_balancing_as_path_ignore: ${18$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  Load balancing as path ignore 
+    rib_only_enable: ${19$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  If the value is true, BGP routes cannot be advertised to the IP routing table  If the value 
+    rib_only_policy_name: ${20:value}                                      # Specify the name of a routing policy  The value is a string of 1 to 40 characters 
+    active_route_advertise: ${21$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, BGP is enabled to advertise only optimal routes in the RM to peer
+    as_path_neglect: ${22$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  If the value is true, the AS path attribute is ignored when BGP selects an optimal route  If
+    med_none_as_maximum: ${23$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, when BGP selects an optimal route, the system uses 4294967295 as the
+    router_id_neglect: ${24$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the router ID attribute is ignored when BGP selects the optimal route 
+    igp_metric_ignore: ${25$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the metrics of next-hop IGP routes are not compared when BGP selects a
+    always_compare_med: ${26$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the MEDs of routes learned from peers in different autonomous systems
+    determin_med: ${27$$(yas-choose-value '("no_use" "true" "false"))}     # choices: no_use;true;false  If the value is true, BGP deterministic-MED is enabled  If the value is false, BGP determini
+    preference_external: ${28:value}                                       # Set the protocol priority of EBGP routes  The value is an integer ranging from 1 to 255 
+    preference_internal: ${29:value}                                       # Set the protocol priority of IBGP routes  The value is an integer ranging from 1 to 255 
+    preference_local: ${30:value}                                          # Set the protocol priority of a local BGP route  The value is an integer ranging from 1 to 255 
+    prefrence_policy_name: ${31:value}                                     # Set a routing policy to filter routes so that a configured priority is applied to the routes that match the specified po
+    reflect_between_client: ${32$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, route reflection is enabled between clients  If the value is fals
+    reflector_cluster_id: ${33:value}                                      # Set a cluster ID  Configuring multiple RRs in a cluster can enhance the stability of the network  The value is an intege
+    reflector_cluster_ipv4: ${34:value}                                    # Set a cluster ipv4 address  The value is expressed in the format of an IPv4 address 
+    rr_filter_number: ${35:value}                                          # Set the number of the extended community filter supported by an RR group  The value is a string of 1 to 51 characters 
+    policy_vpn_target: ${36$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, VPN-Target filtering function is performed for received VPN routes  If
+    next_hop_sel_depend_type: ${37$$(yas-choose-value '("default" "dependTunnel" "dependIp"))}# choices: default;dependTunnel;dependIp  Next hop select depend type 
+    nhp_relay_route_policy_name: ${38:value}                               # Specify the name of a route-policy for route iteration  The value is a string of 1 to 40 characters 
+    ebgp_if_sensitive: ${39$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, after the fast EBGP interface awareness function is enabled, EBGP sess
+    reflect_chg_path: ${40$$(yas-choose-value '("no_use" "true" "false"))} # choices: no_use;true;false  If the value is true, the route reflector is enabled to modify route path attributes based o
+    add_path_sel_num: ${41:value}                                          # Number of Add-Path routes  The value is an integer ranging from 2 to 64 
+    route_sel_delay: ${42:value}                                           # Route selection delay  The value is an integer ranging from 0 to 3600 
+    allow_invalid_as: ${43$$(yas-choose-value '("no_use" "true" "false"))} # choices: no_use;true;false  Allow routes with BGP origin AS validation result Invalid to be selected  If the value is tr
+    policy_ext_comm_enable: ${44$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, modifying extended community attributes is allowed  If the value 
+    supernet_uni_adv: ${45$$(yas-choose-value '("no_use" "true" "false"))} # choices: no_use;true;false  If the value is true, the function to advertise supernetwork unicast routes is enabled  If t
+    supernet_label_adv: ${46$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the function to advertise supernetwork label is enabled  If the value
+    ingress_lsp_policy_name: ${47:value}                                   # Ingress lsp policy name 
+    originator_prior: ${48$$(yas-choose-value '("no_use" "true" "false"))} # choices: no_use;true;false  Originator prior 
+    lowest_priority: ${49$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  If the value is true, enable reduce priority to advertise route  If the value is false, disa
+    relay_delay_enable: ${50$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, relay delay enable  If the value is false, relay delay disable 
+    import_protocol: ${51$$(yas-choose-value '("direct" "ospf" "isis" "static" "rip" "ospfv3" "ripng"))}# choices: direct;ospf;isis;static;rip;ospfv3;ripng  Routing protocol from which routes can b
+    import_process_id: ${52:value}                                         # Process ID of an imported routing protocol  The value is an integer ranging from 0 to 4294967295 
+    network_address: ${53:value}                                           # Specify the IP address advertised by BGP  The value is a string of 0 to 255 characters 
+    mask_len: ${54:value}                                                  # Specify the mask length of an IP address  The value is an integer ranging from 0 to 128 

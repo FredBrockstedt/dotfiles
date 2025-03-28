@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages global VPC configuration
+# prefix: nxos_vpc_snippet
+# key: xos_vpc
+# group: ansible
+# --
+
+- name: ${0:Manages global VPC configuration}
+  nxos_vpc:                                                                
+    domain: ${1:VPC domain}                                                #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Manages desired state of the resource
+    role_priority: ${3:value}                                              # Role priority for device  Remember lower is better 
+    system_priority: ${4:value}                                            # System priority device   Remember they must match between peers 
+    pkl_src: ${5:value}                                                    # Source IP address used for peer keepalive link
+    pkl_dest: ${6:value}                                                   # Destination (remote) IP address used for peer keepalive link pkl_dest is required whenever pkl options are used 
+    pkl_vrf: ${7:management}                                               # VRF used for peer keepalive link The VRF must exist on the device before using pkl_vrf  (Note) 'default' is an overloade
+    peer_gw: ${8:value}                                                    # Enables/Disables peer gateway
+    auto_recovery: ${9:value}                                              # Enables/Disables auto recovery on platforms that support disable timers are not modifiable with this attribute mutually 
+    auto_recovery_reload_delay: ${10:value}                                # Manages auto-recovery reload-delay timer in seconds mutually exclusive with auto_recovery
+    delay_restore: ${11:value}                                             # manages delay restore command and config value in seconds
+    delay_restore_interface_vlan: ${12:value}                              # manages delay restore interface-vlan command and config value in seconds not supported on all platforms
+    delay_restore_orphan_port: ${13:value}                                 # manages delay restore orphan-port command and config value in seconds not supported on all platforms
+    provider: ${14:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify connection-stats-settings
+# prefix: pn_connection_stats_settings_snippet
+# key: pn_connection_stats_setting
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify connection-stats-settings}
+  pn_connection_stats_settings:                                            
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the connection-stats-settings 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_enable: ${3:value}                                                  # Enable or disable collecting connections statistics 
+    pn_connection_backup_enable: ${4:value}                                # Enable backup for connection statistics collection 
+    pn_client_server_stats_max_memory: ${5:value}                          # maximum memory for client server statistics 
+    pn_connection_stats_log_disk_space: ${6:value}                         # disk-space allocated for statistics (including rotated log files) 
+    pn_client_server_stats_log_enable: ${7:value}                          # Enable or disable statistics 
+    pn_service_stat_max_memory: ${8:value}                                 # maximum memory allowed for service statistics 
+    pn_connection_stats_log_interval: ${9:value}                           # interval to collect statistics 
+    pn_fabric_connection_backup_interval: ${10:value}                      # backup interval for fabric connection statistics collection 
+    pn_connection_backup_interval: ${11:value}                             # backup interval for connection statistics collection 
+    pn_connection_stats_log_enable: ${12:value}                            # enable or disable statistics 
+    pn_fabric_connection_max_memory: ${13:value}                           # maximum memory allowed for fabric connection statistics 
+    pn_fabric_connection_backup_enable: ${14:value}                        # enable backup for fabric connection statistics collection 
+    pn_client_server_stats_log_disk_space: ${15:value}                     # disk-space allocated for statistics (including rotated log files) 
+    pn_connection_max_memory: ${16:value}                                  # maximum memory allowed for connection statistics 
+    pn_connection_stats_max_memory: ${17:value}                            # maximum memory allowed for connection statistics 
+    pn_client_server_stats_log_interval: ${18:value}                       # interval to collect statistics 

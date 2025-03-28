@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Set a new size for a Deployment, ReplicaSet, Replication Controller, or Job.
+# prefix: k8s_scale_snippet
+# key: k8s_sc
+# group: ansible
+# --
+
+- name: ${0:Set a new size for a Deployment, ReplicaSet, Replication Controller, or Job.}
+  k8s_scale:                                                               
+    api_version: ${1:v1}                                                   # Use to specify the API version  Use to create, delete, or discover an object without providing a full resource definitio
+    kind: ${2:value}                                                       # Use to specify an object model  Use to create, delete, or discover an object without providing a full resource definitio
+    name: ${3:value}                                                       # Use to specify an object name  Use to create, delete, or discover an object without providing a full resource definition
+    namespace: ${4:value}                                                  # Use to specify an object namespace  Useful when creating, deleting, or discovering an object without providing a full re
+    host: ${5:value}                                                       # Provide a URL for accessing the API  Can also be specified via K8S_AUTH_HOST environment variable 
+    api_key: ${6:value}                                                    # Token used to authenticate with the API  Can also be specified via K8S_AUTH_API_KEY environment variable 
+    kubeconfig: ${7:value}                                                 # Path to an existing Kubernetes config file  If not provided, and no other connection options are provided, the openshift
+    context: ${8:value}                                                    # The name of a context found in the config file  Can also be specified via K8S_AUTH_CONTEXT environment variable 
+    username: ${9:value}                                                   # Provide a username for authenticating with the API  Can also be specified via K8S_AUTH_USERNAME environment variable  Pl
+    password: ${10:value}                                                  # Provide a password for authenticating with the API  Can also be specified via K8S_AUTH_PASSWORD environment variable  Pl
+    client_cert: ${11:value}                                               # Path to a certificate used to authenticate with the API  Can also be specified via K8S_AUTH_CERT_FILE environment variab
+    client_key: ${12:value}                                                # Path to a key file used to authenticate with the API  Can also be specified via K8S_AUTH_KEY_FILE environment variable 
+    ca_cert: ${13:value}                                                   # Path to a CA certificate used to authenticate with the API  The full certificate chain must be provided to avoid certifi
+    validate_certs: ${14:value}                                            # Whether or not to verify the API server's SSL certificates  Can also be specified via K8S_AUTH_VERIFY_SSL environment va
+    proxy: ${15:value}                                                     # The URL of an HTTP proxy to use for the connection  Can also be specified via K8S_AUTH_PROXY environment variable  Pleas
+    resource_definition: ${16:value}                                       # Provide a valid YAML definition (either as a string, list, or dict) for an object when creating or updating  NOTE: I(kin
+    src: ${17:value}                                                       # Provide a path to a file containing a valid YAML definition of an object or objects to be created or updated  Mutually e
+    replicas: ${18:value}                                                  # The desired number of replicas 
+    current_replicas: ${19:value}                                          # For Deployment, ReplicaSet, Replication Controller, only scale, if the number of existing replicas matches  In the case 
+    resource_version: ${20:value}                                          # Only attempt to scale, if the current object version matches 
+    wait: ${21:True}                                                       # For Deployment, ReplicaSet, Replication Controller, wait for the status value of I(ready_replicas) to change to the numb
+    wait_timeout: ${22:20}                                                 # When C(wait) is I(True), the number of seconds to wait for the I(ready_replicas) status to equal  I(replicas)  If the st

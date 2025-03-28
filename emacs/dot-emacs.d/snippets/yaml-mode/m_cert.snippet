@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage server certificates for use on ELBs and CloudFront
+# prefix: iam_cert_snippet
+# key: m_cert
+# group: ansible
+# --
+
+- name: ${0:Manage server certificates for use on ELBs and CloudFront}
+  iam_cert:                                                                
+    name: ${1:Name of certificate to add, update or remove}                #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Whether to create(or update) or delete certificate  If new_path or new_name is defined, specifying present will attempt 
+    new_name: ${3:value}                                                   # When state is present, this will update the name of the cert  The cert, key and cert_chain parameters will be ignored if
+    new_path: ${4:value}                                                   # When state is present, this will update the path of the cert  The cert, key and cert_chain parameters will be ignored if
+    path: ${5:/}                                                           # When creating or updating, specify the desired path of the certificate 
+    cert_chain: ${6:value}                                                 # The path to, or content of the CA certificate chain in PEM encoded format  As of 2 4 content is accepted  If the paramet
+    cert: ${7:value}                                                       # The path to, or content of the certificate body in PEM encoded format  As of 2 4 content is accepted  If the parameter i
+    key: ${8:value}                                                        # The path to, or content of the private key in PEM encoded format  As of 2 4 content is accepted  If the parameter is not
+    dup_ok: ${9:False}                                                     # By default the module will not upload a certificate that is already uploaded into AWS  If set to True, it will upload th
+    debug_botocore_endpoint_logs: ${10:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${11:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${12:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${13:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${14:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${15:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${16:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${17:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage Ruby Gem dependencies with Bundler
+# prefix: bundler_snippet
+# key: undler
+# group: ansible
+# --
+
+- name: ${0:Manage Ruby Gem dependencies with Bundler}
+  bundler:                                                                 
+    executable: ${1:value}                                                 # The path to the bundler executable
+    state: ${2$$(yas-choose-value '("present" "latest"))}                  # choices: present;latest  The desired state of the Gem bundle  C(latest) updates gems to the most recent, acceptable vers
+    chdir: ${3:"temporary working directory"}                              # The directory to execute the bundler commands from  This directory needs to contain a valid Gemfile or  bundle/ director
+    exclude_groups: ${4:value}                                             # A list of Gemfile groups to exclude during operations  This only applies when state is C(present)  Bundler considers thi
+    clean: ${5:false}                                                      # Only applies if state is C(present)  If set removes any gems on the target host that are not in the gemfile
+    gemfile: ${6:"Gemfile in current directory"}                           # Only applies if state is C(present)  The path to the gemfile to use to install gems 
+    local: ${7:false}                                                      # If set only installs gems from the cache on the target host
+    deployment_mode: ${8:false}                                            # Only applies if state is C(present)  If set it will install gems in  /vendor/bundle instead of the default location  Req
+    user_install: ${9:true}                                                # Only applies if state is C(present)  Installs gems in the local user's cache or for all users
+    gem_path: ${10:"RubyGems gem paths"}                                   # Only applies if state is C(present)  Specifies the directory to install the gems into  If C(chdir) is set then this path
+    binstub_directory: ${11:value}                                         # Only applies if state is C(present)  Specifies the directory to install any gem bins files to  When executed the bin fil
+    extra_args: ${12:value}                                                # A space separated string of additional commands that can be applied to the Bundler command  Refer to the Bundler documen

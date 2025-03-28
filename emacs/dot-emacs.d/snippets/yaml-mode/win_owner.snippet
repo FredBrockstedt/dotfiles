@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Set owner
+# prefix: win_owner_snippet
+# key: win_owner
+# group: ansible
+# --
+
+- name: ${0:Set owner}
+  win_owner:                                                               
+    path: ${1:Path to be used for changing owner}                          #
+    user: ${2:Name to be used for changing owner}                          #
+    recurse: ${3:False}                                                    # Indicates if the owner should be changed recursively 

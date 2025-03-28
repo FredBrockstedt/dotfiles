@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Waits for a process to exist or not exist before continuing.
+# prefix: win_wait_for_process_snippet
+# key: win_wait_for_proc
+# group: ansible
+# --
+
+- name: ${0:Waits for a process to exist or not exist before continuing.}
+  win_wait_for_process:                                                    
+    process_name_exact: ${1:value}                                         # The name of the process(es) for which to wait   The name of the process(es) should not include the file extension suffix
+    process_name_pattern: ${2:value}                                       # RegEx pattern matching desired process(es) 
+    sleep: ${3:1}                                                          # Number of seconds to sleep between checks  Only applies when waiting for a process to start   Waiting for a process to s
+    process_min_count: ${4:1}                                              # Minimum number of process matching the supplied pattern to satisfy C(present) condition  Only applies to C(present) 
+    pid: ${5:value}                                                        # The PID of the process 
+    owner: ${6:value}                                                      # The owner of the process  Requires PowerShell version 4 0 or newer 
+    pre_wait_delay: ${7:0}                                                 # Seconds to wait before checking processes 
+    post_wait_delay: ${8:0}                                                # Seconds to wait after checking for processes 
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When checking for a running process C(present) will block execution until the process exists, o
+    timeout: ${10:300}                                                     # The maximum number of seconds to wait for a for a process to start or stop before erroring out 

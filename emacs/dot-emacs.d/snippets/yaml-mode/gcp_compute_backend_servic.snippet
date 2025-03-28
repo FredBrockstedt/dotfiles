@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP BackendService
+# prefix: gcp_compute_backend_service_snippet
+# key: gcp_compute_backend_servic
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP BackendService}
+  gcp_compute_backend_service:                                             
+    health_checks: ${1:The set of URLs to the HttpHealthCheck or HttpsHealthCheck resource for health checking this BackendService}# Currently at most one health check can be specified, and a healt
+    name: ${2:Name of the resource}                                        # Provided by the client when the resource is created  The name must be 1-63 characters long, and comply with RFC1035  Spe
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    affinity_cookie_ttl_sec: ${5:value}                                    # Lifetime of cookies in seconds if session_affinity is GENERATED_COOKIE  If set to 0, the cookie is non-persistent and la
+    backends: ${6:value}                                                   # The set of backends that serve this BackendService 
+    cdn_policy: ${7:value}                                                 # Cloud CDN configuration for this BackendService 
+    connection_draining: ${8:value}                                        # Settings for connection draining  
+    description: ${9:value}                                                # An optional description of this resource 
+    enable_cdn: ${10:value}                                                # If true, enable Cloud CDN for this BackendService 
+    iap: ${11:value}                                                       # Settings for enabling Cloud Identity Aware Proxy 
+    load_balancing_scheme: ${12:EXTERNAL}                                  # Indicates whether the backend service will be used with internal or external load balancing  A backend service created f
+    port_name: ${13:value}                                                 # Name of backend port  The same name should appear in the instance groups referenced by this service  Required when the l
+    protocol: ${14:value}                                                  # The protocol this BackendService uses to communicate with backends  Possible values are HTTP, HTTPS, HTTP2, TCP, and SSL
+    security_policy: ${15:value}                                           # The security policy associated with this backend service 
+    session_affinity: ${16:value}                                          # Type of session affinity to use  The default is NONE  When the load balancing scheme is EXTERNAL, can be NONE, CLIENT_IP
+    timeout_sec: ${17:value}                                               # How many seconds to wait for the backend before considering it a failed request  Default is 30 seconds  Valid range is [
+    project: ${18:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${19:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${20:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${21:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${22:value}                                                    # Array of scopes to be used 
+    env_type: ${23:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

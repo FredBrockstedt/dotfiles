@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages NTP options.
+# prefix: nxos_ntp_options_snippet
+# key: xos_ntp_optio
+# group: ansible
+# --
+
+- name: ${0:Manages NTP options.}
+  nxos_ntp_options:                                                        
+    master: ${1:value}                                                     # Sets whether the device is an authoritative NTP server 
+    stratum: ${2:value}                                                    # If C(master=true), an optional stratum can be supplied (1-15)  The device default is 8 
+    logging: ${3:value}                                                    # Sets whether NTP logging is enabled on the device 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

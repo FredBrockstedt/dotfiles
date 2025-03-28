@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP APM policy or APM access profile imports
+# prefix: bigip_apm_policy_import_snippet
+# key: gip_apm_policy_import
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP APM policy or APM access profile imports}
+  bigip_apm_policy_import:                                                 
+    name: ${1:The name of the APM policy or APM access profile to create or override}#
+    type: ${2$$(yas-choose-value '("profile_access" "access_policy"))}     # choices: profile_access;access_policy  Specifies the type of item to export from device 
+    source: ${3:value}                                                     # Full path to a file to be imported into the BIG-IP APM 
+    force: ${4:False}                                                      # When set to C(yes) any existing policy with the same name will be overwritten by the new import  If policy does not exis
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    provider: ${6:value}                                                   # A dict object containing connection details 

@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Create or delete an AWS CloudFormation stack
+# prefix: cloudformation_snippet
+# key: cloudformatio
+# group: ansible
+# --
+
+- name: ${0:Create or delete an AWS CloudFormation stack}
+  cloudformation:                                                          
+    stack_name: ${1:name of the cloudformation stack}                      #
+    disable_rollback: ${2:false}                                           # If a stacks fails to form, rollback will remove the stack
+    on_create_failure: ${3$$(yas-choose-value '("DO_NOTHING" "ROLLBACK" "DELETE"))}# choices: DO_NOTHING;ROLLBACK;DELETE  Action to take upon failure of stack creation  Incompatible with the disabl
+    create_timeout: ${4:value}                                             # The amount of time (in minutes) that can pass before the stack status becomes CREATE_FAILED
+    template_parameters: ${5:namespace()}                                  # A list of hashes of all the template variables for the stack  The value can be a string or a dict  Dict can be used to s
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If state is "present", stack will be created   If state is "present" and if stack exists and te
+    template: ${7:value}                                                   # The local path of the cloudformation template  This must be the full path to the file, relative to the working directory
+    notification_arns: ${8:value}                                          # The Simple Notification Service (SNS) topic ARNs to publish stack related events 
+    stack_policy: ${9:value}                                               # the path of the cloudformation stack policy  A policy cannot be removed once placed, but it can be modified  for instanc
+    tags: ${10:value}                                                      # Dictionary of tags to associate with stack and its resources during stack creation  Can be updated later, updating tags 
+    template_url: ${11:value}                                              # Location of file containing the template body  The URL must point to a template (max size 307,200 bytes) located in an S
+    create_changeset: ${12:false}                                          # If stack already exists create a changeset instead of directly applying changes  See the AWS Change Sets docs U(https://
+    changeset_name: ${13:value}                                            # Name given to the changeset when creating a changeset, only used when create_changeset is true  By default a name prefix
+    template_format: ${14$$(yas-choose-value '("json" "yaml"))}            # choices: json;yaml  (deprecated) For local templates, allows specification of json or yaml format  Templates are now pas
+    role_arn: ${15:value}                                                  # The role that AWS CloudFormation assumes to create the stack  See the AWS CloudFormation Service Role docs U(https://doc
+    termination_protection: ${16:value}                                    # enable or disable termination protection on the stack  Only works with botocore >= 1 7 18 
+    template_body: ${17:value}                                             # Template body  Use this to pass in the actual body of the Cloudformation template  If 'state' is 'present' and the stack
+    events_limit: ${18:200}                                                # Maximum number of CloudFormation events to fetch from a stack when creating or updating it 
+    backoff_delay: ${19:3}                                                 # Number of seconds to wait for the next retry 
+    backoff_max_delay: ${20:30}                                            # Maximum amount of time to wait between retries 
+    backoff_retries: ${21:10}                                              # Number of times to retry operation  AWS API throttling mechanism fails Cloudformation module so we have to retry a coupl
+    capabilities: ${22:"['CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM']"}       # Specify capabilities that stack template contains  Valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM and CAPABILITY_
+    debug_botocore_endpoint_logs: ${23:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${24:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${25:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${26:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${27:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${28:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${29:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${30:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Upload local VM images to CDI Upload Proxy.
+# prefix: kubevirt_cdi_upload_snippet
+# key: kubevirt_cdi_upload
+# group: ansible
+# --
+
+- name: ${0:Upload local VM images to CDI Upload Proxy.}
+  kubevirt_cdi_upload:                                                     
+    pvc_name: ${1:Use to specify the name of the target PersistentVolumeClaim}#
+    pvc_namespace: ${2:Use to specify the namespace of the target PersistentVolumeClaim}#
+    upload_host: ${3:value}                                                # URL containing the host and port on which the CDI Upload Proxy is available  More info: U(https://github com/kubevirt/co
+    upload_host_validate_certs: ${4:True}                                  # Whether or not to verify the CDI Upload Proxy's SSL certificates against your system's CA trust store 
+    path: ${5:value}                                                       # Path of local image file to transfer 
+    merge_type: ${6$$(yas-choose-value '("json" "merge" "strategic-merge"))}# choices: json;merge;strategic-merge  Whether to override the default patch merge approach with a specific type  By defa
+    host: ${7:value}                                                       # Provide a URL for accessing the API  Can also be specified via K8S_AUTH_HOST environment variable 
+    api_key: ${8:value}                                                    # Token used to authenticate with the API  Can also be specified via K8S_AUTH_API_KEY environment variable 
+    kubeconfig: ${9:value}                                                 # Path to an existing Kubernetes config file  If not provided, and no other connection options are provided, the openshift
+    context: ${10:value}                                                   # The name of a context found in the config file  Can also be specified via K8S_AUTH_CONTEXT environment variable 
+    username: ${11:value}                                                  # Provide a username for authenticating with the API  Can also be specified via K8S_AUTH_USERNAME environment variable  Pl
+    password: ${12:value}                                                  # Provide a password for authenticating with the API  Can also be specified via K8S_AUTH_PASSWORD environment variable  Pl
+    client_cert: ${13:value}                                               # Path to a certificate used to authenticate with the API  Can also be specified via K8S_AUTH_CERT_FILE environment variab
+    client_key: ${14:value}                                                # Path to a key file used to authenticate with the API  Can also be specified via K8S_AUTH_KEY_FILE environment variable 
+    ca_cert: ${15:value}                                                   # Path to a CA certificate used to authenticate with the API  The full certificate chain must be provided to avoid certifi
+    validate_certs: ${16:value}                                            # Whether or not to verify the API server's SSL certificates  Can also be specified via K8S_AUTH_VERIFY_SSL environment va
+    proxy: ${17:value}                                                     # The URL of an HTTP proxy to use for the connection  Can also be specified via K8S_AUTH_PROXY environment variable  Pleas

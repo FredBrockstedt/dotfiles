@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages VTP version configuration.
+# prefix: nxos_vtp_version_snippet
+# key: xos_vtp_versio
+# group: ansible
+# --
+
+- name: ${0:Manages VTP version configuration.}
+  nxos_vtp_version:                                                        
+    version: ${1$$(yas-choose-value '("1" "2"))}                           # VTP version number 
+    provider: ${2:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

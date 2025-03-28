@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Uploads a new or updates an existing runnable file into Radware vDirect server
+# prefix: vdirect_file_snippet
+# key: vdirect_f
+# group: ansible
+# --
+
+- name: ${0:Uploads a new or updates an existing runnable file into Radware vDirect server}
+  vdirect_file:                                                            
+    vdirect_ip: ${1:Primary vDirect server IP address, may be set as VDIRECT_IP environment variable}#
+    vdirect_user: ${2:vDirect server username, may be set as VDIRECT_USER environment variable}#
+    vdirect_password: ${3:vDirect server password, may be set as VDIRECT_PASSWORD environment variable}#
+    file_name: ${4:vDirect runnable file name to be uploaded}              # May be velocity configuration template ( vm) or workflow template zip file ( zip) 
+    vdirect_secondary_ip: ${5:value}                                       # Secondary vDirect server IP address, may be set as VDIRECT_SECONDARY_IP environment variable 
+    vdirect_wait: ${6:true}                                                # Wait for async operation to complete, may be set as VDIRECT_WAIT environment variable 
+    vdirect_https_port: ${7:2189}                                          # vDirect server HTTPS port number, may be set as VDIRECT_HTTPS_PORT environment variable 
+    vdirect_http_port: ${8:2188}                                           # vDirect server HTTP port number, may be set as VDIRECT_HTTP_PORT environment variable 
+    vdirect_timeout: ${9:60}                                               # Amount of time to wait for async operation completion [seconds], may be set as VDIRECT_TIMEOUT environment variable 
+    vdirect_use_ssl: ${10:true}                                            # If C(no), an HTTP connection will be used instead of the default HTTPS connection, may be set as VDIRECT_HTTPS or VDIREC
+    validate_certs: ${11:true}                                             # If C(no), SSL certificates will not be validated, may be set as VDIRECT_VALIDATE_CERTS or VDIRECT_VERIFY environment var

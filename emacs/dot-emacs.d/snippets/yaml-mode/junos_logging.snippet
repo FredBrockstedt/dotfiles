@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage logging on network devices
+# prefix: junos_logging_snippet
+# key: junos_logging
+# group: ansible
+# --
+
+- name: ${0:Manage logging on network devices}
+  junos_logging:                                                           
+    dest: ${1$$(yas-choose-value '("console" "host" "file" "user"))}       # choices: console;host;file;user  Destination of the logs 
+    name: ${2:value}                                                       # If value of C(dest) is I(file) it indicates file-name, for I(user) it indicates username and for I(host) indicates the h
+    facility: ${3:value}                                                   # Set logging facility 
+    level: ${4:value}                                                      # Set logging severity levels 
+    aggregate: ${5:value}                                                  # L i s t   o f   l o g g i n g   d e f i n i t i o n s  
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the logging configuration 
+    active: ${7:True}                                                      # Specifies whether or not the configuration is active or deactivated
+    rotate_frequency: ${8:value}                                           # Rotate log frequency in minutes, this is applicable if value of I(dest) is C(file)  The acceptable value is in range of 
+    size: ${9:value}                                                       # Size of the file in archive, this is applicable if value of I(dest) is C(file)  The acceptable value is in range from 65
+    files: ${10:value}                                                     # Number of files to be archived, this is applicable if value of I(dest) is C(file)  The acceptable value is in range from
+    provider: ${11:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

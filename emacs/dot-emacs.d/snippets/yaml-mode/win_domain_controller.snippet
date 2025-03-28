@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage domain controller/member server state for a Windows host
+# prefix: win_domain_controller_snippet
+# key: win_domain_controller
+# group: ansible
+# --
+
+- name: ${0:Manage domain controller/member server state for a Windows host}
+  win_domain_controller:                                                   
+    domain_admin_user: ${1:Username of a domain admin for the target domain (necessary to promote or demote a domain controller)}#
+    domain_admin_password: ${2:Password for the specified C(domain_admin_user)}#
+    dns_domain_name: ${3:value}                                            # When C(state) is C(domain_controller), the DNS name of the domain for which the targeted Windows host should be a DC 
+    safe_mode_password: ${4:value}                                         # Safe mode password for the domain controller (required when C(state) is C(domain_controller)) 
+    local_admin_password: ${5:value}                                       # Password to be assigned to the local C(Administrator) user (required when C(state) is C(member_server)) 
+    read_only: ${6:False}                                                  # Whether to install the domain controller as a read only replica for an existing domain 
+    site_name: ${7:value}                                                  # Specifies the name of an existing site where you can place the new domain controller  This option is required when I(rea
+    state: ${8$$(yas-choose-value '("domain_controller" "member_server"))} # choices: domain_controller;member_server  Whether the target host should be a domain controller or a member server 
+    database_path: ${9:value}                                              # The path to a directory on a fixed disk of the Windows host where the domain database will be created   If not set then 
+    sysvol_path: ${10:value}                                               # The path to a directory on a fixed disk of the Windows host where the Sysvol folder will be created  If not set then the

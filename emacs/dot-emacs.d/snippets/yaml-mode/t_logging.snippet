@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage logging on network devices
+# prefix: net_logging_snippet
+# key: t_logging
+# group: ansible
+# --
+
+- name: ${0:Manage logging on network devices}
+  net_logging:                                                             
+    dest: ${1$$(yas-choose-value '("console" "host"))}                     # choices: console;host  Destination of the logs 
+    name: ${2:value}                                                       # If value of C(dest) is I(host) it indicates file-name the host name to be notified 
+    facility: ${3:value}                                                   # Set logging facility 
+    level: ${4:value}                                                      # Set logging severity levels 
+    aggregate: ${5:value}                                                  # L i s t   o f   l o g g i n g   d e f i n i t i o n s  
+    purge: ${6:False}                                                      # Purge logging not defined in the I(aggregate) parameter 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the logging configuration 

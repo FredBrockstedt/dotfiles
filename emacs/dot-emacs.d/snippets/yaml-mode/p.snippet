@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manages snaps
+# prefix: snap_snippet
+# key: p
+# group: ansible
+# --
+
+- name: ${0:Manages snaps}
+  snap:                                                                    
+    name: ${1:Name of the snap to install or remove}                       # Can be a list of snaps 
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Desired state of the package 
+    classic: ${3:False}                                                    # Confinement policy  The classic confinement allows a snap to have the same level of access to the system as "classic" pa
+    channel: ${4:stable}                                                   # Define which release of a snap is installed and tracked for updates  This option can only be specified if there is a sin

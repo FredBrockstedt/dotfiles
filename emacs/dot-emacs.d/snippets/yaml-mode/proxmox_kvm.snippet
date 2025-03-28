@@ -1,0 +1,81 @@
+# -*- mode: snippet -*-
+# name: Management of Qemu(KVM) Virtual Machines in Proxmox VE cluster.
+# prefix: proxmox_kvm_snippet
+# key: proxmox_kvm
+# group: ansible
+# --
+
+- name: ${0:Management of Qemu(KVM) Virtual Machines in Proxmox VE cluster.}
+  proxmox_kvm:                                                             
+    api_host: ${1:Specify the target host of the Proxmox VE cluster}       #
+    api_user: ${2:Specify the user to authenticate with}                   #
+    acpi: ${3:true}                                                        # Specify if ACPI should be enabled/disabled 
+    agent: ${4:value}                                                      # Specify if the QEMU Guest Agent should be enabled/disabled 
+    args: ${{5:"-serial unix:/var/run/qemu-server/VMID}                    #serial,server,nowait"} # not required  Pass arbitrary arguments to kvm  This option is for experts only!
+    api_password: ${6:value}                                               # Specify the password to authenticate with  You can use C(PROXMOX_PASSWORD) environment variable 
+    autostart: ${7:false}                                                  # Specify if the VM should be automatically restarted after crash (currently ignored in PVE API) 
+    balloon: ${8:0}                                                        # Specify the amount of RAM for the VM in MB  Using zero disables the balloon driver 
+    bios: ${9$$(yas-choose-value '("seabios" "ovmf"))}                     # choices: seabios;ovmf  Specify the BIOS implementation 
+    boot: ${10:cnd}                                                        # Specify the boot order -> boot on floppy C(a), hard disk C(c), CD-ROM C(d), or network C(n)  You can combine to set orde
+    bootdisk: ${11:value}                                                  # Enable booting from specified disk  C((ide|sata|scsi|virtio)\\d+)
+    clone: ${12:value}                                                     # Name of VM to be cloned  If C(vmid) is setted, C(clone) can take arbitrary value but required for initiating the clone 
+    cores: ${13:1}                                                         # Specify number of cores per socket 
+    cpu: ${14:kvm64}                                                       # Specify emulated CPU type 
+    cpulimit: ${15:value}                                                  # Specify if CPU usage will be limited  Value 0 indicates no CPU limit  If the computer has 2 CPUs, it has total of '2' CP
+    cpuunits: ${16:1000}                                                   # Specify CPU weight for a VM  You can disable fair-scheduler configuration by setting this to 0
+    delete: ${17:value}                                                    # Specify a list of settings you want to delete 
+    description: ${18:value}                                               # Specify the description for the VM  Only used on the configuration web interface  This is saved as comment inside the co
+    digest: ${19:value}                                                    # Specify if to prevent changes if current configuration file has different SHA1 digest  This can be used to prevent concu
+    force: ${20:value}                                                     # Allow to force stop VM  Can be used only with states C(stopped), C(restarted) 
+    format: ${21$$(yas-choose-value '("cloop" "cow" "qcow" "qcow2" "qed" "raw" "vmdk"))}# choices: cloop;cow;qcow;qcow2;qed;raw;vmdk  Target drive's backing file's data format  Used only with clone
+    freeze: ${22:value}                                                    # Specify if PVE should freeze CPU at startup (use 'c' monitor command to start execution) 
+    full: ${23:true}                                                       # Create a full copy of all disk  This is always done when you clone a normal VM  For VM templates, we try to create a lin
+    hostpci: ${24:value}                                                   # Specify a hash/dictionary of map host pci devices into guest  C(hostpci='{"key":"value", "key":"value"\}')  Keys allowed
+    hotplug: ${25:value}                                                   # Selectively enable hotplug features  This is a comma separated list of hotplug features C('network', 'disk', 'cpu', 'mem
+    hugepages: ${26$$(yas-choose-value '("any" "2" "1024"))}               # choices: any;2;1024  Enable/disable hugepages memory 
+    ide: ${27:value}                                                       # A hash/dictionary of volume used as IDE hard disk or CD-ROM  C(ide='{"key":"value", "key":"value"\}')  Keys allowed are 
+    keyboard: ${28:value}                                                  # Sets the keyboard layout for VNC server 
+    kvm: ${29:true}                                                        # Enable/disable KVM hardware virtualization 
+    localtime: ${30:value}                                                 # Sets the real time clock to local time  This is enabled by default if ostype indicates a Microsoft OS 
+    lock: ${31$$(yas-choose-value '("migrate" "backup" "snapshot" "rollback"))}# choices: migrate;backup;snapshot;rollback  Lock/unlock the VM 
+    machine: ${32:value}                                                   # Specifies the Qemu machine type  type => C((pc|pc(-i440fx)?-\\d+\\ \\d+(\\ pxe)?|q35|pc-q35-\\d+\\ \\d+(\\ pxe)?))
+    memory: ${33:512}                                                      # Memory size in MB for instance 
+    migrate_downtime: ${34:value}                                          # Sets maximum tolerated downtime (in seconds) for migrations 
+    migrate_speed: ${35:value}                                             # Sets maximum speed (in MB/s) for migrations  A value of 0 is no limit 
+    name: ${36:value}                                                      # Specifies the VM name  Only used on the configuration web interface  Required only for C(state=present) 
+    net: ${37:value}                                                       # A hash/dictionary of network interfaces for the VM  C(net='{"key":"value", "key":"value"\}')  Keys allowed are - C(net[n
+    newid: ${38:value}                                                     # VMID for the clone  Used only with clone  If newid is not set, the next available VM ID will be fetched from ProxmoxAPI 
+    node: ${39:value}                                                      # Proxmox VE node, where the new VM will be created  Only required for C(state=present)  For other states, it will be auto
+    numa: ${40:value}                                                      # A hash/dictionaries of NUMA topology  C(numa='{"key":"value", "key":"value"\}')  Keys allowed are - C(numa[n]) where 0 ≤
+    onboot: ${41:true}                                                     # Specifies whether a VM will be started during system bootup 
+    ostype: ${42$$(yas-choose-value '("other" "wxp" "w2k" "w2k3" "w2k8" "wvista" "win7" "win8" "l24" "l26" "solaris"))}# choices: other;wxp;w2k;w2k3;w2k8;wvista;win7;win8;l24;l26;solaris  Specifies
+    parallel: ${43:value}                                                  # A hash/dictionary of map host parallel devices  C(parallel='{"key":"value", "key":"value"\}')  Keys allowed are - (paral
+    pool: ${44:value}                                                      # Add the new VM to the specified pool 
+    protection: ${45:value}                                                # Enable/disable the protection flag of the VM  This will enable/disable the remove VM and remove disk operations 
+    reboot: ${46:value}                                                    # Allow reboot  If set to C(yes), the VM exit on reboot 
+    revert: ${47:value}                                                    # Revert a pending change 
+    sata: ${48:value}                                                      # A hash/dictionary of volume used as sata hard disk or CD-ROM  C(sata='{"key":"value", "key":"value"\}')  Keys allowed ar
+    scsi: ${49:value}                                                      # A hash/dictionary of volume used as SCSI hard disk or CD-ROM  C(scsi='{"key":"value", "key":"value"\}')  Keys allowed ar
+    scsihw: ${50$$(yas-choose-value '("lsi" "lsi53c810" "virtio-scsi-pci" "virtio-scsi-single" "megasas" "pvscsi"))}# choices: lsi;lsi53c810;virtio-scsi-pci;virtio-scsi-single;megasas;pvscsi  Speci
+    serial: ${51:value}                                                    # A hash/dictionary of serial device to create inside the VM  C('{"key":"value", "key":"value"\}')  Keys allowed are - ser
+    shares: ${52:value}                                                    # Rets amount of memory shares for auto-ballooning  (0 - 50000)  The larger the number is, the more memory this VM gets  T
+    skiplock: ${53:value}                                                  # Ignore locks Only root is allowed to use this option 
+    smbios: ${54:value}                                                    # Specifies SMBIOS type 1 fields 
+    snapname: ${55:value}                                                  # The name of the snapshot  Used only with clone 
+    sockets: ${56:1}                                                       # Sets the number of CPU sockets  (1 - N) 
+    startdate: ${57:value}                                                 # Sets the initial date of the real time clock  Valid format for date are C('now') or C('2016-09-25T16:01:21') or C('2016-
+    startup: ${58:value}                                                   # Startup and shutdown behavior  C([[order=]\\d+] [,up=\\d+] [,down=\\d+])  Order is a non-negative number defining the ge
+    state: ${59$$(yas-choose-value '("present" "started" "absent" "stopped" "restarted" "current"))}# choices: present;started;absent;stopped;restarted;current  Indicates desired state of the insta
+    storage: ${60:value}                                                   # Target storage for full clone 
+    tablet: ${61:false}                                                    # Enables/disables the USB tablet device 
+    target: ${62:value}                                                    # Target node  Only allowed if the original VM is on shared storage  Used only with clone
+    tdf: ${63:value}                                                       # Enables/disables time drift fix 
+    template: ${64:false}                                                  # Enables/disables the template 
+    timeout: ${65:30}                                                      # Timeout for operations 
+    update: ${66:false}                                                    # If C(yes), the VM will be update with new value  Cause of the operations of the API and security reasons, I have disable
+    validate_certs: ${67:false}                                            # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    vcpus: ${68:value}                                                     # Sets number of hotplugged vcpus 
+    vga: ${69$$(yas-choose-value '("std" "cirrus" "vmware" "qxl" "serial0" "serial1" "serial2" "serial3" "qxl2" "qxl3" "qxl4"))}# choices: std;cirrus;vmware;qxl;serial0;serial1;serial2;serial3;qxl2
+    virtio: ${70:value}                                                    # A hash/dictionary of volume used as VIRTIO hard disk  C(virtio='{"key":"value", "key":"value"\}')  Keys allowed are - C(
+    vmid: ${71:value}                                                      # Specifies the VM ID  Instead use I(name) parameter  If vmid is not set, the next available VM ID will be fetched from Pr
+    watchdog: ${72:value}                                                  # Creates a virtual hardware watchdog device 

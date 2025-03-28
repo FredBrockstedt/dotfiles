@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manages servers on the cloudscale.ch IaaS service
+# prefix: cloudscale_server_snippet
+# key: cloudscale_server
+# group: ansible
+# --
+
+- name: ${0:Manages servers on the cloudscale.ch IaaS service}
+  cloudscale_server:                                                       
+    state: ${1$$(yas-choose-value '("running" "stopped" "absent"))}        # choices: running;stopped;absent  State of the server 
+    name: ${2:value}                                                       # Name of the Server  Either I(name) or I(uuid) are required 
+    uuid: ${3:value}                                                       # UUID of the server  Either I(name) or I(uuid) are required 
+    flavor: ${4:value}                                                     # Flavor of the server 
+    image: ${5:value}                                                      # Image used to create the server 
+    volume_size_gb: ${6:10}                                                # Size of the root volume in GB 
+    bulk_volume_size_gb: ${7:value}                                        # Size of the bulk storage volume in GB  No bulk storage volume if not set 
+    ssh_keys: ${8:value}                                                   # List of SSH public keys  Use the full content of your  pub file here 
+    password: ${9:value}                                                   # Password for the server 
+    use_public_network: ${10:True}                                         # Attach a public network interface to the server 
+    use_private_network: ${11:False}                                       # Attach a private network interface to the server 
+    use_ipv6: ${12:True}                                                   # Enable IPv6 on the public network interface 
+    anti_affinity_with: ${13:value}                                        # UUID of another server to create an anti-affinity group with  Mutually exclusive with I(server_groups)  Deprecated, remo
+    server_groups: ${14:value}                                             # List of UUID or names of server groups  Mutually exclusive with I(anti_affinity_with) 
+    user_data: ${15:value}                                                 # Cloud-init configuration (cloud-config) data to use for the server 
+    api_timeout: ${16:30}                                                  # Timeout in seconds for calls to the cloudscale ch API 
+    force: ${17:False}                                                     # Allow to stop the running server for updating if necessary 
+    tags: ${18:value}                                                      # Tags assosiated with the servers  Set this to C({\}) to clear any tags 
+    api_token: ${19:value}                                                 # cloudscale ch API token  This can also be passed in the C(CLOUDSCALE_API_TOKEN) environment variable 

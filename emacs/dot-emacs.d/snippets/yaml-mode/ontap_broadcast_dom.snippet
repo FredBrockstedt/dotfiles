@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage broadcast domains.
+# prefix: na_ontap_broadcast_domain_snippet
+# key: ontap_broadcast_dom
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage broadcast domains.}
+  na_ontap_broadcast_domain:                                               
+    name: ${1:Specify the broadcast domain name}                           #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified broadcast domain should exist or not 
+    from_name: ${6:value}                                                  # Specify the  broadcast domain name to be split into new broadcast domain 
+    mtu: ${7:value}                                                        # Specify the required mtu for the broadcast domain 
+    ipspace: ${8:value}                                                    # Specify the required ipspace for the broadcast domain  A domain ipspace can not be modified after the domain has been cr
+    ports: ${9:value}                                                      # Specify the ports associated with this broadcast domain  Should be comma separated  It represents the expected state of 
+    https: ${10:False}                                                     # Enable and disable https
+    validate_certs: ${11:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${12:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${13:value}                                                    # The ontap api version to use
+    use_rest: ${14$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

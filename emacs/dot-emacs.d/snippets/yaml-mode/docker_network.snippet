@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Manage Docker networks
+# prefix: docker_network_snippet
+# key: docker_network
+# group: ansible
+# --
+
+- name: ${0:Manage Docker networks}
+  docker_network:                                                          
+    name: ${1:Name of the network to operate on}                           #
+    connected: ${2:value}                                                  # List of container names or container IDs to connect to a network  Please note that the module only makes sure that these
+    driver: ${3:bridge}                                                    # Specify the type of network  Docker provides bridge and overlay drivers, but 3rd party drivers can also be used 
+    driver_options: ${4:value}                                             # Dictionary of network settings  Consult docker docs for valid options and values 
+    force: ${5:False}                                                      # With state C(absent) forces disconnecting all containers from the network prior to deleting the network  With state C(pr
+    appends: ${6:False}                                                    # By default the connected list is canonical, meaning containers not on the list are removed from the network  Use I(appen
+    enable_ipv6: ${7:value}                                                # Enable IPv6 networking 
+    ipam_driver: ${8:value}                                                # Specify an IPAM driver 
+    ipam_driver_options: ${9:value}                                        # Dictionary of IPAM driver options 
+    ipam_options: ${10:value}                                              # Dictionary of IPAM options  Deprecated in 2 8, will be removed in 2 12  Use parameter I(ipam_config) instead  In Docker 
+    ipam_config: ${11:value}                                               # List of IPAM config blocks  Consult L(Docker docs,https://docs docker com/compose/compose-file/compose-file-v2/#ipam) fo
+    state: ${12$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  C(absent) deletes the network  If a network has connected containers, it cannot be deleted  Use
+    internal: ${13:value}                                                  # Restrict external access to the network 
+    labels: ${14:value}                                                    # Dictionary of labels 
+    scope: ${15$$(yas-choose-value '("local" "global" "swarm"))}           # choices: local;global;swarm  Specify the network's scope 
+    attachable: ${16:value}                                                # If enabled, and the network is in the global scope, non-service containers on worker nodes will be able to connect to th
+    docker_host: ${{17:unix://var/run/docker}                              #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${18:localhost}                                          # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${19:auto}                                                # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${20:60}                                                      # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${21:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${22:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${23:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${24:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${25:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${26:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${27:False}                                                     # Debug mode

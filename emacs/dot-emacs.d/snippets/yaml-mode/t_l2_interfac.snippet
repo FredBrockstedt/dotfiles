@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage Layer-2 interface on network devices
+# prefix: net_l2_interface_snippet
+# key: t_l2_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Layer-2 interface on network devices}
+  net_l2_interface:                                                        
+    name: ${1:value}                                                       # Name of the interface excluding any logical unit number 
+    aggregate: ${2:value}                                                  # List of Layer-2 interface definitions 
+    mode: ${3$$(yas-choose-value '("access" "trunk"))}                     # choices: access;trunk  Mode in which interface needs to be configured 
+    access_vlan: ${4:value}                                                # Configure given VLAN in access port 
+    trunk_vlans: ${5:value}                                                # List of VLANs to be configured in trunk port 
+    native_vlan: ${6:value}                                                # Native VLAN to be configured in trunk port 
+    trunk_allowed_vlans: ${7:value}                                        # List of allowed VLAN's in a given trunk port 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the Layer-2 Interface configuration 

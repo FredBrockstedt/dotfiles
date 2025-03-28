@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Firewall
+# prefix: gcp_compute_firewall_snippet
+# key: gcp_compute_firew
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Firewall}
+  gcp_compute_firewall:                                                    
+    name: ${1:Name of the resource}                                        # Provided by the client when the resource is created  The name must be 1-63 characters long, and comply with RFC1035  Spe
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    allowed: ${4:value}                                                    # The list of ALLOW rules specified by this firewall  Each rule specifies a protocol and port-range tuple that describes a
+    denied: ${5:value}                                                     # The list of DENY rules specified by this firewall  Each rule specifies a protocol and port-range tuple that describes a 
+    description: ${6:value}                                                # An optional description of this resource  Provide this property when you create the resource 
+    destination_ranges: ${7:value}                                         # If destination ranges are specified, the firewall will apply only to traffic that has destination IP address in these ra
+    direction: ${8:value}                                                  # Direction of traffic to which this firewall applies; default is INGRESS  Note: For INGRESS traffic, it is NOT supported 
+    disabled: ${9:value}                                                   # Denotes whether the firewall rule is disabled, i e not applied to the network it is associated with  When set to true, t
+    network: ${10:namespace(selfLink='global/networks/default')}           # URL of the network resource for this firewall rule  If not specified when creating a firewall rule, the default network 
+    priority: ${11:1000}                                                   # Priority for this rule  This is an integer between 0 and 65535, both inclusive  When not specified, the value assumed is
+    source_ranges: ${12:value}                                             # If source ranges are specified, the firewall will apply only to traffic that has source IP address in these ranges  Thes
+    source_service_accounts: ${13:value}                                   # If source service accounts are specified, the firewall will apply only to traffic originating from an instance with a se
+    source_tags: ${14:value}                                               # If source tags are specified, the firewall will apply only to traffic with source IP that belongs to a tag listed in sou
+    target_service_accounts: ${15:value}                                   # A list of service accounts indicating sets of instances located in the network that may make network connections as spec
+    target_tags: ${16:value}                                               # A list of instance tags indicating sets of instances located in the network that may make network connections as specifi
+    project: ${17:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${18:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${19:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${20:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${21:value}                                                    # Array of scopes to be used 
+    env_type: ${22:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

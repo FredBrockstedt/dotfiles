@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Gather information about Zabbix host
+# prefix: zabbix_host_info_snippet
+# key: zabbix_host_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about Zabbix host}
+  zabbix_host_info:                                                        
+    server_url: ${1:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${2:Zabbix user name}                                      #
+    login_password: ${3:Zabbix user password}                              #
+    http_login_user: ${4:Basic Auth login}                                 #
+    host_name: ${5:value}                                                  # Name of the host in Zabbix  host_name is the unique identifier used and cannot be updated using this module  Required wh
+    host_ip: ${6:value}                                                    # Host interface IP of the host in Zabbix  Required when I(host_name) is not used 
+    exact_match: ${7:False}                                                # Find the exact match
+    remove_duplicate: ${8:True}                                            # Remove duplicate host from host result
+    host_inventory: ${9:value}                                             # List of host inventory keys to display in result  Whole host inventory is retrieved if keys are not specified 
+    http_login_password: ${10:value}                                       # Basic Auth password
+    timeout: ${11:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${12:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

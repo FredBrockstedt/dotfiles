@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Waits until remote system is reachable/usable
+# prefix: wait_for_connection_snippet
+# key: wait_for_connectio
+# group: ansible
+# --
+
+- name: ${0:Waits until remote system is reachable/usable}
+  wait_for_connection:                                                     
+    connect_timeout: ${1:5}                                                # Maximum number of seconds to wait for a connection to happen before closing and retrying 
+    delay: ${2:0}                                                          # Number of seconds to wait before starting to poll 
+    sleep: ${3:1}                                                          # Number of seconds to sleep between checks 
+    timeout: ${4:600}                                                      # Maximum number of seconds to wait for 

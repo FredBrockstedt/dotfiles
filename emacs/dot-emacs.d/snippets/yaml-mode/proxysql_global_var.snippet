@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Gets or sets the proxysql global variables.
+# prefix: proxysql_global_variables_snippet
+# key: proxysql_global_var
+# group: ansible
+# --
+
+- name: ${0:Gets or sets the proxysql global variables.}
+  proxysql_global_variables:                                               
+    variable: ${1:Defines which variable should be returned, or if I(value) is specified which variable should be updated}#
+    value: ${2:value}                                                      # Defines a value the variable specified using I(variable) should be set to 
+    save_to_disk: ${3:true}                                                # Save config to sqlite db on disk to persist the configuration 
+    load_to_runtime: ${4:true}                                             # Dynamically load config to runtime memory 
+    login_user: ${5:value}                                                 # The username used to authenticate to ProxySQL admin interface 
+    login_password: ${6:value}                                             # The password used to authenticate to ProxySQL admin interface 
+    login_host: ${{7:127}                                                  #0 0 1} # not required  The host used to connect to ProxySQL admin interface 
+    login_port: ${8:6032}                                                  # The port used to connect to ProxySQL admin interface 
+    config_file: ${9:}                                                     # Specify a config file from which I(login_user) and I(login_password) are to be read 

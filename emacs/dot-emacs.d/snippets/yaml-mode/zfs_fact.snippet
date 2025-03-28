@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Gather facts about ZFS datasets.
+# prefix: zfs_facts_snippet
+# key: zfs_fact
+# group: ansible
+# --
+
+- name: ${0:Gather facts about ZFS datasets.}
+  zfs_facts:                                                               
+    name: ${1:ZFS dataset name}                                            #
+    recurse: ${2:false}                                                    # Specifies if properties for any children should be recursively displayed 
+    parsable: ${3:false}                                                   # Specifies if property values should be displayed in machine friendly format 
+    properties: ${4:all}                                                   # Specifies which dataset properties should be queried in comma-separated format  For more information about dataset prope
+    type: ${5$$(yas-choose-value '("all" "filesystem" "volume" "snapshot" "bookmark"))}# choices: all;filesystem;volume;snapshot;bookmark  Specifies which datasets types to display  Multiple values
+    depth: ${6:value}                                                      # Specifies recursion depth 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Attach or detach a volume.
+# prefix: profitbricks_volume_attachments_snippet
+# key: profitbricks_volume_attachment
+# group: ansible
+# --
+
+- name: ${0:Attach or detach a volume.}
+  profitbricks_volume_attachments:                                         
+    datacenter: ${1:The datacenter in which to operate}                    #
+    server: ${2:The name of the server you wish to detach or attach the volume}#
+    volume: ${3:The volume name or ID}                                     #
+    subscription_user: ${4:value}                                          # The ProfitBricks username  Overrides the PB_SUBSCRIPTION_ID environment variable 
+    subscription_password: ${5:value}                                      # THe ProfitBricks password  Overrides the PB_PASSWORD environment variable 
+    wait: ${6:true}                                                        # wait for the operation to complete before returning
+    wait_timeout: ${7:600}                                                 # how long before wait gives up, in seconds
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource

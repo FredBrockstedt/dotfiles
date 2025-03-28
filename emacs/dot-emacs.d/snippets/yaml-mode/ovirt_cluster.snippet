@@ -1,0 +1,59 @@
+# -*- mode: snippet -*-
+# name: Module to manage clusters in oVirt/RHV
+# prefix: ovirt_cluster_snippet
+# key: ovirt_cluster
+# group: ansible
+# --
+
+- name: ${0:Module to manage clusters in oVirt/RHV}
+  ovirt_cluster:                                                           
+    name: ${1:Name of the cluster to manage}                               #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${3:value}                                                         # ID of the cluster to manage 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the cluster be present or absent 
+    data_center: ${5:value}                                                # Datacenter name where cluster reside 
+    description: ${6:value}                                                # Description of the cluster 
+    comment: ${7:value}                                                    # Comment of the cluster 
+    network: ${8:value}                                                    # Management network of cluster to access cluster hosts 
+    ballooning: ${9:value}                                                 # If I(True) enable memory balloon optimization  Memory balloon is used to re-distribute / reclaim the host memory based o
+    virt: ${10:value}                                                      # If I(True), hosts in this cluster will be used to run virtual machines 
+    gluster: ${11:value}                                                   # If I(True), hosts in this cluster will be used as Gluster Storage server nodes, and not for running virtual machines  By
+    threads_as_cores: ${12:value}                                          # If I(True) the exposed host threads would be treated as cores which can be utilized by virtual machines 
+    ksm: ${13:value}                                                       # I I(True) MoM enables to run Kernel Same-page Merging I(KSM) when necessary and when it can yield a memory saving benefi
+    ksm_numa: ${14:value}                                                  # If I(True) enables KSM C(ksm) for best performance inside NUMA nodes 
+    ha_reservation: ${15:value}                                            # If I(True) enables the oVirt/RHV to monitor cluster capacity for highly available virtual machines 
+    trusted_service: ${16:value}                                           # If I(True) enables integration with an OpenAttestation server 
+    vm_reason: ${17:value}                                                 # If I(True) enables an optional reason field when a virtual machine is shut down from the Manager, allowing the administr
+    host_reason: ${18:value}                                               # If I(True) enables an optional reason field when a host is placed into maintenance mode from the Manager, allowing the a
+    memory_policy: ${19$$(yas-choose-value '("disabled" "server" "desktop"))}# choices: disabled;server;desktop  I(disabled) - Disables memory page sharing  I(server) - Sets the memory page sharing
+    rng_sources: ${20:value}                                               # List that specify the random number generator devices that all hosts in the cluster will use  Supported generators are: 
+    spice_proxy: ${21:value}                                               # The proxy by which the SPICE client will connect to virtual machines  The address must be in the following format: I(pro
+    fence_enabled: ${22:value}                                             # If I(True) enables fencing on the cluster  Fencing is enabled by default 
+    fence_skip_if_gluster_bricks_up: ${23:value}                           # A flag indicating if fencing should be skipped if Gluster bricks are up and running in the host being fenced  This flag 
+    fence_skip_if_gluster_quorum_not_met: ${24:value}                      # A flag indicating if fencing should be skipped if Gluster bricks are up and running and Gluster quorum will not be met w
+    fence_skip_if_sd_active: ${25:value}                                   # If I(True) any hosts in the cluster that are Non Responsive and still connected to storage will not be fenced 
+    fence_skip_if_connectivity_broken: ${26:value}                         # If I(True) fencing will be temporarily disabled if the percentage of hosts in the cluster that are experiencing connecti
+    fence_connectivity_threshold: ${27:value}                              # The threshold used by C(fence_skip_if_connectivity_broken) 
+    resilience_policy: ${28$$(yas-choose-value '("do_not_migrate" "migrate" "migrate_highly_available"))}# choices: do_not_migrate;migrate;migrate_highly_available  The resilience policy defines ho
+    migration_bandwidth: ${29$$(yas-choose-value '("auto" "hypervisor_default" "custom"))}# choices: auto;hypervisor_default;custom  The bandwidth settings define the maximum bandwidth of both outg
+    migration_bandwidth_limit: ${30:value}                                 # Set the I(custom) migration bandwidth limit  This parameter is used only when C(migration_bandwidth) is I(custom) 
+    migration_auto_converge: ${31$$(yas-choose-value '("true" "false" "inherit"))}# choices: true;false;inherit  If I(True) auto-convergence is used during live migration of virtual machines  Used 
+    migration_compressed: ${32$$(yas-choose-value '("true" "false" "inherit"))}# choices: true;false;inherit  If I(True) compression is used during live migration of the virtual machine  Used only 
+    migration_policy: ${33$$(yas-choose-value '("legacy" "minimal_downtime" "suspend_workload" "post_copy"))}# choices: legacy;minimal_downtime;suspend_workload;post_copy  A migration policy define
+    serial_policy: ${34:value}                                             # Specify a serial number policy for the virtual machines in the cluster  Following options are supported: C(vm) - Sets th
+    serial_policy_value: ${35:value}                                       # Allows you to specify a custom serial number  This parameter is used only when C(serial_policy) is I(custom) 
+    scheduling_policy: ${36:value}                                         # Name of the scheduling policy to be used for cluster 
+    scheduling_policy_properties: ${37:value}                              # Custom scheduling policy properties of the cluster  These optional properties override the properties of the scheduling 
+    cpu_arch: ${38$$(yas-choose-value '("x86_64" "ppc64" "undefined"))}    # choices: x86_64;ppc64;undefined  CPU architecture of cluster 
+    cpu_type: ${39:value}                                                  # CPU codename  For example I(Intel SandyBridge Family) 
+    switch_type: ${40$$(yas-choose-value '("legacy" "ovs"))}               # choices: legacy;ovs  Type of switch to be used by all networks in given cluster  Either I(legacy) which is using linux b
+    compatibility_version: ${41:value}                                     # The compatibility version of the cluster  All hosts in this cluster must support at least this compatibility version 
+    mac_pool: ${42:value}                                                  # MAC pool to be used by this cluster  C(Note:) This is supported since oVirt version 4 1 
+    external_network_providers: ${43:value}                                # List of references to the external network providers available in the cluster  If the automatic deployment of the extern
+    firewall_type: ${44$$(yas-choose-value '("firewalld" "iptables"))}     # choices: firewalld;iptables  The type of firewall to be used on hosts in this cluster  Up to version 4 1, it was always 
+    gluster_tuned_profile: ${45:value}                                     # The name of the U(https://fedorahosted org/tuned) to set on all the hosts in the cluster  This is not mandatory and rele
+    wait: ${46:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${47:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${48:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${49:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${50:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

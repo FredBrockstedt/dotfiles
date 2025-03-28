@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Reboot a machine
+# prefix: reboot_snippet
+# key: reboot
+# group: ansible
+# --
+
+- name: ${0:Reboot a machine}
+  reboot:                                                                  
+    pre_reboot_delay: ${1:0}                                               # Seconds to wait before reboot  Passed as a parameter to the reboot command  On Linux, macOS and OpenBSD, this is convert
+    post_reboot_delay: ${2:0}                                              # Seconds to wait after the reboot command was successful before attempting to validate the system rebooted successfully  
+    reboot_timeout: ${3:600}                                               # Maximum seconds to wait for machine to reboot and respond to a test command  This timeout is evaluated separately for bo
+    connect_timeout: ${4:value}                                            # Maximum seconds to wait for a successful connection to the managed hosts before trying again  If unspecified, the defaul
+    test_command: ${5:whoami}                                              # Command to run on the rebooted host and expect success from to determine the machine is ready for further tasks 
+    msg: ${6:"Reboot initiated by Ansible"}                                # Message to display to users before reboot 
+    search_paths: ${7:"['/sbin', '/usr/sbin', '/usr/local/sbin']"}         # Paths to search on the remote machine for the C(shutdown) command  I(Only) these paths will be searched for the C(shutdo

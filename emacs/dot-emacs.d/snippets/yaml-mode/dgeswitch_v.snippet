@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage VLANs on Ubiquiti Edgeswitch network devices
+# prefix: edgeswitch_vlan_snippet
+# key: dgeswitch_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLANs on Ubiquiti Edgeswitch network devices}
+  edgeswitch_vlan:                                                         
+    name: ${1:value}                                                       # Name of the VLAN 
+    vlan_id: ${2:value}                                                    # ID of the VLAN  Range 1-4093 
+    tagged_interfaces: ${3:value}                                          # List of interfaces that should accept and transmit tagged frames for the VLAN  Accept range of interfaces 
+    untagged_interfaces: ${4:value}                                        # List of interfaces that should accept untagged frames and transmit them tagged for the VLAN  Accept range of interfaces 
+    excluded_interfaces: ${5:value}                                        # List of interfaces that should be excluded of the VLAN  Accept range of interfaces 
+    auto_tag: ${6:value}                                                   # Each of the switch interfaces will be set to accept and transmit untagged frames for I(vlan_id) unless defined in I(*_in
+    auto_untag: ${7:value}                                                 # Each of the switch interfaces will be set to accept untagged frames and transmit them tagged for I(vlan_id) unless defin
+    auto_exclude: ${8:value}                                               # Each of the switch interfaces will be excluded from I(vlan_id) unless defined in I(*_interfaces)  This is a default sett
+    aggregate: ${9:value}                                                  # L i s t   o f   V L A N s   d e f i n i t i o n s  
+    purge: ${10:False}                                                     # Purge VLANs not defined in the I(aggregate) parameter 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  action on the VLAN configuration 

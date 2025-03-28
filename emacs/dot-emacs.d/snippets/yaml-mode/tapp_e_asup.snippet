@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage auto-support settings
+# prefix: netapp_e_asup_snippet
+# key: tapp_e_asup
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage auto-support settings}
+  netapp_e_asup:                                                           
+    api_username: ${1:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${2:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${3:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    state: ${4$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  Enable/disable the E-Series auto-support configuration  When this option is enabled, configur
+    active: ${5:True}                                                      # Enable active/proactive monitoring for ASUP  When a problem is detected by our monitoring systems, it's possible that th
+    start: ${6:0}                                                          # A start hour may be specified in a range from 0 to 23 hours  ASUP bundles will be sent daily between the provided start 
+    end: ${7:24}                                                           # An end hour may be specified in a range from 1 to 24 hours  ASUP bundles will be sent daily between the provided start a
+    days: ${8$$(yas-choose-value '("monday" "tuesday" "wednesday" "thursday" "friday" "saturday" "sunday"))}# choices: monday;tuesday;wednesday;thursday;friday;saturday;sunday  A list of days of th
+    verbose: ${9:False}                                                    # Provide the full ASUP configuration in the return 
+    log_path: ${10:value}                                                  # A local path to a file to be used for debug logging
+    validate_certs: ${11:True}                                             # Should https certificates be validated?
+    ssid: ${12:1}                                                          # The ID of the array to manage  This value must be unique for each array 

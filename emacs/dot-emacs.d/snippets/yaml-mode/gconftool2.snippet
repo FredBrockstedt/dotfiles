@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Edit GNOME Configurations
+# prefix: gconftool2_snippet
+# key: gconftool2
+# group: ansible
+# --
+
+- name: ${0:Edit GNOME Configurations}
+  gconftool2:                                                              
+    key: ${1:A GConf preference key is an element in the GConf repository that corresponds to an application preference}# See man gconftool-2(1)
+    state: ${2$$(yas-choose-value '("absent" "get" "present"))}            # The action to take upon the key/value 
+    value: ${3:value}                                                      # Preference keys typically have simple values such as strings, integers, or lists of strings and integers  This is ignore
+    value_type: ${4$$(yas-choose-value '("bool" "float" "int" "string"))}  # choices: bool;float;int;string  The type of value being set  This is ignored if the state is "get" 
+    config_source: ${5:value}                                              # Specify a configuration source to use rather than the default path  See man gconftool-2(1)
+    direct: ${6:false}                                                     # Access the config database directly, bypassing server   If direct is specified then the config_source must be specified 

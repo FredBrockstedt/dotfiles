@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: create an annotation in circonus
+# prefix: circonus_annotation_snippet
+# key: circonus_annotatio
+# group: ansible
+# --
+
+- name: ${0:create an annotation in circonus}
+  circonus_annotation:                                                     
+    api_key: ${1:Circonus API key}                                         #
+    category: ${2:Annotation Category}                                     #
+    description: ${3:Description of annotation}                            #
+    title: ${4:Title of annotation}                                        #
+    start: ${5:I(now)}                                                     # Unix timestamp of event start
+    stop: ${6:"I(now) + I(duration)"}                                      # Unix timestamp of event end
+    duration: ${7:0}                                                       # Duration in seconds of annotation

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage static IP routes on Cisco IOS network devices
+# prefix: ios_static_route_snippet
+# key: os_static_rout
+# group: ansible
+# --
+
+- name: ${0:Manage static IP routes on Cisco IOS network devices}
+  ios_static_route:                                                        
+    prefix: ${1:value}                                                     # Network prefix of the static route 
+    mask: ${2:value}                                                       # Network prefix mask of the static route 
+    next_hop: ${3:value}                                                   # Next hop IP of the static route 
+    vrf: ${4:value}                                                        # VRF of the static route 
+    interface: ${5:value}                                                  # Interface of the static route 
+    name: ${6:value}                                                       # Name of the static route
+    admin_distance: ${7:value}                                             # Admin distance of the static route 
+    tag: ${8:value}                                                        # Set tag of the static route 
+    track: ${9:value}                                                      # Tracked item to depend on for the static route 
+    aggregate: ${10:value}                                                 # L i s t   o f   s t a t i c   r o u t e   d e f i n i t i o n s  
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the static route configuration 
+    authorize: ${12:False}                                                 # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  For more infor
+    auth_pass: ${13:value}                                                 # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes) with C(become_p
+    provider: ${14:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

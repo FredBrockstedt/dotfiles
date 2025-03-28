@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# name: Configures Service Profile Templates on Cisco UCS Manager
+# prefix: ucs_service_profile_template_snippet
+# key: ucs_service_profile_templat
+# group: ansible
+# --
+
+- name: ${0:Configures Service Profile Templates on Cisco UCS Manager}
+  ucs_service_profile_template:                                            
+    name: ${1:The name of the service profile template}                    # This name can be between 2 and 32 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify Service Profile Templates are present and will create if needed  If 
+    template_type: ${5$$(yas-choose-value '("initial-template" "updating-template"))}# choices: initial-template;updating-template  The template type field which can be one of the following: initia
+    uuid_pool: ${6:default}                                                # Specifies how the UUID will be set on a server associated with a service profile created from this template  The uuid_po
+    description: ${7:value}                                                # A user-defined description of the service profile template  Enter up to 256 characters  You can use any characters or sp
+    storage_profile: ${8:value}                                            # The name of the storage profile you want to associate with service profiles created from this template
+    local_disk_policy: ${9:value}                                          # The name of the local disk policy you want to associate with service profiles created from this template 
+    lan_connectivity_policy: ${10:value}                                   # The name of the LAN connectivity policy you want to associate with service profiles created from this template 
+    iqn_pool: ${11:value}                                                  # The name of the IQN pool (initiator) you want to apply to all iSCSI vNICs for service profiles created from this templat
+    san_connectivity_policy: ${12:value}                                   # The name of the SAN connectivity policy you want to associate with service profiles created from this template 
+    vmedia_policy: ${13:value}                                             # The name of the vMedia policy you want to associate with service profiles created from this template 
+    boot_policy: ${14:default}                                             # The name of the boot order policy you want to associate with service profiles created from this template 
+    maintenance_policy: ${15:value}                                        # The name of the maintenance policy you want to associate with service profiles created from this template 
+    server_pool: ${16:value}                                               # The name of the server pool you want to associate with this service profile template 
+    server_pool_qualification: ${17:value}                                 # The name of the server pool policy qualification you want to use for this service profile template 
+    power_state: ${18$$(yas-choose-value '("up" "down"))}                  # choices: up;down  The power state to be applied when a service profile created from this template is associated with a s
+    host_firmware_package: ${19:value}                                     # The name of the host firmware package you want to associate with service profiles created from this template 
+    bios_policy: ${20:value}                                               # The name of the BIOS policy you want to associate with service profiles created from this template 
+    ipmi_access_profile: ${21:value}                                       # The name of the IPMI access profile you want to associate with service profiles created from this template 
+    sol_policy: ${22:value}                                                # The name of the Serial over LAN (SoL) policy you want to associate with service profiles created from this template 
+    mgmt_ip_pool: ${23:ext-mgmt}                                           # The name of the management IP pool you want to use with service profiles created from this template 
+    power_control_policy: ${24:default}                                    # The name of the power control policy you want to associate with service profiles created from this template 
+    power_sync_policy: ${25:value}                                         # The name of the power sync policy you want to associate with service profiles created from this template 
+    scrub_policy: ${26:value}                                              # The name of the scrub policy you want to associate with service profiles created from this template 
+    kvm_mgmt_policy: ${27:value}                                           # The name of the KVM management policy you want to associate with service profiles created from this template 
+    graphics_card_policy: ${28:value}                                      # The name of the graphics card policy you want to associate with service profiles created from this template 
+    threshold_policy: ${29:default}                                        # The name of the threshold policy you want to associate with service profiles created from this template 
+    user_label: ${30:value}                                                # The User Label you want to assign to service profiles created from this template 
+    mgmt_interface_mode: ${31$$(yas-choose-value '("" "in-band"))}         # choices: ;in-band  The Management Interface you want to assign to service profiles created from this template 
+    mgmt_vnet_name: ${32:value}                                            # A VLAN selected from the associated VLAN group 
+    mgmt_inband_pool_name: ${33:value}                                     # How the inband management IPv4 address is derived for the server associated with this service profile 
+    org_dn: ${34:org-root}                                                 # Org dn (distinguished name)
+    username: ${35:admin}                                                  # Username for Cisco UCS Manager authentication 
+    port: ${36:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${37:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${38:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${39:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

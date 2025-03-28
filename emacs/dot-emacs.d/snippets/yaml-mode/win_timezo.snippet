@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Sets Windows machine timezone
+# prefix: win_timezone_snippet
+# key: win_timezo
+# group: ansible
+# --
+
+- name: ${0:Sets Windows machine timezone}
+  win_timezone:                                                            
+    timezone: ${1:Timezone to set to}                                      # Example: Central Standard Time

@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Add, modify & delete services within a consul cluster.
+# prefix: consul_snippet
+# key: consu
+# group: ansible
+# --
+
+- name: ${0:Add, modify & delete services within a consul cluster.}
+  consul:                                                                  
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  register or deregister the consul service, defaults to present
+    service_name: ${2:value}                                               # Unique name for the service on a node, must be unique per node, required if registering a service  May be omitted if reg
+    service_id: ${3:value}                                                 # the ID for the service, must be unique per node  If I(state=absent), defaults to the service name if supplied 
+    host: ${4:localhost}                                                   # host of the consul agent defaults to localhost
+    port: ${5:8500}                                                        # the port on which the consul agent is running
+    scheme: ${6:http}                                                      # the protocol scheme on which the consul agent is running
+    validate_certs: ${7:true}                                              # whether to verify the TLS certificate of the consul agent
+    notes: ${8:value}                                                      # Notes to attach to check when registering it 
+    service_port: ${9:value}                                               # the port on which the service is listening  Can optionally be supplied for registration of a service, i e  if I(service_
+    service_address: ${10:value}                                           # the address to advertise that the service will be listening on  This value will be passed as the I(address) parameter to
+    tags: ${11:value}                                                      # tags that will be attached to the service registration 
+    script: ${12:value}                                                    # the script/command that will be run periodically to check the health of the service  Scripts require I(interval) and vic
+    interval: ${13:value}                                                  # the interval at which the service check will be run  This is a number with a s or m suffix to signify the units of secon
+    check_id: ${14:value}                                                  # an ID for the service check  If I(state=absent), defaults to I(check_name)  Ignored if part of a service definition 
+    check_name: ${15:value}                                                # a name for the service check  Required if standalone, ignored if part of service definition 
+    ttl: ${16:value}                                                       # checks can be registered with a ttl instead of a I(script) and I(interval) this means that the service will check in wit
+    http: ${17:value}                                                      # checks can be registered with an HTTP endpoint  This means that consul will check that the http endpoint returns a succe
+    timeout: ${18:value}                                                   # A custom HTTP check timeout  The consul default is 10 seconds  Similar to the interval this is a number with a C(s) or C
+    token: ${19:value}                                                     # the token key identifying an ACL rule set  May be required to register services 

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configure network interfaces using NCLU
+# prefix: nclu_snippet
+# key: clu
+# group: ansible
+# --
+
+- name: ${0:Configure network interfaces using NCLU}
+  nclu:                                                                    
+    commands: ${1:value}                                                   # A list of strings containing the net commands to run  Mutually exclusive with I(template) 
+    template: ${2:value}                                                   # A single, multi-line string with jinja2 formatting  This string will be broken by lines, and each line will be run throu
+    commit: ${3:False}                                                     # When true, performs a 'net commit' at the end of the block  Mutually exclusive with I(atomic) 
+    abort: ${4:False}                                                      # Boolean  When true, perform a 'net abort' before the block  This cleans out any uncommitted changes in the buffer  Mutua
+    atomic: ${5:False}                                                     # When true, equivalent to both I(commit) and I(abort) being true  Mutually exclusive with I(commit) and I(atomic) 
+    description: ${6:"Ansible-originated commit"}                          # Commit description that will be recorded to the commit log if I(commit) or I(atomic) are true 

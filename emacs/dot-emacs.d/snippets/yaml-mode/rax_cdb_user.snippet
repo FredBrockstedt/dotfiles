@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: create / delete a Rackspace Cloud Database
+# prefix: rax_cdb_user_snippet
+# key: rax_cdb_user
+# group: ansible
+# --
+
+- name: ${0:create / delete a Rackspace Cloud Database}
+  rax_cdb_user:                                                            
+    cdb_id: ${1:value}                                                     # The databases server UUID
+    db_username: ${2:value}                                                # Name of the database user
+    db_password: ${3:value}                                                # Database user password
+    databases: ${4:[]}                                                     # Name of the databases that the user can access
+    host: ${5:%}                                                           # Specifies the host from which a user is allowed to connect to the database  Possible values are a string containing an I
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource
+    api_key: ${7:value}                                                    # Rackspace API key, overrides I(credentials) 
+    credentials: ${8:value}                                                # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${9:value}                                                        # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    region: ${10:DFW}                                                      # Region to create an instance in 
+    username: ${11:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${12:value}                                            # Whether or not to require SSL validation of API endpoints 
+    auth_endpoint: ${{13:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    identity_type: ${14:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    tenant_id: ${15:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${16:value}                                               # The tenant name used for authentication 

@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Managed Azure Virtual Machine extension
+# prefix: azure_rm_virtualmachineextension_snippet
+# key: zure_rm_virtualmachineextensio
+# group: ansible
+# --
+
+- name: ${0:Managed Azure Virtual Machine extension}
+  azure_rm_virtualmachineextension:                                        
+    resource_group: ${1:Name of a resource group where the vm extension exists or will be created}#
+    name: ${2:Name of the vm extension}                                    #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the vm extension  Use C(present) to create or update a vm extension and C(absent) to d
+    location: ${4:value}                                                   # Valid Azure location  Defaults to location of the resource group 
+    virtual_machine_name: ${5:value}                                       # The name of the virtual machine where the extension should be create or updated 
+    publisher: ${6:value}                                                  # The name of the extension handler publisher 
+    virtual_machine_extension_type: ${7:value}                             # The type of the extension handler 
+    type_handler_version: ${8:value}                                       # The type version of the extension handler 
+    settings: ${9:value}                                                   # Json formatted public settings for the extension 
+    protected_settings: ${10:value}                                        # Json formatted protected settings for the extension 
+    auto_upgrade_minor_version: ${11:value}                                # Whether the extension handler should be automatically upgraded across minor versions 
+    ad_user: ${12:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${13:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${14:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${15:value}                                           # Your Azure subscription Id 
+    client_id: ${16:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${17:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${18:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${19:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${20:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${21$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${22$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${23:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

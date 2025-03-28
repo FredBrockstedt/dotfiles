@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage your LogicMonitor account through Ansible Playbooks
+# prefix: logicmonitor_snippet
+# key: ogicmonitor
+# group: ansible
+# --
+
+- name: ${0:Manage your LogicMonitor account through Ansible Playbooks}
+  logicmonitor:                                                            
+    target: ${1$$(yas-choose-value '("collector" "host" "datasource" "hostgroup"))}# The type of LogicMonitor object you wish to manage  Collector: Perform actions on a LogicMonitor collector  NOTE
+    action: ${2$$(yas-choose-value '("add" "remove" "update" "sdt"))}      # The action you wish to perform on target  Add: Add an object to your LogicMonitor account  Remove: Remove an object from
+    company: ${3:The LogicMonitor account company name}                    # If you would log in to your account at "superheroes logicmonitor com" you would use "superheroes "
+    user: ${4:A LogicMonitor user name}                                    # The module will authenticate and perform actions on behalf of this user 
+    password: ${5:The password of the specified LogicMonitor user}         #
+    collector: ${6:value}                                                  # The fully qualified domain name of a collector in your LogicMonitor account  This is required for the creation of a Logi
+    hostname: ${7:"hostname -f"}                                           # The hostname of a host in your LogicMonitor account, or the desired hostname of a device to manage  Optional for managin
+    displayname: ${8:"hostname -f"}                                        # The display name of a host in your LogicMonitor account or the desired display name of a device to manage  Optional for 
+    description: ${9:}                                                     # The long text description of the object in your LogicMonitor account  Optional for managing hosts and host groups (targe
+    properties: ${10:namespace()}                                          # A dictionary of properties to set on the LogicMonitor host or host group  Optional for managing hosts and host groups (t
+    groups: ${11:[]}                                                       # A list of groups that the host should be a member of  Optional for managing hosts (target=host; action=add or action=upd
+    id: ${12:value}                                                        # ID of the datasource to target  Required for management of LogicMonitor datasources (target=datasource) 
+    fullpath: ${13:value}                                                  # The fullpath of the host group object you would like to manage  Recommend running on a single Ansible host  Required for
+    alertenable: ${14:true}                                                # A boolean flag to turn alerting on or off for an object  Optional for managing all hosts (action=add or action=update) 
+    starttime: ${15:Now}                                                   # The time that the Scheduled Down Time (SDT) should begin  Optional for managing SDT (action=sdt)  Y-m-d H:M
+    duration: ${16:30}                                                     # The duration (minutes) of the Scheduled Down Time (SDT)  Optional for putting an object into SDT (action=sdt) 

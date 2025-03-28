@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages VLAN resources and attributes on Huawei CloudEngine switches.
+# prefix: ce_vlan_snippet
+# key: ce_v
+# group: ansible
+# --
+
+- name: ${0:Manages VLAN resources and attributes on Huawei CloudEngine switches.}
+  ce_vlan:                                                                 
+    vlan_id: ${1:value}                                                    # Single VLAN ID, in the range from 1 to 4094 
+    vlan_range: ${2:value}                                                 # Range of VLANs such as C(2-10) or C(2,5,10-15), etc 
+    name: ${3:value}                                                       # Name of VLAN, minimum of 1 character, maximum of 31 characters 
+    description: ${4:value}                                                # Specify VLAN description, minimum of 1 character, maximum of 80 characters 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

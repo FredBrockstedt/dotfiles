@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Get session objects facts on Check Point over Web Services API
+# prefix: cp_mgmt_session_facts_snippet
+# key: cp_mgmt_session_fact
+# group: ansible
+# --
+
+- name: ${0:Get session objects facts on Check Point over Web Services API}
+  cp_mgmt_session_facts:                                                   
+    limit: ${1:value}                                                      # No more than that many results will be returned  This parameter is relevant only for getting few objects 
+    offset: ${2:value}                                                     # Skip that many results before beginning to return them  This parameter is relevant only for getting few objects 
+    order: ${3:value}                                                      # Sorts results by the given field  By default the results are sorted in the descending order by the session publish time 
+    view_published_sessions: ${4:value}                                    # Show a list of published sessions 
+    details_level: ${5$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    version: ${6:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

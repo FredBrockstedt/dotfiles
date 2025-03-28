@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Get task objects facts on Check Point over Web Services API
+# prefix: checkpoint_task_facts_snippet
+# key: checkpoint_task_fact
+# group: ansible
+# --
+
+- name: ${0:Get task objects facts on Check Point over Web Services API}
+  checkpoint_task_facts:                                                   
+    task_id: ${1:ID of the task object}                                    #

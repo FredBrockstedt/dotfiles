@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: configure management settings of device
+# prefix: panos_mgtconfig_snippet
+# key: panos_mgtconfig
+# group: ansible
+# --
+
+- name: ${0:configure management settings of device}
+  panos_mgtconfig:                                                         
+    ip_address: ${1:IP address (or hostname) of PAN-OS device}             #
+    password: ${2:Password for authentication}                             #
+    dns_server_primary: ${3:value}                                         # address of primary DNS server
+    dns_server_secondary: ${4:value}                                       # address of secondary DNS server
+    panorama_primary: ${5:value}                                           # address of primary Panorama server
+    panorama_secondary: ${6:value}                                         # address of secondary Panorama server
+    commit: ${7:true}                                                      # commit if changed
+    username: ${8:admin}                                                   # Username for authentication 

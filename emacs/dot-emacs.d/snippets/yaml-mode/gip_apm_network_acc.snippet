@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manage APM Network Access resource
+# prefix: bigip_apm_network_access_snippet
+# key: gip_apm_network_acc
+# group: ansible
+# --
+
+- name: ${0:Manage APM Network Access resource}
+  bigip_apm_network_access:                                                
+    name: ${1:Specifies the name of the APM network access to manage/create}#
+    description: ${2:value}                                                # User created network access description 
+    ip_version: ${3$$(yas-choose-value '("ipv4" "ipv4-ipv6"))}             # choices: ipv4;ipv4-ipv6  Supported IP version on the network access resource 
+    allow_local_subnet: ${4:value}                                         # Enables local subnet access and local access to any host or subnet in routes specified in the client routing table  When
+    allow_local_dns: ${5:value}                                            # Enables local access to DNS servers configured on client prior to establishing network access connection 
+    split_tunnel: ${6:value}                                               # Specifies that only the traffic targeted to a specified address space is sent over the network access tunnel 
+    snat_pool: ${7:value}                                                  # Specifies the name of a SNAT pool used for implementing selective and intelligent SNATs  When C(none) the system uses no
+    dtls: ${8:value}                                                       # When C(yes) the network access connection uses Datagram Transport Level Security instead of TCP, to provide better throu
+    dtls_port: ${9:value}                                                  # Specifies the port number that the network access resource uses for secure UDP traffic with DTLS 
+    ipv4_lease_pool: ${10:value}                                           # Specifies IPV4 lease pool resource to use with network access  Referencing lease pool can be done in the full path forma
+    ipv6_lease_pool: ${11:value}                                           # Specifies IPV6 lease pool resource to use with network access  Referencing lease pool can be done in the full path forma
+    excluded_ipv6_adresses: ${12:value}                                    # Specifies IPV6 address spaces for which traffic is not forced through the tunnel 
+    excluded_ipv4_adresses: ${13:value}                                    # Specifies IPV4 address spaces for which traffic is not forced through the tunnel 
+    excluded_dns_addresses: ${14:value}                                    # Specifies the DNS address spaces for which traffic is not forced through the tunnel 
+    dns_address_space: ${15:value}                                         # Specifies a list of domain names describing the target LAN DNS addresses 
+    ipv4_address_space: ${16:value}                                        # Specifies a list of IPv4 hosts or networks describing the target LAN  This option is mandatory when creating a new resou
+    ipv6_address_space: ${17:value}                                        # Specifies a list of IPv6 hosts or networks describing the target LAN  This option is mandatory when creating a new resou
+    partition: ${18:Common}                                                # Device partition to manage resources on 
+    state: ${19$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(state) is C(present), ensures that the ACL exists  When C(state) is C(absent), ensures t
+    provider: ${20:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify stp
+# prefix: pn_stp_snippet
+# key: pn_stp
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify stp}
+  pn_stp:                                                                  
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to stp 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_hello_time: ${3:2}                                                  # STP hello time between 1 and 10 secs 
+    pn_enable: ${4:value}                                                  # enable or disable STP
+    pn_root_guard_wait_time: ${5:20}                                       # root guard wait time between 0 and 300 secs  0 to disable wait 
+    pn_bpdus_bridge_ports: ${6:value}                                      # BPDU packets to bridge specific port 
+    pn_mst_max_hops: ${7:20}                                               # maximum hop count for mstp bpdu 
+    pn_bridge_id: ${8:value}                                               # STP bridge id 
+    pn_max_age: ${9:20}                                                    # maximum age time between 6 and 40 secs 
+    pn_stp_mode: ${10$$(yas-choose-value '("rstp" "mstp"))}                # choices: rstp;mstp  STP mode 
+    pn_mst_config_name: ${11:value}                                        # Name for MST Configuration Instance 
+    pn_forwarding_delay: ${12:15}                                          # STP forwarding delay between 4 and 30 secs 
+    pn_bridge_priority: ${13:32768}                                        # STP bridge priority 

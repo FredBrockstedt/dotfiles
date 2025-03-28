@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage the aggregate of local users on Cisco IOS XR device
+# prefix: iosxr_user_snippet
+# key: osxr_user
+# group: ansible
+# --
+
+- name: ${0:Manage the aggregate of local users on Cisco IOS XR device}
+  iosxr_user:                                                              
+    aggregate: ${1:value}                                                  # The set of username objects to be configured on the remote Cisco IOS XR device  The list entries can either be the usern
+    name: ${2:value}                                                       # The username to be configured on the Cisco IOS XR device  This argument accepts a string value and is mutually exclusive
+    configured_password: ${3:value}                                        # The password to be configured on the Cisco IOS XR device  The password needs to be provided in clear text  Password is e
+    update_password: ${4$$(yas-choose-value '("on_create" "always"))}      # choices: on_create;always  Since passwords are encrypted in the device running config, this argument will instruct the m
+    group: ${5:value}                                                      # Configures the group for the username in the device running configuration  The argument accepts a string value defining 
+    groups: ${6:value}                                                     # Configures the groups for the username in the device running configuration  The argument accepts a list of group names  
+    purge: ${7:False}                                                      # Instructs the module to consider the resource definition absolute  It will remove any previously configured usernames on
+    admin: ${8:False}                                                      # Enters into administration configuration mode for making config changes to the device  Applicable only when using networ
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the state of the username definition as it relates to the device operational configu
+    public_key: ${10:value}                                                # Configures the contents of the public keyfile to upload to the IOS-XR node  This enables users to login using the accomp
+    public_key_contents: ${11:value}                                       # Configures the contents of the public keyfile to upload to the IOS-XR node  This enables users to login using the accomp
+    provider: ${12:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

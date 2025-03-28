@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Create or Destroy Global or Regional External IP addresses.
+# prefix: gce_eip_snippet
+# key: gce_eip
+# group: ansible
+# --
+
+- name: ${0:Create or Destroy Global or Regional External IP addresses.}
+  gce_eip:                                                                 
+    name: ${1:Name of Address}                                             #
+    region: ${2:Region to create the address in}                           # Set to 'global' to create a global address 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  T h e   s t a t e   t h e   a d d r e s s   s h o u l d   b e   i n     C ( p r e s e n t )   o

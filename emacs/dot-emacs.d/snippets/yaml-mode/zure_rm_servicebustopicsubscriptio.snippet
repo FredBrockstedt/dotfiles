@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Service Bus subscription
+# prefix: azure_rm_servicebustopicsubscription_snippet
+# key: zure_rm_servicebustopicsubscriptio
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Service Bus subscription}
+  azure_rm_servicebustopicsubscription:                                    
+    resource_group: ${1:Name of resource group}                            #
+    name: ${2:Name of the servicebus subscription}                         #
+    namespace: ${3:Servicebus namespace name}                              # A namespace is a scoping container for all messaging components  Multiple subscriptions and topics can reside within a s
+    topic: ${4:Topic name which the subscription subscribe to}             #
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the servicebus subscription  Use C(present) to create or update and use C(a
+    auto_delete_on_idle_in_seconds: ${6:value}                             # Time idle interval after which a subscription is automatically deleted  The minimum duration is 5 minutes 
+    dead_lettering_on_message_expiration: ${7:value}                       # A value that indicates whether a subscription has dead letter support when a message expires 
+    dead_lettering_on_filter_evaluation_exceptions: ${8:value}             # Value that indicates whether a subscription has dead letter support on filter evaluation exceptions 
+    default_message_time_to_live_seconds: ${9:value}                       # Default message timespan to live value  This is the duration after which the message expires, starting from when the mes
+    enable_batched_operations: ${10:value}                                 # Value that indicates whether server-side batched operations are enabled 
+    forward_dead_lettered_messages_to: ${11:value}                         # Queue or topic name to forward the Dead Letter message for a subscription 
+    forward_to: ${12:value}                                                # Queue or topic name to forward the messages for a subscription 
+    lock_duration_in_seconds: ${13:value}                                  # Timespan duration of a peek-lock  The amount of time that the message is locked for other receivers  The maximum value f
+    max_delivery_count: ${14:value}                                        # he maximum delivery count  A message is automatically deadlettered after this number of deliveries 
+    requires_session: ${15:value}                                          # A value that indicates whether the subscription supports the concept of sessions 
+    duplicate_detection_time_in_seconds: ${16:value}                       # TimeSpan structure that defines the duration of the duplicate detection history 
+    status: ${17$$(yas-choose-value '("active" "disabled" "send_disabled" "receive_disabled"))}# choices: active;disabled;send_disabled;receive_disabled  Status of the entity 
+    ad_user: ${18:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${19:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${20:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${21:value}                                           # Your Azure subscription Id 
+    client_id: ${22:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${23:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${24:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${25:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${26:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${27$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${28$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${29:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${30:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${31:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

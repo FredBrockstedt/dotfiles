@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Extract files from an ISO image
+# prefix: iso_extract_snippet
+# key: o_extract
+# group: ansible
+# --
+
+- name: ${0:Extract files from an ISO image}
+  iso_extract:                                                             
+    image: ${1:The ISO image to extract files from}                        #
+    dest: ${2:The destination directory to extract files to}               #
+    files: ${3:A list of files to extract from the image}                  # Extracting directories does not work 
+    force: ${4:True}                                                       # If C(yes), which will replace the remote file when contents are different than the source  If C(no), the file will only 
+    executable: ${5:7z}                                                    # The path to the C(7z) executable to use for extracting files from the ISO 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create and manage cloud Networks on the Hetzner Cloud.
+# prefix: hcloud_network_snippet
+# key: hcloud_network
+# group: ansible
+# --
+
+- name: ${0:Create and manage cloud Networks on the Hetzner Cloud.}
+  hcloud_network:                                                          
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the Hetzner Cloud Networks to manage  Only required if no Network I(name) is given 
+    name: ${3:value}                                                       # The Name of the Hetzner Cloud Network to manage  Only required if no Network I(id) is given or a Network does not exists
+    ip_range: ${4:value}                                                   # IP range of the Network  Required if Network does not exists 
+    labels: ${5:value}                                                     # User-defined labels (key-value pairs) 
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the Network 
+    endpoint: ${{7:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

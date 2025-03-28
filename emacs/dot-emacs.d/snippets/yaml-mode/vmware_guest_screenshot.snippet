@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Create a screenshot of the Virtual Machine console.
+# prefix: vmware_guest_screenshot_snippet
+# key: vmware_guest_screenshot
+# group: ansible
+# --
+
+- name: ${0:Create a screenshot of the Virtual Machine console.}
+  vmware_guest_screenshot:                                                 
+    name: ${1:value}                                                       # Name of the virtual machine  This is a required parameter, if parameter C(uuid) or C(moid) is not supplied 
+    uuid: ${2:value}                                                       # UUID of the instance to gather facts if known, this is VMware's unique identifier  This is a required parameter, if para
+    moid: ${3:value}                                                       # Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance 
+    folder: ${4:value}                                                     # Destination folder, absolute or relative path to find an existing guest  This is a required parameter, only if multiple 
+    cluster: ${5:value}                                                    # The name of cluster where the virtual machine is running  This is a required parameter, if C(esxi_hostname) is not set  
+    esxi_hostname: ${6:value}                                              # The ESXi hostname where the virtual machine is running  This is a required parameter, if C(cluster) is not set  C(esxi_h
+    datacenter: ${7:value}                                                 # The datacenter name to which virtual machine belongs to 
+    local_path: ${8:value}                                                 # If C(local_path) is not set, the created screenshot file will be kept in the directory of the virtual machine on ESXi ho
+    hostname: ${9:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${10:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${11:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${12:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${13:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${14:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${15:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Management of groups in ManageIQ.
+# prefix: manageiq_group_snippet
+# key: manageiq_group
+# group: ansible
+# --
+
+- name: ${0:Management of groups in ManageIQ.}
+  manageiq_group:                                                          
+    description: ${1:None}:The group description}                          #
+    manageiq_connection: ${2:ManageIQ connection configuration information}#
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  absent - group should not exist, present - group should be 
+    role_id: ${4:None}                                                     # The the group role id
+    role: ${5:None}                                                        # The the group role name The C(role_id) has precedence over the C(role) when supplied 
+    tenant_id: ${6:None}                                                   # The tenant for the group identified by the tenant id 
+    tenant: ${7:None}                                                      # The tenant for the group identified by the tenant name  The C(tenant_id) has precedence over the C(tenant) when supplied
+    managed_filters: ${8:None}                                             # T h e   t a g   v a l u e s   p e r   c a t e g o r y
+    managed_filters_merge_mode: ${9$$(yas-choose-value '("merge" "replace"))}# choices: merge;replace  In merge mode existing categories are kept or updated, new categories are added  In replace mo
+    belongsto_filters: ${10:None}                                          # A   l i s t   o f   s t r i n g s   w i t h   a   r e f e r e n c e   t o   t h e   a l l o w e d   h o s t ,   c l u s 
+    belongsto_filters_merge_mode: ${11$$(yas-choose-value '("merge" "replace"))}# choices: merge;replace  In merge mode existing settings are merged with the supplied C(belongsto_filters)  In repla

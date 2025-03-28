@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: create, delete, accept, and reject VPC peering connections between two VPCs.
+# prefix: ec2_vpc_peer_snippet
+# key: c2_vpc_peer
+# group: ansible
+# --
+
+- name: ${0:create, delete, accept, and reject VPC peering connections between two VPCs.}
+  ec2_vpc_peer:                                                            
+    vpc_id: ${1:value}                                                     # VPC id of the requesting VPC 
+    peering_id: ${2:value}                                                 # Peering connection id 
+    peer_region: ${3:value}                                                # Region of the accepting VPC 
+    peer_vpc_id: ${4:value}                                                # VPC id of the accepting VPC 
+    peer_owner_id: ${5:value}                                              # The AWS account number for cross account peering 
+    tags: ${6:value}                                                       # Dictionary of tags to look for and apply when creating a Peering Connection 
+    state: ${7$$(yas-choose-value '("present" "absent" "accept" "reject"))}# choices: present;absent;accept;reject  Create, delete, accept, reject a peering connection 
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

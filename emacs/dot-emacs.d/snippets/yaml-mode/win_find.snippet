@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Return a list of files based on specific criteria
+# prefix: win_find_snippet
+# key: win_find
+# group: ansible
+# --
+
+- name: ${0:Return a list of files based on specific criteria}
+  win_find:                                                                
+    paths: ${1:List of paths of directories to search for files or folders in}# This can be supplied as a single path or a list of paths 
+    age: ${2:value}                                                        # Select files or folders whose age is equal to or greater than the specified time  Use a negative age to find files equal
+    age_stamp: ${3$$(yas-choose-value '("atime" "ctime" "mtime"))}         # choices: atime;ctime;mtime  Choose the file property against which we compare C(age)  The default attribute we compare w
+    checksum_algorithm: ${4$$(yas-choose-value '("md5" "sha1" "sha256" "sha384" "sha512"))}# choices: md5;sha1;sha256;sha384;sha512  Algorithm to determine the checksum of a file  Will throw an err
+    file_type: ${5$$(yas-choose-value '("directory" "file"))}              # choices: directory;file  T y p e   o f   f i l e   t o   s e a r c h   f o r  
+    follow: ${6:False}                                                     # Set this to C(yes) to follow symlinks in the path  This needs to be used in conjunction with C(recurse) 
+    get_checksum: ${7:True}                                                # Whether to return a checksum of the file in the return info (default sha1), use C(checksum_algorithm) to change from the
+    hidden: ${8:False}                                                     # S e t   t h i s   t o   i n c l u d e   h i d d e n   f i l e s   o r   f o l d e r s  
+    patterns: ${9:value}                                                   # One or more (powershell or regex) patterns to compare filenames with  The type of pattern matching is controlled by C(us
+    recurse: ${10:False}                                                   # Will recursively descend into the directory looking for files or folders 
+    size: ${11:value}                                                      # Select files or folders whose size is equal to or greater than the specified size  Use a negative value to find files eq
+    use_regex: ${12:False}                                                 # Will set patterns to run as a regex check if set to C(yes) 

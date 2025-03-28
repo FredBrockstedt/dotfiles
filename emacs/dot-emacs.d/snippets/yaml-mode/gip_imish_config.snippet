@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP advanced routing configuration sections
+# prefix: bigip_imish_config_snippet
+# key: gip_imish_config
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP advanced routing configuration sections}
+  bigip_imish_config:                                                      
+    route_domain: ${1:0}                                                   # Route domain to manage BGP configuration on 
+    lines: ${2:value}                                                      # The ordered set of commands that should be configured in the section  The commands must be the exact same commands as fo
+    parents: ${3:value}                                                    # The ordered set of parents that uniquely identify the section or hierarchy the commands should be checked against  If th
+    src: ${4:value}                                                        # The I(src) argument provides a path to the configuration file to load into the remote system  The path can either be a f
+    before: ${5:value}                                                     # The ordered set of commands to push on to the command stack if a change needs to be made  This allows the playbook desig
+    after: ${6:value}                                                      # The ordered set of commands to append to the end of the command stack if a change needs to be made  Just like with I(bef
+    match: ${7$$(yas-choose-value '("line" "strict" "exact" "none"))}      # choices: line;strict;exact;none  Instructs the module on the way to perform the matching of the set of commands against 
+    replace: ${8$$(yas-choose-value '("line" "block"))}                    # choices: line;block  Instructs the module on the way to perform the configuration on the device  If the replace argument
+    backup: ${9:false}                                                     # This argument will cause the module to create a full backup of the current C(running-config) from the remote device befo
+    running_config: ${10:value}                                            # The module, by default, will connect to the remote device and retrieve the current running-config to use as a base for c
+    save_when: ${11$$(yas-choose-value '("always" "never" "modified" "changed"))}# choices: always;never;modified;changed  When changes are made to the device running-configuration, the changes are
+    diff_against: ${12$$(yas-choose-value '("startup" "intended" "running"))}# choices: startup;intended;running  When using the C(ansible-playbook --diff) command line argument the module can gene
+    diff_ignore_lines: ${13:value}                                         # Use this argument to specify one or more lines that should be ignored during the diff  This is used for lines in the con
+    intended_config: ${14:value}                                           # The C(intended_config) provides the master configuration that the node should conform to and is used to check the final 
+    backup_options: ${15:value}                                            # This is a dict object containing configurable options related to backup file path  The value of this option is read only
+    provider: ${16:value}                                                  # A dict object containing connection details 

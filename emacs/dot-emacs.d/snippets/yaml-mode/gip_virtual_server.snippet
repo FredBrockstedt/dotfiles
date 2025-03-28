@@ -1,0 +1,45 @@
+# -*- mode: snippet -*-
+# name: Manage LTM virtual servers on a BIG-IP
+# prefix: bigip_virtual_server_snippet
+# key: gip_virtual_server
+# group: ansible
+# --
+
+- name: ${0:Manage LTM virtual servers on a BIG-IP}
+  bigip_virtual_server:                                                    
+    name: ${1:Virtual server name}                                         #
+    state: ${2$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  The virtual server state  If C(absent), delete the virtual server if it exi
+    type: ${3$$(yas-choose-value '("standard" "forwarding-l2" "forwarding-ip" "performance-http" "performance-l4" "stateless" "reject" "dhcp" "internal" "message-routing"))}# choices: standard;forw
+    destination: ${4:value}                                                # Destination IP of the virtual server  Required when C(state) is C(present) and virtual server does not exist  When C(typ
+    source: ${5:value}                                                     # Specifies an IP address or network from which the virtual server accepts traffic  The virtual server accepts clients onl
+    port: ${6:value}                                                       # Port of the virtual server  Required when C(state) is C(present) and virtual server does not exist  If you do not want t
+    profiles: ${7:value}                                                   # List of profiles (HTTP, ClientSSL, ServerSSL, etc) to apply to both sides of the connection (client-side and server-side
+    irules: ${8:value}                                                     # List of rules to be applied in priority order  If you want to remove existing iRules, specify a single empty value; C(""
+    enabled_vlans: ${9:value}                                              # List of VLANs to be enabled  When a VLAN named C(all) is used, all VLANs will be allowed  VLANs can be specified with or
+    disabled_vlans: ${10:value}                                            # List of VLANs to be disabled  If the partition is not specified in the VLAN, then the C(partition) option of this module
+    pool: ${11:value}                                                      # Default pool for the virtual server  If you want to remove the existing pool, specify an empty value; C("")  See the doc
+    policies: ${12:value}                                                  # Specifies the policies for the virtual server  When C(type) is C(dhcp), this parameter will be ignored  When C(type) is 
+    snat: ${13:value}                                                      # Source network address policy  When C(type) is C(dhcp), this parameter is ignored  When C(type) is C(reject), this param
+    default_persistence_profile: ${14:value}                               # Default Profile which manages the session persistence  If you want to remove the existing default persistence profile, s
+    description: ${15:value}                                               # Virtual server description 
+    fallback_persistence_profile: ${16:value}                              # Specifies the persistence profile you want the system to use if it cannot use the specified default persistence profile 
+    partition: ${17:Common}                                                # Device partition to manage resources on 
+    metadata: ${18:value}                                                  # Arbitrary key/value pairs that you can attach to a virtual server  This is useful in situations where you might want to 
+    insert_metadata: ${19:True}                                            # When set to C(no) it will not set metadata on the device  Currently there is a limitation that non-admin users cannot se
+    address_translation: ${20:value}                                       # Specifies, when C(enabled), that the system translates the address of the virtual server  When C(disabled), specifies th
+    port_translation: ${21:value}                                          # Specifies, when C(enabled), that the system translates the port of the virtual server  When C(disabled), specifies that 
+    source_port: ${22$$(yas-choose-value '("preserve" "preserve-strict" "change"))}# choices: preserve;preserve-strict;change  Specifies whether the system preserves the source port of the connecti
+    mirror: ${23:value}                                                    # Specifies that the system mirrors connections on each member of a redundant pair  When creating a new virtual server, if
+    mask: ${24:value}                                                      # Specifies the destination address network mask  This parameter will work with IPv4 and IPv6 type of addresses  This is a
+    ip_protocol: ${25$$(yas-choose-value '("ah" "any" "bna" "esp" "etherip" "gre" "icmp" "ipencap" "ipv6" "ipv6-auth" "ipv6-crypt" "ipv6-icmp" "isp-ip" "mux" "ospf" "sctp" "tcp" "udp" "udplite"))}#
+    firewall_enforced_policy: ${26:value}                                  # Applies the specify AFM policy to the virtual in an enforcing way  When creating a new virtual, if this parameter is not
+    firewall_staged_policy: ${27:value}                                    # Applies the specify AFM policy to the virtual in an enforcing way  A staged policy shows the results of the policy rules
+    security_log_profiles: ${28:value}                                     # Specifies the log profile applied to the virtual server  To make use of this feature, the AFM module must be licensed an
+    security_nat_policy: ${29:value}                                       # Specify the Firewall NAT policies for the virtual server  You can specify one or more NAT policies to use  The most spec
+    ip_intelligence_policy: ${30:value}                                    # Specifies the IP intelligence policy applied to the virtual server  This parameter requires that a valid BIG-IP security
+    rate_limit: ${31:value}                                                # Virtual server rate limit (connections-per-second)  Setting this to 0 disables the limit  The valid value range is C(0) 
+    rate_limit_dst_mask: ${32:value}                                       # Specifies a mask, in bits, to be applied to the destination address as part of the rate limiting  The default value is C
+    rate_limit_src_mask: ${33:value}                                       # Specifies a mask, in bits, to be applied to the source address as part of the rate limiting  The default value is C(0), 
+    rate_limit_mode: ${34$$(yas-choose-value '("object" "object-source" "object-destination" "object-source-destination" "destination" "source" "source-destination"))}# choices: object;object-sourc
+    clone_pools: ${35:value}                                               # Specifies a pool or list of pools that the virtual server uses to replicate either client-side or server-side traffic  T
+    provider: ${36:value}                                                  # A dict object containing connection details 

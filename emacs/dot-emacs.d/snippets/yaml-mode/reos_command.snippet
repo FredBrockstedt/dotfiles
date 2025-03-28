@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Run commands on remote devices running Cisco WLC
+# prefix: aireos_command_snippet
+# key: reos_command
+# group: ansible
+# --
+
+- name: ${0:Run commands on remote devices running Cisco WLC}
+  aireos_command:                                                          
+    commands: ${1:List of commands to send to the remote aireos device over the configured provider}# The resulting output from the command is returned  If the I(wait_for) argument is provided, the
+    wait_for: ${2:value}                                                   # List of conditions to evaluate against the output of the command  The task will wait for each condition to be true befor
+    match: ${3$$(yas-choose-value '("any" "all"))}                         # choices: any;all  The I(match) argument is used in conjunction with the I(wait_for) argument to specify the match policy
+    retries: ${4:10}                                                       # Specifies the number of retries a command should by tried before it is considered failed  The command is run on the targ
+    interval: ${5:1}                                                       # Configures the interval in seconds to wait between retries of the command  If the command does not pass the specified co
+    provider: ${6:value}                                                   # A dict object containing connection details 

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage ISO/VHD/VHDX mounts on Windows hosts
+# prefix: win_disk_image_snippet
+# key: win_disk_imag
+# group: ansible
+# --
+
+- name: ${0:Manage ISO/VHD/VHDX mounts on Windows hosts}
+  win_disk_image:                                                          
+    image_path: ${1:Path to an ISO, VHD, or VHDX image on the target Windows host (the file cannot reside on a network share)}#
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the image should be present as a drive-letter mount or not 

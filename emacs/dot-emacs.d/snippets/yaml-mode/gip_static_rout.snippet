@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manipulate static routes on a BIG-IP
+# prefix: bigip_static_route_snippet
+# key: gip_static_rout
+# group: ansible
+# --
+
+- name: ${0:Manipulate static routes on a BIG-IP}
+  bigip_static_route:                                                      
+    name: ${1:Name of the static route}                                    #
+    description: ${2:value}                                                # Descriptive text that identifies the route 
+    destination: ${3:value}                                                # Specifies an IP address for the static entry in the routing table  When creating a new static route, this value is requi
+    netmask: ${4:value}                                                    # The netmask for the static route  When creating a new static route, this value is required  This value can be in either 
+    gateway_address: ${5:value}                                            # Specifies the router for the system to use when forwarding packets to the destination host or network  Also known as the
+    vlan: ${6:value}                                                       # Specifies the VLAN or Tunnel through which the system forwards packets to the destination  When C(gateway_address) is a 
+    pool: ${7:value}                                                       # Specifies the pool through which the system forwards packets to the destination 
+    reject: ${8:value}                                                     # Specifies that the system drops packets sent to the destination 
+    mtu: ${9:value}                                                        # Specifies a specific maximum transmission unit (MTU) 
+    route_domain: ${10:value}                                              # The route domain id of the system  When creating a new static route, if this value is not specified, a default value of 
+    partition: ${11:Common}                                                # Device partition to manage resources on 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the static route exists  When C(absent), ensures that the static 
+    provider: ${13:value}                                                  # A dict object containing connection details 

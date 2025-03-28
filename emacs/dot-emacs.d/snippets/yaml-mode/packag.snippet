@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Generic OS package manager
+# prefix: package_snippet
+# key: packag
+# group: ansible
+# --
+
+- name: ${0:Generic OS package manager}
+  package:                                                                 
+    name: ${1:Package name, or package specifier with version}             # Syntax varies with package manager  For example C(name-1 0) or C(name=1 0)  Package names also vary with package manager
+    state: ${2:Whether to install (C(present)), or remove (C(absent)) a package}# You can use other states like C(latest) ONLY if they are supported by the underlying package module(s) executed 
+    use: ${3:auto}                                                         # The required package manager module to use (yum, apt, etc)  The default 'auto' will use existing facts or try to autodet

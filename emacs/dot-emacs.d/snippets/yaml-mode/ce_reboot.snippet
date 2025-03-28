@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Reboot a HUAWEI CloudEngine switches.
+# prefix: ce_reboot_snippet
+# key: ce_reboot
+# group: ansible
+# --
+
+- name: ${0:Reboot a HUAWEI CloudEngine switches.}
+  ce_reboot:                                                               
+    confirm: ${1:Safeguard boolean}                                        # Set to true if you're sure you want to reboot 
+    save_config: ${2:False}                                                # Flag indicating whether to save the configuration 

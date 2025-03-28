@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages traffic groups on BIG-IP
+# prefix: bigip_device_traffic_group_snippet
+# key: gip_device_traffic_group
+# group: ansible
+# --
+
+- name: ${0:Manages traffic groups on BIG-IP}
+  bigip_device_traffic_group:                                              
+    name: ${1:The name of the traffic group}                               #
+    mac_address: ${2:value}                                                # Specifies the floating Media Access Control (MAC) address associated with the floating IP addresses defined for a traffi
+    ha_order: ${3:value}                                                   # Specifies order in which you would like to assign devices for failover  If you configure this setting, you must configur
+    ha_group: ${4:value}                                                   # Specifies a configured C(HA group) to be associated with the traffic group  Once you create an HA group on a device and 
+    ha_load_factor: ${5:value}                                             # The value of the load the traffic-group presents the system relative to other traffic groups  This parameter only takes 
+    auto_failback: ${6:value}                                              # Specifies whether the traffic group fails back to the initial device specified in C(ha_order) 
+    auto_failback_time: ${7:value}                                         # Specifies the number of seconds the system delays before failing back to the initial device specified in C(ha_order)  Th
+    partition: ${8:Common}                                                 # Device partition to manage resources on 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the traffic group exists  When C(absent), ensures the traffic gro
+    provider: ${10:value}                                                  # A dict object containing connection details 

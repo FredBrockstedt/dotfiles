@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage qtrees
+# prefix: na_ontap_qtree_snippet
+# key: ontap_qtr
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage qtrees}
+  na_ontap_qtree:                                                          
+    name: ${1:The name of the qtree to manage}                             #
+    flexvol_name: ${2:The name of the FlexVol the qtree should exist on}   # Required when C(state=present) 
+    vserver: ${3:The name of the vserver to use}                           #
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified qtree should exist or not 
+    from_name: ${8:value}                                                  # Name of the qtree to be renamed 
+    export_policy: ${9:value}                                              # The name of the export policy to apply 
+    security_style: ${10$$(yas-choose-value '("unix" "ntfs" "mixed"))}     # choices: unix;ntfs;mixed  The security style for the qtree 
+    oplocks: ${11$$(yas-choose-value '("enabled" "disabled"))}             # choices: enabled;disabled  Whether the oplocks should be enabled or not for the qtree 
+    unix_permissions: ${12:value}                                          # File permissions bits of the qtree 
+    https: ${13:False}                                                     # Enable and disable https
+    validate_certs: ${14:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${15:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${16:value}                                                    # The ontap api version to use
+    use_rest: ${17$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

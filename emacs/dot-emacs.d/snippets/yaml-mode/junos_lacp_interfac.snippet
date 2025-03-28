@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Link Aggregation Control Protocol (LACP) attributes of interfaces on Juniper JUNOS devices.
+# prefix: junos_lacp_interfaces_snippet
+# key: junos_lacp_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Link Aggregation Control Protocol (LACP) attributes of interfaces on Juniper JUNOS devices.}
+  junos_lacp_interfaces:                                                   
+    config: ${1:value}                                                     # T h e   l i s t   o f   d i c t i o n a r i e s   o f   L A C P   i n t e r f a c e s   o p t i o n s  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion 

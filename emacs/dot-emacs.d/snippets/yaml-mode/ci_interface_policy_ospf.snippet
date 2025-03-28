@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Manage OSPF interface policies (ospf:IfPol)
+# prefix: aci_interface_policy_ospf_snippet
+# key: ci_interface_policy_ospf
+# group: ansible
+# --
+
+- name: ${0:Manage OSPF interface policies (ospf:IfPol)}
+  aci_interface_policy_ospf:                                               
+    tenant: ${1:The name of the Tenant the OSPF interface policy should belong to}#
+    ospf: ${2:The OSPF interface policy name}                              # This name can be between 1 and 64 alphanumeric characters  Note that you cannot change this name after the object has be
+    host: ${3:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${4:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${5:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    description: ${6:value}                                                # The description for the OSPF interface 
+    network_type: ${7$$(yas-choose-value '("bcast" "p2p"))}                # choices: bcast;p2p  The OSPF interface policy network type  OSPF supports broadcast and point-to-point  The APIC default
+    cost: ${8:value}                                                       # The OSPF cost of the interface  The cost (also called metric) of an interface in OSPF is an indication of the overhead r
+    controls: ${9$$(yas-choose-value '("advert-subnet" "bfd" "mtu-ignore" "passive"))}# choices: advert-subnet;bfd;mtu-ignore;passive  The interface policy controls  This is a list of one or more o
+    dead_interval: ${10:value}                                             # The interval between hello packets from a neighbor before the router declares the neighbor as down  This value must be t
+    hello_interval: ${11:value}                                            # The interval between hello packets that OSPF sends on the interface  Note that the smaller the hello interval, the faste
+    prefix_suppression: ${12:value}                                        # Whether prefix suppressions is enabled or disabled  The APIC defaults to C(inherit) when unset during creation 
+    priority: ${13:value}                                                  # The priority for the OSPF interface profile  Accepted values ranges between C(0) and C(255)  The APIC defaults to C(1) w
+    retransmit_interval: ${14:value}                                       # The interval between LSA retransmissions  The retransmit interval occurs while the router is waiting for an acknowledgem
+    transmit_delay: ${15:value}                                            # The delay time needed to send an LSA update packet  OSPF increments the LSA age time by the transmit delay amount before
+    state: ${16$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${17:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${18:admin}                                                  # The username to use for authentication 
+    certificate_name: ${19:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${20$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${21:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${22:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${23:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${24:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

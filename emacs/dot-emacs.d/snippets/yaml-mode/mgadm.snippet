@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage SmartOS images
+# prefix: imgadm_snippet
+# key: mgadm
+# group: ansible
+# --
+
+- name: ${0:Manage SmartOS images}
+  imgadm:                                                                  
+    state: ${1$$(yas-choose-value '("present" "absent" "deleted" "imported" "updated" "vacuumed"))}# State the object operated on should be in  C(imported) is an alias for for C(present) and C(dele
+    force: ${2:value}                                                      # Force a given operation (where supported by imgadm(1M)) 
+    pool: ${3:zones}                                                       # zpool to import to or delete images from 
+    source: ${4:value}                                                     # URI for the image source 
+    type: ${5$$(yas-choose-value '("imgapi" "docker" "dsapi"))}            # choices: imgapi;docker;dsapi  Type for image sources 
+    uuid: ${6:value}                                                       # Image UUID  Can either be a full UUID or C(*) for all images 

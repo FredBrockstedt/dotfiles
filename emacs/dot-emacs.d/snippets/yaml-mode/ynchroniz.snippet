@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: A wrapper around rsync to make common tasks in your playbooks quick and easy
+# prefix: synchronize_snippet
+# key: ynchroniz
+# group: ansible
+# --
+
+- name: ${0:A wrapper around rsync to make common tasks in your playbooks quick and easy}
+  synchronize:                                                             
+    src: ${1:Path on the source host that will be synchronized to the destination}# The path can be absolute or relative 
+    dest: ${2:Path on the destination host that will be synchronized from the source}# The path can be absolute or relative 
+    dest_port: ${3:value}                                                  # Port number for ssh on the destination host  Prior to Ansible 2 0, the ansible_ssh_port inventory var took precedence ov
+    mode: ${4$$(yas-choose-value '("pull" "push"))}                        # choices: pull;push  Specify the direction of the synchronization  In push mode the localhost or delegate is the source  
+    archive: ${5:True}                                                     # Mirrors the rsync archive flag, enables recursive, links, perms, times, owner, group flags and -D 
+    checksum: ${6:False}                                                   # Skip based on checksum, rather than mod-time & size; Note that that "archive" option is still enabled by default - the "
+    compress: ${7:True}                                                    # Compress file data during the transfer  In most cases, leave this enabled unless it causes problems 
+    existing_only: ${8:False}                                              # Skip creating new files on receiver 
+    delete: ${9:False}                                                     # Delete files in C(dest) that don't exist (after transfer, not before) in the C(src) path  This option requires C(recursi
+    dirs: ${10:False}                                                      # Transfer directories without recursing 
+    recursive: ${11:value}                                                 # Recurse into directories  This parameter defaults to the value of the archive option 
+    links: ${12:value}                                                     # Copy symlinks as symlinks  This parameter defaults to the value of the archive option 
+    copy_links: ${13:False}                                                # Copy symlinks as the item that they point to (the referent) is copied, rather than the symlink 
+    perms: ${14:value}                                                     # Preserve permissions  This parameter defaults to the value of the archive option 
+    times: ${15:value}                                                     # Preserve modification times  This parameter defaults to the value of the archive option 
+    owner: ${16:value}                                                     # Preserve owner (super user only)  This parameter defaults to the value of the archive option 
+    group: ${17:value}                                                     # Preserve group  This parameter defaults to the value of the archive option 
+    rsync_path: ${18:value}                                                # Specify the rsync command to run on the remote host  See C(--rsync-path) on the rsync man page  To specify the rsync com
+    rsync_timeout: ${19:0}                                                 # Specify a C(--timeout) for the rsync command in seconds 
+    set_remote_user: ${20:True}                                            # Put user@ for the remote paths  If you have a custom ssh config to define the remote user for a host that does not match
+    use_ssh_args: ${21:False}                                              # Use the ssh_args specified in ansible cfg 
+    rsync_opts: ${22:None}                                                 # Specify additional rsync options by passing in an array  Note that an empty string in C(rsync_opts) will end up transfer
+    partial: ${23:False}                                                   # Tells rsync to keep the partial file which should make a subsequent transfer of the rest of the file much faster 
+    verify_host: ${24:False}                                               # Verify destination host key 
+    private_key: ${25:value}                                               # Specify the private key to use for SSH-based rsync connections (e g  C(~/ ssh/id_rsa)) 
+    link_dest: ${26:None}                                                  # Add a destination to hard link against during the rsync 

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Address
+# prefix: gcp_compute_address_snippet
+# key: gcp_compute_addr
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Address}
+  gcp_compute_address:                                                     
+    name: ${1:Name of the resource}                                        # The name must be 1-63 characters long, and comply with RFC1035  Specifically, the name must be 1-63 characters long and 
+    region: ${2:URL of the region where the regional address resides}      # This field is not applicable to global addresses 
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    address: ${5:value}                                                    # The static external IP address represented by this resource  Only IPv4 is supported  An address may only be specified fo
+    address_type: ${6:EXTERNAL}                                            # The type of address to reserve, either INTERNAL or EXTERNAL  If unspecified, defaults to EXTERNAL  Some valid choices in
+    description: ${7:value}                                                # An optional description of this resource 
+    network_tier: ${8:value}                                               # The networking tier used for configuring this address  This field can take the following values: PREMIUM or STANDARD  If
+    subnetwork: ${9:value}                                                 # The URL of the subnetwork in which to reserve the address  If an IP address is specified, it must be within the subnetwo
+    project: ${10:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${11:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${12:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${13:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${14:value}                                                    # Array of scopes to be used 
+    env_type: ${15:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

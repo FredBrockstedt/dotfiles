@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower group.
+# prefix: tower_group_snippet
+# key: tower_group
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower group.}
+  tower_group:                                                             
+    name: ${1:The name to use for the group}                               #
+    inventory: ${2:Inventory the group should be made a member of}         #
+    description: ${3:value}                                                # The description to use for the group 
+    variables: ${4:value}                                                  # Variables to use for the group, use C(@) for a file 
+    credential: ${5:value}                                                 # Credential to use for the group 
+    source: ${6$$(yas-choose-value '("manual" "file" "ec2" "rax" "vmware" "gce" "azure" "azure_rm" "openstack" "satellite6" "cloudforms" "custom"))}# choices: manual;file;ec2;rax;vmware;gce;azure;a
+    source_regions: ${7:value}                                             # Regions for cloud provider 
+    source_vars: ${8:value}                                                # Override variables from source with variables from this field 
+    instance_filters: ${9:value}                                           # Comma-separated list of filter expressions for matching hosts 
+    group_by: ${10:value}                                                  # Limit groups automatically created from inventory source 
+    source_script: ${11:value}                                             # Inventory script to be used when group type is C(custom) 
+    overwrite: ${12:false}                                                 # Delete child groups and hosts not found in source 
+    overwrite_vars: ${13:value}                                            # Override vars in child groups and hosts with those from external source 
+    update_on_launch: ${14:false}                                          # Refresh inventory data from its source each time a job is run 
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Desired state of the resource 
+    tower_host: ${16:value}                                                # URL to your Tower instance 
+    tower_username: ${17:value}                                            # Username for your Tower instance 
+    tower_password: ${18:value}                                            # Password for your Tower instance 
+    validate_certs: ${19:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${20:value}                                         # Path to the Tower config file 

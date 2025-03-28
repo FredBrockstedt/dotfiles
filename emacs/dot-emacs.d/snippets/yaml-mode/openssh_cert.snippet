@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Generate OpenSSH host or user certificates.
+# prefix: openssh_cert_snippet
+# key: openssh_cert
+# group: ansible
+# --
+
+- name: ${0:Generate OpenSSH host or user certificates.}
+  openssh_cert:                                                            
+    path: ${1:Path of the file containing the certificate}                 #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the host or user certificate should exist or not, taking action if the state is differe
+    type: ${3$$(yas-choose-value '("host" "user"))}                        # choices: host;user  Whether the module should generate a host or a user certificate  Required if I(state) is C(present) 
+    force: ${4:False}                                                      # Should the certificate be regenerated even if it already exists and is valid 
+    signing_key: ${5:value}                                                # The path to the private openssh key that is used for signing the public key in order to generate the certificate  Requir
+    public_key: ${6:value}                                                 # The path to the public key that will be signed with the signing key in order to generate the certificate  Required if I(
+    valid_from: ${7:value}                                                 # The point in time the certificate is valid from  Time can be specified either as relative time or as absolute timestamp 
+    valid_to: ${8:value}                                                   # The point in time the certificate is valid to  Time can be specified either as relative time or as absolute timestamp  T
+    valid_at: ${9:value}                                                   # Check if the certificate is valid at a certain point in time  If it is not the certificate will be regenerated  Time wil
+    principals: ${10:value}                                                # Certificates may be limited to be valid for a set of principal (user/host) names  By default, generated certificates are
+    options: ${11:value}                                                   # Specify certificate options when signing a key  The option that are valid for user certificates are: C(clear): Clear all
+    identifier: ${12:value}                                                # Specify the key identity when signing a public key  The identifier that is logged by the server when the certificate is 
+    serial_number: ${13:value}                                             # Specify the certificate serial number  The serial number is logged by the server when the certificate is used for authen
+    mode: ${14:value}                                                      # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${15:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${16:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${17:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${18:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${19:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${20:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${21:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${22:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

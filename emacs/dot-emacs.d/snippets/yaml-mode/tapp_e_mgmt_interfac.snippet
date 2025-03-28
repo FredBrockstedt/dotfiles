@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series management interface configuration
+# prefix: netapp_e_mgmt_interface_snippet
+# key: tapp_e_mgmt_interfac
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series management interface configuration}
+  netapp_e_mgmt_interface:                                                 
+    controller: ${1$$(yas-choose-value '("A" "B"))}                        # The controller that owns the port you want to configure  Controller names are represented alphabetically, with the first
+    api_username: ${2:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${3:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${4:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    state: ${5$$(yas-choose-value '("enable" "disable"))}                  # choices: enable;disable  Enable or disable IPv4 network interface configuration  Either IPv4 or IPv6 must be enabled oth
+    name: ${6:value}                                                       # The port to modify the configuration for  The list of choices is not necessarily comprehensive  It depends on the number
+    channel: ${7:value}                                                    # The port to modify the configuration for  The channel represents the port number (typically from left to right on the co
+    address: ${8:value}                                                    # The IPv4 address to assign to the interface  Should be specified in xx xx xx xx form  Mutually exclusive with I(config_m
+    subnet_mask: ${9:value}                                                # The subnet mask to utilize for the interface  Should be specified in xx xx xx xx form  Mutually exclusive with I(config_
+    gateway: ${10:value}                                                   # The IPv4 gateway address to utilize for the interface  Should be specified in xx xx xx xx form  Mutually exclusive with 
+    config_method: ${11$$(yas-choose-value '("dhcp" "static"))}            # choices: dhcp;static  The configuration method type to use for network interface ports  dhcp is mutually exclusive with 
+    dns_config_method: ${12$$(yas-choose-value '("dhcp" "static"))}        # choices: dhcp;static  The configuration method type to use for DNS services  dhcp is mutually exclusive with I(dns_addre
+    dns_address: ${13:value}                                               # Primary IPv4 DNS server address
+    dns_address_backup: ${14:value}                                        # Backup IPv4 DNS server address Queried when primary DNS server fails
+    ntp_config_method: ${15$$(yas-choose-value '("disable" "dhcp" "static"))}# choices: disable;dhcp;static  The configuration method type to use for NTP services  disable is mutually exclusive wit
+    ntp_address: ${16:value}                                               # Primary IPv4 NTP server address
+    ntp_address_backup: ${17:value}                                        # Backup IPv4 NTP server address Queried when primary NTP server fails
+    ssh: ${18:value}                                                       # Enable ssh access to the controller for debug purposes  This is a controller-level setting  rlogin/telnet will be enable
+    log_path: ${19:value}                                                  # A local path to a file to be used for debug logging
+    validate_certs: ${20:True}                                             # Should https certificates be validated?
+    ssid: ${21:1}                                                          # The ID of the array to manage  This value must be unique for each array 

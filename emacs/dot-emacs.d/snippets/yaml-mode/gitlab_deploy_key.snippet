@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages GitLab project deploy keys.
+# prefix: gitlab_deploy_key_snippet
+# key: gitlab_deploy_key
+# group: ansible
+# --
+
+- name: ${0:Manages GitLab project deploy keys.}
+  gitlab_deploy_key:                                                       
+    project: ${1:Id or Full path of project in the form of group/name}     #
+    title: ${2:Deploy key's title}                                         #
+    key: ${3:Deploy key}                                                   #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # When C(present) the deploy key added to the project if it doesn't exist  When C(absent) it will be removed from the proj
+    api_token: ${5:value}                                                  # GitLab token for logging in 
+    can_push: ${6:False}                                                   # Whether this key can push to the project
+    api_url: ${7:value}                                                    # The resolvable endpoint for the API
+    api_username: ${8:value}                                               # The username to use for authentication against the API
+    api_password: ${9:value}                                               # The password to use for authentication against the API
+    validate_certs: ${10:True}                                             # Whether or not to validate SSL certs when supplying a https endpoint 

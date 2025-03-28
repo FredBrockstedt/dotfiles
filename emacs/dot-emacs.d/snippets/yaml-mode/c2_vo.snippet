@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: create and attach a volume, return volume id and device map
+# prefix: ec2_vol_snippet
+# key: c2_vo
+# group: ansible
+# --
+
+- name: ${0:create and attach a volume, return volume id and device map}
+  ec2_vol:                                                                 
+    instance: ${1:value}                                                   # instance ID if you wish to attach the volume  Since 1 9 you can set to None to detach 
+    name: ${2:value}                                                       # volume Name tag if you wish to attach an existing volume (requires instance)
+    id: ${3:value}                                                         # volume id if you wish to attach an existing volume (requires instance) or remove an existing volume
+    volume_size: ${4:value}                                                # size of volume (in GiB) to create 
+    volume_type: ${5:standard}                                             # Type of EBS volume; standard (magnetic), gp2 (SSD), io1 (Provisioned IOPS), st1 (Throughput Optimized HDD), sc1 (Cold HD
+    iops: ${6:100}                                                         # the provisioned IOPs you want to associate with this volume (integer) 
+    encrypted: ${7:false}                                                  # Enable encryption at rest for this volume 
+    kms_key_id: ${8:value}                                                 # Specify the id of the KMS key to use 
+    device_name: ${9:value}                                                # device id to override device mapping  Assumes /dev/sdf for Linux/UNIX and /dev/xvdf for Windows 
+    delete_on_termination: ${10:false}                                     # When set to "yes", the volume will be deleted upon instance termination 
+    zone: ${11:value}                                                      # zone in which to create the volume, if unset uses the zone the instance is in (if set)
+    snapshot: ${12:value}                                                  # snapshot ID on which to base the volume
+    validate_certs: ${13:true}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    state: ${14$$(yas-choose-value '("absent" "present" "list"))}          # choices: absent;present;list  whether to ensure the volume is present or absent, or to list existing volumes (The C(list
+    tags: ${15:namespace()}                                                # tag:value pairs to add to the volume after creation
+    debug_botocore_endpoint_logs: ${16:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${17:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${18:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${19:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${20:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    profile: ${21:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${22:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

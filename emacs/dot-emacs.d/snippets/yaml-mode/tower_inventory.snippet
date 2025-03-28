@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower inventory.
+# prefix: tower_inventory_snippet
+# key: tower_inventory
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower inventory.}
+  tower_inventory:                                                         
+    name: ${1:The name to use for the inventory}                           #
+    organization: ${2:Organization the inventory belongs to}               #
+    description: ${3:value}                                                # The description to use for the inventory 
+    variables: ${4:value}                                                  # Inventory variables  Use C(@) to get from file 
+    kind: ${5$$(yas-choose-value '("" "smart"))}                           # choices: ;smart  The kind field  Cannot be modified after created 
+    host_filter: ${6:value}                                                # The host_filter field  Only useful when C(kind=smart) 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of the resource 
+    tower_host: ${8:value}                                                 # URL to your Tower instance 
+    tower_username: ${9:value}                                             # Username for your Tower instance 
+    tower_password: ${10:value}                                            # Password for your Tower instance 
+    validate_certs: ${11:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${12:value}                                         # Path to the Tower config file 

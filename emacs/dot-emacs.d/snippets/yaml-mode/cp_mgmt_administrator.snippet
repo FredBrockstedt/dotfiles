@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manages administrator objects on Check Point over Web Services API
+# prefix: cp_mgmt_administrator_snippet
+# key: cp_mgmt_administrator
+# group: ansible
+# --
+
+- name: ${0:Manages administrator objects on Check Point over Web Services API}
+  cp_mgmt_administrator:                                                   
+    name: ${1:Object name}                                                 #
+    authentication_method: ${2$$(yas-choose-value '("undefined" "check point password" "os password" "securid" "radius" "tacacs" "ad authentication"))}# choices: undefined;check point password;os p
+    email: ${3:value}                                                      # Administrator email 
+    expiration_date: ${4:value}                                            # Format, YYYY-MM-DD, YYYY-mm-ddThh,mm,ss 
+    multi_domain_profile: ${5:value}                                       # Administrator multi-domain profile 
+    must_change_password: ${6:value}                                       # True if administrator must change password on the next login 
+    password: ${7:value}                                                   # Administrator password 
+    password_hash: ${8:value}                                              # Administrator password hash 
+    permissions_profile: ${9:value}                                        # Administrator permissions profile  Permissions profile should not be provided when multi-domain-profile is set to "Multi
+    phone_number: ${10:value}                                              # Administrator phone number 
+    radius_server: ${11:value}                                             # RADIUS server object identified by the name or UID  Must be set when "authentication-method" was selected to be "RADIUS"
+    tacacs_server: ${12:value}                                             # TACACS server object identified by the name or UID  Must be set when "authentication-method" was selected to be "TACACS"
+    tags: ${13:value}                                                      # Collection of tag identifiers 
+    color: ${14$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${15:value}                                                  # Comments string 
+    details_level: ${16$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${17:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${18:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${19$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${20:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${21:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${22:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

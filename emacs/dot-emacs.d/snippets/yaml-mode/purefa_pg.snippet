@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage protection groups on Pure Storage FlashArrays
+# prefix: purefa_pg_snippet
+# key: purefa_pg
+# group: ansible
+# --
+
+- name: ${0:Manage protection groups on Pure Storage FlashArrays}
+  purefa_pg:                                                               
+    pgroup: ${1:The name of the protection group}                          #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Define whether the protection group should exist or not 
+    volume: ${5:value}                                                     # List of existing volumes to add to protection group 
+    host: ${6:value}                                                       # List of existing hosts to add to protection group 
+    hostgroup: ${7:value}                                                  # List of existing hostgroups to add to protection group 
+    eradicate: ${8:false}                                                  # Define whether to eradicate the protection group on delete and leave in trash 
+    enabled: ${9:true}                                                     # Define whether to enabled snapshots for the protection group 
+    target: ${10:value}                                                    # List of remote arrays or offload target for replication protection group to connect to  Note that all replicated protect

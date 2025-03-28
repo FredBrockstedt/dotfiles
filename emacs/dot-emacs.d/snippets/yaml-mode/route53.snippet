@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: add or delete entries in Amazons Route53 DNS service
+# prefix: route53_snippet
+# key: route53
+# group: ansible
+# --
+
+- name: ${0:add or delete entries in Amazons Route53 DNS service}
+  route53:                                                                 
+    state: ${1$$(yas-choose-value '("present" "absent" "get" "create" "delete"))}# Specifies the state of the resource record  As of Ansible 2 4, the I(command) option has been changed to I(state) 
+    record: ${2:The full DNS record to create or delete}                   #
+    type: ${3$$(yas-choose-value '("A" "CNAME" "MX" "AAAA" "TXT" "PTR" "SRV" "SPF" "CAA" "NS" "SOA"))}# The type of DNS record to create
+    zone: ${4:value}                                                       # The DNS zone to modify This is a required parameter, if parameter C(hosted_zone_id) is not supplied 
+    hosted_zone_id: ${5:value}                                             # The Hosted Zone ID of the DNS zone to modify This is a required parameter, if parameter C(zone) is not supplied 
+    ttl: ${6:"3600 (one hour)"}                                            # The TTL to give the new record
+    alias: ${7:false}                                                      # Indicates if this is an alias record 
+    alias_hosted_zone_id: ${8:value}                                       # The hosted zone identifier 
+    alias_evaluate_target_health: ${9:False}                               # Whether or not to evaluate an alias target health  Useful for aliases to Elastic Load Balancers 
+    value: ${10:value}                                                     # The new value when creating a DNS record   YAML lists or multiple comma-spaced values are allowed for non-alias records 
+    overwrite: ${11:value}                                                 # Whether an existing record should be overwritten on create if values do not match
+    retry_interval: ${12:500}                                              # In the case that route53 is still servicing a prior request, this module will wait and try again after this many seconds
+    private_zone: ${13:false}                                              # If set to C(yes), the private zone matching the requested name within the domain will be used if there are both public a
+    identifier: ${14:value}                                                # Have to be specified for Weighted, latency-based and failover resource record sets only  An identifier that differentiat
+    weight: ${15:value}                                                    # Weighted resource record sets only  Among resource record sets that have the same combination of DNS name and type, a va
+    region: ${16:value}                                                    # Latency-based resource record sets only Among resource record sets that have the same combination of DNS name and type, 
+    health_check: ${17:value}                                              # Health check to associate with this record
+    failover: ${18:value}                                                  # Failover resource record sets only  Whether this is the primary or secondary resource record set  Allowed values are PRI
+    vpc_id: ${19:value}                                                    # When used in conjunction with private_zone: true, this will only modify records in the private hosted zone attached to t
+    wait: ${20:false}                                                      # Wait until the changes have been replicated to all Amazon Route 53 DNS servers 
+    wait_timeout: ${21:300}                                                # How long to wait for the changes to be replicated, in seconds 
+    debug_botocore_endpoint_logs: ${22:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${23:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${24:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${25:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${26:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${27:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${28:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 

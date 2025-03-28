@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Manages outputting logs on HUAWEI CloudEngine switches.
+# prefix: ce_info_center_global_snippet
+# key: ce_info_center_glo
+# group: ansible
+# --
+
+- name: ${0:Manages outputting logs on HUAWEI CloudEngine switches.}
+  ce_info_center_global:                                                   
+    info_center_enable: ${1$$(yas-choose-value '("true" "false"))}         # choices: true;false  Whether the info-center function is enabled  The value is of the Boolean type 
+    packet_priority: ${2:value}                                            # Set the priority of the syslog packet The value is an integer ranging from 0 to 7  The default value is 0 
+    suppress_enable: ${3$$(yas-choose-value '("false" "true"))}            # choices: false;true  Whether a device is enabled to suppress duplicate statistics  The value is of the Boolean type 
+    logfile_max_num: ${4:value}                                            # Maximum number of log files of the same type  The default value is 200  The value range for log files is[3, 500], for se
+    logfile_max_size: ${5$$(yas-choose-value '("4" "8" "16" "32"))}        # choices: 4;8;16;32  Maximum size (in MB) of a log file  The default value is 32  The value range for log files is [4, 8,
+    channel_id: ${6:value}                                                 # Number for channel  The value is an integer ranging from 0 to 9  The default value is 0 
+    channel_cfg_name: ${7:console}                                         # Channel name The value is a string of 1 to 30 case-sensitive characters  The default value is console 
+    channel_out_direct: ${8$$(yas-choose-value '("console" "monitor" "trapbuffer" "logbuffer" "snmp" "logfile"))}# choices: console;monitor;trapbuffer;logbuffer;snmp;logfile  Direction of informati
+    filter_feature_name: ${9:value}                                        # Feature name of the filtered log  The value is a string of 1 to 31 case-insensitive characters 
+    filter_log_name: ${10:value}                                           # Name of the filtered log  The value is a string of 1 to 63 case-sensitive characters 
+    ip_type: ${11$$(yas-choose-value '("ipv4" "ipv6"))}                    # choices: ipv4;ipv6  Log server address type, IPv4 or IPv6 
+    server_ip: ${12:value}                                                 # Log server address, IPv4 or IPv6 type  The value is a string of 0 to 255 characters  The value can be an valid IPv4 or I
+    server_domain: ${13:value}                                             # Server name  The value is a string of 1 to 255 case-sensitive characters 
+    is_default_vpn: ${14:false}                                            # Use the default VPN or not 
+    vrf_name: ${15:value}                                                  # VPN name on a log server  The value is a string of 1 to 31 case-sensitive characters  The default value is _public_ 
+    level: ${16$$(yas-choose-value '("emergencies" "alert" "critical" "error" "warning" "notification" "informational" "debugging"))}# choices: emergencies;alert;critical;error;warning;notification
+    server_port: ${17:value}                                               # Number of a port sending logs The value is an integer ranging from 1 to 65535  For UDP, the default value is 514  For TC
+    facility: ${18$$(yas-choose-value '("local0" "local1" "local2" "local3" "local4" "local5" "local6" "local7"))}# choices: local0;local1;local2;local3;local4;local5;local6;local7  Log record tool
+    channel_name: ${19:value}                                              # Channel name  The value is a string of 1 to 30 case-sensitive characters 
+    timestamp: ${20$$(yas-choose-value '("UTC" "localtime"))}              # choices: UTC;localtime  Log server timestamp  The value is of the enumerated type and case-sensitive 
+    transport_mode: ${21$$(yas-choose-value '("tcp" "udp"))}               # choices: tcp;udp  Transport mode  The value is of the enumerated type and case-sensitive 
+    ssl_policy_name: ${22:value}                                           # SSL policy name  The value is a string of 1 to 23 case-sensitive characters 
+    source_ip: ${23:value}                                                 # Log source ip address, IPv4 or IPv6 type  The value is a string of 0 to 255  The value can be an valid IPv4 or IPv6 addr
+    state: ${24$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Specify desired state of the resource 

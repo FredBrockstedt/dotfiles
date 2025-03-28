@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Return basic info pertaining to a VMware machine guest
+# prefix: vmware_vm_info_snippet
+# key: vmware_vm_info
+# group: ansible
+# --
+
+- name: ${0:Return basic info pertaining to a VMware machine guest}
+  vmware_vm_info:                                                          
+    vm_type: ${1$$(yas-choose-value '("all" "vm" "template"))}             # choices: all;vm;template  If set to C(vm), then information are gathered for virtual machines only  If set to C(template
+    show_attribute: ${2:False}                                             # Attributes related to VM guest shown in information only when this is set C(true) 
+    folder: ${3:value}                                                     # Specify a folder location of VMs to gather information from  Examples:    folder: /ha-datacenter/vm    folder: ha-datace
+    show_tag: ${4:False}                                                   # Tags related to virtual machine are shown if set to C(True) 
+    hostname: ${5:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${6:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${7:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${8:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${9:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${10:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${11:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage policy group in Quality of Service.
+# prefix: na_ontap_qos_policy_group_snippet
+# key: ontap_qos_policy_group
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage policy group in Quality of Service.}
+  na_ontap_qos_policy_group:                                               
+    hostname: ${1:The hostname or IP address of the ONTAP instance}        #
+    username: ${2:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${3:Password for the specified user}                         #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified policy group should exist or not 
+    name: ${5:value}                                                       # The name of the policy group to manage 
+    vserver: ${6:value}                                                    # Name of the vserver to use 
+    from_name: ${7:value}                                                  # Name of the existing policy group to be renamed to name 
+    max_throughput: ${8:value}                                             # Maximum throughput defined by this policy 
+    min_throughput: ${9:value}                                             # Minimum throughput defined by this policy 
+    force: ${10:False}                                                     # Setting to 'true' forces the deletion of the workloads associated with the policy group along with the policy group 
+    https: ${11:False}                                                     # Enable and disable https
+    validate_certs: ${12:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${13:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${14:value}                                                    # The ontap api version to use
+    use_rest: ${15$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

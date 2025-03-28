@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manages service-sctp objects on Check Point over Web Services API
+# prefix: cp_mgmt_service_sctp_snippet
+# key: cp_mgmt_service_sctp
+# group: ansible
+# --
+
+- name: ${0:Manages service-sctp objects on Check Point over Web Services API}
+  cp_mgmt_service_sctp:                                                    
+    name: ${1:Object name}                                                 #
+    port: ${2:value}                                                       # Port number  To specify a port range add a hyphen between the lowest and the highest port numbers, for example 44-45 
+    aggressive_aging: ${3:value}                                           # Sets short (aggressive) timeouts for idle connections 
+    keep_connections_open_after_policy_installation: ${4:value}            # Keep connections open after policy has been installed even if they are not allowed under the new policy  This overrides 
+    match_for_any: ${5:value}                                              # Indicates whether this service is used when 'Any' is set as the rule's service and there are several service objects wit
+    session_timeout: ${6:value}                                            # Time (in seconds) before the session times out 
+    source_port: ${7:value}                                                # Source port number  To specify a port range add a hyphen between the lowest and the highest port numbers, for example 44
+    sync_connections_on_cluster: ${8:value}                                # Enables state-synchronized High Availability or Load Sharing on a ClusterXL or OPSEC-certified cluster 
+    tags: ${9:value}                                                       # Collection of tag identifiers 
+    use_default_session_timeout: ${10:value}                               # Use default virtual session timeout 
+    color: ${11$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${12:value}                                                  # Comments string 
+    details_level: ${13$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    groups: ${14:value}                                                    # Collection of group identifiers 
+    ignore_warnings: ${15:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${16:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${17$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${18:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${19:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${20:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

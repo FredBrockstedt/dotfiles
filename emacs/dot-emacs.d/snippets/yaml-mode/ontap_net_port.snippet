@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP network ports.
+# prefix: na_ontap_net_port_snippet
+# key: ontap_net_port
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP network ports.}
+  na_ontap_net_port:                                                       
+    node: ${1:Specifies the name of node}                                  #
+    ports: ${2:Specifies the name of port(s)}                              #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present"))}                           # choices: present  Whether the specified net port should exist or not 
+    mtu: ${7:value}                                                        # Specifies the maximum transmission unit (MTU) reported by the port 
+    autonegotiate_admin: ${8:value}                                        # Enables or disables Ethernet auto-negotiation of speed, duplex and flow control 
+    duplex_admin: ${9:value}                                               # Specifies the user preferred duplex setting of the port  Valid values auto, half, full
+    speed_admin: ${10:value}                                               # Specifies the user preferred speed setting of the port 
+    flowcontrol_admin: ${11:value}                                         # Specifies the user preferred flow control setting of the port 
+    ipspace: ${12:value}                                                   # Specifies the port's associated IPspace name  The 'Cluster' ipspace is reserved for cluster ports 
+    https: ${13:False}                                                     # Enable and disable https
+    validate_certs: ${14:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${15:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${16:value}                                                    # The ontap api version to use
+    use_rest: ${17$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

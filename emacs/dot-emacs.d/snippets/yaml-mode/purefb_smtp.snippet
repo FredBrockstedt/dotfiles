@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Configure SMTP for Pure Storage FlashBlade
+# prefix: purefb_smtp_snippet
+# key: purefb_smtp
+# group: ansible
+# --
+
+- name: ${0:Configure SMTP for Pure Storage FlashBlade}
+  purefb_smtp:                                                             
+    domain: ${1:D o m a i n   n a m e   f o r   a l e r t   m e s s a g e s}#
+    host: ${2:value}                                                       # R e l a y   s e r v e r   n a m e
+    fb_url: ${3:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${4:value}                                                  # FlashBlade API token for admin privileged user 

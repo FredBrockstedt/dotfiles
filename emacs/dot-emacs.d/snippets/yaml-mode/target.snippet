@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage a target in a target group
+# prefix: elb_target_snippet
+# key: target
+# group: ansible
+# --
+
+- name: ${0:Manage a target in a target group}
+  elb_target:                                                              
+    target_id: ${1:The ID of the target}                                   #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Register or deregister the target 
+    deregister_unused: ${3:value}                                          # The default behaviour for targets that are unused is to leave them registered  If instead you would like to remove them 
+    target_az: ${4:value}                                                  # An Availability Zone or all  This determines whether the target receives traffic from the load balancer nodes in the spe
+    target_group_arn: ${5:value}                                           # The Amazon Resource Name (ARN) of the target group  Mutually exclusive of I(target_group_name) 
+    target_group_name: ${6:value}                                          # The name of the target group  Mutually exclusive of I(target_group_arn) 
+    target_port: ${{7:"The default port for a target is the port for the target group}#"} # not required  The port on which the target is listening  You can specify a port override  If a target is 
+    target_status: ${8$$(yas-choose-value '("initial" "healthy" "unhealthy" "unused" "draining" "unavailable"))}# choices: initial;healthy;unhealthy;unused;draining;unavailable  Blocks and waits fo
+    target_status_timeout: ${9:60}                                         # Maximum time in seconds to wait for target_status change
+    debug_botocore_endpoint_logs: ${10:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${11:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${12:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${13:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${14:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${15:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${16:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${17:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

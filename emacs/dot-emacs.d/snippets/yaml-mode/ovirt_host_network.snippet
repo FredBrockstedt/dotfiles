@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Module to manage host networks in oVirt/RHV
+# prefix: ovirt_host_network_snippet
+# key: ovirt_host_network
+# group: ansible
+# --
+
+- name: ${0:Module to manage host networks in oVirt/RHV}
+  ovirt_host_network:                                                      
+    name: ${1:Name of the host to manage networks for}                     #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the host be present/absent 
+    bond: ${4:value}                                                       # Dictionary describing network bond: C(name) - Bond name  C(mode) - Bonding mode  C(options) - Bonding options  C(interfa
+    interface: ${5:value}                                                  # Name of the network interface where logical network should be attached 
+    networks: ${6:value}                                                   # List of dictionary describing networks to be attached to interface or bond: C(name) - Name of the logical network to be 
+    labels: ${7:value}                                                     # List of names of the network label to be assigned to bond or interface 
+    check: ${8:value}                                                      # If I(true) verify connectivity between host and engine  Network configuration changes will be rolled back if connectivit
+    save: ${9:True}                                                        # If I(true) network configuration will be persistent, otherwise it is temporary  Default I(true) since Ansible 2 8 
+    sync_networks: ${10:False}                                             # If I(true) all networks will be synchronized before modification
+    wait: ${11:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${12:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${13:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${14:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${15:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

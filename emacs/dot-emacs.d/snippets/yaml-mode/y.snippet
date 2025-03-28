@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Makes a computer to speak.
+# prefix: say_snippet
+# key: y
+# group: ansible
+# --
+
+- name: ${0:Makes a computer to speak.}
+  say:                                                                     
+    msg: ${1:W h a t   t o   s a y}                                        #
+    voice: ${2:value}                                                      # W h a t   v o i c e   t o   u s e

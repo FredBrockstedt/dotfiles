@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage link aggregation groups on Extreme Networks SLX-OS network devices
+# prefix: slxos_linkagg_snippet
+# key: xos_linkagg
+# group: ansible
+# --
+
+- name: ${0:Manage link aggregation groups on Extreme Networks SLX-OS network devices}
+  slxos_linkagg:                                                           
+    group: ${1:value}                                                      # Channel-group number for the port-channel Link aggregation group  Range 1-1024 
+    mode: ${2$$(yas-choose-value '("active" "on" "passive"))}              # choices: active;on;passive  Mode of the link aggregation group 
+    members: ${3:value}                                                    # List of members of the link aggregation group 
+    aggregate: ${4:value}                                                  # L i s t   o f   l i n k   a g g r e g a t i o n   d e f i n i t i o n s  
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the link aggregation group 
+    purge: ${6:value}                                                      # Purge links not defined in the I(aggregate) parameter 

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Global Link Aggregation Control Protocol (LACP) on Cisco NX-OS devices.
+# prefix: nxos_lacp_snippet
+# key: xos_lacp
+# group: ansible
+# --
+
+- name: ${0:Manage Global Link Aggregation Control Protocol (LACP) on Cisco NX-OS devices.}
+  nxos_lacp:                                                               
+    config: ${1:value}                                                     # L A C P   g l o b a l   o p t i o n s  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "deleted"))}       # choices: merged;replaced;deleted  The state of the configuration after module completion 

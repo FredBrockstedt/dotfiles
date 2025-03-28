@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Add/Edit/Delete and execute scripts
+# prefix: fmgr_script_snippet
+# key: fmgr_script
+# group: ansible
+# --
+
+- name: ${0:Add/Edit/Delete and execute scripts}
+  fmgr_script:                                                             
+    adom: ${1:The administrative domain (admon) the configuration belongs to}#
+    script_name: ${2:The name of the script}                               #
+    vdom: ${3:value}                                                       # The virtual domain (vdom) the configuration belongs to
+    mode: ${4$$(yas-choose-value '("add" "delete" "execute" "set"))}       # choices: add;delete;execute;set  The desired mode of the specified object  Execute will run the script 
+    script_type: ${5:value}                                                # The type of script (CLI or TCL) 
+    script_target: ${6:value}                                              # The target of the script to be run 
+    script_description: ${7:value}                                         # The description of the script 
+    script_content: ${8:value}                                             # The script content that will be executed 
+    script_scope: ${9:value}                                               # (datasource) The devices that the script will run on, can have both device member and device group member 
+    script_package: ${10:value}                                            # (datasource) Policy package object to run the script against

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Management of users in ManageIQ.
+# prefix: manageiq_user_snippet
+# key: manageiq_user
+# group: ansible
+# --
+
+- name: ${0:Management of users in ManageIQ.}
+  manageiq_user:                                                           
+    userid: ${1:The unique userid in manageiq, often mentioned as username}#
+    manageiq_connection: ${2:ManageIQ connection configuration information}#
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  absent - user should not exist, present - user should be 
+    name: ${4:value}                                                       # The users' full name 
+    password: ${5:value}                                                   # The users' password 
+    group: ${6:value}                                                      # The name of the group to which the user belongs 
+    email: ${7:value}                                                      # The users' E-mail address 
+    update_password: ${8$$(yas-choose-value '("always" "on_create"))}      # choices: always;on_create  C(always) will update passwords unconditionally   C(on_create) will only set the password for

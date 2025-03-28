@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manages DNS records on Exoscale DNS.
+# prefix: exo_dns_record_snippet
+# key: xo_dns_record
+# group: ansible
+# --
+
+- name: ${0:Manages DNS records on Exoscale DNS.}
+  exo_dns_record:                                                          
+    domain: ${1:Domain the record is related to}                           #
+    name: ${2:}                                                            # Name of the record 
+    record_type: ${3$$(yas-choose-value '("A" "ALIAS" "CNAME" "MX" "SPF" "URL" "TXT" "NS" "SRV" "NAPTR" "PTR" "AAAA" "SSHFP" "HINFO" "POOL"))}# choices: A;ALIAS;CNAME;MX;SPF;URL;TXT;NS;SRV;NAPTR;PT
+    content: ${4:value}                                                    # Content of the record  Required if C(state=present) or C(multiple=yes) 
+    ttl: ${5:3600}                                                         # TTL of the record in seconds 
+    prio: ${6:value}                                                       # Priority of the record 
+    multiple: ${7:False}                                                   # Whether there are more than one records with similar I(name) and I(record_type)  Only allowed for a few record types, e 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the record 
+    api_key: ${9:value}                                                    # API key of the Exoscale DNS API  Since 2 4, the ENV variable C(CLOUDSTACK_KEY) is used as default, when defined 
+    api_secret: ${10:value}                                                # Secret key of the Exoscale DNS API  Since 2 4, the ENV variable C(CLOUDSTACK_SECRET) is used as default, when defined 
+    api_timeout: ${11:10}                                                  # HTTP timeout to Exoscale DNS API  Since 2 4, the ENV variable C(CLOUDSTACK_TIMEOUT) is used as default, when defined 
+    api_region: ${12:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  Since 2 4, the ENV variable C(CLOUDSTACK_REGION) is used as defaul
+    validate_certs: ${13:True}                                             # Validate SSL certs of the Exoscale DNS API 

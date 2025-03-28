@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Deploy schema templates to sites
+# prefix: mso_schema_template_deploy_snippet
+# key: mso_schema_template_deploy
+# group: ansible
+# --
+
+- name: ${0:Deploy schema templates to sites}
+  mso_schema_template_deploy:                                              
+    schema: ${1:The name of the schema}                                    #
+    host: ${2:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    template: ${4:value}                                                   # The name of the template 
+    site: ${5:value}                                                       # The name of the site B(to undeploy) 
+    state: ${6$$(yas-choose-value '("deploy" "status" "undeploy"))}        # choices: deploy;status;undeploy  Use C(deploy) to deploy schema template  Use C(status) to get deployment status  Use C(
+    port: ${7:value}                                                       # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${8:admin}                                                   # The username to use for authentication 
+    output_level: ${9$$(yas-choose-value '("debug" "info" "normal"))}      # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${10:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${11:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${12:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${13:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

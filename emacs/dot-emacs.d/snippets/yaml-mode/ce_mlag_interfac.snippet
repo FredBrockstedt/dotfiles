@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages MLAG interfaces on HUAWEI CloudEngine switches.
+# prefix: ce_mlag_interface_snippet
+# key: ce_mlag_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages MLAG interfaces on HUAWEI CloudEngine switches.}
+  ce_mlag_interface:                                                       
+    eth_trunk_id: ${1:value}                                               # Name of the local M-LAG interface  The value is ranging from 0 to 511 
+    dfs_group_id: ${2:present}                                             # ID of a DFS group The value is 1 
+    mlag_id: ${3:value}                                                    # ID of the M-LAG  The value is an integer that ranges from 1 to 2048 
+    mlag_system_id: ${4:value}                                             # M-LAG global LACP system MAC address  The value is a string of 0 to 255 characters  The default value is the MAC address
+    mlag_priority_id: ${5:value}                                           # M-LAG global LACP system priority  The value is an integer ranging from 0 to 65535  The default value is 32768 
+    interface: ${6:value}                                                  # Name of the interface that enters the Error-Down state when the peer-link fails  The value is a string of 1 to 63 charac
+    mlag_error_down: ${7$$(yas-choose-value '("enable" "disable"))}        # choices: enable;disable  Configure the interface on the slave device to enter the Error-Down state 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 

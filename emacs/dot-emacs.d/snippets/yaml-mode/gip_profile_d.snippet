@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage DNS profiles on a BIG-IP
+# prefix: bigip_profile_dns_snippet
+# key: gip_profile_d
+# group: ansible
+# --
+
+- name: ${0:Manage DNS profiles on a BIG-IP}
+  bigip_profile_dns:                                                       
+    name: ${1:Specifies the name of the DNS profile}                       #
+    parent: ${2:value}                                                     # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    enable_dns_express: ${3:value}                                         # Specifies whether the DNS Express engine is enabled  When creating a new profile, if this parameter is not specified, th
+    enable_zone_transfer: ${4:value}                                       # Specifies whether the system answers zone transfer requests for a DNS zone created on the system  When creating a new pr
+    enable_dnssec: ${5:value}                                              # Specifies whether the system signs responses with DNSSEC keys and replies to DNSSEC specific queries (e g , DNSKEY query
+    enable_gtm: ${6:value}                                                 # Specifies whether the system uses Global Traffic Manager to manage the response  When creating a new profile, if this pa
+    process_recursion_desired: ${7:value}                                  # Specifies whether to process client-side DNS packets with Recursion Desired set in the header  When creating a new profi
+    use_local_bind: ${8:value}                                             # Specifies whether the system forwards non-wide IP queries to the local BIND server on the BIG-IP system  For best perfor
+    enable_dns_firewall: ${9:value}                                        # Specifies whether DNS firewall capability is enabled  When creating a new profile, if this parameter is not specified, t
+    enable_cache: ${10:value}                                              # Specifies whether the system caches DNS responses  When creating a new profile, if this parameter is not specified, the 
+    cache_name: ${11:value}                                                # Specifies the user-created cache that the system uses to cache DNS responses  When you select a cache for the system to 
+    unhandled_query_action: ${12$$(yas-choose-value '("allow" "drop" "reject" "hint" "no-error"))}# choices: allow;drop;reject;hint;no-error  Specifies the action to take when a query does not matc
+    partition: ${13:Common}                                                # Device partition to manage resources on 
+    state: ${14$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${15:value}                                                  # A dict object containing connection details 

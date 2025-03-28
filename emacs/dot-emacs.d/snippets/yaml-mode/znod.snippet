@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create, delete, retrieve, and update znodes using ZooKeeper
+# prefix: znode_snippet
+# key: znod
+# group: ansible
+# --
+
+- name: ${0:Create, delete, retrieve, and update znodes using ZooKeeper}
+  znode:                                                                   
+    hosts: ${1:A list of ZooKeeper servers (format '[server]:[port]')}     #
+    name: ${2:The path of the znode}                                       #
+    value: ${3:value}                                                      # The value assigned to the znode 
+    op: ${4:value}                                                         # An operation to perform  Mutually exclusive with state 
+    state: ${5:value}                                                      # The state to enforce  Mutually exclusive with op 
+    timeout: ${6:300}                                                      # The amount of time to wait for a node to appear 
+    recursive: ${7:false}                                                  # Recursively delete node and all its children 

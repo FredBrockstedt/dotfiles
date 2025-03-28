@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Interact with GitHub Releases
+# prefix: github_release_snippet
+# key: github_r
+# group: ansible
+# --
+
+- name: ${0:Interact with GitHub Releases}
+  github_release:                                                          
+    user: ${1:The GitHub account that owns the repository}                 #
+    repo: ${2:Repository name}                                             #
+    action: ${3$$(yas-choose-value '("latest_release" "create_release"))}  # Action to perform
+    token: ${4:value}                                                      # GitHub Personal Access Token for authenticating  Mutually exclusive with C(password) 
+    password: ${5:value}                                                   # The GitHub account password for the user  Mutually exclusive with C(token) 
+    tag: ${6:value}                                                        # Tag name when creating a release  Required when using action is set to C(create_release) 
+    target: ${7:value}                                                     # Target of release when creating a release
+    name: ${8:value}                                                       # Name of release when creating a release
+    body: ${9:value}                                                       # Description of the release when creating a release
+    draft: ${10:false}                                                     # Sets if the release is a draft or not  (boolean)
+    prerelease: ${11:false}                                                # Sets if the release is a prerelease or not  (boolean)

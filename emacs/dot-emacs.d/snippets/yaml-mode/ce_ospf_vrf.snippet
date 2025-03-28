@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manages configuration of an OSPF VPN instance on HUAWEI CloudEngine switches.
+# prefix: ce_ospf_vrf_snippet
+# key: ce_ospf_vrf
+# group: ansible
+# --
+
+- name: ${0:Manages configuration of an OSPF VPN instance on HUAWEI CloudEngine switches.}
+  ce_ospf_vrf:                                                             
+    ospf: ${1:The ID of the ospf process}                                  # Valid values are an integer, 1 - 4294967295, the default value is 1 
+    route_id: ${2:value}                                                   # Specifies the ospf private route id,  Valid values are a string, formatted as an IP address (i e  "10 1 1 1") the length
+    vrf: ${3:_public_}                                                     # Specifies the vpn instance which use ospf,length is 1 - 31  Valid values are a string 
+    description: ${4:value}                                                # Specifies the description information of ospf process 
+    bandwidth: ${5:value}                                                  # Specifies the reference bandwidth used to assign ospf cost  Valid values are an integer, in Mbps, 1 - 2147483648, the de
+    lsaalflag: ${6:false}                                                  # Specifies the mode of timer to calculate interval of arrive LSA  If set the parameter but not specifies value, the defau
+    lsaainterval: ${7:value}                                               # Specifies the interval of arrive LSA when use the general timer  Valid value is an integer, in millisecond, from 0 to 10
+    lsaamaxinterval: ${8:value}                                            # Specifies the max interval of arrive LSA when use the intelligent timer  Valid value is an integer, in millisecond, from
+    lsaastartinterval: ${9:value}                                          # Specifies the start interval of arrive LSA when use the intelligent timer  Valid value is an integer, in millisecond, fr
+    lsaaholdinterval: ${10:value}                                          # Specifies the hold interval of arrive LSA when use the intelligent timer  Valid value is an integer, in millisecond, fro
+    lsaointervalflag: ${11:false}                                          # Specifies whether cancel the interval of LSA originate or not  If set the parameter but noe specifies value, the default
+    lsaointerval: ${12:value}                                              # Specifies the interval of originate LSA   Valid value is an integer, in second, from 0 to 10, the default value is 5 
+    lsaomaxinterval: ${13:value}                                           # Specifies the max interval of originate LSA   Valid value is an integer, in millisecond, from 1 to 10000, the default va
+    lsaostartinterval: ${14:value}                                         # Specifies the start interval of originate LSA   Valid value is an integer, in millisecond, from 0 to 1000, the default v
+    lsaoholdinterval: ${15:value}                                          # Specifies the hold interval of originate LSA   Valid value is an integer, in millisecond, from 0 to 5000, the default va
+    spfintervaltype: ${16$$(yas-choose-value '("intelligent-timer" "timer" "millisecond"))}# choices: intelligent-timer;timer;millisecond  Specifies the mode of timer which used to calculate SPF  I
+    spfinterval: ${17:value}                                               # Specifies the interval to calculate SPF when use second level  timer  Valid value is an integer, in second, from 1 to 10
+    spfintervalmi: ${18:value}                                             # Specifies the interval to calculate SPF when use millisecond level  timer  Valid value is an integer, in millisecond, fr
+    spfmaxinterval: ${19:value}                                            # Specifies the max interval to calculate SPF when use intelligent timer  Valid value is an integer, in millisecond, from 
+    spfstartinterval: ${20:value}                                          # Specifies the start interval to calculate SPF when use intelligent timer  Valid value is an integer, in millisecond, fro
+    spfholdinterval: ${21:value}                                           # Specifies the hold interval to calculate SPF when use intelligent timer  Valid value is an integer, in millisecond, from
+    state: ${22$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Specify desired state of the resource 

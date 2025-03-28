@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage labels
+# prefix: mso_label_snippet
+# key: mso
+# group: ansible
+# --
+
+- name: ${0:Manage labels}
+  mso_label:                                                               
+    label: ${1:The name of the label}                                      #
+    host: ${2:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    type: ${4$$(yas-choose-value '("site"))}                               # choices: site  The type of the label 
+    state: ${5$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${6:value}                                                       # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${7:admin}                                                   # The username to use for authentication 
+    output_level: ${8$$(yas-choose-value '("debug" "info" "normal"))}      # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${9:30}                                                       # The socket level timeout in seconds 
+    use_proxy: ${10:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${11:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${12:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

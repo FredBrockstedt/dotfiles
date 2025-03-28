@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage Windows event logs
+# prefix: win_eventlog_snippet
+# key: win_eventlog
+# group: ansible
+# --
+
+- name: ${0:Manage Windows event logs}
+  win_eventlog:                                                            
+    name: ${1:Name of the event log to manage}                             #
+    state: ${2$$(yas-choose-value '("absent" "clear" "present"))}          # choices: absent;clear;present  Desired state of the log and/or sources  When C(sources) is populated, state is checked f
+    sources: ${3:value}                                                    # A list of one or more sources to ensure are present/absent in the log  When C(category_file), C(message_file) and/or C(p
+    category_file: ${4:value}                                              # For one or more sources specified, the path to a custom category resource file 
+    message_file: ${5:value}                                               # For one or more sources specified, the path to a custom event message resource file 
+    parameter_file: ${6:value}                                             # For one or more sources specified, the path to a custom parameter resource file 
+    maximum_size: ${7:value}                                               # The maximum size of the event log  Value must be between 64KB and 4GB, and divisible by 64KB  Size can be specified in K
+    overflow_action: ${8$$(yas-choose-value '("DoNotOverwrite" "OverwriteAsNeeded" "OverwriteOlder"))}# choices: DoNotOverwrite;OverwriteAsNeeded;OverwriteOlder  The action for the log to take once
+    retention_days: ${9:value}                                             # The minimum number of days event entries must remain in the log  This option is only used when C(overflow_action) is C(O

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages VRRP configuration on NX-OS switches.
+# prefix: nxos_vrrp_snippet
+# key: xos_vrrp
+# group: ansible
+# --
+
+- name: ${0:Manages VRRP configuration on NX-OS switches.}
+  nxos_vrrp:                                                               
+    group: ${1:VRRP group number}                                          #
+    interface: ${2:Full name of interface that is being managed for VRRP}  #
+    interval: ${3:1}                                                       # Time interval between advertisement or 'default' keyword
+    priority: ${4:100}                                                     # VRRP priority or 'default' keyword
+    preempt: ${5:true}                                                     # Enable/Disable preempt 
+    vip: ${6:value}                                                        # VRRP virtual IP address or 'default' keyword
+    authentication: ${7:value}                                             # Clear text authentication string or 'default' keyword
+    admin_state: ${8$$(yas-choose-value '("shutdown" "no shutdown" "default"))}# choices: shutdown;no shutdown;default  Used to enable or disable the VRRP process 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

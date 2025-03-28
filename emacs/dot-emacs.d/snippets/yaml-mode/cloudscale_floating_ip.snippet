@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages floating IPs on the cloudscale.ch IaaS service
+# prefix: cloudscale_floating_ip_snippet
+# key: cloudscale_floating_ip
+# group: ansible
+# --
+
+- name: ${0:Manages floating IPs on the cloudscale.ch IaaS service}
+  cloudscale_floating_ip:                                                  
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the floating IP 
+    ip: ${2:value}                                                         # Floating IP address to change  Required to assign the IP to a different server or if I(state) is absent 
+    ip_version: ${3$$(yas-choose-value '("4" "6"))}                        # choices: 4;6  IP protocol version of the floating IP 
+    server: ${4:value}                                                     # UUID of the server assigned to this floating IP  Required unless I(state) is absent 
+    prefix_length: ${5$$(yas-choose-value '("56"))}                        # choices: 56  Only valid if I(ip_version) is 6  Prefix length for the IPv6 network  Currently only a prefix of /56 can be
+    reverse_ptr: ${6:value}                                                # Reverse PTR entry for this address  You cannot set a reverse PTR entry for IPv6 floating networks  Reverse PTR entries a
+    api_token: ${7:value}                                                  # cloudscale ch API token  This can also be passed in the C(CLOUDSCALE_API_TOKEN) environment variable 
+    api_timeout: ${8:30}                                                   # Timeout in seconds for calls to the cloudscale ch API 

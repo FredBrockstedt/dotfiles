@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Scaleway load-balancer management module
+# prefix: scaleway_lb_snippet
+# key: caleway
+# group: ansible
+# --
+
+- name: ${0:Scaleway load-balancer management module}
+  scaleway_lb:                                                             
+    name: ${1:Name of the load-balancer}                                   #
+    description: ${2:Description of the load-balancer}                     #
+    organization_id: ${3:Organization identifier}                          #
+    region: ${4$$(yas-choose-value '("nl-ams" "fr-par"))}                  # Scaleway zone
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the instance 
+    tags: ${6:value}                                                       # List of tags to apply to the load-balancer
+    wait: ${7:false}                                                       # Wait for the load-balancer to reach its desired state before returning 
+    wait_timeout: ${8:300}                                                 # Time to wait for the load-balancer to reach the expected state
+    wait_sleep_time: ${9:3}                                                # Time to wait before every attempt to check the state of the load-balancer
+    api_token: ${10:value}                                                 # Scaleway OAuth token 
+    api_url: ${{11:https://api}                                            #scaleway com} # not required  Scaleway API URL 
+    api_timeout: ${12:30}                                                  # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${13:namespace()}                                    # List of parameters passed to the query string 
+    validate_certs: ${14:True}                                             # Validate SSL certs of the Scaleway API 

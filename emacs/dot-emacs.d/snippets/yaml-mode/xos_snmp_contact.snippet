@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP contact info.
+# prefix: nxos_snmp_contact_snippet
+# key: xos_snmp_contact
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP contact info.}
+  nxos_snmp_contact:                                                       
+    contact: ${1:Contact information}                                      #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Manage the state of the resource 
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

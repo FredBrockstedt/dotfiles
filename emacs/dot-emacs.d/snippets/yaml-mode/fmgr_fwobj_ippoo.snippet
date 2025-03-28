@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Allows the editing of IP Pool Objects within FortiManager.
+# prefix: fmgr_fwobj_ippool_snippet
+# key: fmgr_fwobj_ippoo
+# group: ansible
+# --
+
+- name: ${0:Allows the editing of IP Pool Objects within FortiManager.}
+  fmgr_fwobj_ippool:                                                       
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    type: ${3$$(yas-choose-value '("overload" "one-to-one" "fixed-port-range" "port-block-allocation"))}# choices: overload;one-to-one;fixed-port-range;port-block-allocation  IP pool type (overload
+    startip: ${4:value}                                                    # First IPv4 address (inclusive) in the range for the address pool (format xxx xxx xxx xxx, Default| 0 0 0 0) 
+    source_startip: ${5:value}                                             # First IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx xxx xxx xxx, Default| 0
+    source_endip: ${6:value}                                               # Final IPv4 address (inclusive) in the range of the source addresses to be translated (format xxx xxx xxx xxx, Default| 0
+    permit_any_host: ${7$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable/disable full cone NAT  choice | disable | Disable full cone NAT  choice | enable | Enabl
+    pba_timeout: ${8:value}                                                # Port block allocation timeout (seconds) 
+    num_blocks_per_user: ${9:value}                                        # Number of addresses blocks that can be used by a user (1 to 128, default = 8) 
+    name: ${10:value}                                                      # IP pool name 
+    endip: ${11:value}                                                     # Final IPv4 address (inclusive) in the range for the address pool (format xxx xxx xxx xxx, Default| 0 0 0 0) 
+    comments: ${12:value}                                                  # Comment 
+    block_size: ${13:value}                                                # Number of addresses in a block (64 to 4096, default = 128) 
+    associated_interface: ${14:value}                                      # Associated interface name 
+    arp_reply: ${15$$(yas-choose-value '("disable" "enable"))}             # choices: disable;enable  Enable/disable replying to ARP requests when an IP Pool is added to a policy (default = enable)
+    arp_intf: ${16:value}                                                  # Select an interface from available options that will reply to ARP requests  (If blank, any is selected) 
+    dynamic_mapping: ${17:value}                                           # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    dynamic_mapping_arp_intf: ${18:value}                                  # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_arp_reply: ${19$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_associated_interface: ${20:value}                      # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_block_size: ${21:value}                                # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_comments: ${22:value}                                  # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_endip: ${23:value}                                     # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_num_blocks_per_user: ${24:value}                       # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_pba_timeout: ${25:value}                               # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_permit_any_host: ${26$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_source_endip: ${27:value}                              # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_source_startip: ${28:value}                            # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_startip: ${29:value}                                   # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_type: ${30$$(yas-choose-value '("overload" "one-to-one" "fixed-port-range" "port-block-allocation"))}# choices: overload;one-to-one;fixed-port-range;port-block-allocation  Dynam

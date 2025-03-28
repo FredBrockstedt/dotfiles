@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove ipv6security-raguard-vlan
+# prefix: pn_ipv6security_raguard_vlan_snippet
+# key: pn_ipv6security_raguard_v
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove ipv6security-raguard-vlan}
+  pn_ipv6security_raguard_vlan:                                            
+    pn_vlans: ${1:Vlans attached to RA Guard Policy}                       #
+    pn_name: ${2:RA Guard Policy Name}                                     #
+    pn_cliswitch: ${3:value}                                               # Target switch to run the CLI on 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  ipv6security-raguard-vlan configuration command 

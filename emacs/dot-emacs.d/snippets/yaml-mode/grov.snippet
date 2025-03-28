@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Sends a notification to a grove.io channel
+# prefix: grove_snippet
+# key: grov
+# group: ansible
+# --
+
+- name: ${0:Sends a notification to a grove.io channel}
+  grove:                                                                   
+    channel_token: ${1:Token of the channel to post to}                    #
+    message: ${2:Message content}                                          #
+    service: ${3:ansible}                                                  # Name of the service (displayed as the "user" in the message)
+    url: ${4:value}                                                        # Service URL for the web client
+    icon_url: ${5:value}                                                   # Icon for the service
+    validate_certs: ${6:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig

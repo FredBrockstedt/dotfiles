@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Perform firmware upgrade/download from a remote server on devices running Lenovo CNOS
+# prefix: cnos_image_snippet
+# key: cnos_imag
+# group: ansible
+# --
+
+- name: ${0:Perform firmware upgrade/download from a remote server on devices running Lenovo CNOS}
+  cnos_image:                                                              
+    protocol: ${1$$(yas-choose-value '("SFTP" "SCP" "FTP" "TFTP"))}        # This refers to the protocol used by the network device to interact with the remote server from where to download the fir
+    serverip: ${2:This specifies the IP Address of the remote server from where the software image will be downloaded}#
+    imgpath: ${3:This specifies the full file path of the image located on the remote server}# In case the relative path is used as the variable value, the root folder for the user of the server ne
+    imgtype: ${4$$(yas-choose-value '("all" "boot" "os" "onie"))}          # This specifies the firmware image type to be downloaded
+    serverusername: ${5:Specify the username for the server relating to the protocol used}#
+    outputfile: ${6:This specifies the file path where the output of each command execution is saved}# Each command that is specified in the merged template file and each response from the device a
+    host: ${7:This is the variable used to search the hosts file at /etc/ansible/hosts and identify the IP address of the device on which the template is going to be applied}# Usually the Ansible k
+    username: ${8:Configures the username used to authenticate the connection to the remote device}# The value of the username parameter is used to authenticate the SSH session  While generally the
+    password: ${9:Configures the password used to authenticate the connection to the remote device}# The value of the password parameter is used to authenticate the SSH session  While generally the
+    deviceType: ${10$$(yas-choose-value '("g8272_cnos" "g8296_cnos" "g8332_cnos" "NE0152T" "NE1072T" "NE1032" "NE1032T" "NE10032" "NE2572"))}# This specifies the type of device where the method is 
+    serverpassword: ${11:value}                                            # Specify the password for the server relating to the protocol used
+    enablePassword: ${12:value}                                            # Configures the password used to enter Global Configuration command mode on the switch  If the switch does not request th

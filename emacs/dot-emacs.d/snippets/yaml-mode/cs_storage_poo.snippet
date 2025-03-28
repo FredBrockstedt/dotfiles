@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manages Primary Storage Pools on Apache CloudStack based clouds.
+# prefix: cs_storage_pool_snippet
+# key: cs_storage_poo
+# group: ansible
+# --
+
+- name: ${0:Manages Primary Storage Pools on Apache CloudStack based clouds.}
+  cs_storage_pool:                                                         
+    name: ${1:Name of the storage pool}                                    #
+    zone: ${2:value}                                                       # Name of the zone in which the host should be deployed  If not set, default zone is used 
+    storage_url: ${3:value}                                                # URL of the storage pool  Required if I(state=present) 
+    pod: ${4:value}                                                        # Name of the pod 
+    cluster: ${5:value}                                                    # Name of the cluster 
+    scope: ${6$$(yas-choose-value '("cluster" "zone"))}                    # choices: cluster;zone  The scope of the storage pool  Defaults to cluster when C(cluster) is provided, otherwise zone 
+    managed: ${7:value}                                                    # Whether the storage pool should be managed by CloudStack  Only considered on creation 
+    hypervisor: ${8:value}                                                 # Required when creating a zone scoped pool  Possible values are C(KVM), C(VMware), C(BareMetal), C(XenServer), C(LXC), C(
+    storage_tags: ${9:value}                                               # Tags associated with this storage pool 
+    provider: ${10:DefaultPrimary}                                         # Name of the storage provider e g  SolidFire, SolidFireShared, DefaultPrimary, CloudByte 
+    capacity_bytes: ${11:value}                                            # Bytes CloudStack can provision from this storage pool 
+    capacity_iops: ${12:value}                                             # Bytes CloudStack can provision from this storage pool 
+    allocation_state: ${13$$(yas-choose-value '("enabled" "disabled" "maintenance"))}# choices: enabled;disabled;maintenance  Allocation state of the storage pool 
+    state: ${14$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the storage pool 
+    api_key: ${15:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${16:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${17:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${18$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${19:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${20:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage libvirt storage pools
+# prefix: virt_pool_snippet
+# key: virt_poo
+# group: ansible
+# --
+
+- name: ${0:Manage libvirt storage pools}
+  virt_pool:                                                               
+    name: ${1:value}                                                       # name of the storage pool being managed  Note that pool must be previously defined with xml 
+    state: ${2$$(yas-choose-value '("active" "inactive" "present" "absent" "undefined" "deleted"))}# choices: active;inactive;present;absent;undefined;deleted  specify which state you want a storag
+    command: ${3$$(yas-choose-value '("define" "build" "create" "start" "stop" "destroy" "delete" "undefine" "get_xml" "list_pools" "facts" "info" "status"))}# choices: define;build;create;start;st
+    autostart: ${4:value}                                                  # Specify if a given storage pool should be started automatically on system boot 
+    uri: ${5:qemu:///system}                                               # I(libvirt) connection uri 
+    xml: ${6:value}                                                        # XML document used with the define command 
+    mode: ${7$$(yas-choose-value '("new" "repair" "resize" "no_overwrite" "overwrite" "normal" "zeroed"))}# choices: new;repair;resize;no_overwrite;overwrite;normal;zeroed  Pass additional paramete

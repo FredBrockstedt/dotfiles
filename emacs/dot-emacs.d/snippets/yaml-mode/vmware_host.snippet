@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Add, remove, or move an ESXi host to, from, or within vCenter
+# prefix: vmware_host_snippet
+# key: vmware_host
+# group: ansible
+# --
+
+- name: ${0:Add, remove, or move an ESXi host to, from, or within vCenter}
+  vmware_host:                                                             
+    datacenter_name: ${1:Name of the datacenter to add the host}           # Aliases added in version 2 6 
+    esxi_hostname: ${2:ESXi hostname to manage}                            #
+    cluster_name: ${3:value}                                               # Name of the cluster to add the host  If C(folder) is not set, then this parameter is required  Aliases added in version 
+    folder: ${4:value}                                                     # Name of the folder under which host to add  If C(cluster_name) is not set, then this parameter is required  For example,
+    add_connected: ${5:True}                                               # If set to C(True), then the host should be connected as soon as it is added  This parameter is ignored if state is set t
+    esxi_username: ${6:value}                                              # ESXi username  Required for adding a host  Optional for reconnect  If both C(esxi_username) and C(esxi_password) are use
+    esxi_password: ${7:value}                                              # ESXi password  Required for adding a host  Optional for reconnect  Unused for removing  No longer a required parameter f
+    state: ${8$$(yas-choose-value '("present" "absent" "add_or_reconnect" "reconnect"))}# choices: present;absent;add_or_reconnect;reconnect  If set to C(present), add the host if host is absent  I
+    esxi_ssl_thumbprint: ${9:}                                             # Specifying the hostsystem certificate's thumbprint  Use following command to get hostsystem certificate's thumbprint -  
+    fetch_ssl_thumbprint: ${10:True}                                       # Fetch the thumbprint of the host's SSL certificate  This basically disables the host certificate verification (check if 
+    force_connection: ${11:True}                                           # Force the connection if the host is already being managed by another vCenter server 
+    reconnect_disconnected: ${12:True}                                     # Reconnect disconnected hosts  This is only used if C(state) is set to C(present) and if the host already exists 
+    hostname: ${13:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${14:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${15:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${16:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${17:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${18:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${19:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

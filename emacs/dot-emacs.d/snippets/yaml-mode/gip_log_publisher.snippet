@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages log publishers on a BIG-IP
+# prefix: bigip_log_publisher_snippet
+# key: gip_log_publisher
+# group: ansible
+# --
+
+- name: ${0:Manages log publishers on a BIG-IP}
+  bigip_log_publisher:                                                     
+    name: ${1:Specifies the name of the log publisher}                     #
+    description: ${2:value}                                                # Specifies a description for the log publisher 
+    destinations: ${3:value}                                               # Specifies log destinations for this log publisher to use 
+    partition: ${4:Common}                                                 # Device partition to manage resources on 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${6:value}                                                   # A dict object containing connection details 

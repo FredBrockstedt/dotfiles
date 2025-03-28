@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Gather info for GCP NodePool
+# prefix: gcp_container_node_pool_info_snippet
+# key: gcp_container_node_pool_info
+# group: ansible
+# --
+
+- name: ${0:Gather info for GCP NodePool}
+  gcp_container_node_pool_info:                                            
+    location: ${1:The location where the node pool is deployed}            #
+    cluster: ${2:The cluster this node pool belongs to}                    # This field represents a link to a Cluster resource in GCP  It can be specified in two ways  First, you can place a dicti
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    project: ${4:value}                                                    # The Google Cloud Platform project to use 
+    service_account_contents: ${5:value}                                   # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${6:value}                                       # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${7:value}                                      # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${8:value}                                                     # Array of scopes to be used 
+    env_type: ${9:value}                                                   # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

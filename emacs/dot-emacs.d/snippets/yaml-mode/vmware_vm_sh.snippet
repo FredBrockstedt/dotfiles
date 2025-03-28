@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Run commands in a VMware guest operating system
+# prefix: vmware_vm_shell_snippet
+# key: vmware_vm_sh
+# group: ansible
+# --
+
+- name: ${0:Run commands in a VMware guest operating system}
+  vmware_vm_shell:                                                         
+    vm_id: ${1:Name of the virtual machine to work with}                   #
+    vm_username: ${2:The user to login-in to the virtual machine}          #
+    vm_password: ${3:The password used to login-in to the virtual machine} #
+    vm_shell: ${4:The absolute path to the program to start}               # On Linux, shell is executed via bash 
+    datacenter: ${5:value}                                                 # The datacenter hosting the virtual machine  If set, it will help to speed up virtual machine search 
+    cluster: ${6:value}                                                    # The cluster hosting the virtual machine  If set, it will help to speed up virtual machine search 
+    folder: ${7:value}                                                     # Destination folder, absolute or relative path to find an existing guest or create the new guest  The folder should inclu
+    vm_id_type: ${8$$(yas-choose-value '("uuid" "instance_uuid" "dns_name" "inventory_path" "vm_name"))}# choices: uuid;instance_uuid;dns_name;inventory_path;vm_name  The VMware identification meth
+    vm_shell_args: ${9:" "}                                                # The argument to the program  The characters which must be escaped to the shell also be escaped on the command line provi
+    vm_shell_env: ${10:value}                                              # Comma separated list of environment variable, specified in the guest OS notation 
+    vm_shell_cwd: ${11:value}                                              # The current working directory of the application from which it will be run 
+    wait_for_process: ${12:False}                                          # If set to C(True), module will wait for process to complete in the given virtual machine 
+    timeout: ${13:3600}                                                    # Timeout in seconds  If set to positive integers, then C(wait_for_process) will honor this parameter and will exit after 
+    hostname: ${14:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${15:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${16:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${17:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${18:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${19:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${20:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

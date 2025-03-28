@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage Cloudflare DNS records
+# prefix: cloudflare_dns_snippet
+# key: cloudflare_d
+# group: ansible
+# --
+
+- name: ${0:Manage Cloudflare DNS records}
+  cloudflare_dns:                                                          
+    account_api_token: ${1:Account API token}                              # You can obtain your API key from the bottom of the Cloudflare 'My Account' page, found here: U(https://dash cloudflare c
+    account_email: ${2:Account email}                                      #
+    zone: ${3:The name of the Zone to work with (e}                        #g  "example com")  The Zone must already exist 
+    algorithm: ${4:value}                                                  # Algorithm number  Required for C(type=DS) and C(type=SSHFP) when C(state=present) 
+    cert_usage: ${5$$(yas-choose-value '("0" "1" "2" "3"))}                # choices: 0;1;2;3  Certificate usage number  Required for C(type=TLSA) when C(state=present) 
+    hash_type: ${6$$(yas-choose-value '("1" "2"))}                         # choices: 1;2  Hash type number  Required for C(type=DS), C(type=SSHFP) and C(type=TLSA) when C(state=present) 
+    key_tag: ${7:value}                                                    # DNSSEC key tag  Needed for C(type=DS) when C(state=present) 
+    port: ${8:value}                                                       # Service port  Required for C(type=SRV) and C(type=TLSA) 
+    priority: ${9:1}                                                       # Record priority  Required for C(type=MX) and C(type=SRV)
+    proto: ${10:value}                                                     # Service protocol  Required for C(type=SRV) and C(type=TLSA)  Common values are TCP and UDP  Before Ansible 2 6 only TCP 
+    proxied: ${11:False}                                                   # Proxy through Cloudflare network or just use DNS 
+    record: ${12:@}                                                        # Record to add  Required if C(state=present)  Default is C(@) (e g  the zone name) 
+    selector: ${13$$(yas-choose-value '("0" "1"))}                         # choices: 0;1  Selector number  Required for C(type=TLSA) when C(state=present) 
+    service: ${14:value}                                                   # Record service  Required for C(type=SRV)
+    solo: ${15:value}                                                      # Whether the record should be the only one for that record type and record name  Only use with C(state=present)  This wil
+    state: ${16$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Whether the record(s) should exist or not 
+    timeout: ${17:30}                                                      # Timeout for Cloudflare API calls 
+    ttl: ${18:1}                                                           # The TTL to give the new record  Must be between 120 and 2,147,483,647 seconds, or 1 for automatic 
+    type: ${19$$(yas-choose-value '("A" "AAAA" "CNAME" "DS" "MX" "NS" "SPF" "SRV" "SSHFP" "TLSA" "TXT"))}# choices: A;AAAA;CNAME;DS;MX;NS;SPF;SRV;SSHFP;TLSA;TXT  The type of DNS record to create  R
+    value: ${20:value}                                                     # The record value  Required for C(state=present) 
+    weight: ${21:1}                                                        # Service weight  Required for C(type=SRV) 

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Configures IGMP interface parameters
+# prefix: onyx_igmp_interface_snippet
+# key: onyx_igmp_interfac
+# group: ansible
+# --
+
+- name: ${0:Configures IGMP interface parameters}
+  onyx_igmp_interface:                                                     
+    name: ${1:interface name that we want to configure IGMP on it}         #
+    state: ${2$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  IGMP Interface state 

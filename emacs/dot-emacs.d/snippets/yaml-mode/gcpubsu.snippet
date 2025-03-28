@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create and Delete Topics/Subscriptions, Publish and pull messages on PubSub
+# prefix: gcpubsub_snippet
+# key: gcpubsu
+# group: ansible
+# --
+
+- name: ${0:Create and Delete Topics/Subscriptions, Publish and pull messages on PubSub}
+  gcpubsub:                                                                
+    topic: ${1:GCP pubsub topic name}                                      # Only the name, not the full path, is required 
+    subscription: ${2:value}                                               # Dictionary containing a subscription name associated with a topic (required), along with optional ack_deadline, push_end
+    name: ${3:value}                                                       # S u b f i e l d   o f   s u b s c r i p t i o n     R e q u i r e d   i f   s u b s c r i p t i o n   i s   s p e c i f 
+    ack_deadline: ${4:value}                                               # S u b f i e l d   o f   s u b s c r i p t i o n     N o t   r e q u i r e d     D e f a u l t   d e a d l i n e   f o r 
+    pull: ${5:value}                                                       # Subfield of subscription  Not required  If specified, messages will be retrieved from topic via the provided subscriptio
+    push_endpoint: ${6:value}                                              # Subfield of subscription   Not required   If specified, message will be sent to an endpoint  See U(https://cloud google 
+    publish: ${7:value}                                                    # List of dictionaries describing messages and attributes to be published   Dictionary is in message(str):attributes(dict)
+    state: ${8$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the topic or queue  Applies to the most granular resource  If subscription isspecified

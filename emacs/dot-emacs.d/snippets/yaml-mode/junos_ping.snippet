@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Tests reachability using ping from devices running Juniper JUNOS
+# prefix: junos_ping_snippet
+# key: junos_ping
+# group: ansible
+# --
+
+- name: ${0:Tests reachability using ping from devices running Juniper JUNOS}
+  junos_ping:                                                              
+    dest: ${1:The IP Address or hostname (resolvable by the device) of the remote node}#
+    count: ${2:5}                                                          # Number of packets to send to check reachability 
+    source: ${3:value}                                                     # The IP Address to use while sending the ping packet(s) 
+    interface: ${4:value}                                                  # The source interface to use while sending the ping packet(s) 
+    ttl: ${5:value}                                                        # The time-to-live value for the ICMP packet(s) 
+    size: ${6:value}                                                       # Determines the size (in bytes) of the ping packet(s) 
+    interval: ${7:value}                                                   # Determines the interval (in seconds) between consecutive pings 
+    state: ${8$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Determines if the expected result is success or fail 
+    provider: ${9:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

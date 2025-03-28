@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manages DHCP Options, and can ensure the DHCP options for the given VPC match what's requested
+# prefix: ec2_vpc_dhcp_option_snippet
+# key: c2_vpc_dhcp_optio
+# group: ansible
+# --
+
+- name: ${0:Manages DHCP Options, and can ensure the DHCP options for the given VPC match what's requested}
+  ec2_vpc_dhcp_option:                                                     
+    domain_name: ${1:value}                                                # The domain name to set in the DHCP option sets
+    dns_servers: ${2:value}                                                # A list of hosts to set the DNS servers for the VPC to  (Should be a list of IP addresses rather than host names )
+    ntp_servers: ${3:value}                                                # List of hosts to advertise as NTP servers for the VPC 
+    netbios_name_servers: ${4:value}                                       # List of hosts to advertise as NetBIOS servers 
+    netbios_node_type: ${5:value}                                          # NetBIOS node type to advertise in the DHCP options  The AWS recommendation is to use 2 (when using netbios name services
+    vpc_id: ${6:value}                                                     # VPC ID to associate with the requested DHCP option set  If no vpc id is provided, and no matching option set is found th
+    delete_old: ${7:true}                                                  # Whether to delete the old VPC DHCP option set when associating a new one  This is primarily useful for debugging/develop
+    inherit_existing: ${8:false}                                           # For any DHCP options not specified in these parameters, whether to inherit them from the options set already applied to 
+    tags: ${9:value}                                                       # Tags to be applied to a VPC options set if a new one is created, or if the resource_id is provided  (options must match)
+    dhcp_options_id: ${10:value}                                           # The resource_id of an existing DHCP options set  If this is specified, then it will override other settings, except tags
+    state: ${11$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  create/assign or remove the DHCP options  If state is set to absent, then a DHCP options set ma
+    debug_botocore_endpoint_logs: ${12:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${13:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${14:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${15:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${16:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${17:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${18:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${19:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Send assets to Ansible Tower.
+# prefix: tower_send_snippet
+# key: tower_send
+# group: ansible
+# --
+
+- name: ${0:Send assets to Ansible Tower.}
+  tower_send:                                                              
+    assets: ${1:value}                                                     # The assets to import  This can be the output of tower_receive or loaded from a file
+    files: ${2:[]}                                                         # List of files to import 
+    prevent: ${3:[]}                                                       # A list of asset types to prevent import for
+    password_management: ${4$$(yas-choose-value '("default" "random"))}    # choices: default;random  The password management option to use  The prompt option is not supported 
+    tower_host: ${5:value}                                                 # URL to your Tower instance 
+    tower_username: ${6:value}                                             # Username for your Tower instance 
+    tower_password: ${7:value}                                             # Password for your Tower instance 
+    validate_certs: ${8:value}                                             # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${9:value}                                          # Path to the Tower config file 

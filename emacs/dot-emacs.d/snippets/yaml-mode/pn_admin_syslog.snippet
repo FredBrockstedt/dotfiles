@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/modify/delete admin-syslog
+# prefix: pn_admin_syslog_snippet
+# key: pn_admin_syslog
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/modify/delete admin-syslog}
+  pn_admin_syslog:                                                         
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use C(present) to create admin-syslog and C(absent) to delete admin-syslog C(update) to mod
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_scope: ${3$$(yas-choose-value '("local" "fabric"))}                 # choices: local;fabric  Scope of the system log 
+    pn_host: ${4:value}                                                    # Hostname to log system events 
+    pn_port: ${5:value}                                                    # Host port 
+    pn_transport: ${6$$(yas-choose-value '("tcp-tls" "udp"))}              # choices: tcp-tls;udp  Transport for log events - tcp/tls or udp 
+    pn_message_format: ${7$$(yas-choose-value '("structured" "legacy"))}   # choices: structured;legacy  message-format for log events - structured or legacy 
+    pn_name: ${8:value}                                                    # name of the system log 

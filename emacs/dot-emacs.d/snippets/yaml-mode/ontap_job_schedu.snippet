@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Job Schedule
+# prefix: na_ontap_job_schedule_snippet
+# key: ontap_job_schedu
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Job Schedule}
+  na_ontap_job_schedule:                                                   
+    name: ${1:The name of the job-schedule to manage}                      #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified job schedule should exist or not 
+    job_minutes: ${6:value}                                                # The minute(s) of each hour when the job should be run  Job Manager cron scheduling minute  -1 represents all minutes and
+    job_hours: ${7:value}                                                  # The hour(s) of the day when the job should be run  Job Manager cron scheduling hour  -1 represents all hours and is only
+    job_months: ${8:value}                                                 # The month(s) when the job should be run  Job Manager cron scheduling month  -1 represents all months and is only support
+    job_days_of_month: ${9:value}                                          # The day(s) of the month when the job should be run  Job Manager cron scheduling day of month  -1 represents all days of 
+    job_days_of_week: ${10:value}                                          # The day(s) in the week when the job should be run  Job Manager cron scheduling day of week  Zero represents Sunday  -1 r
+    https: ${11:False}                                                     # Enable and disable https
+    validate_certs: ${12:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${13:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${14:value}                                                    # The ontap api version to use
+    use_rest: ${15$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Manage MySQL replication
+# prefix: mysql_replication_snippet
+# key: mysql_replicatio
+# group: ansible
+# --
+
+- name: ${0:Manage MySQL replication}
+  mysql_replication:                                                       
+    mode: ${1$$(yas-choose-value '("getslave" "getmaster" "changemaster" "stopslave" "startslave" "resetslave" "resetslaveall"))}# choices: getslave;getmaster;changemaster;stopslave;startslave;rese
+    master_host: ${2:value}                                                # Same as mysql variable 
+    master_user: ${3:value}                                                # Same as mysql variable 
+    master_password: ${4:value}                                            # Same as mysql variable 
+    master_port: ${5:value}                                                # Same as mysql variable 
+    master_connect_retry: ${6:value}                                       # Same as mysql variable 
+    master_log_file: ${7:value}                                            # Same as mysql variable 
+    master_log_pos: ${8:value}                                             # Same as mysql variable 
+    relay_log_file: ${9:value}                                             # Same as mysql variable 
+    relay_log_pos: ${10:value}                                             # Same as mysql variable 
+    master_ssl: ${11:value}                                                # Same as mysql variable 
+    master_ssl_ca: ${12:value}                                             # Same as mysql variable 
+    master_ssl_capath: ${13:value}                                         # Same as mysql variable 
+    master_ssl_cert: ${14:value}                                           # Same as mysql variable 
+    master_ssl_key: ${15:value}                                            # Same as mysql variable 
+    master_ssl_cipher: ${16:value}                                         # Same as mysql variable 
+    master_auto_position: ${17:value}                                      # Whether the host uses GTID based replication or not 
+    login_user: ${18:value}                                                # The username used to authenticate with 
+    login_password: ${19:value}                                            # The password used to authenticate with 
+    login_host: ${20:localhost}                                            # Host running the database 
+    login_port: ${21:3306}                                                 # Port of the MySQL server  Requires I(login_host) be defined as other than localhost if login_port is used 
+    login_unix_socket: ${22:value}                                         # The path to a Unix domain socket for local connections 
+    connect_timeout: ${23:30}                                              # The connection timeout when connecting to the MySQL server 
+    config_file: ${{24:~/}                                                 #my cnf} # not required  Specify a config file from which user and password are to be read 
+    ca_cert: ${25:value}                                                   # The path to a Certificate Authority (CA) certificate  This option, if used, must specify the same certificate as used by
+    client_cert: ${26:value}                                               # The path to a client public key certificate 
+    client_key: ${27:value}                                                # The path to the client private key 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage VLAN interfaces on Solaris/illumos systems.
+# prefix: dladm_vlan_snippet
+# key: dladm_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLAN interfaces on Solaris/illumos systems.}
+  dladm_vlan:                                                              
+    name: ${1:VLAN interface name}                                         #
+    link: ${2:VLAN underlying link name}                                   #
+    temporary: ${3:False}                                                  # Specifies that the VLAN interface is temporary  Temporary VLANs do not persist across reboots 
+    vlan_id: ${4:False}                                                    # VLAN ID value for VLAN interface 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or delete Solaris/illumos VNIC 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/modify/delete ipv6security-raguard
+# prefix: pn_ipv6security_raguard_snippet
+# key: pn_ipv6security_raguard
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/modify/delete ipv6security-raguard}
+  pn_ipv6security_raguard:                                                 
+    pn_name: ${1:RA Guard Policy Name}                                     #
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    state: ${3$$(yas-choose-value '("present" "update" "absent"))}         # choices: present;update;absent  ipv6security-raguard configuration command 
+    pn_device: ${4$$(yas-choose-value '("host" "router"))}                 # choices: host;router  RA Guard Device  host or router 
+    pn_access_list: ${5:value}                                             # RA Guard Access List of Source IPs 
+    pn_prefix_list: ${6:value}                                             # RA Guard Prefix List 
+    pn_router_priority: ${7$$(yas-choose-value '("low" "medium" "high"))}  # choices: low;medium;high  RA Guard Router Priority 

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage a VLAN in a Cloud Control network domain.
+# prefix: dimensiondata_vlan_snippet
+# key: dimensiondata_v
+# group: ansible
+# --
+
+- name: ${0:Manage a VLAN in a Cloud Control network domain.}
+  dimensiondata_vlan:                                                      
+    network_domain: ${1:The Id or name of the target network domain}       #
+    location: ${2:The target datacenter}                                   #
+    name: ${3:value}                                                       # The name of the target VLAN  Required if C(state) is C(present) 
+    description: ${4:value}                                                # A description of the VLAN 
+    private_ipv4_base_address: ${5:value}                                  # The base address for the VLAN's IPv4 network (e g  192 168 1 0) 
+    private_ipv4_prefix_size: ${6:value}                                   # The size of the IPv4 address space, e g 24  Required, if C(private_ipv4_base_address) is specified 
+    state: ${7$$(yas-choose-value '("present" "absent" "readonly"))}       # choices: present;absent;readonly  The desired state for the target VLAN  C(readonly) ensures that the state is only ever
+    allow_expand: ${8:false}                                               # Permit expansion of the target VLAN's network if the module parameters specify a larger network than the VLAN currently 
+    region: ${{9$$(yas-choose-value '("Regions are defined in Apache libcloud project [libcloud/common/dimensiondata}#py],They are also listed in U(https://libcloud readthedocs io/en/latest/compute
+    mcp_user: ${10:value}                                                  # The username used to authenticate to the CloudControl API  If not specified, will fall back to C(MCP_USER) from environm
+    mcp_password: ${11:value}                                              # The password used to authenticate to the CloudControl API  If not specified, will fall back to C(MCP_PASSWORD) from envi
+    validate_certs: ${12:True}                                             # If C(false), SSL certificates will not be validated  This should only be used on private instances of the CloudControl A
+    wait: ${13:False}                                                      # Should we wait for the task to complete before moving onto the next 
+    wait_time: ${14:600}                                                   # The maximum amount of time (in seconds) to wait for the task to complete  Only applicable if I(wait=true) 
+    wait_poll_interval: ${15:2}                                            # The amount of time (in seconds) to wait between checks for task completion  Only applicable if I(wait=true) 

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage services
+# prefix: systemd_snippet
+# key: ystemd
+# group: ansible
+# --
+
+- name: ${0:Manage services}
+  systemd:                                                                 
+    name: ${1:value}                                                       # Name of the service  This parameter takes the name of exactly one service to work with  When using in a chroot environme
+    state: ${2$$(yas-choose-value '("reloaded" "restarted" "started" "stopped"))}# choices: reloaded;restarted;started;stopped  C(started)/C(stopped) are idempotent actions that will not run comman
+    enabled: ${3:value}                                                    # Whether the service should start on boot  B(At least one of state and enabled are required )
+    force: ${4:value}                                                      # Whether to override existing symlinks 
+    masked: ${5:value}                                                     # Whether the unit should be masked or not, a masked unit is impossible to start 
+    daemon_reload: ${6:False}                                              # Run daemon-reload before doing any other operations, to make sure systemd has read any changes  When set to C(yes), runs
+    daemon_reexec: ${7:False}                                              # Run daemon_reexec command before doing any other operations, the systemd manager will serialize the manager state 
+    user: ${8:False}                                                       # (deprecated) run ``systemctl`` talking to the service manager of the calling user, rather than the service manager of th
+    scope: ${9$$(yas-choose-value '("system" "user" "global"))}            # choices: system;user;global  run systemctl within a given service manager scope, either as the default system scope (sys
+    no_block: ${10:False}                                                  # Do not synchronously wait for the requested operation to finish  Enqueued job will continue without Ansible blocking on 

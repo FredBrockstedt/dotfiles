@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage site-local BD subnets in schema template
+# prefix: mso_schema_site_bd_subnet_snippet
+# key: mso_schema_site_bd_subnet
+# group: ansible
+# --
+
+- name: ${0:Manage site-local BD subnets in schema template}
+  mso_schema_site_bd_subnet:                                               
+    schema: ${1:The name of the schema}                                    #
+    site: ${2:The name of the site}                                        #
+    template: ${3:The name of the template}                                #
+    subnet: ${4:The IP range in CIDR notation}                             #
+    host: ${5:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${6:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    bd: ${7:value}                                                         # The name of the BD 
+    description: ${8:value}                                                # The description of this subnet 
+    scope: ${9$$(yas-choose-value '("private" "public"))}                  # choices: private;public  The scope of the subnet 
+    shared: ${10:value}                                                    # Whether this subnet is shared between VRFs 
+    no_default_gateway: ${11:value}                                        # Whether this subnet has a default gateway 
+    state: ${12$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${13:value}                                                      # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${14:admin}                                                  # The username to use for authentication 
+    output_level: ${15$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${16:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${17:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${18:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${19:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

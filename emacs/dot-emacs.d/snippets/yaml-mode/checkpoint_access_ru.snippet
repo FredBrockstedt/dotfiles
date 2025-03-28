@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages access rules on Check Point over Web Services API
+# prefix: checkpoint_access_rule_snippet
+# key: checkpoint_access_ru
+# group: ansible
+# --
+
+- name: ${0:Manages access rules on Check Point over Web Services API}
+  checkpoint_access_rule:                                                  
+    layer: ${1:Layer to attach the access rule to}                         #
+    name: ${2:value}                                                       # Name of the access rule 
+    position: ${3:value}                                                   # Position of the access rule 
+    source: ${4:value}                                                     # Source object of the access rule 
+    destination: ${5:value}                                                # Destination object of the access rule 
+    action: ${6:drop}                                                      # Action of the access rule (accept, drop, inform, etc) 
+    enabled: ${7:True}                                                     # Enabled or disabled flag 
+    state: ${8:present}                                                    # State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${9:true}                                        # Publish the current session if changes have been performed after task completes 
+    auto_install_policy: ${10:true}                                        # Install the package policy if changes have been performed after the task completes 
+    policy_package: ${11:standard}                                         # Package policy name to be installed 
+    targets: ${12:value}                                                   # Targets to install the package policy on 

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Retrieve the information about one or more of the OneView Fibre Channel Networks
+# prefix: oneview_fc_network_info_snippet
+# key: oneview_fc_network_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve the information about one or more of the OneView Fibre Channel Networks}
+  oneview_fc_network_info:                                                 
+    name: ${1:value}                                                       # Fibre Channel Network name 
+    config: ${2:value}                                                     # Path to a  json configuration file containing the OneView client configuration  The configuration file is optional and w
+    params: ${3:value}                                                     # List of params to delimit, filter and sort the list of resources  params allowed: - C(start): The first item to return, 

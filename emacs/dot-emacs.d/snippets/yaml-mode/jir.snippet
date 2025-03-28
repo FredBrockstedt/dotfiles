@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: create and modify issues in a JIRA instance
+# prefix: jira_snippet
+# key: jir
+# group: ansible
+# --
+
+- name: ${0:create and modify issues in a JIRA instance}
+  jira:                                                                    
+    uri: ${1:Base URI for the JIRA instance}                               #
+    operation: ${2$$(yas-choose-value '("create" "comment" "edit" "fetch" "transition" "link"))}# The operation to perform 
+    username: ${3:The username to log-in with}                             #
+    password: ${4:The password to log-in with}                             #
+    project: ${5:value}                                                    # The project for this operation  Required for issue creation 
+    summary: ${6:value}                                                    # The issue summary, where appropriate 
+    description: ${7:value}                                                # The issue description, where appropriate 
+    issuetype: ${8:value}                                                  # The issue type, for issue creation 
+    issue: ${9:value}                                                      # An existing issue key to operate on 
+    comment: ${10:value}                                                   # The comment text to add 
+    status: ${11:value}                                                    # The desired status; only relevant for the transition operation 
+    assignee: ${12:value}                                                  # Sets the assignee on create or transition operations  Note not all transitions will allow this 
+    linktype: ${13:value}                                                  # Set type of link, when action 'link' selected 
+    inwardissue: ${14:value}                                               # Set issue from which link will be created 
+    outwardissue: ${15:value}                                              # Set issue to which link will be created 
+    fields: ${16:value}                                                    # This is a free-form data structure that can contain arbitrary data  This is passed directly to the JIRA REST API (possib
+    timeout: ${17:10}                                                      # Set timeout, in seconds, on requests to JIRA API 
+    validate_certs: ${18:True}                                             # Require valid SSL certificates (set to `false` if you'd like to use self-signed certificates)

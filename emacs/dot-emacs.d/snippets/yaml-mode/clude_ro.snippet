@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Load and execute a role
+# prefix: include_role_snippet
+# key: clude_ro
+# group: ansible
+# --
+
+- name: ${0:Load and execute a role}
+  include_role:                                                            
+    name: ${1:The name of the role to be executed}                         #
+    apply: ${2:value}                                                      # Accepts a hash of task keywords (e g  C(tags), C(become)) that will be applied to all tasks within the included role 
+    tasks_from: ${3:main}                                                  # File to load from a role's C(tasks/) directory 
+    vars_from: ${4:main}                                                   # File to load from a role's C(vars/) directory 
+    defaults_from: ${5:main}                                               # File to load from a role's C(defaults/) directory 
+    allow_duplicates: ${6:True}                                            # Overrides the role's metadata setting to allow using a role more than once with the same parameters 
+    public: ${7:False}                                                     # This option dictates whether the role's C(vars) and C(defaults) are exposed to the playbook  If set to C(yes) the variab
+    handlers_from: ${8:main}                                               # File to load from a role's C(handlers/) directory 

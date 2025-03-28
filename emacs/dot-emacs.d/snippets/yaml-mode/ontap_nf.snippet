@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP NFS status
+# prefix: na_ontap_nfs_snippet
+# key: ontap_nf
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP NFS status}
+  na_ontap_nfs:                                                            
+    vserver: ${1:Name of the vserver to use}                               #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether NFS should exist or not 
+    service_state: ${6$$(yas-choose-value '("started" "stopped"))}         # choices: started;stopped  Whether the specified NFS should be enabled or disabled  Creates NFS service if does not exist
+    nfsv3: ${7$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  status of NFSv3 
+    nfsv3_fsid_change: ${8$$(yas-choose-value '("enabled" "disabled"))}    # choices: enabled;disabled  status of if NFSv3 clients see change in FSID as they traverse filesystems 
+    nfsv4_fsid_change: ${9$$(yas-choose-value '("enabled" "disabled"))}    # choices: enabled;disabled  status of if NFSv4 clients see change in FSID as they traverse filesystems 
+    nfsv4: ${10$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  status of NFSv4 
+    nfsv41: ${11$$(yas-choose-value '("enabled" "disabled"))}              # choices: enabled;disabled  status of NFSv41 
+    nfsv41_pnfs: ${12$$(yas-choose-value '("enabled" "disabled"))}         # choices: enabled;disabled  status of NFSv41 pNFS 
+    nfsv4_numeric_ids: ${13$$(yas-choose-value '("enabled" "disabled"))}   # choices: enabled;disabled  status of NFSv4 numeric ID's 
+    vstorage_state: ${14$$(yas-choose-value '("enabled" "disabled"))}      # choices: enabled;disabled  status of vstorage_state 
+    nfsv4_id_domain: ${15:value}                                           # Name of the nfsv4_id_domain to use 
+    nfsv40_acl: ${16$$(yas-choose-value '("enabled" "disabled"))}          # choices: enabled;disabled  status of NFS v4 0 ACL feature
+    nfsv40_read_delegation: ${17$$(yas-choose-value '("enabled" "disabled"))}# choices: enabled;disabled  status for NFS v4 0 read delegation feature 
+    nfsv40_write_delegation: ${18$$(yas-choose-value '("enabled" "disabled"))}# choices: enabled;disabled  status for NFS v4 0 write delegation feature 
+    nfsv41_acl: ${19$$(yas-choose-value '("enabled" "disabled"))}          # choices: enabled;disabled  status of NFS v4 1 ACL feature
+    nfsv41_read_delegation: ${20$$(yas-choose-value '("enabled" "disabled"))}# choices: enabled;disabled  status for NFS v4 1 read delegation feature 
+    nfsv41_write_delegation: ${21$$(yas-choose-value '("enabled" "disabled"))}# choices: enabled;disabled  status for NFS v4 1 write delegation feature 
+    nfsv40_referrals: ${22$$(yas-choose-value '("enabled" "disabled"))}    # choices: enabled;disabled  status for NFS v4 0 referrals 
+    nfsv41_referrals: ${23$$(yas-choose-value '("enabled" "disabled"))}    # choices: enabled;disabled  status for NFS v4 1 referrals 
+    tcp: ${24$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  Enable TCP (support from ONTAP 9 3 onward) 
+    udp: ${25$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  Enable UDP (support from ONTAP 9 3 onward) 
+    showmount: ${26$$(yas-choose-value '("enabled" "disabled"))}           # choices: enabled;disabled  Whether SVM allows showmount
+    tcp_max_xfer_size: ${27:value}                                         # TCP Maximum Transfer Size (bytes)  The default value is 65536 
+    https: ${28:False}                                                     # Enable and disable https
+    validate_certs: ${29:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${30:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${31:value}                                                    # The ontap api version to use
+    use_rest: ${32$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

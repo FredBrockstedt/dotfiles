@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Configure LVM and NFS file systems for AIX
+# prefix: aix_filesystem_snippet
+# key: x_filesystem
+# group: ansible
+# --
+
+- name: ${0:Configure LVM and NFS file systems for AIX}
+  aix_filesystem:                                                          
+    filesystem: ${1:Specifies the mount point, which is the directory where the file system will be mounted}#
+    state: ${2$$(yas-choose-value '("absent" "mounted" "present" "unmounted"))}# Controls the file system state  C(present) check if file system exists, creates or resize  C(absent) removes existin
+    account_subsystem: ${3:False}                                          # Specifies whether the file system is to be processed by the accounting subsystem 
+    attributes: ${4:agblksize='4096',isnapshot='no'}                       # Specifies attributes for files system separated by comma 
+    auto_mount: ${5:True}                                                  # File system is automatically mounted at system restart 
+    device: ${6:value}                                                     # Logical volume (LV) device name or remote export device to create a NFS file system  It is used to create a file system 
+    fs_type: ${7:jfs2}                                                     # Specifies the virtual file system type 
+    permissions: ${8$$(yas-choose-value '("ro" "rw"))}                     # choices: ro;rw  Set file system permissions  C(rw) (read-write) or C(ro) (read-only) 
+    mount_group: ${9:value}                                                # Specifies the mount group 
+    nfs_server: ${10:value}                                                # Specifies a Network File System (NFS) server 
+    rm_mount_point: ${11:False}                                            # Removes the mount point directory when used with state C(absent) 
+    size: ${12:value}                                                      # Specifies the file system size  For already C(present) it will be resized  512-byte blocks, Megabytes or Gigabytes  If t
+    vg: ${13:value}                                                        # Specifies an existing volume group (VG) 

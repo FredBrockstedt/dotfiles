@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages IGMP global configuration.
+# prefix: nxos_igmp_snippet
+# key: xos_igmp
+# group: ansible
+# --
+
+- name: ${0:Manages IGMP global configuration.}
+  nxos_igmp:                                                               
+    flush_routes: ${1:value}                                               # Removes routes when the IGMP process is restarted  By default, routes are not flushed 
+    enforce_rtr_alert: ${2:value}                                          # Enables or disables the enforce router alert option check for IGMPv2 and IGMPv3 packets 
+    restart: ${3:value}                                                    # Restarts the igmp process (using an exec config command) 
+    state: ${4$$(yas-choose-value '("present" "default"))}                 # choices: present;default  Manages desired state of the resource 
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

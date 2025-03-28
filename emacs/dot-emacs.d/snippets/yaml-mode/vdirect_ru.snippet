@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Runs templates and workflow actions in Radware vDirect server
+# prefix: vdirect_runnable_snippet
+# key: vdirect_ru
+# group: ansible
+# --
+
+- name: ${0:Runs templates and workflow actions in Radware vDirect server}
+  vdirect_runnable:                                                        
+    vdirect_ip: ${1:Primary vDirect server IP address, may be set as C(VDIRECT_IP) environment variable}#
+    vdirect_user: ${2:vDirect server username, may be set as C(VDIRECT_USER) environment variable}#
+    vdirect_password: ${3:vDirect server password, may be set as C(VDIRECT_PASSWORD) environment variable}#
+    runnable_type: ${4$$(yas-choose-value '("ConfigurationTemplate" "Workflow" "WorkflowTemplate"))}# vDirect runnable type 
+    runnable_name: ${5:vDirect runnable name to run}                       # May be configuration template name, workflow template name or workflow instance name 
+    vdirect_secondary_ip: ${6:value}                                       # Secondary vDirect server IP address, may be set as C(VDIRECT_SECONDARY_IP) environment variable 
+    vdirect_wait: ${7:true}                                                # Wait for async operation to complete, may be set as C(VDIRECT_WAIT) environment variable 
+    vdirect_https_port: ${8:2189}                                          # vDirect server HTTPS port number, may be set as C(VDIRECT_HTTPS_PORT) environment variable 
+    vdirect_http_port: ${9:2188}                                           # vDirect server HTTP port number, may be set as C(VDIRECT_HTTP_PORT) environment variable 
+    vdirect_timeout: ${10:60}                                              # Amount of time to wait for async operation completion [seconds], may be set as C(VDIRECT_TIMEOUT) environment variable 
+    vdirect_use_ssl: ${11:true}                                            # If C(no), an HTTP connection will be used instead of the default HTTPS connection, may be set as C(VDIRECT_HTTPS) or C(V
+    validate_certs: ${12:true}                                             # If C(no), SSL certificates will not be validated, may be set as C(VDIRECT_VALIDATE_CERTS) or C(VDIRECT_VERIFY) environme
+    action_name: ${13:value}                                               # Workflow action name to run  Required if I(runnable_type=Workflow) 
+    parameters: ${14:value}                                                # Action parameters dictionary  In case of C(ConfigurationTemplate) runnable type, the device connection details should al

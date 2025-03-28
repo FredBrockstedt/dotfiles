@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify stp-port.
+# prefix: pn_stp_port_snippet
+# key: pn_stp_port
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify stp-port.}
+  pn_stp_port:                                                             
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to update stp-port 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_priority: ${3:128}                                                  # STP port priority from 0 to 240 
+    pn_cost: ${4:2000}                                                     # STP port cost from 1 to 200000000 
+    pn_root_guard: ${5:value}                                              # STP port Root guard 
+    pn_filter: ${6:value}                                                  # STP port filters BPDUs 
+    pn_edge: ${7:value}                                                    # STP port is an edge port 
+    pn_bpdu_guard: ${8:value}                                              # STP port BPDU guard 
+    pn_port: ${9:value}                                                    # STP port 
+    pn_block: ${10:value}                                                  # Specify if a STP port blocks BPDUs 

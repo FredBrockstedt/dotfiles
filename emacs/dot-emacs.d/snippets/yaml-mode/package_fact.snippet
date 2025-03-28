@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: package information as facts
+# prefix: package_facts_snippet
+# key: package_fact
+# group: ansible
+# --
+
+- name: ${0:package information as facts}
+  package_facts:                                                           
+    manager: ${1$$(yas-choose-value '("auto" "rpm" "apt" "portage" "pkg"))}# choices: auto;rpm;apt;portage;pkg  The package manager used by the system so we can query the package information  Since
+    strategy: ${2$$(yas-choose-value '("first" "all"))}                    # choices: first;all  This option controls how the module queries the package managers on the system  C(first) means it wi

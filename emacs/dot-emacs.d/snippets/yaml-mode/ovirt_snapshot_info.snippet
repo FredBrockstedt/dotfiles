@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more oVirt/RHV virtual machine snapshots
+# prefix: ovirt_snapshot_info_snippet
+# key: ovirt_snapshot_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more oVirt/RHV virtual machine snapshots}
+  ovirt_snapshot_info:                                                     
+    vm: ${1:Name of the VM with snapshot}                                  #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt: C(username)[I(required)] - The name of the user, something like I(admin@internal)}# Default value is set by I(O
+    description: ${3:value}                                                # Description of the snapshot, can be used as glob expression 
+    snapshot_id: ${4:value}                                                # Id of the snapshot we want to retrieve information about 
+    fetch_nested: ${5:value}                                               # If I(yes) the module will fetch additional data from the API  It will fetch only IDs of nested entity  It doesn't fetch 
+    nested_attributes: ${6:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is

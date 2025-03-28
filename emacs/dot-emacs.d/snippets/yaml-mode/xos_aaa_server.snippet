@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages AAA server global configuration.
+# prefix: nxos_aaa_server_snippet
+# key: xos_aaa_server
+# group: ansible
+# --
+
+- name: ${0:Manages AAA server global configuration.}
+  nxos_aaa_server:                                                         
+    server_type: ${1$$(yas-choose-value '("radius" "tacacs"))}             # The server type is either radius or tacacs 
+    global_key: ${2:value}                                                 # Global AAA shared secret or keyword 'default' 
+    encrypt_type: ${3$$(yas-choose-value '("0" "7"))}                      # choices: 0;7  The state of encryption applied to the entered global key  O clear text, 7 encrypted  Type-6 encryption is
+    deadtime: ${4:value}                                                   # Duration for which a non-reachable AAA server is skipped, in minutes or keyword 'default  Range is 1-1440  Device defaul
+    server_timeout: ${5:value}                                             # Global AAA server timeout period, in seconds or keyword 'default  Range is 1-60  Device default is 5 
+    directed_request: ${6$$(yas-choose-value '("enabled" "disabled"))}     # choices: enabled;disabled  Enables direct authentication requests to AAA server or keyword 'default' Device default is d
+    state: ${7$$(yas-choose-value '("present" "default"))}                 # choices: present;default  Manage the state of the resource 
+    provider: ${8:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

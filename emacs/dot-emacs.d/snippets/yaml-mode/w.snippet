@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage awall policies
+# prefix: awall_snippet
+# key: w
+# group: ansible
+# --
+
+- name: ${0:Manage awall policies}
+  awall:                                                                   
+    name: ${1:value}                                                       # One or more policy names 
+    state: ${2$$(yas-choose-value '("disabled" "enabled"))}                # choices: disabled;enabled  Whether the policies should be enabled or disabled 
+    activate: ${3:False}                                                   # Activate the new firewall rules  Can be run with other steps or on its own 

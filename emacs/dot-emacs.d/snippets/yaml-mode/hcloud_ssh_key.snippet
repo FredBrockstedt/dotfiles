@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create and manage ssh keys on the Hetzner Cloud.
+# prefix: hcloud_ssh_key_snippet
+# key: hcloud_ssh_key
+# group: ansible
+# --
+
+- name: ${0:Create and manage ssh keys on the Hetzner Cloud.}
+  hcloud_ssh_key:                                                          
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the Hetzner Cloud ssh_key to manage  Only required if no ssh_key I(name) is given
+    name: ${3:value}                                                       # The Name of the Hetzner Cloud ssh_key to manage  Only required if no ssh_key I(id) is given or a ssh_key does not exists
+    fingerprint: ${4:value}                                                # The Fingerprint of the Hetzner Cloud ssh_key to manage  Only required if no ssh_key I(id) or I(name) is given 
+    labels: ${5:value}                                                     # User-defined labels (key-value pairs)
+    public_key: ${6:value}                                                 # The Public Key to add  Required if ssh_key does not exists 
+    state: ${7$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the ssh_key 
+    endpoint: ${{8:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

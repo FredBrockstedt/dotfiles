@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage logging on network devices
+# prefix: cnos_logging_snippet
+# key: cnos_logging
+# group: ansible
+# --
+
+- name: ${0:Manage logging on network devices}
+  cnos_logging:                                                            
+    dest: ${1$$(yas-choose-value '("server" "console" "monitor" "logfile"))}# choices: server;console;monitor;logfile  Destination of the logs  Lenovo uses the term server instead of host in its CL
+    name: ${2:value}                                                       # If value of C(dest) is I(file) it indicates file-name and for I(server) indicates the server name to be notified 
+    size: ${3:10485760}                                                    # Size of buffer  The acceptable value is in range from 4096 to 4294967295 bytes 
+    facility: ${4:value}                                                   # Set logging facility  This is applicable only for server logging
+    level: ${5:5}                                                          # Set logging severity levels  0-emerg;1-alert;2-crit;3-err;4-warn; 5-notif;6-inform;7-debug
+    aggregate: ${6:value}                                                  # L i s t   o f   l o g g i n g   d e f i n i t i o n s  
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the logging configuration 

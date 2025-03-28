@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Configure 1&1 monitoring policy.
+# prefix: oneandone_monitoring_policy_snippet
+# key: oneandone_monitoring_policy
+# group: ansible
+# --
+
+- name: ${0:Configure 1&1 monitoring policy.}
+  oneandone_monitoring_policy:                                             
+    auth_token: ${1:Authenticating API token provided by 1&1}              #
+    name: ${2:Monitoring policy name used with present state}              # Used as identifier (id or name) when used with absent state  maxLength=128
+    monitoring_policy: ${3:The identifier (id or name) of the monitoring policy used with update state}#
+    agent: ${4:Set true for using agent}                                   #
+    email: ${5:User's email}                                               # maxLength=128
+    thresholds: ${6:Monitoring policy thresholds}                          # Each of the suboptions have warning and critical, which both have alert and value suboptions  Warning is used to set lim
+    ports: ${7:Array of ports that will be monitoring}                     #
+    processes: ${8:Array of processes that will be monitoring}             #
+    state: ${9$$(yas-choose-value '("present" "absent" "update"))}         # choices: present;absent;update  Define a monitoring policy's state to create, remove, update 
+    api_url: ${10:value}                                                   # Custom API URL  Overrides the ONEANDONE_API_URL environement variable 
+    description: ${11:value}                                               # Monitoring policy description  maxLength=256
+    add_ports: ${12:value}                                                 # Ports to add to the monitoring policy 
+    add_processes: ${13:value}                                             # Processes to add to the monitoring policy 
+    add_servers: ${14:value}                                               # Servers to add to the monitoring policy 
+    remove_ports: ${15:value}                                              # Ports to remove from the monitoring policy 
+    remove_processes: ${16:value}                                          # Processes to remove from the monitoring policy 
+    remove_servers: ${17:value}                                            # Servers to remove from the monitoring policy 
+    update_ports: ${18:value}                                              # Ports to be updated on the monitoring policy 
+    update_processes: ${19:value}                                          # Processes to be updated on the monitoring policy 
+    wait: ${20:true}                                                       # wait for the instance to be in state 'running' before returning
+    wait_timeout: ${21:600}                                                # how long before wait gives up, in seconds
+    wait_interval: ${22:5}                                                 # Defines the number of seconds to wait when using the _wait_for methods

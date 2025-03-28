@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Add or remove applications on a Webfaction host
+# prefix: webfaction_app_snippet
+# key: webfaction_app
+# group: ansible
+# --
+
+- name: ${0:Add or remove applications on a Webfaction host}
+  webfaction_app:                                                          
+    name: ${1:The name of the application}                                 #
+    type: ${2:The type of application to create}                           # See the Webfaction docs at U(https://docs webfaction com/xmlrpc-api/apps html) for a list 
+    login_name: ${3:The webfaction account to use}                         #
+    login_password: ${4:The webfaction password to use}                    #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the application should exist
+    autostart: ${6:false}                                                  # Whether the app should restart with an C(autostart cgi) script
+    extra_info: ${7:}                                                      # Any extra parameters required by the app
+    port_open: ${8:false}                                                  # IF the port should be opened
+    machine: ${9:value}                                                    # The machine name to use (optional for accounts with only one machine)

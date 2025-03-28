@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Create/delete Zabbix host groups
+# prefix: zabbix_group_snippet
+# key: zabbix_group
+# group: ansible
+# --
+
+- name: ${0:Create/delete Zabbix host groups}
+  zabbix_group:                                                            
+    host_groups: ${1:List of host groups to create or delete}              #
+    server_url: ${2:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${3:Zabbix user name}                                      #
+    login_password: ${4:Zabbix user password}                              #
+    http_login_user: ${5:Basic Auth login}                                 #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or delete host group 
+    http_login_password: ${7:value}                                        # Basic Auth password
+    timeout: ${8:10}                                                       # The timeout of API request (seconds) 
+    validate_certs: ${9:True}                                              # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

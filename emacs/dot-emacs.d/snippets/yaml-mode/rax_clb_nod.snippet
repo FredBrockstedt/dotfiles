@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: add, modify and remove nodes from a Rackspace Cloud Load Balancer
+# prefix: rax_clb_nodes_snippet
+# key: rax_clb_nod
+# group: ansible
+# --
+
+- name: ${0:add, modify and remove nodes from a Rackspace Cloud Load Balancer}
+  rax_clb_nodes:                                                           
+    load_balancer_id: ${1:Load balancer id}                                #
+    address: ${2:value}                                                    # IP address or domain name of the node
+    condition: ${3$$(yas-choose-value '("enabled" "disabled" "draining"))} # choices: enabled;disabled;draining  Condition for the node, which determines its role within the load balancer
+    node_id: ${4:value}                                                    # Node id
+    port: ${5:value}                                                       # Port number of the load balanced service on the node
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the node
+    type: ${7$$(yas-choose-value '("primary" "secondary"))}                # choices: primary;secondary  Type of node
+    wait: ${8:false}                                                       # Wait for the load balancer to become active before returning
+    wait_timeout: ${9:30}                                                  # How long to wait before giving up and returning an error
+    weight: ${10:value}                                                    # Weight of node
+    api_key: ${11:value}                                                   # Rackspace API key, overrides I(credentials) 
+    credentials: ${12:value}                                               # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${13:value}                                                       # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    region: ${14:DFW}                                                      # Region to create an instance in 
+    username: ${15:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${16:value}                                            # Whether or not to require SSL validation of API endpoints 
+    auth_endpoint: ${{17:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    identity_type: ${18:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    tenant_id: ${19:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${20:value}                                               # The tenant name used for authentication 

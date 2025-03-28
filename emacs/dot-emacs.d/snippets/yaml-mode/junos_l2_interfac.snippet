@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Layer-2 interface on Juniper JUNOS devices
+# prefix: junos_l2_interfaces_snippet
+# key: junos_l2_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Layer-2 interface on Juniper JUNOS devices}
+  junos_l2_interfaces:                                                     
+    config: ${1:value}                                                     # A   d i c t i o n a r y   o f   L a y e r - 2   i n t e r f a c e   o p t i o n s
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion

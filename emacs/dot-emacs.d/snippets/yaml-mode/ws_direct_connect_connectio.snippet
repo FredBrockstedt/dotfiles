@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Creates, deletes, modifies a DirectConnect connection
+# prefix: aws_direct_connect_connection_snippet
+# key: ws_direct_connect_connectio
+# group: ansible
+# --
+
+- name: ${0:Creates, deletes, modifies a DirectConnect connection}
+  aws_direct_connect_connection:                                           
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state of the Direct Connect connection 
+    name: ${2:value}                                                       # The name of the Direct Connect connection  This is required to create a new connection  To recreate or delete a connecti
+    connection_id: ${3:value}                                              # The ID of the Direct Connect connection  I(name) or I(connection_id) is required to recreate or delete a connection  Mod
+    location: ${4:value}                                                   # Where the Direct Connect connection is located  Required when I(state=present) 
+    bandwidth: ${5$$(yas-choose-value '("1Gbps" "10Gbps"))}                # choices: 1Gbps;10Gbps  The bandwidth of the Direct Connect connection  Required when I(state=present) 
+    link_aggregation_group: ${6:value}                                     # The ID of the link aggregation group you want to associate with the connection  This is optional in case a stand-alone c
+    forced_update: ${7:value}                                              # To modify bandwidth or location the connection will need to be deleted and recreated  By default this will not happen - 
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

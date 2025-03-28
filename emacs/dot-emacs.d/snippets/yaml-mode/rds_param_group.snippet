@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: manage RDS parameter groups
+# prefix: rds_param_group_snippet
+# key: rds_param_group
+# group: ansible
+# --
+
+- name: ${0:manage RDS parameter groups}
+  rds_param_group:                                                         
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Specifies whether the group should be present or absent 
+    name: ${2:Database parameter group identifier}                         #
+    description: ${3:value}                                                # Database parameter group description  Only set when a new group is added 
+    engine: ${4:value}                                                     # The type of database for this group  Required for state=present  Please use following command to get list of all support
+    immediate: ${5:value}                                                  # Whether to apply the changes immediately, or after the next reboot of any associated instances 
+    params: ${6:value}                                                     # Map of parameter names and values  Numeric values may be represented as K for kilo (1024), M for mega (1024^2), G for gi
+    tags: ${7:value}                                                       # Dictionary of tags to attach to the parameter group
+    purge_tags: ${8:False}                                                 # Whether or not to remove tags that do not appear in the I(tags) list 
+    debug_botocore_endpoint_logs: ${9:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${10:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${11:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${12:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${13:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${14:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${15:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${16:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

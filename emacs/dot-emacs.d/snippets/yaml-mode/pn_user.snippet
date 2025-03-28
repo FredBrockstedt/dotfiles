@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/modify/delete user
+# prefix: pn_user_snippet
+# key: pn_user
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/modify/delete user}
+  pn_user:                                                                 
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use C(present) to create user and C(absent) to delete user C(update) to update user 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_scope: ${3$$(yas-choose-value '("local" "fabric"))}                 # choices: local;fabric  local or fabric 
+    pn_initial_role: ${4:value}                                            # initial role for user 
+    pn_password: ${5:value}                                                # plain text password 
+    pn_name: ${6:value}                                                    # username 

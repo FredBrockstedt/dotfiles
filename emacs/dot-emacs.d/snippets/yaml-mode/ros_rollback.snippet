@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configure Nokia SR OS rollback
+# prefix: sros_rollback_snippet
+# key: ros_rollback
+# group: ansible
+# --
+
+- name: ${0:Configure Nokia SR OS rollback}
+  sros_rollback:                                                           
+    rollback_location: ${1:value}                                          # The I(rollback_location) specifies the location and filename of the rollback checkpoint files    This argument supports 
+    remote_max_checkpoints: ${2:value}                                     # The I(remote_max_checkpoints) argument configures the maximum number of rollback files that can be transferred and saved
+    local_max_checkpoints: ${3:value}                                      # The I(local_max_checkpoints) argument configures the maximum number of rollback files that can be saved on the devices l
+    rescue_location: ${4:value}                                            # The I(rescue_location) specifies the location of the rescue file   This argument supports any valid local or remote URL 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The I(state) argument specifies the state of the configuration entries in the devices active co
+    provider: ${6:value}                                                   # A dict object containing connection details 

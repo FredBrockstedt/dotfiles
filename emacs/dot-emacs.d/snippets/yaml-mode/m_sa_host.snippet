@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Adds hosts to or removes them from IBM Spectrum Accelerate Family storage systems.
+# prefix: ibm_sa_host_snippet
+# key: m_sa_host
+# group: ansible
+# --
+
+- name: ${0:Adds hosts to or removes them from IBM Spectrum Accelerate Family storage systems.}
+  ibm_sa_host:                                                             
+    host: ${1:Host name}                                                   #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Host state 
+    username: ${3:Management user on the spectrum accelerate storage system}#
+    password: ${4:Password for username on the spectrum accelerate storage system}#
+    endpoints: ${5:The hostname or management IP of Spectrum Accelerate storage system}#
+    cluster: ${6:value}                                                    # The name of the cluster to include the host 
+    domain: ${7:value}                                                     # The domains the cluster will be attached to  To include more than one domain, separate domain names with commas  To incl
+    iscsi_chap_name: ${8:value}                                            # The host's CHAP name identifier
+    iscsi_chap_secret: ${9:value}                                          # The password of the initiator used to authenticate to the system when CHAP is enable

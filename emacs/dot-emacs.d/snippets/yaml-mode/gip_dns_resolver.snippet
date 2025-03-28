@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage DNS resolvers on a BIG-IP
+# prefix: bigip_dns_resolver_snippet
+# key: gip_dns_resolver
+# group: ansible
+# --
+
+- name: ${0:Manage DNS resolvers on a BIG-IP}
+  bigip_dns_resolver:                                                      
+    name: ${1:Specifies the name of the DNS resolver}                      #
+    route_domain: ${2:value}                                               # Specifies the route domain the resolver uses for outbound traffic 
+    cache_size: ${3:value}                                                 # Specifies the size of the internal DNS resolver cache  When creating a new resolver, if this parameter is not specified,
+    answer_default_zones: ${4:value}                                       # Specifies whether the system answers DNS queries for the default zones localhost, reverse 127 0 0 1 and ::1, and AS112  
+    randomize_query_case: ${5:value}                                       # When C(yes), specifies that the internal DNS resolver randomizes character case in domain name queries issued to the roo
+    use_ipv4: ${6:value}                                                   # Specifies whether the system can use IPv4 to query backend nameservers  An IPv4 Self IP and default route must be availa
+    use_ipv6: ${7:value}                                                   # Specifies whether the system can use IPv6 to query backend nameservers  An IPv6 Self IP and default route must be availa
+    use_udp: ${8:value}                                                    # Specifies whether the system answers and issues UDP-formatted queries  When creating a new resolver, if this parameter i
+    use_tcp: ${9:value}                                                    # Specifies whether the system answers and issues TCP-formatted queries  When creating a new resolver, if this parameter i
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    partition: ${11:Common}                                                # Device partition to manage resources on 
+    provider: ${12:value}                                                  # A dict object containing connection details 

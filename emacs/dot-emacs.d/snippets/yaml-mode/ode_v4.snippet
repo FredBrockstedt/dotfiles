@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage instances on the Linode cloud.
+# prefix: linode_v4_snippet
+# key: ode_v4
+# group: ansible
+# --
+
+- name: ${0:Manage instances on the Linode cloud.}
+  linode_v4:                                                               
+    label: ${1:The instance label}                                         # This label is used as the main determiner for idempotence for the module and is therefore mandatory 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # The desired instance state 
+    access_token: ${3:The Linode API v4 access token}                      # It may also be specified by exposing the C(LINODE_ACCESS_TOKEN) environment variable  See U(https://developers linode co
+    region: ${4:value}                                                     # The region of the instance  This is a required parameter only when creating Linode instances  See U(https://developers l
+    image: ${5:value}                                                      # The image of the instance  This is a required parameter only when creating Linode instances  See U(https://developers li
+    type: ${6:value}                                                       # The type of the instance  This is a required parameter only when creating Linode instances  See U(https://developers lin
+    group: ${7:value}                                                      # The group that the instance should be marked under  Please note, that group labelling is deprecated but still supported 
+    tags: ${8:value}                                                       # The tags that the instance should be marked under  See U(https://developers linode com/api/v4#tag/Tags) 
+    root_pass: ${9:value}                                                  # The password for the root user  If not specified, one will be generated  This generated password will be available in th
+    authorized_keys: ${10:value}                                           # A list of SSH public key parts to deploy for the root user 

@@ -1,0 +1,181 @@
+# -*- mode: snippet -*-
+# name: Manages Virtual IPs objects in FortiManager
+# prefix: fmgr_fwobj_vip_snippet
+# key: fmgr_fwobj_vip
+# group: ansible
+# --
+
+- name: ${0:Manages Virtual IPs objects in FortiManager}
+  fmgr_fwobj_vip:                                                          
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    websphere_server: ${3$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable to add an HTTP header to indicate SSL offloading for a WebSphere server  choice | disabl
+    weblogic_server: ${4$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable to add an HTTP header to indicate SSL offloading for a WebLogic server  choice | disable
+    type: ${5$$(yas-choose-value '("static-nat" "load-balance" "server-load-balance" "dns-translation" "fqdn"))}# choices: static-nat;load-balance;server-load-balance;dns-translation;fqdn  Configur
+    ssl_server_session_state_type: ${6$$(yas-choose-value '("disable" "time" "count" "both"))}# choices: disable;time;count;both  How to expire SSL sessions for the segment of the SSL connection be
+    ssl_server_session_state_timeout: ${7:value}                           # Number of minutes to keep FortiGate to Server SSL session state 
+    ssl_server_session_state_max: ${8:value}                               # Maximum number of FortiGate to Server SSL session states to keep 
+    ssl_server_min_version: ${{9$$(yas-choose-value '("ssl-3}              #0,tls-1 0,tls-1 1,tls-1 2,client|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2;client  Lowest SSL/TLS versio
+    ssl_server_max_version: ${{10$$(yas-choose-value '("ssl-3}             #0,tls-1 0,tls-1 1,tls-1 2,client|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2;client  Highest SSL/TLS versi
+    ssl_server_algorithm: ${11$$(yas-choose-value '("high" "low" "medium" "custom" "client"))}# choices: high;low;medium;custom;client  Permitted encryption algorithms for the server side of SSL fu
+    ssl_send_empty_frags: ${12$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable sending empty fragments to avoid CBC IV attacks (SSL 3 0 &amp; TLS 1 0 only)  ch
+    ssl_pfs: ${13$$(yas-choose-value '("require" "deny" "allow"))}         # choices: require;deny;allow  Select the cipher suites that can be used for SSL perfect forward secrecy (PFS)  choice | r
+    ssl_mode: ${14$$(yas-choose-value '("half" "full"))}                   # choices: half;full  Apply SSL offloading mode choice | half | Client to FortiGate SSL  choice | full | Client to FortiGa
+    ssl_min_version: ${{15$$(yas-choose-value '("ssl-3}                    #0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  Lowest SSL/TLS version acceptable f
+    ssl_max_version: ${{16$$(yas-choose-value '("ssl-3}                    #0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  Highest SSL/TLS version acceptable 
+    ssl_http_match_host: ${17$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable/disable HTTP host matching for location conversion  choice | disable | Do not match HTTP
+    ssl_http_location_conversion: ${18$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable to replace HTTP with HTTPS in the reply's Location HTTP header field  choice | dis
+    ssl_hsts_include_subdomains: ${19$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Indicate that HSTS header applies to all subdomains  choice | disable | HSTS header does n
+    ssl_hsts_age: ${20:value}                                              # Number of seconds the client should honour the HSTS setting 
+    ssl_hsts: ${21$$(yas-choose-value '("disable" "enable"))}              # choices: disable;enable  Enable/disable including HSTS header in response  choice | disable | Do not add a HSTS header t
+    ssl_hpkp_report_uri: ${22:value}                                       # URL to report HPKP violations to 
+    ssl_hpkp_primary: ${23:value}                                          # Certificate to generate primary HPKP pin from 
+    ssl_hpkp_include_subdomains: ${24$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Indicate that HPKP header applies to all subdomains  choice | disable | HPKP header does n
+    ssl_hpkp_backup: ${25:value}                                           # Certificate to generate backup HPKP pin from 
+    ssl_hpkp_age: ${26:value}                                              # Number of seconds the client should honour the HPKP setting 
+    ssl_hpkp: ${27$$(yas-choose-value '("disable" "enable" "report-only"))}# choices: disable;enable;report-only  Enable/disable including HPKP header in response  choice | disable | Do not add a H
+    ssl_dh_bits: ${28$$(yas-choose-value '("768" "1024" "1536" "2048" "3072" "4096"))}# choices: 768;1024;1536;2048;3072;4096  Number of bits to use in the Diffie-Hellman exchange for RSA encryptio
+    ssl_client_session_state_type: ${29$$(yas-choose-value '("disable" "time" "count" "both"))}# choices: disable;time;count;both  How to expire SSL sessions for the segment of the SSL connection b
+    ssl_client_session_state_timeout: ${30:value}                          # Number of minutes to keep client to FortiGate SSL session state 
+    ssl_client_session_state_max: ${31:value}                              # Maximum number of client to FortiGate SSL session states to keep 
+    ssl_client_renegotiation: ${32$$(yas-choose-value '("deny" "allow" "secure"))}# choices: deny;allow;secure  Allow, deny, or require secure renegotiation of client sessions to comply with RFC 57
+    ssl_client_fallback: ${33$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable/disable support for preventing Downgrade Attacks on client connections (RFC 7507)  choic
+    ssl_certificate: ${34:value}                                           # The name of the SSL certificate to use for SSL acceleration 
+    ssl_algorithm: ${35$$(yas-choose-value '("high" "medium" "low" "custom"))}# choices: high;medium;low;custom  Permitted encryption algorithms for SSL sessions according to encryption strength  c
+    srcintf_filter: ${36:value}                                            # Interfaces to which the VIP applies  Separate the names with spaces 
+    src_filter: ${37:value}                                                # Source address filter  Each address must be either an IP/subnet (x x x x/n) or a range (x x x x-y y y y)  Separate addre
+    service: ${38:value}                                                   # Service name 
+    server_type: ${39$$(yas-choose-value '("http" "https" "ssl" "tcp" "udp" "ip" "imaps" "pop3s" "smtps"))}# choices: http;https;ssl;tcp;udp;ip;imaps;pop3s;smtps  Protocol to be load balanced by th
+    protocol: ${40$$(yas-choose-value '("tcp" "udp" "sctp" "icmp"))}       # choices: tcp;udp;sctp;icmp  Protocol to use when forwarding packets  choice | tcp | TCP  choice | udp | UDP  choice | sc
+    portmapping_type: ${41$$(yas-choose-value '("1-to-1" "m-to-n"))}       # choices: 1-to-1;m-to-n  Port mapping type  choice | 1-to-1 | One to one  choice | m-to-n | Many to many 
+    portforward: ${42$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable port forwarding  choice | disable | Disable port forward  choice | enable | Enab
+    persistence: ${43$$(yas-choose-value '("none" "http-cookie" "ssl-session-id"))}# choices: none;http-cookie;ssl-session-id  Configure how to make sure that clients connect to the same server eve
+    outlook_web_access: ${44$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable to add the Front-End-Https header for Microsoft Outlook Web Access  choice | disable | D
+    nat_source_vip: ${45$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable to prevent unintended servers from using a virtual IP  Disable to use the actual IP addr
+    name: ${46:value}                                                      # Virtual IP name 
+    monitor: ${47:value}                                                   # Name of the health check monitor to use when polling to determine a virtual server's connectivity status 
+    max_embryonic_connections: ${48:value}                                 # Maximum number of incomplete connections 
+    mappedport: ${49:value}                                                # Port number range on the destination network to which the external port number range is mapped 
+    mappedip: ${50:value}                                                  # IP address or address range on the destination network to which the external IP address is mapped 
+    mapped_addr: ${51:value}                                               # Mapped FQDN address name 
+    ldb_method: ${52$$(yas-choose-value '("static" "round-robin" "weighted" "least-session" "least-rtt" "first-alive" "http-host"))}# choices: static;round-robin;weighted;least-session;least-rtt;fi
+    https_cookie_secure: ${53$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable/disable verification that inserted HTTPS cookies are secure  choice | disable | Do not m
+    http_multiplex: ${54$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable/disable HTTP multiplexing  choice | disable | Disable HTTP session multiplexing  choice 
+    http_ip_header_name: ${55:value}                                       # For HTTP multiplexing, enter a custom HTTPS header name  The orig client IP address is added to this header  If empty, X
+    http_ip_header: ${56$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  For HTTP multiplexing, enable to add the original client IP address in the XForwarded-For HTTP 
+    http_cookie_share: ${57$$(yas-choose-value '("disable" "same-ip"))}    # choices: disable;same-ip  Control sharing of cookies across virtual servers  same-ip means a cookie from one virtual ser
+    http_cookie_path: ${58:value}                                          # Limit HTTP cookie persistence to the specified path 
+    http_cookie_generation: ${59:value}                                    # Generation of HTTP cookie to be accepted  Changing invalidates all existing cookies 
+    http_cookie_domain_from_host: ${60$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable use of HTTP cookie domain from host field in HTTP  choice | disable | Disa
+    http_cookie_domain: ${61:value}                                        # Domain that HTTP cookie persistence should apply to 
+    http_cookie_age: ${62:value}                                           # Time in minutes that client web browsers should keep a cookie  Default is 60 seconds  0 = no time limit 
+    gratuitous_arp_interval: ${63:value}                                   # Enable to have the VIP send gratuitous ARPs  0=disabled  Set from 5 up to 8640000 seconds to enable 
+    extport: ${64:value}                                                   # Incoming port number range that you want to map to a port number range on the destination network 
+    extip: ${65:value}                                                     # IP address or address range on the external interface that you want to map to an address or address range on t he destin
+    extintf: ${66:value}                                                   # Interface connected to the source network that receives the packets that will be forwarded to the destination network 
+    extaddr: ${67:value}                                                   # External FQDN address name 
+    dns_mapping_ttl: ${68:value}                                           # DNS mapping TTL (Set to zero to use TTL in DNS response, default = 0) 
+    comment: ${69:value}                                                   # Comment 
+    color: ${70:value}                                                     # Color of icon on the GUI 
+    arp_reply: ${71$$(yas-choose-value '("disable" "enable"))}             # choices: disable;enable  Enable to respond to ARP requests for this virtual IP address  Enabled by default  choice | dis
+    dynamic_mapping: ${72:value}                                           # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    dynamic_mapping_arp_reply: ${73$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent  cho
+    dynamic_mapping_color: ${74:value}                                     # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_comment: ${75:value}                                   # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_dns_mapping_ttl: ${76:value}                           # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_extaddr: ${77:value}                                   # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_extintf: ${78:value}                                   # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_extip: ${79:value}                                     # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_extport: ${80:value}                                   # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_gratuitous_arp_interval: ${81:value}                   # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_http_cookie_age: ${82:value}                           # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_http_cookie_domain: ${83:value}                        # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_http_cookie_domain_from_host: ${84$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descript
+    dynamic_mapping_http_cookie_generation: ${85:value}                    # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_http_cookie_path: ${86:value}                          # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_http_cookie_share: ${87$$(yas-choose-value '("disable" "same-ip"))}# choices: disable;same-ip  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as P
+    dynamic_mapping_http_ip_header: ${88$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent
+    dynamic_mapping_http_ip_header_name: ${89:value}                       # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_http_multiplex: ${90$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent
+    dynamic_mapping_https_cookie_secure: ${91$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as P
+    dynamic_mapping_ldb_method: ${92$$(yas-choose-value '("static" "round-robin" "weighted" "least-session" "least-rtt" "first-alive" "http-host"))}# choices: static;round-robin;weighted;least-sess
+    dynamic_mapping_mapped_addr: ${93:value}                               # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_mappedip: ${94:value}                                  # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_mappedport: ${95:value}                                # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_max_embryonic_connections: ${96:value}                 # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_monitor: ${97:value}                                   # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_nat_source_vip: ${98$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent
+    dynamic_mapping_outlook_web_access: ${99$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Pa
+    dynamic_mapping_persistence: ${100$$(yas-choose-value '("none" "http-cookie" "ssl-session-id"))}# choices: none;http-cookie;ssl-session-id  Dynamic Mapping Version of Suffixed Option Name  Sub-
+    dynamic_mapping_portforward: ${101$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent  
+    dynamic_mapping_portmapping_type: ${102$$(yas-choose-value '("1-to-1" "m-to-n"))}# choices: 1-to-1;m-to-n  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Paren
+    dynamic_mapping_protocol: ${103$$(yas-choose-value '("tcp" "udp" "sctp" "icmp"))}# choices: tcp;udp;sctp;icmp  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as P
+    dynamic_mapping_server_type: ${104$$(yas-choose-value '("http" "https" "ssl" "tcp" "udp" "ip" "imaps" "pop3s" "smtps"))}# choices: http;https;ssl;tcp;udp;ip;imaps;pop3s;smtps  Dynamic Mapping V
+    dynamic_mapping_service: ${105:value}                                  # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_src_filter: ${106:value}                               # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_srcintf_filter: ${107:value}                           # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_algorithm: ${108$$(yas-choose-value '("high" "medium" "low" "custom"))}# choices: high;medium;low;custom  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same De
+    dynamic_mapping_ssl_certificate: ${109:value}                          # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_client_fallback: ${110$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as 
+    dynamic_mapping_ssl_client_renegotiation: ${111$$(yas-choose-value '("deny" "allow" "secure"))}# choices: deny;allow;secure  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Des
+    dynamic_mapping_ssl_client_session_state_max: ${112:value}             # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_client_session_state_timeout: ${113:value}         # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_client_session_state_type: ${114$$(yas-choose-value '("disable" "time" "count" "both"))}# choices: disable;time;count;both  Dynamic Mapping Version of Suffixed Option Name  
+    dynamic_mapping_ssl_dh_bits: ${115$$(yas-choose-value '("768" "1024" "1536" "2048" "3072" "4096"))}# choices: 768;1024;1536;2048;3072;4096  Dynamic Mapping Version of Suffixed Option Name  Sub-
+    dynamic_mapping_ssl_hpkp: ${116$$(yas-choose-value '("disable" "enable" "report-only"))}# choices: disable;enable;report-only  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same D
+    dynamic_mapping_ssl_hpkp_age: ${117:value}                             # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_hpkp_backup: ${118:value}                          # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_hpkp_include_subdomains: ${119$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descript
+    dynamic_mapping_ssl_hpkp_primary: ${120:value}                         # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_hpkp_report_uri: ${121:value}                      # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_hsts: ${122$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent  cho
+    dynamic_mapping_ssl_hsts_age: ${123:value}                             # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_hsts_include_subdomains: ${124$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descript
+    dynamic_mapping_ssl_http_location_conversion: ${125$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descrip
+    dynamic_mapping_ssl_http_match_host: ${126$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as 
+    dynamic_mapping_ssl_max_version: ${{127$$(yas-choose-value '("ssl-3}   #0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  Dynamic Mapping Version of Suffixed
+    dynamic_mapping_ssl_min_version: ${{128$$(yas-choose-value '("ssl-3}   #0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  Dynamic Mapping Version of Suffixed
+    dynamic_mapping_ssl_mode: ${129$$(yas-choose-value '("half" "full"))}  # choices: half;full  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent  choice | ha
+    dynamic_mapping_ssl_pfs: ${130$$(yas-choose-value '("require" "deny" "allow"))}# choices: require;deny;allow  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Pa
+    dynamic_mapping_ssl_send_empty_frags: ${131$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as
+    dynamic_mapping_ssl_server_algorithm: ${132$$(yas-choose-value '("high" "low" "medium" "custom" "client"))}# choices: high;low;medium;custom;client  Dynamic Mapping Version of Suffixed Option N
+    dynamic_mapping_ssl_server_max_version: ${{133$$(yas-choose-value '("ssl-3}#0,tls-1 0,tls-1 1,tls-1 2,client|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2;client  Dynamic Mapping V
+    dynamic_mapping_ssl_server_min_version: ${{134$$(yas-choose-value '("ssl-3}#0,tls-1 0,tls-1 1,tls-1 2,client|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2;client  Dynamic Mapping V
+    dynamic_mapping_ssl_server_session_state_max: ${135:value}             # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_server_session_state_timeout: ${136:value}         # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_server_session_state_type: ${137$$(yas-choose-value '("disable" "time" "count" "both"))}# choices: disable;time;count;both  Dynamic Mapping Version of Suffixed Option Name  
+    dynamic_mapping_type: ${138$$(yas-choose-value '("static-nat" "load-balance" "server-load-balance" "dns-translation" "fqdn"))}# choices: static-nat;load-balance;server-load-balance;dns-translat
+    dynamic_mapping_weblogic_server: ${139$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Pare
+    dynamic_mapping_websphere_server: ${140$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Par
+    dynamic_mapping_realservers_client_ip: ${141:value}                    # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_realservers_healthcheck: ${142$$(yas-choose-value '("disable" "enable" "vip"))}# choices: disable;enable;vip  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same De
+    dynamic_mapping_realservers_holddown_interval: ${143:value}            # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_realservers_http_host: ${144:value}                    # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_realservers_ip: ${145:value}                           # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_realservers_max_connections: ${146:value}              # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_realservers_monitor: ${147:value}                      # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_realservers_port: ${148:value}                         # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_realservers_seq: ${149:value}                          # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_realservers_status: ${150$$(yas-choose-value '("active" "standby" "disable"))}# choices: active;standby;disable  Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same
+    dynamic_mapping_realservers_weight: ${151:value}                       # Dynamic Mapping Version of Suffixed Option Name  Sub-Table  Same Descriptions as Parent 
+    dynamic_mapping_ssl_cipher_suites_cipher: ${152$$(yas-choose-value '("TLS-RSA-WITH-RC4-128-MD5" "TLS-RSA-WITH-RC4-128-SHA" "TLS-RSA-WITH-DES-CBC-SHA" "TLS-RSA-WITH-3DES-EDE-CBC-SHA" "TLS-RSA-WI
+    dynamic_mapping_ssl_cipher_suites_versions: ${{153$$(yas-choose-value '("ssl-3}#0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  Dynamic Mapping Version of 
+    realservers: ${154:value}                                              # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    realservers_client_ip: ${155:value}                                    # Only clients in this IP range can connect to this real server 
+    realservers_healthcheck: ${156$$(yas-choose-value '("disable" "enable" "vip"))}# choices: disable;enable;vip  Enable to check the responsiveness of the real server before forwarding traffic  ch
+    realservers_holddown_interval: ${157:value}                            # Time in seconds that the health check monitor monitors an unresponsive server that should be active 
+    realservers_http_host: ${158:value}                                    # HTTP server domain name in HTTP header 
+    realservers_ip: ${159:value}                                           # IP address of the real server 
+    realservers_max_connections: ${160:value}                              # Max number of active connections that can be directed to the real server  When reached, sessions are sent to their real 
+    realservers_monitor: ${161:value}                                      # Name of the health check monitor to use when polling to determine a virtual server's connectivity status 
+    realservers_port: ${162:value}                                         # Port for communicating with the real server  Required if port forwarding is enabled 
+    realservers_seq: ${163:value}                                          # Real Server Sequence Number
+    realservers_status: ${164$$(yas-choose-value '("active" "standby" "disable"))}# choices: active;standby;disable  Set the status of the real server to active so that it can accept traffic  Or on
+    realservers_weight: ${165:value}                                       # Weight of the real server  If weighted load balancing is enabled, the server with the highest weight gets more connectio
+    ssl_cipher_suites: ${166:value}                                        # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ssl_cipher_suites_cipher: ${167$$(yas-choose-value '("TLS-RSA-WITH-RC4-128-MD5" "TLS-RSA-WITH-RC4-128-SHA" "TLS-RSA-WITH-DES-CBC-SHA" "TLS-RSA-WITH-3DES-EDE-CBC-SHA" "TLS-RSA-WITH-AES-128-CBC-S
+    ssl_cipher_suites_versions: ${{168$$(yas-choose-value '("ssl-3}        #0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  SSL/TLS versions that the cipher su
+    ssl_server_cipher_suites: ${169:value}                                 # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ssl_server_cipher_suites_cipher: ${170$$(yas-choose-value '("TLS-RSA-WITH-RC4-128-MD5" "TLS-RSA-WITH-RC4-128-SHA" "TLS-RSA-WITH-DES-CBC-SHA" "TLS-RSA-WITH-3DES-EDE-CBC-SHA" "TLS-RSA-WITH-AES-12
+    ssl_server_cipher_suites_priority: ${171:value}                        # SSL/TLS cipher suites priority 
+    ssl_server_cipher_suites_versions: ${{172$$(yas-choose-value '("ssl-3} #0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  SSL/TLS versions that the cipher su

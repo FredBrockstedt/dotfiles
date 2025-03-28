@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Avi API Module
+# prefix: avi_api_session_snippet
+# key: vi_api_sessio
+# group: ansible
+# --
+
+- name: ${0:Avi API Module}
+  avi_api_session:                                                         
+    http_method: ${1$$(yas-choose-value '("get" "put" "post" "patch" "delete"))}# Allowed HTTP methods for RESTful services and are supported by Avi Controller 
+    data: ${2:value}                                                       # HTTP body in YAML or JSON format 
+    params: ${3:value}                                                     # Query parameters passed to the HTTP API 
+    path: ${4:value}                                                       # Path for Avi API resource  For example, C(path: virtualservice) will translate to C(api/virtualserivce) 
+    timeout: ${5:60}                                                       # Timeout (in seconds) for Avi API calls 
+    controller: ${6:}                                                      # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${7:}                                                        # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${8:}                                                        # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${9:admin}                                                     # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${10:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{11:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${12:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${13:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${14:value}                         # It disables avi session information to be cached as a fact 

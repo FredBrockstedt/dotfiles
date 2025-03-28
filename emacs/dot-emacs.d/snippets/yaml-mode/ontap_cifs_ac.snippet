@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage cifs-share-access-control
+# prefix: na_ontap_cifs_acl_snippet
+# key: ontap_cifs_ac
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage cifs-share-access-control}
+  na_ontap_cifs_acl:                                                       
+    share_name: ${1:The name of the cifs-share-access-control to manage}   #
+    vserver: ${2:Name of the vserver to use}                               #
+    user_or_group: ${3:The user or group name for which the permissions are listed}#
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    permission: ${7$$(yas-choose-value '("no_access" "read" "change" "full_control"))}# choices: no_access;read;change;full_control  - " T h e   a c c e s s   r i g h t s   t h a t   t h e   u s e 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified CIFS share acl should exist or not 
+    https: ${9:False}                                                      # Enable and disable https
+    validate_certs: ${10:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${11:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${12:value}                                                    # The ontap api version to use
+    use_rest: ${13$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

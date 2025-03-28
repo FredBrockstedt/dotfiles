@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Sends Toast windows notification to logged in users on Windows 10 or later hosts
+# prefix: win_toast_snippet
+# key: win_toast
+# group: ansible
+# --
+
+- name: ${0:Sends Toast windows notification to logged in users on Windows 10 or later hosts}
+  win_toast:                                                               
+    expire: ${1:45}                                                        # How long in seconds before the notification expires 
+    group: ${2:Powershell}                                                 # Which notification group to add the notification to 
+    msg: ${3:"Hello, World!"}                                              # The message to appear inside the notification  May include \\n to format the message to appear within the Action Center 
+    popup: ${4:True}                                                       # If C(no), the notification will not pop up and will only appear in the Action Center 
+    tag: ${5:Ansible}                                                      # The tag to add to the notification 
+    title: ${6:"Notification HH:mm"}                                       # The notification title, which appears in the pop up  

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manages F5 BIG-IP LTM https monitors
+# prefix: bigip_monitor_https_snippet
+# key: gip_monitor_http
+# group: ansible
+# --
+
+- name: ${0:Manages F5 BIG-IP LTM https monitors}
+  bigip_monitor_https:                                                     
+    name: ${1:Monitor name}                                                #
+    description: ${2:value}                                                # The description of the monitor 
+    parent: ${3:/Common/https}                                             # The parent template of this monitor template  Once this value has been set, it cannot be changed  By default, this value
+    send: ${4:value}                                                       # The send string for the monitor call  When creating a new monitor, if this value is not provided, the default C(GET /\\\
+    receive: ${5:value}                                                    # The receive string for the monitor call 
+    receive_disable: ${6:value}                                            # This setting works like C(receive), except that the system marks the node or pool member disabled when its response matc
+    ip: ${7:value}                                                         # IP address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the defau
+    port: ${8:value}                                                       # Port address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the def
+    interval: ${9:value}                                                   # The interval specifying how frequently the monitor instance of this template will run  If this parameter is not provided
+    timeout: ${10:value}                                                   # The number of seconds in which the node or service must respond to the monitor request  If the target responds within th
+    time_until_up: ${11:value}                                             # Specifies the amount of time in seconds after the first successful response before a node will be marked up  A value of 
+    target_username: ${12:value}                                           # Specifies the user name, if the monitored target requires authentication 
+    target_password: ${13:value}                                           # Specifies the password, if the monitored target requires authentication 
+    ssl_profile: ${14:value}                                               # Specifies the SSL profile to use for the HTTPS monitor  Defining SSL profiles enables refined customization of the SSL a
+    up_interval: ${15:value}                                               # Specifies the interval for the system to use to perform the health check when a resource is up  When C(0), specifies tha
+    partition: ${16:Common}                                                # Device partition to manage resources on 
+    state: ${17$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the monitor exists  When C(absent), ensures the monitor is remove
+    provider: ${18:value}                                                  # A dict object containing connection details 

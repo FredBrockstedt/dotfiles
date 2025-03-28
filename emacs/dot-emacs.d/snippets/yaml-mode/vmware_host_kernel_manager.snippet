@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage kernel module options on ESXi hosts
+# prefix: vmware_host_kernel_manager_snippet
+# key: vmware_host_kernel_manager
+# group: ansible
+# --
+
+- name: ${0:Manage kernel module options on ESXi hosts}
+  vmware_host_kernel_manager:                                              
+    kernel_module_name: ${1:Name of the kernel module to be configured}    #
+    kernel_module_option: ${2:Specified configurations will be applied to the given module}# These values are specified in key=value pairs and separated by a space when there are multiple options 
+    esxi_hostname: ${3:value}                                              # Name of the ESXi host to work on  This parameter is required if C(cluster_name) is not specified 
+    cluster_name: ${4:value}                                               # Name of the VMware cluster to work on  All ESXi hosts in this cluster will be configured  This parameter is required if 
+    hostname: ${5:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${6:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${7:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${8:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${9:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${10:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${11:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

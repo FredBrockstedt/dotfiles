@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Manage an Azure Container Instance
+# prefix: azure_rm_containerinstance_snippet
+# key: zure_rm_containerinstanc
+# group: ansible
+# --
+
+- name: ${0:Manage an Azure Container Instance}
+  azure_rm_containerinstance:                                              
+    resource_group: ${1:Name of resource group}                            #
+    name: ${2:The name of the container group}                             #
+    os_type: ${3$$(yas-choose-value '("linux" "windows"))}                 # choices: linux;windows  The OS type of containers 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the container instance  Use C(present) to create or update an container ins
+    ip_address: ${5$$(yas-choose-value '("public" "none"))}                # choices: public;none  The IP address type of the container group  Default is C(none) and creating an instance without pu
+    dns_name_label: ${6:value}                                             # The Dns name label for the IP 
+    ports: ${7:value}                                                      # List of ports exposed within the container group  This option is deprecated, using I(ports) under I(containers)" 
+    location: ${8:value}                                                   # Valid azure location  Defaults to location of the resource group 
+    registry_login_server: ${9:value}                                      # The container image registry login server 
+    registry_username: ${10:value}                                         # The username to log in container image registry server 
+    registry_password: ${11:value}                                         # The password to log in container image registry server 
+    containers: ${12:value}                                                # List of containers  Required when creation 
+    restart_policy: ${13$$(yas-choose-value '("always" "on_failure" "never"))}# choices: always;on_failure;never  Restart policy for all containers within the container group 
+    force_update: ${14:false}                                              # Force update of existing container instance  Any update will result in deletion and recreation of existing containers 
+    ad_user: ${15:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${16:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${17:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${18:value}                                           # Your Azure subscription Id 
+    client_id: ${19:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${20:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${21:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${22:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${23:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${24$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${25$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${26:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${27:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${28:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

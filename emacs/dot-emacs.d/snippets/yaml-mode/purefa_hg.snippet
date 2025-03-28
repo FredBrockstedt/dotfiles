@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage hostgroups on Pure Storage FlashArrays
+# prefix: purefa_hg_snippet
+# key: purefa_hg
+# group: ansible
+# --
+
+- name: ${0:Manage hostgroups on Pure Storage FlashArrays}
+  purefa_hg:                                                               
+    hostgroup: ${1:The name of the hostgroup}                              #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Define whether the hostgroup should exist or not 
+    host: ${5:value}                                                       # List of existing hosts to add to hostgroup 
+    volume: ${6:value}                                                     # List of existing volumes to add to hostgroup 

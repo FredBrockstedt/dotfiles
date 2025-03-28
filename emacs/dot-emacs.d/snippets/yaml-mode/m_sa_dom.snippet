@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages domains on IBM Spectrum Accelerate Family storage systems
+# prefix: ibm_sa_domain_snippet
+# key: m_sa_dom
+# group: ansible
+# --
+
+- name: ${0:Manages domains on IBM Spectrum Accelerate Family storage systems}
+  ibm_sa_domain:                                                           
+    domain: ${1:Name of the domain to be managed}                          #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # The desired state of the domain 
+    username: ${3:Management user on the spectrum accelerate storage system}#
+    password: ${4:Password for username on the spectrum accelerate storage system}#
+    endpoints: ${5:The hostname or management IP of Spectrum Accelerate storage system}#
+    ldap_id: ${6:value}                                                    # ldap id to add to the domain 
+    size: ${7:value}                                                       # Size of the domain 
+    hard_capacity: ${8:value}                                              # Hard capacity of the domain 
+    soft_capacity: ${9:value}                                              # Soft capacity of the domain 
+    max_cgs: ${10:value}                                                   # Number of max cgs 
+    max_dms: ${11:value}                                                   # Number of max dms 
+    max_mirrors: ${12:value}                                               # Number of max_mirrors 
+    max_pools: ${13:value}                                                 # Number of max_pools 
+    max_volumes: ${14:value}                                               # Number of max_volumes 
+    perf_class: ${15:value}                                                # Add the domain to a performance class 

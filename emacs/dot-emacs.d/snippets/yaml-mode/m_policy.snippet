@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage IAM policies for users, groups, and roles
+# prefix: iam_policy_snippet
+# key: m_policy
+# group: ansible
+# --
+
+- name: ${0:Manage IAM policies for users, groups, and roles}
+  iam_policy:                                                              
+    iam_type: ${1$$(yas-choose-value '("user" "group" "role"))}            # Type of IAM resource
+    iam_name: ${2:Name of IAM resource you wish to target for policy actions}# In other words, the user name, group name or role name 
+    policy_name: ${3:The name label for the policy to create or remove}    #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # Whether to create or delete the IAM policy 
+    policy_document: ${5:value}                                            # The path to the properly json formatted policy file (mutually exclusive with C(policy_json))
+    policy_json: ${6:value}                                                # A properly json formatted policy as string (mutually exclusive with C(policy_document), see https://github com/ansible/a
+    skip_duplicates: ${7:/}                                                # By default the module looks for any policies that match the document you pass in, if there is a match it will not make a
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

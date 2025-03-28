@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages F5 BIG-IP GTM tcp monitors
+# prefix: bigip_gtm_monitor_tcp_snippet
+# key: gip_gtm_monitor_tcp
+# group: ansible
+# --
+
+- name: ${0:Manages F5 BIG-IP GTM tcp monitors}
+  bigip_gtm_monitor_tcp:                                                   
+    name: ${1:Monitor name}                                                #
+    parent: ${2:/Common/tcp}                                               # The parent template of this monitor template  Once this value has been set, it cannot be changed  By default, this value
+    send: ${3:value}                                                       # The send string for the monitor call 
+    receive: ${4:value}                                                    # The receive string for the monitor call 
+    ip: ${5:value}                                                         # IP address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the defau
+    port: ${6:value}                                                       # Port address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the def
+    interval: ${7:value}                                                   # The interval specifying how frequently the monitor instance of this template will run  If this parameter is not provided
+    timeout: ${8:value}                                                    # The number of seconds in which the node or service must respond to the monitor request  If the target responds within th
+    partition: ${9:Common}                                                 # Device partition to manage resources on 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the monitor exists  When C(absent), ensures the monitor is remove
+    probe_timeout: ${11:value}                                             # Specifies the number of seconds after which the system times out the probe request to the system  When creating a new mo
+    ignore_down_response: ${12:value}                                      # Specifies that the monitor allows more than one probe attempt per interval  When C(yes), specifies that the monitor igno
+    transparent: ${13:value}                                               # Specifies whether the monitor operates in transparent mode  A monitor in transparent mode directs traffic through the as
+    reverse: ${14:value}                                                   # Instructs the system to mark the target resource down when the test is successful  This setting is useful, for example, 
+    provider: ${15:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Pause/unpause Pingdom alerts
+# prefix: pingdom_snippet
+# key: pingdom
+# group: ansible
+# --
+
+- name: ${0:Pause/unpause Pingdom alerts}
+  pingdom:                                                                 
+    state: ${1$$(yas-choose-value '("running" "paused"))}                  # Define whether or not the check should be running or paused 
+    checkid: ${2:Pingdom ID of the check}                                  #
+    uid: ${3:Pingdom user ID}                                              #
+    passwd: ${4:Pingdom user password}                                     #
+    key: ${5:Pingdom API key}                                              #

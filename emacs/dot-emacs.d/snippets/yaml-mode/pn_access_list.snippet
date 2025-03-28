@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete access-list
+# prefix: pn_access_list_snippet
+# key: pn_access_list
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete access-list}
+  pn_access_list:                                                          
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use 'present' to create access-list and 'absent' to delete access-list 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_name: ${3:value}                                                    # Access List Name 
+    pn_scope: ${4$$(yas-choose-value '("local" "fabric"))}                 # choices: local;fabric  scope  Available valid values - local or fabric 

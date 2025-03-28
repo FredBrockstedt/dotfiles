@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manages virtual machines running on Citrix Hypervisor/XenServer host or pool
+# prefix: xenserver_guest_snippet
+# key: xenserver_guest
+# group: ansible
+# --
+
+- name: ${0:Manages virtual machines running on Citrix Hypervisor/XenServer host or pool}
+  xenserver_guest:                                                         
+    name: ${1:Name of the VM to work with}                                 # VMs running on XenServer do not necessarily have unique names  The module will fail if multiple VMs with same name are f
+    state: ${2$$(yas-choose-value '("present" "absent" "poweredon"))}      # choices: present;absent;poweredon  Specify the state VM should be in  If C(state) is set to C(present) and VM exists, en
+    name_desc: ${3:value}                                                  # VM description 
+    uuid: ${4:value}                                                       # UUID of the VM to manage if known  This is XenServer's unique identifier  It is required if name is not unique  Please n
+    template: ${5:value}                                                   # Name of a template, an existing VM (must be shut down) or a snapshot that should be used to create VM  Templates/VMs/sna
+    template_uuid: ${6:value}                                              # UUID of a template, an existing VM or a snapshot that should be used to create VM  It is required if template name is no
+    is_template: ${7:False}                                                # Convert VM to template 
+    folder: ${8:value}                                                     # Destination folder for VM  This parameter is case sensitive  Example:   folder: /folder1/folder2
+    hardware: ${9:value}                                                   # Manage VM's hardware parameters  VM needs to be shut down to reconfigure these parameters  Valid parameters are:  - C(nu
+    disks: ${10:value}                                                     # A list of disks to add to VM  All parameters are case sensitive  Removing or detaching existing disks of VM is not suppo
+    cdrom: ${11:value}                                                     # A CD-ROM configuration for the VM  All parameters are case sensitive  Valid parameters are:  - C(type) (string): The typ
+    networks: ${12:value}                                                  # A list of networks (in the order of the NICs)  All parameters are case sensitive  Required parameters per entry:  - C(na
+    home_server: ${13:value}                                               # Name of a XenServer host that will be a Home Server for the VM  This parameter is case sensitive 
+    custom_params: ${14:value}                                             # Define a list of custom VM params to set on VM  Useful for advanced users familiar with managing VM params trough xe CLI
+    wait_for_ip_address: ${15:False}                                       # Wait until XenServer detects an IP address for the VM  If C(state) is set to C(absent), this parameter is ignored  This 
+    state_change_timeout: ${16:0}                                          # By default, module will wait indefinitely for VM to accquire an IP address if C(wait_for_ip_address: yes)  If this param
+    linked_clone: ${17:False}                                              # Whether to create a Linked Clone from the template, existing VM or snapshot  If no, will create a full copy  This is equ
+    force: ${18:False}                                                     # Ignore warnings and complete the actions  This parameter is useful for removing VM in running state or reconfiguring VM 
+    hostname: ${19:localhost}                                              # The hostname or IP address of the XenServer host or XenServer pool master  If the value is not specified in the task, th
+    username: ${20:root}                                                   # The username to use for connecting to XenServer  If the value is not specified in the task, the value of environment var
+    password: ${21:value}                                                  # The password to use for connecting to XenServer  If the value is not specified in the task, the value of environment var
+    validate_certs: ${22:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i

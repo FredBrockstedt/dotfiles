@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify vflow-table-profile
+# prefix: pn_vflow_table_profile_snippet
+# key: pn_vflow_table_prof
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify vflow-table-profile}
+  pn_vflow_table_profile:                                                  
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the vflow-table-profile 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_profile: ${3$$(yas-choose-value '("application" "ipv6" "qos"))}     # choices: application;ipv6;qos  type of vFlow profile 
+    pn_hw_tbl: ${4$$(yas-choose-value '("switch-main" "switch-hash" "npu-main" "npu-hash"))}# choices: switch-main;switch-hash;npu-main;npu-hash  hardware table used by vFlow 
+    pn_enable: ${5:value}                                                  # enable or disable vflow profile table 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove ipv6security-raguard-port
+# prefix: pn_ipv6security_raguard_port_snippet
+# key: pn_ipv6security_raguard_port
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove ipv6security-raguard-port}
+  pn_ipv6security_raguard_port:                                            
+    pn_name: ${1:RA Guard Policy Name}                                     #
+    pn_ports: ${2:Ports attached to RA Guard Policy}                       #
+    pn_cliswitch: ${3:value}                                               # Target switch to run the CLI on 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  ipv6security-raguard-port configuration command 

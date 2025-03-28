@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series create and delete snapshot images
+# prefix: netapp_e_snapshot_images_snippet
+# key: tapp_e_snapshot_imag
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series create and delete snapshot images}
+  netapp_e_snapshot_images:                                                
+    api_username: ${1:The username to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_password: ${2:The password to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_url: ${3:The url to the SANtricity WebServices Proxy or embedded REST API}#
+    snapshot_group: ${4:The name of the snapshot group in which you want to create a snapshot image}#
+    state: ${5$$(yas-choose-value '("create" "remove"))}                   # Whether a new snapshot image should be created or oldest be deleted 
+    validate_certs: ${6:True}                                              # Should https certificates be validated?

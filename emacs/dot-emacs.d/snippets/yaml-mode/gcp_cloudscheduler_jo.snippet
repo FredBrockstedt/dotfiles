@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Job
+# prefix: gcp_cloudscheduler_job_snippet
+# key: gcp_cloudscheduler_jo
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Job}
+  gcp_cloudscheduler_job:                                                  
+    name: ${1:The name of the job}                                         #
+    region: ${2:Region where the scheduler job resides }                   #
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${5:value}                                                # A human-readable description for the job  This string must not contain more than 500 characters 
+    schedule: ${6:value}                                                   # Describes the schedule on which the job will be executed 
+    time_zone: ${7:Etc/UTC}                                                # Specifies the time zone to be used in interpreting schedule  The value of this field must be a time zone name from the t
+    retry_config: ${8:value}                                               # By default, if a job does not complete successfully, meaning that an acknowledgement is not received from the handler, t
+    pubsub_target: ${9:value}                                              # Pub/Sub target If the job providers a Pub/Sub target the cron will publish a message to the provided topic  
+    app_engine_http_target: ${10:value}                                    # App Engine HTTP target  If the job providers a App Engine HTTP target the cron will send a request to the service instan
+    http_target: ${11:value}                                               # HTTP target  If the job providers a http_target the cron will send a request to the targeted url  
+    project: ${12:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${13:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${14:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${15:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${16:value}                                                    # Array of scopes to be used 
+    env_type: ${17:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

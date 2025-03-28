@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage the collection of local users on VyOS device
+# prefix: vyos_user_snippet
+# key: vyos_user
+# group: ansible
+# --
+
+- name: ${0:Manage the collection of local users on VyOS device}
+  vyos_user:                                                               
+    aggregate: ${1:value}                                                  # The set of username objects to be configured on the remote VyOS device  The list entries can either be the username or a
+    name: ${2:value}                                                       # The username to be configured on the VyOS device  This argument accepts a string value and is mutually exclusive with th
+    full_name: ${3:value}                                                  # The C(full_name) argument provides the full name of the user account to be created on the remote device  This argument a
+    configured_password: ${4:value}                                        # The password to be configured on the VyOS device  The password needs to be provided in clear and it will be encrypted on
+    update_password: ${5$$(yas-choose-value '("on_create" "always"))}      # choices: on_create;always  Since passwords are encrypted in the device running config, this argument will instruct the m
+    level: ${6:value}                                                      # The C(level) argument configures the level of the user when logged into the system  This argument accepts string values 
+    purge: ${7:False}                                                      # Instructs the module to consider the resource definition absolute  It will remove any previously configured usernames on
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the state of the username definition as it relates to the device operational configu
+    provider: ${9:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

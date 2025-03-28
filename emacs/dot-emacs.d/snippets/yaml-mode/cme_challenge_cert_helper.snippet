@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Prepare certificates required for ACME challenges such as C(tls-alpn-01)
+# prefix: acme_challenge_cert_helper_snippet
+# key: cme_challenge_cert_helper
+# group: ansible
+# --
+
+- name: ${0:Prepare certificates required for ACME challenges such as C(tls-alpn-01)}
+  acme_challenge_cert_helper:                                              
+    challenge: ${1$$(yas-choose-value '("tls-alpn-01"))}                   # The challenge type 
+    challenge_data: ${2:The C(challenge_data) entry provided by M(acme_certificate) for the challenge}#
+    private_key_src: ${3:value}                                            # Path to a file containing the private key file to use for this challenge certificate  Mutually exclusive with C(private_
+    private_key_content: ${4:value}                                        # Content of the private key to use for this challenge certificate  Mutually exclusive with C(private_key_src) 

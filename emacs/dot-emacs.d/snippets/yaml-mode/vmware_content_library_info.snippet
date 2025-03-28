@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Gather information about VMware Content Library
+# prefix: vmware_content_library_info_snippet
+# key: vmware_content_library_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about VMware Content Library}
+  vmware_content_library_info:                                             
+    library_id: ${1:value}                                                 # content library id for which details needs to be fetched 
+    hostname: ${2:value}                                                   # The hostname or IP address of the vSphere vCenter server  If the value is not specified in the task, the value of enviro
+    username: ${3:value}                                                   # The username of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    password: ${4:value}                                                   # The password of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    validate_certs: ${5:True}                                              # Allows connection when SSL certificates are not valid  Set to C(no) when certificates are not trusted  If the value is n
+    protocol: ${6$$(yas-choose-value '("http" "https"))}                   # choices: http;https  The connection to protocol 

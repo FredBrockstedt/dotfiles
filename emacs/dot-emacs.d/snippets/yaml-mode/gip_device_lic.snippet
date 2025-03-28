@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage license installation and activation on BIG-IP devices
+# prefix: bigip_device_license_snippet
+# key: gip_device_lic
+# group: ansible
+# --
+
+- name: ${0:Manage license installation and activation on BIG-IP devices}
+  bigip_device_license:                                                    
+    license_key: ${1:value}                                                # The registration key to use to license the BIG-IP  This parameter is required if the C(state) is equal to C(present)  Th
+    license_server: ${{2:activate}                                         #f5 com} # not required  The F5 license server to use when getting a license and validating a dossier  This parameter is r
+    state: ${3$$(yas-choose-value '("absent" "present" "revoked"))}        # choices: absent;present;revoked  The state of the license on the system  When C(present), only guarantees that a license
+    accept_eula: ${4:False}                                                # Declares whether you accept the BIG-IP EULA or not  By default, this value is C(no)  You must specifically declare that 
+    provider: ${5:value}                                                   # A dict object containing connection details 

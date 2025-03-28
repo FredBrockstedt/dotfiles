@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Create, update and delete VMware content library
+# prefix: vmware_content_library_manager_snippet
+# key: vmware_content_library_manager
+# group: ansible
+# --
+
+- name: ${0:Create, update and delete VMware content library}
+  vmware_content_library_manager:                                          
+    library_name: ${1:The name of VMware content library to manage}        #
+    library_description: ${2:}                                             # The content library description  This is required only if C(state) is set to C(present)  This parameter is ignored, when
+    library_type: ${3$$(yas-choose-value '("local" "subscribed"))}         # choices: local;subscribed  The content library type  This is required only if C(state) is set to C(present)  This parame
+    datastore_name: ${4:value}                                             # Name of the datastore on which backing content library is created  This is required only if C(state) is set to C(present
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state of content library  If set to C(present) and library does not exists, then content li
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter server  If the value is not specified in the task, the value of enviro
+    username: ${7:value}                                                   # The username of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    password: ${8:value}                                                   # The password of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(no) when certificates are not trusted  If the value is n
+    protocol: ${10$$(yas-choose-value '("http" "https"))}                  # choices: http;https  The connection to protocol 

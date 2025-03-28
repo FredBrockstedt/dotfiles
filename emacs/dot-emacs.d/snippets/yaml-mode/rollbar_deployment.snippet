@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Notify Rollbar about app deployments
+# prefix: rollbar_deployment_snippet
+# key: rollbar_deployment
+# group: ansible
+# --
+
+- name: ${0:Notify Rollbar about app deployments}
+  rollbar_deployment:                                                      
+    token: ${1:Your project access token}                                  #
+    environment: ${2:Name of the environment being deployed, e}            #g  'production' 
+    revision: ${3:Revision number/sha being deployed}                      #
+    user: ${4:value}                                                       # User who deployed 
+    rollbar_user: ${5:value}                                               # Rollbar username of the user who deployed 
+    comment: ${6:value}                                                    # Deploy comment (e g  what is being deployed) 
+    url: ${{7:https://api}                                                 #rollbar com/api/1/deploy/} # not required  Optional URL to submit the notification to 
+    validate_certs: ${8:true}                                              # If C(no), SSL certificates for the target url will not be validated  This should only be used on personally controlled s

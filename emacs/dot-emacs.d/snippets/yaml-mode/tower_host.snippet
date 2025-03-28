@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower host.
+# prefix: tower_host_snippet
+# key: tower_host
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower host.}
+  tower_host:                                                              
+    name: ${1:The name to use for the host}                                #
+    inventory: ${2:Inventory the host should be made a member of}          #
+    description: ${3:value}                                                # The description to use for the host 
+    enabled: ${4:true}                                                     # If the host should be enabled 
+    variables: ${5:value}                                                  # Variables to use for the host  Use C(@) for a file 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of the resource 
+    tower_host: ${7:value}                                                 # URL to your Tower instance 
+    tower_username: ${8:value}                                             # Username for your Tower instance 
+    tower_password: ${9:value}                                             # Password for your Tower instance 
+    validate_certs: ${10:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${11:value}                                         # Path to the Tower config file 

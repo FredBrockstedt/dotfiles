@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Add or remove a database on Webfaction
+# prefix: webfaction_db_snippet
+# key: webfaction_d
+# group: ansible
+# --
+
+- name: ${0:Add or remove a database on Webfaction}
+  webfaction_db:                                                           
+    name: ${1:The name of the database}                                    #
+    type: ${2$$(yas-choose-value '("mysql" "postgresql"))}                 # The type of database to create 
+    login_name: ${3:The webfaction account to use}                         #
+    login_password: ${4:The webfaction password to use}                    #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the database should exist
+    password: ${6:value}                                                   # The password for the new database user 
+    machine: ${7:value}                                                    # The machine name to use (optional for accounts with only one machine)

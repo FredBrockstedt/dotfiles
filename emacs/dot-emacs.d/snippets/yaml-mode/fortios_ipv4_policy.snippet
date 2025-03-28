@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: Manage IPv4 policy objects on Fortinet FortiOS firewall devices
+# prefix: fortios_ipv4_policy_snippet
+# key: fortios_ipv4_policy
+# group: ansible
+# --
+
+- name: ${0:Manage IPv4 policy objects on Fortinet FortiOS firewall devices}
+  fortios_ipv4_policy:                                                     
+    id: ${1:Policy ID}                                                     # Warning: policy ID number is different than Policy sequence number  The policy ID is the number assigned at policy creat
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies if policy I(id) need to be added or deleted 
+    src_intf: ${3:any}                                                     # Specifies source interface name(s) 
+    dst_intf: ${4:any}                                                     # Specifies destination interface name(s) 
+    src_addr: ${5:value}                                                   # Specifies source address (or group) object name(s)  Required when I(state=present) 
+    src_addr_negate: ${6:False}                                            # Negate source address param 
+    dst_addr: ${7:value}                                                   # Specifies destination address (or group) object name(s)  Required when I(state=present) 
+    dst_addr_negate: ${8:False}                                            # Negate destination address param 
+    policy_action: ${9$$(yas-choose-value '("accept" "deny"))}             # choices: accept;deny  Specifies accept or deny action policy  Required when I(state=present) 
+    service: ${10:value}                                                   # Specifies policy service(s), could be a list (ex: ['MAIL','DNS'])  Required when I(state=present) 
+    service_negate: ${11:False}                                            # Negate policy service(s) defined in service value 
+    schedule: ${12:always}                                                 # defines policy schedule 
+    nat: ${13:False}                                                       # Enable or disable Nat 
+    fixedport: ${14:False}                                                 # Use fixed port for nat 
+    poolname: ${15:value}                                                  # Specifies NAT pool name 
+    av_profile: ${16:value}                                                # Specifies Antivirus profile name 
+    webfilter_profile: ${17:value}                                         # Specifies Webfilter profile name 
+    ips_sensor: ${18:value}                                                # Specifies IPS Sensor profile name 
+    application_list: ${19:value}                                          # Specifies Application Control name 
+    logtraffic: ${20$$(yas-choose-value '("disable" "utm" "all"))}         # choices: disable;utm;all  Logs sessions that matched policy 
+    logtraffic_start: ${21:False}                                          # Logs beginning of session as well 
+    comment: ${22:value}                                                   # free text to describe policy 
+    file_mode: ${23:False}                                                 # Don't connect to any device, only use I(config_file) as input and Output 
+    config_file: ${24:value}                                               # Path to configuration file  Required when I(file_mode) is True 
+    host: ${25:value}                                                      # Specifies the DNS hostname or IP address for connecting to the remote fortios device  Required when I(file_mode) is Fals
+    username: ${26:value}                                                  # Configures the username used to authenticate to the remote device  Required when I(file_mode) is True 
+    password: ${27:value}                                                  # Specifies the password used to authenticate to the remote device  Required when I(file_mode) is True 
+    timeout: ${28:60}                                                      # Timeout in seconds for connecting to the remote device 
+    vdom: ${29:value}                                                      # Specifies on which vdom to apply configuration
+    backup: ${30:False}                                                    # This argument will cause the module to create a backup of the current C(running-config) from the remote device before an
+    backup_path: ${31:value}                                               # Specifies where to store backup files  Required if I(backup=yes) 
+    backup_filename: ${32:value}                                           # Specifies the backup filename  If omitted filename will be formatted like HOST_config YYYY-MM-DD@HH:MM:SS

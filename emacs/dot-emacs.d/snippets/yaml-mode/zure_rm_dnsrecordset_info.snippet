@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Get DNS Record Set facts
+# prefix: azure_rm_dnsrecordset_info_snippet
+# key: zure_rm_dnsrecordset_info
+# group: ansible
+# --
+
+- name: ${0:Get DNS Record Set facts}
+  azure_rm_dnsrecordset_info:                                              
+    relative_name: ${1:value}                                              # Only show results for a Record Set 
+    resource_group: ${2:value}                                             # Limit results by resource group  Required when filtering by name or type 
+    zone_name: ${3:value}                                                  # Limit results by zones  Required when filtering by name or type 
+    record_type: ${4:value}                                                # Limit record sets by record type 
+    top: ${5:value}                                                        # Limit the maximum number of record sets to return 
+    ad_user: ${6:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${7:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${8:value}                                                    # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${9:value}                                            # Your Azure subscription Id 
+    client_id: ${10:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${11:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${12:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${13:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${14:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${15$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${16$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${17:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${18:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${19:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

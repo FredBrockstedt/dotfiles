@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage DigitalOcean SSH keys
+# prefix: digital_ocean_sshkey_snippet
+# key: digital_ocean_sshkey
+# group: ansible
+# --
+
+- name: ${0:Manage DigitalOcean SSH keys}
+  digital_ocean_sshkey:                                                    
+    oauth_token: ${1:DigitalOcean OAuth token}                             #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the target 
+    fingerprint: ${3:value}                                                # This is a unique identifier for the SSH key used to delete a key
+    name: ${4:value}                                                       # The name for the SSH key
+    ssh_pub_key: ${5:value}                                                # The Public SSH key to add 

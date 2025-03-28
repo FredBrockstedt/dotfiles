@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Provision server port by applying or removing template configuration to an Arista CloudVision Portal configlet that is applied to a switch.
+# prefix: cv_server_provision_snippet
+# key: cv_server_provisio
+# group: ansible
+# --
+
+- name: ${0:Provision server port by applying or removing template configuration to an Arista CloudVision Portal configlet that is applied to a switch.}
+  cv_server_provision:                                                     
+    host: ${1:The hostname or IP address of the CVP node being connected to}#
+    username: ${2:The user that will be used to connect to CVP for making API calls}#
+    password: ${3:The password of the user that will be used to connect to CVP for API calls}#
+    server_name: ${4:The hostname or identifier for the server that is having it's switch port provisioned}#
+    switch_name: ${5:The hostname of the switch is being configured for the server being provisioned}#
+    switch_port: ${6:The physical port number on the switch that the new server is connected to}#
+    template: ${7:A path to a Jinja formatted template file that contains the configuration block that will be applied to the specified switch port}# This template will have variable fields replace
+    port: ${8:value}                                                       # The port number to use when making API calls to the CVP node  This will default to the default port for the specified pr
+    protocol: ${9$$(yas-choose-value '("https" "http"))}                   # choices: https;http  The protocol to use when making API calls to CVP  CVP defaults to https and newer versions of CVP n
+    port_vlan: ${10:value}                                                 # The vlan that should be applied to the port for this server  This parameter is dependent on a proper template that suppo
+    action: ${11$$(yas-choose-value '("show" "add" "remove"))}             # choices: show;add;remove  The action for the module to take  The actions are add, which applies the specified template c
+    auto_run: ${12:false}                                                  # Flag that determines whether or not the module will execute the CVP task spawned as a result of changes to a switch conf

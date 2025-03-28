@@ -1,0 +1,61 @@
+# -*- mode: snippet -*-
+# name: Manages BGP neighbor Address-family configuration on HUAWEI CloudEngine switches.
+# prefix: ce_bgp_neighbor_af_snippet
+# key: ce_bgp_neighbor_af
+# group: ansible
+# --
+
+- name: ${0:Manages BGP neighbor Address-family configuration on HUAWEI CloudEngine switches.}
+  ce_bgp_neighbor_af:                                                      
+    vrf_name: ${1:Name of a BGP instance}                                  # The name is a case-sensitive string of characters  The BGP instance can be used only after the corresponding VPN instanc
+    af_type: ${2$$(yas-choose-value '("ipv4uni" "ipv4multi" "ipv4vpn" "ipv6uni" "ipv6vpn" "evpn"))}# Address family type of a BGP instance 
+    remote_address: ${3:IPv4 or IPv6 peer connection address}              #
+    advertise_irb: ${4$$(yas-choose-value '("no_use" "true" "false"))}     # choices: no_use;true;false  If the value is true, advertised IRB routes are distinguished  If the value is false, advert
+    advertise_arp: ${5$$(yas-choose-value '("no_use" "true" "false"))}     # choices: no_use;true;false  If the value is true, advertised ARP routes are distinguished  If the value is false, advert
+    advertise_remote_nexthop: ${6$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the remote next-hop attribute is advertised to peers  If the val
+    advertise_community: ${7$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the community attribute is advertised to peers  If the value is false
+    advertise_ext_community: ${8$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the extended community attribute is advertised to peers  If the v
+    discard_ext_community: ${9$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the extended community attribute in the peer route information is d
+    allow_as_loop_enable: ${10$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, repetitive local AS numbers are allowed  If the value is false, rep
+    allow_as_loop_limit: ${11:value}                                       # Set the maximum number of repetitive local AS number  The value is an integer ranging from 1 to 10 
+    keep_all_routes: ${12$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  If the value is true, the system stores all route update messages received from all peers (g
+    nexthop_configure: ${13$$(yas-choose-value '("null" "local" "invariable"))}# choices: null;local;invariable  null, The next hop is not changed  local, The next hop is changed to the local IP ad
+    preferred_value: ${14:value}                                           # Assign a preferred value for the routes learned from a specified peer  The value is an integer ranging from 0 to 65535 
+    public_as_only: ${15$$(yas-choose-value '("no_use" "true" "false"))}   # choices: no_use;true;false  If the value is true, sent BGP update messages carry only the public AS number but do not ca
+    public_as_only_force: ${16$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, sent BGP update messages carry only the public AS number but do not
+    public_as_only_limited: ${17$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  Limited use public as number 
+    public_as_only_replace: ${18$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  Private as replaced by public as number 
+    public_as_only_skip_peer_as: ${19$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  Public as only skip peer as 
+    route_limit: ${20:value}                                               # Configure the maximum number of routes that can be accepted from a peer  The value is an integer ranging from 1 to 42949
+    route_limit_percent: ${21:value}                                       # Specify the percentage of routes when a router starts to generate an alarm  The value is an integer ranging from 1 to 10
+    route_limit_type: ${22$$(yas-choose-value '("noparameter" "alertOnly" "idleForever" "idleTimeout"))}# choices: noparameter;alertOnly;idleForever;idleTimeout  Noparameter, After the number of re
+    route_limit_idle_timeout: ${23:value}                                  # Specify the value of the idle-timeout timer to automatically reestablish the connections after they are cut off when the
+    rt_updt_interval: ${24:value}                                          # Specify the minimum interval at which Update packets are sent  The value is an integer, in seconds  The value is an inte
+    redirect_ip: ${25$$(yas-choose-value '("no_use" "true" "false"))}      # choices: no_use;true;false  Redirect ip 
+    redirect_ip_vaildation: ${26$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  Redirect ip vaildation 
+    reflect_client: ${27$$(yas-choose-value '("no_use" "true" "false"))}   # choices: no_use;true;false  If the value is true, the local device functions as the route reflector and a peer functions
+    substitute_as_enable: ${28$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the function to replace a specified peer's AS number in the AS-Path
+    import_rt_policy_name: ${29:value}                                     # Specify the filtering policy applied to the routes learned from a peer  The value is a string of 1 to 40 characters 
+    export_rt_policy_name: ${30:value}                                     # Specify the filtering policy applied to the routes to be advertised to a peer  The value is a string of 1 to 40 characte
+    import_pref_filt_name: ${31:value}                                     # Specify the IPv4 filtering policy applied to the routes received from a specified peer  The value is a string of 1 to 16
+    export_pref_filt_name: ${32:value}                                     # Specify the IPv4 filtering policy applied to the routes to be advertised to a specified peer  The value is a string of 1
+    import_as_path_filter: ${33:value}                                     # Apply an AS_Path-based filtering policy to the routes received from a specified peer  The value is an integer ranging fr
+    export_as_path_filter: ${34:value}                                     # Apply an AS_Path-based filtering policy to the routes to be advertised to a specified peer  The value is an integer rang
+    import_as_path_name_or_num: ${35:value}                                # A routing strategy based on the AS path list for routing received by a designated peer 
+    export_as_path_name_or_num: ${36:value}                                # Application of a AS path list based filtering policy to the routing of a specified peer 
+    import_acl_name_or_num: ${37:value}                                    # Apply an IPv4 ACL-based filtering policy to the routes received from a specified peer  The value is a string of 1 to 32 
+    export_acl_name_or_num: ${38:value}                                    # Apply an IPv4 ACL-based filtering policy to the routes to be advertised to a specified peer  The value is a string of 1 
+    ipprefix_orf_enable: ${39$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the address prefix-based Outbound Route Filter (ORF) capability is e
+    is_nonstd_ipprefix_mod: ${40$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, Non-standard capability codes are used during capability negotiat
+    orftype: ${41:value}                                                   # ORF Type  The value is an integer ranging from 0 to 65535 
+    orf_mode: ${42$$(yas-choose-value '("null" "receive" "send" "both"))}  # choices: null;receive;send;both  ORF mode  null, Default value  receive, ORF for incoming packets  send, ORF for outgoin
+    soostring: ${43:value}                                                 # Configure the Site-of-Origin (SoO) extended community attribute  The value is a string of 3 to 21 characters 
+    default_rt_adv_enable: ${44$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, the function to advertise default routes to peers is enabled  If t
+    default_rt_adv_policy: ${45:value}                                     # Specify the name of a used policy  The value is a string  The value is a string of 1 to 40 characters 
+    default_rt_match_mode: ${46$$(yas-choose-value '("null" "matchall" "matchany"))}# choices: null;matchall;matchany  null, Null  matchall, Advertise the default route if all matching conditions a
+    add_path_mode: ${47$$(yas-choose-value '("null" "receive" "send" "both"))}# choices: null;receive;send;both  null, Null  receive, Support receiving Add-Path routes  send, Support sending Add-Pa
+    adv_add_path_num: ${48:value}                                          # The number of addPath advertise route  The value is an integer ranging from 2 to 64 
+    origin_as_valid: ${49$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  If the value is true, Application results of route announcement  If the value is false, Rout
+    vpls_enable: ${50$$(yas-choose-value '("no_use" "true" "false"))}      # choices: no_use;true;false  If the value is true, vpls enable  If the value is false, vpls disable 
+    vpls_ad_disable: ${51$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  If the value is true, enable vpls-ad  If the value is false, disable vpls-ad 
+    update_pkt_standard_compatible: ${52$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, When the vpnv4 multicast neighbor receives and updates th

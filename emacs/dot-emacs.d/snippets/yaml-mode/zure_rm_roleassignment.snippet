@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Role Assignment
+# prefix: azure_rm_roleassignment_snippet
+# key: zure_rm_roleassignment
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Role Assignment}
+  azure_rm_roleassignment:                                                 
+    name: ${1:value}                                                       # Unique name of role assignment 
+    assignee_object_id: ${2:value}                                         # The object id of assignee  This maps to the ID inside the Active Directory  It can point to a user, service principal or
+    role_definition_id: ${3:value}                                         # The role definition id used in the role assignment  Required when creating role assignment 
+    scope: ${4:value}                                                      # The scope of the role assignment to create  For example, use /subscriptions/{subscription-id\}/ for subscription  /subsc
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the role assignment  Use C(present) to create or update a role assignment a
+    ad_user: ${6:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${7:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${8:value}                                                    # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${9:value}                                            # Your Azure subscription Id 
+    client_id: ${10:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${11:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${12:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${13:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${14:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${15$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${16$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${17:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

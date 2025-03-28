@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Provision devices via FortiMananger
+# prefix: fmgr_provisioning_snippet
+# key: fmgr_provisioning
+# group: ansible
+# --
+
+- name: ${0:Provision devices via FortiMananger}
+  fmgr_provisioning:                                                       
+    adom: ${1:The administrative domain (admon) the configuration belongs to}#
+    host: ${2:The FortiManager's Address}                                  #
+    username: ${3:The username to log into the FortiManager}               #
+    policy_package: ${4:The name of the policy package to be assigned to the device}#
+    name: ${5:The name of the device to be provisioned}                    #
+    serial: ${6:The serial number of the device that will be provisioned}  #
+    platform: ${7:The platform of the device, such as model number or VM}  #
+    os_version: ${8:The Fortinet OS version to be used for the device, such as 5}#0 or 6 0 
+    os_type: ${9:The Fortinet OS type to be pushed to the device, such as 'FOS' for FortiOS}#
+    vdom: ${10:value}                                                      # The virtual domain (vdom) the configuration belongs to
+    password: ${11:value}                                                  # The password associated with the username account 
+    group: ${12:value}                                                     # The name of the device group the provisioned device can belong to 
+    description: ${13:value}                                               # Description of the device to be provisioned 
+    minor_release: ${14:value}                                             # The minor release number such as 6 X 1, as X being the minor release 
+    patch_release: ${15:value}                                             # The patch release number such as 6 0 X, as X being the patch release 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage macOS user defaults
+# prefix: osx_defaults_snippet
+# key: osx_default
+# group: ansible
+# --
+
+- name: ${0:Manage macOS user defaults}
+  osx_defaults:                                                            
+    key: ${1:The key of the user preference}                               #
+    domain: ${2:NSGlobalDomain}                                            # The domain is a domain name of the form C(com companyname appname) 
+    host: ${3:value}                                                       # The host on which the preference should apply  The special value C(currentHost) corresponds to the C(-currentHost) switc
+    type: ${4$$(yas-choose-value '("array" "bool" "boolean" "date" "float" "int" "integer" "string"))}# choices: array;bool;boolean;date;float;int;integer;string  The type of value to write 
+    array_add: ${5:False}                                                  # Add new elements to the array for a key which has an array as its value 
+    value: ${6:value}                                                      # The value to write  Only required when C(state=present) 
+    state: ${7$$(yas-choose-value '("absent" "list" "present"))}           # choices: absent;list;present  The state of the user defaults  If set to C(list) will query the given parameter specified
+    path: ${8:/usr/bin:/usr/local/bin}                                     # The path in which to search for C(defaults) 

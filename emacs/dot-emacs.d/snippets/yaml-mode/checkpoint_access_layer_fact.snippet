@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Get access layer facts on Check Point over Web Services API
+# prefix: checkpoint_access_layer_facts_snippet
+# key: checkpoint_access_layer_fact
+# group: ansible
+# --
+
+- name: ${0:Get access layer facts on Check Point over Web Services API}
+  checkpoint_access_layer_facts:                                           
+    uid: ${1:value}                                                        # UID of access layer object 
+    name: ${2:value}                                                       # Name of the access layer object 

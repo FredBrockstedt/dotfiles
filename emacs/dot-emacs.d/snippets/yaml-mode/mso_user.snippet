@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage users
+# prefix: mso_user_snippet
+# key: mso_user
+# group: ansible
+# --
+
+- name: ${0:Manage users}
+  mso_user:                                                                
+    user: ${1:The name of the user}                                        #
+    host: ${2:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    user_password: ${4:value}                                              # The password of the user 
+    first_name: ${5:value}                                                 # The first name of the user  This parameter is required when creating new users 
+    last_name: ${6:value}                                                  # The last name of the user  This parameter is required when creating new users 
+    email: ${7:value}                                                      # The email address of the user  This parameter is required when creating new users 
+    phone: ${8:value}                                                      # The phone number of the user  This parameter is required when creating new users 
+    account_status: ${9$$(yas-choose-value '("active"))}                   # choices: active  The status of the user account 
+    domain: ${10:value}                                                    # The domain this user belongs to  When creating new users, this defaults to C(Local) 
+    roles: ${11:value}                                                     # The roles for this user 
+    state: ${12$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${13:value}                                                      # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${14:admin}                                                  # The username to use for authentication 
+    output_level: ${15$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${16:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${17:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${18:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${19:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

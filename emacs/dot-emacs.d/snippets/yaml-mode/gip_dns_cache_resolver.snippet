@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage DNS resolver cache configurations on BIG-IP
+# prefix: bigip_dns_cache_resolver_snippet
+# key: gip_dns_cache_resolver
+# group: ansible
+# --
+
+- name: ${0:Manage DNS resolver cache configurations on BIG-IP}
+  bigip_dns_cache_resolver:                                                
+    name: ${1:Specifies the name of the cache}                             #
+    answer_default_zones: ${2:value}                                       # Specifies whether the system answers DNS queries for the default zones localhost, reverse 127 0 0 1 and ::1, and AS112  
+    forward_zones: ${3:value}                                              # Forward zones associated with the cache  To remove all forward zones, specify a value of C(none) 
+    route_domain: ${4:value}                                               # Specifies the route domain the resolver uses for outbound traffic 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    partition: ${6:Common}                                                 # Device partition to manage resources on 
+    provider: ${7:value}                                                   # A dict object containing connection details 

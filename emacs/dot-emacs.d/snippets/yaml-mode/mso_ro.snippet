@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage roles
+# prefix: mso_role_snippet
+# key: mso_ro
+# group: ansible
+# --
+
+- name: ${0:Manage roles}
+  mso_role:                                                                
+    role: ${1:The name of the role}                                        #
+    host: ${2:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    display_name: ${4:value}                                               # The name of the role to be displayed in the web UI 
+    description: ${5:value}                                                # The description of the role 
+    permissions: ${6$$(yas-choose-value '("backup-db" "manage-audit-records" "manage-labels" "manage-roles" "manage-schemas" "manage-sites" "manage-tenants" "manage-tenant-schemas" "manage-users" "
+    state: ${7$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${8:value}                                                       # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${9:admin}                                                   # The username to use for authentication 
+    output_level: ${10$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${11:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${12:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${13:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${14:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

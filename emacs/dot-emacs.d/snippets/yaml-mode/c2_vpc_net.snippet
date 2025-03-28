@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Configure AWS virtual private clouds
+# prefix: ec2_vpc_net_snippet
+# key: c2_vpc_net
+# group: ansible
+# --
+
+- name: ${0:Configure AWS virtual private clouds}
+  ec2_vpc_net:                                                             
+    name: ${1:The name to give your VPC}                                   # This is used in combination with C(cidr_block) to determine if a VPC already exists 
+    cidr_block: ${2:The primary CIDR of the VPC}                           # After 2 5 a list of CIDRs can be provided  The first in the list will be used as the primary CIDR and is used in conjunc
+    purge_cidrs: ${3:False}                                                # Remove CIDRs that are associated with the VPC and are not specified in C(cidr_block) 
+    tenancy: ${4$$(yas-choose-value '("default" "dedicated"))}             # choices: default;dedicated  Whether to be default or dedicated tenancy  This cannot be changed after the VPC has been cr
+    dns_support: ${5:True}                                                 # Whether to enable AWS DNS support 
+    dns_hostnames: ${6:True}                                               # Whether to enable AWS hostname support 
+    dhcp_opts_id: ${7:value}                                               # the id of the DHCP options to use for this vpc
+    tags: ${8:value}                                                       # The tags you want attached to the VPC  This is independent of the name value, note if you pass a 'Name' key it would ove
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state of the VPC  Either absent or present 
+    multi_ok: ${10:False}                                                  # By default the module will not create another VPC if there is another VPC with the same name and CIDR block  Specify thi
+    debug_botocore_endpoint_logs: ${11:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${12:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${13:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${14:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${15:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${16:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${17:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${18:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

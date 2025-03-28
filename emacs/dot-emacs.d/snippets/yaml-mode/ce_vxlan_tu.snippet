@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages VXLAN tunnel configuration on HUAWEI CloudEngine devices.
+# prefix: ce_vxlan_tunnel_snippet
+# key: ce_vxlan_tu
+# group: ansible
+# --
+
+- name: ${0:Manages VXLAN tunnel configuration on HUAWEI CloudEngine devices.}
+  ce_vxlan_tunnel:                                                         
+    bridge_domain_id: ${1:value}                                           # Specifies a bridge domain ID  The value is an integer ranging from 1 to 16777215 
+    vni_id: ${2:value}                                                     # Specifies a VXLAN network identifier (VNI) ID  The value is an integer ranging from 1 to 16000000 
+    nve_name: ${3:value}                                                   # Specifies the number of an NVE interface  The value ranges from 1 to 2 
+    nve_mode: ${4$$(yas-choose-value '("mode-l2" "mode-l3"))}              # choices: mode-l2;mode-l3  Specifies the working mode of an NVE interface 
+    peer_list_ip: ${5:value}                                               # Specifies the IP address of a remote VXLAN tunnel endpoints (VTEP)  The value is in dotted decimal notation 
+    protocol_type: ${6$$(yas-choose-value '("bgp" "null"))}                # choices: bgp;null  The operation type of routing protocol 
+    source_ip: ${7:value}                                                  # Specifies an IP address for a source VTEP  The value is in dotted decimal notation 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

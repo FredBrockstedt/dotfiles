@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/modify/remove vrouter-bgp
+# prefix: pn_vrouter_bgp_snippet
+# key: pn_vrouter_bgp
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/modify/remove vrouter-bgp}
+  pn_vrouter_bgp:                                                          
+    pn_neighbor: ${1:IP address for BGP neighbor}                          #
+    pn_vrouter_name: ${2:name of service config}                           #
+    pn_cliswitch: ${3:value}                                               # Target switch to run the CLI on 
+    state: ${4$$(yas-choose-value '("present" "absent" "update"))}         # choices: present;absent;update  vrouter-bgp configuration command 
+    pn_send_community: ${5:value}                                          # send any community attribute to neighbor 
+    pn_weight: ${6:value}                                                  # default weight value between 0 and 65535 for the neighbor's routes 
+    pn_multi_protocol: ${7$$(yas-choose-value '("ipv4-unicast" "ipv6-unicast"))}# choices: ipv4-unicast;ipv6-unicast  Multi-protocol features 
+    pn_prefix_list_in: ${8:value}                                          # prefixes used for filtering 
+    pn_route_reflector_client: ${9:value}                                  # set as route reflector client 
+    pn_default_originate: ${10:value}                                      # announce default routes to the neighbor or not 
+    pn_neighbor_holdtime: ${11:value}                                      # BGP Holdtime (seconds) 
+    pn_connect_retry_interval: ${12:value}                                 # BGP Connect retry interval (seconds) 
+    pn_advertisement_interval: ${13:value}                                 # Minimum interval between sending BGP routing updates 
+    pn_route_map_out: ${14:value}                                          # route map out for nbr 
+    pn_update_source: ${15:value}                                          # IP address of BGP packets required for peering over loopback interface 
+    pn_bfd: ${16:False}                                                    # BFD protocol support for fault detection 
+    pn_next_hop_self: ${17:value}                                          # BGP next hop is self or not 
+    pn_allowas_in: ${18:value}                                             # Allow/reject routes with local AS in AS_PATH 
+    pn_neighbor_keepalive_interval: ${19:value}                            # BGP Keepalive interval (seconds) 
+    pn_max_prefix: ${20:value}                                             # maximum number of prefixes 
+    pn_bfd_multihop: ${21:value}                                           # always use BFD multi-hop port for fault detection 
+    pn_interface: ${22:value}                                              # Interface to reach the neighbor 
+    pn_password: ${23:value}                                               # password for MD5 BGP 
+    pn_route_map_in: ${24:value}                                           # route map in for nbr 
+    pn_soft_reconfig_inbound: ${25:value}                                  # soft reset to reconfigure inbound traffic 
+    pn_override_capability: ${26:value}                                    # override capability 
+    pn_max_prefix_warn_only: ${27:value}                                   # warn if the maximum number of prefixes is exceeded 
+    pn_ebgp_multihop: ${28:value}                                          # value for external BGP from 1 to 255 
+    pn_remote_as: ${29:value}                                              # BGP remote AS from 1 to 4294967295 
+    pn_prefix_list_out: ${30:value}                                        # prefixes used for filtering outgoing packets 
+    pn_no_route_map_out: ${31:value}                                       # Remove egress route-map from BGP neighbor 
+    pn_no_route_map_in: ${32:value}                                        # Remove ingress route-map from BGP neighbor 

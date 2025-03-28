@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage aggregates.
+# prefix: na_ontap_aggregate_snippet
+# key: ontap_aggregat
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage aggregates.}
+  na_ontap_aggregate:                                                      
+    name: ${1:The name of the aggregate to manage}                         #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified aggregate should exist or not 
+    service_state: ${6$$(yas-choose-value '("online" "offline"))}          # choices: online;offline  Whether the specified aggregate should be enabled or disabled  Creates aggregate if doesnt exis
+    from_name: ${7:value}                                                  # Name of the aggregate to be renamed 
+    nodes: ${8:value}                                                      # Node(s) for the aggregate to be created on   If no node specified, mgmt lif home will be used  If multiple nodes specifi
+    disk_type: ${9$$(yas-choose-value '("ATA" "BSAS" "FCAL" "FSAS" "LUN" "MSATA" "SAS" "SSD" "VMDISK"))}# choices: ATA;BSAS;FCAL;FSAS;LUN;MSATA;SAS;SSD;VMDISK  Type of disk to use to build aggregat
+    disk_count: ${10:value}                                                # Number of disks to place into the aggregate, including parity disks  The disks in this newly-created aggregate come from
+    disk_size: ${11:value}                                                 # Disk size to use in 4K block size   Disks within 10% of specified size will be used 
+    raid_size: ${12:value}                                                 # Sets the maximum number of drives per raid group 
+    raid_type: ${13$$(yas-choose-value '("raid4" "raid_dp" "raid_tec"))}   # choices: raid4;raid_dp;raid_tec  Specifies the type of RAID groups to use in the new aggregate 
+    unmount_volumes: ${14:value}                                           # If set to "TRUE", this option specifies that all of the volumes hosted by the given aggregate are to be unmounted before
+    disks: ${15:value}                                                     # Specific list of disks to use for the new aggregate  To create a "mirrored" aggregate with a specific list of disks, bot
+    is_mirrored: ${16:value}                                               # Specifies that the new aggregate be mirrored (have two plexes)  If set to true, then the indicated disks will be split a
+    mirror_disks: ${17:value}                                              # List of mirror disks to use  It must contain the same number of disks specified in 'disks' 
+    spare_pool: ${18$$(yas-choose-value '("Pool0" "Pool1"))}               # choices: Pool0;Pool1  Specifies the spare pool from which to select spare disks to use in creation of a new aggregate 
+    wait_for_online: ${19:False}                                           # Set this parameter to 'true' for synchronous execution during create (wait until aggregate status is online) Set this pa
+    time_out: ${20:100}                                                    # time to wait for aggregate creation in seconds default is set to 100 seconds
+    https: ${21:False}                                                     # Enable and disable https
+    validate_certs: ${22:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${23:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${24:value}                                                    # The ontap api version to use
+    use_rest: ${25$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

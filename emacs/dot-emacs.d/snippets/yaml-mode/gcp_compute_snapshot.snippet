@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Snapshot
+# prefix: gcp_compute_snapshot_snippet
+# key: gcp_compute_snapshot
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Snapshot}
+  gcp_compute_snapshot:                                                    
+    name: ${1:Name of the resource; provided by the client when the resource is created}# The name must be 1-63 characters long, and comply with RFC1035  Specifically, the name must be 1-63 charact
+    source_disk: ${2:A reference to the disk used to create this snapshot} # This field represents a link to a Disk resource in GCP  It can be specified in two ways  First, you can place a dictiona
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${5:value}                                                # An optional description of this resource 
+    labels: ${6:value}                                                     # Labels to apply to this Snapshot 
+    zone: ${7:value}                                                       # A reference to the zone where the disk is hosted 
+    snapshot_encryption_key: ${8:value}                                    # The customer-supplied encryption key of the snapshot  Required if the source snapshot is protected by a customer-supplie
+    source_disk_encryption_key: ${9:value}                                 # The customer-supplied encryption key of the source snapshot  Required if the source snapshot is protected by a customer-
+    project: ${10:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${11:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${12:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${13:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${14:value}                                                    # Array of scopes to be used 
+    env_type: ${15:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

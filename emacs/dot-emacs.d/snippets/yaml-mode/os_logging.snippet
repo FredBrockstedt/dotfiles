@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage logging on network devices
+# prefix: ios_logging_snippet
+# key: os_logging
+# group: ansible
+# --
+
+- name: ${0:Manage logging on network devices}
+  ios_logging:                                                             
+    dest: ${1$$(yas-choose-value '("on" "host" "console" "monitor" "buffered" "trap"))}# choices: on;host;console;monitor;buffered;trap  Destination of the logs 
+    name: ${2:value}                                                       # The hostname or IP address of the destination  Required when I(dest=host) 
+    size: ${3:4096}                                                        # Size of buffer  The acceptable value is in range from 4096 to 4294967295 bytes 
+    facility: ${4:value}                                                   # Set logging facility 
+    level: ${5$$(yas-choose-value '("emergencies" "alerts" "critical" "errors" "warnings" "notifications" "informational" "debugging"))}# choices: emergencies;alerts;critical;errors;warnings;notifi
+    aggregate: ${6:value}                                                  # L i s t   o f   l o g g i n g   d e f i n i t i o n s  
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the logging configuration 
+    authorize: ${8:False}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  For more infor
+    auth_pass: ${9:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes) with C(become_p
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

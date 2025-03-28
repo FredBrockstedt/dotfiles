@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP KeyRing
+# prefix: gcp_kms_key_ring_snippet
+# key: gcp_kms_key_ring
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP KeyRing}
+  gcp_kms_key_ring:                                                        
+    name: ${1:The resource name for the KeyRing}                           #
+    location: ${2:The location for the KeyRing}                            # A full list of valid locations can be found by running `gcloud kms locations list` 
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    project: ${5:value}                                                    # The Google Cloud Platform project to use 
+    service_account_contents: ${6:value}                                   # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${7:value}                                       # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${8:value}                                      # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${9:value}                                                     # Array of scopes to be used 
+    env_type: ${10:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

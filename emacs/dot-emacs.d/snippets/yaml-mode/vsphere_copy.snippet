@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Copy a file to a VMware datastore
+# prefix: vsphere_copy_snippet
+# key: vsphere_copy
+# group: ansible
+# --
+
+- name: ${0:Copy a file to a VMware datastore}
+  vsphere_copy:                                                            
+    src: ${1:The file to push to vCenter}                                  #
+    datastore: ${2:The datastore to push files to}                         #
+    path: ${3:The file to push to the datastore}                           #
+    hostname: ${4:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    port: ${5:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    username: ${6:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    datacenter: ${7:value}                                                 # The datacenter on the vCenter server that holds the datastore 
+    timeout: ${8:10}                                                       # The timeout in seconds for the upload to the datastore 
+    password: ${9:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${10:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    proxy_host: ${11:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${12:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

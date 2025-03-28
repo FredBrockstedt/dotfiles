@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage local users on an ESXi host
+# prefix: vmware_local_user_manager_snippet
+# key: vmware_local_user_manager
+# group: ansible
+# --
+
+- name: ${0:Manage local users on an ESXi host}
+  vmware_local_user_manager:                                               
+    local_user_name: ${1:The local user name to be changed}                #
+    local_user_password: ${2:value}                                        # The password to be set 
+    local_user_description: ${3:value}                                     # Description for the user 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the user  If the user already exists when C(state=present), the user 
+    hostname: ${5:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${6:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${7:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${8:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${9:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${10:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${11:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

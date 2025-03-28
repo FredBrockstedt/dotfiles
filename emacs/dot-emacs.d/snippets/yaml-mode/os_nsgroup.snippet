@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Configure InfoBlox DNS Nameserver Groups
+# prefix: nios_nsgroup_snippet
+# key: os_nsgroup
+# group: ansible
+# --
+
+- name: ${0:Configure InfoBlox DNS Nameserver Groups}
+  nios_nsgroup:                                                            
+    name: ${1:Specifies the name of the NIOS nameserver group to be managed}#
+    grid_primary: ${2:value}                                               # This host is to be used as primary server in this nameserver group  It must be a grid member  This option is required wh
+    grid_secondaries: ${3:value}                                           # Configures the list of grid member hosts that act as secondary nameservers  This option is required when setting I(use_e
+    is_grid_default: ${4:False}                                            # If set to C(True) this nsgroup will become the default nameserver group for new zones 
+    use_external_primary: ${5:False}                                       # This flag controls whether the group is using an external primary nameserver  Note that modification of this field requi
+    external_primaries: ${6:value}                                         # Configures a list of external nameservers (non-members of the grid)  This option is required when setting I(use_external
+    external_secondaries: ${7:value}                                       # Allows to provide a list of external secondary nameservers, that are not members of the grid 
+    extattrs: ${8:value}                                                   # Allows for the configuration of Extensible Attributes on the instance of the object   This argument accepts a set of key
+    comment: ${9:value}                                                    # Configures a text string comment to be associated with the instance of this object   The provided text string will be co
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Configures the intended state of the instance of the object on the NIOS server   When this valu
+    provider: ${11:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Send a message to Campfire
+# prefix: campfire_snippet
+# key: campfir
+# group: ansible
+# --
+
+- name: ${0:Send a message to Campfire}
+  campfire:                                                                
+    subscription: ${1:The subscription name to use}                        #
+    token: ${2:API token}                                                  #
+    room: ${3:Room number to which the message should be sent}             #
+    msg: ${4:The message body}                                             #
+    notify: ${5$$(yas-choose-value '("56k" "bell" "bezos" "bueller" "clowntown" "cottoneyejoe" "crickets" "dadgummit" "dangerzone" "danielsan" "deeper" "drama" "greatjob" "greyjoy" "guarantee" "hey

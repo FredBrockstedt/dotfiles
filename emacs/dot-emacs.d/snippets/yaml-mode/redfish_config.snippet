@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages Out-Of-Band controllers using Redfish APIs
+# prefix: redfish_config_snippet
+# key: redfish_config
+# group: ansible
+# --
+
+- name: ${0:Manages Out-Of-Band controllers using Redfish APIs}
+  redfish_config:                                                          
+    category: ${1:Category to execute on OOB controller}                   #
+    command: ${2:List of commands to execute on OOB controller}            #
+    baseuri: ${3:Base URI of OOB controller}                               #
+    username: ${4:User for authentication with OOB controller}             #
+    password: ${5:Password for authentication with OOB controller}         #
+    bios_attribute_name: ${6:null}                                         # name of BIOS attribute to update
+    bios_attribute_value: ${7:null}                                        # value of BIOS attribute to update
+    timeout: ${8:10}                                                       # Timeout in seconds for URL requests to OOB controller

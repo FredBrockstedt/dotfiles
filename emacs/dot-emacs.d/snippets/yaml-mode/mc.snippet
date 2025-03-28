@@ -1,0 +1,53 @@
+# -*- mode: snippet -*-
+# name: Manage Networking
+# prefix: nmcli_snippet
+# key: mc
+# group: ansible
+# --
+
+- name: ${0:Manage Networking}
+  nmcli:                                                                   
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # Whether the device should exist or not, taking action if the state is different from what is stated 
+    conn_name: ${2:The name used to call the connection}                   # Pattern is <type>[-<ifname>][-<num>] 
+    autoconnect: ${3:True}                                                 # Whether the connection should start on boot  Whether the connection profile can be automatically activated
+    ifname: ${4:value}                                                     # The interface to bind the connection to  The connection will only be applicable to this interface name  A special value 
+    type: ${5$$(yas-choose-value '("bond" "bond-slave" "bridge" "bridge-slave" "ethernet" "generic" "ipip" "sit" "team" "team-slave" "vlan" "vxlan"))}# choices: bond;bond-slave;bridge;bridge-slave;
+    mode: ${{6$$(yas-choose-value '("802}                                  #3ad,active-backup,balance-alb,balance-rr,balance-tlb,balance-xor,broadcast|} # not required  choices: 802 3ad;active-back
+    master: ${7:value}                                                     # Master <master (ifname, or connection UUID or conn_name) of bridge, team, bond master connection profile 
+    ip4: ${8:value}                                                        # The IPv4 address to this interface  Use the format C(192 0 2 24/24) 
+    gw4: ${9:value}                                                        # The IPv4 gateway for this interface  Use the format C(192 0 2 1) 
+    dns4: ${10:value}                                                      # A list of up to 3 dns servers  IPv4 format e g  to add two IPv4 DNS server addresses, use C(192 0 2 53 198 51 100 53) 
+    dns4_search: ${11:value}                                               # A list of DNS search domains 
+    ip6: ${12:value}                                                       # The IPv6 address to this interface  Use the format C(abbe::cafe) 
+    gw6: ${13:value}                                                       # The IPv6 gateway for this interface  Use the format C(2001:db8::1) 
+    dns6: ${14:value}                                                      # A list of up to 3 dns servers  IPv6 format e g  to add two IPv6 DNS server addresses, use C(2001:4860:4860::8888 2001:48
+    dns6_search: ${15:value}                                               # A list of DNS search domains 
+    mtu: ${16:value}                                                       # The connection MTU, e g  9000  This can't be applied when creating the interface and is done once the interface has been
+    dhcp_client_id: ${17:value}                                            # DHCP Client Identifier sent to the DHCP server 
+    primary: ${18:value}                                                   # This is only used with bond and is the primary interface name (for "active-backup" mode), this is the usually the 'ifnam
+    miimon: ${19:value}                                                    # This is only used with bond - miimon  This parameter defaults to C(100) when unset 
+    downdelay: ${20:value}                                                 # This is only used with bond - downdelay 
+    updelay: ${21:value}                                                   # This is only used with bond - updelay 
+    arp_interval: ${22:value}                                              # This is only used with bond - ARP interval 
+    arp_ip_target: ${23:value}                                             # This is only used with bond - ARP IP target 
+    stp: ${24:True}                                                        # This is only used with bridge and controls whether Spanning Tree Protocol (STP) is enabled for this bridge 
+    priority: ${25:128}                                                    # This is only used with 'bridge' - sets STP priority 
+    forwarddelay: ${26:15}                                                 # This is only used with bridge - [forward-delay <2-30>] STP forwarding delay, in seconds 
+    hellotime: ${27:2}                                                     # This is only used with bridge - [hello-time <1-10>] STP hello time, in seconds 
+    maxage: ${28:20}                                                       # This is only used with bridge - [max-age <6-42>] STP maximum message age, in seconds 
+    ageingtime: ${29:300}                                                  # This is only used with bridge - [ageing-time <0-1000000>] the Ethernet MAC address aging time, in seconds 
+    mac: ${30:value}                                                       # This is only used with bridge - MAC address of the bridge  Note this requires a recent kernel feature, originally introd
+    slavepriority: ${31:32}                                                # This is only used with 'bridge-slave' - [<0-63>] - STP priority of this slave 
+    path_cost: ${32:100}                                                   # This is only used with 'bridge-slave' - [<1-65535>] - STP port cost for destinations via this slave 
+    hairpin: ${33:True}                                                    # This is only used with 'bridge-slave' - 'hairpin mode' for the slave, which allows frames to be sent back out through th
+    vlanid: ${34:value}                                                    # This is only used with VLAN - VLAN ID in range <0-4095> 
+    vlandev: ${35:value}                                                   # This is only used with VLAN - parent device this VLAN is on, can use ifname 
+    flags: ${36:value}                                                     # This is only used with VLAN - flags 
+    ingress: ${37:value}                                                   # This is only used with VLAN - VLAN ingress priority mapping 
+    egress: ${38:value}                                                    # This is only used with VLAN - VLAN egress priority mapping 
+    vxlan_id: ${39:value}                                                  # This is only used with VXLAN - VXLAN ID 
+    vxlan_remote: ${40:value}                                              # This is only used with VXLAN - VXLAN destination IP address 
+    vxlan_local: ${41:value}                                               # This is only used with VXLAN - VXLAN local IP address 
+    ip_tunnel_dev: ${42:value}                                             # This is used with IPIP/SIT - parent device this IPIP/SIT tunnel, can use ifname 
+    ip_tunnel_remote: ${43:value}                                          # This is used with IPIP/SIT - IPIP/SIT destination IP address 
+    ip_tunnel_local: ${44:value}                                           # This is used with IPIP/SIT - IPIP/SIT local IP address 

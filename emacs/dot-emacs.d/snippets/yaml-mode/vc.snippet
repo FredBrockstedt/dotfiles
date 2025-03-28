@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage daemontools services
+# prefix: svc_snippet
+# key: vc
+# group: ansible
+# --
+
+- name: ${0:Manage daemontools services}
+  svc:                                                                     
+    name: ${1:Name of the service to manage}                               #
+    state: ${2$$(yas-choose-value '("killed" "once" "reloaded" "restarted" "started" "stopped"))}# choices: killed;once;reloaded;restarted;started;stopped  C(Started)/C(stopped) are idempotent acti
+    downed: ${3:False}                                                     # Should a 'down' file exist or not, if it exists it disables auto startup  Defaults to no  Downed does not imply stopped 
+    enabled: ${4:value}                                                    # Whether the service is enabled or not, if disabled it also implies stopped  Take note that a service can be enabled and 
+    service_dir: ${5:/service}                                             # Directory svscan watches for services
+    service_src: ${6:/etc/service}                                         # Directory where services are defined, the source of symlinks to service_dir 

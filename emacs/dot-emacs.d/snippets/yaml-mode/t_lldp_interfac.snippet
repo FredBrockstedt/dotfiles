@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP interfaces configuration on network devices
+# prefix: net_lldp_interface_snippet
+# key: t_lldp_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP interfaces configuration on network devices}
+  net_lldp_interface:                                                      
+    name: ${1:value}                                                       # Name of the interface LLDP should be configured on 
+    aggregate: ${2:value}                                                  # L i s t   o f   i n t e r f a c e s   L L D P   s h o u l d   b e   c o n f i g u r e d   o n  
+    purge: ${3:False}                                                      # Purge interfaces not defined in the aggregate parameter 
+    state: ${4$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  State of the LLDP configuration 

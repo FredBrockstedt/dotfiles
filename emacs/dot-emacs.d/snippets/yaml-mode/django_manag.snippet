@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages a Django application.
+# prefix: django_manage_snippet
+# key: django_manag
+# group: ansible
+# --
+
+- name: ${0:Manages a Django application.}
+  django_manage:                                                           
+    command: ${1$$(yas-choose-value '("cleanup" "collectstatic" "flush" "loaddata" "migrate" "runfcgi" "syncdb" "test" "validate"))}# The name of the Django management command to run  Built in comm
+    app_path: ${2:The path to the root of the Django application where B(manage}#py) lives 
+    settings: ${3:value}                                                   # The Python path to the application's settings module, such as 'myapp settings' 
+    pythonpath: ${4:value}                                                 # A directory to add to the Python path  Typically used to include the settings module if it is located external to the ap
+    virtualenv: ${5:value}                                                 # An optional path to a I(virtualenv) installation to use while running the manage application 
+    apps: ${6:value}                                                       # A list of space-delimited apps to target  Used by the 'test' command 
+    cache_table: ${7:value}                                                # The name of the table used for database-backed caching  Used by the 'createcachetable' command 
+    clear: ${8:False}                                                      # Clear the existing files before trying to copy or link the original file  Used only with the 'collectstatic' command  Th
+    database: ${9:value}                                                   # The database to target  Used by the 'createcachetable', 'flush', 'loaddata', and 'syncdb' commands 
+    failfast: ${10:false}                                                  # Fail the command immediately if a test fails  Used by the 'test' command 
+    fixtures: ${11:value}                                                  # A space-delimited list of fixture file names to load in the database  B(Required) by the 'loaddata' command 
+    skip: ${12:value}                                                      # Will skip over out-of-order missing migrations, you can only use this parameter with I(migrate)
+    merge: ${13:value}                                                     # Will run out-of-order or missing migrations as they are not rollback migrations, you can only use this parameter with 'm
+    link: ${14:value}                                                      # Will create links to the files instead of copying them, you can only use this parameter with 'collectstatic' command

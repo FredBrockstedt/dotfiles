@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Get information about Windows files
+# prefix: win_stat_snippet
+# key: win_stat
+# group: ansible
+# --
+
+- name: ${0:Get information about Windows files}
+  win_stat:                                                                
+    path: ${1:The full path of the file/object to get the facts of; both forward and back slashes are accepted}#
+    get_md5: ${2:False}                                                    # Whether to return the checksum sum of the file  Between Ansible 1 9 and Ansible 2 2 this is no longer an MD5, but a SHA1
+    get_checksum: ${3:True}                                                # Whether to return a checksum of the file (default sha1)
+    checksum_algorithm: ${4$$(yas-choose-value '("md5" "sha1" "sha256" "sha384" "sha512"))}# choices: md5;sha1;sha256;sha384;sha512  Algorithm to determine checksum of file  Will throw an error if 
+    follow: ${5:False}                                                     # Whether to follow symlinks or junction points  In the case of C(path) pointing to another link, then that will be follow

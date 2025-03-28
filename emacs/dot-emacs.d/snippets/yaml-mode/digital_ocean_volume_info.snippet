@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Gather information about DigitalOcean volumes
+# prefix: digital_ocean_volume_info_snippet
+# key: digital_ocean_volume_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about DigitalOcean volumes}
+  digital_ocean_volume_info:                                               
+    region_name: ${1:value}                                                # Name of region to restrict results to volumes available in a specific region  Please use M(digital_ocean_region_info) fo
+    oauth_token: ${2:value}                                                # DigitalOcean OAuth token  There are several other environment variables which can be used to provide this value  i e , -
+    timeout: ${3:30}                                                       # The timeout in seconds used for polling DigitalOcean's API 
+    validate_certs: ${4:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled

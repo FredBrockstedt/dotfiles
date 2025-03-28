@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Trigger, acknowledge or resolve PagerDuty incidents
+# prefix: pagerduty_alert_snippet
+# key: pagerduty_alert
+# group: ansible
+# --
+
+- name: ${0:Trigger, acknowledge or resolve PagerDuty incidents}
+  pagerduty_alert:                                                         
+    service_id: ${1:ID of PagerDuty service when incidents will be triggered, acknowledged or resolved}#
+    integration_key: ${2:The GUID of one of your "Generic API" services}   # This is the "integration key" listed on a "Integrations" tab of PagerDuty service 
+    state: ${3$$(yas-choose-value '("triggered" "acknowledged" "resolved"))}# Type of event to be sent 
+    api_key: ${4:The pagerduty API key (readonly access), generated on the pagerduty site}#
+    name: ${5:value}                                                       # PagerDuty unique subdomain  Obsolete  It is not used with PagerDuty REST v2 API 
+    service_key: ${6:value}                                                # The GUID of one of your "Generic API" services  Obsolete  Please use I(integration_key) 
+    desc: ${7:"Created via Ansible"}                                       # For C(triggered) I(state) - Required  Short description of the problem that led to this trigger  This field (or a trunca
+    incident_key: ${8:value}                                               # Identifies the incident to which this I(state) should be applied  For C(triggered) I(state) - If there's no open (i e  u
+    client: ${9:value}                                                     # The name of the monitoring client that is triggering this event 
+    client_url: ${10:value}                                                # The URL of the monitoring client that is triggering this event 

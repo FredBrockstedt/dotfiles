@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Create, Delete shared loadbalancers in CenturyLink Cloud.
+# prefix: clc_loadbalancer_snippet
+# key: clc_loadbalancer
+# group: ansible
+# --
+
+- name: ${0:Create, Delete shared loadbalancers in CenturyLink Cloud.}
+  clc_loadbalancer:                                                        
+    name: ${1:The name of the loadbalancer}                                #
+    alias: ${2:The alias of your CLC Account}                              #
+    location: ${3:The location of the datacenter where the load balancer resides in}#
+    description: ${4:value}                                                # A description for the loadbalancer
+    method: ${5$$(yas-choose-value '("leastConnection" "roundRobin"))}     # choices: leastConnection;roundRobin  - T h e   b a l a n c i n g   m e t h o d   f o r   t h e   l o a d   b a l a n c e
+    persistence: ${6$$(yas-choose-value '("standard" "sticky"))}           # choices: standard;sticky  The persistence method for the load balancer
+    port: ${7$$(yas-choose-value '("80" "443"))}                           # choices: 80;443  Port to configure on the public-facing side of the load balancer pool
+    nodes: ${8:[]}                                                         # A list of nodes that needs to be added to the load balancer pool
+    status: ${9$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  The status of the loadbalancer
+    state: ${10$$(yas-choose-value '("present" "absent" "port_absent" "nodes_present" "nodes_absent"))}# choices: present;absent;port_absent;nodes_present;nodes_absent  Whether to create or delete 

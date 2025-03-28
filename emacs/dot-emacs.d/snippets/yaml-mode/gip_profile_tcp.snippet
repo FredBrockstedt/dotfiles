@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage TCP profiles on a BIG-IP
+# prefix: bigip_profile_tcp_snippet
+# key: gip_profile_tcp
+# group: ansible
+# --
+
+- name: ${0:Manage TCP profiles on a BIG-IP}
+  bigip_profile_tcp:                                                       
+    name: ${1:Specifies the name of the profile}                           #
+    parent: ${2:value}                                                     # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    idle_timeout: ${3:value}                                               # Specifies the length of time that a connection is idle (has no traffic) before the connection is eligible for deletion  
+    time_wait_recycle: ${4:value}                                          # Specifies that connections in a TIME-WAIT state are reused, if a SYN packet, indicating a request for a new connection, 
+    nagle: ${5$$(yas-choose-value '("auto" "enabled" "disabled"))}         # choices: auto;enabled;disabled  When C(enabled) the system applies Nagle's algorithm to reduce the number of short segme
+    early_retransmit: ${6:value}                                           # When C(yes) the system uses early fast retransmits to reduce the recovery time for connections that are receive-buffer o
+    proxy_options: ${7:value}                                              # When C(yes) the system advertises an option, such as a time-stamp to the server only if it was negotiated with the clien
+    initial_congestion_window_size: ${8:value}                             # Specifies the initial congestion window size for connections to this destination  The actual window size is this value m
+    initial_receive_window_size: ${9:value}                                # Specifies the initial receive window size for connections to this destination  The actual window size is this value mult
+    syn_rto_base: ${10:value}                                              # Specifies the initial RTO C(Retransmission TimeOut) base multiplier for SYN retransmission, in C(milliseconds)  This val
+    partition: ${11:Common}                                                # Device partition to manage resources on 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${13:value}                                                  # A dict object containing connection details 

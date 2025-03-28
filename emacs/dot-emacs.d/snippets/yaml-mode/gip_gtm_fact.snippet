@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Collect facts from F5 BIG-IP GTM devices
+# prefix: bigip_gtm_facts_snippet
+# key: gip_gtm_fact
+# group: ansible
+# --
+
+- name: ${0:Collect facts from F5 BIG-IP GTM devices}
+  bigip_gtm_facts:                                                         
+    include: ${1$$(yas-choose-value '("pool" "wide_ip" "server"))}         # Fact category to collect 
+    filter: ${2:value}                                                     # Perform regex filter of response  Filtering is done on the name of the resource  Valid filters are anything that can be 
+    provider: ${3:value}                                                   # A dict object containing connection details 

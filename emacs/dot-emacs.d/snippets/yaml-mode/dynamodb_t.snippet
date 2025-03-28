@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Create, update or delete AWS Dynamo DB tables.
+# prefix: dynamodb_table_snippet
+# key: dynamodb_t
+# group: ansible
+# --
+
+- name: ${0:Create, update or delete AWS Dynamo DB tables.}
+  dynamodb_table:                                                          
+    name: ${1:Name of the table}                                           #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or delete the table
+    hash_key_name: ${3:value}                                              # Name of the hash key  Required when C(state=present) 
+    hash_key_type: ${4$$(yas-choose-value '("STRING" "NUMBER" "BINARY"))}  # choices: STRING;NUMBER;BINARY  Type of the hash key 
+    range_key_name: ${5:value}                                             # Name of the range key 
+    range_key_type: ${6$$(yas-choose-value '("STRING" "NUMBER" "BINARY"))} # choices: STRING;NUMBER;BINARY  Type of the range key 
+    read_capacity: ${7:1}                                                  # Read throughput capacity (units) to provision 
+    write_capacity: ${8:1}                                                 # Write throughput capacity (units) to provision 
+    indexes: ${9:[]}                                                       # list of dictionaries describing indexes to add to the table  global indexes can be updated  local indexes don't support 
+    tags: ${10:value}                                                      # a hash/dictionary of tags to add to the new instance or for starting/stopping instance by tag; '{"key":"value"\}' and '{
+    wait_for_active_timeout: ${11:60}                                      # how long before wait gives up, in seconds  only used when tags is set
+    debug_botocore_endpoint_logs: ${12:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${13:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${14:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${15:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${16:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${17:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${18:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${19:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

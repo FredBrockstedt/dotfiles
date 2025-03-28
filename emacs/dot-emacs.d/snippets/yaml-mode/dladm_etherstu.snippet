@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage etherstubs on Solaris/illumos systems.
+# prefix: dladm_etherstub_snippet
+# key: dladm_etherstu
+# group: ansible
+# --
+
+- name: ${0:Manage etherstubs on Solaris/illumos systems.}
+  dladm_etherstub:                                                         
+    name: ${1:Etherstub name}                                              #
+    temporary: ${2:False}                                                  # Specifies that the etherstub is temporary  Temporary etherstubs do not persist across reboots 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or delete Solaris/illumos etherstub 

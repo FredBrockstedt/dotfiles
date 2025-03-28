@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Manage Azure DevTest Lab Virtual Machine instance
+# prefix: azure_rm_devtestlabvirtualmachine_snippet
+# key: zure_rm_devtestlabvirtualmach
+# group: ansible
+# --
+
+- name: ${0:Manage Azure DevTest Lab Virtual Machine instance}
+  azure_rm_devtestlabvirtualmachine:                                       
+    resource_group: ${1:The name of the resource group}                    #
+    lab_name: ${2:The name of the lab}                                     #
+    name: ${3:The name of the virtual machine}                             #
+    notes: ${4:value}                                                      # The notes of the virtual machine 
+    os_type: ${5$$(yas-choose-value '("windows" "linux"))}                 # choices: windows;linux  Base type of operating system 
+    vm_size: ${6:value}                                                    # A valid Azure VM size value  For example, C(Standard_D4)  The list of choices varies depending on the subscription and l
+    user_name: ${7:value}                                                  # The user name of the virtual machine 
+    password: ${8:value}                                                   # The password of the virtual machine administrator 
+    ssh_key: ${9:value}                                                    # The SSH key of the virtual machine administrator 
+    lab_subnet: ${10:value}                                                # An existing subnet within lab's virtual network  It can be the subnet's resource id  It can be a dict which contains C(v
+    disallow_public_ip_address: ${11:value}                                # Indicates whether the virtual machine is to be created without a public IP address 
+    artifacts: ${12:value}                                                 # The artifacts to be installed on the virtual machine 
+    image: ${13:value}                                                     # The Microsoft Azure Marketplace image reference of the virtual machine 
+    expiration_date: ${14:value}                                           # The expiration date for VM 
+    allow_claim: ${15:value}                                               # Indicates whether another user can take ownership of the virtual machine 
+    storage_type: ${16$$(yas-choose-value '("standard" "premium"))}        # choices: standard;premium  Storage type to use for virtual machine 
+    state: ${17$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the Virtual Machine  Use C(present) to create or update an Virtual Machine 
+    ad_user: ${18:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${19:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${20:value}                                           # Your Azure subscription Id 
+    client_id: ${21:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${22:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${23:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${24:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${25:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${26$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${27$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${28:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${29:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${30:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

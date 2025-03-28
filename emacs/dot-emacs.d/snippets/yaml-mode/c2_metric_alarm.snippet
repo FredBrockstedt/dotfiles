@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Create/update or delete AWS Cloudwatch 'metric alarms'
+# prefix: ec2_metric_alarm_snippet
+# key: c2_metric_alarm
+# group: ansible
+# --
+
+- name: ${0:Create/update or delete AWS Cloudwatch 'metric alarms'}
+  ec2_metric_alarm:                                                        
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # register or deregister the alarm
+    name: ${2:Unique name for the alarm}                                   #
+    metric: ${3:value}                                                     # Name of the monitored metric (e g  CPUUtilization) Metric must already exist
+    namespace: ${4:value}                                                  # Name of the appropriate namespace ('AWS/EC2', 'System/Linux', etc ), which determines the category it will appear under 
+    statistic: ${5$$(yas-choose-value '("SampleCount" "Average" "Sum" "Minimum" "Maximum"))}# choices: SampleCount;Average;Sum;Minimum;Maximum  Operation applied to the metric Works in conjunction 
+    comparison: ${6$$(yas-choose-value '("<=" "<" ">" ">="))}              # choices: <=;<;>;>=  Determines how the threshold value is compared
+    threshold: ${7:value}                                                  # Sets the min/max bound for triggering the alarm
+    period: ${8:value}                                                     # The time (in seconds) between metric evaluations
+    evaluation_periods: ${9:value}                                         # The number of times in which the metric is evaluated before final calculation
+    unit: ${10$$(yas-choose-value '("Seconds" "Microseconds" "Milliseconds" "Bytes" "Kilobytes" "Megabytes" "Gigabytes" "Terabytes" "Bits" "Kilobits" "Megabits" "Gigabits" "Terabits" "Percent" "Cou
+    description: ${11:value}                                               # A longer description of the alarm
+    dimensions: ${12:value}                                                # Describes to what the alarm is applied
+    alarm_actions: ${13:value}                                             # A list of the names action(s) taken when the alarm is in the 'alarm' status, denoted as Amazon Resource Name(s)
+    insufficient_data_actions: ${14:value}                                 # A list of the names of action(s) to take when the alarm is in the 'insufficient_data' status
+    ok_actions: ${15:value}                                                # A list of the names of action(s) to take when the alarm is in the 'ok' status, denoted as Amazon Resource Name(s)
+    debug_botocore_endpoint_logs: ${16:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${17:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${18:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${19:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${20:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${21:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${22:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${23:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

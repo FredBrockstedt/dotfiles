@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage services
+# prefix: service_snippet
+# key: rvic
+# group: ansible
+# --
+
+- name: ${0:Manage services}
+  service:                                                                 
+    name: ${1:Name of the service}                                         #
+    state: ${2$$(yas-choose-value '("reloaded" "restarted" "started" "stopped"))}# choices: reloaded;restarted;started;stopped  C(started)/C(stopped) are idempotent actions that will not run comman
+    sleep: ${3:value}                                                      # If the service is being C(restarted) then sleep this many seconds between the stop and start command  This helps to work
+    pattern: ${4:value}                                                    # If the service does not respond to the status command, name a substring to look for as would be found in the output of t
+    enabled: ${5:value}                                                    # Whether the service should start on boot  B(At least one of state and enabled are required )
+    runlevel: ${6:default}                                                 # For OpenRC init scripts (e g  Gentoo) only  The runlevel that this service belongs to 
+    arguments: ${7:value}                                                  # Additional arguments provided on the command line 
+    use: ${8:auto}                                                         # The service module actually uses system specific modules, normally through auto detection, this setting can force a spec

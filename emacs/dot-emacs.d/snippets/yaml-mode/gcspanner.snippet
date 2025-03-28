@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create and Delete Instances/Databases on Spanner
+# prefix: gcspanner_snippet
+# key: gcspanner
+# group: ansible
+# --
+
+- name: ${0:Create and Delete Instances/Databases on Spanner}
+  gcspanner:                                                               
+    configuration: ${1:Configuration the instance should use}              # Examples are us-central1, asia-east1 and europe-west1 
+    instance_id: ${2:GCP spanner instance name}                            #
+    database_name: ${3:value}                                              # Name of database contained on the instance 
+    force_instance_delete: ${4:false}                                      # To delete an instance, this argument must exist and be true (along with state being equal to absent) 
+    instance_display_name: ${5:value}                                      # Name of Instance to display  If not specified, instance_id will be used instead 
+    node_count: ${6:1}                                                     # Number of nodes in the instance 
+    state: ${7$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the instance or database  Applies to the most granular resource  If a C(database_name)

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manipulate general SNMP settings on a BIG-IP
+# prefix: bigip_snmp_snippet
+# key: gip_snmp
+# group: ansible
+# --
+
+- name: ${0:Manipulate general SNMP settings on a BIG-IP}
+  bigip_snmp:                                                              
+    allowed_addresses: ${1:value}                                          # Configures the IP addresses of the SNMP clients from which the snmpd daemon accepts requests  This value can be hostname
+    contact: ${2:value}                                                    # Specifies the name of the person who administers the SNMP service for this system 
+    agent_status_traps: ${3$$(yas-choose-value '("enabled" "disabled"))}   # choices: enabled;disabled  When C(enabled), ensures that the system sends a trap whenever the SNMP agent starts running 
+    agent_authentication_traps: ${4$$(yas-choose-value '("enabled" "disabled"))}# choices: enabled;disabled  When C(enabled), ensures that the system sends authentication warning traps to the trap 
+    device_warning_traps: ${5$$(yas-choose-value '("enabled" "disabled"))} # choices: enabled;disabled  When C(enabled), ensures that the system sends device warning traps to the trap destinations 
+    location: ${6:value}                                                   # Specifies the description of this system's physical location 
+    provider: ${7:value}                                                   # A dict object containing connection details 

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Replace all instances of a particular string in a file using a back-referenced regular expression
+# prefix: replace_snippet
+# key: replac
+# group: ansible
+# --
+
+- name: ${0:Replace all instances of a particular string in a file using a back-referenced regular expression}
+  replace:                                                                 
+    path: ${1:The file to modify}                                          # Before Ansible 2 3 this option was only usable as I(dest), I(destfile) and I(name) 
+    regexp: ${2:The regular expression to look for in the contents of the file}# Uses Python regular expressions; see U(http://docs python org/2/library/re html)  Uses MULTILINE mode, which means C
+    replace: ${3:value}                                                    # The string to replace regexp matches  May contain backreferences that will get expanded with the regexp capture groups i
+    after: ${4:value}                                                      # If specified, only content after this match will be replaced/removed  Can be used in combination with C(before)  Uses Py
+    before: ${5:value}                                                     # If specified, only content before this match will be replaced/removed  Can be used in combination with C(after)  Uses Py
+    backup: ${6:False}                                                     # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    others: ${7:value}                                                     # All arguments accepted by the M(file) module also work here 
+    encoding: ${8:utf-8}                                                   # The character encoding for reading and writing the file 
+    mode: ${9:value}                                                       # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${10:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${11:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${12:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${13:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${14:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${15:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${16:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${17:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on
+    validate: ${18:value}                                                  # The validation command to run before copying into place  The path to the file to validate is passed in via '%s' which mu

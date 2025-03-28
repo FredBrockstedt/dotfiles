@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Gather facts on instances of Apache CloudStack based clouds.
+# prefix: cs_facts_snippet
+# key: cs_fact
+# group: ansible
+# --
+
+- name: ${0:Gather facts on instances of Apache CloudStack based clouds.}
+  cs_facts:                                                                
+    filter: ${1$$(yas-choose-value '("cloudstack_service_offering" "cloudstack_availability_zone" "cloudstack_public_hostname" "cloudstack_public_ipv4" "cloudstack_local_hostname" "cloudstack_local
+    meta_data_host: ${2:value}                                             # Host or IP of the meta data API service  If not set, determination by parsing the dhcp lease file 

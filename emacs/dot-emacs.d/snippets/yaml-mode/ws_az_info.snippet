@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Gather information about availability zones in AWS.
+# prefix: aws_az_info_snippet
+# key: ws_az_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about availability zones in AWS.}
+  aws_az_info:                                                             
+    filters: ${1:namespace()}                                              # A dict of filters to apply  Each dict item consists of a filter key and a filter value  See U(https://docs aws amazon co
+    debug_botocore_endpoint_logs: ${2:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${3:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${4:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${5:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${6:value}                                             # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${7:True}                                              # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${8:value}                                                    # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${9:value}                                                     # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

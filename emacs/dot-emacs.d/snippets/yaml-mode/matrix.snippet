@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Send notifications to matrix
+# prefix: matrix_snippet
+# key: matrix
+# group: ansible
+# --
+
+- name: ${0:Send notifications to matrix}
+  matrix:                                                                  
+    msg_plain: ${1:Plain text form of the message to send to matrix, usually markdown}#
+    msg_html: ${2:HTML form of the message to send to matrix}              #
+    room_id: ${3:ID of the room to send the notification to}               #
+    hs_url: ${4:URL of the homeserver, where the CS-API is reachable}      #
+    token: ${5:value}                                                      # Authentication token for the API call  If provided, user_id and password are not required
+    user_id: ${6:value}                                                    # The user id of the user
+    password: ${7:value}                                                   # The password to log in with

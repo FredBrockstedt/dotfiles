@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: manage objects in S3.
+# prefix: aws_s3_snippet
+# key: ws_s3
+# group: ansible
+# --
+
+- name: ${0:manage objects in S3.}
+  aws_s3:                                                                  
+    bucket: ${1:Bucket name}                                               #
+    mode: ${2$$(yas-choose-value '("get" "put" "delete" "create" "geturl" "getstr" "delobj" "list"))}# Switches the module behaviour between put (upload), get (download), geturl (return download ur
+    aws_access_key: ${3:value}                                             # AWS access key id  If not set then the value of the AWS_ACCESS_KEY environment variable is used 
+    aws_secret_key: ${4:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_KEY environment variable is used 
+    dest: ${5:value}                                                       # The destination file path when downloading an object/key with a GET operation 
+    encrypt: ${6:True}                                                     # When set for PUT mode, asks for server-side encryption 
+    encryption_mode: ${7$$(yas-choose-value '("AES256" "aws:kms"))}        # choices: AES256;aws:kms  What encryption mode to use if C(encrypt) is set
+    expiration: ${8:600}                                                   # Time limit (in seconds) for the URL generated and returned by S3/Walrus when performing a mode=put or mode=geturl operat
+    headers: ${9:value}                                                    # Custom headers for PUT operation, as a dictionary of 'key=value' and 'key=value,key=value' 
+    marker: ${10:value}                                                    # Specifies the key to start with when using list mode  Object keys are returned in alphabetical order, starting with key 
+    max_keys: ${11:1000}                                                   # Max number of results to return in list mode, set this if you want to retrieve fewer than the default 1000 keys 
+    metadata: ${12:value}                                                  # Metadata for PUT operation, as a dictionary of 'key=value' and 'key=value,key=value' 
+    object: ${13:value}                                                    # Keyname of the object inside the bucket  Can be used to create "virtual directories", see examples 
+    permission: ${14:private}                                              # This option lets the user set the canned permissions on the object/bucket that are created  The permissions that can be 
+    prefix: ${15:}                                                         # Limits the response to keys that begin with the specified prefix for list mode
+    version: ${16:value}                                                   # Version ID of the object inside the bucket  Can be used to get a specific version of a file if versioning is enabled in 
+    overwrite: ${17:always}                                                # Force overwrite either locally on the filesystem or remotely with the object/key  Used with PUT and GET operations  Bool
+    region: ${18:value}                                                    # AWS region to create the bucket in  If not set then the value of the AWS_REGION and EC2_REGION environment variables are
+    retries: ${19:0}                                                       # On recoverable failure, how many times to retry before actually failing 
+    s3_url: ${20:value}                                                    # S3 URL endpoint for usage with Ceph, Eucalyptus and fakes3 etc  Otherwise assumes AWS 
+    dualstack: ${21:false}                                                 # Enables Amazon S3 Dual-Stack Endpoints, allowing S3 communications using both IPv4 and IPv6  Requires at least botocore 
+    rgw: ${22:False}                                                       # Enable Ceph RGW S3 support  This option requires an explicit url via s3_url 
+    src: ${23:value}                                                       # The source file path when performing a PUT operation 
+    ignore_nonexistent_bucket: ${24:value}                                 # Overrides initial bucket lookups in case bucket or iam policies are restrictive  Example: a user may have the GetObject 
+    encryption_kms_key_id: ${25:value}                                     # KMS key id to use when encrypting objects using C(aws:kms) encryption  Ignored if encryption is not C(aws:kms)
+    debug_botocore_endpoint_logs: ${26:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${27:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    security_token: ${28:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${29:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${30:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 

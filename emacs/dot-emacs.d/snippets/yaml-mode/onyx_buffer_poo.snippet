@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Configures Buffer Pool
+# prefix: onyx_buffer_pool_snippet
+# key: onyx_buffer_poo
+# group: ansible
+# --
+
+- name: ${0:Configures Buffer Pool}
+  onyx_buffer_pool:                                                        
+    name: ${1:pool name}                                                   #
+    pool_type: ${2$$(yas-choose-value '("lossless" "lossy"))}              # choices: lossless;lossy  pool type 
+    memory_percent: ${3:value}                                             # memory percent 
+    switch_priority: ${4:value}                                            # switch priority, range 1-7 

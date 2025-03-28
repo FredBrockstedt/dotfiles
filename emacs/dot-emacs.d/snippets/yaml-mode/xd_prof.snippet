@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage LXD profiles
+# prefix: lxd_profile_snippet
+# key: xd_prof
+# group: ansible
+# --
+
+- name: ${0:Manage LXD profiles}
+  lxd_profile:                                                             
+    name: ${1:Name of a profile}                                           #
+    description: ${2:value}                                                # Description of the profile 
+    config: ${3:value}                                                     # The config for the container (e g  {"limits memory": "4GB"\})  See U(https://github com/lxc/lxd/blob/master/doc/rest-api
+    devices: ${4:value}                                                    # The devices for the profile (e g  {"rootfs": {"path": "/dev/kvm", "type": "unix-char"\})  See U(https://github com/lxc/l
+    new_name: ${5:value}                                                   # A new name of a profile  If this parameter is specified a profile will be renamed to this name  See U(https://github com
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Define the state of a profile 
+    url: ${{7:unix:/var/lib/lxd/unix}                                      #socket} # not required  The unix domain socket path or the https URL for the LXD server 
+    snap_url: ${{8:unix:/var/snap/lxd/common/lxd/unix}                     #socket} # not required  The unix domain socket path when LXD is installed by snap package manager 
+    client_key: ${{9:""{\}/}                                               #config/lxc/client key"  format(os environ["HOME"])"} # not required  The client certificate key file path 
+    client_cert: ${{10:""{\}/}                                             #config/lxc/client crt"  format(os environ["HOME"])"} # not required  The client certificate file path 
+    trust_password: ${11:value}                                            # The client trusted password  You need to set this password on the LXD server before running this module using the follow

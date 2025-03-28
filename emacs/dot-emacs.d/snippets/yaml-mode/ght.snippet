@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Create or delete a virtual machine instance in AWS Lightsail
+# prefix: lightsail_snippet
+# key: ght
+# group: ansible
+# --
+
+- name: ${0:Create or delete a virtual machine instance in AWS Lightsail}
+  lightsail:                                                               
+    name: ${1:Name of the instance}                                        #
+    state: ${2$$(yas-choose-value '("present" "absent" "running" "restarted" "stopped"))}# choices: present;absent;running;restarted;stopped  Indicate desired state of the target 
+    zone: ${3:value}                                                       # AWS availability zone in which to launch the instance  Required when state='present'
+    blueprint_id: ${4:value}                                               # ID of the instance blueprint image  Required when state='present'
+    bundle_id: ${5:value}                                                  # Bundle of specification info for the instance  Required when state='present'
+    user_data: ${6:value}                                                  # Launch script that can configure the instance with additional data
+    key_pair_name: ${7:value}                                              # Name of the key pair to use with the instance
+    wait: ${8:true}                                                        # Wait for the instance to be in state 'running' before returning   If wait is "no" an ip_address may not be returned
+    wait_timeout: ${9:300}                                                 # How long before wait gives up, in seconds 
+    debug_botocore_endpoint_logs: ${10:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${11:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${12:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${13:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${14:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${15:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${16:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${17:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

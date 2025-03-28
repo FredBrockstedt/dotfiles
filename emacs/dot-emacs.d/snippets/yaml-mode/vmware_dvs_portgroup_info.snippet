@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Gathers info DVS portgroup configurations
+# prefix: vmware_dvs_portgroup_info_snippet
+# key: vmware_dvs_portgroup_info
+# group: ansible
+# --
+
+- name: ${0:Gathers info DVS portgroup configurations}
+  vmware_dvs_portgroup_info:                                               
+    datacenter: ${1:Name of the datacenter}                                #
+    dvswitch: ${2:value}                                                   # Name of a dvswitch to look for 
+    show_network_policy: ${3:True}                                         # Show or hide network policies of DVS portgroup 
+    show_port_policy: ${4:True}                                            # Show or hide port policies of DVS portgroup 
+    show_teaming_policy: ${5:True}                                         # Show or hide teaming policies of DVS portgroup 
+    show_vlan_info: ${6:False}                                             # Show or hide vlan information of the DVS portgroup 
+    hostname: ${7:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${8:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${9:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${10:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${11:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${12:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${13:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

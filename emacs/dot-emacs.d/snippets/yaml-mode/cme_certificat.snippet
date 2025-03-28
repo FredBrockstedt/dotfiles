@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Create SSL/TLS certificates with the ACME protocol
+# prefix: acme_certificate_snippet
+# key: cme_certificat
+# group: ansible
+# --
+
+- name: ${0:Create SSL/TLS certificates with the ACME protocol}
+  acme_certificate:                                                        
+    csr: ${1:File containing the CSR for the new certificate}              # Can be created with C(openssl req    )  The CSR may contain multiple Subject Alternate Names, but each one will lead to 
+    account_email: ${2:value}                                              # The email address associated with this account  It will be used for certificate expiration warnings  Note that when C(mo
+    agreement: ${3:value}                                                  # URI to a terms of service document you agree to when using the ACME v1 service at C(acme_directory)  Default is latest g
+    terms_agreed: ${4:False}                                               # Boolean indicating whether you agree to the terms of service document  ACME servers can require this to be true  This op
+    modify_account: ${5:True}                                              # Boolean indicating whether the module should create the account if necessary, and update its contact data  Set to C(no) 
+    challenge: ${6$$(yas-choose-value '("http-01" "dns-01" "tls-alpn-01"))}# choices: http-01;dns-01;tls-alpn-01  T h e   c h a l l e n g e   t o   b e   p e r f o r m e d  
+    data: ${7:value}                                                       # The data to validate ongoing challenges  This must be specified for the second run of the module only  The value that mu
+    dest: ${8:value}                                                       # The destination file for the certificate  Required if C(fullchain_dest) is not specified 
+    fullchain_dest: ${9:value}                                             # The destination file for the full chain (i e  certificate followed by chain of intermediate certificates)  Required if C
+    chain_dest: ${10:value}                                                # If specified, the intermediate certificate will be written to this file 
+    remaining_days: ${11:10}                                               # The number of days the certificate must have left being valid  If C(cert_days < remaining_days), then it will be renewed
+    deactivate_authzs: ${12:False}                                         # Deactivate authentication objects (authz) after issuing a certificate, or when issuing the certificate failed  Authentic
+    force: ${13:False}                                                     # Enforces the execution of the challenge and validation, even if an existing certificate is still valid for more than C(r
+    retrieve_all_alternates: ${14:False}                                   # When set to C(yes), will retrieve all alternate chains offered by the ACME CA  These will not be written to disk, but wi
+    account_key_src: ${15:value}                                           # Path to a file containing the ACME account RSA or Elliptic Curve key  RSA keys can be created with C(openssl genrsa    )
+    account_key_content: ${16:value}                                       # Content of the ACME account RSA or Elliptic Curve key  Mutually exclusive with C(account_key_src)  Required if C(account
+    account_uri: ${17:value}                                               # If specified, assumes that the account URI is as given  If the account key does not match this account, or an account wi
+    acme_version: ${18$$(yas-choose-value '("1" "2"))}                     # choices: 1;2  The ACME version of the endpoint  Must be 1 for the classic Let's Encrypt and Buypass ACME endpoints, or 2
+    acme_directory: ${{19:https://acme-staging}                            #api letsencrypt org/directory} # not required  The ACME directory to use  This is the entry point URL to access CA server
+    validate_certs: ${20:True}                                             # Whether calls to the ACME directory will validate TLS certificates  I(Warning): Should I(only ever) be set to C(no) for 
+    select_crypto_backend: ${21$$(yas-choose-value '("auto" "cryptography" "openssl"))}# choices: auto;cryptography;openssl  Determines which crypto backend to use  The default choice is C(auto), w

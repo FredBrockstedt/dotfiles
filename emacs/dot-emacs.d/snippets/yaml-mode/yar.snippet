@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage node.js packages with Yarn
+# prefix: yarn_snippet
+# key: yar
+# group: ansible
+# --
+
+- name: ${0:Manage node.js packages with Yarn}
+  yarn:                                                                    
+    name: ${1:value}                                                       # The name of a node js library to install If omitted all packages in package json are installed 
+    path: ${2:value}                                                       # The base path where Node js libraries will be installed  This is where the node_modules folder lives 
+    version: ${3:value}                                                    # The version of the library to be installed  Must be in semver format  If "latest" is desired, use "state" arg instead
+    global: ${4:False}                                                     # Install the node js library globally
+    executable: ${5:value}                                                 # The executable location for yarn 
+    ignore_scripts: ${6:False}                                             # Use the --ignore-scripts flag when installing 
+    production: ${7:False}                                                 # Install dependencies in production mode  Yarn will ignore any dependencies under devDependencies in package json
+    registry: ${8:value}                                                   # The registry to install modules from 
+    state: ${9$$(yas-choose-value '("present" "absent" "latest"))}         # choices: present;absent;latest  Installation state of the named node js library If absent is selected, a name option mus

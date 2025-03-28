@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Add, update, or remove PostgreSQL publication
+# prefix: postgresql_publication_snippet
+# key: postgresql_publicatio
+# group: ansible
+# --
+
+- name: ${0:Add, update, or remove PostgreSQL publication}
+  postgresql_publication:                                                  
+    name: ${1:Name of the publication to add, update, or remove}           #
+    db: ${2:value}                                                         # Name of the database to connect to and where the publication state will be changed 
+    tables: ${3:value}                                                     # List of tables to add to the publication  If no value is set all tables are targeted  If the publication already exists 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The publication state 
+    parameters: ${5:value}                                                 # Dictionary with optional publication parameters  Available parameters depend on PostgreSQL version 
+    owner: ${6:value}                                                      # Publication owner  If I(owner) is not defined, the owner will be set as I(login_user) or I(session_role) 
+    cascade: ${7:False}                                                    # Drop publication dependencies  Has effect with I(state=absent) only 
+    login_user: ${8:postgres}                                              # The username used to authenticate with 
+    login_password: ${9:value}                                             # The password used to authenticate with 
+    login_host: ${10:value}                                                # Host running the database 
+    login_unix_socket: ${11:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${12:5432}                                                       # Database port to connect to 
+    ssl_mode: ${13$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${14:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

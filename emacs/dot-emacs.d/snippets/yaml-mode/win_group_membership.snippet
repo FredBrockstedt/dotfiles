@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage Windows local group membership
+# prefix: win_group_membership_snippet
+# key: win_group_membership
+# group: ansible
+# --
+
+- name: ${0:Manage Windows local group membership}
+  win_group_membership:                                                    
+    name: ${1:Name of the local group to manage membership on}             #
+    members: ${2:A list of members to ensure are present/absent from the group}# Accepts local users as  \\username, and SERVERNAME\\username  Accepts domain users and groups as DOMAIN\\username an
+    state: ${3$$(yas-choose-value '("absent" "present" "pure"))}           # choices: absent;present;pure  Desired state of the members in the group  C(pure) was added in Ansible 2 8  When C(state)

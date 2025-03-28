@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Create Zabbix maintenance windows
+# prefix: zabbix_maintenance_snippet
+# key: zabbix_maintenanc
+# group: ansible
+# --
+
+- name: ${0:Create Zabbix maintenance windows}
+  zabbix_maintenance:                                                      
+    name: ${1:Unique name of maintenance window}                           #
+    server_url: ${2:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${3:Zabbix user name}                                      #
+    login_password: ${4:Zabbix user password}                              #
+    http_login_user: ${5:Basic Auth login}                                 #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or remove a maintenance window  Maintenance window to remove is identified by name 
+    host_names: ${7:value}                                                 # Hosts to manage maintenance window for  B(Required) option when I(state=present) and I(host_groups) is not used 
+    host_groups: ${8:value}                                                # Host groups to manage maintenance window for  B(Required) option when I(state=present) and I(host_names) is not used 
+    minutes: ${9:10}                                                       # Length of maintenance window in minutes 
+    desc: ${10:"Created by Ansible"}                                       # Short description of maintenance window 
+    collect_data: ${11:true}                                               # Type of maintenance  With data collection, or without 
+    http_login_password: ${12:value}                                       # Basic Auth password
+    timeout: ${13:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${14:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

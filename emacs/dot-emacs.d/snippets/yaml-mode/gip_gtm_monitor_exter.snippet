@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages external GTM monitors on a BIG-IP
+# prefix: bigip_gtm_monitor_external_snippet
+# key: gip_gtm_monitor_exter
+# group: ansible
+# --
+
+- name: ${0:Manages external GTM monitors on a BIG-IP}
+  bigip_gtm_monitor_external:                                              
+    name: ${1:Specifies the name of the monitor}                           #
+    parent: ${2:/Common/external}                                          # The parent template of this monitor template  Once this value has been set, it cannot be changed  By default, this value
+    arguments: ${3:value}                                                  # Specifies any command-line arguments that the script requires 
+    ip: ${4:value}                                                         # IP address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the defau
+    port: ${5:value}                                                       # Port address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the def
+    external_program: ${6:value}                                           # Specifies the name of the file for the monitor to use  In order to reference a file, you must first import it using opti
+    interval: ${7:value}                                                   # The interval specifying how frequently the monitor instance of this template will run  If this parameter is not provided
+    timeout: ${8:value}                                                    # The number of seconds in which the node or service must respond to the monitor request  If the target responds within th
+    variables: ${9:value}                                                  # Specifies any variables that the script requires  Note that double quotes in values will be suppressed 
+    partition: ${10:Common}                                                # Device partition to manage resources on 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the monitor exists  When C(absent), ensures the monitor is remove
+    provider: ${12:value}                                                  # A dict object containing connection details 

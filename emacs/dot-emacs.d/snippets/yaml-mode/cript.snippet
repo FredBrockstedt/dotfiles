@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Runs a local script on a remote node after transferring it
+# prefix: script_snippet
+# key: cript
+# group: ansible
+# --
+
+- name: ${0:Runs a local script on a remote node after transferring it}
+  script:                                                                  
+    free_form: ${1:value}                                                  # Path to the local script file followed by optional arguments 
+    cmd: ${2:value}                                                        # Path to the local script to run followed by optional arguments 
+    creates: ${3:value}                                                    # A filename on the remote node, when it already exists, this step will B(not) be run 
+    removes: ${4:value}                                                    # A filename on the remote node, when it does not exist, this step will B(not) be run 
+    chdir: ${5:value}                                                      # Change into this directory on the remote node before running the script 
+    executable: ${6:value}                                                 # Name or path of a executable to invoke the script with 
+    decrypt: ${7:True}                                                     # This option controls the autodecryption of source files using vault 

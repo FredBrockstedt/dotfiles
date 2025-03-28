@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Import a task list
+# prefix: import_tasks_snippet
+# key: mport_task
+# group: ansible
+# --
+
+- name: ${0:Import a task list}
+  import_tasks:                                                            
+    free-form: ${1:value}                                                  # The name of the imported file is specified directly without any other option  Most keywords, including loops and conditi

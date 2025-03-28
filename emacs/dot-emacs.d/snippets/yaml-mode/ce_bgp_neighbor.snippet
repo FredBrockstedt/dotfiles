@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: Manages BGP peer configuration on HUAWEI CloudEngine switches.
+# prefix: ce_bgp_neighbor_snippet
+# key: ce_bgp_neighbor
+# group: ansible
+# --
+
+- name: ${0:Manages BGP peer configuration on HUAWEI CloudEngine switches.}
+  ce_bgp_neighbor:                                                         
+    vrf_name: ${1:Name of a BGP instance}                                  # The name is a case-sensitive string of characters  The BGP instance can be used only after the corresponding VPN instanc
+    peer_addr: ${2:Connection address of a peer, which can be an IPv4 or IPv6 address}#
+    remote_as: ${3:AS number of a peer}                                    # The value is a string of 1 to 11 characters 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    description: ${5:value}                                                # Description of a peer, which can be letters or digits  The value is a string of 1 to 80 characters 
+    fake_as: ${6:value}                                                    # Fake AS number that is specified for a local peer  The value is a string of 1 to 11 characters 
+    dual_as: ${7$$(yas-choose-value '("no_use" "true" "false"))}           # choices: no_use;true;false  If the value is true, the EBGP peer can use either a fake AS number or the actual AS number 
+    conventional: ${8$$(yas-choose-value '("no_use" "true" "false"))}      # choices: no_use;true;false  If the value is true, the router has all extended capabilities  If the value is false, the r
+    route_refresh: ${9$$(yas-choose-value '("no_use" "true" "false"))}     # choices: no_use;true;false  If the value is true, BGP is enabled to advertise REFRESH packets  If the value is false, th
+    is_ignore: ${10$$(yas-choose-value '("no_use" "true" "false"))}        # choices: no_use;true;false  If the value is true, the session with a specified peer is torn down and all related routing
+    local_if_name: ${11:value}                                             # Name of a source interface that sends BGP packets  The value is a string of 1 to 63 characters 
+    ebgp_max_hop: ${12:value}                                              # Maximum number of hops in an indirect EBGP connection  The value is an ranging from 1 to 255 
+    valid_ttl_hops: ${13:value}                                            # Enable GTSM on a peer or peer group  The valid-TTL-Value parameter is used to specify the number of TTL hops to be detec
+    connect_mode: ${14:value}                                              # The value can be Connect-only, Listen-only, or Both 
+    is_log_change: ${15$$(yas-choose-value '("no_use" "true" "false"))}    # choices: no_use;true;false  If the value is true, BGP is enabled to record peer session status and event information  If
+    pswd_type: ${16$$(yas-choose-value '("null" "cipher" "simple"))}       # choices: null;cipher;simple  Enable BGP peers to establish a TCP connection and perform the Message Digest 5 (MD5) authe
+    pswd_cipher_text: ${17:value}                                          # The character string in a password identifies the contents of the password, spaces not supported  The value is a string 
+    keep_alive_time: ${18:value}                                           # Specify the Keepalive time of a peer or peer group  The value is an integer ranging from 0 to 21845  The default value i
+    hold_time: ${19:value}                                                 # Specify the Hold time of a peer or peer group  The value is 0 or an integer ranging from 3 to 65535 
+    min_hold_time: ${20:value}                                             # Specify the Min hold time of a peer or peer group 
+    key_chain_name: ${21:value}                                            # Specify the Keychain authentication name used when BGP peers establish a TCP connection  The value is a string of 1 to 4
+    conn_retry_time: ${22:value}                                           # ConnectRetry interval  The value is an integer ranging from 1 to 65535 
+    tcp_MSS: ${23:value}                                                   # Maximum TCP MSS value used for TCP connection establishment for a peer  The value is an integer ranging from 176 to 4096
+    mpls_local_ifnet_disable: ${24$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  If the value is true, peer create MPLS Local IFNET disable  If the value is false, pe
+    prepend_global_as: ${25$$(yas-choose-value '("no_use" "true" "false"))}# choices: no_use;true;false  Add the global AS number to the Update packets to be advertised 
+    prepend_fake_as: ${26$$(yas-choose-value '("no_use" "true" "false"))}  # choices: no_use;true;false  Add the Fake AS number to received Update packets 
+    is_bfd_block: ${27$$(yas-choose-value '("no_use" "true" "false"))}     # choices: no_use;true;false  If the value is true, peers are enabled to inherit the BFD function from the peer group  If 
+    multiplier: ${28:value}                                                # Specify the detection multiplier  The default value is 3  The value is an integer ranging from 3 to 50 
+    is_bfd_enable: ${29$$(yas-choose-value '("no_use" "true" "false"))}    # choices: no_use;true;false  If the value is true, BFD is enabled  If the value is false, BFD is disabled 
+    rx_interval: ${30:value}                                               # Specify the minimum interval at which BFD packets are received  The value is an integer ranging from 50 to 1000, in mill
+    tx_interval: ${31:value}                                               # Specify the minimum interval at which BFD packets are sent  The value is an integer ranging from 50 to 1000, in millisec
+    is_single_hop: ${32$$(yas-choose-value '("no_use" "true" "false"))}    # choices: no_use;true;false  If the value is true, the system is enabled to preferentially use the single-hop mode for BF

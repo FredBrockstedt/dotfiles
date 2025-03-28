@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manages hosts on Apache CloudStack based clouds.
+# prefix: cs_host_snippet
+# key: cs_host
+# group: ansible
+# --
+
+- name: ${0:Manages hosts on Apache CloudStack based clouds.}
+  cs_host:                                                                 
+    name: ${1:Name of the host}                                            #
+    url: ${2:value}                                                        # Url of the host used to create a host  If not provided, C(http://) and param I(name) is used as url  Only considered if 
+    username: ${3:value}                                                   # Username for the host  Required if I(state=present) and host does not yet exist 
+    password: ${4:value}                                                   # Password for the host  Required if I(state=present) and host does not yet exist 
+    pod: ${5:value}                                                        # Name of the pod  Required if I(state=present) and host does not yet exist 
+    cluster: ${6:value}                                                    # Name of the cluster 
+    hypervisor: ${7:value}                                                 # Name of the cluster  Required if I(state=present) and host does not yet exist  Possible values are C(KVM), C(VMware), C(
+    allocation_state: ${8$$(yas-choose-value '("enabled" "disabled" "maintenance"))}# choices: enabled;disabled;maintenance  Allocation state of the host 
+    host_tags: ${9:value}                                                  # Tags of the host 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the host 
+    zone: ${11:value}                                                      # Name of the zone in which the host should be deployed  If not set, default zone is used 
+    api_key: ${12:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${13:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${14:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${15$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${16:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${17:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

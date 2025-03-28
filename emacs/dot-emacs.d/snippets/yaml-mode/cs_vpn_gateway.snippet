@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manages site-to-site VPN gateways on Apache CloudStack based clouds.
+# prefix: cs_vpn_gateway_snippet
+# key: cs_vpn_gateway
+# group: ansible
+# --
+
+- name: ${0:Manages site-to-site VPN gateways on Apache CloudStack based clouds.}
+  cs_vpn_gateway:                                                          
+    vpc: ${1:Name of the VPC}                                              #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the VPN gateway 
+    domain: ${3:value}                                                     # Domain the VPN gateway is related to 
+    account: ${4:value}                                                    # Account the VPN gateway is related to 
+    project: ${5:value}                                                    # Name of the project the VPN gateway is related to 
+    zone: ${6:value}                                                       # Name of the zone the VPC is related to  If not set, default zone is used 
+    poll_async: ${7:True}                                                  # Poll async jobs until job has finished 
+    api_key: ${8:value}                                                    # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${9:value}                                                 # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${10:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${11$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${12:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${13:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

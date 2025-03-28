@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Collect information from Pure Storage FlashBlade
+# prefix: purefb_info_snippet
+# key: purefb_info
+# group: ansible
+# --
+
+- name: ${0:Collect information from Pure Storage FlashBlade}
+  purefb_info:                                                             
+    gather_subset: ${1:minimum}                                            # When supplied, this argument will define the information to be collected  Possible values for this include all, minimum,
+    fb_url: ${2:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${3:value}                                                  # FlashBlade API token for admin privileged user 

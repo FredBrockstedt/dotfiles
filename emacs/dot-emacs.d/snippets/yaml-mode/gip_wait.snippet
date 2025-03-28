@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Wait for a BIG-IP condition before continuing
+# prefix: bigip_wait_snippet
+# key: gip_wait
+# group: ansible
+# --
+
+- name: ${0:Wait for a BIG-IP condition before continuing}
+  bigip_wait:                                                              
+    timeout: ${1:7200}                                                     # Maximum number of seconds to wait for  When used without other conditions it is equivalent of just sleeping  The default
+    delay: ${2:0}                                                          # Number of seconds to wait before starting to poll 
+    sleep: ${3:1}                                                          # Number of seconds to sleep between checks, before 2 3 this was hardcoded to 1 second 
+    msg: ${4:value}                                                        # This overrides the normal error message from a failure to meet the required conditions 
+    provider: ${5:value}                                                   # A dict object containing connection details 

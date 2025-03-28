@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Add host ports on IBM Spectrum Accelerate Family storage systems.
+# prefix: ibm_sa_host_ports_snippet
+# key: m_sa_host_port
+# group: ansible
+# --
+
+- name: ${0:Add host ports on IBM Spectrum Accelerate Family storage systems.}
+  ibm_sa_host_ports:                                                       
+    host: ${1:Host name}                                                   #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Host ports state 
+    username: ${3:Management user on the spectrum accelerate storage system}#
+    password: ${4:Password for username on the spectrum accelerate storage system}#
+    endpoints: ${5:The hostname or management IP of Spectrum Accelerate storage system}#
+    iscsi_name: ${6:value}                                                 # iSCSI initiator name 
+    fcaddress: ${7:value}                                                  # Fiber channel address 
+    num_of_visible_targets: ${8:value}                                     # Number of visible targets 

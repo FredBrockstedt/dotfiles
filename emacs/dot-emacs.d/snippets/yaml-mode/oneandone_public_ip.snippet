@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Configure 1&1 public IPs.
+# prefix: oneandone_public_ip_snippet
+# key: oneandone_public_ip
+# group: ansible
+# --
+
+- name: ${0:Configure 1&1 public IPs.}
+  oneandone_public_ip:                                                     
+    auth_token: ${1:Authenticating API token provided by 1&1}              #
+    public_ip_id: ${2:The ID of the public IP used with update and delete states}#
+    state: ${3$$(yas-choose-value '("present" "absent" "update"))}         # choices: present;absent;update  Define a public ip state to create, remove, or update 
+    api_url: ${4:value}                                                    # Custom API URL  Overrides the ONEANDONE_API_URL environement variable 
+    reverse_dns: ${5:value}                                                # Reverse DNS name  maxLength=256
+    datacenter: ${6:value}                                                 # ID of the datacenter where the IP will be created (only for unassigned IPs) 
+    type: ${7$$(yas-choose-value '("IPV4" "IPV6"))}                        # choices: IPV4;IPV6  Type of IP  Currently, only IPV4 is available 
+    wait: ${8:true}                                                        # wait for the instance to be in state 'running' before returning
+    wait_timeout: ${9:600}                                                 # how long before wait gives up, in seconds
+    wait_interval: ${10:5}                                                 # Defines the number of seconds to wait when using the _wait_for methods

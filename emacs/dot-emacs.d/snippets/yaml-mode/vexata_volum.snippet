@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage volumes on Vexata VX100 storage arrays
+# prefix: vexata_volume_snippet
+# key: vexata_volum
+# group: ansible
+# --
+
+- name: ${0:Manage volumes on Vexata VX100 storage arrays}
+  vexata_volume:                                                           
+    name: ${1:Volume name}                                                 #
+    array: ${2:Vexata VX100 array hostname or IPv4 Address}                #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates/Modifies volume when present or removes when absent 
+    size: ${4:value}                                                       # Volume size in M, G, T units  M=2^20, G=2^30, T=2^40 bytes 
+    user: ${5:value}                                                       # Vexata API user with administrative privileges 
+    password: ${6:value}                                                   # Vexata API user password 
+    validate_certs: ${7:false}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If set to C(ye

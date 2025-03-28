@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Add or remove a static route
+# prefix: win_route_snippet
+# key: win_rout
+# group: ansible
+# --
+
+- name: ${0:Add or remove a static route}
+  win_route:                                                               
+    destination: ${1:Destination IP address in CIDR format (ip address/prefix length)}#
+    gateway: ${2:value}                                                    # The gateway used by the static route  If C(gateway) is not provided it will be set to C(0 0 0 0) 
+    metric: ${3:1}                                                         # Metric used by the static route 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If C(absent), it removes a network static route  If C(present), it adds a network static route 

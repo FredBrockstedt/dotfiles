@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage a Network Load Balancer
+# prefix: elb_network_lb_snippet
+# key: twork
+# group: ansible
+# --
+
+- name: ${0:Manage a Network Load Balancer}
+  elb_network_lb:                                                          
+    name: ${1:The name of the load balancer}                               # This name must be unique within your AWS account, can have a maximum of 32 characters, must contain only alphanumeric ch
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Create or destroy the load balancer 
+    cross_zone_load_balancing: ${3:False}                                  # Indicates whether cross-zone load balancing is enabled 
+    deletion_protection: ${4:False}                                        # Indicates whether deletion protection for the ELB is enabled 
+    listeners: ${5:value}                                                  # A list of dicts containing listeners to attach to the ELB  See examples for detail of the dict required  Note that liste
+    purge_listeners: ${6:True}                                             # If yes, existing listeners will be purged from the ELB to match exactly what is defined by I(listeners) parameter  If th
+    purge_tags: ${7:True}                                                  # If yes, existing tags will be purged from the resource to match exactly what is defined by I(tags) parameter  If the I(t
+    subnet_mappings: ${8:value}                                            # A list of dicts containing the IDs of the subnets to attach to the load balancer  You can also specify the allocation ID
+    subnets: ${9:value}                                                    # A list of the IDs of the subnets to attach to the load balancer  You can specify only one subnet per Availability Zone  
+    scheme: ${10$$(yas-choose-value '("internet-facing" "internal"))}      # choices: internet-facing;internal  Internet-facing or internal load balancer  An ELB scheme can not be modified after cr
+    tags: ${11:value}                                                      # A dictionary of one or more tags to assign to the load balancer 
+    wait: ${12:value}                                                      # Whether or not to wait for the network load balancer to reach the desired state 
+    wait_timeout: ${13:value}                                              # The duration in seconds to wait, used in conjunction with I(wait) 
+    debug_botocore_endpoint_logs: ${14:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${15:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${16:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${17:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${18:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${19:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${20:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${21:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

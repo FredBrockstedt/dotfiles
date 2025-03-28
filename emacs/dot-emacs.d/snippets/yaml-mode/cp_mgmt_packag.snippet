@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manages package objects on Check Point over Web Services API
+# prefix: cp_mgmt_package_snippet
+# key: cp_mgmt_packag
+# group: ansible
+# --
+
+- name: ${0:Manages package objects on Check Point over Web Services API}
+  cp_mgmt_package:                                                         
+    name: ${1:Object name}                                                 #
+    access: ${2:value}                                                     # True - enables, False - disables access & NAT policies, empty - nothing is changed 
+    desktop_security: ${3:value}                                           # True - enables, False - disables Desktop security policy, empty - nothing is changed 
+    installation_targets: ${4:value}                                       # Which Gateways identified by the name or UID to install the policy on 
+    qos: ${5:value}                                                        # True - enables, False - disables QoS policy, empty - nothing is changed 
+    qos_policy_type: ${6$$(yas-choose-value '("recommended" "express"))}   # choices: recommended;express  QoS policy type 
+    tags: ${7:value}                                                       # Collection of tag identifiers 
+    threat_prevention: ${8:value}                                          # True - enables, False - disables Threat policy, empty - nothing is changed 
+    vpn_traditional_mode: ${9:value}                                       # True - enables, False - disables VPN traditional mode, empty - nothing is changed 
+    color: ${10$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${11:value}                                                  # Comments string 
+    details_level: ${12$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${13:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${14:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    access_layers: ${15:value}                                             # Access policy layers 
+    threat_layers: ${16:value}                                             # Threat policy layers 
+    state: ${17$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${18:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${19:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${20:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

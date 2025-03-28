@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: add or remove tag(s) to/from GCE instances
+# prefix: gce_tag_snippet
+# key: gce_tag
+# group: ansible
+# --
+
+- name: ${0:add or remove tag(s) to/from GCE instances}
+  gce_tag:                                                                 
+    tags: ${1:Comma-separated list of tags to add or remove}               #
+    instance_name: ${2:value}                                              # The name of the GCE instance to add/remove tags  Required if C(instance_pattern) is not specified 
+    instance_pattern: ${3:value}                                           # The pattern of GCE instance names to match for adding/removing tags   Full-Python regex is supported  See U(https://docs
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Desired state of the tags 
+    zone: ${5:us-central1-a}                                               # The zone of the disk specified by source 
+    service_account_email: ${6:value}                                      # Service account email 
+    pem_file: ${7:value}                                                   # Path to the PEM file associated with the service account email 
+    project_id: ${8:value}                                                 # Your GCE project ID 

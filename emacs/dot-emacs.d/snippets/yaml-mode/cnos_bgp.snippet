@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage BGP resources and attributes on devices running CNOS
+# prefix: cnos_bgp_snippet
+# key: cnos_bgp
+# group: ansible
+# --
+
+- name: ${0:Manage BGP resources and attributes on devices running CNOS}
+  cnos_bgp:                                                                
+    asNum: ${1:None}:AS number}                                            #
+    bgpArg1: ${2$$(yas-choose-value '("address-family" "bestpath" "bgp" "cluster-id" "confederation" "enforce-first-as" "fast-external-failover" "graceful-restart" "graceful-restart-helper" "log-ne
+    outputfile: ${3:This specifies the file path where the output of each command execution is saved}# Each command that is specified in the merged template file and each response from the device a
+    host: ${4:This is the variable used to search the hosts file at /etc/ansible/hosts and identify the IP address of the device on which the template is going to be applied}# Usually the Ansible k
+    username: ${5:Configures the username used to authenticate the connection to the remote device}# The value of the username parameter is used to authenticate the SSH session  While generally the
+    password: ${6:Configures the password used to authenticate the connection to the remote device}# The value of the password parameter is used to authenticate the SSH session  While generally the
+    deviceType: ${7$$(yas-choose-value '("g8272_cnos" "g8296_cnos" "g8332_cnos" "NE0152T" "NE1072T" "NE1032" "NE1032T" "NE10032" "NE2572"))}# This specifies the type of device where the method is e
+    bgpArg2: ${8$$(yas-choose-value '("ipv4 or ipv6" "always-compare-med" "compare-confed-aspath" "compare-routerid" "dont-compare-originator-id" "tie-break-on-age" "as-path" "med" "identifier" "pe
+    bgpArg3: ${9$$(yas-choose-value '("aggregate-address" "client-to-client" "dampening" "distance" "maximum-paths" "network" "nexthop" "redistribute" "save" "synchronization" "ignore or multipath-
+    bgpArg4: ${10$$(yas-choose-value '("Aggregate prefix" "Reachability Half-life time" "route-map" "Distance for routes ext" "ebgp or ibgp" "IP prefix <network>" "IP prefix <network>/<length>" "sy
+    bgpArg5: ${11$$(yas-choose-value '("as-set" "summary-only" "Value to start reusing a route" "Distance for routes internal" "Supported multipath numbers" "backdoor" "map" "route-map"))}# choices
+    bgpArg6: ${12$$(yas-choose-value '("summary-only" "as-set" "route-map name" "Value to start suppressing a route" "Distance local routes" "Network mask" "Pointer to route-map entries"))}# choice
+    bgpArg7: ${13$$(yas-choose-value '("Maximum duration to suppress a stable route(minutes)" "backdoor" "route-map" "Name of the route map"))}# choices: Maximum duration to suppress a stable route
+    bgpArg8: ${14$$(yas-choose-value '("Un-reachability Half-life time for the penalty(minutes)" "backdoor"))}# choices: Un-reachability Half-life time for the penalty(minutes);backdoor  This is an
+    enablePassword: ${15:value}                                            # Configures the password used to enter Global Configuration command mode on the switch  If the switch does not request th

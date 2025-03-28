@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create/delete a DNS domain in DigitalOcean
+# prefix: digital_ocean_domain_snippet
+# key: digital_ocean_dom
+# group: ansible
+# --
+
+- name: ${0:Create/delete a DNS domain in DigitalOcean}
+  digital_ocean_domain:                                                    
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the target 
+    id: ${2:value}                                                         # Numeric, the droplet id you want to operate on 
+    name: ${3:value}                                                       # String, this is the name of the droplet - must be formatted by hostname rules, or the name of a SSH key, or the name of 
+    ip: ${4:value}                                                         # An 'A' record for '@' (\$ORIGIN) will be created with the value 'ip'   'ip' is an IP version 4 address 
+    oauth_token: ${5:value}                                                # DigitalOcean OAuth token  There are several other environment variables which can be used to provide this value  i e , -
+    timeout: ${6:30}                                                       # The timeout in seconds used for polling DigitalOcean's API 
+    validate_certs: ${7:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled

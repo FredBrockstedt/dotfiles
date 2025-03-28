@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP configuration on Lenovo CNOS network devices.
+# prefix: cnos_lldp_snippet
+# key: cnos_lldp
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP configuration on Lenovo CNOS network devices.}
+  cnos_lldp:                                                               
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the LLDP configuration  If value is I(present) lldp will be enabled else if it is I(ab

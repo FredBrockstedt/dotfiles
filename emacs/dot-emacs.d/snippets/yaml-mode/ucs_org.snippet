@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages UCS Organizations for UCS Manager
+# prefix: ucs_org_snippet
+# key: ucs_org
+# group: ansible
+# --
+
+- name: ${0:Manages UCS Organizations for UCS Manager}
+  ucs_org:                                                                 
+    hostname: ${1:IP address or hostname of Cisco UCS Manager}             #
+    password: ${2:Password for Cisco UCS Manager authentication}           #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If C(absent), will remove organization  If C(present), will create or update organization 
+    org_name: ${4:value}                                                   # The name of the organization  Enter up to 16 characters  You can use any characters or spaces except the following: ` (a
+    parent_org_path: ${5:root}                                             # A forward slash / separated hierarchical path from the root organization to the parent of the organization to be added o
+    description: ${6:value}                                                # A user-defined description of the organization  Enter up to 256 characters  You can use any characters or spaces except 
+    delegate_to: ${7:localhost}                                            # Where the module will be run
+    username: ${8:admin}                                                   # Username for Cisco UCS Manager authentication 
+    port: ${9:value}                                                       # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${10:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${11:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${12:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

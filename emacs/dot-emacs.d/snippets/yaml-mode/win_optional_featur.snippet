@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage optional Windows features
+# prefix: win_optional_feature_snippet
+# key: win_optional_featur
+# group: ansible
+# --
+
+- name: ${0:Manage optional Windows features}
+  win_optional_feature:                                                    
+    name: ${1:The name(s) of the feature to install}                       # This relates to C(FeatureName) in the Powershell cmdlet  To list all available features use the PowerShell command C(Get
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether to ensure the feature is absent or present on the system 
+    include_parent: ${3:False}                                             # Whether to enable the parent feature and the parent's dependencies 
+    source: ${4:value}                                                     # Specify a source to install the feature from  Can either be C({driveletter\}:\\sources\\sxs) or C(\\\\{IP\}\\share\\sour

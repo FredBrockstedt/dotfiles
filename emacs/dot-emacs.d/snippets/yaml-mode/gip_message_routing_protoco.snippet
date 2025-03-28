@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage generic message parser profile.
+# prefix: bigip_message_routing_protocol_snippet
+# key: gip_message_routing_protoco
+# group: ansible
+# --
+
+- name: ${0:Manage generic message parser profile.}
+  bigip_message_routing_protocol:                                          
+    name: ${1:Specifies the name of the generic parser profile}            #
+    description: ${2:value}                                                # The user defined description of the generic parser profile 
+    parent: ${3:value}                                                     # The parent template of this parser profile  Once this value has been set, it cannot be changed  When creating a new prof
+    disable_parser: ${4:value}                                             # When C(yes), the generic message parser will be disabled ignoring all incoming packets and not directly send message dat
+    max_egress_buffer: ${5:value}                                          # Specifies the maximum size of the send buffer in bytes  If the number of bytes in the send buffer for a connection excee
+    max_msg_size: ${6:value}                                               # Specifies the maximum size of a received message  If a message exceeds this size, the connection will be reset  The acce
+    msg_terminator: ${7:value}                                             # The string of characters used to terminate a message  If the message-terminator is not specified, the generic message pa
+    no_response: ${8:value}                                                # When set, matching of responses to requests is disabled 
+    partition: ${9:Common}                                                 # Device partition to create route object on 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the route exists  When C(absent), ensures the route is removed 
+    provider: ${11:value}                                                  # A dict object containing connection details 

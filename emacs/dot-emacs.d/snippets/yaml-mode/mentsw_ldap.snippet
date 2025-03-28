@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage ldap admin users
+# prefix: na_elementsw_ldap_snippet
+# key: mentsw_ldap
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage ldap admin users}
+  na_elementsw_ldap:                                                       
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified volume should exist or not 
+    hostname: ${2:The hostname or IP address of the SolidFire cluster}     #
+    username: ${3:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${4:Password for the specified user}                         #
+    authType: ${5$$(yas-choose-value '("DirectBind" "SearchAndBind"))}     # choices: DirectBind;SearchAndBind  Identifies which user authentication method to use 
+    groupSearchBaseDn: ${6:value}                                          # The base DN of the tree to start the group search (will do a subtree search from here)
+    groupSearchType: ${7$$(yas-choose-value '("NoGroup" "ActiveDirectory" "MemberDN"))}# choices: NoGroup;ActiveDirectory;MemberDN  Controls the default group search filter used
+    serverURIs: ${8:value}                                                 # A comma-separated list of LDAP server URIs
+    userSearchBaseDN: ${9:value}                                           # The base DN of the tree to start the search (will do a subtree search from here)
+    searchBindDN: ${10:value}                                              # A dully qualified DN to log in with to perform an LDAp search for the user (needs read access to the LDAP directory) 
+    searchBindPassword: ${11:value}                                        # The password for the searchBindDN account used for searching
+    userSearchFilter: ${12:value}                                          # the LDAP Filter to use
+    userDNTemplate: ${13:value}                                            # A string that is used form a fully qualified user DN 
+    groupSearchCustomFilter: ${14:value}                                   # For use with the CustomFilter Search type

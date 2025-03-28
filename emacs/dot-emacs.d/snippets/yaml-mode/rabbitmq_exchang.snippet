@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage rabbitMQ exchanges
+# prefix: rabbitmq_exchange_snippet
+# key: rabbitmq_exchang
+# group: ansible
+# --
+
+- name: ${0:Manage rabbitMQ exchanges}
+  rabbitmq_exchange:                                                       
+    name: ${1:Name of the exchange to create}                              #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the exchange should be present or absent
+    durable: ${3:True}                                                     # whether exchange is durable or not
+    exchange_type: ${4$$(yas-choose-value '("fanout" "direct" "headers" "topic"))}# choices: fanout;direct;headers;topic  type for the exchange
+    auto_delete: ${5:False}                                                # if the exchange should delete itself after all queues/exchanges unbound from it
+    internal: ${6:False}                                                   # exchange is available only for other exchanges
+    arguments: ${7:namespace()}                                            # extra arguments for exchange  If defined this argument is a key/value dictionary
+    login_user: ${8:guest}                                                 # RabbitMQ user for connection 
+    login_password: ${9:value}                                             # RabbitMQ password for connection 
+    login_host: ${10:localhost}                                            # RabbitMQ host for connection 
+    login_port: ${11:15672}                                                # RabbitMQ management API port 
+    login_protocol: ${12$$(yas-choose-value '("http" "https"))}            # choices: http;https  RabbitMQ management API protocol 
+    ca_cert: ${13:value}                                                   # CA certificate to verify SSL connection to management API 
+    client_cert: ${14:value}                                               # Client certificate to send on SSL connections to management API 
+    client_key: ${15:value}                                                # Private key matching the client certificate 
+    vhost: ${16:/}                                                         # RabbitMQ virtual host 

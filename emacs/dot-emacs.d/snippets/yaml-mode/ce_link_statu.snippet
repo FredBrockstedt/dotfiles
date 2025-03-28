@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Get interface link status on HUAWEI CloudEngine switches.
+# prefix: ce_link_status_snippet
+# key: ce_link_statu
+# group: ansible
+# --
+
+- name: ${0:Get interface link status on HUAWEI CloudEngine switches.}
+  ce_link_status:                                                          
+    interface: ${1:For the interface parameter, you can enter C(all) to display information about all interfaces, an interface type such as C(40GE) to display information about interfaces of the sp

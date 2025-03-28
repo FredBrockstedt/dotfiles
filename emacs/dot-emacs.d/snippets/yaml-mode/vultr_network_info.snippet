@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Gather information about the Vultr networks available.
+# prefix: vultr_network_info_snippet
+# key: vultr_network_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about the Vultr networks available.}
+  vultr_network_info:                                                      
+    api_key: ${1:value}                                                    # API key of the Vultr API  The ENV variable C(VULTR_API_KEY) is used as default, when defined 
+    api_timeout: ${2:value}                                                # HTTP timeout to Vultr API  The ENV variable C(VULTR_API_TIMEOUT) is used as default, when defined  Fallback value is 60 
+    api_retries: ${3:value}                                                # Amount of retries in case of the Vultr API retuns an HTTP 503 code  The ENV variable C(VULTR_API_RETRIES) is used as def
+    api_retry_max_delay: ${4:value}                                        # Retry backoff delay in seconds is exponential up to this max  value, in seconds  The ENV variable C(VULTR_API_RETRY_MAX_
+    api_account: ${5:default}                                              # Name of the ini section in the C(vultr ini) file  The ENV variable C(VULTR_API_ACCOUNT) is used as default, when defined
+    api_endpoint: ${6:value}                                               # URL to API endpint (without trailing slash)  The ENV variable C(VULTR_API_ENDPOINT) is used as default, when defined  Fa
+    validate_certs: ${7:True}                                              # Validate SSL certs of the Vultr API 

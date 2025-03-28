@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage MAGP protocol on Mellanox ONYX network devices
+# prefix: onyx_magp_snippet
+# key: onyx_magp
+# group: ansible
+# --
+
+- name: ${0:Manage MAGP protocol on Mellanox ONYX network devices}
+  onyx_magp:                                                               
+    magp_id: ${1:MAGP instance number 1-255}                               #
+    interface: ${2:VLAN Interface name}                                    #
+    state: ${3$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  MAGP state 
+    router_ip: ${4:value}                                                  # MAGP router IP address 
+    router_mac: ${5:value}                                                 # MAGP router MAC address 

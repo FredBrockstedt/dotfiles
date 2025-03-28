@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manipulate remote syslog settings on a BIG-IP
+# prefix: bigip_remote_syslog_snippet
+# key: gip_remote_syslog
+# group: ansible
+# --
+
+- name: ${0:Manipulate remote syslog settings on a BIG-IP}
+  bigip_remote_syslog:                                                     
+    remote_host: ${1:Specifies the IP address, or hostname, for the remote system to which the system sends log messages}#
+    name: ${2:value}                                                       # Specifies the name of the syslog object  This option is required when multiple C(remote_host) with the same IP or hostna
+    remote_port: ${3:value}                                                # Specifies the port that the system uses to send messages to the remote logging server  When creating a remote syslog, if
+    local_ip: ${4:value}                                                   # Specifies the local IP address of the system that is logging  To provide no local IP, specify the value C(none)  When cr
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(present), guarantees that the remote syslog exists with the provided attributes  When C(
+    provider: ${6:value}                                                   # A dict object containing connection details 

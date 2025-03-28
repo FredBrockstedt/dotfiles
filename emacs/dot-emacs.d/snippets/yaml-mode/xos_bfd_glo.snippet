@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Bidirectional Forwarding Detection (BFD) global-level configuration
+# prefix: nxos_bfd_global_snippet
+# key: xos_bfd_glo
+# group: ansible
+# --
+
+- name: ${0:Bidirectional Forwarding Detection (BFD) global-level configuration}
+  nxos_bfd_global:                                                         
+    echo_interface: ${1:value}                                             # Loopback interface used for echo frames  Valid values are loopback interface name or 'deleted'  Not supported on N5K/N6K
+    echo_rx_interval: ${2:value}                                           # BFD Echo receive interval in milliseconds 
+    interval: ${3:value}                                                   # BFD interval timer values  Value must be a dict defining values for keys (tx, min_rx, and multiplier)
+    slow_timer: ${4:value}                                                 # BFD slow rate timer in milliseconds 
+    startup_timer: ${5:value}                                              # BFD delayed startup timer in seconds  Not supported on N5K/N6K/N7K
+    ipv4_echo_rx_interval: ${6:value}                                      # BFD IPv4 session echo receive interval in milliseconds 
+    ipv4_interval: ${7:value}                                              # BFD IPv4 interval timer values  Value must be a dict defining values for keys (tx, min_rx, and multiplier) 
+    ipv4_slow_timer: ${8:value}                                            # BFD IPv4 slow rate timer in milliseconds 
+    ipv6_echo_rx_interval: ${9:value}                                      # BFD IPv6 session echo receive interval in milliseconds 
+    ipv6_interval: ${10:value}                                             # BFD IPv6 interval timer values  Value must be a dict defining values for keys (tx, min_rx, and multiplier) 
+    ipv6_slow_timer: ${11:value}                                           # BFD IPv6 slow rate timer in milliseconds 
+    fabricpath_interval: ${12:value}                                       # BFD fabricpath interval timer values  Value must be a dict defining values for keys (tx, min_rx, and multiplier) 
+    fabricpath_slow_timer: ${13:value}                                     # BFD fabricpath slow rate timer in milliseconds 
+    fabricpath_vlan: ${14:value}                                           # BFD fabricpath control vlan 
+    provider: ${15:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage and configure Arista EOS eAPI.
+# prefix: eos_eapi_snippet
+# key: os_eap
+# group: ansible
+# --
+
+- name: ${0:Manage and configure Arista EOS eAPI.}
+  eos_eapi:                                                                
+    http: ${1:false}                                                       # The C(http) argument controls the operating state of the HTTP transport protocol when eAPI is present in the running-con
+    http_port: ${2:80}                                                     # Configures the HTTP port that will listen for connections when the HTTP transport protocol is enabled   This argument ac
+    https: ${3:true}                                                       # The C(https) argument controls the operating state of the HTTPS transport protocol when eAPI is present in the running-c
+    https_port: ${4:443}                                                   # Configures the HTTP port that will listen for connections when the HTTP transport protocol is enabled   This argument ac
+    local_http: ${5:false}                                                 # The C(local_http) argument controls the operating state of the local HTTP transport protocol when eAPI is present in the
+    local_http_port: ${6:8080}                                             # Configures the HTTP port that will listen for connections when the HTTP transport protocol is enabled   This argument ac
+    socket: ${7:false}                                                     # The C(socket) argument controls the operating state of the UNIX Domain Socket used to receive eAPI requests   When the v
+    vrf: ${8:default}                                                      # The C(vrf) argument will configure eAPI to listen for connections in the specified VRF   By default, eAPI transports wil
+    config: ${9:value}                                                     # The module, by default, will connect to the remote device and retrieve the current running-config to use as a base for c
+    state: ${10$$(yas-choose-value '("started" "stopped"))}                # choices: started;stopped  The C(state) argument controls the operational state of eAPI on the remote device   When this 
+    authorize: ${11:False}                                                 # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  This option is
+    auth_pass: ${12:value}                                                 # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes) with C(become_p
+    provider: ${13:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

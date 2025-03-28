@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Module to manage hosts in oVirt/RHV
+# prefix: ovirt_host_snippet
+# key: ovirt_host
+# group: ansible
+# --
+
+- name: ${0:Module to manage hosts in oVirt/RHV}
+  ovirt_host:                                                              
+    name: ${1:Name of the host to manage}                                  #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${3:value}                                                         # ID of the host to manage 
+    state: ${4$$(yas-choose-value '("present" "absent" "maintenance" "upgraded" "started" "restarted" "stopped" "reinstalled" "iscsidiscover" "iscsilogin"))}# choices: present;absent;maintenance;up
+    comment: ${5:value}                                                    # Description of the host 
+    timeout: ${6:600}                                                      # The amount of time in seconds the module should wait for the host to get into desired state 
+    cluster: ${7:value}                                                    # Name of the cluster, where host should be created 
+    address: ${8:value}                                                    # Host address  It can be either FQDN (preferred) or IP address 
+    password: ${9:value}                                                   # Password of the root  It's required in case C(public_key) is set to I(False) 
+    public_key: ${10:False}                                                # I(True) if the public key should be used to authenticate to host  It's required in case C(password) is not set 
+    kdump_integration: ${11$$(yas-choose-value '("enabled" "disabled"))}   # choices: enabled;disabled  Specify if host will have enabled Kdump integration 
+    spm_priority: ${12:value}                                              # SPM priority of the host  Integer value from 1 to 10, where higher number means higher priority 
+    override_iptables: ${13:value}                                         # If True host iptables will be overridden by host deploy script  Note that C(override_iptables) is I(false) by default in
+    force: ${14:False}                                                     # Indicates that the host should be removed even if it is non-responsive, or if it is part of a Gluster Storage cluster an
+    override_display: ${15:value}                                          # Override the display address of all VMs on this host with specified address 
+    kernel_params: ${16:value}                                             # List of kernel boot parameters  Following are most common kernel parameters used for host: Hostdev Passthrough & SR-IOV:
+    hosted_engine: ${17$$(yas-choose-value '("deploy" "undeploy"))}        # choices: deploy;undeploy  If I(deploy) it means this host should deploy also hosted engine components  If I(undeploy) it
+    power_management_enabled: ${18:value}                                  # Enable or disable power management of the host  For more comprehensive setup of PM use C(ovirt_host_pm) module 
+    activate: ${19:True}                                                   # If C(state) is I(present) activate the host  This parameter is good to disable, when you don't want to change the state 
+    iscsi: ${20:value}                                                     # If C(state) is I(iscsidiscover) it means that the iscsi attribute is being used to discover targets If C(state) is I(isc
+    check_upgrade: ${21:True}                                              # If I(true) and C(state) is I(upgraded) run check for upgrade action before executing upgrade action 
+    reboot_after_upgrade: ${22:True}                                       # If I(true) and C(state) is I(upgraded) reboot host after successful upgrade 
+    vgpu_placement: ${23$$(yas-choose-value '("consolidated" "separated"))}# choices: consolidated;separated  If I(consolidated), each vGPU is placed on the first physical card with available space
+    wait: ${24:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${25:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${26:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    poll_interval: ${27:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

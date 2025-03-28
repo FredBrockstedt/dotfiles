@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages netstream export on HUAWEI CloudEngine switches.
+# prefix: ce_netstream_export_snippet
+# key: ce_netstream_export
+# group: ansible
+# --
+
+- name: ${0:Manages netstream export on HUAWEI CloudEngine switches.}
+  ce_netstream_export:                                                     
+    type: ${1$$(yas-choose-value '("ip" "vxlan"))}                         # Specifies NetStream feature 
+    source_ip: ${2:value}                                                  # Specifies source address which can be IPv6 or IPv4 of the exported NetStream packet 
+    host_ip: ${3:value}                                                    # Specifies destination address which can be IPv6 or IPv4 of the exported NetStream packet 
+    host_port: ${4:value}                                                  # Specifies the destination UDP port number of the exported packets  The value is an integer that ranges from 1 to 65535 
+    host_vpn: ${5:value}                                                   # Specifies the VPN instance of the exported packets carrying flow statistics  Ensure the VPN instance has been created on
+    version: ${6$$(yas-choose-value '("5" "9"))}                           # choices: 5;9  Sets the version of exported packets 
+    as_option: ${7$$(yas-choose-value '("origin" "peer"))}                 # choices: origin;peer  Specifies the AS number recorded in the statistics as the original or the peer AS number 
+    bgp_nexthop: ${8$$(yas-choose-value '("enable" "disable"))}            # choices: enable;disable  Configures the statistics to carry BGP next hop information  Currently, only V9 supports the ex
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

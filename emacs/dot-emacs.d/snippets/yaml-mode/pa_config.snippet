@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage Global FreeIPA Configuration Settings
+# prefix: ipa_config_snippet
+# key: pa_config
+# group: ansible
+# --
+
+- name: ${0:Manage Global FreeIPA Configuration Settings}
+  ipa_config:                                                              
+    ipa_pass: ${1:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    ipadefaultloginshell: ${2:value}                                       # D e f a u l t   s h e l l   f o r   n e w   u s e r s  
+    ipadefaultemaildomain: ${3:value}                                      # D e f a u l t   e - m a i l   d o m a i n   f o r   n e w   u s e r s  
+    ipa_port: ${4:443}                                                     # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{5:ipa}                                                    #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${6:admin}                                                   # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${7$$(yas-choose-value '("http" "https"))}                   # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${8:True}                                              # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${9:10}                                                   # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Run one or more commands on EdgeOS devices
+# prefix: edgeos_command_snippet
+# key: dgeos_command
+# group: ansible
+# --
+
+- name: ${0:Run one or more commands on EdgeOS devices}
+  edgeos_command:                                                          
+    commands: ${1:The commands or ordered set of commands that should be run against the remote device}# The output of the command is returned to the playbook  If the C(wait_for) argument is provid
+    wait_for: ${2:value}                                                   # Causes the task to wait for a specific condition to be met before moving forward  If the condition is not met before the
+    match: ${3$$(yas-choose-value '("any" "all"))}                         # choices: any;all  Used in conjunction with C(wait_for) to create match policy  If set to C(all), then all conditions in 
+    retries: ${4:10}                                                       # Number of times a command should be tried before it is considered failed  The command is run on the target device and ev
+    interval: ${5:1}                                                       # The number of seconds to wait between C(retries) of the command 

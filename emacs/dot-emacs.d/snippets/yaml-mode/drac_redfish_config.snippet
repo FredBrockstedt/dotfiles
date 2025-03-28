@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages servers through iDRAC using Dell Redfish APIs
+# prefix: idrac_redfish_config_snippet
+# key: drac_redfish_config
+# group: ansible
+# --
+
+- name: ${0:Manages servers through iDRAC using Dell Redfish APIs}
+  idrac_redfish_config:                                                    
+    category: ${1:Category to execute on iDRAC}                            #
+    command: ${2:List of commands to execute on iDRAC}                     #
+    baseuri: ${3:Base URI of iDRAC}                                        #
+    username: ${4:User for authentication with iDRAC}                      #
+    password: ${5:Password for authentication with iDRAC}                  #
+    manager_attribute_name: ${6:null}                                      # name of iDRAC attribute to update
+    manager_attribute_value: ${7:null}                                     # value of iDRAC attribute to update
+    timeout: ${8:10}                                                       # Timeout in seconds for URL requests to iDRAC controller

@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Create maintenance windows for your status.io dashboard
+# prefix: statusio_maintenance_snippet
+# key: tatusio_maintenanc
+# group: ansible
+# --
+
+- name: ${0:Create maintenance windows for your status.io dashboard}
+  statusio_maintenance:                                                    
+    api_id: ${1:Your unique API ID from status}                            #io
+    api_key: ${2:Your unique API Key from status}                          #io
+    statuspage: ${3:Your unique StatusPage ID from status}                 #io
+    title: ${4:"A new maintenance window"}                                 # A descriptive title for the maintenance window
+    desc: ${5:"Created by Ansible"}                                        # Message describing the maintenance window
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of the package 
+    url: ${{7:https://api}                                                 #status io} # not required  Status io API URL  A private apiary can be used instead 
+    components: ${8:value}                                                 # The given name of your component (server name)
+    containers: ${9:value}                                                 # The given name of your container (data center)
+    all_infrastructure_affected: ${10:false}                               # If it affects all components and containers
+    automation: ${11:false}                                                # Automatically start and end the maintenance window
+    maintenance_notify_now: ${12:false}                                    # Notify subscribers now
+    maintenance_notify_72_hr: ${13:false}                                  # Notify subscribers 72 hours before maintenance start time
+    maintenance_notify_24_hr: ${14:false}                                  # Notify subscribers 24 hours before maintenance start time
+    maintenance_notify_1_hr: ${15:false}                                   # Notify subscribers 1 hour before maintenance start time
+    maintenance_id: ${16:value}                                            # The maintenance id number when deleting a maintenance window
+    minutes: ${17:10}                                                      # The length of time in UTC that the maintenance will run             (starting from playbook runtime)
+    start_date: ${18:value}                                                # Date maintenance is expected to start (Month/Day/Year) (UTC) End Date is worked out from start_date + minutes
+    start_time: ${19:value}                                                # Time maintenance is expected to start (Hour:Minutes) (UTC) End Time is worked out from start_time + minutes

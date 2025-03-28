@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage AWS IAM groups
+# prefix: iam_group_snippet
+# key: m_group
+# group: ansible
+# --
+
+- name: ${0:Manage AWS IAM groups}
+  iam_group:                                                               
+    name: ${1:The name of the group to create}                             #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Create or remove the IAM group
+    managed_policy: ${3:value}                                             # A list of managed policy ARNs or friendly names to attach to the role  To embed an inline policy, use M(iam_policy) 
+    users: ${4:value}                                                      # A list of existing users to add as members of the group 
+    purge_policy: ${5:False}                                               # Detach policy which not included in managed_policy list
+    purge_users: ${6:False}                                                # Detach users which not included in users list
+    debug_botocore_endpoint_logs: ${7:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${8:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${9:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${10:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${11:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${12:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${13:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${14:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

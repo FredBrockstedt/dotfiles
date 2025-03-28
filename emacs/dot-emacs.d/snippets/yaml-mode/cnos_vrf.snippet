@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage VRFs on Lenovo CNOS network devices
+# prefix: cnos_vrf_snippet
+# key: cnos_vrf
+# group: ansible
+# --
+
+- name: ${0:Manage VRFs on Lenovo CNOS network devices}
+  cnos_vrf:                                                                
+    name: ${1:Name of the VRF}                                             #
+    rd: ${2:value}                                                         # Route distinguisher of the VRF
+    interfaces: ${3:value}                                                 # Identifies the set of interfaces that should be configured in the VRF  Interfaces must be routed interfaces in order to 
+    associated_interfaces: ${4:value}                                      # This is a intent option and checks the operational state of the for given vrf C(name) for associated interfaces  If the 
+    aggregate: ${5:value}                                                  # L i s t   o f   V R F s   c o n t e x t s
+    purge: ${6:False}                                                      # Purge VRFs not defined in the I(aggregate) parameter 
+    delay: ${7:10}                                                         # Time in seconds to wait before checking for the operational state on remote device  This wait is applicable for operatio
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the VRF configuration 

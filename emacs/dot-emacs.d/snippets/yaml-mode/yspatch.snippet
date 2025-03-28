@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage OpenBSD system patches
+# prefix: syspatch_snippet
+# key: yspatch
+# group: ansible
+# --
+
+- name: ${0:Manage OpenBSD system patches}
+  syspatch:                                                                
+    apply: ${1:False}                                                      # Apply all available system patches
+    revert: ${2$$(yas-choose-value '("all" "one"))}                        # choices: all;one  Revert system patches

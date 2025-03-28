@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Adds or removes Red Hat software channels
+# prefix: rhn_channel_snippet
+# key: rhn_ch
+# group: ansible
+# --
+
+- name: ${0:Adds or removes Red Hat software channels}
+  rhn_channel:                                                             
+    name: ${1:Name of the software channel}                                #
+    sysname: ${2:Name of the system as it is known in RHN/Satellite}       #
+    url: ${3:The full URL to the RHN/Satellite API}                        #
+    user: ${4:RHN/Satellite login}                                         #
+    password: ${5:RHN/Satellite password}                                  #
+    state: ${6:present}                                                    # Whether the channel should be present or not, taking action if the state is different from what is stated 

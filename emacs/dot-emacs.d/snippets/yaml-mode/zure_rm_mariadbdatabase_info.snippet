@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Get Azure MariaDB Database facts
+# prefix: azure_rm_mariadbdatabase_info_snippet
+# key: zure_rm_mariadbdatabase_info
+# group: ansible
+# --
+
+- name: ${0:Get Azure MariaDB Database facts}
+  azure_rm_mariadbdatabase_info:                                           
+    resource_group: ${1:The name of the resource group that contains the resource}# You can obtain this value from the Azure Resource Manager API or the portal 
+    server_name: ${2:The name of the server}                               #
+    name: ${3:value}                                                       # The name of the database 
+    ad_user: ${4:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${5:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${6:value}                                                    # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${7:value}                                            # Your Azure subscription Id 
+    client_id: ${8:value}                                                  # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${9:value}                                                     # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${10:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${11:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${12:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${13$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${14$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${15:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

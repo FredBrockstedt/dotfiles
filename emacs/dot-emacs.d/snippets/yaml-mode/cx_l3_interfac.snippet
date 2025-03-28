@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage Layer-3 interfaces on Ruckus ICX 7000 series switches
+# prefix: icx_l3_interface_snippet
+# key: cx_l3_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Layer-3 interfaces on Ruckus ICX 7000 series switches}
+  icx_l3_interface:                                                        
+    name: ${1:value}                                                       # Name of the Layer-3 interface to be configured eg  GigabitEthernet0/2, ve 10, ethernet 1/1/1
+    ipv4: ${2:value}                                                       # IPv4 address to be set for the Layer-3 interface mentioned in I(name) option  The address format is <ipv4 address>/<mask
+    ipv6: ${3:value}                                                       # IPv6 address to be set for the Layer-3 interface mentioned in I(name) option  The address format is <ipv6 address>/<mask
+    mode: ${4$$(yas-choose-value '("dynamic" "ospf-ignore" "ospf-passive"))}# choices: dynamic;ospf-ignore;ospf-passive  Specifies if ipv4 address should be dynamic/advertise to ospf/not advertise 
+    replace: ${5$$(yas-choose-value '("true" "false"))}                    # choices: yes;no  Replaces the configured primary IP address on the interface 
+    secondary: ${6$$(yas-choose-value '("true" "false"))}                  # choices: yes;no  Specifies that the configured address is a secondary IP address  If this keyword is omitted, the config
+    aggregate: ${7:value}                                                  # List of Layer-3 interfaces definitions  Each of the entry in aggregate list should define name of interface C(name) and 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the Layer-3 interface configuration  It indicates if the configuration should be prese
+    check_running_config: ${9:True}                                        # Check running configuration  This can be set as environment variable  Module will use environment variable value(default

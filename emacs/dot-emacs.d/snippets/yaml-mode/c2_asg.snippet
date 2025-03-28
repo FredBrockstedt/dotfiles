@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: Create or delete AWS Autoscaling Groups
+# prefix: ec2_asg_snippet
+# key: c2_asg
+# group: ansible
+# --
+
+- name: ${0:Create or delete AWS Autoscaling Groups}
+  ec2_asg:                                                                 
+    name: ${1:Unique name for group to be created or deleted}              #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  register or deregister the instance
+    load_balancers: ${3:value}                                             # List of ELB names to use for the group  Use for classic load balancers 
+    target_group_arns: ${4:value}                                          # List of target group ARNs to use for the group  Use for application load balancers 
+    availability_zones: ${5:value}                                         # List of availability zone names in which to create the group   Defaults to all the availability zones in the region if v
+    launch_config_name: ${6:value}                                         # Name of the Launch configuration to use for the group  See the ec2_lc module for managing these  If unspecified then the
+    launch_template: ${7:value}                                            # Dictionary describing the Launch Template to use
+    min_size: ${8:value}                                                   # Minimum number of instances in group, if unspecified then the current group value will be used 
+    max_size: ${9:value}                                                   # Maximum number of instances in group, if unspecified then the current group value will be used 
+    placement_group: ${10:value}                                           # Physical location of your cluster placement group created in Amazon EC2 
+    desired_capacity: ${11:value}                                          # Desired number of instances in group, if unspecified then the current group value will be used 
+    replace_all_instances: ${12:false}                                     # In a rolling fashion, replace all instances that used the old launch configuration with one from the new launch configur
+    replace_batch_size: ${13:1}                                            # Number of instances you'd like to replace at a time   Used with replace_all_instances 
+    replace_instances: ${14:value}                                         # List of instance_ids belonging to the named ASG that you would like to terminate and be replaced with instances matching
+    lc_check: ${15:true}                                                   # Check to make sure instances that are being replaced with replace_instances do not already have the current launch_confi
+    lt_check: ${16:true}                                                   # Check to make sure instances that are being replaced with replace_instances do not already have the current launch_templ
+    vpc_zone_identifier: ${17:value}                                       # List of VPC subnets to use
+    tags: ${18:value}                                                      # A list of tags to add to the Auto Scale Group  Optional key is 'propagate_at_launch', which defaults to true 
+    health_check_period: ${19:"300 seconds"}                               # Length of time in seconds after a new EC2 instance comes into service that Auto Scaling starts checking its health 
+    health_check_type: ${20$$(yas-choose-value '("EC2" "ELB"))}            # choices: EC2;ELB  The service you want the health status from, Amazon EC2 or Elastic Load Balancer 
+    default_cooldown: ${21:"300 seconds"}                                  # The number of seconds after a scaling activity completes before another can begin 
+    wait_timeout: ${22:300}                                                # How long to wait for instances to become viable when replaced   If you experience the error "Waited too long for ELB ins
+    wait_for_instances: ${23:true}                                         # Wait for the ASG instances to be in a ready state before exiting   If instances are behind an ELB, it will wait until th
+    termination_policies: ${24$$(yas-choose-value '("OldestInstance" "NewestInstance" "OldestLaunchConfiguration" "ClosestToNextInstanceHour" "Default"))}# choices: OldestInstance;NewestInstance;Ol
+    notification_topic: ${25:value}                                        # A SNS topic ARN to send auto scaling notifications to 
+    notification_types: ${26:"['autoscaling:EC2_INSTANCE_LAUNCH', 'autoscaling:EC2_INSTANCE_LAUNCH_ERROR', 'autoscaling:EC2_INSTANCE_TERMINATE', 'autoscaling:EC2_INSTANCE_TERMINATE_ERROR']"}# A lis
+    suspend_processes: ${27$$(yas-choose-value '("Launch" "Terminate" "HealthCheck" "ReplaceUnhealthy" "AZRebalance" "AlarmNotification" "ScheduledActions" "AddToLoadBalancer"))}# choices: Launch;T
+    metrics_collection: ${28:false}                                        # Enable ASG metrics collection
+    metrics_granularity: ${29:1minute}                                     # When metrics_collection is enabled this will determine granularity of metrics collected by CloudWatch
+    metrics_list: ${30:"['GroupMinSize', 'GroupMaxSize', 'GroupDesiredCapacity', 'GroupInServiceInstances', 'GroupPendingInstances', 'GroupStandbyInstances', 'GroupTerminatingInstances', 'GroupTota
+    debug_botocore_endpoint_logs: ${31:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${32:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${33:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${34:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${35:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${36:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${37:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${38:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

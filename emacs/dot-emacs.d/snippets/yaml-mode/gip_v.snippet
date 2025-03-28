@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage VLANs on a BIG-IP system
+# prefix: bigip_vlan_snippet
+# key: gip_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLANs on a BIG-IP system}
+  bigip_vlan:                                                              
+    name: ${1:The VLAN to manage}                                          # If the special VLAN C(ALL) is specified with the C(state) value of C(absent) then all VLANs will be removed 
+    description: ${2:value}                                                # The description to give to the VLAN 
+    tagged_interfaces: ${3:value}                                          # Specifies a list of tagged interfaces and trunks that you want to configure for the VLAN  Use tagged interfaces or trunk
+    untagged_interfaces: ${4:value}                                        # Specifies a list of untagged interfaces and trunks that you want to configure for the VLAN  This parameter is mutually e
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state of the VLAN on the system  When C(present), guarantees that the VLAN exists with the 
+    tag: ${6:value}                                                        # Tag number for the VLAN  The tag number can be any integer between 1 and 4094  The system automatically assigns a tag nu
+    mtu: ${7:value}                                                        # Specifies the maximum transmission unit (MTU) for traffic on this VLAN  When creating a new VLAN, if this parameter is n
+    cmp_hash: ${8$$(yas-choose-value '("default" "destination-address" "source-address" "dst-ip" "src-ip" "dest" "destination" "source" "dst" "src"))}# choices: default;destination-address;source-a
+    dag_tunnel: ${9$$(yas-choose-value '("inner" "outer"))}                # choices: inner;outer  Specifies how the disaggregator (DAG) distributes received tunnel-encapsulated packets to TMM inst
+    dag_round_robin: ${10:value}                                           # Specifies whether some of the stateless traffic on the VLAN should be disaggregated in a round-robin order instead of us
+    partition: ${11:Common}                                                # Device partition to manage resources on 
+    source_check: ${12:value}                                              # When C(yes), specifies that the system verifies that the return route to an initial packet is the same VLAN from which t
+    fail_safe: ${13:value}                                                 # When C(yes), specifies that the VLAN takes the specified C(fail_safe_action) if the system detects a loss of traffic on 
+    fail_safe_timeout: ${14:value}                                         # Specifies the number of seconds that a system can run without detecting network traffic on this VLAN before it takes the
+    fail_safe_action: ${15$$(yas-choose-value '("reboot" "restart-all" "failover"))}# choices: reboot;restart-all;failover  Specifies the action that the system takes when it does not detect any tr
+    sflow_poll_interval: ${16:value}                                       # Specifies the maximum interval in seconds between two pollings 
+    sflow_sampling_rate: ${17:value}                                       # Specifies the ratio of packets observed to the samples generated 
+    interfaces: ${18:value}                                                # Interfaces that you want added to the VLAN  This can include both tagged and untagged interfaces as the C(tagging) param
+    provider: ${19:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage Kibana plugins
+# prefix: kibana_plugin_snippet
+# key: kibana_plug
+# group: ansible
+# --
+
+- name: ${0:Manage Kibana plugins}
+  kibana_plugin:                                                           
+    name: ${1:Name of the plugin to install}                               #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of a plugin 
+    url: ${3:value}                                                        # Set exact URL to download the plugin from  For local file, prefix its absolute path with file://
+    timeout: ${4:1m}                                                       # Timeout setting: 30s, 1m, 1h etc 
+    plugin_bin: ${5:/opt/kibana/bin/kibana}                                # Location of the Kibana binary 
+    plugin_dir: ${6:/opt/kibana/installedPlugins/}                         # Your configured plugin directory specified in Kibana 
+    version: ${7:value}                                                    # Version of the plugin to be installed  If plugin exists with previous version, plugin will NOT be updated unless C(force
+    force: ${8:false}                                                      # Delete and re-install the plugin  Can be useful for plugins update 

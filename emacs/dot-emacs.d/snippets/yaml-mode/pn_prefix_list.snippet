@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete prefix-list
+# prefix: pn_prefix_list_snippet
+# key: pn_prefix_list
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete prefix-list}
+  pn_prefix_list:                                                          
+    pn_name: ${1:Prefix List Name}                                         #
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State the action to perform  Use C(present) to create prefix-list and C(absent) to delete prefi
+    pn_scope: ${4$$(yas-choose-value '("local" "fabric"))}                 # choices: local;fabric  scope of prefix-list 

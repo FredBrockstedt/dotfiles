@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Manage Key Vault instance
+# prefix: azure_rm_keyvault_snippet
+# key: zure_rm_keyvault
+# group: ansible
+# --
+
+- name: ${0:Manage Key Vault instance}
+  azure_rm_keyvault:                                                       
+    resource_group: ${1:The name of the Resource Group to which the server belongs}#
+    vault_name: ${2:Name of the vault}                                     #
+    location: ${3:value}                                                   # Resource location  If not set, location from the resource group will be used as default 
+    vault_tenant: ${4:value}                                               # The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault 
+    sku: ${5:value}                                                        # SKU details 
+    access_policies: ${6:value}                                            # An array of 0 to 16 identities that have access to the key vault  All identities in the array must use the same tenant I
+    enabled_for_deployment: ${7:value}                                     # Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key
+    enabled_for_disk_encryption: ${8:value}                                # Property to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys 
+    enabled_for_template_deployment: ${9:value}                            # Property to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault 
+    enable_soft_delete: ${10:value}                                        # Property to specify whether the soft delete functionality is enabled for this key vault 
+    recover_mode: ${11:value}                                              # Create vault in recovery mode 
+    state: ${12$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the KeyVault  Use C(present) to create or update an KeyVault and C(absent) 
+    ad_user: ${13:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${14:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${15:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${16:value}                                           # Your Azure subscription Id 
+    client_id: ${17:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${18:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${19:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${20:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${21:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${22$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${23$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${24:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${25:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${26:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

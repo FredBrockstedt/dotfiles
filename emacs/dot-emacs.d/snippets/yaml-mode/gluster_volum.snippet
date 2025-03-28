@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage GlusterFS volumes
+# prefix: gluster_volume_snippet
+# key: gluster_volum
+# group: ansible
+# --
+
+- name: ${0:Manage GlusterFS volumes}
+  gluster_volume:                                                          
+    name: ${1:The volume name}                                             #
+    state: ${2$$(yas-choose-value '("absent" "present" "started" "stopped"))}# Use present/absent ensure if a volume exists or not  Use started/stopped to control its availability 
+    cluster: ${3:value}                                                    # List of hosts to use for probing and brick setup 
+    host: ${4:value}                                                       # Override local hostname (for peer probing purposes) 
+    replicas: ${5:value}                                                   # Replica count for volume 
+    arbiters: ${6:value}                                                   # Arbiter count for volume 
+    stripes: ${7:value}                                                    # Stripe count for volume 
+    disperses: ${8:value}                                                  # Disperse count for volume 
+    redundancies: ${9:value}                                               # Redundancy count for volume 
+    transport: ${10$$(yas-choose-value '("tcp" "rdma" "tcp" "rdma"))}      # choices: tcp;rdma;tcp,rdma  Transport type for volume 
+    bricks: ${11:value}                                                    # Brick paths on servers  Multiple brick paths can be separated by commas 
+    start_on_create: ${12:true}                                            # Controls whether the volume is started after creation or not 
+    rebalance: ${13:false}                                                 # Controls whether the cluster is rebalanced after changes 
+    directory: ${14:value}                                                 # Directory for limit-usage 
+    options: ${15:value}                                                   # A dictionary/hash with options/settings for the volume 
+    quota: ${16:value}                                                     # Quota value for limit-usage (be sure to use 10 0MB instead of 10MB, see quota list) 
+    force: ${17:value}                                                     # If brick is being created in the root partition, module will fail  Set force to true to override this behaviour 

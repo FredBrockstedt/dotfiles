@@ -1,0 +1,87 @@
+# -*- mode: snippet -*-
+# name: Module for setup of Pool Avi RESTful Object
+# prefix: avi_pool_snippet
+# key: vi_poo
+# group: ansible
+# --
+
+- name: ${0:Module for setup of Pool Avi RESTful Object}
+  avi_pool:                                                                
+    name: ${1:The name of the pool}                                        #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    a_pool: ${5:value}                                                     # Name of container cloud application that constitutes a pool in a a-b pool configuration, if different from vs app  Field
+    ab_pool: ${6:value}                                                    # A/b pool configuration  Field deprecated in 18 1 2 
+    ab_priority: ${7:value}                                                # Priority of this pool in a a-b pool pair  Internally used  Field deprecated in 18 1 2 
+    analytics_policy: ${8:value}                                           # Determines analytics settings for the pool  Field introduced in 18 1 5, 18 2 1 
+    analytics_profile_ref: ${9:value}                                      # Specifies settings related to analytics  It is a reference to an object of type analyticsprofile  Field introduced in 18
+    apic_epg_name: ${10:value}                                             # Synchronize cisco apic epg members with pool servers 
+    application_persistence_profile_ref: ${11:value}                       # Persistence will ensure the same user sticks to the same server for a desired duration of time  It is a reference to an 
+    autoscale_launch_config_ref: ${12:value}                               # If configured then avi will trigger orchestration of pool server creation and deletion  It is only supported for contain
+    autoscale_networks: ${13:value}                                        # Network ids for the launch configuration 
+    autoscale_policy_ref: ${14:value}                                      # Reference to server autoscale policy  It is a reference to an object of type serverautoscalepolicy 
+    capacity_estimation: ${15:value}                                       # Inline estimation of capacity of servers  Default value when not specified in API or module is interpreted by Avi Contro
+    capacity_estimation_ttfb_thresh: ${16:value}                           # The maximum time-to-first-byte of a server  Allowed values are 1-5000  Special values are 0 - 'automatic'  Default value
+    cloud_config_cksum: ${17:value}                                        # Checksum of cloud configuration for pool  Internally set by cloud connector 
+    cloud_ref: ${18:value}                                                 # It is a reference to an object of type cloud 
+    conn_pool_properties: ${19:value}                                      # Connection pool properties  Field introduced in 18 2 1 
+    connection_ramp_duration: ${20:value}                                  # Duration for which new connections will be gradually ramped up to a server recently brought online  Useful for lb algori
+    created_by: ${21:value}                                                # Creator name 
+    default_server_port: ${22:value}                                       # Traffic sent to servers will use this destination server port unless overridden by the server's specific port attribute 
+    delete_server_on_dns_refresh: ${23:value}                              # Indicates whether existing ips are disabled(false) or deleted(true) on dns hostname refreshdetail -- on a dns refresh, s
+    description: ${24:value}                                               # A description of the pool 
+    domain_name: ${25:value}                                               # Comma separated list of domain names which will be used to verify the common names or subject alternative names presente
+    east_west: ${26:value}                                                 # Inherited config from virtualservice 
+    enabled: ${27:value}                                                   # Enable or disable the pool  Disabling will terminate all open connections and pause health monitors  Default value when 
+    external_autoscale_groups: ${28:value}                                 # Names of external auto-scale groups for pool servers  Currently available only for aws and azure  Field introduced in 17
+    fail_action: ${29:value}                                               # Enable an action - close connection, http redirect or local http response - when a pool failure happens  By default, a c
+    fewest_tasks_feedback_delay: ${30:value}                               # Periodicity of feedback for fewest tasks server selection algorithm  Allowed values are 1-300  Default value when not sp
+    graceful_disable_timeout: ${31:value}                                  # Used to gracefully disable a server  Virtual service waits for the specified time before terminating the existing connec
+    gslb_sp_enabled: ${32:value}                                           # Indicates if the pool is a site-persistence pool  Field introduced in 17 2 1 
+    health_monitor_refs: ${33:value}                                       # Verify server health by applying one or more health monitors  Active monitors generate synthetic traffic from each servi
+    host_check_enabled: ${34:value}                                        # Enable common name check for server certificate  If enabled and no explicit domain name is specified, avi will use the i
+    inline_health_monitor: ${35:value}                                     # The passive monitor will monitor client to server connections and requests and adjust traffic load to servers based on s
+    ipaddrgroup_ref: ${36:value}                                           # Use list of servers from ip address group  It is a reference to an object of type ipaddrgroup 
+    lb_algorithm: ${37:value}                                              # The load balancing algorithm will pick a server within the pool's list of available servers  Enum options - LB_ALGORITHM
+    lb_algorithm_consistent_hash_hdr: ${38:value}                          # Http header name to be used for the hash key 
+    lb_algorithm_core_nonaffinity: ${39:value}                             # Degree of non-affinity for core affinity based server selection  Allowed values are 1-65535  Field introduced in 17 1 3 
+    lb_algorithm_hash: ${40:value}                                         # Criteria used as a key for determining the hash between the client and  server  Enum options - LB_ALGORITHM_CONSISTENT_H
+    lookup_server_by_name: ${41:value}                                     # Allow server lookup by name  Field introduced in 17 1 11,17 2 4  Default value when not specified in API or module is in
+    max_concurrent_connections_per_server: ${42:value}                     # The maximum number of concurrent connections allowed to each server within the pool  Note  applied value will be no less
+    max_conn_rate_per_server: ${43:value}                                  # Rate limit connections to each server 
+    min_health_monitors_up: ${44:value}                                    # Minimum number of health monitors in up state to mark server up  Field introduced in 18 2 1, 17 2 12 
+    min_servers_up: ${45:value}                                            # Minimum number of servers in up state for marking the pool up  Field introduced in 18 2 1, 17 2 12 
+    networks: ${46:value}                                                  # (internal-use) networks designated as containing servers for this pool  The servers may be further narrowed down by a fi
+    nsx_securitygroup: ${47:value}                                         # A list of nsx service groups where the servers for the pool are created  Field introduced in 17 1 1 
+    pki_profile_ref: ${48:value}                                           # Avi will validate the ssl certificate present by a server against the selected pki profile  It is a reference to an obje
+    placement_networks: ${49:value}                                        # Manually select the networks and subnets used to provide reachability to the pool's servers  Specify the subnet using th
+    prst_hdr_name: ${50:value}                                             # Header name for custom header persistence  Field deprecated in 18 1 2 
+    request_queue_depth: ${51:value}                                       # Minimum number of requests to be queued when pool is full  Default value when not specified in API or module is interpre
+    request_queue_enabled: ${52:value}                                     # Enable request queue when pool is full  Default value when not specified in API or module is interpreted by Avi Controll
+    rewrite_host_header_to_server_name: ${53:value}                        # Rewrite incoming host header to server name of the server to which the request is proxied  Enabling this feature rewrite
+    rewrite_host_header_to_sni: ${54:value}                                # If sni server name is specified, rewrite incoming host header to the sni server name  Default value when not specified i
+    server_auto_scale: ${55:value}                                         # Server autoscale  Not used anymore  Field deprecated in 18 1 2 
+    server_count: ${56:value}                                              # Field deprecated in 18 2 1 
+    server_name: ${57:value}                                               # Fully qualified dns hostname which will be used in the tls sni extension in server connections if sni is enabled  If no 
+    server_reselect: ${58:value}                                           # Server reselect configuration for http requests 
+    server_timeout: ${59:value}                                            # Server timeout value specifies the time within which a server connection needs to be established and a request-response 
+    servers: ${60:value}                                                   # The pool directs load balanced traffic to this list of destination servers  The servers can be configured by ip address,
+    service_metadata: ${61:value}                                          # Metadata pertaining to the service provided by this pool  In openshift/kubernetes environments, app metadata info is sto
+    sni_enabled: ${62:value}                                               # Enable tls sni for server connections  If disabled, avi will not send the sni extension as part of the handshake  Defaul
+    ssl_key_and_certificate_ref: ${63:value}                               # Service engines will present a client ssl certificate to the server  It is a reference to an object of type sslkeyandcer
+    ssl_profile_ref: ${64:value}                                           # When enabled, avi re-encrypts traffic to the backend servers  The specific ssl profile defines which ciphers and ssl ver
+    tenant_ref: ${65:value}                                                # It is a reference to an object of type tenant 
+    url: ${66:value}                                                       # Avi controller URL of the object 
+    use_service_port: ${67:value}                                          # Do not translate the client's destination port when sending the connection to the server  The pool or servers specified 
+    uuid: ${68:value}                                                      # Uuid of the pool 
+    vrf_ref: ${69:value}                                                   # Virtual routing context that the pool is bound to  This is used to provide the isolation of the set of networks the pool
+    controller: ${70:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${71:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${72:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${73:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${74:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{75:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${76:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${77:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${78:value}                         # It disables avi session information to be cached as a fact 

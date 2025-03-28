@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: copies an EC2 snapshot and returns the new Snapshot ID.
+# prefix: ec2_snapshot_copy_snippet
+# key: c2_snapshot_copy
+# group: ansible
+# --
+
+- name: ${0:copies an EC2 snapshot and returns the new Snapshot ID.}
+  ec2_snapshot_copy:                                                       
+    source_region: ${1:The source region the Snapshot should be copied from}#
+    source_snapshot_id: ${2:The ID of the Snapshot in source region that should be copied}#
+    description: ${3:value}                                                # An optional human-readable string describing purpose of the new Snapshot 
+    encrypted: ${4:false}                                                  # Whether or not the destination Snapshot should be encrypted 
+    kms_key_id: ${5:value}                                                 # KMS key id used to encrypt snapshot  If not specified, defaults to EBS Customer Master Key (CMK) for that account 
+    wait: ${6:false}                                                       # Wait for the copied Snapshot to be in 'Available' state before returning 
+    wait_timeout: ${7:600}                                                 # How long before wait gives up, in seconds 
+    tags: ${8:value}                                                       # A hash/dictionary of tags to add to the new Snapshot; '{"key":"value"\}' and '{"key":"value","key":"value"\}'
+    debug_botocore_endpoint_logs: ${9:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${10:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${11:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${12:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${13:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${14:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${15:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${16:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

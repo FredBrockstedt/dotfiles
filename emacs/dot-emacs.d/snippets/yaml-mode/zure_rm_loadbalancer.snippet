@@ -1,0 +1,49 @@
+# -*- mode: snippet -*-
+# name: Manage Azure load balancers
+# prefix: azure_rm_loadbalancer_snippet
+# key: zure_rm_loadbalancer
+# group: ansible
+# --
+
+- name: ${0:Manage Azure load balancers}
+  azure_rm_loadbalancer:                                                   
+    resource_group: ${1:Name of a resource group where the load balancer exists or will be created}#
+    name: ${2:Name of the load balancer}                                   #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the load balancer  Use C(present) to create/update a load balancer, or C(ab
+    location: ${4:value}                                                   # Valid Azure location  Defaults to location of the resource group 
+    sku: ${5$$(yas-choose-value '("Basic" "Standard"))}                    # choices: Basic;Standard  The load balancer SKU 
+    frontend_ip_configurations: ${6:value}                                 # List of frontend IPs to be used 
+    backend_address_pools: ${7:value}                                      # List of backend address pools 
+    probes: ${8:value}                                                     # List of probe definitions used to check endpoint health 
+    inbound_nat_pools: ${9:value}                                          # Defines an external port range for inbound NAT to a single backend port on NICs associated with a load balancer  Inbound
+    load_balancing_rules: ${10:value}                                      # Object collection representing the load balancing rules Gets the provisioning 
+    inbound_nat_rules: ${11:value}                                         # Collection of inbound NAT Rules used by a load balancer  Defining inbound NAT rules on your load balancer is mutually ex
+    public_ip_address_name: ${12:value}                                    # (deprecated) Name of an existing public IP address object to associate with the security group  This option has been dep
+    probe_port: ${13:value}                                                # (deprecated) The port that the health probe will use  This option has been deprecated, and will be removed in 2 9  Use I
+    probe_protocol: ${14$$(yas-choose-value '("Tcp" "Http" "Https"))}      # choices: Tcp;Http;Https  (deprecated) The protocol to use for the health probe  This option has been deprecated, and wil
+    probe_interval: ${15:15}                                               # (deprecated) Time (in seconds) between endpoint health probes  This option has been deprecated, and will be removed in 2
+    probe_fail_count: ${16:3}                                              # (deprecated) The amount of probe failures for the load balancer to make a health determination  This option has been dep
+    probe_request_path: ${17:value}                                        # (deprecated) The URL that an HTTP probe or HTTPS probe will use (only relevant if I(probe_protocol=Http) or I(probe_prot
+    protocol: ${18$$(yas-choose-value '("Tcp" "Udp"))}                     # choices: Tcp;Udp  (deprecated) The protocol (TCP or UDP) that the load balancer will use  This option has been deprecate
+    load_distribution: ${19$$(yas-choose-value '("Default" "SourceIP" "SourceIPProtocol"))}# choices: Default;SourceIP;SourceIPProtocol  (deprecated) The type of load distribution that the load bal
+    frontend_port: ${20:value}                                             # (deprecated) Frontend port that will be exposed for the load balancer  This option has been deprecated, and will be remo
+    backend_port: ${21:value}                                              # (deprecated) Backend port that will be exposed for the load balancer  This option has been deprecated, and will be remov
+    idle_timeout: ${22:4}                                                  # (deprecated) Timeout for TCP idle connection in minutes  This option has been deprecated, and will be removed in 2 9  Us
+    natpool_frontend_port_start: ${23:value}                               # (deprecated) Start of the port range for a NAT pool  This option has been deprecated, and will be removed in 2 9  Use I(
+    natpool_frontend_port_end: ${24:value}                                 # (deprecated) End of the port range for a NAT pool  This option has been deprecated, and will be removed in 2 9  Use I(in
+    natpool_backend_port: ${25:value}                                      # (deprecated) Backend port used by the NAT pool  This option has been deprecated, and will be removed in 2 9  Use I(inbou
+    natpool_protocol: ${26:value}                                          # (deprecated) The protocol for the NAT pool  This option has been deprecated, and will be removed in 2 9  Use I(inbound_n
+    ad_user: ${27:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${28:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${29:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${30:value}                                           # Your Azure subscription Id 
+    client_id: ${31:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${32:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${33:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${34:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${35:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${36$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${37$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${38:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${39:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${40:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

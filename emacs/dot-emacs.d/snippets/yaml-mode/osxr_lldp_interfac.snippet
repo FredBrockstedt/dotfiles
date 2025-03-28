@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Link Layer Discovery Protocol (LLDP) attributes of interfaces on IOS-XR devices.
+# prefix: iosxr_lldp_interfaces_snippet
+# key: osxr_lldp_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Link Layer Discovery Protocol (LLDP) attributes of interfaces on IOS-XR devices.}
+  iosxr_lldp_interfaces:                                                   
+    config: ${1:value}                                                     # A   d i c t i o n a r y   o f   L L D P   i n t e r f a c e s   o p t i o n s  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion 

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage Grafana dashboards
+# prefix: grafana_dashboard_snippet
+# key: grafana_dashboard
+# group: ansible
+# --
+
+- name: ${0:Manage Grafana dashboards}
+  grafana_dashboard:                                                       
+    url: ${1:The Grafana URL}                                              #
+    state: ${2$$(yas-choose-value '("absent" "export" "present"))}         # State of the dashboard 
+    url_username: ${3:admin}                                               # The Grafana API user 
+    url_password: ${4:admin}                                               # The Grafana API password 
+    grafana_api_key: ${5:value}                                            # The Grafana API key  If set, I(grafana_user) and I(grafana_password) will be ignored 
+    org_id: ${6:1}                                                         # The Grafana Organisation ID where the dashboard will be imported / exported  Not used when I(grafana_api_key) is set, be
+    slug: ${7:value}                                                       # Deprecated since Grafana 5  Use grafana dashboard uid instead  slug of the dashboard  It's the friendly url name of the 
+    uid: ${8:value}                                                        # uid of the dashboard to export when C(state) is C(export) or C(absent) 
+    path: ${9:value}                                                       # The path to the json file containing the Grafana dashboard to import or export 
+    overwrite: ${10:false}                                                 # Override existing dashboard when state is present 
+    message: ${11:value}                                                   # Set a commit message for the version history  Only used when C(state) is C(present) 
+    validate_certs: ${12:true}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    client_cert: ${13:value}                                               # PEM formatted certificate chain file to be used for SSL client authentication  This file can also include the key as wel
+    client_key: ${14:value}                                                # PEM formatted file that contains your private key to be used for SSL client authentication  If client_cert contains both
+    use_proxy: ${15:true}                                                  # Boolean of whether or not to use proxy 

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage hosts on Pure Storage FlashArrays
+# prefix: purefa_host_snippet
+# key: purefa_host
+# group: ansible
+# --
+
+- name: ${0:Manage hosts on Pure Storage FlashArrays}
+  purefa_host:                                                             
+    host: ${1:The name of the host}                                        #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Define whether the host should exist or not  When removing host all connected volumes will be d
+    protocol: ${5$$(yas-choose-value '("fc" "iscsi" "nvme" "mixed"))}      # choices: fc;iscsi;nvme;mixed  Defines the host connection protocol for volumes 
+    wwns: ${6:value}                                                       # List of wwns of the host if protocol is fc or mixed 
+    iqn: ${7:value}                                                        # List of IQNs of the host if protocol is iscsi or mixed 
+    nqn: ${8:value}                                                        # List of NQNs of the host if protocol is nvme or mixed 
+    volume: ${9:value}                                                     # Volume name to map to the host 
+    lun: ${10:value}                                                       # LUN ID to assign to volume for host  Must be unique  If not provided the ID will be automatically assigned  Range for LU
+    personality: ${11$$(yas-choose-value '("hpux" "vms" "aix" "esxi" "solaris" "hitachi-vsp" "oracle-vm-server" "delete" ""))}# choices: hpux;vms;aix;esxi;solaris;hitachi-vsp;oracle-vm-server;delet
+    preferred_array: ${12:value}                                           # List of preferred arrays in an ActiveCluster environment  To remove existing preferred arrays from the host, specify I(d

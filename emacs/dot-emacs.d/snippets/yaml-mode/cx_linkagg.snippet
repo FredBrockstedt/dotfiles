@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage link aggregation groups on Ruckus ICX 7000 series switches
+# prefix: icx_linkagg_snippet
+# key: cx_linkagg
+# group: ansible
+# --
+
+- name: ${0:Manage link aggregation groups on Ruckus ICX 7000 series switches}
+  icx_linkagg:                                                             
+    group: ${1:value}                                                      # Channel-group number for the port-channel Link aggregation group  Range 1-255 or set to 'auto' to auto-generates a LAG I
+    name: ${2:value}                                                       # Name of the LAG
+    mode: ${3$$(yas-choose-value '("dynamic" "static"))}                   # choices: dynamic;static  Mode of the link aggregation group 
+    members: ${4:value}                                                    # List of port members or ranges of the link aggregation group 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the link aggregation group 
+    check_running_config: ${6:True}                                        # Check running configuration  This can be set as environment variable  Module will use environment variable value(default
+    aggregate: ${7:value}                                                  # List of link aggregation definitions 
+    purge: ${8:False}                                                      # Purge links not defined in the I(aggregate) parameter 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Get a certificate from a host:port
+# prefix: get_certificate_snippet
+# key: get_certificat
+# group: ansible
+# --
+
+- name: ${0:Get a certificate from a host:port}
+  get_certificate:                                                         
+    host: ${1:The host to get the cert for (IP is fine)}                   #
+    port: ${2:The port to connect to}                                      #
+    ca_cert: ${3:value}                                                    # A PEM file containing one or more root certificates; if present, the cert will be validated against these root certs  No
+    proxy_host: ${4:value}                                                 # Proxy host used when get a certificate 
+    proxy_port: ${5:8080}                                                  # Proxy port used when get a certificate 
+    timeout: ${6:10}                                                       # The timeout in seconds
+    select_crypto_backend: ${7$$(yas-choose-value '("auto" "cryptography" "pyopenssl"))}# choices: auto;cryptography;pyopenssl  Determines which crypto backend to use  The default choice is C(auto)

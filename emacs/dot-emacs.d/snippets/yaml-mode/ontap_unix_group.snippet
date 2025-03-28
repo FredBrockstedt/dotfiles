@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP UNIX Group
+# prefix: na_ontap_unix_group_snippet
+# key: ontap_unix_group
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP UNIX Group}
+  na_ontap_unix_group:                                                     
+    name: ${1:Specifies UNIX group's name, unique for each group}          # Non-modifiable 
+    vserver: ${2:Specifies the Vserver for the UNIX group}                 # Non-modifiable 
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified group should exist or not 
+    id: ${7:value}                                                         # Specifies an identification number for the UNIX group  Group ID is unique for each UNIX group  Required for create, modi
+    skip_name_validation: ${8:value}                                       # Specifies if group name validation is skipped 
+    users: ${9:value}                                                      # Specifies the users associated with this group  Should be comma separated  It represents the expected state of a list of
+    https: ${10:False}                                                     # Enable and disable https
+    validate_certs: ${11:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${12:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${13:value}                                                    # The ontap api version to use
+    use_rest: ${14$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

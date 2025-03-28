@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manages vpn-community-meshed objects on Check Point over Web Services API
+# prefix: cp_mgmt_vpn_community_meshed_snippet
+# key: cp_mgmt_vpn_community_meshed
+# group: ansible
+# --
+
+- name: ${0:Manages vpn-community-meshed objects on Check Point over Web Services API}
+  cp_mgmt_vpn_community_meshed:                                            
+    name: ${1:Object name}                                                 #
+    encryption_method: ${2$$(yas-choose-value '("prefer ikev2 but support ikev1" "ikev2 only" "ikev1 for ipv4 and ikev2 for ipv6 only"))}# choices: prefer ikev2 but support ikev1;ikev2 only;ikev1 f
+    encryption_suite: ${3$$(yas-choose-value '("suite-b-gcm-256" "custom" "vpn b" "vpn a" "suite-b-gcm-128"))}# choices: suite-b-gcm-256;custom;vpn b;vpn a;suite-b-gcm-128  The encryption suite to 
+    gateways: ${4:value}                                                   # Collection of Gateway objects identified by the name or UID 
+    ike_phase_1: ${5:value}                                                # Ike Phase 1 settings  Only applicable when the encryption-suite is set to [custom] 
+    ike_phase_2: ${6:value}                                                # Ike Phase 2 settings  Only applicable when the encryption-suite is set to [custom] 
+    shared_secrets: ${7:value}                                             # Shared secrets for external gateways 
+    tags: ${8:value}                                                       # Collection of tag identifiers 
+    use_shared_secret: ${9:value}                                          # Indicates whether the shared secret should be used for all external gateways 
+    color: ${10$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${11:value}                                                  # Comments string 
+    details_level: ${12$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${13:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${14:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${16:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${17:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${18:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

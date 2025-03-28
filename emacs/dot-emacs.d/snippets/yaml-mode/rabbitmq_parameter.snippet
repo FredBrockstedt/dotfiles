@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage RabbitMQ parameters
+# prefix: rabbitmq_parameter_snippet
+# key: rabbitmq_parameter
+# group: ansible
+# --
+
+- name: ${0:Manage RabbitMQ parameters}
+  rabbitmq_parameter:                                                      
+    component: ${1:Name of the component of which the parameter is being set}#
+    name: ${2:Name of the parameter being set}                             #
+    value: ${3:value}                                                      # Value of the parameter, as a JSON term
+    vhost: ${4:/}                                                          # vhost to apply access privileges 
+    node: ${5:rabbit}                                                      # erlang node name of the rabbit we wish to configure
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify if user is to be added or removed

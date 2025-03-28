@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP firmware upgrade for SP, shelf, ACP, and disk.
+# prefix: na_ontap_firmware_upgrade_snippet
+# key: ontap_firmware_upgrad
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP firmware upgrade for SP, shelf, ACP, and disk.}
+  na_ontap_firmware_upgrade:                                               
+    node: ${1:Node on which the device is located}                         #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5:present}                                                    # Whether the specified ONTAP firmware should  be upgraded or not 
+    clear_logs: ${6:True}                                                  # Clear logs on the device after update  Default value is true
+    package: ${7:value}                                                    # Name of the package file containing the firmware to be installed  Not required when -baseline is true 
+    shelf_module_fw: ${8:value}                                            # Shelf module firmware to be updated to 
+    disk_fw: ${9:value}                                                    # disk firmware to be updated to 
+    update_type: ${10:value}                                               # Type of firmware update to be performed  Options include serial_full, serial_differential, network_full 
+    install_baseline_image: ${11:False}                                    # Install the version packaged with ONTAP if this parameter is set to true  Otherwise, package must be used to specify the
+    firmware_type: ${12$$(yas-choose-value '("service-processor" "shelf" "acp" "disk"))}# choices: service-processor;shelf;acp;disk  Type of firmware to be upgraded  Options include shelf, ACP, ser
+    https: ${13:False}                                                     # Enable and disable https
+    validate_certs: ${14:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${15:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${16:value}                                                    # The ontap api version to use
+    use_rest: ${17$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

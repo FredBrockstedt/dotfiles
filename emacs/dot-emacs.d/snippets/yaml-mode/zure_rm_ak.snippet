@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Manage a managed Azure Container Service (AKS) instance
+# prefix: azure_rm_aks_snippet
+# key: zure_rm_ak
+# group: ansible
+# --
+
+- name: ${0:Manage a managed Azure Container Service (AKS) instance}
+  azure_rm_aks:                                                            
+    resource_group: ${1:Name of a resource group where the managed Azure Container Services (AKS) exists or will be created}#
+    name: ${2:Name of the managed Azure Container Services (AKS) instance} #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the AKS  Use C(present) to create or update an AKS and C(absent) to delete 
+    location: ${4:value}                                                   # Valid azure location  Defaults to location of the resource group 
+    dns_prefix: ${5:value}                                                 # DNS prefix specified when creating the managed cluster 
+    kubernetes_version: ${6:value}                                         # Version of Kubernetes specified when creating the managed cluster 
+    linux_profile: ${7:value}                                              # The Linux profile suboptions 
+    agent_pool_profiles: ${8:value}                                        # The agent pool profile suboptions 
+    service_principal: ${9:value}                                          # The service principal suboptions 
+    enable_rbac: ${10:False}                                               # Enable RBAC  Existing non-RBAC enabled AKS clusters cannot currently be updated for RBAC use 
+    network_profile: ${11:value}                                           # Profile of network configuration 
+    aad_profile: ${12:value}                                               # Profile of Azure Active Directory configuration 
+    addon: ${13:value}                                                     # Profile of managed cluster add-on  Key can be C(http_application_routing), C(monitoring), C(virtual_node)  Value must be
+    ad_user: ${14:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${15:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${16:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${17:value}                                           # Your Azure subscription Id 
+    client_id: ${18:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${19:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${20:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${21:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${22:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${23$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${24$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${25:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${26:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${27:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: configure data-port network interface for DHCP
+# prefix: panos_interface_snippet
+# key: panos_interfac
+# group: ansible
+# --
+
+- name: ${0:configure data-port network interface for DHCP}
+  panos_interface:                                                         
+    if_name: ${1:Name of the interface to configure}                       #
+    zone_name: ${2:N a m e   o f   t h e   z o n e   f o r   t h e   i n t e r f a c e }#   I f   t h e   z o n e   d o e s   n o t   e x i s t   i t   i s   c r e a t e d   b u t   i f   t h e   z
+    ip_address: ${3:IP address (or hostname) of PAN-OS device}             #
+    password: ${4:Password for authentication}                             #
+    create_default_route: ${5:false}                                       # Whether or not to add default route with router learned via DHCP 
+    commit: ${6:True}                                                      # Commit if changed
+    username: ${7:admin}                                                   # Username for authentication 

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Get token for the Itential Automation Platform
+# prefix: iap_token_snippet
+# key: p_tok
+# group: ansible
+# --
+
+- name: ${0:Get token for the Itential Automation Platform}
+  iap_token:                                                               
+    iap_port: ${1:None}:Provide the port number for the Itential Automation Platform}#
+    iap_fqdn: ${2:None}:Provide the fqdn or ip-address for the Itential Automation Platform}#
+    username: ${3:None}:Provide the username for the Itential Automation Platform}#
+    password: ${4:None}:Provide the password for the Itential Automation Platform}#
+    https: ${5:False}                                                      # Use HTTPS to connect By default using http
+    validate_certs: ${6:False}                                             # If C(no), SSL certificates for the target url will not be validated  This should only be used on personally controlled s

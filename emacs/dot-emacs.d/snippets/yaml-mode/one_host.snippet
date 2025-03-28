@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manages OpenNebula Hosts
+# prefix: one_host_snippet
+# key: one_host
+# group: ansible
+# --
+
+- name: ${0:Manages OpenNebula Hosts}
+  one_host:                                                                
+    name: ${1:Hostname of the machine to manage}                           #
+    state: ${2$$(yas-choose-value '("absent" "present" "enabled" "disabled" "offline"))}# choices: absent;present;enabled;disabled;offline  Takes the host to the desired lifecycle state  If C(absen
+    im_mad_name: ${3:kvm}                                                  # The name of the information manager, this values are taken from the oned conf with the tag name IM_MAD (name)
+    vmm_mad_name: ${4:kvm}                                                 # The name of the virtual machine manager mad name, this values are taken from the oned conf with the tag name VM_MAD (nam
+    cluster_id: ${5:0}                                                     # The cluster ID 
+    cluster_name: ${6:value}                                               # The cluster specified by name 
+    labels: ${7:value}                                                     # The labels for this host 
+    template: ${8:value}                                                   # The template or attribute changes to merge into the host template 
+    api_url: ${9:value}                                                    # The ENDPOINT URL of the XMLRPC server  If not specified then the value of the ONE_URL environment variable, if any, is u
+    api_username: ${10:value}                                              # The name of the user for XMLRPC authentication  If not specified then the value of the ONE_USERNAME environment variable
+    api_password: ${11:value}                                              # The password or token for XMLRPC authentication  If not specified then the value of the ONE_PASSWORD environment variabl
+    validate_certs: ${12:True}                                             # Whether to validate the SSL certificates or not  This parameter is ignored if PYTHONHTTPSVERIFY environment variable is 
+    wait_timeout: ${13:300}                                                # Time to wait for the desired state to be reached before timeout, in seconds 

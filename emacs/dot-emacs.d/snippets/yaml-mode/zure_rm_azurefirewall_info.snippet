@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Get AzureFirewall info.
+# prefix: azure_rm_azurefirewall_info_snippet
+# key: zure_rm_azurefirewall_info
+# group: ansible
+# --
+
+- name: ${0:Get AzureFirewall info.}
+  azure_rm_azurefirewall_info:                                             
+    resource_group: ${1:value}                                             # The name of the resource group 
+    name: ${2:value}                                                       # Resource name 
+    ad_user: ${3:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${4:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${5:value}                                                    # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${6:value}                                            # Your Azure subscription Id 
+    client_id: ${7:value}                                                  # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${8:value}                                                     # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${9:value}                                                     # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${10:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${11:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${12$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${13$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${14:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

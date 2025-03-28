@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Gather infos about your Hetzner Cloud locations.
+# prefix: hcloud_location_info_snippet
+# key: hcloud_location_info
+# group: ansible
+# --
+
+- name: ${0:Gather infos about your Hetzner Cloud locations.}
+  hcloud_location_info:                                                    
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the location you want to get 
+    name: ${3:value}                                                       # The name of the location you want to get 
+    endpoint: ${{4:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

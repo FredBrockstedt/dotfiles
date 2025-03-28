@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage firmware.
+# prefix: netapp_e_firmware_snippet
+# key: tapp_e_firmwar
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage firmware.}
+  netapp_e_firmware:                                                       
+    nvsram: ${1:Path to the NVSRAM file}                                   #
+    firmware: ${2:Path to the firmware file}                               #
+    api_username: ${3:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${4:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${5:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    wait_for_completion: ${6:False}                                        # This flag will cause module to wait for any upgrade actions to complete 
+    ignore_health_check: ${7:False}                                        # This flag will force firmware to be activated in spite of the health check  Use at your own risk  Certain non-optimal st
+    validate_certs: ${8:True}                                              # Should https certificates be validated?
+    ssid: ${9:1}                                                           # The ID of the array to manage  This value must be unique for each array 

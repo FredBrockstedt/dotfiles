@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Bind Domain to VLAN Pools (infra:RsVlanNs)
+# prefix: aci_domain_to_vlan_pool_snippet
+# key: ci_domain_to_vlan_poo
+# group: ansible
+# --
+
+- name: ${0:Bind Domain to VLAN Pools (infra:RsVlanNs)}
+  aci_domain_to_vlan_pool:                                                 
+    pool_allocation_mode: ${1$$(yas-choose-value '("dynamic" "static"))}   # The method used for allocating VLANs to resources 
+    host: ${2:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${4:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    domain: ${5:value}                                                     # Name of the domain being associated with the VLAN Pool 
+    domain_type: ${6$$(yas-choose-value '("fc" "l2dom" "l3dom" "phys" "vmm"))}# choices: fc;l2dom;l3dom;phys;vmm  Determines if the Domain is physical (phys) or virtual (vmm) 
+    pool: ${7:value}                                                       # The name of the pool 
+    state: ${8$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    vm_provider: ${9$$(yas-choose-value '("cloudfoundry" "kubernetes" "microsoft" "openshift" "openstack" "redhat" "vmware"))}# choices: cloudfoundry;kubernetes;microsoft;openshift;openstack;redhat
+    port: ${10:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${11:admin}                                                  # The username to use for authentication 
+    certificate_name: ${12:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${13$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${14:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${15:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${16:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${17:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

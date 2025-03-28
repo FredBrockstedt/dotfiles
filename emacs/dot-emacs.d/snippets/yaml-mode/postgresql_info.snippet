@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Gather information about PostgreSQL servers
+# prefix: postgresql_info_snippet
+# key: postgresql_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about PostgreSQL servers}
+  postgresql_info:                                                         
+    filter: ${1:value}                                                     # Limit the collected information by comma separated string or YAML list  Allowable values are C(version), C(databases), C
+    db: ${2:value}                                                         # Name of database to connect 
+    session_role: ${3:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    login_user: ${4:postgres}                                              # The username used to authenticate with 
+    login_password: ${5:value}                                             # The password used to authenticate with 
+    login_host: ${6:value}                                                 # Host running the database 
+    login_unix_socket: ${7:value}                                          # Path to a Unix domain socket for local connections 
+    port: ${8:5432}                                                        # Database port to connect to 
+    ssl_mode: ${9$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wha
+    ca_cert: ${10:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

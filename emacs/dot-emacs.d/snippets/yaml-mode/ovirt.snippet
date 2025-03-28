@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: oVirt/RHEV platform management
+# prefix: ovirt_snippet
+# key: ovirt
+# group: ansible
+# --
+
+- name: ${0:oVirt/RHEV platform management}
+  ovirt:                                                                   
+    user: ${1:The user to authenticate with}                               #
+    url: ${2:The url of the oVirt instance}                                #
+    instance_name: ${3:The name of the instance to use}                    #
+    password: ${4:Password of the user to authenticate with}               #
+    image: ${5:value}                                                      # The template to use for the instance 
+    resource_type: ${6$$(yas-choose-value '("new" "template"))}            # choices: new;template  Whether you want to deploy an image or create an instance from scratch 
+    zone: ${7:value}                                                       # Deploy the image to this oVirt cluster 
+    instance_disksize: ${8:value}                                          # Size of the instance's disk in GB 
+    instance_cpus: ${9:1}                                                  # The instance's number of CPUs 
+    instance_nic: ${10:value}                                              # The name of the network interface in oVirt/RHEV 
+    instance_network: ${11:rhevm}                                          # The logical network the machine should belong to 
+    instance_mem: ${12:value}                                              # The instance's amount of memory in MB 
+    instance_type: ${13$$(yas-choose-value '("desktop" "server" "high_performance"))}# choices: desktop;server;high_performance  Define whether the instance is a server, desktop or high_performance
+    disk_alloc: ${14$$(yas-choose-value '("preallocated" "thin"))}         # choices: preallocated;thin  Define whether disk is thin or preallocated 
+    disk_int: ${15$$(yas-choose-value '("ide" "virtio"))}                  # choices: ide;virtio  Interface type of the disk 
+    instance_os: ${16:value}                                               # Type of Operating System 
+    instance_cores: ${17:1}                                                # Define the instance's number of cores 
+    sdomain: ${18:value}                                                   # The Storage Domain where you want to create the instance's disk on 
+    region: ${19:value}                                                    # The oVirt/RHEV datacenter where you want to deploy to 
+    instance_dns: ${20:value}                                              # Define the instance's Primary DNS server 
+    instance_domain: ${21:value}                                           # Define the instance's Domain 
+    instance_hostname: ${22:value}                                         # Define the instance's Hostname 
+    instance_ip: ${23:value}                                               # Define the instance's IP 
+    instance_netmask: ${24:value}                                          # Define the instance's Netmask 
+    instance_rootpw: ${25:value}                                           # Define the instance's Root password 
+    instance_key: ${26:value}                                              # Define the instance's Authorized key 
+    state: ${27$$(yas-choose-value '("absent" "present" "restarted" "shutdown" "started"))}# choices: absent;present;restarted;shutdown;started  Create, terminate or remove instances 

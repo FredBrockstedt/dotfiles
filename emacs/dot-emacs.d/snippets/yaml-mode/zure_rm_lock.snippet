@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage Azure locks
+# prefix: azure_rm_lock_snippet
+# key: zure_rm_lock
+# group: ansible
+# --
+
+- name: ${0:Manage Azure locks}
+  azure_rm_lock:                                                           
+    name: ${1:Name of the lock}                                            #
+    managed_resource_id: ${2:value}                                        # Manage a lock for the specified resource ID  Mutually exclusive with I(resource_group)  If neither I(managed_resource_id
+    resource_group: ${3:value}                                             # Manage a lock for the named resource group  Mutually exclusive with I(managed_resource_id)  If neither I(managed_resourc
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the lock  Use C(present) to create or update a lock and C(absent) to delete a lock 
+    level: ${5$$(yas-choose-value '("can_not_delete" "read_only"))}        # choices: can_not_delete;read_only  The lock level type 
+    ad_user: ${6:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${7:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${8:value}                                                    # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${9:value}                                            # Your Azure subscription Id 
+    client_id: ${10:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${11:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${12:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${13:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${14:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${15$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${16$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${17:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

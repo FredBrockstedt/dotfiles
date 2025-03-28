@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Send Slack notifications
+# prefix: slack_snippet
+# key: ck
+# group: ansible
+# --
+
+- name: ${0:Send Slack notifications}
+  slack:                                                                   
+    token: ${1:Slack integration token}                                    #  This authenticates you to the slack service  Prior to 1 8, a token looked like C(3Ffe373sfhRE6y42Fg3rvf4GlK)   In 1 8 a
+    domain: ${2:value}                                                     # Slack (sub)domain for your environment without protocol  (i e  C(example slack com)) In 1 8 and beyond, this is deprecat
+    msg: ${3:value}                                                        # Message to send  Note that the module does not handle escaping characters  Plain-text angle brackets and ampersands shou
+    channel: ${4:value}                                                    # Channel to send the message to  If absent, the message goes to the channel selected for the I(token) 
+    thread_id: ${5:value}                                                  # Optional  Timestamp of message to thread this message to as a float  https://api slack com/docs/message-threading
+    username: ${6:Ansible}                                                 # This is the sender of the message 
+    icon_url: ${7:value}                                                   # Url for the message sender's icon (default C(https://www ansible com/favicon ico))
+    icon_emoji: ${8:value}                                                 # Emoji for the message sender  See Slack documentation for options  (if I(icon_emoji) is set, I(icon_url) will not be use
+    link_names: ${9$$(yas-choose-value '("1" "0"))}                        # choices: 1;0  Automatically create links for channels and usernames in I(msg) 
+    parse: ${10$$(yas-choose-value '("full" "none"))}                      # choices: full;none  Setting for the message parser at Slack
+    validate_certs: ${11:true}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    color: ${12:falsermal}                                                 # Allow text to use default colors - use the default of 'normal' to not send a custom color bar at the start of the messag
+    attachments: ${13:value}                                               # Define a list of attachments  This list mirrors the Slack JSON API  For more information, see also in the (U(https://api

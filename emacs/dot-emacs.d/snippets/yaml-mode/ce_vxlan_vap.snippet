@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages VXLAN virtual access point on HUAWEI CloudEngine Devices.
+# prefix: ce_vxlan_vap_snippet
+# key: ce_vxlan_vap
+# group: ansible
+# --
+
+- name: ${0:Manages VXLAN virtual access point on HUAWEI CloudEngine Devices.}
+  ce_vxlan_vap:                                                            
+    bridge_domain_id: ${1:value}                                           # Specifies a bridge domain ID  The value is an integer ranging from 1 to 16777215 
+    bind_vlan_id: ${2:value}                                               # Specifies the VLAN binding to a BD(Bridge Domain)  The value is an integer ranging ranging from 1 to 4094 
+    l2_sub_interface: ${3:value}                                           # Specifies an Sub-Interface full name, i e  "10GE1/0/41 1"  The value is a string of 1 to 63 case-insensitive characters,
+    encapsulation: ${4$$(yas-choose-value '("dot1q" "default" "untag" "qinq" "none"))}# choices: dot1q;default;untag;qinq;none  Specifies an encapsulation type of packets allowed to pass through a 
+    ce_vid: ${5:value}                                                     # When I(encapsulation) is 'dot1q', specifies a VLAN ID in the outer VLAN tag  When I(encapsulation) is 'qinq', specifies 
+    pe_vid: ${6:value}                                                     # When I(encapsulation) is 'qinq', specifies an inner VLAN ID for double-tagged packets to be received by a Layer 2 sub-in
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 

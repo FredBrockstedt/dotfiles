@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage AFM DoS profiles on a BIG-IP
+# prefix: bigip_firewall_dos_profile_snippet
+# key: gip_firewall_dos_prof
+# group: ansible
+# --
+
+- name: ${0:Manage AFM DoS profiles on a BIG-IP}
+  bigip_firewall_dos_profile:                                              
+    name: ${1:Specifies the name of the profile}                           #
+    description: ${2:value}                                                # The description of the DoS profile 
+    default_whitelist: ${3:value}                                          # The default whitelist address list for the system to use to determine which IP addresses are legitimate  The system does
+    threshold_sensitivity: ${4$$(yas-choose-value '("low" "medium" "high"))}# choices: low;medium;high  Specifies the threshold sensitivity for the DoS profile  Thresholds for detecting attacks are
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${7:value}                                                   # A dict object containing connection details 

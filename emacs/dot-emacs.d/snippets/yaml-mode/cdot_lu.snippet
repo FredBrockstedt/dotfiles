@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage  NetApp cDOT luns
+# prefix: na_cdot_lun_snippet
+# key: cdot_lu
+# group: ansible
+# --
+
+- name: ${0:Manage  NetApp cDOT luns}
+  na_cdot_lun:                                                             
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified lun should exist or not 
+    name: ${2:The name of the lun to manage}                               #
+    vserver: ${3:The name of the vserver to use}                           #
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    flexvol_name: ${7:value}                                               # The name of the FlexVol the lun should exist on  Required when C(state=present) 
+    size: ${8:value}                                                       # The size of the lun in C(size_unit)  Required when C(state=present) 
+    size_unit: ${9$$(yas-choose-value '("bytes" "b" "kb" "mb" "gb" "tb" "pb" "eb" "zb" "yb"))}# choices: bytes;b;kb;mb;gb;tb;pb;eb;zb;yb  The unit used to interpret the size parameter 
+    force_resize: ${10:False}                                              # Forcibly reduce the size  This is required for reducing the size of the LUN to avoid accidentally reducing the LUN size 
+    force_remove: ${11:False}                                              # If "true", override checks that prevent a LUN from being destroyed if it is online and mapped  If "false", destroying an
+    force_remove_fenced: ${12:False}                                       # If "true", override checks that prevent a LUN from being destroyed while it is fenced  If "false", attempting to destroy

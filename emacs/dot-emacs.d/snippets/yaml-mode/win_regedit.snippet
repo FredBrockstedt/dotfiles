@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Add, change, or remove registry keys and values
+# prefix: win_regedit_snippet
+# key: win_regedit
+# group: ansible
+# --
+
+- name: ${0:Add, change, or remove registry keys and values}
+  win_regedit:                                                             
+    path: ${1:Name of the registry path}                                   # Should be in one of the following registry hives: HKCC, HKCR, HKCU, HKLM, HKU 
+    name: ${2:value}                                                       # Name of the registry entry in the above C(path) parameters  If not provided, or empty then the '(Default)' property for 
+    data: ${3:value}                                                       # Value of the registry entry C(name) in C(path)  If not specified then the value for the property will be null for the co
+    type: ${4$$(yas-choose-value '("binary" "dword" "expandstring" "multistring" "string" "qword"))}# choices: binary;dword;expandstring;multistring;string;qword  The registry value data type 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state of the registry entry 
+    delete_key: ${6:True}                                                  # When C(state) is 'absent' then this will delete the entire key  If C(no) then it will only clear out the '(Default)' pro
+    hive: ${7:value}                                                       # A path to a hive key like C:\\Users\\Default\\NTUSER DAT to load in the registry  This hive is loaded under the HKLM:\\A

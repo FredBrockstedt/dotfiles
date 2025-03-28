@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP community configs.
+# prefix: nxos_snmp_community_snippet
+# key: xos_snmp_community
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP community configs.}
+  nxos_snmp_community:                                                     
+    community: ${1:Case-sensitive community string}                        #
+    access: ${2$$(yas-choose-value '("ro" "rw"))}                          # choices: ro;rw  Access type for community 
+    group: ${3:value}                                                      # Group to which the community belongs 
+    acl: ${4:value}                                                        # ACL name to filter snmp requests or keyword 'default' 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 
+    provider: ${6:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Module for setup of SeProperties Avi RESTful Object
+# prefix: avi_seproperties_snippet
+# key: vi_sepropert
+# group: ansible
+# --
+
+- name: ${0:Module for setup of SeProperties Avi RESTful Object}
+  avi_seproperties:                                                        
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${2$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${3$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    se_agent_properties: ${4:value}                                        # Seagentproperties settings for seproperties 
+    se_bootup_properties: ${5:value}                                       # Sebootupproperties settings for seproperties 
+    se_runtime_properties: ${6:value}                                      # Seruntimeproperties settings for seproperties 
+    url: ${7:value}                                                        # Avi controller URL of the object 
+    uuid: ${8:value}                                                       # Unique object identifier of the object  Default value when not specified in API or module is interpreted by Avi Controll
+    controller: ${9:}                                                      # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${10:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${11:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${12:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${13:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{14:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${15:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${16:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${17:value}                         # It disables avi session information to be cached as a fact 

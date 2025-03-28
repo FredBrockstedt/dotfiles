@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage services on a given ESXi host
+# prefix: vmware_host_service_manager_snippet
+# key: vmware_host_service_manager
+# group: ansible
+# --
+
+- name: ${0:Manage services on a given ESXi host}
+  vmware_host_service_manager:                                             
+    service_name: ${1:Name of Service to be managed}                       # This is a brief identifier for the service, for example, ntpd, vxsyslogd etc  This value should be a valid ESXi service 
+    cluster_name: ${2:value}                                               # Name of the cluster  Service settings are applied to every ESXi host system/s in given cluster  If C(esxi_hostname) is n
+    esxi_hostname: ${3:value}                                              # ESXi hostname  Service settings are applied to this ESXi host system  If C(cluster_name) is not given, this parameter is
+    state: ${4$$(yas-choose-value '("absent" "present" "restart" "start" "stop"))}# choices: absent;present;restart;start;stop  Desired state of service  State value 'start' and 'present' has same 
+    service_policy: ${5$$(yas-choose-value '("automatic" "off" "on"))}     # choices: automatic;off;on  Set of valid service policy strings  If set C(on), then service should be started when the ho
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${7:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${8:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${10:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${11:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${12:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

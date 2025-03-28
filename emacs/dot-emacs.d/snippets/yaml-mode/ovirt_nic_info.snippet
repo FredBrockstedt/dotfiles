@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more oVirt/RHV virtual machine network interfaces
+# prefix: ovirt_nic_info_snippet
+# key: ovirt_nic_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more oVirt/RHV virtual machine network interfaces}
+  ovirt_nic_info:                                                          
+    vm: ${1:Name of the VM where NIC is attached}                          #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt: C(username)[I(required)] - The name of the user, something like I(admin@internal)}# Default value is set by I(O
+    name: ${3:value}                                                       # Name of the NIC, can be used as glob expression 
+    fetch_nested: ${4:value}                                               # If I(yes) the module will fetch additional data from the API  It will fetch only IDs of nested entity  It doesn't fetch 
+    nested_attributes: ${5:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is

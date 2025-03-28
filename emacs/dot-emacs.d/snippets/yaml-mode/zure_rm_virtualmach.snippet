@@ -1,0 +1,63 @@
+# -*- mode: snippet -*-
+# name: Manage Azure virtual machines
+# prefix: azure_rm_virtualmachine_snippet
+# key: zure_rm_virtualmach
+# group: ansible
+# --
+
+- name: ${0:Manage Azure virtual machines}
+  azure_rm_virtualmachine:                                                 
+    resource_group: ${1:Name of the resource group containing the VM}      #
+    name: ${2:Name of the VM}                                              #
+    image: ${3:The image used to build the VM}                             # For custom images, the name of the image  To narrow the search to a specific resource group, a dict with the keys I(name
+    custom_data: ${4:value}                                                # Data made available to the VM and used by C(cloud-init)  Only used on Linux images with C(cloud-init) enabled  Consult U
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the VM  Set to C(present) to create a VM with the configuration specified by other opt
+    started: ${6:True}                                                     # Whether the VM is started or stopped  Set to (true) with I(state=present) to start the VM  Set to C(false) to stop the V
+    allocated: ${7:True}                                                   # Whether the VM is allocated or deallocated, only useful with I(state=present) 
+    generalized: ${8:value}                                                # Whether the VM is generalized or not  Set to C(true) with I(state=present) to generalize the VM  Generalizing a VM is ir
+    restarted: ${9:value}                                                  # Set to C(true) with I(state=present) to restart a running VM 
+    location: ${10:value}                                                  # Valid Azure location for the VM  Defaults to location of the resource group 
+    short_hostname: ${11:value}                                            # Name assigned internally to the host  On a Linux VM this is the name returned by the C(hostname) command  When creating 
+    vm_size: ${12:value}                                                   # A valid Azure VM size value  For example, C(Standard_D4)  Choices vary depending on the subscription and location  Check
+    admin_username: ${13:value}                                            # Admin username used to access the VM after it is created  Required when creating a VM 
+    admin_password: ${14:value}                                            # Password for the admin username  Not required if the I(os_type=Linux) and SSH password authentication is disabled by set
+    ssh_password_enabled: ${15:True}                                       # Whether to enable or disable SSH passwords  When I(os_type=Linux), set to C(false) to disable SSH password authenticatio
+    ssh_public_keys: ${16:value}                                           # For I(os_type=Linux) provide a list of SSH keys  Accepts a list of dicts where each dictionary contains two keys, I(path
+    availability_set: ${17:value}                                          # Name or ID of an existing availability set to add the VM to  The I(availability_set) should be in the same resource grou
+    storage_account_name: ${18:value}                                      # Name of a storage account that supports creation of VHD blobs  If not specified for a new VM, a new storage account name
+    storage_container_name: ${19:vhds}                                     # Name of the container to use within the storage account to store VHD blobs  If not specified, a default container will b
+    storage_blob_name: ${20:value}                                         # Name of the storage blob used to hold the OS disk image of the VM  Must end with ' vhd'  If not specified, defaults to t
+    managed_disk_type: ${21$$(yas-choose-value '("Standard_LRS" "StandardSSD_LRS" "Premium_LRS"))}# choices: Standard_LRS;StandardSSD_LRS;Premium_LRS  Managed OS disk type  Create OS disk with mana
+    os_disk_name: ${22:value}                                              # OS disk name 
+    os_disk_caching: ${23$$(yas-choose-value '("ReadOnly" "ReadWrite"))}   # choices: ReadOnly;ReadWrite  Type of OS disk caching 
+    os_disk_size_gb: ${24:value}                                           # Type of OS disk size in GB 
+    os_type: ${25$$(yas-choose-value '("Windows" "Linux"))}                # choices: Windows;Linux  Base type of operating system 
+    data_disks: ${26:value}                                                # Describes list of data disks  Use M(azure_rm_mangeddisk) to manage the specific disk 
+    public_ip_allocation_method: ${27$$(yas-choose-value '("Dynamic" "Static" "Disabled"))}# choices: Dynamic;Static;Disabled  Allocation method for the public IP of the VM  Used only if a network 
+    open_ports: ${28:value}                                                # List of ports to open in the security group for the VM, when a security group and network interface are created with a V
+    network_interface_names: ${29:value}                                   # Network interface names to add to the VM  Can be a string of name or resource ID of the network interface  Can be a dict
+    virtual_network_resource_group: ${30:value}                            # The resource group to use when creating a VM with another resource group's virtual network 
+    virtual_network_name: ${31:value}                                      # The virtual network to use when creating a VM  If not specified, a new network interface will be created and assigned to
+    subnet_name: ${32:value}                                               # Subnet for the VM  Defaults to the first subnet found in the virtual network or the subnet of the I(network_interface_na
+    remove_on_absent: ${33:['all']}                                        # Associated resources to remove when removing a VM using I(state=absent)  To remove all resources related to the VM being
+    plan: ${34:value}                                                      # Third-party billing plan for the VM 
+    accept_terms: ${35:False}                                              # Accept terms for Marketplace images that require it  Only Azure service admin/account admin users can purchase images fr
+    zones: ${36:value}                                                     # A list of Availability Zones for your VM 
+    license_type: ${37$$(yas-choose-value '("Windows_Server" "Windows_Client"))}# choices: Windows_Server;Windows_Client  On-premise license for the image or disk  Only used for images that contain
+    vm_identity: ${38$$(yas-choose-value '("SystemAssigned"))}             # choices: SystemAssigned  Identity for the VM 
+    winrm: ${39:value}                                                     # List of Windows Remote Management configurations of the VM 
+    boot_diagnostics: ${40:value}                                          # Manage boot diagnostics settings for a VM  Boot diagnostics includes a serial console and remote console screenshots 
+    ad_user: ${41:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${42:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${43:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${44:value}                                           # Your Azure subscription Id 
+    client_id: ${45:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${46:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${47:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${48:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${49:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${50$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${51$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${52:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${53:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${54:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

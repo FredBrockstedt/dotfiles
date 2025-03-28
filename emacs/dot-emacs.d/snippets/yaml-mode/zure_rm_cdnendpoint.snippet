@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Manage a Azure CDN endpoint
+# prefix: azure_rm_cdnendpoint_snippet
+# key: zure_rm_cdnendpoint
+# group: ansible
+# --
+
+- name: ${0:Manage a Azure CDN endpoint}
+  azure_rm_cdnendpoint:                                                    
+    resource_group: ${1:Name of a resource group where the Azure CDN endpoint exists or will be created}#
+    name: ${2:Name of the Azure CDN endpoint}                              #
+    profile_name: ${3:Name of the CDN profile where the endpoint attached to}#
+    origins: ${4:Set of source of the content being delivered via CDN}     #
+    location: ${5:value}                                                   # Valid azure location  Defaults to location of the resource group 
+    started: ${6:value}                                                    # Use with I(state=present) to start the endpoint 
+    purge: ${7:False}                                                      # Use with I(state=present) to purge the endpoint 
+    purge_content_paths: ${8:['/']}                                        # Use with I(state=present) and I(purge=true) to specify content paths to be purged 
+    origin_host_header: ${9:value}                                         # The host header value sent to the origin with each request 
+    origin_path: ${10:value}                                               # A directory path on the origin that CDN can use to retrieve content from  E g  contoso cloudapp net/originpath 
+    content_types_to_compress: ${11:value}                                 # List of content types on which compression applies  This value should be a valid MIME type 
+    is_compression_enabled: ${12:False}                                    # Indicates whether content compression is enabled on CDN 
+    is_http_allowed: ${13:True}                                            # Indicates whether HTTP traffic is allowed on the endpoint 
+    is_https_allowed: ${14:True}                                           # Indicates whether HTTPS traffic is allowed on the endpoint 
+    query_string_caching_behavior: ${15$$(yas-choose-value '("ignore_query_string" "bypass_caching" "use_query_string" "not_set"))}# choices: ignore_query_string;bypass_caching;use_query_string;not
+    state: ${16$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the Azure CDN endpoint  Use C(present) to create or update a Azure CDN endp
+    ad_user: ${17:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${18:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${19:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${20:value}                                           # Your Azure subscription Id 
+    client_id: ${21:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${22:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${23:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${24:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${25:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${26$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${27$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${28:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${29:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${30:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

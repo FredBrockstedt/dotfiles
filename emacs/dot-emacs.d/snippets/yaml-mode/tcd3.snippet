@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Set or delete key value pairs from an etcd3 cluster
+# prefix: etcd3_snippet
+# key: tcd3
+# group: ansible
+# --
+
+- name: ${0:Set or delete key value pairs from an etcd3 cluster}
+  etcd3:                                                                   
+    key: ${1:the key where the information is stored in the cluster}       #
+    value: ${2:the information stored}                                     #
+    state: ${3:the state of the value for the key}                         # can be present or absent
+    host: ${4:localhost}                                                   # the IP address of the cluster
+    port: ${5:2379}                                                        # the port number used to connect to the cluster
+    user: ${6:value}                                                       # The etcd user to authenticate with 
+    password: ${7:value}                                                   # The password to use for authentication  Required if I(user) is defined 
+    ca_cert: ${8:value}                                                    # The Certificate Authority to use to verify the etcd host  Required if I(client_cert) and I(client_key) are defined 
+    client_cert: ${9:value}                                                # PEM formatted certificate chain file to be used for SSL client authentication  Required if I(client_key) is defined 
+    client_key: ${10:value}                                                # PEM formatted file that contains your private key to be used for SSL client authentication  Required if I(client_cert) i
+    timeout: ${11:value}                                                   # The socket level timeout in seconds 

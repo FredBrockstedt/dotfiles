@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Get OpenStack Client config
+# prefix: os_client_config_snippet
+# key: os_client_config
+# group: ansible
+# --
+
+- name: ${0:Get OpenStack Client config}
+  os_client_config:                                                        
+    clouds: ${1:[]}                                                        # List of clouds to limit the return list to  No value means return information on all configured clouds

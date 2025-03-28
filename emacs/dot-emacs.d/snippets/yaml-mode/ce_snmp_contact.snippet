@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP contact configuration on HUAWEI CloudEngine switches.
+# prefix: ce_snmp_contact_snippet
+# key: ce_snmp_contact
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP contact configuration on HUAWEI CloudEngine switches.}
+  ce_snmp_contact:                                                         
+    contact: ${1:Contact information}                                      #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

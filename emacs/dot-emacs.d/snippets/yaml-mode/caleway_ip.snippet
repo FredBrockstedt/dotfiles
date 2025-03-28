@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Scaleway IP management module
+# prefix: scaleway_ip_snippet
+# key: caleway_ip
+# group: ansible
+# --
+
+- name: ${0:Scaleway IP management module}
+  scaleway_ip:                                                             
+    organization: ${1:Scaleway organization identifier}                    #
+    region: ${2$$(yas-choose-value '("ams1" "EMEA-NL-EVS" "par1" "EMEA-FR-PAR1"))}# Scaleway region to use (for example par1) 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the IP 
+    id: ${4:value}                                                         # id of the Scaleway IP (UUID)
+    server: ${5:value}                                                     # id of the server you want to attach an IP to  To unattach an IP don't specify this option
+    reverse: ${6:value}                                                    # Reverse to assign to the IP
+    api_token: ${7:value}                                                  # Scaleway OAuth token 
+    api_url: ${{8:https://api}                                             #scaleway com} # not required  Scaleway API URL 
+    api_timeout: ${9:30}                                                   # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${10:namespace()}                                    # List of parameters passed to the query string 
+    validate_certs: ${11:True}                                             # Validate SSL certs of the Scaleway API 

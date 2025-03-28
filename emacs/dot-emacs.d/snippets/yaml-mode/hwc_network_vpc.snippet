@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Creates a Huawei Cloud VPC
+# prefix: hwc_network_vpc_snippet
+# key: hwc_network_vpc
+# group: ansible
+# --
+
+- name: ${0:Creates a Huawei Cloud VPC}
+  hwc_network_vpc:                                                         
+    name: ${1:The name of vpc}                                             #
+    cidr: ${2:The range of available subnets in the vpc}                   #
+    identity_endpoint: ${3:The Identity authentication URL}                #
+    user: ${4:The user name to login with (currently only user names are supported, and not user IDs)}#
+    password: ${5:The password to login with}                              #
+    domain: ${6:The name of the Domain to scope to (Identity v3)}          # (currently only domain names are supported, and not domain IDs) 
+    project: ${7:The name of the Tenant (Identity v2) or Project (Identity v3)}# (currently only project names are supported, and not project IDs) 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in vpc 
+    timeouts: ${9:value}                                                   # The timeouts for each operations 
+    region: ${10:value}                                                    # The region to which the project belongs 
+    id: ${11:value}                                                        # The id of resource to be managed 

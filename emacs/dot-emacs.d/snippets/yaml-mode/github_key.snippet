@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage GitHub access keys.
+# prefix: github_key_snippet
+# key: github_key
+# group: ansible
+# --
+
+- name: ${0:Manage GitHub access keys.}
+  github_key:                                                              
+    token: ${1:GitHub Access Token with permission to list and create public keys}#
+    name: ${2:SSH key name}                                                #
+    pubkey: ${3:value}                                                     # SSH public key value  Required when C(state=present) 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether to remove a key, ensure that it exists, or update its value 
+    force: ${5:true}                                                       # The default is C(yes), which will replace the existing remote key if it's different than C(pubkey)  If C(no), the key wi

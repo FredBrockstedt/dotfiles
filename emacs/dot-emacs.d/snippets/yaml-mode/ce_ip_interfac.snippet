@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages L3 attributes for IPv4 and IPv6 interfaces on HUAWEI CloudEngine switches.
+# prefix: ce_ip_interface_snippet
+# key: ce_ip_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages L3 attributes for IPv4 and IPv6 interfaces on HUAWEI CloudEngine switches.}
+  ce_ip_interface:                                                         
+    interface: ${1:Full name of interface, i}                              #e  40GE1/0/22, vlanif10 
+    addr: ${2:value}                                                       # IPv4 or IPv6 Address 
+    mask: ${3:value}                                                       # Subnet mask for IPv4 or IPv6 Address in decimal format 
+    version: ${4$$(yas-choose-value '("v4" "v6"))}                         # choices: v4;v6  IP address version 
+    ipv4_type: ${5$$(yas-choose-value '("main" "sub"))}                    # choices: main;sub  Specifies an address type  The value is an enumerated type  main, primary IP address  sub, secondary 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 

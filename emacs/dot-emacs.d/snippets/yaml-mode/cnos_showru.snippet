@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Collect the current running configuration on devices running on CNOS
+# prefix: cnos_showrun_snippet
+# key: cnos_showru
+# group: ansible
+# --
+
+- name: ${0:Collect the current running configuration on devices running on CNOS}
+  cnos_showrun:                                                            
+    outputfile: ${1:This specifies the file path where the output of each command execution is saved}# Each command that is specified in the merged template file and each response from the device a
+    host: ${2:This is the variable used to search the hosts file at /etc/ansible/hosts and identify the IP address of the device on which the template is going to be applied}# Usually the Ansible k
+    username: ${3:Configures the username used to authenticate the connection to the remote device}# The value of the username parameter is used to authenticate the SSH session  While generally the
+    password: ${4:Configures the password used to authenticate the connection to the remote device}# The value of the password parameter is used to authenticate the SSH session  While generally the
+    deviceType: ${5$$(yas-choose-value '("g8272_cnos" "g8296_cnos" "g8332_cnos" "NE0152T" "NE1072T" "NE1032" "NE1032T" "NE10032" "NE2572"))}# This specifies the type of device where the method is e
+    enablePassword: ${6:value}                                             # Configures the password used to enter Global Configuration command mode on the switch  If the switch does not request th

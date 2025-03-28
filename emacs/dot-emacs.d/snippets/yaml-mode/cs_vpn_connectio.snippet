@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manages site-to-site VPN connections on Apache CloudStack based clouds.
+# prefix: cs_vpn_connection_snippet
+# key: cs_vpn_connectio
+# group: ansible
+# --
+
+- name: ${0:Manages site-to-site VPN connections on Apache CloudStack based clouds.}
+  cs_vpn_connection:                                                       
+    vpc: ${1:Name of the VPC the VPN connection is related to}             #
+    vpn_customer_gateway: ${2:Name of the VPN customer gateway}            #
+    passive: ${3:False}                                                    # State of the VPN connection  Only considered when I(state=present) 
+    force: ${4:False}                                                      # Activate the VPN gateway if not already activated on I(state=present)  Also see M(cs_vpn_gateway) 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the VPN connection 
+    zone: ${6:value}                                                       # Name of the zone the VPC is related to  If not set, default zone is used 
+    domain: ${7:value}                                                     # Domain the VPN connection is related to 
+    account: ${8:value}                                                    # Account the VPN connection is related to 
+    project: ${9:value}                                                    # Name of the project the VPN connection is related to 
+    poll_async: ${10:True}                                                 # Poll async jobs until job has finished 
+    api_key: ${11:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${12:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${13:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${14$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${15:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${16:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

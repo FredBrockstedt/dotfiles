@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Add or remove domains and subdomains on Webfaction
+# prefix: webfaction_domain_snippet
+# key: webfaction_dom
+# group: ansible
+# --
+
+- name: ${0:Add or remove domains and subdomains on Webfaction}
+  webfaction_domain:                                                       
+    name: ${1:The name of the domain}                                      #
+    login_name: ${2:The webfaction account to use}                         #
+    login_password: ${3:The webfaction password to use}                    #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the domain should exist
+    subdomains: ${5:[]}                                                    # Any subdomains to create 

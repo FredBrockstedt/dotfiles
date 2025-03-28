@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Creates temporary files and directories
+# prefix: win_tempfile_snippet
+# key: win_tempf
+# group: ansible
+# --
+
+- name: ${0:Creates temporary files and directories}
+  win_tempfile:                                                            
+    state: ${1$$(yas-choose-value '("directory" "file"))}                  # choices: directory;file  Whether to create file or directory 
+    path: ${2:%TEMP%}                                                      # Location where temporary file or directory should be created  If path is not specified default system temporary director
+    prefix: ${{3:ansible}                                                  #} # not required  Prefix of file/directory name created by module 
+    suffix: ${4:}                                                          # Suffix of file/directory name created by module 

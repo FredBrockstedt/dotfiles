@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage contract resources (vz:BrCP)
+# prefix: aci_contract_snippet
+# key: ci_contract
+# group: ansible
+# --
+
+- name: ${0:Manage contract resources (vz:BrCP)}
+  aci_contract:                                                            
+    contract: ${1:The name of the contract}                                #
+    tenant: ${2:The name of the tenant}                                    #
+    host: ${3:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${4:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${5:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    description: ${6:value}                                                # Description for the contract 
+    scope: ${7$$(yas-choose-value '("application-profile" "context" "global" "tenant"))}# choices: application-profile;context;global;tenant  The scope of a service contract  The APIC defaults to C
+    priority: ${8$$(yas-choose-value '("level1" "level2" "level3" "unspecified"))}# choices: level1;level2;level3;unspecified  The desired QoS class to be used  The APIC defaults to C(unspecified) 
+    dscp: ${9$$(yas-choose-value '("AF11" "AF12" "AF13" "AF21" "AF22" "AF23" "AF31" "AF32" "AF33" "AF41" "AF42" "AF43" "CS0" "CS1" "CS2" "CS3" "CS4" "CS5" "CS6" "CS7" "EF" "VA" "unspecified"))}# ch
+    state: ${10$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${11:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${12:admin}                                                  # The username to use for authentication 
+    certificate_name: ${13:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${14$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${15:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${16:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${17:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${18:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

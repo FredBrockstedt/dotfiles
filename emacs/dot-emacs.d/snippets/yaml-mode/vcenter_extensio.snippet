@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Register/deregister vCenter Extensions
+# prefix: vcenter_extension_snippet
+# key: vcenter_extensio
+# group: ansible
+# --
+
+- name: ${0:Register/deregister vCenter Extensions}
+  vcenter_extension:                                                       
+    extension_key: ${1:The extension key of the extension to install or uninstall}#
+    version: ${2:The version of the extension you are installing or uninstalling}#
+    name: ${3:value}                                                       # Required for C(state=present)  The name of the extension you are installing 
+    company: ${4:value}                                                    # Required for C(state=present)  The name of the company that makes the extension 
+    description: ${5:value}                                                # Required for C(state=present)  A short description of the extension 
+    email: ${6:value}                                                      # Required for C(state=present)  Administrator email to use for extension 
+    url: ${7:value}                                                        # Required for C(state=present)  Link to server hosting extension zip file to install 
+    ssl_thumbprint: ${8:value}                                             # Required for C(state=present)  SSL thumbprint of the extension hosting server 
+    server_type: ${9:vsphere-client-serenity}                              # Required for C(state=present)  Type of server being used to install the extension (SOAP, REST, HTTP, etc ) 
+    client_type: ${10:vsphere-client-serenity}                             # Required for C(state=present)  Type of client the extension is (win32,  net, linux, etc ) 
+    visible: ${11:True}                                                    # Show the extension in solution manager inside vCenter 
+    state: ${12$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Add or remove vCenter Extension 
+    hostname: ${13:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${14:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${15:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${16:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${17:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${18:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${19:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

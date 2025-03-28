@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage domain/workgroup membership for a Windows host
+# prefix: win_domain_membership_snippet
+# key: win_domain_membership
+# group: ansible
+# --
+
+- name: ${0:Manage domain/workgroup membership for a Windows host}
+  win_domain_membership:                                                   
+    domain_admin_user: ${1:Username of a domain admin for the target domain (required to join or leave the domain)}#
+    dns_domain_name: ${2:value}                                            # When C(state) is C(domain), the DNS name of the domain to which the targeted Windows host should be joined 
+    domain_admin_password: ${3:value}                                      # Password for the specified C(domain_admin_user) 
+    hostname: ${4:value}                                                   # The desired hostname for the Windows host 
+    domain_ou_path: ${5:value}                                             # The desired OU path for adding the computer object  This is only used when adding the target host to a domain, if it is 
+    state: ${6$$(yas-choose-value '("domain" "workgroup"))}                # choices: domain;workgroup  Whether the target host should be a member of a domain or workgroup 
+    workgroup_name: ${7:value}                                             # When C(state) is C(workgroup), the name of the workgroup that the Windows host should be in 

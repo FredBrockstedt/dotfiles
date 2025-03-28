@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Downloads files from Cisco FTD devices over HTTP(S)
+# prefix: ftd_file_download_snippet
+# key: ftd_file_download
+# group: ansible
+# --
+
+- name: ${0:Downloads files from Cisco FTD devices over HTTP(S)}
+  ftd_file_download:                                                       
+    operation: ${1:The name of the operation to execute}                   # Only operations that return a file can be used in this module 
+    destination: ${2:Absolute path of where to download the file to}       # If destination is a directory, the module uses a filename from 'Content-Disposition' header specified by the server 
+    path_params: ${3:value}                                                # Key-value pairs that should be sent as path parameters in a REST API call 

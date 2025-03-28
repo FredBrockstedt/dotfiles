@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage FreeIPA DNS Zones
+# prefix: ipa_dnszone_snippet
+# key: pa_dnszo
+# group: ansible
+# --
+
+- name: ${0:Manage FreeIPA DNS Zones}
+  ipa_dnszone:                                                             
+    zone_name: ${1:The DNS zone name to which needs to be managed}         #
+    ipa_pass: ${2:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  S t a t e   t o   e n s u r e
+    dynamicupdate: ${4$$(yas-choose-value '("false" "true"))}              # choices: false;true  A p p l y   d y n a m i c   u p d a t e   t o   z o n e
+    ipa_port: ${5:443}                                                     # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{6:ipa}                                                    #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${7:admin}                                                   # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${8$$(yas-choose-value '("http" "https"))}                   # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${9:True}                                              # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${10:10}                                                  # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

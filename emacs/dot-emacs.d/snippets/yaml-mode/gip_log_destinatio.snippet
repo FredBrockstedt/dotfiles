@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manages log destinations on a BIG-IP.
+# prefix: bigip_log_destination_snippet
+# key: gip_log_destinatio
+# group: ansible
+# --
+
+- name: ${0:Manages log destinations on a BIG-IP.}
+  bigip_log_destination:                                                   
+    name: ${1:Specifies the name of the log destination}                   #
+    type: ${2$$(yas-choose-value '("remote-high-speed-log" "remote-syslog" "arcsight" "splunk" "management-port" "ipfix"))}# Specifies the type of log destination  Once created, this parameter cann
+    description: ${3:value}                                                # The description of the log destination 
+    pool_settings: ${4:value}                                              # This parameter is only available when C(type) is C(remote-high-speed-log)  Deprecated  Use the equivalent top-level para
+    syslog_settings: ${5:value}                                            # This parameter is only available when C(type) is C(remote-syslog)  Deprecated  Use the equivalent top-level parameters i
+    syslog_format: ${6$$(yas-choose-value '("bsd-syslog" "syslog" "legacy-bigip" "rfc5424" "rfc3164"))}# choices: bsd-syslog;syslog;legacy-bigip;rfc5424;rfc3164  Specifies the method to use to form
+    forward_to: ${7:value}                                                 # When C(type) is C(remote-syslog), specifies the management port log destination, which will be used to forward the logs 
+    pool: ${8:value}                                                       # When C(type) is C(remote-high-speed-log), specifies the existing pool of remote high-speed log servers where logs will b
+    protocol: ${9$$(yas-choose-value '("tcp" "udp" "ipfix" "netflow-9"))}  # choices: tcp;udp;ipfix;netflow-9  When C(type) is C(remote-high-speed-log), specifies the protocol for the system to use
+    distribution: ${10$$(yas-choose-value '("adaptive" "balanced" "replicated"))}# choices: adaptive;balanced;replicated  Specifies the distribution method used by the Remote High Speed Log destina
+    address: ${11:value}                                                   # Specifies the IP address that will receive messages from the specified local Log Destination  This parameter is only ava
+    port: ${12:value}                                                      # Specifies the port of the IP address that will receive messages from the specified local Log Destination  This parameter
+    transport_profile: ${13:value}                                         # Is a transport profile based on either TCP or UDP  This profile defines the TCP or UDP options used to send IP-traffic l
+    server_ssl_profile: ${14:value}                                        # If the C(transport_profile) is a TCP profile, you can use this field to choose a Secure Socket Layer (SSL) profile for s
+    template_retransmit_interval: ${15:value}                              # Enter the time (in seconds) between each transmission of IPFIX templates to the pool of IPFIX collectors  The logging de
+    template_delete_delay: ${16:value}                                     # Enter the time (in seconds) that the BIG-IP device should pause between deleting an obsolete IPFIX template and reusing 
+    partition: ${17:Common}                                                # Device partition to manage resources on 
+    state: ${18$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${19:value}                                                  # A dict object containing connection details 

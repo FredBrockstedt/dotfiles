@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete a cluster.
+# prefix: pn_cluster_snippet
+# key: pn_cluster
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete a cluster.}
+  pn_cluster:                                                              
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Specify action to perform  Use 'present' to create cluster and 'absent' to delete cluster 
+    pn_name: ${2:Specify the name of the cluster}                          #
+    pn_cliusername: ${3:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${4:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${5:local}                                               # Target switch to run the cli on 
+    pn_cluster_node1: ${6:value}                                           # Specify the name of the first switch in the cluster  Required for 'cluster-create' 
+    pn_cluster_node2: ${7:value}                                           # Specify the name of the second switch in the cluster  Required for 'cluster-create' 
+    pn_validate: ${8:value}                                                # Validate the inter-switch links and state of switches in the cluster 

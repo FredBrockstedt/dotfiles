@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Blacklist kernel modules
+# prefix: kernel_blacklist_snippet
+# key: kernel_blacklist
+# group: ansible
+# --
+
+- name: ${0:Blacklist kernel modules}
+  kernel_blacklist:                                                        
+    name: ${1:Name of kernel module to black- or whitelist}                #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the module should be present in the blacklist or absent 
+    blacklist_file: ${3:value}                                             # If specified, use this blacklist file instead of C(/etc/modprobe d/blacklist-ansible conf) 

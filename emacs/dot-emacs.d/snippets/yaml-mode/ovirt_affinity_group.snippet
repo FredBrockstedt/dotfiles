@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Module to manage affinity groups in oVirt/RHV
+# prefix: ovirt_affinity_group_snippet
+# key: ovirt_affinity_group
+# group: ansible
+# --
+
+- name: ${0:Module to manage affinity groups in oVirt/RHV}
+  ovirt_affinity_group:                                                    
+    name: ${1:Name of the affinity group to manage}                        #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Should the affinity group be present or absent 
+    cluster: ${4:value}                                                    # Name of the cluster of the affinity group 
+    description: ${5:value}                                                # Description of the affinity group 
+    host_enforcing: ${6:value}                                             # If I(yes) VM cannot start on host if it does not satisfy the C(host_rule)  This parameter is support since oVirt/RHV 4 1
+    host_rule: ${7$$(yas-choose-value '("negative" "positive"))}           # choices: negative;positive  If I(positive) I(all) VMs in this group should run on the this host  If I(negative) I(no) VM
+    vm_enforcing: ${8:value}                                               # If I(yes) VM cannot start if it does not satisfy the C(vm_rule) 
+    vm_rule: ${9$$(yas-choose-value '("disabled" "negative" "positive"))}  # choices: disabled;negative;positive  If I(positive) I(all) VMs in this group should run on the host defined by C(host_ru
+    vms: ${10:value}                                                       # List of the VMs names, which should have assigned this affinity group 
+    hosts: ${11:value}                                                     # List of the hosts names, which should have assigned this affinity group  This parameter is support since oVirt/RHV 4 1 v
+    wait: ${12:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${13:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${14:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${15:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${16:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

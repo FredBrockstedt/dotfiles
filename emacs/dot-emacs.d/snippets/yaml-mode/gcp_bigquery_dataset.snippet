@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Dataset
+# prefix: gcp_bigquery_dataset_snippet
+# key: gcp_bigquery_dataset
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Dataset}
+  gcp_bigquery_dataset:                                                    
+    dataset_reference: ${1:A reference that identifies the dataset}        #
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    name: ${4:value}                                                       # Dataset name 
+    access: ${5:value}                                                     # An array of objects that define dataset access for one or more entities 
+    default_table_expiration_ms: ${6:value}                                # The default lifetime of all tables in the dataset, in milliseconds  The minimum value is 3600000 milliseconds (one hour)
+    default_partition_expiration_ms: ${7:value}                            # The default partition expiration for all partitioned tables in the dataset, in milliseconds  Once this property is set, 
+    description: ${8:value}                                                # A user-friendly description of the dataset 
+    friendly_name: ${9:value}                                              # A descriptive name for the dataset 
+    labels: ${10:value}                                                    # The labels associated with this dataset  You can use these to organize and group your datasets  
+    location: ${11:US}                                                     # The geographic location where the dataset should reside  See [official docs](U(https://cloud google com/bigquery/docs/da
+    project: ${12:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${13:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${14:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${15:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${16:value}                                                    # Array of scopes to be used 
+    env_type: ${17:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

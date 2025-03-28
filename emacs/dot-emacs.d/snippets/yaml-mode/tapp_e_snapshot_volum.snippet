@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage snapshot volumes.
+# prefix: netapp_e_snapshot_volume_snippet
+# key: tapp_e_snapshot_volum
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage snapshot volumes.}
+  netapp_e_snapshot_volume:                                                
+    api_username: ${1:The username to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_password: ${2:The password to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_url: ${3:The url to the SANtricity WebServices Proxy or embedded REST API}#
+    ssid: ${4:storage array ID}                                            #
+    snapshot_image_id: ${5:The identifier of the snapshot image used to create the new snapshot volume}# Note: You'll likely want to use the M(netapp_e_facts) module to find the ID of the image you
+    name: ${6:The name you wish to give the snapshot volume}               #
+    view_mode: ${7$$(yas-choose-value '("modeUnknown" "readWrite" "readOnly" "__UNDEFINED"))}# The snapshot volume access mode
+    storage_pool_name: ${8:Name of the storage pool on which to allocate the repository volume}#
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # Whether to create or remove the snapshot volume
+    validate_certs: ${10:True}                                             # Should https certificates be validated?
+    full_threshold: ${11:85}                                               # The repository utilization warning threshold percentage
+    repo_percentage: ${12:20}                                              # The size of the view in relation to the size of the base volume

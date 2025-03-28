@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage physical, virtual, bridged, routed or FC domain profiles (phys:DomP, vmm:DomP, l2ext:DomP, l3ext:DomP, fc:DomP)
+# prefix: aci_domain_snippet
+# key: ci_dom
+# group: ansible
+# --
+
+- name: ${0:Manage physical, virtual, bridged, routed or FC domain profiles (phys:DomP, vmm:DomP, l2ext:DomP, l3ext:DomP, fc:DomP)}
+  aci_domain:                                                              
+    host: ${1:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${2:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${3:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    domain: ${4:value}                                                     # Name of the physical, virtual, bridged routed or FC domain profile 
+    domain_type: ${5$$(yas-choose-value '("fc" "l2dom" "l3dom" "phys" "vmm"))}# choices: fc;l2dom;l3dom;phys;vmm  The type of domain profile  C(fc): The FC domain profile is a policy pertaining to 
+    dscp: ${6$$(yas-choose-value '("AF11" "AF12" "AF13" "AF21" "AF22" "AF23" "AF31" "AF32" "AF33" "AF41" "AF42" "AF43" "CS0" "CS1" "CS2" "CS3" "CS4" "CS5" "CS6" "CS7" "EF" "VA" "unspecified"))}# ch
+    encap_mode: ${7$$(yas-choose-value '("unknown" "vlan" "vxlan"))}       # choices: unknown;vlan;vxlan  The layer 2 encapsulation protocol to use with the virtual switch 
+    multicast_address: ${8:value}                                          # The multicast IP address to use for the virtual switch 
+    state: ${9$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    vm_provider: ${10$$(yas-choose-value '("cloudfoundry" "kubernetes" "microsoft" "openshift" "openstack" "redhat" "vmware"))}# choices: cloudfoundry;kubernetes;microsoft;openshift;openstack;redha
+    vswitch: ${11$$(yas-choose-value '("avs" "default" "dvs" "unknown"))}  # choices: avs;default;dvs;unknown  The virtual switch to use for vmm domains  The APIC defaults to C(default) when unset 
+    port: ${12:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${13:admin}                                                  # The username to use for authentication 
+    certificate_name: ${14:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${15$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${16:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${17:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${18:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${19:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

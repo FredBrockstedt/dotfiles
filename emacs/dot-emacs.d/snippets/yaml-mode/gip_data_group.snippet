@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage data groups on a BIG-IP
+# prefix: bigip_data_group_snippet
+# key: gip_data_group
+# group: ansible
+# --
+
+- name: ${0:Manage data groups on a BIG-IP}
+  bigip_data_group:                                                        
+    name: ${1:Specifies the name of the data group}                        #
+    description: ${2:value}                                                # The description of the data group 
+    type: ${3$$(yas-choose-value '("address" "addr" "ip" "string" "str" "integer" "int"))}# choices: address;addr;ip;string;str;integer;int  The type of records in this data group  This parameter i
+    internal: ${4:False}                                                   # The type of this data group  You should only consider setting this value in cases where you know exactly what you're doi
+    external_file_name: ${5:value}                                         # When creating a new data group, this specifies the file name that you want to give an external data group file on the BI
+    records: ${6:value}                                                    # Specifies the records that you want to add to a data group  If you have a large number of records, it is recommended tha
+    records_src: ${7:value}                                                # Path to a file with records in it  The file should be well-formed  This means that it includes records, one per line, th
+    separator: ${8::=}                                                     # When specifying C(records_content), this is the string of characters that will be used to break apart entries in the C(r
+    delete_data_group_file: ${9:False}                                     # When C(yes), will ensure that the remote data group file is deleted  This parameter is only relevant when C(state) is C(
+    partition: ${10:Common}                                                # Device partition to manage resources on 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(state) is C(present), ensures the data group exists  When C(state) is C(absent), ensures
+    provider: ${12:value}                                                  # A dict object containing connection details 

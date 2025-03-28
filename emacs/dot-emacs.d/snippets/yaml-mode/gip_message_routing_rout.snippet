@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages static routes for routing message protocol messages
+# prefix: bigip_message_routing_route_snippet
+# key: gip_message_routing_rout
+# group: ansible
+# --
+
+- name: ${0:Manages static routes for routing message protocol messages}
+  bigip_message_routing_route:                                             
+    name: ${1:Specifies the name of the static route}                      #
+    description: ${2:value}                                                # The user defined description of the static route 
+    type: ${3$$(yas-choose-value '("generic"))}                            # choices: generic  Parameter used to specify the type of the route to manage  Default setting is C(generic) with more opt
+    src_address: ${4:value}                                                # Specifies the source address of the route  Setting the attribute to an empty string will create a wildcard matching all 
+    dst_address: ${5:value}                                                # Specifies the destination address of the route  Setting the attribute to an empty string will create a wildcard matching
+    peer_selection_mode: ${6$$(yas-choose-value '("ratio" "sequential"))}  # choices: ratio;sequential  Specifies the method to use when selecting a peer from the provided list of C(peers) 
+    peers: ${7:value}                                                      # Specifies a list of ltm messagerouting-peer objects  The specified peer must be on the same partition as the route 
+    partition: ${8:Common}                                                 # Device partition to create route object on 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the route exists  When C(absent), ensures the route is removed 
+    provider: ${10:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Various redis commands, slave and flush
+# prefix: redis_snippet
+# key: red
+# group: ansible
+# --
+
+- name: ${0:Various redis commands, slave and flush}
+  redis:                                                                   
+    command: ${1$$(yas-choose-value '("config" "flush" "slave"))}          # The selected redis command C(config) (new in 1 6), ensures a configuration setting on an instance  C(flush) flushes all 
+    login_password: ${2:value}                                             # The password used to authenticate with (usually not used)
+    login_host: ${3:localhost}                                             # The host running the database
+    login_port: ${4:6379}                                                  # The port to connect to
+    master_host: ${5:value}                                                # The host of the master instance [slave command]
+    master_port: ${6:value}                                                # The port of the master instance [slave command]
+    slave_mode: ${7$$(yas-choose-value '("master" "slave"))}               # choices: master;slave  the mode of the redis instance [slave command]
+    db: ${8:value}                                                         # The database to flush (used in db mode) [flush command]
+    flush_mode: ${9$$(yas-choose-value '("all" "db"))}                     # choices: all;db  Type of flush (all the dbs in a redis instance or a specific one) [flush command]
+    name: ${10:value}                                                      # A redis config key 
+    value: ${11:value}                                                     # A redis config value 

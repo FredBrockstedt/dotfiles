@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Run gunicorn with various settings.
+# prefix: gunicorn_snippet
+# key: gunicor
+# group: ansible
+# --
+
+- name: ${0:Run gunicorn with various settings.}
+  gunicorn:                                                                
+    app: ${1:The app module}                                               # A name refers to a WSGI callable that should be found in the specified module 
+    venv: ${2:value}                                                       # Path to the virtualenv directory 
+    config: ${3:value}                                                     # Path to the gunicorn configuration file 
+    chdir: ${4:value}                                                      # Chdir to specified directory before apps loading 
+    pid: ${5:value}                                                        # A filename to use for the PID file  If not set and not found on the configuration file a tmp pid file will be created to
+    worker: ${6$$(yas-choose-value '("sync" "eventlet" "gevent" "tornado " "gthread" "gaiohttp"))}# choices: sync;eventlet;gevent;tornado ;gthread;gaiohttp  The type of workers to use  The default 
+    user: ${7:value}                                                       # Switch worker processes to run as this user 

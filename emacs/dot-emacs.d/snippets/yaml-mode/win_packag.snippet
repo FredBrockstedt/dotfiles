@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Installs/uninstalls an installable package
+# prefix: win_package_snippet
+# key: win_packag
+# group: ansible
+# --
+
+- name: ${0:Installs/uninstalls an installable package}
+  win_package:                                                             
+    arguments: ${1:value}                                                  # Any arguments the installer needs to either install or uninstall the package  If the package is an MSI do not supply the
+    chdir: ${2:value}                                                      # Set the specified path as the current working directory before installing or uninstalling a package 
+    creates_path: ${3:value}                                               # Will check the existence of the path specified and use the result to determine whether the package is already installed 
+    creates_service: ${4:value}                                            # Will check the existing of the service specified and use the result to determine whether the package is already installe
+    creates_version: ${5:value}                                            # Will check the file version property of the file at C(creates_path) and use the result to determine whether the package 
+    expected_return_code: ${6:"[0, 3010]"}                                 # One or more return codes from the package installation that indicates success  Before Ansible 2 4 this was just 0 but si
+    password: ${7:value}                                                   # The password for C(user_name), must be set when C(user_name) is 
+    path: ${8:value}                                                       # Location of the package to be installed or uninstalled  This package can either be on the local file system, network sha
+    product_id: ${9:value}                                                 # The product id of the installed packaged  This is used for checking whether the product is already installed and getting
+    state: ${10$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Whether to install or uninstall the package  The module uses C(product_id) and whether it exist
+    username: ${11:value}                                                  # Username of an account with access to the package if it is located on a file share  This is only needed if the WinRM tra
+    validate_certs: ${12:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    log_path: ${13:value}                                                  # Specifies the path to a log file that is persisted after an MSI package is installed or uninstalled  When omitted, a tem

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP SNMP community
+# prefix: na_ontap_snmp_snippet
+# key: ontap_snmp
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP SNMP community}
+  na_ontap_snmp:                                                           
+    access_control: ${1:Access control for the community}                  # The only supported value is 'ro' (read-only)
+    community_name: ${2:The name of the SNMP community to manage}          #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified SNMP community should exist or not 
+    https: ${7:False}                                                      # Enable and disable https
+    validate_certs: ${8:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${9:value}                                                  # Override the default port (80 or 443) with this port
+    ontapi: ${10:value}                                                    # The ontap api version to use
+    use_rest: ${11$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

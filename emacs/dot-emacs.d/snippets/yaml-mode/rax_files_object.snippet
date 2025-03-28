@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Upload, download, and delete objects in Rackspace Cloud Files
+# prefix: rax_files_objects_snippet
+# key: rax_files_object
+# group: ansible
+# --
+
+- name: ${0:Upload, download, and delete objects in Rackspace Cloud Files}
+  rax_files_objects:                                                       
+    container: ${1:The container to use for file object operations}        #
+    clear_meta: ${2:false}                                                 # Optionally clear existing metadata when applying metadata to existing objects  Selecting this option is only appropriate
+    dest: ${3:value}                                                       # The destination of a "get" operation; i e  a local directory, "/home/user/myfolder"  Used to specify the destination of 
+    expires: ${4:value}                                                    # Used to set an expiration on a file or folder uploaded to Cloud Files  Requires an integer, specifying expiration in sec
+    meta: ${5:value}                                                       # A hash of items to set as metadata values on an uploaded file or folder
+    method: ${6$$(yas-choose-value '("get" "put" "delete"))}               # choices: get;put;delete  The method of operation to be performed   For example, put to upload files to Cloud Files, get 
+    src: ${7:value}                                                        # Source from which to upload files   Used to specify a remote object as a source for an operation, i e  a file name, "fil
+    structure: ${8:true}                                                   # Used to specify whether to maintain nested directory structure when downloading objects from Cloud Files   Setting to fa
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource
+    type: ${10$$(yas-choose-value '("file" "meta"))}                       # choices: file;meta  Type of object to do work on Metadata object or a file object
+    api_key: ${11:value}                                                   # Rackspace API key, overrides I(credentials) 
+    credentials: ${12:value}                                               # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${13:value}                                                       # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    region: ${14:DFW}                                                      # Region to create an instance in 
+    username: ${15:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${16:value}                                            # Whether or not to require SSL validation of API endpoints 
+    auth_endpoint: ${{17:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    identity_type: ${18:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    tenant_id: ${19:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${20:value}                                               # The tenant name used for authentication 

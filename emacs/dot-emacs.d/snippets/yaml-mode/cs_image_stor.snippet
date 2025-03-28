@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages CloudStack Image Stores.
+# prefix: cs_image_store_snippet
+# key: cs_image_stor
+# group: ansible
+# --
+
+- name: ${0:Manages CloudStack Image Stores.}
+  cs_image_store:                                                          
+    name: ${1:The ID of the Image Store}                                   # Required when deleting a Image Store 
+    zone: ${2:The Zone name for the Image Store}                           #
+    url: ${3:value}                                                        # The URL for the Image Store  Required when I(state=present) 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Stage of the Image Store
+    provider: ${5:value}                                                   # The image store provider name  Required when creating a new Image Store
+    force_recreate: ${6:False}                                             # Set to C(yes) if you're changing an existing Image Store  This will force the recreation of the Image Store  Recreation 
+    api_key: ${7:value}                                                    # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${8:value}                                                 # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${9:value}                                                    # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${10$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${11:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${12:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

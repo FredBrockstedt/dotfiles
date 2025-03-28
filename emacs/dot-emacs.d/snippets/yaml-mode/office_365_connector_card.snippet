@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Use webhooks to create Connector Card messages within an Office 365 group
+# prefix: office_365_connector_card_snippet
+# key: office_365_connector_card
+# group: ansible
+# --
+
+- name: ${0:Use webhooks to create Connector Card messages within an Office 365 group}
+  office_365_connector_card:                                               
+    webhook: ${1:The webhook URL is given to you when you create a new Connector}#
+    summary: ${2:value}                                                    # A string used for summarizing card content  This will be shown as the message subject  This is required if the text para
+    color: ${3:value}                                                      # Accent color used for branding or indicating status in the card 
+    title: ${4:value}                                                      # A title for the Connector message  Shown at the top of the message 
+    text: ${5:value}                                                       # The main text of the card  This will be rendered below the sender information and optional title, and above any sections
+    actions: ${6:value}                                                    # This array of objects will power the action links found at the bottom of the card 
+    sections: ${7:value}                                                   # Contains a list of sections to display in the card  For more information see https://dev outlook com/Connectors/referenc

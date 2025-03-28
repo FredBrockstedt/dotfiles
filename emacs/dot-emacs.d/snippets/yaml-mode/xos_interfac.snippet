@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage Interfaces on Extreme SLX-OS network devices
+# prefix: slxos_interface_snippet
+# key: xos_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Interfaces on Extreme SLX-OS network devices}
+  slxos_interface:                                                         
+    name: ${1:Name of the Interface}                                       #
+    description: ${2:value}                                                # Description of Interface 
+    enabled: ${3:True}                                                     # Interface link status 
+    speed: ${4:value}                                                      # Interface link speed 
+    mtu: ${5:value}                                                        # Maximum size of transmit packet 
+    tx_rate: ${6:value}                                                    # Transmit rate in bits per second (bps) 
+    rx_rate: ${7:value}                                                    # Receiver rate in bits per second (bps) 
+    neighbors: ${8:value}                                                  # Check the operational state of given interface C(name) for LLDP neighbor  The following suboptions are available 
+    aggregate: ${9:value}                                                  # L i s t   o f   I n t e r f a c e s   d e f i n i t i o n s  
+    delay: ${10:10}                                                        # Time in seconds to wait before checking for the operational state on remote device  This wait is applicable for operatio
+    state: ${11$$(yas-choose-value '("present" "absent" "up" "down"))}     # choices: present;absent;up;down  State of the Interface configuration, C(up) means present and operationally up and C(do

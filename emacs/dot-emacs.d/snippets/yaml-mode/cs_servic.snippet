@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: create, terminate, start or stop a service in ecs
+# prefix: ecs_service_snippet
+# key: cs_servic
+# group: ansible
+# --
+
+- name: ${0:create, terminate, start or stop a service in ecs}
+  ecs_service:                                                             
+    state: ${1$$(yas-choose-value '("present" "absent" "deleting"))}       # The desired state of the service
+    name: ${2:The name of the service}                                     #
+    cluster: ${3:value}                                                    # The name of the cluster in which the service exists
+    task_definition: ${4:value}                                            # The task definition the service will run  This parameter is required when state=present
+    load_balancers: ${5:value}                                             # The list of ELBs defined for this service
+    desired_count: ${6:value}                                              # The count of how many instances of the service  This parameter is required when state=present
+    client_token: ${7:value}                                               # Unique, case-sensitive identifier you provide to ensure the idempotency of the request  Up to 32 ASCII characters are al
+    role: ${8:value}                                                       # The name or full Amazon Resource Name (ARN) of the IAM role that allows your Amazon ECS container agent to make calls to
+    delay: ${9:10}                                                         # The time to wait before checking that the service is available
+    repeat: ${10:10}                                                       # The number of times to check that the service is available
+    force_new_deployment: ${11:value}                                      # Force deployment of service even if there are no changes
+    deployment_configuration: ${12:value}                                  # Optional parameters that control the deployment_configuration; format is '{"maximum_percent":<integer>, "minimum_healthy
+    placement_constraints: ${13:value}                                     # The placement constraints for the tasks in the service
+    placement_strategy: ${14:value}                                        # The placement strategy objects to use for tasks in your service  You can specify a maximum of 5 strategy rules per servi
+    network_configuration: ${15:value}                                     # network configuration of the service  Only applicable for task definitions created with C(awsvpc) I(network_mode)  assig
+    launch_type: ${16$$(yas-choose-value '("EC2" "FARGATE"))}              # choices: EC2;FARGATE  The launch type on which to run your service
+    health_check_grace_period_seconds: ${17:value}                         # Seconds to wait before health checking the freshly added/updated services  This option requires botocore >= 1 8 20 
+    service_registries: ${18:value}                                        # describes service discovery registries this service will register with 
+    scheduling_strategy: ${19$$(yas-choose-value '("DAEMON" "REPLICA"))}   # choices: DAEMON;REPLICA  The scheduling strategy, defaults to "REPLICA" if not given to preserve previous behavior
+    debug_botocore_endpoint_logs: ${20:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${21:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${22:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${23:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${24:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${25:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${26:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${27:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

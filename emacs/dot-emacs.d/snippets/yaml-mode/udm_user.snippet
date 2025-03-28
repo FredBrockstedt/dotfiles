@@ -1,0 +1,58 @@
+# -*- mode: snippet -*-
+# name: Manage posix users on a univention corporate server
+# prefix: udm_user_snippet
+# key: udm_user
+# group: ansible
+# --
+
+- name: ${0:Manage posix users on a univention corporate server}
+  udm_user:                                                                
+    username: ${1:User name}                                               #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the user is present or not 
+    firstname: ${3:value}                                                  # First name  Required if C(state=present) 
+    lastname: ${4:value}                                                   # Last name  Required if C(state=present) 
+    password: ${5:value}                                                   # Password  Required if C(state=present) 
+    birthday: ${6:value}                                                   # Birthday
+    city: ${7:value}                                                       # City of users business address 
+    country: ${8:value}                                                    # Country of users business address 
+    department_number: ${9:value}                                          # Department number of users business address 
+    description: ${10:value}                                               # Description (not gecos)
+    display_name: ${11:value}                                              # Display name (not gecos)
+    email: ${12:[]}                                                        # A list of e-mail addresses 
+    employee_number: ${13:value}                                           # Employee number
+    employee_type: ${14:value}                                             # Employee type
+    gecos: ${15:value}                                                     # GECOS
+    groups: ${16:[]}                                                       # POSIX groups, the LDAP DNs of the groups will be found with the LDAP filter for each group as \$GROUP: C((&(objectClass=
+    home_share: ${17:value}                                                # Home NFS share  Must be a LDAP DN, e g  C(cn=home,cn=shares,ou=school,dc=example,dc=com) 
+    home_share_path: ${18:value}                                           # Path to home NFS share, inside the homeShare 
+    home_telephone_number: ${19:[]}                                        # List of private telephone numbers 
+    homedrive: ${20:value}                                                 # Windows home drive, e g  C("H:") 
+    mail_alternative_address: ${21:[]}                                     # List of alternative e-mail addresses 
+    mail_home_server: ${22:value}                                          # FQDN of mail server
+    mail_primary_address: ${23:value}                                      # Primary e-mail address
+    mobile_telephone_number: ${24:[]}                                      # Mobile phone number
+    organisation: ${25:value}                                              # Organisation
+    override_pw_history: ${26:false}                                       # Override password history
+    override_pw_length: ${27:false}                                        # Override password check
+    pager_telephonenumber: ${28:[]}                                        # List of pager telephone numbers 
+    phone: ${29:value}                                                     # List of telephone numbers 
+    postcode: ${30:value}                                                  # Postal code of users business address 
+    primary_group: ${31:"cn=Domain Users,cn=groups,\$LDAP_BASE_DN"}        # Primary group  This must be the group LDAP DN 
+    profilepath: ${32:value}                                               # Windows profile directory
+    pwd_change_next_login: ${33$$(yas-choose-value '("0" "1"))}            # choices: 0;1  Change password on next login 
+    room_number: ${34:value}                                               # Room number of users business address 
+    samba_privileges: ${35:value}                                          # Samba privilege, like allow printer administration, do domain join 
+    samba_user_workstations: ${36:value}                                   # Allow the authentication only on this Microsoft Windows host 
+    sambahome: ${37:value}                                                 # Windows home path, e g  C('\\\\\$FQDN\\\$USERNAME') 
+    scriptpath: ${38:value}                                                # Windows logon script 
+    secretary: ${39:[]}                                                    # A list of superiors as LDAP DNs 
+    serviceprovider: ${40:[]}                                              # Enable user for the following service providers 
+    shell: ${41:/bin/bash}                                                 # Login shell
+    street: ${42:value}                                                    # Street of users business address 
+    title: ${43:value}                                                     # Title, e g  C(Prof ) 
+    unixhome: ${44:/home/\$USERNAME}                                       # Unix home directory
+    userexpiry: ${45:"Today + 1 year"}                                     # Account expiry date, e g  C(1999-12-31) 
+    position: ${46:}                                                       # Define the whole position of users object inside the LDAP tree, e g  C(cn=employee,cn=users,ou=school,dc=example,dc=com)
+    update_password: ${47:always}                                          # C(always) will update passwords if they differ  C(on_create) will only set the password for newly created users 
+    ou: ${48:}                                                             # Organizational Unit inside the LDAP Base DN, e g  C(school) for LDAP OU C(ou=school,dc=example,dc=com) 
+    subpath: ${49:cn=users}                                                # LDAP subpath inside the organizational unit, e g  C(cn=teachers,cn=users) for LDAP container C(cn=teachers,cn=users,dc=e

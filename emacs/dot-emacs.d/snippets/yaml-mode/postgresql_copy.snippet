@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Copy data between a file/program and a PostgreSQL table
+# prefix: postgresql_copy_snippet
+# key: postgresql_copy
+# group: ansible
+# --
+
+- name: ${0:Copy data between a file/program and a PostgreSQL table}
+  postgresql_copy:                                                         
+    copy_to: ${1:value}                                                    # Copy the contents of a table to a file  Can also copy the results of a SELECT query  Mutually exclusive with I(copy_from
+    copy_from: ${2:value}                                                  # Copy data from a file to a table (appending the data to whatever is in the table already)  Mutually exclusive with I(cop
+    src: ${3:value}                                                        # Copy data from I(copy_from) to I(src=tablename)  Used with I(copy_to) only 
+    dst: ${4:value}                                                        # Copy data to I(dst=tablename) from I(copy_from=/path/to/data file)  Used with I(copy_from) only 
+    columns: ${5:value}                                                    # List of column names for the src/dst table to COPY FROM/TO 
+    program: ${6:False}                                                    # Mark I(src)/I(dst) as a program  Data will be copied to/from a program  See block Examples and PROGRAM arg description U
+    options: ${7:value}                                                    # Options of COPY command  See the full list of available options U(https://www postgresql org/docs/current/sql-copy html)
+    db: ${8:value}                                                         # Name of database to connect to 
+    session_role: ${9:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    login_user: ${10:postgres}                                             # The username used to authenticate with 
+    login_password: ${11:value}                                            # The password used to authenticate with 
+    login_host: ${12:value}                                                # Host running the database 
+    login_unix_socket: ${13:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${14:5432}                                                       # Database port to connect to 
+    ssl_mode: ${15$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${16:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

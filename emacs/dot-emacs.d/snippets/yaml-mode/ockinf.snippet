@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Insert/update/remove a text block surrounded by marker lines
+# prefix: blockinfile_snippet
+# key: ockinf
+# group: ansible
+# --
+
+- name: ${0:Insert/update/remove a text block surrounded by marker lines}
+  blockinfile:                                                             
+    path: ${1:The file to modify}                                          # Before Ansible 2 3 this option was only usable as I(dest), I(destfile) and I(name) 
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the block should be there or not 
+    marker: ${3:"# {mark\} ANSIBLE MANAGED BLOCK"}                         # The marker line template  C({mark\}) will be replaced with the values C(in marker_begin) (default="BEGIN") and C(marker_
+    block: ${4:}                                                           # The text to insert inside the marker lines  If it is missing or an empty string, the block will be removed as if C(state
+    insertafter: ${5$$(yas-choose-value '("EOF" "*regex*"))}               # choices: EOF;*regex*  If specified, the block will be inserted after the last match of specified regular expression  A s
+    insertbefore: ${6$$(yas-choose-value '("BOF" "*regex*"))}              # choices: BOF;*regex*  If specified, the block will be inserted before the last match of specified regular expression  A 
+    create: ${7:False}                                                     # Create a new file if it does not exist 
+    backup: ${8:False}                                                     # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    marker_begin: ${9:BEGIN}                                               # This will be inserted at C({mark\}) in the opening ansible block marker 
+    marker_end: ${10:END}                                                  # This will be inserted at C({mark\}) in the closing ansible block marker 
+    mode: ${11:value}                                                      # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${12:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${13:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${14:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${15:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${16:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${17:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${18:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${19:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on
+    validate: ${20:value}                                                  # The validation command to run before copying into place  The path to the file to validate is passed in via '%s' which mu

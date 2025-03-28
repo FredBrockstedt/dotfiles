@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Create or delete AWS Autoscaling Launch Configurations
+# prefix: ec2_lc_snippet
+# key: c2_lc
+# group: ansible
+# --
+
+- name: ${0:Create or delete AWS Autoscaling Launch Configurations}
+  ec2_lc:                                                                  
+    name: ${1:Unique name for configuration}                               #
+    instance_type: ${2:Instance type to use for the instance}              #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Register or deregister the instance
+    image_id: ${4:value}                                                   # The AMI unique identifier to be used for the group
+    key_name: ${5:value}                                                   # The SSH key name to be used for access to managed instances
+    security_groups: ${6:value}                                            # A list of security groups to apply to the instances  Since version 2 4 you can specify either security group names or ID
+    volumes: ${7:value}                                                    # A list of volume dicts, each containing device name and optionally ephemeral id or snapshot id  Size and type (and numbe
+    user_data: ${8:value}                                                  # Opaque blob of data which is made available to the ec2 instance  Mutually exclusive with I(user_data_path) 
+    user_data_path: ${9:value}                                             # Path to the file that contains userdata for the ec2 instances  Mutually exclusive with I(user_data) 
+    kernel_id: ${10:value}                                                 # Kernel id for the EC2 instance
+    spot_price: ${11:value}                                                # The spot price you are bidding  Only applies for an autoscaling group with spot instances 
+    instance_monitoring: ${12:false}                                       # Specifies whether instances are launched with detailed monitoring 
+    assign_public_ip: ${13:value}                                          # Used for Auto Scaling groups that launch instances into an Amazon Virtual Private Cloud  Specifies whether to assign a p
+    ramdisk_id: ${14:value}                                                # A RAM disk id for the instances 
+    instance_profile_name: ${15:value}                                     # The name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instances 
+    ebs_optimized: ${16:False}                                             # Specifies whether the instance is optimized for EBS I/O (true) or not (false) 
+    classic_link_vpc_id: ${17:value}                                       # Id of ClassicLink enabled VPC
+    classic_link_vpc_security_groups: ${18:value}                          # A list of security group IDs with which to associate the ClassicLink VPC instances 
+    vpc_id: ${19:value}                                                    # VPC ID, used when resolving security group names to IDs 
+    instance_id: ${20:value}                                               # The Id of a running instance to use as a basis for a launch configuration  Can be used in place of image_id and instance
+    placement_tenancy: ${21:default}                                       # Determines whether the instance runs on single-tenant hardware or not 
+    debug_botocore_endpoint_logs: ${22:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${23:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${24:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${25:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${26:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${27:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${28:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${29:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

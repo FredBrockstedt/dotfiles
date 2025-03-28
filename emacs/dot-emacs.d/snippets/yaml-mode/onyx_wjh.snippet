@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Configure what-just-happend module
+# prefix: onyx_wjh_snippet
+# key: onyx_wjh
+# group: ansible
+# --
+
+- name: ${0:Configure what-just-happend module}
+  onyx_wjh:                                                                
+    group: ${1$$(yas-choose-value '("all" "forwarding" "acl"))}            # choices: all;forwarding;acl  Name of wjh group 
+    enabled: ${2:value}                                                    # wjh group status
+    auto_export: ${3:value}                                                # wjh group auto export pcap file status
+    export_group: ${4$$(yas-choose-value '("all" "forwarding" "acl"))}     # choices: all;forwarding;acl  wjh group auto export group
+    clear_group: ${5$$(yas-choose-value '("all" "user" "auto-export"))}    # choices: all;user;auto-export  clear pcap file by group

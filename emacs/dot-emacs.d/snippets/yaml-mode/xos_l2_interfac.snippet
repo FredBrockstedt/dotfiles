@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage Layer-2 interface on Extreme Networks SLX-OS devices.
+# prefix: slxos_l2_interface_snippet
+# key: xos_l2_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Layer-2 interface on Extreme Networks SLX-OS devices.}
+  slxos_l2_interface:                                                      
+    name: ${1:Full name of the interface excluding any logical unit number, i}#e  Ethernet 0/1 
+    mode: ${2$$(yas-choose-value '("access" "trunk"))}                     # choices: access;trunk  Mode in which interface needs to be configured 
+    access_vlan: ${3:value}                                                # Configure given VLAN in access port  If C(mode=access), used as the access VLAN ID 
+    trunk_vlans: ${4:value}                                                # List of VLANs to be configured in trunk port  If C(mode=trunk), used as the VLAN range to ADD or REMOVE from the trunk 
+    native_vlan: ${5:value}                                                # Native VLAN to be configured in trunk port  If C(mode=trunk), used as the trunk native VLAN ID 
+    trunk_allowed_vlans: ${6:value}                                        # List of allowed VLANs in a given trunk port  If C(mode=trunk), these are the only VLANs that will be configured on the t
+    aggregate: ${7:value}                                                  # List of Layer-2 interface definitions 
+    state: ${8$$(yas-choose-value '("present" "absent" "unconfigured"))}   # choices: present;absent;unconfigured  Manage the state of the Layer-2 Interface configuration 

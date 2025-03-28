@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages VPN instance on HUAWEI CloudEngine switches.
+# prefix: ce_vrf_snippet
+# key: ce_vrf
+# group: ansible
+# --
+
+- name: ${0:Manages VPN instance on HUAWEI CloudEngine switches.}
+  ce_vrf:                                                                  
+    vrf: ${1:VPN instance, the length of vrf name is 1 - 31, i}            #e  "test", but can not be C(_public_) 
+    description: ${2:value}                                                # Description of the vrf, the string length is 1 - 242  
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

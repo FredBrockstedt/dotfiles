@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: management of OS templates in Proxmox VE cluster
+# prefix: proxmox_template_snippet
+# key: proxmox_templat
+# group: ansible
+# --
+
+- name: ${0:management of OS templates in Proxmox VE cluster}
+  proxmox_template:                                                        
+    api_host: ${1:the host of the Proxmox VE cluster}                      #
+    api_user: ${2:the user to authenticate with}                           #
+    node: ${3:Proxmox VE node, when you will operate with template}        #
+    api_password: ${4:value}                                               # the password to authenticate with you can use PROXMOX_PASSWORD environment variable
+    validate_certs: ${5:false}                                             # enable / disable https certificate verification
+    src: ${6:value}                                                        # path to uploaded file required only for C(state=present)
+    template: ${7:value}                                                   # the template name required only for states C(absent), C(info)
+    content_type: ${8$$(yas-choose-value '("vztmpl" "iso"))}               # choices: vztmpl;iso  content type required only for C(state=present)
+    storage: ${9:local}                                                    # target storage
+    timeout: ${10:30}                                                      # timeout for operations
+    force: ${11:false}                                                     # can be used only with C(state=present), exists template will be overwritten
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Indicate desired state of the template

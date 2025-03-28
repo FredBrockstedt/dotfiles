@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage eseries hosts
+# prefix: netapp_e_host_snippet
+# key: tapp_e_host
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage eseries hosts}
+  netapp_e_host:                                                           
+    name: ${1:If the host doesn't yet exist, the label/name to assign at creation time}# If the hosts already exists, this will be used to uniquely identify the host to make any required changes
+    api_username: ${2:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${3:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${4:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Set to absent to remove an existing host Set to present to modify or create a new host definiti
+    host_type: ${6:value}                                                  # This is the type of host to be mapped Required when C(state=present) Either one of the following names can be specified,
+    ports: ${7:value}                                                      # A list of host ports you wish to associate with the host  Host ports are uniquely identified by their WWN or IQN  Their 
+    force_port: ${8:value}                                                 # Allow ports that are already assigned to be re-assigned to your current host
+    group: ${9:value}                                                      # The unique identifier of the host-group you want the host to be a member of; this is used for clustering 
+    log_path: ${10:value}                                                  # A local path to a file to be used for debug logging
+    validate_certs: ${11:True}                                             # Should https certificates be validated?
+    ssid: ${12:1}                                                          # The ID of the array to manage  This value must be unique for each array 

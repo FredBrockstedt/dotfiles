@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Module for setup of ServerAutoScalePolicy Avi RESTful Object
+# prefix: avi_serverautoscalepolicy_snippet
+# key: vi_serverautoscalepolicy
+# group: ansible
+# --
+
+- name: ${0:Module for setup of ServerAutoScalePolicy Avi RESTful Object}
+  avi_serverautoscalepolicy:                                               
+    name: ${1:Name of the object}                                          #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    description: ${5:value}                                                # User defined description for the object 
+    intelligent_autoscale: ${6:value}                                      # Use avi intelligent autoscale algorithm where autoscale is performed by comparing load on the pool against estimated cap
+    intelligent_scalein_margin: ${7:value}                                 # Maximum extra capacity as percentage of load used by the intelligent scheme  Scalein is triggered when available capacit
+    intelligent_scaleout_margin: ${8:value}                                # Minimum extra capacity as percentage of load used by the intelligent scheme  Scaleout is triggered when available capaci
+    max_scalein_adjustment_step: ${9:value}                                # Maximum number of servers to scalein simultaneously  The actual number of servers to scalein is chosen such that target 
+    max_scaleout_adjustment_step: ${10:value}                              # Maximum number of servers to scaleout simultaneously  The actual number of servers to scaleout is chosen such that targe
+    max_size: ${11:value}                                                  # Maximum number of servers after scaleout  Allowed values are 0-400 
+    min_size: ${12:value}                                                  # No scale-in happens once number of operationally up servers reach min_servers  Allowed values are 0-400 
+    scalein_alertconfig_refs: ${13:value}                                  # Trigger scalein when alerts due to any of these alert configurations are raised  It is a reference to an object of type 
+    scalein_cooldown: ${14:value}                                          # Cooldown period during which no new scalein is triggered to allow previous scalein to successfully complete  Default val
+    scaleout_alertconfig_refs: ${15:value}                                 # Trigger scaleout when alerts due to any of these alert configurations are raised  It is a reference to an object of type
+    scaleout_cooldown: ${16:value}                                         # Cooldown period during which no new scaleout is triggered to allow previous scaleout to successfully complete  Default v
+    tenant_ref: ${17:value}                                                # It is a reference to an object of type tenant 
+    url: ${18:value}                                                       # Avi controller URL of the object 
+    use_predicted_load: ${19:value}                                        # Use predicted load rather than current load  Default value when not specified in API or module is interpreted by Avi Con
+    uuid: ${20:value}                                                      # Unique object identifier of the object 
+    controller: ${21:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${22:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${23:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${24:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${25:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{26:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${27:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${28:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${29:value}                         # It disables avi session information to be cached as a fact 

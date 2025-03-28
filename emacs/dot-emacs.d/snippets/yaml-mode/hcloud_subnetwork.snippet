@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage cloud subnetworks on the Hetzner Cloud.
+# prefix: hcloud_subnetwork_snippet
+# key: hcloud_subnetwork
+# group: ansible
+# --
+
+- name: ${0:Manage cloud subnetworks on the Hetzner Cloud.}
+  hcloud_subnetwork:                                                       
+    network: ${1:The ID or Name  of the Hetzner Cloud Networks}            #
+    ip_range: ${2:IP range of the subnetwork}                              #
+    type: ${3:Type of subnetwork}                                          #
+    network_zone: ${4:Name of network zone}                                #
+    api_token: ${5:This is the API Token for the Hetzner Cloud}            #
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the subnetwork 
+    endpoint: ${{7:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

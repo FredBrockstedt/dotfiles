@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage hostname
+# prefix: hostname_snippet
+# key: hostnam
+# group: ansible
+# --
+
+- name: ${0:Manage hostname}
+  hostname:                                                                
+    name: ${1:Name of the host}                                            #
+    use: ${2$$(yas-choose-value '("generic" "debian" "sles" "redhat" "alpine" "systemd" "openrc" "openbsd" "solaris" "freebsd"))}# choices: generic;debian;sles;redhat;alpine;systemd;openrc;openbsd;

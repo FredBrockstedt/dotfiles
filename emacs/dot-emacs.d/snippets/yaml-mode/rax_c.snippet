@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage SSL termination for a Rackspace Cloud Load Balancer.
+# prefix: rax_clb_ssl_snippet
+# key: rax_c
+# group: ansible
+# --
+
+- name: ${0:Manage SSL termination for a Rackspace Cloud Load Balancer.}
+  rax_clb_ssl:                                                             
+    loadbalancer: ${1:Name or ID of the load balancer on which to manage SSL termination}#
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If set to "present", SSL termination will be added to this load balancer  If "absent", SSL term
+    enabled: ${3:True}                                                     # If set to "false", temporarily disable SSL termination without discarding existing credentials 
+    private_key: ${4:value}                                                # The private SSL key as a string in PEM format 
+    certificate: ${5:value}                                                # The public SSL certificates as a string in PEM format 
+    intermediate_certificate: ${6:value}                                   # One or more intermediate certificate authorities as a string in PEM format, concatenated into a single string 
+    secure_port: ${7:443}                                                  # The port to listen for secure traffic 
+    secure_traffic_only: ${8:False}                                        # If "true", the load balancer will *only* accept secure traffic 
+    https_redirect: ${9:value}                                             # If "true", the load balancer will redirect HTTP traffic to HTTPS  Requires "secure_traffic_only" to be true  Incurs an i
+    wait: ${10:False}                                                      # Wait for the balancer to be in state "running" before turning 
+    wait_timeout: ${11:300}                                                # How long before "wait" gives up, in seconds 
+    api_key: ${12:value}                                                   # Rackspace API key, overrides I(credentials) 
+    credentials: ${13:value}                                               # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${14:value}                                                       # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    region: ${15:DFW}                                                      # Region to create an instance in 
+    username: ${16:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${17:value}                                            # Whether or not to require SSL validation of API endpoints 
+    auth_endpoint: ${{18:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    identity_type: ${19:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    tenant_id: ${20:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${21:value}                                               # The tenant name used for authentication 

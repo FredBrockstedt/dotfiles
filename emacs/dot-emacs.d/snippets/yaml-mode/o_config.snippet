@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Cisco NSO configuration and service synchronization.
+# prefix: nso_config_snippet
+# key: o_config
+# group: ansible
+# --
+
+- name: ${0:Manage Cisco NSO configuration and service synchronization.}
+  nso_config:                                                              
+    data: ${1:N S O   d a t a   i n   f o r m a t   a s   $$(yas-choose-value '("   d i s p l a y   j s o n   c o n v e r t e d   t o   Y A M L }#   L i s t   e n t r i e s   c a n   b e   a n n o 
+    url: ${2:N S O   J S O N - R P C   U R L ,   h t t p : / / l o c a l h o s t : 8 0 8 0 / j s o n r p c}#
+    username: ${3:N S O   u s e r n a m e}                                 #
+    password: ${4:N S O   p a s s w o r d}                                 #
+    timeout: ${5:300}                                                      # J S O N - R P C   r e q u e s t   t i m e o u t   i n   s e c o n d s
+    validate_certs: ${6:False}                                             # W h e n   s e t   t o   t r u e ,   v a l i d a t e s   t h e   S S L   c e r t i f i c a t e   o f   N S O   w h e n   

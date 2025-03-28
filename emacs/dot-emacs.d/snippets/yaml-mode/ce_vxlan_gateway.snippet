@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages gateway for the VXLAN network on HUAWEI CloudEngine devices.
+# prefix: ce_vxlan_gateway_snippet
+# key: ce_vxlan_gateway
+# group: ansible
+# --
+
+- name: ${0:Manages gateway for the VXLAN network on HUAWEI CloudEngine devices.}
+  ce_vxlan_gateway:                                                        
+    dfs_id: ${1:value}                                                     # Specifies the ID of a DFS group  The value must be 1 
+    dfs_source_ip: ${2:value}                                              # Specifies the IPv4 address bound to a DFS group  The value is in dotted decimal notation 
+    dfs_source_vpn: ${3:value}                                             # Specifies the name of a VPN instance bound to a DFS group  The value is a string of 1 to 31 case-sensitive characters wi
+    dfs_udp_port: ${4:value}                                               # Specifies the UDP port number of the DFS group  The value is an integer that ranges from 1025 to 65535 
+    dfs_all_active: ${5$$(yas-choose-value '("enable" "disable"))}         # choices: enable;disable  Creates all-active gateways 
+    dfs_peer_ip: ${6:value}                                                # Configure the IP address of an all-active gateway peer  The value is in dotted decimal notation 
+    dfs_peer_vpn: ${7:value}                                               # Specifies the name of the VPN instance that is associated with all-active gateway peer  The value is a string of 1 to 31
+    vpn_instance: ${8:value}                                               # Specifies the name of a VPN instance  The value is a string of 1 to 31 case-sensitive characters, spaces not supported  
+    vpn_vni: ${9:value}                                                    # Specifies a VNI ID  Binds a VXLAN network identifier (VNI) to a virtual private network (VPN) instance  The value is an 
+    vbdif_name: ${10:value}                                                # Full name of VBDIF interface, i e  Vbdif100 
+    vbdif_bind_vpn: ${11:value}                                            # Specifies the name of the VPN instance that is associated with the interface  The value is a string of 1 to 31 case-sens
+    vbdif_mac: ${12:value}                                                 # Specifies a MAC address for a VBDIF interface  The value is in the format of H-H-H  Each H is a 4-digit hexadecimal numb
+    arp_distribute_gateway: ${13$$(yas-choose-value '("enable" "disable"))}# choices: enable;disable  Enable the distributed gateway function on VBDIF interface 
+    arp_direct_route: ${14$$(yas-choose-value '("enable" "disable"))}      # choices: enable;disable  Enable VLINK direct route on VBDIF interface 
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 

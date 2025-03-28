@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Configure and manage Link Layer Discovery Protocol(LLDP) attributes on NX-OS platforms.
+# prefix: nxos_lldp_global_snippet
+# key: xos_lldp_glo
+# group: ansible
+# --
+
+- name: ${0:Configure and manage Link Layer Discovery Protocol(LLDP) attributes on NX-OS platforms.}
+  nxos_lldp_global:                                                        
+    config: ${1:value}                                                     # A list of link layer discovery configurations
+    state: ${2$$(yas-choose-value '("merged" "replaced" "deleted"))}       # choices: merged;replaced;deleted  The state of the configuration after module completion

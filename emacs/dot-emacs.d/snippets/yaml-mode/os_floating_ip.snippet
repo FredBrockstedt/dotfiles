@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Add/Remove floating IP from an instance
+# prefix: os_floating_ip_snippet
+# key: os_floating_ip
+# group: ansible
+# --
+
+- name: ${0:Add/Remove floating IP from an instance}
+  os_floating_ip:                                                          
+    server: ${1:The name or ID of the instance to which the IP address should be assigned}#
+    network: ${2:value}                                                    # The name or ID of a neutron external network or a nova pool name 
+    floating_ip_address: ${3:value}                                        # A floating IP address to attach or to detach  Required only if I(state) is absent  When I(state) is present can be used 
+    reuse: ${4:false}                                                      # When I(state) is present, and I(floating_ip_address) is not present, this parameter can be used to specify whether we sh
+    fixed_address: ${5:value}                                              # To which fixed IP of server the floating IP address should be attached to 
+    nat_destination: ${6:value}                                            # The name or id of a neutron private network that the fixed IP to attach floating IP is on
+    wait: ${7:false}                                                       # When attaching a floating IP address, specify whether to wait for it to appear as attached  Must be set to C(yes) for th
+    timeout: ${8:60}                                                       # Time to wait for an IP address to appear as attached  See wait 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the resource be present or absent 
+    purge: ${10:false}                                                     # When I(state) is absent, indicates whether or not to delete the floating IP completely, or only detach it from the serve
+    availability_zone: ${11:value}                                         # Ignored  Present for backwards compatibility
+    cloud: ${12:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${13:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${14:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${15:value}                                               # Name of the region 
+    api_timeout: ${16:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${17:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${18:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${19:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${20:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${21$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

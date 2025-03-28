@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages network access control lists (ACL) on Apache CloudStack based clouds.
+# prefix: cs_network_acl_snippet
+# key: cs_network_ac
+# group: ansible
+# --
+
+- name: ${0:Manages network access control lists (ACL) on Apache CloudStack based clouds.}
+  cs_network_acl:                                                          
+    name: ${1:Name of the network ACL}                                     #
+    vpc: ${2:VPC the network ACL is related to}                            #
+    description: ${3:value}                                                # Description of the network ACL  If not set, identical to I(name) 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the network ACL 
+    domain: ${5:value}                                                     # Domain the network ACL rule is related to 
+    account: ${6:value}                                                    # Account the network ACL rule is related to 
+    project: ${7:value}                                                    # Name of the project the network ACL is related to 
+    zone: ${8:value}                                                       # Name of the zone the VPC is related to  If not set, default zone is used 
+    poll_async: ${9:True}                                                  # Poll async jobs until job has finished 
+    api_key: ${10:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${11:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${12:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${13$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${14:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${15:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Create, update or delete devices within Netbox
+# prefix: netbox_device_snippet
+# key: tbox_devic
+# group: ansible
+# --
+
+- name: ${0:Create, update or delete devices within Netbox}
+  netbox_device:                                                           
+    netbox_url: ${1:URL of the Netbox instance resolvable by Ansible control host}#
+    netbox_token: ${2:The token created within Netbox to authorize API access}#
+    data: ${3:Defines the device configuration}                            #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Use C(present) or C(absent) for adding or removing 
+    validate_certs: ${5:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig

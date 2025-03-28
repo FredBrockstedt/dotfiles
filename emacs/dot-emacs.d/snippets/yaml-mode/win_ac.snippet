@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Set file/directory/registry permissions for a system user or group
+# prefix: win_acl_snippet
+# key: win_ac
+# group: ansible
+# --
+
+- name: ${0:Set file/directory/registry permissions for a system user or group}
+  win_acl:                                                                 
+    path: ${1:The path to the file or directory}                           #
+    user: ${2:User or Group to add specified rights to act on src file/folder or registry key}#
+    type: ${3$$(yas-choose-value '("allow" "deny"))}                       # Specify whether to allow or deny the rights specified 
+    rights: ${4:The rights/permissions that are to be allowed/denied for the specified user or group for the item at C(path)}# If C(path) is a file or directory, rights can be any right under MSDN 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Specify whether to add C(present) or remove C(absent) the specified access rule 
+    inherit: ${6$$(yas-choose-value '("ContainerInherit" "ObjectInherit"))}# choices: ContainerInherit;ObjectInherit  Inherit flags on the ACL rules  Can be specified as a comma separated list, e g
+    propagation: ${7$$(yas-choose-value '("InheritOnly" "None" "NoPropagateInherit"))}# choices: InheritOnly;None;NoPropagateInherit  Propagation flag on the ACL rules  For more information on the 

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage Redshift Cross Region Snapshots
+# prefix: redshift_cross_region_snapshots_snippet
+# key: redshift_cross_region_snapshot
+# group: ansible
+# --
+
+- name: ${0:Manage Redshift Cross Region Snapshots}
+  redshift_cross_region_snapshots:                                         
+    cluster_name: ${1:The name of the cluster to configure cross-region snapshots for}#
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Create or remove the cross-region snapshot configuration 
+    region: ${3:The clusters region}                                       #
+    destination_region: ${4:The region to copy snapshots to}               #
+    snapshot_retention_period: ${5:Keep cross-region snapshots for N number of days}#
+    snapshot_copy_grant: ${6:value}                                        # A grant for Amazon Redshift to use a master key in the destination region  See http://boto3 readthedocs io/en/latest/ref
+    debug_botocore_endpoint_logs: ${7:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${8:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${9:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${10:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${11:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${12:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${13:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 

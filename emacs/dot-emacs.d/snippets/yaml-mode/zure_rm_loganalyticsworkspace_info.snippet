@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Get facts of Azure Log Analytics workspaces
+# prefix: azure_rm_loganalyticsworkspace_info_snippet
+# key: zure_rm_loganalyticsworkspace_info
+# group: ansible
+# --
+
+- name: ${0:Get facts of Azure Log Analytics workspaces}
+  azure_rm_loganalyticsworkspace_info:                                     
+    resource_group: ${1:Name of resource group}                            #
+    name: ${2:value}                                                       # Name of the workspace 
+    tags: ${3:value}                                                       # Limit results by providing a list of tags  Format tags as 'key' or 'key:value' 
+    show_intelligence_packs: ${4:value}                                    # Show the intelligence packs for a workspace  Note this will cost one more network overhead for each workspace, expected 
+    show_management_groups: ${5:value}                                     # Show the management groups for a workspace  Note this will cost one more network overhead for each workspace, expected s
+    show_shared_keys: ${6:value}                                           # Show the shared keys for a workspace  Note this will cost one more network overhead for each workspace, expected slow re
+    show_usages: ${7:value}                                                # Show the list of usages for a workspace  Note this will cost one more network overhead for each workspace, expected slow
+    ad_user: ${8:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${9:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${10:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${11:value}                                           # Your Azure subscription Id 
+    client_id: ${12:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${13:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${14:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${15:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${16:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${17$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${18$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${19:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

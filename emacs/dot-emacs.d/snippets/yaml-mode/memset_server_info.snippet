@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Retrieve server information.
+# prefix: memset_server_info_snippet
+# key: memset_server_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve server information.}
+  memset_server_info:                                                      
+    api_key: ${1:The API key obtained from the Memset control panel}       #
+    name: ${2:The server product name (i}                                  #e  C(testyaa1)) 

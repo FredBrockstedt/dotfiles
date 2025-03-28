@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: Manage scheduled tasks
+# prefix: win_scheduled_task_snippet
+# key: win_scheduled_task
+# group: ansible
+# --
+
+- name: ${0:Manage scheduled tasks}
+  win_scheduled_task:                                                      
+    name: ${1:The name of the scheduled task without the path}             #
+    path: ${2:\\}                                                          # Task folder in which this task will be stored  Will create the folder when C(state=present) and the folder does not alre
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(state=present) will ensure the task exists  When C(state=absent) will ensure the task do
+    actions: ${4:value}                                                    # A list of action to configure for the task  See suboptions for details on how to construct each list entry  When creatin
+    triggers: ${5:value}                                                   # A list of triggers to configure for the task  See suboptions for details on how to construct each list entry  The orderi
+    display_name: ${6:value}                                               # The name of the user/group that is displayed in the Task Scheduler UI 
+    group: ${7:value}                                                      # The group that will run the task  C(group) and C(username) are exclusive to each other and cannot be set at the same tim
+    logon_type: ${8$$(yas-choose-value '("none" "password" "s4u" "interactive_token" "group" "service_account" "token_or_password"))}# choices: none;password;s4u;interactive_token;group;service_acc
+    run_level: ${9$$(yas-choose-value '("limited" "highest"))}             # choices: limited;highest  The level of user rights used to run the task  If not specified the task will be created with 
+    username: ${10:value}                                                  # The user to run the scheduled task as  Will default to the current user under an interactive token if not specified duri
+    password: ${11:value}                                                  # The password for the user account to run the scheduled task as  This is required when running a task without the user be
+    update_password: ${12:True}                                            # Whether to update the password even when not other changes have occurred  When C(yes) will always result in a change whe
+    author: ${13:value}                                                    # The author of the task 
+    date: ${14:value}                                                      # The date when the task was registered 
+    description: ${15:value}                                               # The description of the task 
+    source: ${16:value}                                                    # The source of the task 
+    version: ${17:value}                                                   # The version number of the task 
+    allow_demand_start: ${18:value}                                        # Whether the task can be started by using either the Run command or the Context menu 
+    allow_hard_terminate: ${19:value}                                      # Whether the task can be terminated by using TerminateProcess 
+    compatibility: ${20$$(yas-choose-value '("0" "1" "2"))}                # choices: 0;1;2  The integer value with indicates which version of Task Scheduler a task is compatible with  C(0) means t
+    delete_expired_task_after: ${21:value}                                 # The amount of time that the Task Scheduler will wait before deleting the task after it expires  A task expires after the
+    disallow_start_if_on_batteries: ${22:value}                            # Whether the task will not be started if the computer is running on battery power 
+    enabled: ${23:value}                                                   # Whether the task is enabled, the task can only run when C(yes) 
+    execution_time_limit: ${24:value}                                      # The amount of time allowed to complete the task  When not set, the time limit is infinite  This is in the ISO 8601 Durat
+    hidden: ${25:value}                                                    # Whether the task will be hidden in the UI 
+    multiple_instances: ${26$$(yas-choose-value '("0" "1" "2" "3"))}       # choices: 0;1;2;3  An integer that indicates the behaviour when starting a task that is already running  C(0) will start 
+    priority: ${27:value}                                                  # The priority level (0-10) of the task  When creating a new task the default is C(7)  See U(https://msdn microsoft com/en
+    restart_count: ${28:value}                                             # The number of times that the Task Scheduler will attempt to restart the task 
+    restart_interval: ${29:value}                                          # How long the Task Scheduler will attempt to restart the task  If this is set then C(restart_count) must also be set  The
+    run_only_if_idle: ${30:value}                                          # Whether the task will run the task only if the computer is in an idle state 
+    run_only_if_network_available: ${31:value}                             # Whether the task will run only when a network is available 
+    start_when_available: ${32:value}                                      # Whether the task can start at any time after its scheduled time has passed 
+    stop_if_going_on_batteries: ${33:value}                                # Whether the task will be stopped if the computer begins to run on battery power 
+    wake_to_run: ${34:value}                                               # Whether the task will wake the computer when it is time to run the task 

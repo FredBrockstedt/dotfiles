@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages server groups on the cloudscale.ch IaaS service
+# prefix: cloudscale_server_group_snippet
+# key: cloudscale_server_group
+# group: ansible
+# --
+
+- name: ${0:Manages server groups on the cloudscale.ch IaaS service}
+  cloudscale_server_group:                                                 
+    name: ${1:value}                                                       # Name of the server group  Either I(name) or I(uuid) is required  These options are mutually exclusive 
+    uuid: ${2:value}                                                       # UUID of the server group  Either I(name) or I(uuid) is required  These options are mutually exclusive 
+    type: ${3:anti-affinity}                                               # Type of the server group 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the server group 
+    tags: ${5:value}                                                       # Tags assosiated with the server groups  Set this to C({\}) to clear any tags 
+    api_token: ${6:value}                                                  # cloudscale ch API token  This can also be passed in the C(CLOUDSCALE_API_TOKEN) environment variable 
+    api_timeout: ${7:30}                                                   # Timeout in seconds for calls to the cloudscale ch API 

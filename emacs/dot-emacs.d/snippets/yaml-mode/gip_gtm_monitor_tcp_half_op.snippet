@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages F5 BIG-IP GTM tcp half-open monitors
+# prefix: bigip_gtm_monitor_tcp_half_open_snippet
+# key: gip_gtm_monitor_tcp_half_op
+# group: ansible
+# --
+
+- name: ${0:Manages F5 BIG-IP GTM tcp half-open monitors}
+  bigip_gtm_monitor_tcp_half_open:                                         
+    name: ${1:Monitor name}                                                #
+    parent: ${2:/Common/tcp_half_open}                                     # The parent template of this monitor template  Once this value has been set, it cannot be changed  By default, this value
+    ip: ${3:value}                                                         # IP address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the defau
+    port: ${4:value}                                                       # Port address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the def
+    interval: ${5:value}                                                   # Specifies, in seconds, the frequency at which the system issues the monitor check when either the resource is down or th
+    timeout: ${6:value}                                                    # Specifies the number of seconds the target has in which to respond to the monitor request  If the target responds within
+    probe_interval: ${7:value}                                             # Specifies the number of seconds the big3d process waits before sending out a subsequent probe attempt when a probe fails
+    probe_timeout: ${8:value}                                              # Specifies the number of seconds after which the system times out the probe request to the system  When creating a new mo
+    probe_attempts: ${9:value}                                             # Specifies the number of times the system attempts to probe the host server, after which the system considers the host se
+    ignore_down_response: ${10:value}                                      # Specifies that the monitor allows more than one probe attempt per interval  When C(yes), specifies that the monitor igno
+    transparent: ${11:value}                                               # Specifies whether the monitor operates in transparent mode  A monitor in transparent mode directs traffic through the as
+    partition: ${12:Common}                                                # Device partition to manage resources on 
+    state: ${13$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the monitor exists  When C(absent), ensures the monitor is remove
+    provider: ${14:value}                                                  # A dict object containing connection details 

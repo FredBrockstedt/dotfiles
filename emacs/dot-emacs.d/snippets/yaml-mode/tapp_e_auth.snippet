@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series set or update the password for a storage array.
+# prefix: netapp_e_auth_snippet
+# key: tapp_e_auth
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series set or update the password for a storage array.}
+  netapp_e_auth:                                                           
+    new_password: ${1:The password you would like to set}                  # Cannot be more than 30 characters 
+    validate_certs: ${2:True}                                              # Should https certificates be validated?
+    name: ${3:value}                                                       # The name of the storage array  Note that if more than one storage array with this name is detected, the task will fail a
+    ssid: ${4:value}                                                       # the identifier of the storage array in the Web Services Proxy 
+    set_admin: ${5:False}                                                  # Boolean value on whether to update the admin password  If set to false then the RO account is updated 
+    current_password: ${6:value}                                           # The current admin password  This is not required if the password hasn't been set before 
+    api_url: ${7:value}                                                    # The full API url  Example: http://ENDPOINT:8080/devmgr/v2 This can optionally be set via an environment variable, API_UR
+    api_username: ${8:value}                                               # The username used to authenticate against the API This can optionally be set via an environment variable, API_USERNAME
+    api_password: ${9:value}                                               # The password used to authenticate against the API This can optionally be set via an environment variable, API_PASSWORD

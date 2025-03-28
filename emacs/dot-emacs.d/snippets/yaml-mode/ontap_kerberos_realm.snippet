@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP vserver nfs kerberos realm
+# prefix: na_ontap_kerberos_realm_snippet
+# key: ontap_kerberos_realm
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP vserver nfs kerberos realm}
+  na_ontap_kerberos_realm:                                                 
+    vserver: ${1:vserver/svm with kerberos realm configured}               #
+    realm: ${2:Kerberos realm name}                                        #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the Kerberos realm is present or absent 
+    kdc_vendor: ${7$$(yas-choose-value '("Other" "Microsoft"))}            # choices: Other;Microsoft  The vendor of the Key Distribution Centre (KDC) server Required if I(state=present)
+    kdc_ip: ${8:value}                                                     # IP address of the Key Distribution Centre (KDC) server Required if I(state=present)
+    kdc_port: ${9:value}                                                   # TCP port on the KDC to be used for Kerberos communication  The default for this parameter is '88' 
+    clock_skew: ${10:value}                                                # The clock skew in minutes is the tolerance for accepting tickets with time stamps that do not exactly match the host's s
+    comment: ${11:value}                                                   # Optional comment
+    admin_server_ip: ${12:value}                                           # IP address of the host where the Kerberos administration daemon is running  This is usually the master KDC  If this para
+    admin_server_port: ${13:value}                                         # The TCP port on the Kerberos administration server where the Kerberos administration service is running  The default for
+    pw_server_ip: ${14:value}                                              # IP address of the host where the Kerberos password-changing server is running  Typically, this is the same as the host i
+    pw_server_port: ${15:value}                                            # The TCP port on the Kerberos password-changing server where the Kerberos password-changing service is running  The defau
+    https: ${16:False}                                                     # Enable and disable https
+    validate_certs: ${17:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${18:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${19:value}                                                    # The ontap api version to use
+    use_rest: ${20$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

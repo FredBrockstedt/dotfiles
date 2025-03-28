@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage networks in the Meraki cloud
+# prefix: meraki_network_snippet
+# key: meraki_network
+# group: ansible
+# --
+
+- name: ${0:Manage networks in the Meraki cloud}
+  meraki_network:                                                          
+    auth_key: ${1:Authentication key provided by the dashboard}            # Required if environmental variable C(MERAKI_KEY) is not set 
+    state: ${2$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Create or modify an organization 
+    net_name: ${3:value}                                                   # Name of a network 
+    net_id: ${4:value}                                                     # ID number of a network 
+    type: ${5$$(yas-choose-value '("appliance" "switch" "wireless"))}      # choices: appliance;switch;wireless  Type of network device network manages  Required when creating a network  As of Ansi
+    tags: ${6:value}                                                       # List of tags to assign to network  C(tags) name conflicts with the tags parameter in Ansible  Indentation problems may c
+    timezone: ${7:value}                                                   # Timezone associated to network  See U(https://en wikipedia org/wiki/List_of_tz_database_time_zones) for a list of valid 
+    enable_vlans: ${8:value}                                               # Boolean value specifying whether VLANs should be supported on a network  Requires C(net_name) or C(net_id) to be specifi
+    disable_my_meraki: ${9:value}                                          # -   D i s a b l e s   t h e   l o c a l   d e v i c e   s t a t u s   p a g e s   ( U [ m y   m e r a k i   c o m ] ( m 
+    enable_my_meraki: ${10:value}                                          # -   E n a b l e s   t h e   l o c a l   d e v i c e   s t a t u s   p a g e s   ( U [ m y   m e r a k i   c o m ] ( m y 
+    enable_remote_status_page: ${11:value}                                 # Enables access to the device status page (U(http://device LAN IP))  Can only be set if C(enable_my_meraki:) is set to C(
+    host: ${{12:api}                                                       #meraki com} # not required  Hostname for Meraki dashboard  Can be used to access regional Meraki environments, such as Ch
+    use_proxy: ${13:value}                                                 # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_https: ${14:True}                                                  # If C(no), it will use HTTP  Otherwise it will use HTTPS  Only useful for internal Meraki developers 
+    output_format: ${15$$(yas-choose-value '("snakecase" "camelcase"))}    # choices: snakecase;camelcase  Instructs module whether response keys should be snake case (ex  C(net_id)) or camel case 
+    output_level: ${16$$(yas-choose-value '("debug" "normal"))}            # choices: debug;normal  Set amount of debug output during module execution 
+    timeout: ${17:30}                                                      # Time to timeout for HTTP requests 
+    validate_certs: ${18:True}                                             # Whether to validate HTTP certificates 
+    org_name: ${19:value}                                                  # Name of organization 
+    org_id: ${20:value}                                                    # ID of organization 
+    rate_limit_retry_time: ${21:165}                                       # Number of seconds to retry if rate limiter is triggered 
+    internal_error_retry_time: ${22:60}                                    # Number of seconds to retry if server returns an internal server error 

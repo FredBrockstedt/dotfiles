@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages service policies on a BIG-IP.
+# prefix: bigip_service_policy_snippet
+# key: gip_service_policy
+# group: ansible
+# --
+
+- name: ${0:Manages service policies on a BIG-IP.}
+  bigip_service_policy:                                                    
+    name: ${1:Name of the service policy}                                  #
+    description: ${2:value}                                                # Description of the service policy 
+    timer_policy: ${3:value}                                               # The timer policy to attach to the service policy 
+    port_misuse_policy: ${4:value}                                         # The port misuse policy to attach to the service policy  Requires that C(afm) be provisioned to use  If C(afm) is not pro
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the resource should exist or not 
+    partition: ${6:Common}                                                 # Device partition to manage resources on 
+    provider: ${7:value}                                                   # A dict object containing connection details 

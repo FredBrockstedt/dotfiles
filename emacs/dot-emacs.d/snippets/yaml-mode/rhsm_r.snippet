@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Set or Unset RHSM Release version
+# prefix: rhsm_release_snippet
+# key: rhsm_r
+# group: ansible
+# --
+
+- name: ${0:Set or Unset RHSM Release version}
+  rhsm_release:                                                            
+    release: ${1:RHSM release version to use (use null to unset)}          #

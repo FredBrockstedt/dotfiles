@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage Nuage VSP environments
+# prefix: nuage_vspk_snippet
+# key: uage_vspk
+# group: ansible
+# --
+
+- name: ${0:Manage Nuage VSP environments}
+  nuage_vspk:                                                              
+    auth: ${1:Dict with the authentication information required to connect to a Nuage VSP environment}# Requires a I(api_username) parameter (example csproot)  Requires either a I(api_password) par
+    type: ${2:The type of entity you want to work on (example Enterprise)} # This should match the objects CamelCase class name in VSPK-Python  This Class name can be found on U(https://nuagenetwor
+    id: ${3:value}                                                         # The ID of the entity you want to work on  In combination with I(command=find), it will only return the single entity  In
+    parent_id: ${4:value}                                                  # The ID of the parent of the entity you want to work on  When I(state) is specified, the entity will be gathered from thi
+    parent_type: ${5:value}                                                # The type of parent the ID is specified for (example Enterprise)  This should match the objects CamelCase class name in V
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies the desired state of the entity  If I(state=present), in case the entity already exis
+    command: ${7$$(yas-choose-value '("find" "change_password" "wait_for_job" "get_csp_enterprise"))}# choices: find;change_password;wait_for_job;get_csp_enterprise  Specifies a command to be execu
+    match_filter: ${8:value}                                               # A filter used when looking (both in I(command) and I(state) for entities, in the format the Nuage VSP API expects  If I(
+    properties: ${9:value}                                                 # Properties are the key, value pairs of the different properties an entity has  If no I(id) and no I(match_filter) is spe
+    children: ${10:value}                                                  # Can be used to specify a set of child entities  A mandatory property of each child is the I(type)  Supported optional pr

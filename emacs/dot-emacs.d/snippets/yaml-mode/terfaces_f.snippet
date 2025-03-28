@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Tweak settings in /etc/network/interfaces files
+# prefix: interfaces_file_snippet
+# key: terfaces_f
+# group: ansible
+# --
+
+- name: ${0:Tweak settings in /etc/network/interfaces files}
+  interfaces_file:                                                         
+    dest: ${1:/etc/network/interfaces}                                     # Path to the interfaces file
+    iface: ${2:value}                                                      # Name of the interface, required for value changes or option remove
+    address_family: ${3:value}                                             # Address family of the interface, useful if same interface name is used for both inet and inet6
+    option: ${4:value}                                                     # Name of the option, required for value changes or option remove
+    value: ${5:value}                                                      # If I(option) is not presented for the I(interface) and I(state) is C(present) option will be added  If I(option) already
+    backup: ${6:false}                                                     # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If set to C(absent) the option or section will be removed if present instead of created 
+    mode: ${8:value}                                                       # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${9:value}                                                      # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${10:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${11:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${12:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${13:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${14:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${15:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${16:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

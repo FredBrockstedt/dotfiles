@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify switch-setup
+# prefix: pn_switch_setup_snippet
+# key: pn_switch_setup
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify switch-setup}
+  pn_switch_setup:                                                         
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the switch-setup 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_force: ${3:value}                                                   # Force analytics-store change even if it involves removing data 
+    pn_dns_ip: ${4:value}                                                  # DNS IP address 
+    pn_mgmt_netmask: ${5:value}                                            # Netmask 
+    pn_gateway_ip6: ${6:value}                                             # Gateway IPv6 address 
+    pn_in_band_ip6_assign: ${7$$(yas-choose-value '("none" "autoconf"))}   # choices: none;autoconf  Data IPv6 address assignment 
+    pn_domain_name: ${8:value}                                             # Domain name 
+    pn_timezone: ${9:value}                                                # Timezone to be configured 
+    pn_in_band_netmask: ${10:value}                                        # Data in-band netmask 
+    pn_in_band_ip6: ${11:value}                                            # Data in-band IPv6 address 
+    pn_in_band_netmask_ip6: ${12:value}                                    # Data in-band IPv6 netmask 
+    pn_motd: ${13:value}                                                   # Message of the Day 
+    pn_loopback_ip6: ${14:value}                                           # loopback IPv6 address 
+    pn_mgmt_ip6_assignment: ${15$$(yas-choose-value '("none" "autoconf"))} # choices: none;autoconf  IPv6 address assignment 
+    pn_ntp_secondary_server: ${16:value}                                   # Secondary NTP server 
+    pn_in_band_ip: ${17:value}                                             # data in-band IP address 
+    pn_eula_accepted: ${18$$(yas-choose-value '("true" "false"))}          # choices: true;false  Accept EULA 
+    pn_mgmt_ip: ${19:value}                                                # Management IP address 
+    pn_ntp_server: ${20:value}                                             # NTP server 
+    pn_mgmt_ip_assignment: ${21$$(yas-choose-value '("none" "dhcp"))}      # choices: none;dhcp  IP address assignment 
+    pn_date: ${22:value}                                                   # Date 
+    pn_password: ${23:value}                                               # plain text password 
+    pn_banner: ${24:value}                                                 # Banner to display on server-switch 
+    pn_loopback_ip: ${25:value}                                            # loopback IPv4 address 
+    pn_dns_secondary_ip: ${26:value}                                       # secondary DNS IP address 
+    pn_switch_name: ${27:value}                                            # switch name 
+    pn_eula_timestamp: ${28:value}                                         # EULA timestamp 
+    pn_mgmt_netmask_ip6: ${29:value}                                       # IPv6 netmask 
+    pn_enable_host_ports: ${30:value}                                      # Enable host ports by default 
+    pn_mgmt_ip6: ${31:value}                                               # IPv6 address 
+    pn_analytics_store: ${32$$(yas-choose-value '("default" "optimized"))} # choices: default;optimized  type of disk storage for analytics 
+    pn_gateway_ip: ${33:value}                                             # gateway IPv4 address 

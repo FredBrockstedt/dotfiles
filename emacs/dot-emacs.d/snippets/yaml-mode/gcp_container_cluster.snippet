@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Cluster
+# prefix: gcp_container_cluster_snippet
+# key: gcp_container_cluster
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Cluster}
+  gcp_container_cluster:                                                   
+    location: ${1:The location where the cluster is deployed}              #
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    name: ${4:value}                                                       # The name of this cluster  The name must be unique within this project and location, and can be up to 40 characters  Must
+    description: ${5:value}                                                # An optional description of this cluster 
+    initial_node_count: ${6:value}                                         # The number of nodes to create in this cluster  You must ensure that your Compute Engine resource quota is sufficient for
+    node_config: ${7:value}                                                # Parameters used in creating the cluster's nodes  For requests, this field should only be used in lieu of a "nodePool" ob
+    master_auth: ${8:value}                                                # The authentication information for accessing the master endpoint 
+    logging_service: ${9:value}                                            # The logging service the cluster should use to write logs  Currently available options: logging googleapis com - the Goog
+    monitoring_service: ${10:value}                                        # The monitoring service the cluster should use to write metrics  Currently available options: monitoring googleapis com -
+    network: ${11:value}                                                   # The name of the Google Compute Engine network to which the cluster is connected  If left unspecified, the default networ
+    private_cluster_config: ${12:value}                                    # Configuration for a private cluster 
+    cluster_ipv4_cidr: ${13:value}                                         # The IP address range of the container pods in this cluster, in CIDR notation (e g  10 96 0 0/14)  Leave blank to have on
+    addons_config: ${14:value}                                             # Configurations for the various addons available to run in the cluster 
+    subnetwork: ${15:value}                                                # The name of the Google Compute Engine subnetwork to which the cluster is connected 
+    locations: ${16:value}                                                 # The list of Google Compute Engine zones in which the cluster's nodes should be located 
+    resource_labels: ${17:value}                                           # The resource labels for the cluster to use to annotate any related Google Compute Engine resources 
+    legacy_abac: ${18:value}                                               # Configuration for the legacy ABAC authorization mode 
+    network_policy: ${19:value}                                            # Configuration options for the NetworkPolicy feature 
+    default_max_pods_constraint: ${20:value}                               # The default constraint on the maximum number of pods that can be run simultaneously on a node in the node pool of this c
+    ip_allocation_policy: ${21:value}                                      # Configuration for controlling how IPs are allocated in the cluster 
+    enable_tpu: ${22:value}                                                # Enable the ability to use Cloud TPUs in this cluster 
+    tpu_ipv4_cidr_block: ${23:value}                                       # The IP address range of the Cloud TPUs in this cluster, in CIDR notation 
+    kubectl_path: ${24:value}                                              # The path that the kubectl config file will be written to  The file will not be created if this path is unset  Any existi
+    kubectl_context: ${25:value}                                           # The name of the context for the kubectl config file  Will default to the cluster name 
+    project: ${26:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${27:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${28:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${29:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${30:value}                                                    # Array of scopes to be used 
+    env_type: ${31:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

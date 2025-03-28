@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Creates or removes locales
+# prefix: locale_gen_snippet
+# key: ocale_g
+# group: ansible
+# --
+
+- name: ${0:Creates or removes locales}
+  locale_gen:                                                              
+    name: ${1:Name and encoding of the locale, such as "en_GB}             #UTF-8" 
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the locale shall be present 

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Alter FortiManager device groups.
+# prefix: fmgr_device_group_snippet
+# key: fmgr_device_group
+# group: ansible
+# --
+
+- name: ${0:Alter FortiManager device groups.}
+  fmgr_device_group:                                                       
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    vdom: ${2:root}                                                        # The VDOM of the Fortigate you want to add, must match the device in FMGR  Usually root 
+    mode: ${3$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    grp_name: ${4:value}                                                   # The name of the device group 
+    grp_desc: ${5:value}                                                   # The description of the device group 
+    grp_members: ${6:value}                                                # A comma separated list of device names or device groups to be added as members to the device group  If Group Members are

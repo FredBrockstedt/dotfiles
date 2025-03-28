@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify admin-session-timeout
+# prefix: pn_admin_session_timeout_snippet
+# key: pn_admin_session_timeout
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify admin-session-timeout}
+  pn_admin_session_timeout:                                                
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  C(update) to modify the admin-session-timeout 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_timeout: ${3:value}                                                 # Maximum time to wait for user activity before terminating login session  Minimum should be 60s 

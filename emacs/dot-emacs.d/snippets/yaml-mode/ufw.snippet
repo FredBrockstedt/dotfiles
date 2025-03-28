@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage firewall with UFW
+# prefix: ufw_snippet
+# key: ufw
+# group: ansible
+# --
+
+- name: ${0:Manage firewall with UFW}
+  ufw:                                                                     
+    state: ${1$$(yas-choose-value '("disabled" "enabled" "reloaded" "reset"))}# choices: disabled;enabled;reloaded;reset  C(enabled) reloads firewall and enables firewall on boot  C(disabled) unloa
+    default: ${2$$(yas-choose-value '("allow" "deny" "reject"))}           # choices: allow;deny;reject  Change the default policy for incoming or outgoing traffic 
+    direction: ${3$$(yas-choose-value '("in" "incoming" "out" "outgoing" "routed"))}# choices: in;incoming;out;outgoing;routed  Select direction for a rule or default policy command 
+    logging: ${4$$(yas-choose-value '("on" "off" "low" "medium" "high" "full"))}# choices: on;off;low;medium;high;full  Toggles logging  Logged packets use the LOG_KERN syslog facility 
+    insert: ${5:value}                                                     # Insert the corresponding rule as rule number NUM  Note that ufw numbers rules starting with 1 
+    insert_relative_to: ${6$$(yas-choose-value '("first-ipv4" "first-ipv6" "last-ipv4" "last-ipv6" "zero"))}# choices: first-ipv4;first-ipv6;last-ipv4;last-ipv6;zero  Allows to interpret the index 
+    rule: ${7$$(yas-choose-value '("allow" "deny" "limit" "reject"))}      # choices: allow;deny;limit;reject  Add firewall rule
+    log: ${8:value}                                                        # Log new connections matched to this rule
+    from_ip: ${9:any}                                                      # Source IP address 
+    from_port: ${10:value}                                                 # Source port 
+    to_ip: ${11:any}                                                       # Destination IP address 
+    to_port: ${12:value}                                                   # Destination port 
+    proto: ${13$$(yas-choose-value '("any" "tcp" "udp" "ipv6" "esp" "ah" "gre" "igmp"))}# choices: any;tcp;udp;ipv6;esp;ah;gre;igmp  TCP/IP protocol 
+    name: ${14:value}                                                      # Use profile located in C(/etc/ufw/applications d) 
+    delete: ${15:value}                                                    # Delete rule 
+    interface: ${16:value}                                                 # Specify interface for rule 
+    route: ${17:value}                                                     # Apply the rule to routed/forwarded packets 
+    comment: ${18:value}                                                   # Add a comment to the rule  Requires UFW version >=0 35 

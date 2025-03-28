@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage lines in text files
+# prefix: lineinfile_snippet
+# key: f
+# group: ansible
+# --
+
+- name: ${0:Manage lines in text files}
+  lineinfile:                                                              
+    path: ${1:The file to modify}                                          # Before Ansible 2 3 this option was only usable as I(dest), I(destfile) and I(name) 
+    regexp: ${2:value}                                                     # The regular expression to look for in every line of the file  For C(state=present), the pattern to replace if found  Onl
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the line should be there or not 
+    line: ${4:value}                                                       # The line to insert/replace into the file  Required for C(state=present)  If C(backrefs) is set, may contain backreferenc
+    backrefs: ${5:False}                                                   # Used with C(state=present)  If set, C(line) can contain backreferences (both positional and named) that will get populat
+    insertafter: ${6$$(yas-choose-value '("EOF" "*regex*"))}               # choices: EOF;*regex*  Used with C(state=present)  If specified, the line will be inserted after the last match of specif
+    insertbefore: ${7$$(yas-choose-value '("BOF" "*regex*"))}              # choices: BOF;*regex*  Used with C(state=present)  If specified, the line will be inserted before the last match of speci
+    create: ${8:False}                                                     # Used with C(state=present)  If specified, the file will be created if it does not already exist  By default it will fail
+    backup: ${9:False}                                                     # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    firstmatch: ${10:False}                                                # Used with C(insertafter) or C(insertbefore)  If set, C(insertafter) and C(insertbefore) will work with the first line th
+    others: ${11:value}                                                    # All arguments accepted by the M(file) module also work here 
+    mode: ${12:value}                                                      # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${13:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${14:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${15:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${16:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${17:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${18:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${19:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${20:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on
+    validate: ${21:value}                                                  # The validation command to run before copying into place  The path to the file to validate is passed in via '%s' which mu

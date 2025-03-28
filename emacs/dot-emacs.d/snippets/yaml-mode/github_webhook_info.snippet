@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Query information about GitHub webhooks
+# prefix: github_webhook_info_snippet
+# key: github_webhook_info
+# group: ansible
+# --
+
+- name: ${0:Query information about GitHub webhooks}
+  github_webhook_info:                                                     
+    repository: ${1:Full name of the repository to configure a hook for}   #
+    user: ${2:User to authenticate to GitHub as}                           #
+    password: ${3:value}                                                   # Password to authenticate to GitHub with
+    token: ${4:value}                                                      # Token to authenticate to GitHub with
+    github_url: ${{5:https://api}                                          #github com} # not required  Base URL of the github api

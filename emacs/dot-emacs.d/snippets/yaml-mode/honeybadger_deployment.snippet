@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Notify Honeybadger.io about app deployments
+# prefix: honeybadger_deployment_snippet
+# key: honeybadger_deployment
+# group: ansible
+# --
+
+- name: ${0:Notify Honeybadger.io about app deployments}
+  honeybadger_deployment:                                                  
+    token: ${1:API token}                                                  #
+    environment: ${2:The environment name, typically 'production', 'staging', etc}#
+    user: ${3:value}                                                       # The username of the person doing the deployment
+    repo: ${4:value}                                                       # URL of the project repository
+    revision: ${5:value}                                                   # A hash, number, tag, or other identifier showing what revision was deployed
+    url: ${{6:https://api}                                                 #honeybadger io/v1/deploys} # not required  Optional URL to submit the notification to 
+    validate_certs: ${7:true}                                              # If C(no), SSL certificates for the target url will not be validated  This should only be used on personally controlled s

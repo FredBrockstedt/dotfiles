@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Fetch configuration/state data from RESTCONF enabled devices.
+# prefix: restconf_get_snippet
+# key: restconf_get
+# group: ansible
+# --
+
+- name: ${0:Fetch configuration/state data from RESTCONF enabled devices.}
+  restconf_get:                                                            
+    path: ${1:URI being used to execute API calls}                         #
+    content: ${2$$(yas-choose-value '("config" "nonconfig" "all"))}        # choices: config;nonconfig;all  The C(content) is a query parameter that controls how descendant nodes of the requested d
+    output: ${3$$(yas-choose-value '("json" "xml"))}                       # choices: json;xml  The output of response received 

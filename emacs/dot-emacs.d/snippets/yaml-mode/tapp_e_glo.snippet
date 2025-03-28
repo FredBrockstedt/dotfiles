@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage global settings configuration
+# prefix: netapp_e_global_snippet
+# key: tapp_e_glo
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage global settings configuration}
+  netapp_e_global:                                                         
+    api_username: ${1:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${2:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${3:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    name: ${4:value}                                                       # Set the name of the E-Series storage-system This label/name doesn't have to be unique  May be up to 30 characters in len
+    log_path: ${5:value}                                                   # A local path to a file to be used for debug logging
+    validate_certs: ${6:True}                                              # Should https certificates be validated?
+    ssid: ${7:1}                                                           # The ID of the array to manage  This value must be unique for each array 

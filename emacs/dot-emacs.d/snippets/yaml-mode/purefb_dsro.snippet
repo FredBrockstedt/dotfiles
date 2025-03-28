@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configure FlashBlade  Management Directory Service Roles
+# prefix: purefb_dsrole_snippet
+# key: purefb_dsro
+# group: ansible
+# --
+
+- name: ${0:Configure FlashBlade  Management Directory Service Roles}
+  purefb_dsrole:                                                           
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete directory service role
+    role: ${2$$(yas-choose-value '("array_admin" "ops_admin" "readonly" "storage_admin"))}# choices: array_admin;ops_admin;readonly;storage_admin  The directory service role to work on
+    group_base: ${3:value}                                                 # Specifies where the configured group is located in the directory tree  This field consists of Organizational Units (OUs)
+    group: ${4:value}                                                      # Sets the common Name (CN) of the configured directory service group containing users for the FlashBlade  This name shoul
+    fb_url: ${5:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${6:value}                                                  # FlashBlade API token for admin privileged user 

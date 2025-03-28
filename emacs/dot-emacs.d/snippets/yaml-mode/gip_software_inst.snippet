@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Install software images on a BIG-IP
+# prefix: bigip_software_install_snippet
+# key: gip_software_inst
+# group: ansible
+# --
+
+- name: ${0:Install software images on a BIG-IP}
+  bigip_software_install:                                                  
+    image: ${1:value}                                                      # Image to install on the remote device 
+    volume: ${2:value}                                                     # The volume to install the software image to 
+    state: ${3$$(yas-choose-value '("activated" "installed"))}             # choices: activated;installed  When C(installed), ensures that the software is installed on the volume and the volume is 
+    provider: ${4:value}                                                   # A dict object containing connection details 

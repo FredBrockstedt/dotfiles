@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower workflow template.
+# prefix: tower_workflow_template_snippet
+# key: tower_workflow_templat
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower workflow template.}
+  tower_workflow_template:                                                 
+    name: ${1:The name to use for the workflow}                            #
+    allow_simultaneous: ${2:value}                                         # If enabled, simultaneous runs of this job template will be allowed 
+    ask_extra_vars: ${3:value}                                             # Prompt user for (extra_vars) on launch 
+    ask_inventory: ${4:value}                                              # Prompt user for inventory on launch 
+    description: ${5:value}                                                # The description to use for the workflow 
+    extra_vars: ${6:value}                                                 # Extra variables used by Ansible in YAML or key=value format 
+    inventory: ${7:value}                                                  # Name of the inventory to use for the job template 
+    organization: ${8:value}                                               # The organization the workflow is linked to 
+    schema: ${9:value}                                                     # The schema is a JSON- or YAML-formatted string defining the hierarchy structure that connects the nodes  Refer to Tower 
+    survey_enabled: ${10:value}                                            # Setting that variable will prompt the user for job type on the workflow launch 
+    survey: ${11:value}                                                    # The definition of the survey associated to the workflow 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Desired state of the resource 
+    tower_host: ${13:value}                                                # URL to your Tower instance 
+    tower_username: ${14:value}                                            # Username for your Tower instance 
+    tower_password: ${15:value}                                            # Password for your Tower instance 
+    validate_certs: ${16:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${17:value}                                         # Path to the Tower config file 

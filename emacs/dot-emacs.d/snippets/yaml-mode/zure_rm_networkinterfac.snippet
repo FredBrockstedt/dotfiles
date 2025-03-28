@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: Manage Azure network interfaces
+# prefix: azure_rm_networkinterface_snippet
+# key: zure_rm_networkinterfac
+# group: ansible
+# --
+
+- name: ${0:Manage Azure network interfaces}
+  azure_rm_networkinterface:                                               
+    resource_group: ${1:Name of a resource group where the network interface exists or will be created}#
+    name: ${2:Name of the network interface}                               #
+    virtual_network: ${3:An existing virtual network with which the network interface will be associated}# Required when creating a network interface  It can be the virtual network's name  Make sur
+    subnet_name: ${4:Name of an existing subnet within the specified virtual network}# Required when creating a network interface  Use the C(virtual_network)'s resource group 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the network interface  Use C(present) to create or update an interface and 
+    location: ${6:value}                                                   # Valid Azure location  Defaults to location of the resource group 
+    os_type: ${7$$(yas-choose-value '("Windows" "Linux"))}                 # choices: Windows;Linux  Determines any rules to be added to a default security group  When creating a network interface,
+    private_ip_address: ${8:value}                                         # (Deprecate) Valid IPv4 address that falls within the specified subnet  This option will be deprecated in 2 9, use I(ip_c
+    private_ip_allocation_method: ${9$$(yas-choose-value '("Dynamic" "Static"))}# choices: Dynamic;Static  (Deprecate) Whether or not the assigned IP address is permanent  When creating a network i
+    public_ip: ${10:true}                                                  # (Deprecate) When creating a network interface, if no public IP address name is provided a default public IP address will
+    public_ip_address_name: ${11:value}                                    # (Deprecate) Name of an existing public IP address object to associate with the security group  This option will be depre
+    public_ip_allocation_method: ${12$$(yas-choose-value '("Dynamic" "Static"))}# choices: Dynamic;Static  (Deprecate) If a I(public_ip_address_name) is not provided, a default public IP address wi
+    ip_configurations: ${13:value}                                         # List of IP configurations  Each configuration object should include field I(private_ip_address), I(private_ip_allocation
+    enable_accelerated_networking: ${14:False}                             # Whether the network interface should be created with the accelerated networking feature or not 
+    create_with_security_group: ${15:True}                                 # Whether a security group should be be created with the NIC  If this flag set to C(True) and no I(security_group) set, a 
+    security_group: ${16:value}                                            # An existing security group with which to associate the network interface  If not provided, a default security group will
+    open_ports: ${17:value}                                                # When a default security group is created for a Linux host a rule will be added allowing inbound TCP connections to the d
+    enable_ip_forwarding: ${18:False}                                      # Whether to enable IP forwarding 
+    dns_servers: ${19:value}                                               # Which DNS servers should the NIC lookup  List of IP addresses 
+    ad_user: ${20:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${21:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${22:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${23:value}                                           # Your Azure subscription Id 
+    client_id: ${24:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${25:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${26:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${27:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${28:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${29$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${30$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${31:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${32:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${33:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

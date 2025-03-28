@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Node Operation
+# prefix: na_elementsw_node_snippet
+# key: mentsw_nod
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Node Operation}
+  na_elementsw_node:                                                       
+    node_id: ${1:List of IDs or Names or IP Address of nodes from cluster used for operation}#
+    hostname: ${2:The hostname or IP address of the SolidFire cluster}     #
+    username: ${3:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Element Software Storage Node operation state  present - To add pending node to participate in 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Configure Pure Storage FlashArray GUI and SSH MOTD message
+# prefix: purefa_banner_snippet
+# key: purefa_banner
+# group: ansible
+# --
+
+- name: ${0:Configure Pure Storage FlashArray GUI and SSH MOTD message}
+  purefa_banner:                                                           
+    fa_url: ${1:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${2:FlashArray API token for admin privileged user}         #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  S e t   o t   d e l e t e   t h e   M O T D
+    banner: ${{4:"Welcome to the machine}                                  #  "} # not required  B a n n e r   t e x t ,   o r   M O T D ,   t o   u s e

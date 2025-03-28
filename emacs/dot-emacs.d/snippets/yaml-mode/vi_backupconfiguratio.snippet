@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Module for setup of BackupConfiguration Avi RESTful Object
+# prefix: avi_backupconfiguration_snippet
+# key: vi_backupconfiguratio
+# group: ansible
+# --
+
+- name: ${0:Module for setup of BackupConfiguration Avi RESTful Object}
+  avi_backupconfiguration:                                                 
+    name: ${1:Name of backup configuration}                                #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    aws_access_key: ${5:value}                                             # Aws access key id  Field introduced in 18 2 3 
+    aws_bucket_id: ${6:value}                                              # Aws bucket  Field introduced in 18 2 3 
+    aws_secret_access: ${7:value}                                          # Aws secret access key  Field introduced in 18 2 3 
+    backup_file_prefix: ${8:value}                                         # Prefix of the exported configuration file  Field introduced in 17 1 1 
+    backup_passphrase: ${9:value}                                          # Passphrase of backup configuration 
+    maximum_backups_stored: ${10:value}                                    # Rotate the backup files based on this count  Allowed values are 1-20  Default value when not specified in API or module 
+    remote_directory: ${11:value}                                          # Directory at remote destination with write permission for ssh user 
+    remote_hostname: ${12:value}                                           # Remote destination 
+    save_local: ${13:value}                                                # Local backup 
+    ssh_user_ref: ${14:value}                                              # Access credentials for remote destination  It is a reference to an object of type cloudconnectoruser 
+    tenant_ref: ${15:value}                                                # It is a reference to an object of type tenant 
+    upload_to_remote_host: ${16:value}                                     # Remote backup 
+    upload_to_s3: ${17:value}                                              # Cloud backup  Field introduced in 18 2 3 
+    url: ${18:value}                                                       # Avi controller URL of the object 
+    uuid: ${19:value}                                                      # Unique object identifier of the object 
+    controller: ${20:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${21:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${22:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${23:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${24:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{25:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${26:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${27:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${28:value}                         # It disables avi session information to be cached as a fact 

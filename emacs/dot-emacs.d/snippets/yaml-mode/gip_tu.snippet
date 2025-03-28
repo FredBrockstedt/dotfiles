@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage tunnels on a BIG-IP
+# prefix: bigip_tunnel_snippet
+# key: gip_tu
+# group: ansible
+# --
+
+- name: ${0:Manage tunnels on a BIG-IP}
+  bigip_tunnel:                                                            
+    name: ${1:Specifies the name of the tunnel}                            #
+    description: ${2:value}                                                # Description of the tunnel 
+    profile: ${3:value}                                                    # Specifies the profile to associate with the tunnel for handling traffic  Depending on your selection, other settings bec
+    key: ${4:value}                                                        # When applied to a GRE tunnel, this value specifies an optional field in the GRE header, used to authenticate the source 
+    local_address: ${5:value}                                              # Specifies the IP address of the local endpoint of the tunnel 
+    remote_address: ${6:value}                                             # Specifies the IP address of the remote endpoint of the tunnel  For C(dslite), C(fec) (when configuring the FEC tunnel fo
+    secondary_address: ${7:value}                                          # Specifies a non-floating IP address for the tunnel, to be used with host-initiated traffic 
+    mtu: ${8:value}                                                        # Specifies the maximum transmission unit (MTU) of the tunnel  When creating a new tunnel, if this parameter is supported 
+    use_pmtu: ${9:value}                                                   # Enables or disables the tunnel to use the PMTU (Path MTU) information provided by ICMP NeedFrag error messages  If C(yes
+    tos: ${10:value}                                                       # Specifies the Type of Service (TOS) value to insert in the encapsulating header of transmitted packets  When creating a 
+    auto_last_hop: ${11$$(yas-choose-value '("default" "enabled" "disabled"))}# choices: default;enabled;disabled  Allows you to configure auto last hop on a per-tunnel basis  When creating a new t
+    traffic_group: ${12:value}                                             # Specifies the traffic group to associate with the tunnel  This value cannot be changed after it is set  This is a limita
+    mode: ${13$$(yas-choose-value '("bidirectional" "inbound" "outbound"))}# choices: bidirectional;inbound;outbound  Specifies how the tunnel carries traffic  When creating a new tunnel, if this p
+    transparent: ${14:value}                                               # Specifies that the tunnel operates in transparent mode  When C(yes), you can inspect and manipulate the encapsulated tra
+    partition: ${15:Common}                                                # Device partition to manage resources on 
+    state: ${16$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the tunnel exists  When C(absent), ensures the tunnel is removed 
+    provider: ${17:value}                                                  # A dict object containing connection details 

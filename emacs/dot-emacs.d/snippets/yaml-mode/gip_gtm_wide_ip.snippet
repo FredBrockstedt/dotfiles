@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages F5 BIG-IP GTM wide ip
+# prefix: bigip_gtm_wide_ip_snippet
+# key: gip_gtm_wide_ip
+# group: ansible
+# --
+
+- name: ${0:Manages F5 BIG-IP GTM wide ip}
+  bigip_gtm_wide_ip:                                                       
+    pool_lb_method: ${1$$(yas-choose-value '("round-robin" "ratio" "topology" "global-availability"))}# Specifies the load balancing method used to select a pool in this wide IP  This setting is re
+    name: ${2:Wide IP name}                                                # This name must be formatted as a fully qualified domain name (FQDN)  You can also use the alias C(wide_ip) but this is d
+    type: ${3$$(yas-choose-value '("a" "aaaa" "cname" "mx" "naptr" "srv"))}# choices: a;aaaa;cname;mx;naptr;srv  Specifies the type of wide IP  GTM wide IPs need to be keyed by query type in additi
+    state: ${4$$(yas-choose-value '("present" "absent" "disabled" "enabled"))}# choices: present;absent;disabled;enabled  When C(present) or C(enabled), ensures that the Wide IP exists and is enabl
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    pools: ${6:value}                                                      # The pools that you want associated with the Wide IP  If C(ratio) is not provided when creating a new Wide IP, it will de
+    irules: ${7:value}                                                     # List of rules to be applied  If you want to remove all existing iRules, specify a single empty value; C("")  See the doc
+    aliases: ${8:value}                                                    # Specifies alternate domain names for the web site content you are load balancing  You can use the same wildcard characte
+    last_resort_pool: ${9:value}                                           # Specifies which GTM pool, for the system to use as the last resort pool for the wide IP  The valid pools for this parame
+    provider: ${10:value}                                                  # A dict object containing connection details 

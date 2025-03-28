@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage iSCSI target configuration
+# prefix: netapp_e_iscsi_target_snippet
+# key: tapp_e_iscsi_target
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage iSCSI target configuration}
+  netapp_e_iscsi_target:                                                   
+    api_username: ${1:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${2:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${3:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    name: ${4:value}                                                       # The name/alias to assign to the iSCSI target  This alias is often used by the initiator software in order to make an iSC
+    ping: ${5:True}                                                        # Enable ICMP ping responses from the configured iSCSI ports 
+    chap_secret: ${6:value}                                                # Enable Challenge-Handshake Authentication Protocol (CHAP), utilizing this value as the password  When this value is spec
+    unnamed_discovery: ${7:True}                                           # When an initiator initiates a discovery session to an initiator port, it is considered an unnamed discovery session if t
+    log_path: ${8:value}                                                   # A local path (on the Ansible controller), to a file to be used for debug logging 
+    validate_certs: ${9:True}                                              # Should https certificates be validated?
+    ssid: ${10:1}                                                          # The ID of the array to manage  This value must be unique for each array 

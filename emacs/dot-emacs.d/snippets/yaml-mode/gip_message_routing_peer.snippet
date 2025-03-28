@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage peers for routing generic message protocol messages
+# prefix: bigip_message_routing_peer_snippet
+# key: gip_message_routing_peer
+# group: ansible
+# --
+
+- name: ${0:Manage peers for routing generic message protocol messages}
+  bigip_message_routing_peer:                                              
+    name: ${1:Specifies the name of the peer to manage}                    #
+    description: ${2:value}                                                # The user defined description of the peer 
+    type: ${3$$(yas-choose-value '("generic"))}                            # choices: generic  Parameter used to specify the type of the peer to manage  Default setting is C(generic) with more opti
+    auto_init: ${4:value}                                                  # If C(yes), the BIGIP will automatically create outbound connections to the active pool members in the specified C(pool) 
+    auto_init_interval: ${5:value}                                         # Specifies the interval that attempts to initiate a connection occur  The default value upon peer object creation, that s
+    connection_mode: ${6$$(yas-choose-value '("per-blade" "per-client" "per-peer" "per-tmm"))}# choices: per-blade;per-client;per-peer;per-tmm  Specifies how the number of connections per host are 
+    number_of_connections: ${7:value}                                      # Specifies the distribution of connections between the BIG-IP and a remote host  The accepted range is between 0 and 6553
+    pool: ${8:value}                                                       # Specifies the name of the pool that messages will be routed towards  The specified pool must be on the same partition as
+    ratio: ${9:value}                                                      # Specifies the ratio to be used for selection of a peer within a list of peers in a ltm route  The accepted range is betw
+    transport_config: ${10:value}                                          # The name of the ltm virtual or ltm transport-config to use for creating an outgoing connection  The resource must exist 
+    partition: ${11:Common}                                                # Device partition to create peer object on 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the peer exists  When C(absent), ensures the peer is removed 
+    provider: ${13:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manage gslb site entities in Netscaler.
+# prefix: netscaler_gslb_site_snippet
+# key: tscaler_gslb_sit
+# group: ansible
+# --
+
+- name: ${0:Manage gslb site entities in Netscaler.}
+  netscaler_gslb_site:                                                     
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    sitename: ${4:value}                                                   # Name for the GSLB site  Must begin with an ASCII alphanumeric or underscore C(_) character, and must contain only ASCII 
+    sitetype: ${5$$(yas-choose-value '("REMOTE" "LOCAL"))}                 # choices: REMOTE;LOCAL  Type of site to create  If the type is not specified, the appliance automatically detects and set
+    siteipaddress: ${6:value}                                              # IP address for the GSLB site  The GSLB site uses this IP address to communicate with other GSLB sites  For a local site,
+    publicip: ${7:value}                                                   # Public IP address for the local site  Required only if the appliance is deployed in a private address space and the site
+    metricexchange: ${8$$(yas-choose-value '("enabled" "disabled"))}       # choices: enabled;disabled  Exchange metrics with other sites  Metrics are exchanged by using Metric Exchange Protocol (M
+    nwmetricexchange: ${9$$(yas-choose-value '("enabled" "disabled"))}     # choices: enabled;disabled  Exchange, with other GSLB sites, network metrics such as round-trip time (RTT), learned from 
+    sessionexchange: ${10$$(yas-choose-value '("enabled" "disabled"))}     # choices: enabled;disabled  Exchange persistent session entries with other GSLB sites every five seconds 
+    triggermonitor: ${11$$(yas-choose-value '("ALWAYS" "MEPDOWN" "MEPDOWN_SVCDOWN"))}# choices: ALWAYS;MEPDOWN;MEPDOWN_SVCDOWN  Specify the conditions under which the GSLB service must be monitored
+    parentsite: ${12:value}                                                # Parent site of the GSLB site, in a parent-child topology 
+    clip: ${13:value}                                                      # Cluster IP address  Specify this parameter to connect to the remote cluster site for GSLB auto-sync  Note: The cluster I
+    publicclip: ${14:value}                                                # IP address to be used to globally access the remote cluster when it is deployed behind a NAT  It can be same as the norm
+    naptrreplacementsuffix: ${15:value}                                    # The naptr replacement suffix configured here will be used to construct the naptr replacement field in NAPTR record  Mini
+    nitro_protocol: ${16$$(yas-choose-value '("http" "https"))}            # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${17:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${18:310}                                               # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    state: ${19$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource being configured by the module on the netscaler node  When present th
+    save_config: ${20:True}                                                # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

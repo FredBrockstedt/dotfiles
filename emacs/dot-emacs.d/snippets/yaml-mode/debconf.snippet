@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Configure a .deb package
+# prefix: debconf_snippet
+# key: debconf
+# group: ansible
+# --
+
+- name: ${0:Configure a .deb package}
+  debconf:                                                                 
+    name: ${1:Name of package to configure}                                #
+    question: ${2:value}                                                   # A debconf configuration setting 
+    vtype: ${3$$(yas-choose-value '("boolean" "error" "multiselect" "note" "password" "seen" "select" "string" "text" "title"))}# choices: boolean;error;multiselect;note;password;seen;select;string
+    value: ${4:value}                                                      # Value to set the configuration to 
+    unseen: ${5:False}                                                     # Do not set 'seen' flag when pre-seeding 

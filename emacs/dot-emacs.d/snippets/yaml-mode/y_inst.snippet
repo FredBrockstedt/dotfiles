@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Installs Python libraries
+# prefix: easy_install_snippet
+# key: y_inst
+# group: ansible
+# --
+
+- name: ${0:Installs Python libraries}
+  easy_install:                                                            
+    name: ${1:A Python library name}                                       #
+    virtualenv: ${2:value}                                                 # an optional I(virtualenv) directory path to install into  If the I(virtualenv) does not exist, it is created automatical
+    virtualenv_site_packages: ${3:false}                                   # Whether the virtual environment will inherit packages from the global site-packages directory   Note that if this settin
+    virtualenv_command: ${4:virtualenv}                                    # The command to create the virtual environment with  For example C(pyvenv), C(virtualenv), C(virtualenv2) 
+    executable: ${5:value}                                                 # The explicit executable or a pathname to the executable to be used to run easy_install for a specific version of Python 
+    state: ${6$$(yas-choose-value '("present" "latest"))}                  # choices: present;latest  The desired state of the library  C(latest) ensures that the latest version is installed 

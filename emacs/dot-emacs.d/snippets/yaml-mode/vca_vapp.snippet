@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manages vCloud Air vApp instances.
+# prefix: vca_vapp_snippet
+# key: vca_vapp
+# group: ansible
+# --
+
+- name: ${0:Manages vCloud Air vApp instances.}
+  vca_vapp:                                                                
+    vapp_name: ${1:The name of the vCloud Air vApp instance}               #
+    template_name: ${2:value}                                              # The name of the vApp template to use to create the vApp instance   If the I(state) is not `absent` then the I(template_n
+    network_name: ${3:value}                                               # The name of the network that should be attached to the virtual machine in the vApp   The virtual network specified must 
+    network_mode: ${4$$(yas-choose-value '("pool" "dhcp" "static"))}       # choices: pool;dhcp;static  Configures the mode of the network connection 
+    vm_name: ${5:value}                                                    # The name of the virtual machine instance in the vApp to manage 
+    vm_cpus: ${6:value}                                                    # The number of vCPUs to configure for the VM in the vApp    If the I(vm_name) argument is provided, then this becomes a p
+    vm_memory: ${7:value}                                                  # The amount of memory in MB to allocate to VMs in the vApp   If the I(vm_name) argument is provided, then this becomes a 
+    operation: ${8$$(yas-choose-value '("noop" "poweron" "poweroff" "suspend" "shutdown" "reboot" "reset"))}# choices: noop;poweron;poweroff;suspend;shutdown;reboot;reset  Specifies an operation to
+    state: ${9$$(yas-choose-value '("present" "absent" "deployed" "undeployed"))}# choices: present;absent;deployed;undeployed  Configures the state of the vApp 
+    username: ${10:value}                                                  # The vCloud Air username to use during authentication
+    password: ${11:value}                                                  # The vCloud Air password to use during authentication
+    org: ${12:value}                                                       # The org to login to for creating vapp, mostly set when the service_type is vdc 
+    instance_id: ${13:value}                                               # The instance id in a vchs environment to be used for creating the vapp
+    host: ${14:value}                                                      # The authentication host to be used when service type  is vcd 
+    api_version: ${{15:5}                                                  #7} # not required  The api version to be used with the vca
+    service_type: ${16$$(yas-choose-value '("vca" "vchs" "vcd"))}          # choices: vca;vchs;vcd  The type of service we are authenticating against
+    vdc_name: ${17:value}                                                  # The name of the virtual data center (VDC) where the vm should be created or contains the vAPP 
+    validate_certs: ${18:True}                                             # If the certificates of the authentication is to be verified 
+    gateway_name: ${19:gateway}                                            # The name of the gateway of the vdc where the rule should be added 

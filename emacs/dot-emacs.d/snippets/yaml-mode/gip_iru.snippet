@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage iRules across different modules on a BIG-IP
+# prefix: bigip_irule_snippet
+# key: gip_iru
+# group: ansible
+# --
+
+- name: ${0:Manage iRules across different modules on a BIG-IP}
+  bigip_irule:                                                             
+    module: ${1$$(yas-choose-value '("ltm" "gtm"))}                        # The BIG-IP module to add the iRule to 
+    name: ${2:The name of the iRule}                                       #
+    src: ${3:The iRule file to interpret and upload to the BIG-IP}         # Either one of C(src) or C(content) must be provided 
+    content: ${4:value}                                                    # When used instead of 'src', sets the contents of an iRule directly to the specified value  This is for simple values, bu
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the iRule should exist or not 
+    partition: ${6:Common}                                                 # Device partition to manage resources on 
+    provider: ${7:value}                                                   # A dict object containing connection details 

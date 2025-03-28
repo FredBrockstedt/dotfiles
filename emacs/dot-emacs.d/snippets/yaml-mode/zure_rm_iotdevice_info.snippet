@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Facts of Azure IoT hub device
+# prefix: azure_rm_iotdevice_info_snippet
+# key: zure_rm_iotdevice_info
+# group: ansible
+# --
+
+- name: ${0:Facts of Azure IoT hub device}
+  azure_rm_iotdevice_info:                                                 
+    hub: ${1:Name of IoT Hub}                                              #
+    hub_policy_name: ${2:Policy name of the IoT Hub which will be used to query from IoT hub}# This policy should have at least 'Registry Read' access 
+    hub_policy_key: ${3:Key of the I(hub_policy_name)}                     #
+    name: ${4:value}                                                       # Name of the IoT hub device identity 
+    module_id: ${5:value}                                                  # Name of the IoT hub device module  Must use with I(device_id) defined 
+    query: ${6:value}                                                      # Query an IoT hub to retrieve information regarding device twins using a SQL-like language  See U(https://docs microsoft 
+    top: ${7:value}                                                        # Used when I(name) not defined  List the top n devices in the query 
+    ad_user: ${8:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${9:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${10:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${11:value}                                           # Your Azure subscription Id 
+    client_id: ${12:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${13:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${14:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${15:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${16:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${17$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${18$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${19:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${20:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${21:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

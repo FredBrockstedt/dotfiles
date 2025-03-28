@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage LTM policy rules on a BIG-IP
+# prefix: bigip_policy_rule_snippet
+# key: gip_policy_ru
+# group: ansible
+# --
+
+- name: ${0:Manage LTM policy rules on a BIG-IP}
+  bigip_policy_rule:                                                       
+    policy: ${1:The name of the policy that you want to associate this rule with}#
+    name: ${2:The name of the rule}                                        #
+    description: ${3:value}                                                # Description of the policy rule 
+    actions: ${4:value}                                                    # The actions that you want the policy rule to perform  The available attributes vary by the action, however, each action 
+    conditions: ${5:value}                                                 # A list of attributes that describe the condition  See suboptions for details on how to construct each list entry  The or
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the key is uploaded to the device  When C(absent), ensures that t
+    partition: ${7:Common}                                                 # Device partition to manage resources on 
+    provider: ${8:value}                                                   # A dict object containing connection details 

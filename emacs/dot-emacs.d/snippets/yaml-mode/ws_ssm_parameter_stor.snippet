@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage key-value pairs in aws parameter store.
+# prefix: aws_ssm_parameter_store_snippet
+# key: ws_ssm_parameter_stor
+# group: ansible
+# --
+
+- name: ${0:Manage key-value pairs in aws parameter store.}
+  aws_ssm_parameter_store:                                                 
+    name: ${1:parameter key name}                                          #
+    description: ${2:value}                                                # parameter key description 
+    value: ${3:value}                                                      # Parameter value 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates or modifies an existing parameter Deletes a parameter
+    string_type: ${5$$(yas-choose-value '("String" "StringList" "SecureString"))}# choices: String;StringList;SecureString  Parameter String type
+    decryption: ${6:True}                                                  # Work with SecureString type to get plain text secrets
+    key_id: ${{7:"aws/ssm (this key is automatically generated at the first parameter created)}#"} # not required  aws KMS key to decrypt the secrets 
+    overwrite_value: ${8$$(yas-choose-value '("never" "changed" "always"))}# choices: never;changed;always  Option to overwrite an existing value if it already exists  String
+    region: ${9:value}                                                     # region 
+    debug_botocore_endpoint_logs: ${10:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${11:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${12:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${13:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${14:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${15:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${16:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 

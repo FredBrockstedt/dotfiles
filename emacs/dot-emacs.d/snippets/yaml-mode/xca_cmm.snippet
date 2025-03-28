@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Custom module for lxca cmms inventory utility
+# prefix: lxca_cmms_snippet
+# key: xca_cmm
+# group: ansible
+# --
+
+- name: ${0:Custom module for lxca cmms inventory utility}
+  lxca_cmms:                                                               
+    login_user: ${1:The username for use in HTTP basic authentication}     #
+    login_password: ${2:The password for use in HTTP basic authentication} #
+    auth_url: ${3:lxca https full web address}                             #
+    uuid: ${4:value}                                                       # u u i d   o f   d e v i c e ,   t h i s   i s   s t r i n g   w i t h   l e n g t h   g r e a t e r   t h a n   1 6  
+    command_options: ${5$$(yas-choose-value '("cmms" "cmms_by_uuid" "cmms_by_chassis_uuid"))}# choices: cmms;cmms_by_uuid;cmms_by_chassis_uuid  o p t i o n s   t o   f i l t e r   n o d e s   i n f
+    chassis: ${6:value}                                                    # u u i d   o f   c h a s s i s ,   t h i s   i s   s t r i n g   w i t h   l e n g t h   g r e a t e r   t h a n   1 6  

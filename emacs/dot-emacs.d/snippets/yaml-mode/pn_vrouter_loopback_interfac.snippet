@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove vrouter-loopback-interface
+# prefix: pn_vrouter_loopback_interface_snippet
+# key: pn_vrouter_loopback_interfac
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove vrouter-loopback-interface}
+  pn_vrouter_loopback_interface:                                           
+    pn_ip: ${1:loopback IP address}                                        #
+    pn_vrouter_name: ${2:name of service config}                           #
+    pn_cliswitch: ${3:value}                                               # Target switch to run the CLI on 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State the action to perform  Use C(present) to add vrouter-loopback-interface and C(absent) to 
+    pn_index: ${5:value}                                                   # loopback index from 1 to 255 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages OpenNebula images
+# prefix: one_image_snippet
+# key: one_imag
+# group: ansible
+# --
+
+- name: ${0:Manages OpenNebula images}
+  one_image:                                                               
+    api_url: ${1:value}                                                    # URL of the OpenNebula RPC server  It is recommended to use HTTPS so that the username/password are not transferred over 
+    api_username: ${2:value}                                               # Name of the user to login into the OpenNebula RPC server  If not set then the value of the C(ONE_USERNAME) environment v
+    api_password: ${3:value}                                               # Password of the user to login into OpenNebula RPC server  If not set then the value of the C(ONE_PASSWORD) environment v
+    id: ${4:value}                                                         # A C(id) of the image you would like to manage 
+    name: ${5:value}                                                       # A C(name) of the image you would like to manage 
+    state: ${6$$(yas-choose-value '("present" "absent" "cloned" "renamed"))}# choices: present;absent;cloned;renamed  C(present) - state that is used to manage the image C(absent) - delete the imag
+    enabled: ${7:value}                                                    # Whether the image should be enabled or disabled 
+    new_name: ${8:value}                                                   # A name that will be assigned to the existing or new image  In the case of cloning, by default C(new_name) will take the 

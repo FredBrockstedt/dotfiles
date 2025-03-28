@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage the state of a virtual host in RabbitMQ
+# prefix: rabbitmq_vhost_snippet
+# key: rabbitmq_vhost
+# group: ansible
+# --
+
+- name: ${0:Manage the state of a virtual host in RabbitMQ}
+  rabbitmq_vhost:                                                          
+    name: ${1:The name of the vhost to manage}                             #
+    node: ${2:rabbit}                                                      # erlang node name of the rabbit we wish to configure
+    tracing: ${3:false}                                                    # Enable/disable tracing for a vhost
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state of vhost

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Create and delete AWS VPN Virtual Gateways.
+# prefix: ec2_vpc_vgw_snippet
+# key: c2_vpc_vgw
+# group: ansible
+# --
+
+- name: ${0:Create and delete AWS VPN Virtual Gateways.}
+  ec2_vpc_vgw:                                                             
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  present to ensure resource is created  absent to remove resource
+    name: ${2:value}                                                       # name of the vgw to be created or deleted
+    type: ${{3$$(yas-choose-value '("ipsec}                                #1|} # not required  choices: ipsec 1  type of the virtual gateway to be created
+    vpn_gateway_id: ${4:value}                                             # vpn gateway id of an existing virtual gateway
+    vpc_id: ${5:value}                                                     # the vpc-id of a vpc to attach or detach
+    asn: ${6:value}                                                        # the BGP ASN of the amazon side
+    wait_timeout: ${7:320}                                                 # number of seconds to wait for status during vpc attach and detach
+    tags: ${8:value}                                                       # dictionary of resource tags
+    region: ${9:value}                                                     # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 
+    debug_botocore_endpoint_logs: ${10:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${11:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${12:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${13:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${14:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${15:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${16:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 

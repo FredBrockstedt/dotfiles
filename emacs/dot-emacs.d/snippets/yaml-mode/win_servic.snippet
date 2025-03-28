@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage and query Windows services
+# prefix: win_service_snippet
+# key: win_servic
+# group: ansible
+# --
+
+- name: ${0:Manage and query Windows services}
+  win_service:                                                             
+    name: ${1:Name of the service}                                         # If only the name parameter is specified, the module will report on whether the service exists or not without making any 
+    dependencies: ${2:value}                                               # A list of service dependencies to set for this particular service  This should be a list of service names and not the di
+    dependency_action: ${3$$(yas-choose-value '("add" "remove" "set"))}    # choices: add;remove;set  Used in conjunction with C(dependency) to either add the dependencies to the existing service d
+    desktop_interact: ${4:False}                                           # Whether to allow the service user to interact with the desktop  This should only be set to C(yes) when using the C(Local
+    description: ${5:value}                                                # The description to set for the service 
+    display_name: ${6:value}                                               # The display name to set for the service 
+    force_dependent_services: ${7:False}                                   # If C(yes), stopping or restarting a service with dependent services will force the dependent services to stop or restart
+    path: ${8:value}                                                       # The path to the executable to set for the service 
+    password: ${9:value}                                                   # The password to set the service to start as  This and the C(username) argument must be supplied together  If specifying 
+    start_mode: ${10$$(yas-choose-value '("auto" "delayed" "disabled" "manual"))}# choices: auto;delayed;disabled;manual  Set the startup type for the service  A newly created service will default 
+    state: ${11$$(yas-choose-value '("absent" "paused" "started" "stopped" "restarted"))}# choices: absent;paused;started;stopped;restarted  The desired state of the service  C(started)/C(stopped)/
+    username: ${12:value}                                                  # The username to set the service to start as  This and the C(password) argument must be supplied together when using a lo

@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Manages client SSL profiles on a BIG-IP
+# prefix: bigip_profile_client_ssl_snippet
+# key: gip_profile_client
+# group: ansible
+# --
+
+- name: ${0:Manages client SSL profiles on a BIG-IP}
+  bigip_profile_client_ssl:                                                
+    name: ${1:Specifies the name of the profile}                           #
+    parent: ${2:/Common/clientssl}                                         # The parent template of this monitor template  Once this value has been set, it cannot be changed  By default, this value
+    ciphers: ${3:value}                                                    # Specifies the list of ciphers that the system supports  When creating a new profile, the default cipher list is provided
+    cert_key_chain: ${4:value}                                             # One or more certificates and keys to associate with the SSL profile  This option is always a list  The keys in the list 
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    options: ${{6$$(yas-choose-value '("netscape-reuse-cipher-change-bug" "microsoft-big-sslv3-buffer" "msie-sslv2-rsa-padding" "ssleay-080-client-dh-bug" "tls-d5-bug" "tls-block-padding-bug" "dont
+    secure_renegotiation: ${7$$(yas-choose-value '("require" "require-strict" "request"))}# choices: require;require-strict;request  Specifies the method of secure renegotiations for SSL connection
+    allow_non_ssl: ${8:value}                                              # Enables or disables acceptance of non-SSL connections  When creating a new profile, the setting is provided by the paren
+    server_name: ${9:value}                                                # Specifies the fully qualified DNS hostname of the server used in Server Name Indication communications  When creating a 
+    sni_default: ${10:value}                                               # Indicates that the system uses this profile as the default SSL profile when there is no match to the server name, or whe
+    sni_require: ${11:value}                                               # Requires that the network peers also provide SNI support, this setting only takes effect when C(sni_default) is set to C
+    strict_resume: ${12:value}                                             # Enables or disables the resumption of SSL sessions after an unclean shutdown  When creating a new profile, the setting i
+    client_certificate: ${13$$(yas-choose-value '("ignore" "require" "request"))}# choices: ignore;require;request  Specifies the way the system handles client certificates  When C(ignore), specifi
+    client_auth_frequency: ${14$$(yas-choose-value '("once" "always"))}    # choices: once;always  Specifies the frequency of client authentication for an SSL session  When C(once), specifies that 
+    renegotiation: ${15:value}                                             # Enables or disables SSL renegotiation  When creating a new profile, the setting is provided by the parent profile 
+    retain_certificate: ${16:value}                                        # When C(yes), client certificate is retained in SSL session 
+    cert_auth_depth: ${17:value}                                           # Specifies the maximum number of certificates to be traversed in a client certificate chain 
+    trusted_cert_authority: ${18:value}                                    # Specifies a client CA that the system trusts 
+    advertised_cert_authority: ${19:value}                                 # Specifies that the CAs that the system advertises to clients is being trusted by the profile 
+    client_auth_crl: ${20:value}                                           # Specifies the name of a file containing a list of revoked client certificates 
+    allow_expired_crl: ${21:value}                                         # Instructs the system to use the specified CRL file even if it has expired 
+    state: ${22$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${23:value}                                                  # A dict object containing connection details 

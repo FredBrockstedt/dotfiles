@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Assume a role using AWS Security Token Service and obtain temporary credentials
+# prefix: sts_assume_role_snippet
+# key: ts_assume_ro
+# group: ansible
+# --
+
+- name: ${0:Assume a role using AWS Security Token Service and obtain temporary credentials}
+  sts_assume_role:                                                         
+    role_arn: ${1:The Amazon Resource Name (ARN) of the role that the caller is assuming U(https://docs}#aws amazon com/IAM/latest/UserGuide/Using_Identifiers html#Identifiers_ARNs) 
+    role_session_name: ${2:Name of the role's session - will be used by CloudTrail}#
+    policy: ${3:value}                                                     # Supplemental policy to use in addition to assumed role's policies 
+    duration_seconds: ${4:value}                                           # The duration, in seconds, of the role session  The value can range from 900 seconds (15 minutes) to 43200 seconds (12 ho
+    external_id: ${5:value}                                                # A unique identifier that is used by third parties to assume a role in their customers' accounts 
+    mfa_serial_number: ${6:value}                                          # The identification number of the MFA device that is associated with the user who is making the AssumeRole call 
+    mfa_token: ${7:value}                                                  # The value provided by the MFA device, if the trust policy of the role being assumed requires MFA 
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

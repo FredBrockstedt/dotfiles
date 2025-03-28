@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages TCL iApp templates on a BIG-IP
+# prefix: bigip_iapp_template_snippet
+# key: gip_iapp_templat
+# group: ansible
+# --
+
+- name: ${0:Manages TCL iApp templates on a BIG-IP}
+  bigip_iapp_template:                                                     
+    force: ${1:value}                                                      # Specifies whether or not to force the uploading of an iApp  When C(yes), will force update the iApp even if there are iA
+    name: ${2:value}                                                       # The name of the iApp template that you want to delete  This option is only available when specifying a C(state) of C(abs
+    content: ${3:value}                                                    # Sets the contents of an iApp template directly to the specified value  This is for simple values, but can be used with l
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the iApp template should exist or not 
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    provider: ${6:value}                                                   # A dict object containing connection details 

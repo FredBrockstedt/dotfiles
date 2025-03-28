@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Gather information on instances of Alibaba Cloud ECS.
+# prefix: ali_instance_info_snippet
+# key: tance_info
+# group: ansible
+# --
+
+- name: ${0:Gather information on instances of Alibaba Cloud ECS.}
+  ali_instance_info:                                                       
+    availability_zone: ${1:value}                                          # Aliyun availability zone ID in which to launch the instance
+    instance_names: ${2:value}                                             # A list of ECS instance names 
+    instance_ids: ${3:value}                                               # A list of ECS instance ids 
+    instance_tags: ${4:value}                                              # A hash/dictionaries of instance tags  C({"key":"value"\})
+    alicloud_access_key: ${5:value}                                        # Aliyun Cloud access key  If not set then the value of environment variable C(ALICLOUD_ACCESS_KEY), C(ALICLOUD_ACCESS_KEY
+    alicloud_secret_key: ${6:value}                                        # Aliyun Cloud secret key  If not set then the value of environment variable C(ALICLOUD_SECRET_KEY), C(ALICLOUD_SECRET_ACC
+    alicloud_region: ${7:value}                                            # The Aliyun Cloud region to use  If not specified then the value of environment variable C(ALICLOUD_REGION), C(ALICLOUD_R
+    alicloud_security_token: ${8:value}                                    # The Aliyun Cloud security token  If not specified then the value of environment variable C(ALICLOUD_SECURITY_TOKEN) will

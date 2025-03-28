@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Add or remove mailboxes on Webfaction
+# prefix: webfaction_mailbox_snippet
+# key: webfaction_mailbox
+# group: ansible
+# --
+
+- name: ${0:Add or remove mailboxes on Webfaction}
+  webfaction_mailbox:                                                      
+    mailbox_name: ${1:The name of the mailbox}                             #
+    mailbox_password: ${2:The password for the mailbox}                    #
+    login_name: ${3:The webfaction account to use}                         #
+    login_password: ${4:The webfaction password to use}                    #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the mailbox should exist

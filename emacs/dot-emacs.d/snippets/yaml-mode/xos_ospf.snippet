@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages configuration of an ospf instance.
+# prefix: nxos_ospf_snippet
+# key: xos_ospf
+# group: ansible
+# --
+
+- name: ${0:Manages configuration of an ospf instance.}
+  nxos_ospf:                                                               
+    ospf: ${1:Name of the ospf instance}                                   #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

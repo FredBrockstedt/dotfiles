@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Uses keytool to import/remove key from java keystore (cacerts)
+# prefix: java_cert_snippet
+# key: java_cert
+# group: ansible
+# --
+
+- name: ${0:Uses keytool to import/remove key from java keystore (cacerts)}
+  java_cert:                                                               
+    keystore_pass: ${1:Keystore password}                                  #
+    cert_url: ${2:value}                                                   # Basic URL to fetch SSL certificate from  One of C(cert_url) or C(cert_path) is required to load certificate 
+    cert_port: ${3:443}                                                    # Port to connect to URL  This will be used to create server URL:PORT 
+    cert_path: ${4:value}                                                  # Local path to load certificate from  One of C(cert_url) or C(cert_path) is required to load certificate 
+    cert_alias: ${5:value}                                                 # Imported certificate alias  The alias is used when checking for the presence of a certificate in the keystore 
+    pkcs12_path: ${6:value}                                                # Local path to load PKCS12 keystore from 
+    pkcs12_password: ${7:}                                                 # Password for importing from PKCS12 keystore 
+    pkcs12_alias: ${8:value}                                               # Alias in the PKCS12 keystore 
+    keystore_path: ${9:value}                                              # Path to keystore 
+    keystore_create: ${10:value}                                           # Create keystore if it does not exist 
+    keystore_type: ${11:value}                                             # Keystore type (JCEKS, JKS) 
+    executable: ${12:keytool}                                              # Path to keytool binary if not used we search in PATH for it 
+    state: ${13$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Defines action which can be either certificate import or removal 

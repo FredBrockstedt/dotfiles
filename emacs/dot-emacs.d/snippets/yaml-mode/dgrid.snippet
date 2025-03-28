@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Sends an email with the SendGrid API
+# prefix: sendgrid_snippet
+# key: dgrid
+# group: ansible
+# --
+
+- name: ${0:Sends an email with the SendGrid API}
+  sendgrid:                                                                
+    from_address: ${1:the address in the "from" field for the email}       #
+    to_addresses: ${2:a list with one or more recipient email addresses}   #
+    subject: ${3:the desired subject for the email}                        #
+    username: ${4:value}                                                   # username for logging into the SendGrid account  Since 2 2 it is only required if api_key is not supplied 
+    password: ${5:value}                                                   # password that corresponds to the username Since 2 2 it is only required if api_key is not supplied 
+    api_key: ${6:value}                                                    # sendgrid API key to use instead of username/password
+    cc: ${7:value}                                                         # a list of email addresses to cc
+    bcc: ${8:value}                                                        # a list of email addresses to bcc
+    attachments: ${9:value}                                                # a list of relative or explicit paths of files you want to attach (7MB limit as per SendGrid docs)
+    from_name: ${10:value}                                                 # the name you want to appear in the from field, i e 'John Doe'
+    html_body: ${11:false}                                                 # whether the body is html content that should be rendered
+    headers: ${12:value}                                                   # a dict to pass on as headers

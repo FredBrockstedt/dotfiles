@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Package manager for FreeBSD >= 9.0
+# prefix: pkgng_snippet
+# key: pkgng
+# group: ansible
+# --
+
+- name: ${0:Package manager for FreeBSD >= 9.0}
+  pkgng:                                                                   
+    name: ${1:Name or list of names of packages to install/remove}         #
+    state: ${2$$(yas-choose-value '("present" "latest" "absent"))}         # choices: present;latest;absent  State of the package  Note: "latest" added in 2 7
+    cached: ${3:False}                                                     # Use local package base instead of fetching an updated one 
+    annotation: ${4:value}                                                 # A comma-separated list of keyvalue-pairs of the form C(<+/-/:><key>[=<value>])  A C(+) denotes adding an annotation, a C
+    pkgsite: ${5:value}                                                    # For pkgng versions before 1 1 4, specify packagesite to use for downloading packages  If not specified, use settings fro
+    rootdir: ${6:value}                                                    # For pkgng versions 1 5 and later, pkg will install all packages within the specified root directory  Can not be used tog
+    chroot: ${7:value}                                                     # Pkg will chroot in the specified environment  Can not be used together with I(rootdir) or I(jail) options 
+    jail: ${8:value}                                                       # Pkg will execute in the given jail name or id  Can not be used together with I(chroot) or I(rootdir) options 
+    autoremove: ${9:False}                                                 # Remove automatically installed packages which are no longer needed 

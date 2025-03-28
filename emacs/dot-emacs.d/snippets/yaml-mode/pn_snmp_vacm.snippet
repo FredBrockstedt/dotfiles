@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/modify/delete snmp-vacm
+# prefix: pn_snmp_vacm_snippet
+# key: pn_snmp_vacm
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/modify/delete snmp-vacm}
+  pn_snmp_vacm:                                                            
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use C(present) to create snmp-vacm and C(absent) to delete snmp-vacm and C(update) to modif
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_oid_restrict: ${3:value}                                            # restrict OID 
+    pn_priv: ${4:value}                                                    # privileges 
+    pn_auth: ${5:value}                                                    # authentication required 
+    pn_user_type: ${6$$(yas-choose-value '("rouser" "rwuser"))}            # choices: rouser;rwuser  SNMP user type 
+    pn_user_name: ${7:value}                                               # SNMP administrator name 

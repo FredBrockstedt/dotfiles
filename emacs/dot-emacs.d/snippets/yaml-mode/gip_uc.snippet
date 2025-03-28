@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage upload, installation and removal of UCS files
+# prefix: bigip_ucs_snippet
+# key: gip_uc
+# group: ansible
+# --
+
+- name: ${0:Manage upload, installation and removal of UCS files}
+  bigip_ucs:                                                               
+    include_chassis_level_config: ${1:value}                               # During restore of the UCS file, include chassis level configuration that is shared among boot volume sets  For example, 
+    ucs: ${2:value}                                                        # The path to the UCS file to install  The parameter must be provided if the C(state) is either C(installed) or C(activate
+    force: ${3:False}                                                      # If C(yes) will upload the file every time and replace the file on the device  If C(no), the file will only be uploaded i
+    no_license: ${4:value}                                                 # Performs a full restore of the UCS file and all the files it contains, with the exception of the license file  The optio
+    no_platform_check: ${5:value}                                          # Bypasses the platform check and allows a UCS that was created using a different platform to be installed  By default (wi
+    passphrase: ${6:value}                                                 # Specifies the passphrase that is necessary to load the specified UCS file 
+    reset_trust: ${7:value}                                                # When specified, the device and trust domain certs and keys are not loaded from the UCS  Instead, a new set is regenerate
+    state: ${8$$(yas-choose-value '("absent" "installed" "present"))}      # choices: absent;installed;present  When C(installed), ensures that the UCS is uploaded and installed, on the system  Whe
+    provider: ${9:value}                                                   # A dict object containing connection details 

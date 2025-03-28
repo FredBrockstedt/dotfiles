@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Add/Delete a pool in the load balancing service from OpenStack Cloud
+# prefix: os_pool_snippet
+# key: os_poo
+# group: ansible
+# --
+
+- name: ${0:Add/Delete a pool in the load balancing service from OpenStack Cloud}
+  os_pool:                                                                 
+    name: ${1:Name that has to be given to the pool}                       #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the resource be present or absent 
+    loadbalancer: ${3:value}                                               # The name or id of the load balancer that this pool belongs to  Either loadbalancer or listener must be specified for poo
+    listener: ${4:value}                                                   # The name or id of the listener that this pool belongs to  Either loadbalancer or listener must be specified for pool cre
+    protocol: ${5$$(yas-choose-value '("HTTP" "HTTPS" "PROXY" "TCP" "UDP"))}# choices: HTTP;HTTPS;PROXY;TCP;UDP  The protocol for the pool 
+    lb_algorithm: ${6$$(yas-choose-value '("LEAST_CONNECTIONS" "ROUND_ROBIN" "SOURCE_IP"))}# choices: LEAST_CONNECTIONS;ROUND_ROBIN;SOURCE_IP  The load balancing algorithm for the pool 
+    wait: ${7:true}                                                        # If the module should wait for the pool to be ACTIVE 
+    timeout: ${8:180}                                                      # The amount of time the module should wait for the pool to get into ACTIVE state 
+    availability_zone: ${9:value}                                          # Ignored  Present for backwards compatibility
+    cloud: ${10:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${11:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${12:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${13:value}                                               # Name of the region 
+    api_timeout: ${14:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${15:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${16:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${17:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${18:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${19$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

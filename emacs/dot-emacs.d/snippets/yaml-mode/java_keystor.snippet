@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Create or delete a Java keystore in JKS format.
+# prefix: java_keystore_snippet
+# key: java_keystor
+# group: ansible
+# --
+
+- name: ${0:Create or delete a Java keystore in JKS format.}
+  java_keystore:                                                           
+    name: ${1:Name of the certificate}                                     #
+    certificate: ${2:Certificate that should be used to create the key store}#
+    private_key: ${3:Private key that should be used to create the key store}#
+    password: ${4:Password that should be used to secure the key store}    #
+    dest: ${5:Absolute path where the jks should be generated}             #
+    owner: ${6:value}                                                      # Name of the user that should own jks file 
+    group: ${7:value}                                                      # Name of the group that should own jks file 
+    mode: ${8:value}                                                       # Mode the file should be 
+    force: ${9:false}                                                      # Key store will be created even if it already exists 

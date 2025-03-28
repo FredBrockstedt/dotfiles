@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: docker stack module
+# prefix: docker_stack_snippet
+# key: docker_stack
+# group: ansible
+# --
+
+- name: ${0:docker stack module}
+  docker_stack:                                                            
+    name: ${1:Stack name}                                                  #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Service state 
+    compose: ${3:[]}                                                       # List of compose definitions  Any element may be a string referring to the path of the compose file on the target host or
+    prune: ${4:False}                                                      # If true will add the C(--prune) option to the C(docker stack deploy) command  This will have docker remove the services 
+    with_registry_auth: ${5:False}                                         # If true will add the C(--with-registry-auth) option to the C(docker stack deploy) command  This will have docker send re
+    resolve_image: ${6$$(yas-choose-value '("always" "changed" "never"))}  # choices: always;changed;never  If set will add the C(--resolve-image) option to the C(docker stack deploy) command  This
+    absent_retries: ${7:0}                                                 # If C(>0) and I(state) is C(absent) the module will retry up to I(absent_retries) times to delete the stack until all the
+    absent_retries_interval: ${8:1}                                        # Interval in seconds between consecutive I(absent_retries) 

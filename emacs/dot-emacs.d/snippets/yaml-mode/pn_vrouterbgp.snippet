@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove/modify vrouter-bgp.
+# prefix: pn_vrouterbgp_snippet
+# key: pn_vrouterbgp
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove/modify vrouter-bgp.}
+  pn_vrouterbgp:                                                           
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use 'present' to add bgp, 'absent' to remove bgp and 'update' to modify bgp 
+    pn_vrouter_name: ${2:Specify a name for the vRouter service}           #
+    pn_cliusername: ${3:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${4:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${5:local}                                               # Target switch(es) to run the cli on 
+    pn_neighbor: ${6:value}                                                # Specify a neighbor IP address to use for BGP  Required for vrouter-bgp-add 
+    pn_remote_as: ${7:value}                                               # Specify the remote Autonomous System(AS) number  This value is between 1 and 4294967295  Required for vrouter-bgp-add 
+    pn_next_hop_self: ${8:value}                                           # Specify if the next-hop is the same router or not 
+    pn_password: ${9:value}                                                # Specify a password, if desired 
+    pn_ebgp: ${10:value}                                                   # Specify a value for external BGP to accept or attempt BGP connections to external peers, not directly connected, on the 
+    pn_prefix_listin: ${11:value}                                          # Specify the prefix list to filter traffic inbound 
+    pn_prefix_listout: ${12:value}                                         # Specify the prefix list to filter traffic outbound 
+    pn_route_reflector: ${13:value}                                        # Specify if a route reflector client is used 
+    pn_override_capability: ${14:value}                                    # Specify if you want to override capability 
+    pn_soft_reconfig: ${15:value}                                          # Specify if you want a soft reconfiguration of inbound traffic 
+    pn_max_prefix: ${16:value}                                             # Specify the maximum number of prefixes 
+    pn_max_prefix_warn: ${17:value}                                        # Specify if you want a warning message when the maximum number of prefixes is exceeded 
+    pn_bfd: ${18:value}                                                    # Specify if you want BFD protocol support for fault detection 
+    pn_multiprotocol: ${19$$(yas-choose-value '("ipv4-unicast" "ipv6-unicast"))}# choices: ipv4-unicast;ipv6-unicast  Specify a multi-protocol for BGP 
+    pn_weight: ${20:value}                                                 # Specify a default weight value between 0 and 65535 for the neighbor routes 
+    pn_default_originate: ${21:value}                                      # Specify if you want announce default routes to the neighbor or not 
+    pn_keepalive: ${22:value}                                              # Specify BGP neighbor keepalive interval in seconds 
+    pn_holdtime: ${23:value}                                               # Specify BGP neighbor holdtime in seconds 
+    pn_route_mapin: ${24:value}                                            # Specify inbound route map for neighbor 
+    pn_route_mapout: ${25:value}                                           # Specify outbound route map for neighbor 

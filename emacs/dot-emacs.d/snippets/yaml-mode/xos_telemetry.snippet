@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Telemetry Monitoring Service (TMS) configuration
+# prefix: nxos_telemetry_snippet
+# key: xos_telemetry
+# group: ansible
+# --
+
+- name: ${0:Telemetry Monitoring Service (TMS) configuration}
+  nxos_telemetry:                                                          
+    config: ${1:value}                                                     # T h e   p r o v i d e d   c o n f i g u r a t i o n
+    state: ${2$$(yas-choose-value '("merged" "replaced" "deleted"))}       # choices: merged;replaced;deleted  Final configuration state

@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: create, delete, or modify an Amazon Redshift instance
+# prefix: redshift_snippet
+# key: redshift
+# group: ansible
+# --
+
+- name: ${0:create, delete, or modify an Amazon Redshift instance}
+  redshift:                                                                
+    command: ${1$$(yas-choose-value '("create" "facts" "delete" "modify"))}# Specifies the action to take 
+    identifier: ${2:Redshift cluster identifier}                           #
+    node_type: ${{3$$(yas-choose-value '("ds1}                             #xlarge,ds1 8xlarge,ds2 xlarge,ds2 8xlarge,dc1 large,dc1 8xlarge,dc2 large,dc2 8xlarge,dw1 xlarge,dw1 8xlarge,dw2 large,dw
+    username: ${4:value}                                                   # Master database username  Used only when command=create 
+    password: ${5:value}                                                   # Master database password  Used only when command=create 
+    cluster_type: ${6$$(yas-choose-value '("multi-node" "single-node"))}   # choices: multi-node;single-node  The type of cluster 
+    db_name: ${7:value}                                                    # Name of the database 
+    availability_zone: ${8:value}                                          # availability zone in which to launch cluster
+    number_of_nodes: ${9:value}                                            # Number of nodes  Only used when cluster_type=multi-node 
+    cluster_subnet_group_name: ${10:value}                                 # which subnet to place the cluster
+    cluster_security_groups: ${11:value}                                   # in which security group the cluster belongs
+    vpc_security_group_ids: ${12:value}                                    # VPC security group
+    skip_final_cluster_snapshot: ${13:false}                               # skip a final snapshot before deleting the cluster  Used only when command=delete 
+    final_cluster_snapshot_identifier: ${14:value}                         # identifier of the final snapshot to be created before deleting the cluster  If this parameter is provided, final_cluster
+    preferred_maintenance_window: ${15:value}                              # maintenance window
+    cluster_parameter_group_name: ${16:value}                              # name of the cluster parameter group
+    automated_snapshot_retention_period: ${17:value}                       # period when the snapshot take place
+    port: ${18:value}                                                      # which port the cluster is listening
+    cluster_version: ${{19$$(yas-choose-value '("1}                        #0|} # not required  choices: 1 0  which version the cluster should have
+    allow_version_upgrade: ${20:true}                                      # flag to determinate if upgrade of version is possible
+    publicly_accessible: ${21:false}                                       # if the cluster is accessible publicly or not
+    encrypted: ${22:false}                                                 # if the cluster is encrypted or not
+    elastic_ip: ${23:value}                                                # if the cluster has an elastic IP or not
+    new_cluster_identifier: ${24:value}                                    # Only used when command=modify 
+    wait: ${25:false}                                                      # When command=create, modify or restore then wait for the database to enter the 'available' state  When command=delete wa
+    wait_timeout: ${26:300}                                                # how long before wait gives up, in seconds
+    debug_botocore_endpoint_logs: ${27:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${28:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${29:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${30:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${31:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${32:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${33:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${34:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

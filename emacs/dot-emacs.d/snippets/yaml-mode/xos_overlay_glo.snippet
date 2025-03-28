@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Configures anycast gateway MAC of the switch.
+# prefix: nxos_overlay_global_snippet
+# key: xos_overlay_glo
+# group: ansible
+# --
+
+- name: ${0:Configures anycast gateway MAC of the switch.}
+  nxos_overlay_global:                                                     
+    anycast_gateway_mac: ${1:Anycast gateway mac of the switch}            #
+    provider: ${2:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

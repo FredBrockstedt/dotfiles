@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manages global GTM settings
+# prefix: bigip_gtm_global_snippet
+# key: gip_gtm_glo
+# group: ansible
+# --
+
+- name: ${0:Manages global GTM settings}
+  bigip_gtm_global:                                                        
+    synchronization: ${1:value}                                            # Specifies whether this system is a member of a synchronization group  When you enable synchronization, the system period
+    synchronization_group_name: ${2:value}                                 # Specifies the name of the synchronization group to which the system belongs 
+    synchronize_zone_files: ${3:value}                                     # Specifies that the system synchronizes Domain Name System (DNS) zone files among the synchronization group members 
+    provider: ${4:value}                                                   # A dict object containing connection details 

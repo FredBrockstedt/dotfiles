@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Control active and configured mount points
+# prefix: mount_snippet
+# key: mount
+# group: ansible
+# --
+
+- name: ${0:Control active and configured mount points}
+  mount:                                                                   
+    path: ${1:Path to the mount point (e}                                  #g  C(/mnt/files))  Before Ansible 2 3 this option was only usable as I(dest), I(destfile) and I(name) 
+    state: ${2$$(yas-choose-value '("absent" "mounted" "present" "unmounted" "remounted"))}# If C(mounted), the device will be actively mounted and appropriately configured in I(fstab)  If the moun
+    src: ${3:value}                                                        # Device to be mounted on I(path)  Required when I(state) set to C(present) or C(mounted) 
+    fstype: ${4:value}                                                     # Filesystem type  Required when I(state) is C(present) or C(mounted) 
+    opts: ${5:value}                                                       # Mount options (see fstab(5), or vfstab(4) on Solaris) 
+    dump: ${6:0}                                                           # Dump (see fstab(5))  Note that if set to C(null) and I(state) set to C(present), it will cease to work and duplicate ent
+    passno: ${7:0}                                                         # Passno (see fstab(5))  Note that if set to C(null) and I(state) set to C(present), it will cease to work and duplicate e
+    fstab: ${8:value}                                                      # File to use instead of C(/etc/fstab)  You should not use this option unless you really know what you are doing  This mig
+    boot: ${9:True}                                                        # Determines if the filesystem should be mounted on boot  Only applies to Solaris systems 
+    backup: ${10:False}                                                    # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 

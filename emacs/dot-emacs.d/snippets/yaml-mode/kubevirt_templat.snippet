@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Manage KubeVirt templates
+# prefix: kubevirt_template_snippet
+# key: kubevirt_templat
+# group: ansible
+# --
+
+- name: ${0:Manage KubeVirt templates}
+  kubevirt_template:                                                       
+    name: ${1:Name of the Template object}                                 #
+    namespace: ${2:Namespace where the Template object exists}             #
+    objects: ${3:value}                                                    # List of any valid API objects, such as a I(DeploymentConfig), I(Service), etc  The object will be created exactly as def
+    merge_type: ${4$$(yas-choose-value '("json" "merge" "strategic-merge"))}# choices: json;merge;strategic-merge  Whether to override the default patch merge approach with a specific type  By defa
+    display_name: ${5:value}                                               # A brief, user-friendly name, which can be employed by user interfaces 
+    description: ${6:value}                                                # A description of the template  Include enough detail that the user will understand what is being deployed    and any cav
+    long_description: ${7:value}                                           # Additional template description  This may be displayed by the service catalog, for example 
+    provider_display_name: ${8:value}                                      # The name of the person or organization providing the template 
+    documentation_url: ${9:value}                                          # A URL referencing further documentation for the template 
+    support_url: ${10:value}                                               # A URL where support can be obtained for the template 
+    editable: ${11:value}                                                  # Extension for hinting at which elements should be considered editable  List of jsonpath selectors  The jsonpath root is 
+    default_disk: ${12:value}                                              # The goal of default disk is to define what kind of disk is supported by the OS mainly in terms of bus (ide, scsi, sata, 
+    default_volume: ${13:value}                                            # The goal of default volume is to be able to configure mostly performance parameters like caches if those are exposed by 
+    default_nic: ${14:value}                                               # The goal of default network is similar to I(default_disk) and should be used as a template to ensure OS compatibility an
+    default_network: ${15:value}                                           # The goal of default network is similar to I(default_volume) and should be used as a template that specifies performance 
+    icon_class: ${16:value}                                                # An icon to be displayed with your template in the web console  Choose from our existing logo icons when possible  You ca
+    parameters: ${17:value}                                                # Parameters allow a value to be supplied by the user or generated when the template is instantiated  Then, that value is 
+    version: ${18:value}                                                   # Template structure version  This is parameter can be used only when kubevirt addon is installed on your openshift cluste
+    host: ${19:value}                                                      # Provide a URL for accessing the API  Can also be specified via K8S_AUTH_HOST environment variable 
+    api_key: ${20:value}                                                   # Token used to authenticate with the API  Can also be specified via K8S_AUTH_API_KEY environment variable 
+    kubeconfig: ${21:value}                                                # Path to an existing Kubernetes config file  If not provided, and no other connection options are provided, the openshift
+    context: ${22:value}                                                   # The name of a context found in the config file  Can also be specified via K8S_AUTH_CONTEXT environment variable 
+    username: ${23:value}                                                  # Provide a username for authenticating with the API  Can also be specified via K8S_AUTH_USERNAME environment variable  Pl
+    password: ${24:value}                                                  # Provide a password for authenticating with the API  Can also be specified via K8S_AUTH_PASSWORD environment variable  Pl
+    client_cert: ${25:value}                                               # Path to a certificate used to authenticate with the API  Can also be specified via K8S_AUTH_CERT_FILE environment variab
+    client_key: ${26:value}                                                # Path to a key file used to authenticate with the API  Can also be specified via K8S_AUTH_KEY_FILE environment variable 
+    ca_cert: ${27:value}                                                   # Path to a CA certificate used to authenticate with the API  The full certificate chain must be provided to avoid certifi
+    validate_certs: ${28:value}                                            # Whether or not to verify the API server's SSL certificates  Can also be specified via K8S_AUTH_VERIFY_SSL environment va
+    proxy: ${29:value}                                                     # The URL of an HTTP proxy to use for the connection  Can also be specified via K8S_AUTH_PROXY environment variable  Pleas
+    state: ${30$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Determines if an object should be created, patched, or deleted  When set to C(present), an obje
+    force: ${31:False}                                                     # If set to C(yes), and I(state) is C(present), an existing object will be replaced 

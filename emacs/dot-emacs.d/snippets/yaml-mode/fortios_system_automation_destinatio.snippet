@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Automation destinations in Fortinet's FortiOS and FortiGate.
+# prefix: fortios_system_automation_destination_snippet
+# key: fortios_system_automation_destinatio
+# group: ansible
+# --
+
+- name: ${0:Automation destinations in Fortinet's FortiOS and FortiGate.}
+  fortios_system_automation_destination:                                   
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Indicates whether to create or remove the object 
+    host: ${2:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${3:value}                                                   # FortiOS or FortiGate username 
+    password: ${4:}                                                        # FortiOS or FortiGate password 
+    vdom: ${5:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${6:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${7:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 
+    system_automation_destination: ${8:None}                               # Automation destinations 

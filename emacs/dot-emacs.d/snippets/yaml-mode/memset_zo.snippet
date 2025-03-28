@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Creates and deletes Memset DNS zones.
+# prefix: memset_zone_snippet
+# key: memset_zo
+# group: ansible
+# --
+
+- name: ${0:Creates and deletes Memset DNS zones.}
+  memset_zone:                                                             
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # Indicates desired state of resource 
+    api_key: ${2:The API key obtained from the Memset control panel}       #
+    name: ${3:The zone nickname; usually the same as the main domain}      # Ensure this value has at most 250 characters 
+    ttl: ${4$$(yas-choose-value '("0" "300" "600" "900" "1800" "3600" "7200" "10800" "21600" "43200" "86400"))}# choices: 0;300;600;900;1800;3600;7200;10800;21600;43200;86400  The default TTL for a
+    force: ${5:False}                                                      # Forces deletion of a zone and all zone domains/zone records it contains 

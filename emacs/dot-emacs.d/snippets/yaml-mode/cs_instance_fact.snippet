@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Gathering facts from the API of instances from Apache CloudStack based clouds.
+# prefix: cs_instance_facts_snippet
+# key: cs_instance_fact
+# group: ansible
+# --
+
+- name: ${0:Gathering facts from the API of instances from Apache CloudStack based clouds.}
+  cs_instance_facts:                                                       
+    name: ${1:Name or display name of the instance}                        #
+    domain: ${2:value}                                                     # Domain the instance is related to 
+    account: ${3:value}                                                    # Account the instance is related to 
+    project: ${4:value}                                                    # Project the instance is related to 
+    api_key: ${5:value}                                                    # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${6:value}                                                 # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${7:value}                                                    # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${8$$(yas-choose-value '("get" "post"))}              # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${9:value}                                                # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${10:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

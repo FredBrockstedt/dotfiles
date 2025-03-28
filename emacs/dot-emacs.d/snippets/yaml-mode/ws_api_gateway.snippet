@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage AWS API Gateway APIs
+# prefix: aws_api_gateway_snippet
+# key: ws_api_gateway
+# group: ansible
+# --
+
+- name: ${0:Manage AWS API Gateway APIs}
+  aws_api_gateway:                                                         
+    api_id: ${1:value}                                                     # The ID of the API you want to manage 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  NOT IMPLEMENTED Create or delete API - currently we always create 
+    swagger_file: ${3:value}                                               # JSON or YAML file containing swagger definitions for API  Exactly one of swagger_file, swagger_text or swagger_dict must
+    swagger_text: ${4:value}                                               # Swagger definitions for API in JSON or YAML as a string direct from playbook 
+    swagger_dict: ${5:value}                                               # Swagger definitions API ansible dictionary which will be converted to JSON and uploaded 
+    stage: ${6:value}                                                      # The name of the stage the API should be deployed to 
+    deploy_desc: ${{7:"Automatic deployment by Ansible}                    #"} # not required  Description of the deployment - recorded and visible in the AWS console 
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

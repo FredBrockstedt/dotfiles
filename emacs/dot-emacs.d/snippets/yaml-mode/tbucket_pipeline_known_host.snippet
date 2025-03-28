@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages Bitbucket pipeline known hosts
+# prefix: bitbucket_pipeline_known_host_snippet
+# key: tbucket_pipeline_known_host
+# group: ansible
+# --
+
+- name: ${0:Manages Bitbucket pipeline known hosts}
+  bitbucket_pipeline_known_host:                                           
+    repository: ${1:The repository name}                                   #
+    username: ${2:The repository owner}                                    #
+    name: ${3:The FQDN of the known host}                                  #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # Indicates desired state of the record 
+    client_id: ${5:value}                                                  # The OAuth consumer key  If not set the environment variable C(BITBUCKET_CLIENT_ID) will be used 
+    client_secret: ${6:value}                                              # The OAuth consumer secret  If not set the environment variable C(BITBUCKET_CLIENT_SECRET) will be used 
+    key: ${7:value}                                                        # The public key 

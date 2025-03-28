@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages security groups on Apache CloudStack based clouds.
+# prefix: cs_securitygroup_snippet
+# key: cs_securitygroup
+# group: ansible
+# --
+
+- name: ${0:Manages security groups on Apache CloudStack based clouds.}
+  cs_securitygroup:                                                        
+    name: ${1:Name of the security group}                                  #
+    description: ${2:value}                                                # Description of the security group 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the security group 
+    domain: ${4:value}                                                     # Domain the security group is related to 
+    account: ${5:value}                                                    # Account the security group is related to 
+    project: ${6:value}                                                    # Name of the project the security group to be created in 
+    api_key: ${7:value}                                                    # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${8:value}                                                 # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${9:value}                                                    # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${10$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${11:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${12:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

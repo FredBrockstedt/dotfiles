@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove/modify vrouter-interface.
+# prefix: pn_vrouterif_snippet
+# key: pn_vrouterif
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove/modify vrouter-interface.}
+  pn_vrouterif:                                                            
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use 'present' to add vrouter interface, 'absent' to remove vrouter interface and 'update' t
+    pn_vrouter_name: ${2:Specify the name of the vRouter interface}        #
+    pn_cliusername: ${3:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${4:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${5:local}                                               # Target switch to run the cli on 
+    pn_vlan: ${6:value}                                                    # Specify the VLAN identifier  This is a value between 1 and 4092 
+    pn_interface_ip: ${7:value}                                            # Specify the IP address of the interface in x x x x/n format 
+    pn_assignment: ${8$$(yas-choose-value '("none" "dhcp" "dhcpv6" "autov6"))}# choices: none;dhcp;dhcpv6;autov6  Specify the DHCP method for IP address assignment 
+    pn_vxlan: ${9:value}                                                   # Specify the VXLAN identifier  This is a value between 1 and 16777215 
+    pn_interface: ${10$$(yas-choose-value '("mgmt" "data" "span"))}        # choices: mgmt;data;span  Specify if the interface is management, data or span interface 
+    pn_alias: ${11:value}                                                  # Specify an alias for the interface 
+    pn_exclusive: ${12:value}                                              # Specify if the interface is exclusive to the configuration  Exclusive means that other configurations cannot use the int
+    pn_nic_enable: ${13:value}                                             # Specify if the NIC is enabled or not
+    pn_vrrp_id: ${14:value}                                                # Specify the ID for the VRRP interface  The IDs on both vRouters must be the same IS number 
+    pn_vrrp_priority: ${15:value}                                          # Specify the priority for the VRRP interface  This is a value between 1 (lowest) and 255 (highest) 
+    pn_vrrp_adv_int: ${16:value}                                           # Specify a VRRP advertisement interval in milliseconds  The range is from 30 to 40950 with a default value of 1000 
+    pn_l3port: ${17:value}                                                 # Specify a Layer 3 port for the interface 
+    pn_secondary_macs: ${18:value}                                         # Specify a secondary MAC address for the interface 
+    pn_nic_str: ${19:value}                                                # Specify the type of NIC  Used for vrouter-interface remove/modify 

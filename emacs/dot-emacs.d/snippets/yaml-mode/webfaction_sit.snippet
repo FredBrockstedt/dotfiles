@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Add or remove a website on a Webfaction host
+# prefix: webfaction_site_snippet
+# key: webfaction_sit
+# group: ansible
+# --
+
+- name: ${0:Add or remove a website on a Webfaction host}
+  webfaction_site:                                                         
+    name: ${1:The name of the website}                                     #
+    host: ${2:The webfaction host on which the site should be created}     #
+    login_name: ${3:The webfaction account to use}                         #
+    login_password: ${4:The webfaction password to use}                    #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the website should exist
+    https: ${6:false}                                                      # Whether or not to use HTTPS
+    site_apps: ${7:[]}                                                     # A mapping of URLs to apps
+    subdomains: ${8:[]}                                                    # A list of subdomains associated with this site 

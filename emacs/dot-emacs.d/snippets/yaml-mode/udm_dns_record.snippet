@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage dns entries on a univention corporate server
+# prefix: udm_dns_record_snippet
+# key: udm_dns_record
+# group: ansible
+# --
+
+- name: ${0:Manage dns entries on a univention corporate server}
+  udm_dns_record:                                                          
+    name: ${1:Name of the record, this is also the DNS record}             # E g  www for www example com 
+    zone: ${2:Corresponding DNS zone for this record, e}                   #g  example com 
+    type: ${3$$(yas-choose-value '("host_record" "alias" "ptr_record" "srv_record" "txt_record"))}# Define the record type  C(host_record) is a A or AAAA record, C(alias) is a CNAME, C(ptr_record) 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the dns record is present or not 
+    data: ${5:[]}                                                          # Additional data for this record, e g  ['a': '192 0 2 1']  Required if C(state=present) 

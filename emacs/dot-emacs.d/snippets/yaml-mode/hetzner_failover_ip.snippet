@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Hetzner's failover IPs
+# prefix: hetzner_failover_ip_snippet
+# key: hetzner_failover_ip
+# group: ansible
+# --
+
+- name: ${0:Manage Hetzner's failover IPs}
+  hetzner_failover_ip:                                                     
+    failover_ip: ${1:T h e   f a i l o v e r   I P   a d d r e s s }       #
+    hetzner_user: ${2:T h e   u s e r n a m e   f o r   t h e   R o b o t   w e b s e r v i c e   u s e r }#
+    hetzner_password: ${3:T h e   p a s s w o r d   f o r   t h e   R o b o t   w e b s e r v i c e   u s e r }#
+    state: ${4$$(yas-choose-value '("routed" "unrouted"))}                 # choices: routed;unrouted  Defines whether the IP will be routed or not  If set to C(routed), I(value) must be specified 
+    value: ${5:value}                                                      # The new value for the failover IP address  Required when setting I(state) to C(routed) 
+    timeout: ${6:180}                                                      # Timeout to use when routing or unrouting the failover IP  Note that the API call returns when the failover IP has been s

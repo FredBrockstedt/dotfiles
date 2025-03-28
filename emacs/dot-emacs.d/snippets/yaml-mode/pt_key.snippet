@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Add or remove an apt key
+# prefix: apt_key_snippet
+# key: pt_key
+# group: ansible
+# --
+
+- name: ${0:Add or remove an apt key}
+  apt_key:                                                                 
+    id: ${1:value}                                                         # The identifier of the key  Including this allows check mode to correctly report the changed state  If specifying a subke
+    data: ${2:value}                                                       # The keyfile contents to add to the keyring 
+    file: ${3:value}                                                       # The path to a keyfile on the remote server to add to the keyring 
+    keyring: ${4:value}                                                    # The full path to specific keyring file in /etc/apt/trusted gpg d/
+    url: ${5:value}                                                        # The URL to retrieve key from 
+    keyserver: ${6:value}                                                  # The keyserver to retrieve key from 
+    state: ${7$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Ensures that the key is present (added) or absent (revoked) 
+    validate_certs: ${8:true}                                              # If C(no), SSL certificates for the target url will not be validated  This should only be used on personally controlled s

@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Version
+# prefix: gcp_mlengine_version_snippet
+# key: gcp_mlengine_versio
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Version}
+  gcp_mlengine_version:                                                    
+    name: ${1:The name specified for the version when it was created}      # The version name must be unique within the model it is created in 
+    deployment_uri: ${2:The Cloud Storage location of the trained model used to create the version}#
+    model: ${3:The model that this version belongs to}                     # This field represents a link to a Model resource in GCP  It can be specified in two ways  First, you can place a diction
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${6:value}                                                # The description specified for the version when it was created 
+    runtime_version: ${7:value}                                            # The AI Platform runtime version to use for this deployment 
+    machine_type: ${8:value}                                               # The type of machine on which to serve the model  Currently only applies to online prediction service  Some valid choices
+    labels: ${9:value}                                                     # One or more labels that you can add, to organize your model versions 
+    framework: ${10:value}                                                 # The machine learning framework AI Platform uses to train this version of the model  Some valid choices include: "FRAMEWO
+    python_version: ${11:value}                                            # The version of Python used in prediction  If not set, the default version is '2 7'  Python '3 5' is available when runti
+    service_account: ${12:value}                                           # Specifies the service account for resource access control 
+    auto_scaling: ${13:value}                                              # Automatically scale the number of nodes used to serve the model in response to increases and decreases in traffic  Care 
+    manual_scaling: ${14:value}                                            # Manually select the number of nodes to use for serving the model  You should generally use autoScaling with an appropria
+    prediction_class: ${15:value}                                          # The fully qualified name (module_name class_name) of a class that implements the Predictor interface described in this r
+    is_default: ${16:value}                                                # If true, this version will be used to handle prediction requests that do not specify a version 
+    project: ${17:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${18:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${19:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${20:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${21:value}                                                    # Array of scopes to be used 
+    env_type: ${22:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove vrouter-packet-relay
+# prefix: pn_vrouter_packet_relay_snippet
+# key: pn_vrouter_packet_relay
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove vrouter-packet-relay}
+  pn_vrouter_packet_relay:                                                 
+    pn_forward_ip: ${1:forwarding IP address}                              #
+    pn_nic: ${2:NIC}                                                       #
+    pn_vrouter_name: ${3:name of service config}                           #
+    pn_cliswitch: ${4:value}                                               # Target switch to run the CLI on 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  vrouter-packet-relay configuration command 
+    pn_forward_proto: ${6$$(yas-choose-value '("dhcp"))}                   # choices: dhcp  protocol type to forward packets 

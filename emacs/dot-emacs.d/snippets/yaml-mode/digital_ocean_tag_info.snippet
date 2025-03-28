@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Gather information about DigitalOcean tags
+# prefix: digital_ocean_tag_info_snippet
+# key: digital_ocean_tag_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about DigitalOcean tags}
+  digital_ocean_tag_info:                                                  
+    tag_name: ${1:value}                                                   # Tag name that can be used to identify and reference a tag 
+    oauth_token: ${2:value}                                                # DigitalOcean OAuth token  There are several other environment variables which can be used to provide this value  i e , -
+    timeout: ${3:30}                                                       # The timeout in seconds used for polling DigitalOcean's API 
+    validate_certs: ${4:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled

@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage HTTP analytics profiles on a BIG-IP
+# prefix: bigip_profile_analytics_snippet
+# key: gip_profile_analytic
+# group: ansible
+# --
+
+- name: ${0:Manage HTTP analytics profiles on a BIG-IP}
+  bigip_profile_analytics:                                                 
+    name: ${1:Specifies the name of the profile}                           #
+    parent: ${2:value}                                                     # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    description: ${3:value}                                                # Description of the profile 
+    collect_geo: ${4:value}                                                # Enables or disables the collection of the names of the countries from where the traffic was sent 
+    collect_ip: ${5:value}                                                 # Enables or disables the collection of client IPs statistics 
+    collect_max_tps_and_throughput: ${6:value}                             # Enables or disables the collection of maximum TPS and throughput for all collected entities 
+    collect_page_load_time: ${7:value}                                     # Enables or disables the collection of the page load time statistics 
+    collect_url: ${8:value}                                                # Enables or disables the collection of requested URL statistics 
+    collect_user_agent: ${9:value}                                         # Enables or disables the collection of user agents 
+    collect_user_sessions: ${10:value}                                     # Enables or disables the collection of the unique user sessions 
+    collected_stats_external_logging: ${11:value}                          # Enables or disables the external logging of the collected statistics 
+    collected_stats_internal_logging: ${12:value}                          # Enables or disables the internal logging of the collected statistics 
+    external_logging_publisher: ${13:value}                                # Specifies the external logging publisher used to send statistical data to one or more destinations 
+    notification_by_syslog: ${14:value}                                    # Enables or disables logging of the analytics alerts into the Syslog 
+    notification_by_email: ${15:value}                                     # Enables or disables sending the analytics alerts by email 
+    notification_email_addresses: ${16:value}                              # Specifies which email addresses receive alerts by email when C(notification_by_email) is enabled 
+    partition: ${17:Common}                                                # Device partition to manage resources on 
+    state: ${18$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${19:value}                                                  # A dict object containing connection details 

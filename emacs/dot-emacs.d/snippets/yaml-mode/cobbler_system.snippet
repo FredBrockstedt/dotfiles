@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage system objects in Cobbler
+# prefix: cobbler_system_snippet
+# key: cobbler_system
+# group: ansible
+# --
+
+- name: ${0:Manage system objects in Cobbler}
+  cobbler_system:                                                          
+    password: ${1:The password to log in to Cobbler}                       #
+    host: ${{2:127}                                                        #0 0 1} # not required  The name or IP address of the Cobbler system 
+    port: ${3:value}                                                       # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${4:cobbler}                                                 # The username to log in to Cobbler 
+    use_ssl: ${5:true}                                                     # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${6:true}                                              # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites
+    name: ${7:value}                                                       # The system name to manage 
+    properties: ${8:value}                                                 # A dictionary with system properties 
+    interfaces: ${9:value}                                                 # A list of dictionaries containing interface options 
+    sync: ${10:False}                                                      # Sync on changes  Concurrently syncing Cobbler is bound to fail 
+    state: ${11$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Whether the system should be present, absent or a query is made 

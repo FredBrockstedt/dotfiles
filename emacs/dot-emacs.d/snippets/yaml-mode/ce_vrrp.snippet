@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manages VRRP interfaces on HUAWEI CloudEngine devices.
+# prefix: ce_vrrp_snippet
+# key: ce_vrrp
+# group: ansible
+# --
+
+- name: ${0:Manages VRRP interfaces on HUAWEI CloudEngine devices.}
+  ce_vrrp:                                                                 
+    interface: ${1:value}                                                  # Name of an interface  The value is a string of 1 to 63 characters 
+    vrid: ${2:present}                                                     # VRRP backup group ID  The value is an integer ranging from 1 to 255 
+    virtual_ip: ${3:value}                                                 # Virtual IP address  The value is a string of 0 to 255 characters 
+    vrrp_type: ${4$$(yas-choose-value '("normal" "member" "admin"))}       # choices: normal;member;admin  Type of a VRRP backup group 
+    admin_ignore_if_down: ${5:false}                                       # mVRRP ignores an interface Down event 
+    admin_vrid: ${6:value}                                                 # Tracked mVRRP ID  The value is an integer ranging from 1 to 255 
+    admin_interface: ${7:value}                                            # Tracked mVRRP interface name  The value is a string of 1 to 63 characters 
+    admin_flowdown: ${8:false}                                             # Disable the flowdown function for service VRRP 
+    priority: ${9:value}                                                   # Configured VRRP priority  The value ranges from 1 to 254  The default value is 100  A larger value indicates a higher pr
+    version: ${10$$(yas-choose-value '("v2" "v3"))}                        # choices: v2;v3  VRRP version  The default version is v2 
+    advertise_interval: ${11:value}                                        # Configured interval between sending advertisements, in milliseconds  Only the master router sends VRRP advertisements  T
+    preempt_timer_delay: ${12:value}                                       # Preemption delay  The value is an integer ranging from 0 to 3600  The default value is 0 
+    gratuitous_arp_interval: ${13:value}                                   # Interval at which gratuitous ARP packets are sent, in seconds  The value ranges from 30 to 1200 The default value is 300
+    recover_delay: ${14:value}                                             # Delay in recovering after an interface goes Up  The delay is used for interface flapping suppression  The value is an in
+    holding_multiplier: ${15:value}                                        # The configured holdMultiplier The value is an integer ranging from 3 to 10  The default value is 3 
+    auth_mode: ${16$$(yas-choose-value '("simple" "md5" "none"))}          # choices: simple;md5;none  Authentication type used for VRRP packet exchanges between virtual routers  The values are noA
+    is_plain: ${17:false}                                                  # Select the display mode of an authentication key  By default, an authentication key is displayed in ciphertext 
+    auth_key: ${18:value}                                                  # This object is set based on the authentication type  When noAuthentication is specified, the value is empty  When simple
+    fast_resume: ${19$$(yas-choose-value '("enable" "disable"))}           # choices: enable;disable  mVRRP's fast resume mode 
+    state: ${20$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Specify desired state of the resource 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Send notifications via U(https://pushover.net)
+# prefix: pushover_snippet
+# key: pushover
+# group: ansible
+# --
+
+- name: ${0:Send notifications via U(https://pushover.net)}
+  pushover:                                                                
+    msg: ${1:What message you wish to send}                                #
+    app_token: ${2:Pushover issued token identifying your pushover app}    #
+    user_key: ${3:Pushover issued authentication key for your user}        #
+    title: ${4:value}                                                      # Message title 
+    pri: ${5:value}                                                        # Message priority (see U(https://pushover net) for details) 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages physical attributes of interfaces on HUAWEI CloudEngine switches.
+# prefix: ce_interface_snippet
+# key: ce_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages physical attributes of interfaces on HUAWEI CloudEngine switches.}
+  ce_interface:                                                            
+    interface: ${1:value}                                                  # Full name of interface, i e  40GE1/0/10, Tunnel1 
+    interface_type: ${2$$(yas-choose-value '("ge" "10ge" "25ge" "4x10ge" "40ge" "100ge" "vlanif" "loopback" "meth" "eth-trunk" "nve" "tunnel" "ethernet" "fcoe-port" "fabric-port" "stack-port" "null
+    admin_state: ${3$$(yas-choose-value '("up" "down"))}                   # choices: up;down  Specifies the interface management status  The value is an enumerated type  up, An interface is in the
+    description: ${4:value}                                                # Specifies an interface description  The value is a string of 1 to 242 case-sensitive characters, spaces supported but qu
+    mode: ${5$$(yas-choose-value '("layer2" "layer3"))}                    # choices: layer2;layer3  Manage Layer 2 or Layer 3 state of the interface 
+    l2sub: ${6:false}                                                      # Specifies whether the interface is a Layer 2 sub-interface 
+    state: ${7$$(yas-choose-value '("present" "absent" "default"))}        # choices: present;absent;default  Specify desired state of the resource 

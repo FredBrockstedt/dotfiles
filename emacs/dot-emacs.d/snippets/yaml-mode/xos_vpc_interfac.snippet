@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages interface VPC configuration
+# prefix: nxos_vpc_interface_snippet
+# key: xos_vpc_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages interface VPC configuration}
+  nxos_vpc_interface:                                                      
+    portchannel: ${1:Group number of the portchannel that will be configured}#
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Manages desired state of the resource 
+    vpc: ${3:value}                                                        # VPC group/id that will be configured on associated portchannel 
+    peer_link: ${4:value}                                                  # Set to true/false for peer link config on associated portchannel 
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

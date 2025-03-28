@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage FreeIPA users
+# prefix: ipa_user_snippet
+# key: pa_user
+# group: ansible
+# --
+
+- name: ${0:Manage FreeIPA users}
+  ipa_user:                                                                
+    uid: ${1:u i d   o f   t h e   u s e r}                                #
+    ipa_pass: ${2:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    displayname: ${3:value}                                                # D i s p l a y   n a m e
+    update_password: ${4$$(yas-choose-value '("always" "on_create"))}      # choices: always;on_create  Set password for a user 
+    givenname: ${5:value}                                                  # F i r s t   n a m e
+    krbpasswordexpiration: ${6:value}                                      # Date at which the user password will expire In the format YYYYMMddHHmmss e g  20180121182022 will expire on 21 January 2
+    loginshell: ${7:value}                                                 # L o g i n   s h e l l
+    mail: ${8:value}                                                       # List of mail addresses assigned to the user  If an empty list is passed all assigned email addresses will be deleted  If
+    password: ${9:value}                                                   # Password for a user  Will not be set for an existing user unless C(update_password) is set to C(always), which is the de
+    sn: ${10:value}                                                        # S u r n a m e
+    sshpubkey: ${11:value}                                                 # List of public SSH key  If an empty list is passed all assigned public keys will be deleted  If None is passed SSH publi
+    state: ${12$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  S t a t e   t o   e n s u r e
+    telephonenumber: ${13:value}                                           # List of telephone numbers assigned to the user  If an empty list is passed all assigned telephone numbers will be delete
+    title: ${14:value}                                                     # T i t l e
+    uidnumber: ${15:value}                                                 # Account Settings UID/Posix User ID number
+    gidnumber: ${16:value}                                                 # Posix Group ID
+    ipa_port: ${17:443}                                                    # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{18:ipa}                                                   #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${19:admin}                                                  # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${20$$(yas-choose-value '("http" "https"))}                  # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${21:True}                                             # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${22:10}                                                  # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

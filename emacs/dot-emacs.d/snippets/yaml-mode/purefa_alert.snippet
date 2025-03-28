@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Configure Pure Storage FlashArray alert email settings
+# prefix: purefa_alert_snippet
+# key: purefa_alert
+# group: ansible
+# --
+
+- name: ${0:Configure Pure Storage FlashArray alert email settings}
+  purefa_alert:                                                            
+    address: ${1:Email address (valid format required)}                    #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete alert email
+    enabled: ${5:True}                                                     # Set specified email address to be enabled or disabled

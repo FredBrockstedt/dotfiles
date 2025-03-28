@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage initial Contract Subjects (vz:Subj)
+# prefix: aci_contract_subject_snippet
+# key: ci_contract_subject
+# group: ansible
+# --
+
+- name: ${0:Manage initial Contract Subjects (vz:Subj)}
+  aci_contract_subject:                                                    
+    host: ${1:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${2:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${3:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    tenant: ${4:value}                                                     # The name of the tenant 
+    subject: ${5:value}                                                    # The contract subject name 
+    contract: ${6:value}                                                   # The name of the Contract 
+    reverse_filter: ${7:value}                                             # Determines if the APIC should reverse the src and dst ports to allow the return traffic back, since ACI is stateless fil
+    priority: ${8$$(yas-choose-value '("level1" "level2" "level3" "unspecified"))}# choices: level1;level2;level3;unspecified  The QoS class  The APIC defaults to C(unspecified) when unset during c
+    dscp: ${9$$(yas-choose-value '("AF11" "AF12" "AF13" "AF21" "AF22" "AF23" "AF31" "AF32" "AF33" "AF41" "AF42" "AF43" "CS0" "CS1" "CS2" "CS3" "CS4" "CS5" "CS6" "CS7" "EF" "VA" "unspecified"))}# ch
+    description: ${10:value}                                               # Description for the contract subject 
+    consumer_match: ${11$$(yas-choose-value '("all" "at_least_one" "at_most_one" "none"))}# choices: all;at_least_one;at_most_one;none  The match criteria across consumers  The APIC defaults to C(a
+    provider_match: ${12$$(yas-choose-value '("all" "at_least_one" "at_most_one" "none"))}# choices: all;at_least_one;at_most_one;none  The match criteria across providers  The APIC defaults to C(a
+    state: ${13$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${14:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${15:admin}                                                  # The username to use for authentication 
+    certificate_name: ${16:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${17$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${18:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${19:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${20:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${21:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

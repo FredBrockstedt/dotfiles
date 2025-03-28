@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: create or destroy instance templates of Compute Engine of GCP.
+# prefix: gce_instance_template_snippet
+# key: gce_instance_templat
+# group: ansible
+# --
+
+- name: ${0:create or destroy instance templates of Compute Engine of GCP.}
+  gce_instance_template:                                                   
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The desired state for the instance template 
+    name: ${2:value}                                                       # The name of the GCE instance template 
+    size: ${3:f1-micro}                                                    # The desired machine type for the instance template 
+    source: ${4:value}                                                     # A source disk to attach to the instance  Cannot specify both I(image) and I(source) 
+    image: ${5:value}                                                      # The image to use to create the instance  Cannot specify both both I(image) and I(source) 
+    image_family: ${6:value}                                               # The image family to use to create the instance  If I(image) has been used I(image_family) is ignored  Cannot specify bot
+    disk_type: ${7:pd-standard}                                            # Specify a C(pd-standard) disk or C(pd-ssd) for an SSD disk 
+    disk_auto_delete: ${8:True}                                            # Indicate that the boot disk should be deleted when the Node is deleted 
+    network: ${9:default}                                                  # The network to associate with the instance 
+    subnetwork: ${10:value}                                                # The Subnetwork resource name for this instance 
+    can_ip_forward: ${11:false}                                            # Set to C(yes) to allow instance to send/receive non-matching src/dst packets 
+    external_ip: ${12:ephemeral}                                           # The external IP address to use  If C(ephemeral), a new non-static address will be used   If C(None), then no external ad
+    service_account_email: ${13:value}                                     # service account email
+    service_account_permissions: ${14$$(yas-choose-value '("bigquery" "cloud-platform" "compute-ro" "compute-rw" "useraccounts-ro" "useraccounts-rw" "datastore" "logging-write" "monitoring" "sql-ad
+    automatic_restart: ${15:value}                                         # Defines whether the instance should be automatically restarted when it is terminated by Compute Engine 
+    preemptible: ${16:value}                                               # Defines whether the instance is preemptible 
+    tags: ${17:value}                                                      # a comma-separated list of tags to associate with the instance
+    metadata: ${18:value}                                                  # a hash/dictionary of custom data for the instance; '{"key":"value",    \}'
+    description: ${19:value}                                               # description of instance template
+    disks: ${20:value}                                                     # a list of persistent disks to attach to the instance; a string value gives the name of the disk; alternatively, a dictio
+    nic_gce_struct: ${21:value}                                            # Support passing in the GCE-specific formatted networkInterfaces[] structure 
+    disks_gce_struct: ${22:value}                                          # Support passing in the GCE-specific formatted formatted disks[] structure  Case sensitive  see U(https://cloud google co
+    project_id: ${23:value}                                                # your GCE project ID
+    pem_file: ${24:value}                                                  # path to the pem file associated with the service account email This option is deprecated  Use 'credentials_file' 
+    credentials_file: ${25:value}                                          # path to the JSON file associated with the service account email
+    subnetwork_region: ${26:value}                                         # Region that subnetwork resides in  (Required for subnetwork to successfully complete)

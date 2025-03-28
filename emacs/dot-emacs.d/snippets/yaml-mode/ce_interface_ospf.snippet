@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages configuration of an OSPF interface instanceon HUAWEI CloudEngine switches.
+# prefix: ce_interface_ospf_snippet
+# key: ce_interface_ospf
+# group: ansible
+# --
+
+- name: ${0:Manages configuration of an OSPF interface instanceon HUAWEI CloudEngine switches.}
+  ce_interface_ospf:                                                       
+    interface: ${1:Full name of interface, i}                              #e  40GE1/0/10 
+    process_id: ${2:Specifies a process ID}                                # The value is an integer ranging from 1 to 4294967295 
+    area: ${3:Ospf area associated with this ospf process}                 # Valid values are a string, formatted as an IP address (i e  "0 0 0 0") or as an integer between 1 and 4294967295 
+    cost: ${4:value}                                                       # The cost associated with this interface  Valid values are an integer in the range from 1 to 65535 
+    hello_interval: ${5:value}                                             # Time between sending successive hello packets  Valid values are an integer in the range from 1 to 65535 
+    dead_interval: ${6:value}                                              # Time interval an ospf neighbor waits for a hello packet before tearing down adjacencies  Valid values are an integer in 
+    silent_interface: ${7:false}                                           # Setting to true will prevent this interface from receiving HELLO packets  Valid values are 'true' and 'false' 
+    auth_mode: ${8$$(yas-choose-value '("none" "null" "hmac-sha256" "md5" "hmac-md5" "simple"))}# choices: none;null;hmac-sha256;md5;hmac-md5;simple  Specifies the authentication type 
+    auth_text_simple: ${9:value}                                           # Specifies a password for simple authentication  The value is a string of 1 to 8 characters 
+    auth_key_id: ${10:value}                                               # Authentication key id when C(auth_mode) is 'hmac-sha256', 'md5' or 'hmac-md5  Valid value is an integer is in the range 
+    auth_text_md5: ${11:value}                                             # Specifies a password for MD5, HMAC-MD5, or HMAC-SHA256 authentication  The value is a string of 1 to 255 case-sensitive 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 

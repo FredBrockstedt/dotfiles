@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Create, Delete and Restore server snapshots in CenturyLink Cloud.
+# prefix: clc_server_snapshot_snippet
+# key: clc_server_snapshot
+# group: ansible
+# --
+
+- name: ${0:Create, Delete and Restore server snapshots in CenturyLink Cloud.}
+  clc_server_snapshot:                                                     
+    server_ids: ${1:The list of CLC server Ids}                            #
+    expiration_days: ${2:7}                                                # The number of days to keep the server snapshot before it expires 
+    state: ${3$$(yas-choose-value '("present" "absent" "restore"))}        # choices: present;absent;restore  The state to insure that the provided resources are in 
+    wait: ${4:True}                                                        # Whether to wait for the provisioning tasks to finish before returning 

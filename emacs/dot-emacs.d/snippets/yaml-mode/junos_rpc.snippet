@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Runs an arbitrary RPC over NetConf on an Juniper JUNOS device
+# prefix: junos_rpc_snippet
+# key: junos_rpc
+# group: ansible
+# --
+
+- name: ${0:Runs an arbitrary RPC over NetConf on an Juniper JUNOS device}
+  junos_rpc:                                                               
+    rpc: ${1:The C(rpc) argument specifies the RPC call to send to the remote devices to be executed}#  The RPC Reply message is parsed and the contents are returned to the playbook 
+    args: ${2:value}                                                       # The C(args) argument provides a set of arguments for the RPC call and are encoded in the request message   This argument
+    attrs: ${3:value}                                                      # The C(attrs) arguments defines a list of attributes and their values to set for the RPC call  This accepts a dictionary 
+    output: ${4:xml}                                                       # The C(output) argument specifies the desired output of the return data   This argument accepts one of C(xml), C(text), o
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

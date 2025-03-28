@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP CryptoKey
+# prefix: gcp_kms_crypto_key_snippet
+# key: gcp_kms_crypto_key
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP CryptoKey}
+  gcp_kms_crypto_key:                                                      
+    name: ${1:The resource name for the CryptoKey}                         #
+    key_ring: ${2:The KeyRing that this key belongs to}                    # Format: `'projects/{{project\}\}/locations/{{location\}\}/keyRings/{{keyRing\}\}'` 
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    labels: ${5:value}                                                     # Labels with user-defined metadata to apply to this resource 
+    purpose: ${6:ENCRYPT_DECRYPT}                                          # Immutable purpose of CryptoKey  See U(https://cloud google com/kms/docs/reference/rest/v1/projects locations keyRings cr
+    rotation_period: ${7:value}                                            # Every time this period passes, generate a new CryptoKeyVersion and set it as the primary  The first rotation will take p
+    version_template: ${8:value}                                           # A template describing settings for new crypto key versions 
+    project: ${9:value}                                                    # The Google Cloud Platform project to use 
+    service_account_contents: ${10:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${11:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${12:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${13:value}                                                    # Array of scopes to be used 
+    env_type: ${14:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP CIFS server configuration
+# prefix: na_ontap_cifs_server_snippet
+# key: ontap_cifs_server
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP CIFS server configuration}
+  na_ontap_cifs_server:                                                    
+    name: ${1:Specifies the cifs_server name}                              #
+    vserver: ${2:The name of the vserver to use}                           #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified cifs_server should exist or not 
+    service_state: ${7$$(yas-choose-value '("stopped" "started"))}         # choices: stopped;started  CIFS Server Administrative Status 
+    admin_user_name: ${8:value}                                            # Specifies the cifs server admin username 
+    admin_password: ${9:value}                                             # Specifies the cifs server admin password 
+    domain: ${10:value}                                                    # The Fully Qualified Domain Name of the Windows Active Directory this CIFS server belongs to 
+    workgroup: ${11:value}                                                 # The NetBIOS name of the domain or workgroup this CIFS server belongs to 
+    ou: ${12:value}                                                        # The Organizational Unit (OU) within the Windows Active Directory this CIFS server belongs to 
+    force: ${13:value}                                                     # If this is set and a machine account with the same name as specified in 'name' exists in the Active Directory, it will b
+    https: ${14:False}                                                     # Enable and disable https
+    validate_certs: ${15:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${16:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${17:value}                                                    # The ontap api version to use
+    use_rest: ${18$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

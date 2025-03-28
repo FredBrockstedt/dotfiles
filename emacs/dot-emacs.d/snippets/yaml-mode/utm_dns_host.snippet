@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: create, update or destroy dns entry in Sophos UTM
+# prefix: utm_dns_host_snippet
+# key: utm_dns_host
+# group: ansible
+# --
+
+- name: ${0:create, update or destroy dns entry in Sophos UTM}
+  utm_dns_host:                                                            
+    name: ${1:The name of the object}                                      # Will be used to identify the entry
+    utm_host: ${2:The REST Endpoint of the Sophos UTM}                     #
+    utm_token: ${3:The token used to identify at the REST-API}             # See U(https://www sophos com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API pdf?la=en), Chapter 2
+    address: ${{4:0}                                                       #0 0 0} # not required  The IPV4 Address of the entry  Can be left empty for automatic resolving 
+    address6: ${5:::}                                                      # The IPV6 Address of the entry  Can be left empty for automatic resolving 
+    comment: ${6:value}                                                    # An optional comment to add to the dns host object
+    hostname: ${7:value}                                                   # The hostname for the dns host object
+    interface: ${8:value}                                                  # The reference name of the interface to use  If not provided the default interface will be used
+    resolved: ${9:False}                                                   # whether the hostname's ipv4 address is already resolved or not
+    resolved6: ${10:False}                                                 # whether the hostname's ipv6 address is already resolved or not
+    timeout: ${11:0}                                                       # the timeout for the utm to resolve the ip address for the hostname again
+    headers: ${12:value}                                                   # A dictionary of additional headers to be sent to POST and PUT requests  Is needed for some modules
+    utm_port: ${13:4444}                                                   # The port of the REST interface 
+    utm_protocol: ${14$$(yas-choose-value '("http" "https"))}              # choices: http;https  The protocol of the REST Endpoint 
+    validate_certs: ${15:True}                                             # Whether the REST interface's ssl certificate should be verified or not 
+    state: ${16$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The desired state of the object  C(present) will create or update an object C(absent) will dele

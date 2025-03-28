@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage VyOS configuration on remote device
+# prefix: vyos_config_snippet
+# key: vyos_config
+# group: ansible
+# --
+
+- name: ${0:Manage VyOS configuration on remote device}
+  vyos_config:                                                             
+    lines: ${1:value}                                                      # The ordered set of configuration lines to be managed and compared with the existing configuration on the remote device 
+    src: ${2:value}                                                        # The C(src) argument specifies the path to the source config file to load   The source config file can either be in brack
+    match: ${3$$(yas-choose-value '("line" "none"))}                       # choices: line;none  The C(match) argument controls the method used to match against the current active configuration   B
+    backup: ${4:false}                                                     # The C(backup) argument will backup the current devices active configuration to the Ansible control host prior to making 
+    comment: ${5:"configured by vyos_config"}                              # Allows a commit description to be specified to be included when the configuration is committed   If the configuration is
+    config: ${6:value}                                                     # The C(config) argument specifies the base configuration to use to compare against the desired configuration   If this va
+    save: ${7:false}                                                       # The C(save) argument controls whether or not changes made to the active configuration are saved to disk   This is indepe
+    backup_options: ${8:value}                                             # This is a dict object containing configurable options related to backup file path  The value of this option is read only
+    provider: ${9:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

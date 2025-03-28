@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage FreeIPA sudo rule
+# prefix: ipa_sudorule_snippet
+# key: pa_sudoru
+# group: ansible
+# --
+
+- name: ${0:Manage FreeIPA sudo rule}
+  ipa_sudorule:                                                            
+    cn: ${1:Canonical name}                                                # Can not be changed as it is the unique identifier 
+    ipa_pass: ${2:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    cmdcategory: ${3$$(yas-choose-value '("all"))}                         # choices: all  Command category the rule applies to 
+    cmd: ${4:value}                                                        # List of commands assigned to the rule  If an empty list is passed all commands will be removed from the rule  If option 
+    description: ${5:value}                                                # Description of the sudo rule 
+    host: ${6:value}                                                       # List of hosts assigned to the rule  If an empty list is passed all hosts will be removed from the rule  If option is omi
+    hostcategory: ${7$$(yas-choose-value '("all"))}                        # choices: all  Host category the rule applies to  If 'all' is passed one must omit C(host) and C(hostgroup)  Option C(hos
+    hostgroup: ${8:value}                                                  # List of host groups assigned to the rule  If an empty list is passed all host groups will be removed from the rule  If o
+    runasusercategory: ${9$$(yas-choose-value '("all"))}                   # choices: all  RunAs User category the rule applies to 
+    runasgroupcategory: ${10$$(yas-choose-value '("all"))}                 # choices: all  RunAs Group category the rule applies to 
+    sudoopt: ${11:value}                                                   # List of options to add to the sudo rule 
+    user: ${12:value}                                                      # List of users assigned to the rule  If an empty list is passed all users will be removed from the rule  If option is omi
+    usercategory: ${13$$(yas-choose-value '("all"))}                       # choices: all  User category the rule applies to 
+    usergroup: ${14:value}                                                 # List of user groups assigned to the rule  If an empty list is passed all user groups will be removed from the rule  If o
+    state: ${15$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  S t a t e   t o   e n s u r e
+    ipa_port: ${16:443}                                                    # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{17:ipa}                                                   #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${18:admin}                                                  # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${19$$(yas-choose-value '("http" "https"))}                  # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${20:True}                                             # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${21:10}                                                  # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

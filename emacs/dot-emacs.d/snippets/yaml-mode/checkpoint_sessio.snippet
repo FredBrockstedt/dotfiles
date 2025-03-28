@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages session objects on Check Point over Web Services API
+# prefix: checkpoint_session_snippet
+# key: checkpoint_sessio
+# group: ansible
+# --
+
+- name: ${0:Manages session objects on Check Point over Web Services API}
+  checkpoint_session:                                                      
+    uid: ${1:UID of the session}                                           #
+    state: ${2$$(yas-choose-value '("published" "discarded"))}             # choices: published;discarded  Action to perform on the session object  Valid choices are published and discarded 

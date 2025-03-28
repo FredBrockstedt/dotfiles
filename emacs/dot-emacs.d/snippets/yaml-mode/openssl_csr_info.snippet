@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Provide information of OpenSSL Certificate Signing Requests (CSR)
+# prefix: openssl_csr_info_snippet
+# key: openssl_csr_info
+# group: ansible
+# --
+
+- name: ${0:Provide information of OpenSSL Certificate Signing Requests (CSR)}
+  openssl_csr_info:                                                        
+    path: ${1:Remote absolute path where the CSR file is loaded from}      #
+    select_crypto_backend: ${2$$(yas-choose-value '("auto" "cryptography" "pyopenssl"))}# choices: auto;cryptography;pyopenssl  Determines which crypto backend to use  The default choice is C(auto)

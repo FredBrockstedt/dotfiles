@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP configuration on Mellanox ONYX network devices
+# prefix: onyx_lldp_snippet
+# key: onyx_lldp
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP configuration on Mellanox ONYX network devices}
+  onyx_lldp:                                                               
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the LLDP protocol configuration 

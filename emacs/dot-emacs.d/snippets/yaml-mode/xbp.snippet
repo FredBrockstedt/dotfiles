@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage packages with XBPS
+# prefix: xbps_snippet
+# key: xbp
+# group: ansible
+# --
+
+- name: ${0:Manage packages with XBPS}
+  xbps:                                                                    
+    name: ${1:value}                                                       # Name of the package to install, upgrade, or remove 
+    state: ${2$$(yas-choose-value '("present" "absent" "latest"))}         # choices: present;absent;latest  Desired state of the package 
+    recurse: ${3:false}                                                    # When removing a package, also remove its dependencies, provided that they are not required by other packages and were no
+    update_cache: ${4:true}                                                # Whether or not to refresh the master package lists  This can be run as part of a package installation or as a separate s
+    upgrade: ${5:false}                                                    # Whether or not to upgrade whole system

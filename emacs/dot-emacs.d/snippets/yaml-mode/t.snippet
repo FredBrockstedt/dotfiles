@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Schedule the execution of a command or script file via the at command
+# prefix: at_snippet
+# key: t
+# group: ansible
+# --
+
+- name: ${0:Schedule the execution of a command or script file via the at command}
+  at:                                                                      
+    count: ${1:The count of units in the future to execute the command or script file}#
+    units: ${2$$(yas-choose-value '("minutes" "hours" "days" "weeks"))}    # The type of units in the future to execute the command or script file 
+    command: ${3:value}                                                    # A command to be executed in the future 
+    script_file: ${4:value}                                                # An existing script file to be executed in the future 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state dictates if the command or script file should be evaluated as present(added) or absen
+    unique: ${6:False}                                                     # If a matching job is present a new job will not be added 

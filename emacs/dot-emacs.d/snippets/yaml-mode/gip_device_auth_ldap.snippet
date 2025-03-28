@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage LDAP device authentication settings on BIG-IP
+# prefix: bigip_device_auth_ldap_snippet
+# key: gip_device_auth_ldap
+# group: ansible
+# --
+
+- name: ${0:Manage LDAP device authentication settings on BIG-IP}
+  bigip_device_auth_ldap:                                                  
+    servers: ${1:value}                                                    # Specifies the LDAP servers that the system must use to obtain authentication information  You must specify a server when
+    port: ${2:value}                                                       # Specifies the port that the system uses for access to the remote host server  When configuring LDAP device authenticatio
+    remote_directory_tree: ${3:value}                                      # Specifies the file location (tree) of the user authentication database on the server 
+    scope: ${4$$(yas-choose-value '("sub" "one" "base"))}                  # choices: sub;one;base  Specifies the level of the remote Active Directory or LDAP directory that the system should searc
+    bind_dn: ${5:value}                                                    # Specifies the distinguished name for the Active Directory or LDAP server user ID  The BIG-IP client authentication modul
+    bind_password: ${6:value}                                              # Specifies a password for the Active Directory or LDAP server user ID 
+    user_template: ${7:value}                                              # Specifies the distinguished name of the user who is logging on  You specify the template as a variable that the system r
+    check_member_attr: ${8:value}                                          # Checks the user's member attribute in the remote LDAP or AD group 
+    ssl: ${9$$(yas-choose-value '("true" "false" "start-tls"))}            # choices: yes;no;start-tls  Specifies whether the system uses an SSL port to communicate with the LDAP server 
+    ca_cert: ${10:value}                                                   # Specifies the name of an SSL certificate from a certificate authority (CA)  To remove this value, use the reserved value
+    client_key: ${11:value}                                                # Specifies the name of an SSL client key  To remove this value, use the reserved value C(none) 
+    client_cert: ${12:value}                                               # Specifies the name of an SSL client certificate  To remove this value, use the reserved value C(none) 
+    validate_certs: ${13:value}                                            # Specifies whether the system checks an SSL peer, as a result of which the system requires and verifies the server certif
+    login_ldap_attr: ${14:value}                                           # Specifies the LDAP directory attribute containing the local user name that is associated with the selected directory ent
+    fallback_to_local: ${15:value}                                         # Specifies that the system uses the Local authentication method if the remote authentication method is not available 
+    state: ${16$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures the device authentication method exists  When C(absent), ensures the d
+    update_password: ${17$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will always update the C(bind_password)  C(on_create) will only set the C(bind_pass
+    provider: ${18:value}                                                  # A dict object containing connection details 

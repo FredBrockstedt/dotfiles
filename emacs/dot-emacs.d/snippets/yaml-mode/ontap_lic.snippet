@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP protocol and feature licenses
+# prefix: na_ontap_license_snippet
+# key: ontap_lic
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP protocol and feature licenses}
+  na_ontap_license:                                                        
+    hostname: ${1:The hostname or IP address of the ONTAP instance}        #
+    username: ${2:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${3:Password for the specified user}                         #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified license should exist or not 
+    remove_unused: ${5:value}                                              # Remove licenses that have no controller affiliation in the cluster 
+    remove_expired: ${6:value}                                             # Remove licenses that have expired in the cluster 
+    serial_number: ${7:value}                                              # S e r i a l   n u m b e r   o f   t h e   n o d e   a s s o c i a t e d   w i t h   t h e   l i c e n s e     T h i s   
+    license_names: ${8:value}                                              # List of license-names to delete 
+    license_codes: ${9:value}                                              # List of license codes to be added 
+    https: ${10:False}                                                     # Enable and disable https
+    validate_certs: ${11:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${12:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${13:value}                                                    # The ontap api version to use
+    use_rest: ${14$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

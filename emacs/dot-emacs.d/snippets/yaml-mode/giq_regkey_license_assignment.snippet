@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage regkey license assignment on BIG-IPs from a BIG-IQ
+# prefix: bigiq_regkey_license_assignment_snippet
+# key: giq_regkey_license_assignment
+# group: ansible
+# --
+
+- name: ${0:Manage regkey license assignment on BIG-IPs from a BIG-IQ}
+  bigiq_regkey_license_assignment:                                         
+    pool: ${1:The registration key pool to use}                            #
+    key: ${2:The registration key that you want to assign from the pool}   #
+    device: ${3:value}                                                     # When C(managed) is C(no), specifies the address, or hostname, where the BIG-IQ can reach the remote device to register  
+    managed: ${4:value}                                                    # Whether the specified device is a managed or un-managed device  When C(state) is C(present), this parameter is required 
+    device_port: ${5:443}                                                  # Specifies the port of the remote device to connect to  If this parameter is not specified, the default of C(443) will be
+    device_username: ${6:value}                                            # The username used to connect to the remote device  This username should be one that has sufficient privileges on the rem
+    device_password: ${7:value}                                            # The password of the C(device_username)  When C(managed) is C(no), this parameter is required 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the device is assigned the specified license  When C(absent), ens
+    provider: ${9:value}                                                   # A dict object containing connection details 

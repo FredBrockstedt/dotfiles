@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: PANOS module that allows search for security rules in PANW NGFW devices.
+# prefix: panos_query_rules_snippet
+# key: panos_query_ru
+# group: ansible
+# --
+
+- name: ${0:PANOS module that allows search for security rules in PANW NGFW devices.}
+  panos_query_rules:                                                       
+    ip_address: ${1:IP address (or hostname) of PAN-OS firewall or Panorama management console being queried}#
+    password: ${2:Password credentials to use for authentication}          #
+    username: ${3:admin}                                                   # Username credentials to use for authentication 
+    api_key: ${4:value}                                                    # API key that can be used instead of I(username)/I(password) credentials 
+    application: ${5:value}                                                # Name of the application or application group to be queried 
+    source_zone: ${6:value}                                                # Name of the source security zone to be queried 
+    source_ip: ${7:value}                                                  # The source IP address to be queried 
+    source_port: ${8:value}                                                # The source port to be queried 
+    destination_zone: ${9:value}                                           # Name of the destination security zone to be queried 
+    destination_ip: ${10:value}                                            # The destination IP address to be queried 
+    destination_port: ${11:value}                                          # The destination port to be queried 
+    protocol: ${12$$(yas-choose-value '("tcp" "udp"))}                     # choices: tcp;udp  The protocol used to be queried   Must be either I(tcp) or I(udp) 
+    tag_name: ${13:value}                                                  # Name of the rule tag to be queried 
+    devicegroup: ${14:value}                                               # The Panorama device group in which to conduct the query 

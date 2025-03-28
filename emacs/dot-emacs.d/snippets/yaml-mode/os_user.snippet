@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage OpenStack Identity Users
+# prefix: os_user_snippet
+# key: os_user
+# group: ansible
+# --
+
+- name: ${0:Manage OpenStack Identity Users}
+  os_user:                                                                 
+    name: ${1:Username for the user}                                       #
+    password: ${2:value}                                                   # Password for the user
+    update_password: ${3$$(yas-choose-value '("always" "on_create"))}      # choices: always;on_create  C(always) will attempt to update password   C(on_create) will only set the password for newly
+    email: ${4:value}                                                      # Email address for the user
+    description: ${5:value}                                                # Description about the user
+    default_project: ${6:value}                                            # Project name or ID that the user should be associated with by default
+    domain: ${7:value}                                                     # Domain to create the user in if the cloud supports domains
+    enabled: ${8:true}                                                     # Is the user enabled
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the resource be present or absent 
+    availability_zone: ${10:value}                                         # Ignored  Present for backwards compatibility
+    cloud: ${11:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${12:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${13:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${14:value}                                               # Name of the region 
+    wait: ${15:True}                                                       # Should ansible wait until the requested resource is complete 
+    timeout: ${16:180}                                                     # How long should ansible wait for the requested resource 
+    api_timeout: ${17:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${18:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${19:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${20:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${21:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${22$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages VRF AF.
+# prefix: nxos_vrf_af_snippet
+# key: xos_vrf_af
+# group: ansible
+# --
+
+- name: ${0:Manages VRF AF.}
+  nxos_vrf_af:                                                             
+    vrf: ${1:Name of the VRF}                                              #
+    afi: ${2$$(yas-choose-value '("ipv4" "ipv6"))}                         # Address-Family Identifier (AFI) 
+    route_target_both_auto_evpn: ${3:value}                                # Enable/Disable the EVPN route-target 'auto' setting for both import and export target communities 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

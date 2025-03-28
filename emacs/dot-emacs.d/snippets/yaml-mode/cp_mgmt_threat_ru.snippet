@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Manages threat-rule objects on Check Point over Web Services API
+# prefix: cp_mgmt_threat_rule_snippet
+# key: cp_mgmt_threat_ru
+# group: ansible
+# --
+
+- name: ${0:Manages threat-rule objects on Check Point over Web Services API}
+  cp_mgmt_threat_rule:                                                     
+    name: ${1:Object name}                                                 #
+    position: ${2:value}                                                   # Position in the rulebase 
+    layer: ${3:value}                                                      # Layer that the rule belongs to identified by the name or UID 
+    action: ${4:value}                                                     # Action-the enforced profile 
+    destination: ${5:value}                                                # Collection of Network objects identified by the name or UID 
+    destination_negate: ${6:value}                                         # True if negate is set for destination 
+    enabled: ${7:value}                                                    # Enable/Disable the rule 
+    install_on: ${8:value}                                                 # Which Gateways identified by the name or UID to install the policy on 
+    protected_scope: ${9:value}                                            # Collection of objects defining Protected Scope identified by the name or UID 
+    protected_scope_negate: ${10:value}                                    # True if negate is set for Protected Scope 
+    service: ${11:value}                                                   # Collection of Network objects identified by the name or UID 
+    service_negate: ${12:value}                                            # True if negate is set for Service 
+    source: ${13:value}                                                    # Collection of Network objects identified by the name or UID 
+    source_negate: ${14:value}                                             # True if negate is set for source 
+    track: ${15:value}                                                     # Packet tracking 
+    track_settings: ${16:value}                                            # Threat rule track settings 
+    comments: ${17:value}                                                  # Comments string 
+    details_level: ${18$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${19:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${20:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${21$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${22:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${23:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${24:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

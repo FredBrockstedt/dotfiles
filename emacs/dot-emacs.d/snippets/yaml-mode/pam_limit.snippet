@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Modify Linux PAM limits
+# prefix: pam_limits_snippet
+# key: pam_limit
+# group: ansible
+# --
+
+- name: ${0:Modify Linux PAM limits}
+  pam_limits:                                                              
+    domain: ${1:A username, @groupname, wildcard, uid/gid range}           #
+    limit_type: ${2$$(yas-choose-value '("hard" "soft" "-"))}              # Limit type, see C(man 5 limits conf) for an explanation
+    limit_item: ${3$$(yas-choose-value '("core" "data" "fsize" "memlock" "nofile" "rss" "stack" "cpu" "nproc" "as" "maxlogins" "maxsyslogins" "priority" "locks" "sigpending" "msgqueue" "nice" "rtpr
+    value: ${4:The value of the limit}                                     #
+    backup: ${5:false}                                                     # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    use_min: ${6:false}                                                    # If set to C(yes), the minimal value will be used or conserved  If the specified value is inferior to the value in the fi
+    use_max: ${7:false}                                                    # If set to C(yes), the maximal value will be used or conserved  If the specified value is superior to the value in the fi
+    dest: ${{8:/etc/security/limits}                                       #conf} # not required  Modify the limits conf path 
+    comment: ${9:}                                                         # Comment associated with the limit 

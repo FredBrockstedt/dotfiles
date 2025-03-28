@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP partitions
+# prefix: bigip_partition_snippet
+# key: gip_partitio
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP partitions}
+  bigip_partition:                                                         
+    name: ${1:Name of the partition}                                       #
+    description: ${2:value}                                                # The description to attach to the Partition 
+    route_domain: ${3:value}                                               # The default Route Domain to assign to the Partition  If no route domain is specified, then the default route domain for 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the partition should exist or not 
+    provider: ${5:value}                                                   # A dict object containing connection details 

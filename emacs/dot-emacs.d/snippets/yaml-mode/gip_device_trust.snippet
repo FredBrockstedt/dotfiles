@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage the trust relationships between BIG-IPs
+# prefix: bigip_device_trust_snippet
+# key: gip_device_trust
+# group: ansible
+# --
+
+- name: ${0:Manage the trust relationships between BIG-IPs}
+  bigip_device_trust:                                                      
+    peer_server: ${1:The peer address to connect to and trust for synchronizing configuration}# This is typically the management address of the remote device, but may also be a Self IP 
+    peer_hostname: ${2:value}                                              # The hostname that you want to associate with the device  This value will be used to easily distinguish this device in BI
+    peer_user: ${3:value}                                                  # The API username of the remote peer device that you are trusting  Note that the CLI user cannot be used unless it too ha
+    peer_password: ${4:value}                                              # The password of the API username of the remote peer device that you are trusting  If this value is not specified, then t
+    type: ${5$$(yas-choose-value '("peer" "subordinate"))}                 # choices: peer;subordinate  Specifies whether the device you are adding is a Peer or a Subordinate  The default is C(peer
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(present), ensures the specified devices are trusted  When C(absent), removes the device 
+    provider: ${7:value}                                                   # A dict object containing connection details 

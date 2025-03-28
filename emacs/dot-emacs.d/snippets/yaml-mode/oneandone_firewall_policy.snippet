@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Configure 1&1 firewall policy.
+# prefix: oneandone_firewall_policy_snippet
+# key: oneandone_firewall_policy
+# group: ansible
+# --
+
+- name: ${0:Configure 1&1 firewall policy.}
+  oneandone_firewall_policy:                                               
+    auth_token: ${1:Authenticating API token provided by 1&1}              #
+    name: ${2:Firewall policy name used with present state}                # Used as identifier (id or name) when used with absent state  maxLength=128
+    firewall_policy: ${3:The identifier (id or name) of the firewall policy used with update state}#
+    state: ${4$$(yas-choose-value '("present" "absent" "update"))}         # choices: present;absent;update  Define a firewall policy state to create, remove, or update 
+    api_url: ${5:value}                                                    # Custom API URL  Overrides the ONEANDONE_API_URL environment variable 
+    rules: ${6:value}                                                      # A list of rules that will be set for the firewall policy  Each rule must contain protocol parameter, in addition to thre
+    add_server_ips: ${7:value}                                             # A list of server identifiers (id or name) to be assigned to a firewall policy  Used in combination with update state 
+    remove_server_ips: ${8:value}                                          # A list of server IP ids to be unassigned from a firewall policy  Used in combination with update state 
+    add_rules: ${9:value}                                                  # A list of rules that will be added to an existing firewall policy  It is syntax is the same as the one used for rules pa
+    remove_rules: ${10:value}                                              # A list of rule ids that will be removed from an existing firewall policy  Used in combination with update state 
+    description: ${11:value}                                               # Firewall policy description  maxLength=256
+    wait: ${12:true}                                                       # wait for the instance to be in state 'running' before returning
+    wait_timeout: ${13:600}                                                # how long before wait gives up, in seconds
+    wait_interval: ${14:5}                                                 # Defines the number of seconds to wait when using the _wait_for methods

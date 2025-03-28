@@ -1,0 +1,50 @@
+# -*- mode: snippet -*-
+# name: Manage Grafana datasources
+# prefix: grafana_datasource_snippet
+# key: grafana_datasourc
+# group: ansible
+# --
+
+- name: ${0:Manage Grafana datasources}
+  grafana_datasource:                                                      
+    grafana_url: ${1:The Grafana URL}                                      #
+    name: ${2:The name of the datasource}                                  #
+    ds_type: ${3$$(yas-choose-value '("graphite" "prometheus" "elasticsearch" "influxdb" "opentsdb" "mysql" "postgres" "cloudwatch" "alexanderzobnin-zabbix-datasource"))}# The type of the datasourc
+    url: ${4:The URL of the datasource}                                    #
+    access: ${5$$(yas-choose-value '("direct" "proxy"))}                   # choices: direct;proxy  The access mode for this datasource 
+    url_username: ${6:admin}                                               # The Grafana API user 
+    url_password: ${7:admin}                                               # The Grafana API password 
+    grafana_api_key: ${8:value}                                            # The Grafana API key  If set, C(grafana_user) and C(grafana_password) will be ignored 
+    database: ${9:value}                                                   # Name of the database for the datasource  This options is required when the C(ds_type) is C(influxdb), C(elasticsearch) (
+    user: ${10:value}                                                      # The datasource login user for influxdb datasources 
+    password: ${11:value}                                                  # The datasource password
+    basic_auth_user: ${12:value}                                           # The datasource basic auth user  Setting this option with basic_auth_password will enable basic auth 
+    basic_auth_password: ${13:value}                                       # The datasource basic auth password, when C(basic auth) is C(yes) 
+    with_credentials: ${14:false}                                          # Whether credentials such as cookies or auth headers should be sent with cross-site requests 
+    tls_client_cert: ${15:value}                                           # The client TLS certificate  If C(tls_client_cert) and C(tls_client_key) are set, this will enable TLS authentication  St
+    tls_client_key: ${16:value}                                            # The client TLS private key Starts with ----- BEGIN RSA PRIVATE KEY -----
+    tls_ca_cert: ${17:value}                                               # The TLS CA certificate for self signed certificates  Only used when C(tls_client_cert) and C(tls_client_key) are set 
+    tls_skip_verify: ${18:False}                                           # Skip the TLS datasource certificate verification 
+    is_default: ${19:false}                                                # Make this datasource the default one 
+    org_id: ${20:1}                                                        # Grafana Organisation ID in which the datasource should be created  Not used when C(grafana_api_key) is set, because the 
+    state: ${21$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Status of the datasource
+    es_version: ${22$$(yas-choose-value '("2" "5" "56"))}                  # choices: 2;5;56  Elasticsearch version (for C(ds_type = elasticsearch) only) Version 56 is for elasticsearch 5 6+ where 
+    max_concurrent_shard_requests: ${23:256}                               # Starting with elasticsearch 5 6, you can specify the max concurrent shard per requests 
+    time_field: ${24:timestamp}                                            # Name of the time field in elasticsearch ds  For example C(@timestamp)
+    time_interval: ${25:value}                                             # Minimum group by interval for C(influxdb) or C(elasticsearch) datasources  for example C(>10s)
+    interval: ${26$$(yas-choose-value '("" "Hourly" "Daily" "Weekly" "Monthly" "Yearly"))}# choices: ;Hourly;Daily;Weekly;Monthly;Yearly  For elasticsearch C(ds_type), this is the index pattern use
+    tsdb_version: ${27$$(yas-choose-value '("1" "2" "3"))}                 # choices: 1;2;3  The opentsdb version  Use C(1) for <=2 1, C(2) for ==2 2, C(3) for ==2 3 
+    tsdb_resolution: ${28$$(yas-choose-value '("millisecond" "second"))}   # choices: millisecond;second  The opentsdb time resolution 
+    sslmode: ${29$$(yas-choose-value '("disable" "require" "verify-ca" "verify-full"))}# choices: disable;require;verify-ca;verify-full  SSL mode for C(postgres) datasource type 
+    trends: ${30:value}                                                    # Use trends or not for zabbix datasource type
+    client_cert: ${31:value}                                               # TLS certificate path used by ansible to query grafana api
+    client_key: ${32:value}                                                # TLS private key path used by ansible to query grafana api
+    validate_certs: ${33:true}                                             # Whether to validate the Grafana certificate 
+    use_proxy: ${34:true}                                                  # Boolean of whether or not to use proxy 
+    aws_auth_type: ${35$$(yas-choose-value '("keys" "credentials" "arn"))} # choices: keys;credentials;arn  Type for AWS authentication for CloudWatch datasource type (authType of grafana api)
+    aws_default_region: ${36$$(yas-choose-value '("ap-northeast-1" "ap-northeast-2" "ap-southeast-1" "ap-southeast-2" "ap-south-1" "ca-central-1" "cn-north-1" "cn-northwest-1" "eu-central-1" "eu-we
+    aws_credentials_profile: ${37:}                                        # Profile for AWS credentials for CloudWatch datasource type when C(aws_auth_type) is C(credentials)
+    aws_access_key: ${38:}                                                 # AWS access key for CloudWatch datasource type when C(aws_auth_type) is C(keys)
+    aws_secret_key: ${39:}                                                 # AWS secret key for CloudWatch datasource type when C(aws_auth_type) is C(keys)
+    aws_assume_role_arn: ${40:}                                            # AWS IAM role arn to assume for CloudWatch datasource type when C(aws_auth_type) is C(arn)
+    aws_custom_metrics_namespaces: ${41:}                                  # Namespaces of Custom Metrics for CloudWatch datasource type

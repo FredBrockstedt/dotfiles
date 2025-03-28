@@ -1,0 +1,87 @@
+# -*- mode: snippet -*-
+# name: Manage SSL and SSH security profiles in FortiManager
+# prefix: fmgr_secprof_ssl_ssh_snippet
+# key: fmgr_secprof_ssl_ssh
+# group: ansible
+# --
+
+- name: ${0:Manage SSL and SSH security profiles in FortiManager}
+  fmgr_secprof_ssl_ssh:                                                    
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    whitelist: ${3$$(yas-choose-value '("disable" "enable"))}              # choices: disable;enable  Enable/disable exempting servers by FortiGuard whitelist  choice | disable | Disable setting  c
+    use_ssl_server: ${4$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable the use of SSL server table for SSL offloading  choice | disable | Don't use SSL
+    untrusted_caname: ${5:value}                                           # Untrusted CA certificate used by SSL Inspection 
+    ssl_exemptions_log: ${6$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable logging SSL exemptions  choice | disable | Disable logging SSL exemptions  choic
+    ssl_anomalies_log: ${7$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable logging SSL anomalies  choice | disable | Disable logging SSL anomalies  choice 
+    server_cert_mode: ${8$$(yas-choose-value '("re-sign" "replace"))}      # choices: re-sign;replace  Re-sign or replace the server's certificate  choice | re-sign | Multiple clients connecting to
+    server_cert: ${9:value}                                                # Certificate used by SSL Inspection to replace server certificate 
+    rpc_over_https: ${10$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable/disable inspection of RPC over HTTPS  choice | disable | Disable inspection of RPC over 
+    name: ${11:value}                                                      # Name 
+    mapi_over_https: ${12$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable inspection of MAPI over HTTPS  choice | disable | Disable inspection of MAPI ove
+    comment: ${13:value}                                                   # Optional comments 
+    caname: ${14:value}                                                    # CA certificate used by SSL Inspection 
+    ftps: ${15:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ftps_allow_invalid_server_cert: ${16$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  When enabled, allows SSL sessions whose server certificate validation failed  choice | 
+    ftps_client_cert_request: ${17$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure  choice | bypass | Bypass  c
+    ftps_ports: ${18:value}                                                # Ports to use for scanning (1 - 65535, default = 443) 
+    ftps_status: ${19$$(yas-choose-value '("disable" "deep-inspection"))}  # choices: disable;deep-inspection  Configure protocol inspection status  choice | disable | Disable  choice | deep-inspec
+    ftps_unsupported_ssl: ${20$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on the SSL encryption used being unsupported  choice | bypass | Bypass
+    ftps_untrusted_cert: ${21$$(yas-choose-value '("allow" "block" "ignore"))}# choices: allow;block;ignore  Allow, ignore, or block the untrusted SSL session server certificate  choice | allow | A
+    https: ${22:value}                                                     # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    https_allow_invalid_server_cert: ${23$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  When enabled, allows SSL sessions whose server certificate validation failed  choice |
+    https_client_cert_request: ${24$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure  choice | bypass | Bypass  
+    https_ports: ${25:value}                                               # Ports to use for scanning (1 - 65535, default = 443) 
+    https_status: ${26$$(yas-choose-value '("disable" "certificate-inspection" "deep-inspection"))}# choices: disable;certificate-inspection;deep-inspection  Configure protocol inspection status  c
+    https_unsupported_ssl: ${27$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on the SSL encryption used being unsupported  choice | bypass | Bypas
+    https_untrusted_cert: ${28$$(yas-choose-value '("allow" "block" "ignore"))}# choices: allow;block;ignore  Allow, ignore, or block the untrusted SSL session server certificate  choice | allow | 
+    imaps: ${29:value}                                                     # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    imaps_allow_invalid_server_cert: ${30$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  When enabled, allows SSL sessions whose server certificate validation failed  choice |
+    imaps_client_cert_request: ${31$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure  choice | bypass | Bypass  
+    imaps_ports: ${32:value}                                               # Ports to use for scanning (1 - 65535, default = 443) 
+    imaps_status: ${33$$(yas-choose-value '("disable" "deep-inspection"))} # choices: disable;deep-inspection  Configure protocol inspection status  choice | disable | Disable  choice | deep-inspec
+    imaps_unsupported_ssl: ${34$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on the SSL encryption used being unsupported  choice | bypass | Bypas
+    imaps_untrusted_cert: ${35$$(yas-choose-value '("allow" "block" "ignore"))}# choices: allow;block;ignore  Allow, ignore, or block the untrusted SSL session server certificate  choice | allow | 
+    pop3s: ${36:value}                                                     # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    pop3s_allow_invalid_server_cert: ${37$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  When enabled, allows SSL sessions whose server certificate validation failed  choice |
+    pop3s_client_cert_request: ${38$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure  choice | bypass | Bypass  
+    pop3s_ports: ${39:value}                                               # Ports to use for scanning (1 - 65535, default = 443) 
+    pop3s_status: ${40$$(yas-choose-value '("disable" "deep-inspection"))} # choices: disable;deep-inspection  Configure protocol inspection status  choice | disable | Disable  choice | deep-inspec
+    pop3s_unsupported_ssl: ${41$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on the SSL encryption used being unsupported  choice | bypass | Bypas
+    pop3s_untrusted_cert: ${42$$(yas-choose-value '("allow" "block" "ignore"))}# choices: allow;block;ignore  Allow, ignore, or block the untrusted SSL session server certificate  choice | allow | 
+    smtps: ${43:value}                                                     # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    smtps_allow_invalid_server_cert: ${44$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  When enabled, allows SSL sessions whose server certificate validation failed  choice |
+    smtps_client_cert_request: ${45$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure  choice | bypass | Bypass  
+    smtps_ports: ${46:value}                                               # Ports to use for scanning (1 - 65535, default = 443) 
+    smtps_status: ${47$$(yas-choose-value '("disable" "deep-inspection"))} # choices: disable;deep-inspection  Configure protocol inspection status  choice | disable | Disable  choice | deep-inspec
+    smtps_unsupported_ssl: ${48$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on the SSL encryption used being unsupported  choice | bypass | Bypas
+    smtps_untrusted_cert: ${49$$(yas-choose-value '("allow" "block" "ignore"))}# choices: allow;block;ignore  Allow, ignore, or block the untrusted SSL session server certificate  choice | allow | 
+    ssh: ${50:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ssh_inspect_all: ${51$$(yas-choose-value '("disable" "deep-inspection"))}# choices: disable;deep-inspection  Level of SSL inspection  choice | disable | Disable  choice | deep-inspection | Full
+    ssh_ports: ${52:value}                                                 # Ports to use for scanning (1 - 65535, default = 443) 
+    ssh_ssh_algorithm: ${53$$(yas-choose-value '("compatible" "high-encryption"))}# choices: compatible;high-encryption  Relative strength of encryption algorithms accepted during negotiation  choi
+    ssh_ssh_policy_check: ${54$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable SSH policy check  choice | disable | Disable SSH policy check  choice | enable |
+    ssh_ssh_tun_policy_check: ${55$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable SSH tunnel policy check  choice | disable | Disable SSH tunnel policy check  c
+    ssh_status: ${56$$(yas-choose-value '("disable" "deep-inspection"))}   # choices: disable;deep-inspection  Configure protocol inspection status  choice | disable | Disable  choice | deep-inspec
+    ssh_unsupported_version: ${57$$(yas-choose-value '("block" "bypass"))} # choices: block;bypass  Action based on SSH version being unsupported  choice | block | Block  choice | bypass | Bypass 
+    ssl: ${58:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ssl_allow_invalid_server_cert: ${59$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  When enabled, allows SSL sessions whose server certificate validation failed  choice | d
+    ssl_client_cert_request: ${60$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure  choice | bypass | Bypass  ch
+    ssl_inspect_all: ${61$$(yas-choose-value '("disable" "certificate-inspection" "deep-inspection"))}# choices: disable;certificate-inspection;deep-inspection  Level of SSL inspection  choice | di
+    ssl_unsupported_ssl: ${62$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on the SSL encryption used being unsupported  choice | bypass | Bypass 
+    ssl_untrusted_cert: ${63$$(yas-choose-value '("allow" "block" "ignore"))}# choices: allow;block;ignore  Allow, ignore, or block the untrusted SSL session server certificate  choice | allow | Al
+    ssl_exempt: ${64:value}                                                # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ssl_exempt_address: ${65:value}                                        # IPv4 address object 
+    ssl_exempt_address6: ${66:value}                                       # IPv6 address object 
+    ssl_exempt_fortiguard_category: ${67:value}                            # FortiGuard category ID 
+    ssl_exempt_regex: ${68:value}                                          # Exempt servers by regular expression 
+    ssl_exempt_type: ${69$$(yas-choose-value '("fortiguard-category" "address" "address6" "wildcard-fqdn" "regex"))}# choices: fortiguard-category;address;address6;wildcard-fqdn;regex  Type of addr
+    ssl_exempt_wildcard_fqdn: ${70:value}                                  # Exempt servers by wildcard FQDN 
+    ssl_server: ${71:value}                                                # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ssl_server_ftps_client_cert_request: ${72$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure during the FTPS h
+    ssl_server_https_client_cert_request: ${73$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure during the HTTPS
+    ssl_server_imaps_client_cert_request: ${74$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure during the IMAPS
+    ssl_server_ip: ${75:value}                                             # IPv4 address of the SSL server 
+    ssl_server_pop3s_client_cert_request: ${76$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure during the POP3S
+    ssl_server_smtps_client_cert_request: ${77$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure during the SMTPS
+    ssl_server_ssl_other_client_cert_request: ${78$$(yas-choose-value '("bypass" "inspect" "block"))}# choices: bypass;inspect;block  Action based on client certificate request failure during an SS

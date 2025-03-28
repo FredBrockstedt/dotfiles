@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Manages local Windows computer name
+# prefix: win_hostname_snippet
+# key: win_hostnam
+# group: ansible
+# --
+
+- name: ${0:Manages local Windows computer name}
+  win_hostname:                                                            
+    name: ${1:The hostname to set for the computer}                        #

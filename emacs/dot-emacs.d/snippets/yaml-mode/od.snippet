@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Manage instances on the Linode Public Cloud
+# prefix: linode_snippet
+# key: od
+# group: ansible
+# --
+
+- name: ${0:Manage instances on the Linode Public Cloud}
+  linode:                                                                  
+    name: ${1:Name to give the instance (alphanumeric, dashes, underscore)}# To keep sanity on the Linode Web Console, name is prepended with C(LinodeID-) 
+    state: ${2$$(yas-choose-value '("absent" "active" "deleted" "present" "restarted" "started" "stopped"))}# choices: absent;active;deleted;present;restarted;started;stopped  Indicate desired stat
+    api_key: ${3:value}                                                    # Linode API key
+    displaygroup: ${4:value}                                               # Add the instance to a Display Group in Linode Manager 
+    linode_id: ${5:value}                                                  # Unique ID of a linode server  This value is read-only in the sense that if you specify it on creation of a Linode it wil
+    additional_disks: ${6:value}                                           # List of dictionaries for creating additional disks that are added to the Linode configuration settings  Dictionary takes
+    alert_bwin_enabled: ${7:value}                                         # Set status of bandwidth in alerts 
+    alert_bwin_threshold: ${8:value}                                       # Set threshold in MB of bandwidth in alerts 
+    alert_bwout_enabled: ${9:value}                                        # Set status of bandwidth out alerts 
+    alert_bwout_threshold: ${10:value}                                     # Set threshold in MB of bandwidth out alerts 
+    alert_bwquota_enabled: ${11:value}                                     # Set status of bandwidth quota alerts as percentage of network transfer quota 
+    alert_bwquota_threshold: ${12:value}                                   # Set threshold in MB of bandwidth quota alerts 
+    alert_cpu_enabled: ${13:value}                                         # Set status of receiving CPU usage alerts 
+    alert_cpu_threshold: ${14:value}                                       # Set percentage threshold for receiving CPU usage alerts  Each CPU core adds 100% to total 
+    alert_diskio_enabled: ${15:value}                                      # Set status of receiving disk IO alerts 
+    alert_diskio_threshold: ${16:value}                                    # Set threshold for average IO ops/sec over 2 hour period 
+    backupweeklyday: ${17:value}                                           # Integer value for what day of the week to store weekly backups 
+    plan: ${18:value}                                                      # plan to use for the instance (Linode plan)
+    payment_term: ${19$$(yas-choose-value '("1" "12" "24"))}               # choices: 1;12;24  payment term to use for the instance (payment term in months)
+    password: ${20:value}                                                  # root password to apply to a new server (auto generated if missing)
+    private_ip: ${21:false}                                                # Add private IPv4 address when Linode is created 
+    ssh_pub_key: ${22:value}                                               # SSH public key applied to root user
+    swap: ${23:512}                                                        # swap size in MB
+    distribution: ${24:value}                                              # distribution to use for the instance (Linode Distribution)
+    datacenter: ${25:value}                                                # datacenter to create an instance in (Linode Datacenter)
+    kernel_id: ${26:value}                                                 # kernel to use for the instance (Linode Kernel)
+    wait: ${27:false}                                                      # wait for the instance to be in state C(running) before returning
+    wait_timeout: ${28:300}                                                # how long before wait gives up, in seconds
+    watchdog: ${29:True}                                                   # Set status of Lassie watchdog 

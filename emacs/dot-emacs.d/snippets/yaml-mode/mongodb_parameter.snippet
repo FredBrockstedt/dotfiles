@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Change an administrative parameter on a MongoDB server.
+# prefix: mongodb_parameter_snippet
+# key: mongodb_parameter
+# group: ansible
+# --
+
+- name: ${0:Change an administrative parameter on a MongoDB server.}
+  mongodb_parameter:                                                       
+    database: ${1:The name of the database to add/remove the user from}    #
+    param: ${2:MongoDB administrative parameter to modify}                 #
+    value: ${3:MongoDB administrative parameter value to set}              #
+    login_user: ${4:value}                                                 # The username used to authenticate with
+    login_password: ${5:value}                                             # The password used to authenticate with
+    login_host: ${6:localhost}                                             # The host running the database
+    login_port: ${7:27017}                                                 # The port to connect to
+    login_database: ${8:value}                                             # The database where login credentials are stored
+    replica_set: ${9:value}                                                # Replica set to connect to (automatically connects to primary for writes)
+    ssl: ${10:false}                                                       # Whether to use an SSL connection when connecting to the database
+    param_type: ${11:str}                                                  # Define the parameter value (str, int)

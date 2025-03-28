@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage nic tags on SmartOS systems
+# prefix: nictagadm_snippet
+# key: ctagadm
+# group: ansible
+# --
+
+- name: ${0:Manage nic tags on SmartOS systems}
+  nictagadm:                                                               
+    name: ${1:Name of the nic tag}                                         #
+    mac: ${2:value}                                                        # Specifies the I(mac) address to attach the nic tag to when not creating an I(etherstub)  Parameters I(mac) and I(etherst
+    etherstub: ${3:False}                                                  # Specifies that the nic tag will be attached to a created I(etherstub)  Parameter I(etherstub) is mutually exclusive with
+    mtu: ${4:value}                                                        # Specifies the size of the I(mtu) of the desired nic tag  Parameters I(mtu) and I(etherstub) are mutually exclusive 
+    force: ${5:False}                                                      # When I(state) is absent set this switch will use the C(-f) parameter and delete the nic tag regardless of existing VMs 
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete a SmartOS nic tag 

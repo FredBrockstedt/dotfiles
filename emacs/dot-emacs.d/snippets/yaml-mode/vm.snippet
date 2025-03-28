@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: create or cancel a virtual instance in SoftLayer
+# prefix: sl_vm_snippet
+# key: vm
+# group: ansible
+# --
+
+- name: ${0:create or cancel a virtual instance in SoftLayer}
+  sl_vm:                                                                   
+    cpus: ${1:Count of cpus to be assigned to new virtual instance}        #
+    memory: ${2:Amount of memory to be assigned to new virtual instance}   #
+    disks: ${3:[25]}:List of disk sizes to be assigned to new virtual instance}#
+    instance_id: ${4:value}                                                # Instance Id of the virtual instance to perform action option 
+    hostname: ${5:value}                                                   # Hostname to be provided to a virtual instance 
+    domain: ${6:value}                                                     # Domain name to be provided to a virtual instance 
+    datacenter: ${7:value}                                                 # Datacenter for the virtual instance to be deployed 
+    tags: ${8:value}                                                       # Tag or list of tags to be provided to a virtual instance 
+    hourly: ${9:true}                                                      # Flag to determine if the instance should be hourly billed 
+    private: ${10:false}                                                   # Flag to determine if the instance should be private only 
+    dedicated: ${11:false}                                                 # Flag to determine if the instance should be deployed in dedicated space 
+    local_disk: ${12:true}                                                 # Flag to determine if local disk should be used for the new instance 
+    os_code: ${13:value}                                                   # OS Code to be used for new virtual instance 
+    image_id: ${14:value}                                                  # Image Template to be used for new virtual instance 
+    nic_speed: ${15:10}                                                    # NIC Speed to be assigned to new virtual instance 
+    public_vlan: ${16:value}                                               # VLAN by its Id to be assigned to the public NIC 
+    private_vlan: ${17:value}                                              # VLAN by its Id to be assigned to the private NIC 
+    ssh_keys: ${18:value}                                                  # List of ssh keys by their Id to be assigned to a virtual instance 
+    post_uri: ${19:value}                                                  # URL of a post provisioning script to be loaded and executed on virtual instance 
+    state: ${20$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Create, or cancel a virtual instance  Specify C(present) for create, C(absent) to cancel 
+    wait: ${21:true}                                                       # Flag used to wait for active status before returning 
+    wait_time: ${22:600}                                                   # Time in seconds before wait returns 

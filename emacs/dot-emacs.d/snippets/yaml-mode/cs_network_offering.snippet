@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Manages network offerings on Apache CloudStack based clouds.
+# prefix: cs_network_offering_snippet
+# key: cs_network_offering
+# group: ansible
+# --
+
+- name: ${0:Manages network offerings on Apache CloudStack based clouds.}
+  cs_network_offering:                                                     
+    name: ${1:The name of the network offering}                            #
+    state: ${2$$(yas-choose-value '("enabled" "present" "disabled" "absent"))}# choices: enabled;present;disabled;absent  State of the network offering 
+    display_text: ${3:value}                                               # Display text of the network offerings 
+    guest_ip_type: ${4$$(yas-choose-value '("Shared" "Isolated"))}         # choices: Shared;Isolated  Guest type of the network offering 
+    supported_services: ${5$$(yas-choose-value '("Dns" "PortForwarding" "Dhcp" "SourceNat" "UserData" "Firewall" "StaticNat" "Vpn" "Lb"))}# choices: Dns;PortForwarding;Dhcp;SourceNat;UserData;Firew
+    traffic_type: ${6:Guest}                                               # The traffic type for the network offering 
+    availability: ${7:value}                                               # The availability of network offering  Default value is Optional
+    conserve_mode: ${8:value}                                              # Whether the network offering has IP conserve mode enabled 
+    details: ${9:value}                                                    # Network offering details in key/value pairs  with service provider as a value
+    egress_default_policy: ${10$$(yas-choose-value '("allow" "deny"))}     # choices: allow;deny  Whether the default egress policy is allow or to deny 
+    persistent: ${11:value}                                                # True if network offering supports persistent networks defaulted to false if not specified
+    keepalive_enabled: ${12:value}                                         # If true keepalive will be turned on in the loadbalancer  At the time of writing this has only an effect on haproxy  the 
+    max_connections: ${13:value}                                           # Maximum number of concurrent connections supported by the network offering 
+    network_rate: ${14:value}                                              # Data transfer rate in megabits per second allowed 
+    service_capabilities: ${15:value}                                      # Desired service capabilities as part of network offering 
+    service_offering: ${16:value}                                          # The service offering name or ID used by virtual router provider 
+    service_providers: ${17:value}                                         # Provider to service mapping  If not specified, the provider for the service will be mapped to the default provider on th
+    specify_ip_ranges: ${18:value}                                         # Whether the network offering supports specifying IP ranges  Defaulted to C(no) by the API if not specified 
+    specify_vlan: ${19:value}                                              # Whether the network offering supports vlans or not 
+    for_vpc: ${20:value}                                                   # Whether the offering is meant to be used for VPC or not 
+    api_key: ${21:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${22:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${23:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${24$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${25:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${26:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

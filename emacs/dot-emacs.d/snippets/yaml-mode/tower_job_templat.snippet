@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower job template.
+# prefix: tower_job_template_snippet
+# key: tower_job_templat
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower job template.}
+  tower_job_template:                                                      
+    name: ${1:Name to use for the job template}                            #
+    job_type: ${2$$(yas-choose-value '("run" "check" "scan"))}             # The job type to use for the job template 
+    project: ${3:Name of the project to use for the job template}          #
+    playbook: ${4:Path to the playbook to use for the job template within the project provided}#
+    description: ${5:value}                                                # Description to use for the job template 
+    inventory: ${6:value}                                                  # Name of the inventory to use for the job template 
+    credential: ${7:value}                                                 # Name of the credential to use for the job template 
+    vault_credential: ${8:value}                                           # Name of the vault credential to use for the job template 
+    forks: ${9:value}                                                      # The number of parallel or simultaneous processes to use while executing the playbook 
+    limit: ${10:value}                                                     # A host pattern to further constrain the list of hosts managed or affected by the playbook
+    verbosity: ${11$$(yas-choose-value '("0" "1" "2" "3" "4"))}            # choices: 0;1;2;3;4  Control the output level Ansible produces as the playbook runs  0 - Normal, 1 - Verbose, 2 - More Ve
+    extra_vars_path: ${12:value}                                           # Path to the C(extra_vars) YAML file 
+    job_tags: ${13:value}                                                  # Comma separated list of the tags to use for the job template 
+    force_handlers_enabled: ${14:false}                                    # Enable forcing playbook handlers to run even if a task fails 
+    skip_tags: ${15:value}                                                 # Comma separated list of the tags to skip for the job template 
+    start_at_task: ${16:value}                                             # Start the playbook at the task matching this name 
+    diff_mode_enabled: ${17:false}                                         # Enable diff mode for the job template 
+    fact_caching_enabled: ${18:false}                                      # Enable use of fact caching for the job template 
+    host_config_key: ${19:value}                                           # Allow provisioning callbacks using this host config key 
+    ask_diff_mode: ${20:false}                                             # Prompt user to enable diff mode (show changes) to files when supported by modules 
+    ask_extra_vars: ${21:false}                                            # Prompt user for (extra_vars) on launch 
+    ask_limit: ${22:false}                                                 # Prompt user for a limit on launch 
+    ask_tags: ${23:false}                                                  # Prompt user for job tags on launch 
+    ask_skip_tags: ${24:false}                                             # Prompt user for job tags to skip on launch 
+    ask_job_type: ${25:false}                                              # Prompt user for job type on launch 
+    ask_verbosity: ${26:false}                                             # Prompt user to choose a verbosity level on launch 
+    ask_inventory: ${27:false}                                             # Prompt user for inventory on launch 
+    ask_credential: ${28:false}                                            # Prompt user for credential on launch 
+    survey_enabled: ${29:false}                                            # Enable a survey on the job template 
+    survey_spec: ${30:value}                                               # JSON/YAML dict formatted survey definition 
+    become_enabled: ${31:false}                                            # Activate privilege escalation 
+    concurrent_jobs_enabled: ${32:false}                                   # Allow simultaneous runs of the job template 
+    state: ${33$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Desired state of the resource 
+    tower_host: ${34:value}                                                # URL to your Tower instance 
+    tower_username: ${35:value}                                            # Username for your Tower instance 
+    tower_password: ${36:value}                                            # Password for your Tower instance 
+    validate_certs: ${37:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${38:value}                                         # Path to the Tower config file 

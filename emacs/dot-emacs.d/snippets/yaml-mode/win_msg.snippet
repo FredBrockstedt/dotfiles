@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Sends a message to logged in users on Windows hosts
+# prefix: win_msg_snippet
+# key: win_msg
+# group: ansible
+# --
+
+- name: ${0:Sends a message to logged in users on Windows hosts}
+  win_msg:                                                                 
+    to: ${1:*}                                                             # Who to send the message to  Can be a username, sessionname or sessionid 
+    display_seconds: ${2:10}                                               # How long to wait for receiver to acknowledge message, in seconds 
+    wait: ${3:false}                                                       # Whether to wait for users to respond   Module will only wait for the number of seconds specified in display_seconds or 1
+    msg: ${4:"Hello world!"}                                               # The text of the message to be displayed  The message must be less than 256 characters 

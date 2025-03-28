@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Module to manage data centers in oVirt/RHV
+# prefix: ovirt_datacenter_snippet
+# key: ovirt_datacenter
+# group: ansible
+# --
+
+- name: ${0:Module to manage data centers in oVirt/RHV}
+  ovirt_datacenter:                                                        
+    name: ${1:Name of the data center to manage}                           #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${3:value}                                                         # ID of the datacenter to manage 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the data center be present or absent 
+    description: ${5:value}                                                # Description of the data center 
+    comment: ${6:value}                                                    # Comment of the data center 
+    local: ${7:value}                                                      # I(True) if the data center should be local, I(False) if should be shared  Default value is set by engine 
+    compatibility_version: ${8:value}                                      # Compatibility version of the data center 
+    quota_mode: ${9$$(yas-choose-value '("disabled" "audit" "enabled"))}   # choices: disabled;audit;enabled  Quota mode of the data center  One of I(disabled), I(audit) or I(enabled)
+    mac_pool: ${10:value}                                                  # MAC pool to be used by this datacenter  IMPORTANT: This option is deprecated in oVirt/RHV 4 1  You should use C(mac_pool
+    force: ${11:False}                                                     # This parameter can be used only when removing a data center  If I(True) data center will be forcibly removed, even thoug
+    wait: ${12:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${13:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${14:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${15:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${16:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

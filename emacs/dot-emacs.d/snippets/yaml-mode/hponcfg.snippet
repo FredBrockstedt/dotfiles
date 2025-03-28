@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Configure HP iLO interface using hponcfg
+# prefix: hponcfg_snippet
+# key: hponcfg
+# group: ansible
+# --
+
+- name: ${0:Configure HP iLO interface using hponcfg}
+  hponcfg:                                                                 
+    path: ${1:The XML file as accepted by hponcfg}                         #
+    minfw: ${2:value}                                                      # The minimum firmware level needed 
+    executable: ${3:hponcfg}                                               # Path to the hponcfg executable (`hponcfg` which uses \$PATH) 
+    verbose: ${4:False}                                                    # Run hponcfg in verbose mode (-v) 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Fetch files from remote nodes
+# prefix: fetch_snippet
+# key: fetch
+# group: ansible
+# --
+
+- name: ${0:Fetch files from remote nodes}
+  fetch:                                                                   
+    src: ${1:The file on the remote system to fetch}                       # This I(must) be a file, not a directory  Recursive fetching may be supported in a later release 
+    dest: ${2:A directory to save the file into}                           # For example, if the I(dest) directory is C(/backup) a I(src) file named C(/etc/profile) on host C(host example com), wou
+    fail_on_missing: ${3:True}                                             # When set to C(yes), the task will fail if the remote file cannot be read for any reason  Prior to Ansible 2 5, setting t
+    validate_checksum: ${4:True}                                           # Verify that the source and destination checksums match after the files are fetched 
+    flat: ${5:False}                                                       # Allows you to override the default behavior of appending hostname/path/to/file to the destination  If C(dest) ends with 

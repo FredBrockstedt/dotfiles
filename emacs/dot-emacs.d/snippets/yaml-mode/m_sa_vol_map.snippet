@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Handles volume mapping on IBM Spectrum Accelerate Family storage systems.
+# prefix: ibm_sa_vol_map_snippet
+# key: m_sa_vol_map
+# group: ansible
+# --
+
+- name: ${0:Handles volume mapping on IBM Spectrum Accelerate Family storage systems.}
+  ibm_sa_vol_map:                                                          
+    vol: ${1:Volume name}                                                  #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # When the state is present the volume is mapped  When the state is absent, the volume is meant to be unmapped 
+    username: ${3:Management user on the spectrum accelerate storage system}#
+    password: ${4:Password for username on the spectrum accelerate storage system}#
+    endpoints: ${5:The hostname or management IP of Spectrum Accelerate storage system}#
+    cluster: ${6:value}                                                    # Maps the volume to a cluster 
+    host: ${7:value}                                                       # Maps the volume to a host 
+    lun: ${8:value}                                                        # The LUN identifier 
+    override: ${9:value}                                                   # Overrides the existing volume mapping 

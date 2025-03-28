@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage OneConnect profiles on a BIG-IP
+# prefix: bigip_profile_oneconnect_snippet
+# key: gip_profile_oneconnect
+# group: ansible
+# --
+
+- name: ${0:Manage OneConnect profiles on a BIG-IP}
+  bigip_profile_oneconnect:                                                
+    name: ${1:Specifies the name of the OneConnect profile}                #
+    parent: ${2:value}                                                     # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    source_mask: ${3:value}                                                # Specifies a value that the system applies to the source address to determine its eligibility for reuse  When creating a 
+    description: ${4:value}                                                # Description of the profile 
+    maximum_size: ${5:value}                                               # Specifies the maximum number of connections that the system holds in the connection reuse pool  If the pool is already f
+    maximum_age: ${6:value}                                                # Specifies the maximum number of seconds allowed for a connection in the connection reuse pool  For any connection with a
+    maximum_reuse: ${7:value}                                              # Specifies the maximum number of times that a server-side connection can be reused  When creating a new profile, if this 
+    idle_timeout_override: ${8:value}                                      # Specifies the number of seconds that a connection is idle before the connection flow is eligible for deletion  When crea
+    limit_type: ${9$$(yas-choose-value '("none" "idle" "strict"))}         # choices: none;idle;strict  When C(none), simultaneous in-flight requests and responses over TCP connections to a pool me
+    share_pools: ${10:value}                                               # Indicates that connections may be shared not only within a virtual server, but also among similar virtual servers When C
+    partition: ${11:Common}                                                # Device partition to manage resources on 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${13:value}                                                  # A dict object containing connection details 

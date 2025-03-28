@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Snapshot Schedules
+# prefix: na_elementsw_snapshot_schedule_snippet
+# key: mentsw_snapshot_schedu
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Snapshot Schedules}
+  na_elementsw_snapshot_schedule:                                          
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified schedule should exist or not 
+    password: ${2:Element SW access account password}                      #
+    username: ${3:Element SW access account user-name}                     #
+    hostname: ${4:The hostname or IP address of the SolidFire cluster}     #
+    paused: ${5:value}                                                     # Pause / Resume a schedule 
+    recurring: ${6:value}                                                  # Should the schedule recur?
+    schedule_type: ${7$$(yas-choose-value '("DaysOfWeekFrequency" "DaysOfMonthFrequency" "TimeIntervalFrequency"))}# choices: DaysOfWeekFrequency;DaysOfMonthFrequency;TimeIntervalFrequency  Schedul
+    time_interval_days: ${8:1}                                             # T i m e   i n t e r v a l   i n   d a y s  
+    time_interval_hours: ${9:0}                                            # T i m e   i n t e r v a l   i n   h o u r s  
+    time_interval_minutes: ${10:0}                                         # T i m e   i n t e r v a l   i n   m i n u t e s  
+    days_of_week_weekdays: ${11:value}                                     # L i s t   o f   d a y s   o f   t h e   w e e k   ( S u n d a y   t o   S a t u r d a y )
+    days_of_week_hours: ${12:0}                                            # T i m e   s p e c i f i e d   i n   h o u r s
+    days_of_week_minutes: ${13:0}                                          # T i m e   s p e c i f i e d   i n   m i n u t e s  
+    days_of_month_monthdays: ${14:value}                                   # L i s t   o f   d a y s   o f   t h e   m o n t h   ( 1 - 3 1 )
+    days_of_month_hours: ${15:0}                                           # T i m e   s p e c i f i e d   i n   h o u r s
+    days_of_month_minutes: ${16:0}                                         # T i m e   s p e c i f i e d   i n   m i n u t e s  
+    name: ${17:value}                                                      # Name for the snapshot schedule  It accepts either schedule_id or schedule_name if name is digit, it will consider as sch
+    snapshot_name: ${18:value}                                             # Name for the created snapshots 
+    volumes: ${19:value}                                                   # Volume IDs that you want to set the snapshot schedule for  It accepts both volume_name and volume_id
+    account_id: ${20:value}                                                # Account ID for the owner of this volume  It accepts either account_name or account_id if account_id is digit, it will co
+    retention: ${21:value}                                                 # Retention period for the snapshot  Format is 'HH:mm:ss' 
+    starting_date: ${22:value}                                             # Starting date for the schedule  Required when C(state=present)  Format: C(2016-12-01T00:00:00Z)

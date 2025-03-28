@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage HTTP2 profiles on a BIG-IP
+# prefix: bigip_profile_http2_snippet
+# key: gip_profile_http2
+# group: ansible
+# --
+
+- name: ${0:Manage HTTP2 profiles on a BIG-IP}
+  bigip_profile_http2:                                                     
+    name: ${1:Specifies the name of the profile}                           #
+    parent: ${2:/Common/http2}                                             # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    description: ${3:value}                                                # Description of the profile 
+    streams: ${4:value}                                                    # Specifies the number of outstanding concurrent requests that are allowed on a single HTTP/2 connection  When creating a 
+    idle_timeout: ${5:value}                                               # Specifies the number of seconds that an HTTP/2 connection is idly left open before being shut down  When creating a new 
+    insert_header: ${6:value}                                              # Specifies whether an HTTP header indicating the use of HTTP/2 should be inserted into the request that goes to the serve
+    insert_header_name: ${7:value}                                         # Specifies the name of the HTTP header controlled by C(insert_header) parameter  When creating a new profile, if this par
+    enforce_tls_requirements: ${8:value}                                   # Specifies whether the system requires TLS for communications between specified senders and recipients  When creating a n
+    activation_modes: ${9$$(yas-choose-value '("alpn" "always"))}          # choices: alpn;always  Specifies what will cause an incoming connection to be handled as a HTTP/2 connection  The C(alpn)
+    frame_size: ${10:value}                                                # Specifies the size of data frames, in bytes, that HTTP/2 sends to the client  When creating a new profile, if this param
+    write_size: ${11:value}                                                # Specifies the total size of combined data frames, in bytes, that HTTP/2 sends in a single write  When creating a new pro
+    receive_window: ${12:value}                                            # Specifies the way that the HTTP/2 profile performs flow control  When creating a new profile, if this parameter is not s
+    header_table_size: ${13:value}                                         # Specifies the size of the header table, in bytes  When creating a new profile, if this parameter is not specified, the d
+    partition: ${14:Common}                                                # Device partition to manage resources on 
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${16:value}                                                  # A dict object containing connection details 

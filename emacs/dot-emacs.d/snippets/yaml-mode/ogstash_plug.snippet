@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Logstash plugins
+# prefix: logstash_plugin_snippet
+# key: ogstash_plug
+# group: ansible
+# --
+
+- name: ${0:Manage Logstash plugins}
+  logstash_plugin:                                                         
+    name: ${1:Install plugin with that name}                               #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Apply plugin state 
+    plugin_bin: ${3:/usr/share/logstash/bin/logstash-plugin}               # Specify logstash-plugin to use for plugin management 
+    proxy_host: ${4:value}                                                 # Proxy host to use during plugin installation 
+    proxy_port: ${5:value}                                                 # Proxy port to use during plugin installation 
+    version: ${6:value}                                                    # Specify plugin Version of the plugin to install  If plugin exists with previous version, it will NOT be updated 

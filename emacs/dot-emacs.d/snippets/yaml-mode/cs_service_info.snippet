@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: list or describe services in ecs
+# prefix: ecs_service_info_snippet
+# key: cs_service_info
+# group: ansible
+# --
+
+- name: ${0:list or describe services in ecs}
+  ecs_service_info:                                                        
+    details: ${1:false}                                                    # Set this to true if you want detailed information about the services 
+    events: ${2:true}                                                      # Whether to return ECS service events  Only has an effect if C(details) is true 
+    cluster: ${3:default}                                                  # The cluster ARNS in which to list the services 
+    service: ${4:value}                                                    # One or more services to get details for
+    debug_botocore_endpoint_logs: ${5:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${6:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${7:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${8:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${9:value}                                             # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${10:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${11:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${12:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

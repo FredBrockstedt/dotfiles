@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Configures server UUID pools on Cisco UCS Manager
+# prefix: ucs_uuid_pool_snippet
+# key: ucs_uuid_poo
+# group: ansible
+# --
+
+- name: ${0:Configures server UUID pools on Cisco UCS Manager}
+  ucs_uuid_pool:                                                           
+    name: ${1:The name of the UUID pool}                                   # This name can be between 1 and 32 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify UUID pool is present and will create if needed  If C(absent), will v
+    description: ${5:value}                                                # The user-defined description of the UUID pool  Enter up to 256 characters  You can use any characters or spaces except t
+    prefix: ${6:value}                                                     # UUID prefix used for the range of server UUIDs  If no value is provided, the system derived prefix will be used (equival
+    order: ${7$$(yas-choose-value '("default" "sequential"))}              # choices: default;sequential  The Assignment Order field  This can be one of the following: default - Cisco UCS Manager s
+    first_uuid: ${8:value}                                                 # The first UUID in the block of UUIDs  This is the From field in the UCS Manager UUID Blocks menu 
+    last_uuid: ${9:value}                                                  # The last UUID in the block of UUIDs  This is the To field in the UCS Manager Add UUID Blocks menu 
+    org_dn: ${10:org-root}                                                 # The distinguished name (dn) of the organization where the resource is assigned 
+    username: ${11:admin}                                                  # Username for Cisco UCS Manager authentication 
+    port: ${12:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${13:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${14:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${15:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

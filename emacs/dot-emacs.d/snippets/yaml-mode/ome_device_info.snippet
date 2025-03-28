@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Retrieves the information about Device.
+# prefix: ome_device_info_snippet
+# key: ome_device_info
+# group: ansible
+# --
+
+- name: ${0:Retrieves the information about Device.}
+  ome_device_info:                                                         
+    hostname: ${1:Target IP Address or hostname}                           #
+    username: ${2:Target username}                                         #
+    password: ${3:Target user password}                                    #
+    port: ${4:443}                                                         # Target HTTPS port 
+    fact_subset: ${5$$(yas-choose-value '("basic_inventory" "detailed_inventory" "subsystem_health"))}# choices: basic_inventory;detailed_inventory;subsystem_health  C(basic_inventory) returns the 
+    system_query_options: ${6:value}                                       # I(system_query_options) applicable for the choices of the fact_subset  Either I(device_id) or I(device_service_tag) is m

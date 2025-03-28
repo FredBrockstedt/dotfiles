@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Scaleway volumes management module
+# prefix: scaleway_volume_snippet
+# key: caleway_volum
+# group: ansible
+# --
+
+- name: ${0:Scaleway volumes management module}
+  scaleway_volume:                                                         
+    region: ${1$$(yas-choose-value '("ams1" "EMEA-NL-EVS" "par1" "EMEA-FR-PAR1"))}# Scaleway region to use (for example par1) 
+    name: ${2:Name used to identify the volume}                            #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the volume 
+    organization: ${4:value}                                               # ScaleWay organization ID to which volume belongs 
+    size: ${5:value}                                                       # Size of the volume in bytes 
+    volume_type: ${6:value}                                                # Type of the volume (for example 'l_ssd') 
+    api_token: ${7:value}                                                  # Scaleway OAuth token 
+    api_url: ${{8:https://api}                                             #scaleway com} # not required  Scaleway API URL 
+    api_timeout: ${9:30}                                                   # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${10:namespace()}                                    # List of parameters passed to the query string 
+    validate_certs: ${11:True}                                             # Validate SSL certs of the Scaleway API 

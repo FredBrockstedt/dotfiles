@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage dns zones on a univention corporate server
+# prefix: udm_dns_zone_snippet
+# key: udm_dns_zo
+# group: ansible
+# --
+
+- name: ${0:Manage dns zones on a univention corporate server}
+  udm_dns_zone:                                                            
+    type: ${1$$(yas-choose-value '("forward_zone" "reverse_zone"))}        # Define if the zone is a forward or reverse DNS zone 
+    zone: ${2:DNS zone name, e}                                            #g  C(example com) 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the dns zone is present or not 
+    nameserver: ${4:value}                                                 # List of appropriate name servers  Required if C(state=present) 
+    interfaces: ${5:value}                                                 # List of interface IP addresses, on which the server should response this zone  Required if C(state=present) 
+    refresh: ${6:3600}                                                     # Interval before the zone should be refreshed 
+    retry: ${7:1800}                                                       # Interval that should elapse before a failed refresh should be retried 
+    expire: ${8:604800}                                                    # Specifies the upper limit on the time interval that can elapse before the zone is no longer authoritative 
+    ttl: ${9:600}                                                          # Minimum TTL field that should be exported with any RR from this zone 
+    contact: ${10:}                                                        # Contact person in the SOA record 
+    mx: ${11:[]}                                                           # List of MX servers  (Must declared as A or AAAA records) 

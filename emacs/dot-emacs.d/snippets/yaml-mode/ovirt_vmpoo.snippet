@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Module to manage VM pools in oVirt/RHV
+# prefix: ovirt_vmpool_snippet
+# key: ovirt_vmpoo
+# group: ansible
+# --
+
+- name: ${0:Module to manage VM pools in oVirt/RHV}
+  ovirt_vmpool:                                                            
+    name: ${1:Name of the VM pool to manage}                               #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${3:value}                                                         # ID of the vmpool to manage 
+    comment: ${4:value}                                                    # Comment of the Virtual Machine pool 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the VM pool be present/absent  Note that when C(state) is I(absent) all VMs in VM pool a
+    template: ${6:value}                                                   # Name of the template, which will be used to create VM pool 
+    description: ${7:value}                                                # Description of the VM pool 
+    cluster: ${8:value}                                                    # Name of the cluster, where VM pool should be created 
+    type: ${9$$(yas-choose-value '("manual" "automatic"))}                 # choices: manual;automatic  Type of the VM pool  Either manual or automatic  C(manual) - The administrator is responsible
+    vm_per_user: ${10:value}                                               # Maximum number of VMs a single user can attach to from this pool  Default value is set by engine 
+    prestarted: ${11:value}                                                # Number of pre-started VMs defines the number of VMs in run state, that are waiting to be attached to Users  Default valu
+    vm_count: ${12:value}                                                  # Number of VMs in the pool  Default value is set by engine 
+    vm: ${13:value}                                                        # For creating vm pool without editing template  Note: You can use C(vm) only for creating vm pool 
+    wait: ${14:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${15:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${16:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${17:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${18:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

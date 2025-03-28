@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage RabbitMQ global parameters
+# prefix: rabbitmq_global_parameter_snippet
+# key: rabbitmq_global_parameter
+# group: ansible
+# --
+
+- name: ${0:Manage RabbitMQ global parameters}
+  rabbitmq_global_parameter:                                               
+    name: ${1:None}:Name of the global parameter being set}                #
+    value: ${2:None}                                                       # Value of the global parameter, as a JSON term
+    node: ${3:rabbit}                                                      # erlang node name of the rabbit we wish to configure
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify if user is to be added or removed

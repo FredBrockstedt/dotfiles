@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Create and manage block volumes on the Hetzner Cloud.
+# prefix: hcloud_volume_snippet
+# key: hcloud_volum
+# group: ansible
+# --
+
+- name: ${0:Create and manage block volumes on the Hetzner Cloud.}
+  hcloud_volume:                                                           
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the Hetzner Cloud Block Volume to manage  Only required if no volume I(name) is given
+    name: ${3:value}                                                       # The Name of the Hetzner Cloud Block Volume to manage  Only required if no volume I(id) is given or a volume does not exi
+    size: ${4:value}                                                       # The size of the Block Volume in GB  Required if volume does not yet exists 
+    automount: ${5:value}                                                  # Automatically mount the Volume 
+    format: ${6$$(yas-choose-value '("xfs" "ext4"))}                       # choices: xfs;ext4  Automatically Format the volume on creation Can only be used in case the Volume does not exists 
+    location: ${7:value}                                                   # Location of the Hetzner Cloud Volume  Required if no I(server) is given and Volume does not exists 
+    server: ${8:value}                                                     # Server Name the Volume should be assigned to  Required if no I(location) is given and Volume does not exists 
+    labels: ${9:value}                                                     # User-defined key-value pairs 
+    state: ${10$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  State of the volume 
+    endpoint: ${{11:https://api}                                           #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

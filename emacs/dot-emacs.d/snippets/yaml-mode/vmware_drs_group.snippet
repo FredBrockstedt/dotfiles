@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Creates vm/host group in a given cluster.
+# prefix: vmware_drs_group_snippet
+# key: vmware_drs_group
+# group: ansible
+# --
+
+- name: ${0:Creates vm/host group in a given cluster.}
+  vmware_drs_group:                                                        
+    cluster_name: ${1:Cluster to create vm/host group}                     #
+    group_name: ${2:The name of the group to create or remove}             #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # If set to C(present) and the group doesn't exists then the group will be created  If set to C(absent) and the group exis
+    datacenter: ${4:value}                                                 # Datacenter to search for given cluster  If not set, we use first cluster we encounter with C(cluster_name) 
+    hosts: ${5:value}                                                      # List of hosts to create in group  Required only if C(vms) is not set 
+    vms: ${6:value}                                                        # List of vms to create in group  Required only if C(hosts) is not set 
+    hostname: ${7:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${8:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${9:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${10:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${11:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${12:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${13:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Runs puppet
+# prefix: puppet_snippet
+# key: puppet
+# group: ansible
+# --
+
+- name: ${0:Runs puppet}
+  puppet:                                                                  
+    timeout: ${1:30m}                                                      # How long to wait for I(puppet) to finish 
+    puppetmaster: ${2:value}                                               # The hostname of the puppetmaster to contact 
+    modulepath: ${3:value}                                                 # Path to an alternate location for puppet modules 
+    manifest: ${4:value}                                                   # Path to the manifest file to run puppet apply on 
+    noop: ${5:value}                                                       # Override puppet conf noop mode  When C(yes), run Puppet agent with C(--noop) switch set  When C(no), run Puppet agent wi
+    facts: ${6:value}                                                      # A dict of values to pass in as persistent external facter facts 
+    facter_basename: ${7:ansible}                                          # Basename of the facter output file 
+    environment: ${8:value}                                                # Puppet environment to be used 
+    logdest: ${9$$(yas-choose-value '("all" "stdout" "syslog"))}           # choices: all;stdout;syslog  Where the puppet logs should go, if puppet apply is being used  C(all) will go to both C(std
+    certname: ${10:value}                                                  # The name to use when handling certificates 
+    tags: ${11:value}                                                      # A list of puppet tags to be used 
+    execute: ${12:value}                                                   # Execute a specific piece of Puppet code  It has no effect with a puppetmaster 
+    use_srv_records: ${13:value}                                           # Toggles use_srv_records flag
+    summarize: ${14:value}                                                 # Whether to print a transaction summary 
+    verbose: ${15:value}                                                   # Print extra information 
+    debug: ${16:value}                                                     # Enable full debugging 

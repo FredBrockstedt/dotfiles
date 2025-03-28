@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Publish a message on an MQTT topic for the IoT
+# prefix: mqtt_snippet
+# key: mqtt
+# group: ansible
+# --
+
+- name: ${0:Publish a message on an MQTT topic for the IoT}
+  mqtt:                                                                    
+    topic: ${1:MQTT topic name}                                            #
+    payload: ${2:Payload}                                                  # The special string C("None") may be used to send a NULL (i e  empty) payload which is useful to simply notify with the I
+    server: ${3:localhost}                                                 # MQTT broker address/name
+    port: ${4:1883}                                                        # MQTT broker port number
+    username: ${5:value}                                                   # Username to authenticate against the broker 
+    password: ${6:value}                                                   # Password for C(username) to authenticate against the broker 
+    client_id: ${7:"hostname + pid"}                                       # MQTT client identifier
+    qos: ${8$$(yas-choose-value '("0" "1" "2"))}                           # choices: 0;1;2  QoS (Quality of Service)
+    retain: ${9:false}                                                     # Setting this flag causes the broker to retain (i e  keep) the message so that applications that subsequently subscribe t
+    ca_cert: ${10:value}                                                   # The path to the Certificate Authority certificate files that are to be treated as trusted by this client  If this is the
+    client_cert: ${11:value}                                               # The path pointing to the PEM encoded client certificate  If this is not None it will be used as client information for T
+    client_key: ${12:value}                                                # The path pointing to the PEM encoded client private key  If this is not None it will be used as client information for T
+    tls_version: ${{13$$(yas-choose-value '("tlsv1}                        #1,tlsv1 2|} # not required  choices: tlsv1 1;tlsv1 2  Specifies the version of the SSL/TLS protocol to be used  By defaul

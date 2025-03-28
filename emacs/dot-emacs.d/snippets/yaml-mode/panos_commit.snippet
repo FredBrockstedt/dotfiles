@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: commit firewall's candidate configuration
+# prefix: panos_commit_snippet
+# key: panos_commit
+# group: ansible
+# --
+
+- name: ${0:commit firewall's candidate configuration}
+  panos_commit:                                                            
+    ip_address: ${1:IP address (or hostname) of PAN-OS device}             #
+    password: ${2:Password for authentication}                             # If the value is not specified in the task, the value of environment variable C(ANSIBLE_NET_PASSWORD) will be used instea
+    username: ${3:admin}                                                   # Username for authentication  If the value is not specified in the task, the value of environment variable C(ANSIBLE_NET_
+    interval: ${{4:0}                                                      #5} # not required  interval for checking commit job
+    timeout: ${5:value}                                                    # timeout for commit job
+    sync: ${6:true}                                                        # if commit should be synchronous
+    description: ${7:value}                                                # Commit description/comment
+    commit_changes_by: ${8:value}                                          # Commit changes made by specified admin
+    commit_vsys: ${9:value}                                                # Commit changes for specified VSYS

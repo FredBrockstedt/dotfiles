@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages Chocolatey config settings
+# prefix: win_chocolatey_config_snippet
+# key: win_chocolatey_config
+# group: ansible
+# --
+
+- name: ${0:Manages Chocolatey config settings}
+  win_chocolatey_config:                                                   
+    name: ${1:The name of the config setting to manage}                    # See U(https://chocolatey org/docs/chocolatey-configuration) for a list of valid configuration settings that can be chang
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(absent), it will ensure the setting is unset or blank  When C(present), it will ensure t
+    value: ${3:value}                                                      # Used when C(state=present) that contains the value to set for the config setting  Cannot be null or an empty string, use

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Retrieve Memstore product usage information.
+# prefix: memset_memstore_info_snippet
+# key: memset_memstore_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve Memstore product usage information.}
+  memset_memstore_info:                                                    
+    api_key: ${1:The API key obtained from the Memset control panel}       #
+    name: ${2:The Memstore product name (i}                                #e  C(mstestyaa1)) 

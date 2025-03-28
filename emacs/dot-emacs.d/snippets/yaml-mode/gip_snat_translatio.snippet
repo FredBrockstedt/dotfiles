@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage SNAT Translations on a BIG-IP
+# prefix: bigip_snat_translation_snippet
+# key: gip_snat_translatio
+# group: ansible
+# --
+
+- name: ${0:Manage SNAT Translations on a BIG-IP}
+  bigip_snat_translation:                                                  
+    name: ${1:The name of SNAT translation}                                #
+    address: ${2:value}                                                    # Specifies the IP address of the SNAT translation  When a C(state) of present, enabled, or disabled is provided, this par
+    arp: ${3:value}                                                        # If C(yes), specifies that the NAT sends ARP requests 
+    connection_limit: ${4:value}                                           # Specifies a limit on the number of connections a translation address must reach before it no longer initiates a connecti
+    description: ${5:value}                                                # Description of snat-translation  C(none or '') will set to default description of null 
+    ip_idle_timeout: ${6:value}                                            # Specifies the amount of time that connections to an IP address initiated using a SNAT address are allowed to remain idle
+    partition: ${7:value}                                                  # Device partition to manage resources on  Required with state C(absent) when partition other than Common used 
+    state: ${8$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  The SNAT translation state  If C(absent), delete the SNAT translation if it
+    tcp_idle_timeout: ${9:value}                                           # Specifies the amount of time that TCP connections initiated using a SNAT address are allowed to remain idle before being
+    traffic_group: ${10:value}                                             # The traffic group for the snat-translation address  When creating a new address, if this value is not specified, the def
+    udp_idle_timeout: ${11:value}                                          # Specifies the amount of time that UDP connections initiated using a SNAT address are allowed to remain idle before being
+    provider: ${12:value}                                                  # A dict object containing connection details 

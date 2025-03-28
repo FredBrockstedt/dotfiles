@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Module for setup of ServiceEngine Avi RESTful Object
+# prefix: avi_serviceengine_snippet
+# key: vi_serviceeng
+# group: ansible
+# --
+
+- name: ${0:Module for setup of ServiceEngine Avi RESTful Object}
+  avi_serviceengine:                                                       
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${2$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${3$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    availability_zone: ${4:value}                                          # Availability_zone of serviceengine 
+    cloud_ref: ${5:value}                                                  # It is a reference to an object of type cloud 
+    container_mode: ${6:value}                                             # Boolean flag to set container_mode  Default value when not specified in API or module is interpreted by Avi Controller a
+    container_type: ${7:value}                                             # Enum options - container_type_bridge, container_type_host, container_type_host_dpdk  Default value when not specified in
+    controller_created: ${8:value}                                         # Boolean flag to set controller_created  Default value when not specified in API or module is interpreted by Avi Controll
+    controller_ip: ${9:value}                                              # Controller_ip of serviceengine 
+    data_vnics: ${10:value}                                                # List of vnic 
+    enable_state: ${11:value}                                              # Inorder to disable se set this field appropriately  Enum options - SE_STATE_ENABLED, SE_STATE_DISABLED_FOR_PLACEMENT, SE
+    flavor: ${12:value}                                                    # Flavor of serviceengine 
+    host_ref: ${13:value}                                                  # It is a reference to an object of type vimgrhostruntime 
+    hypervisor: ${14:value}                                                # Enum options - default, vmware_esx, kvm, vmware_vsan, xen 
+    mgmt_vnic: ${15:value}                                                 # Vnic settings for serviceengine 
+    name: ${16:value}                                                      # Name of the object  Default value when not specified in API or module is interpreted by Avi Controller as VM name unknow
+    resources: ${17:value}                                                 # Seresources settings for serviceengine 
+    se_group_ref: ${18:value}                                              # It is a reference to an object of type serviceenginegroup 
+    tenant_ref: ${19:value}                                                # It is a reference to an object of type tenant 
+    url: ${20:value}                                                       # Avi controller URL of the object 
+    uuid: ${21:value}                                                      # Unique object identifier of the object 
+    controller: ${22:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${23:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${24:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${25:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${26:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{27:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${28:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${29:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${30:value}                         # It disables avi session information to be cached as a fact 

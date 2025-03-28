@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Verifies the policy of the selected package.
+# prefix: cp_mgmt_verify_policy_snippet
+# key: cp_mgmt_verify_policy
+# group: ansible
+# --
+
+- name: ${0:Verifies the policy of the selected package.}
+  cp_mgmt_verify_policy:                                                   
+    policy_package: ${1:value}                                             # Policy package identified by the name or UID 
+    wait_for_task: ${2:True}                                               # Wait for the task to end  Such as publish task 
+    version: ${3:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

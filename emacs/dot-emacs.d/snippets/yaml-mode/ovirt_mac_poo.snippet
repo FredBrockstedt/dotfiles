@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Module to manage MAC pools in oVirt/RHV
+# prefix: ovirt_mac_pool_snippet
+# key: ovirt_mac_poo
+# group: ansible
+# --
+
+- name: ${0:Module to manage MAC pools in oVirt/RHV}
+  ovirt_mac_pool:                                                          
+    name: ${1:Name of the MAC pool to manage}                              #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${3:value}                                                         # ID of the mac pool to manage 
+    description: ${4:value}                                                # Description of the MAC pool 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the mac pool be present or absent 
+    allow_duplicates: ${6:value}                                           # If I(true) allow a MAC address to be used multiple times in a pool  Default value is set by oVirt/RHV engine to I(false)
+    ranges: ${7:value}                                                     # List of MAC ranges  The from and to should be split by comma  For example: 00:1a:4a:16:01:51,00:1a:4a:16:01:61
+    wait: ${8:True}                                                        # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${9:value}                                               # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${10:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${11:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${12:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

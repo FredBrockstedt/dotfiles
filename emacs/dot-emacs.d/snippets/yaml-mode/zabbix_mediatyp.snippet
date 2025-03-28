@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Create/Update/Delete Zabbix media types
+# prefix: zabbix_mediatype_snippet
+# key: zabbix_mediatyp
+# group: ansible
+# --
+
+- name: ${0:Create/Update/Delete Zabbix media types}
+  zabbix_mediatype:                                                        
+    name: ${1:Name of the media type}                                      #
+    type: ${2$$(yas-choose-value '("email" "script" "sms" "jabber" "ez_texting"))}# Type of the media type 
+    server_url: ${3:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${4:Zabbix user name}                                      #
+    login_password: ${5:Zabbix user password}                              #
+    http_login_user: ${6:Basic Auth login}                                 #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of the mediatype  On C(present), it will create a mediatype if it does not exist 
+    status: ${8$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  Whether the media type is enabled or no 
+    max_sessions: ${9:1}                                                   # The maximum number of alerts that can be processed in parallel  Possible value is 1 when I(type=sms) and 0-100 otherwise
+    max_attempts: ${10:3}                                                  # The maximum number of attempts to send an alert  Possible range is 0-10
+    attempt_interval: ${11:10}                                             # The interval between retry attempts  Possible range is 0-60
+    script_name: ${12:value}                                               # The name of the executed script  Required when I(type=script) 
+    script_params: ${13:value}                                             # List of script parameters  Required when I(type=script) 
+    gsm_modem: ${14:value}                                                 # Serial device name of the gsm modem  Required when I(type=sms) 
+    username: ${15:value}                                                  # Username or Jabber identifier  Required when I(type=jabber) or I(type=ez_texting)  Required when I(type=email) and I(smt
+    password: ${16:value}                                                  # Authentication password  Required when I(type=jabber) or I(type=ez_texting)  Required when I(type=email) and I(smtp_auth
+    smtp_server: ${17:localhost}                                           # SMTP server host  Required when I(type=email) 
+    smtp_server_port: ${18:25}                                             # SMTP server port  Required when I(type=email) 
+    smtp_helo: ${19:localhost}                                             # SMTP HELO  Required when I(type=email) 
+    smtp_email: ${20:value}                                                # Email address from which notifications will be sent  Required when I(type=email) 
+    smtp_authentication: ${21:False}                                       # Whether SMTP authentication with username and password should be enabled or not  If set to C(true), C(username) and C(pa
+    smtp_security: ${22$$(yas-choose-value '("None" "STARTTLS" "SSL/TLS"))}# choices: None;STARTTLS;SSL/TLS  SMTP connection security level to use 
+    smtp_verify_host: ${23:False}                                          # SSL verify host for SMTP  Can be specified when I(smtp_security=STARTTLS) or I(smtp_security=SSL/TLS)
+    smtp_verify_peer: ${24:False}                                          # SSL verify peer for SMTP  Can be specified when I(smtp_security=STARTTLS) or I(smtp_security=SSL/TLS)
+    message_text_limit: ${25$$(yas-choose-value '("USA" "Canada"))}        # choices: USA;Canada  The message text limit  Required when I(type=ez_texting)  160 characters for USA and 136 characters
+    http_login_password: ${26:value}                                       # Basic Auth password
+    timeout: ${27:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${28:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Create and manage AWS Datapipelines
+# prefix: data_pipeline_snippet
+# key: data_pip
+# group: ansible
+# --
+
+- name: ${0:Create and manage AWS Datapipelines}
+  data_pipeline:                                                           
+    name: ${1:The name of the Datapipeline to create/modify/delete}        #
+    description: ${2:}                                                     # An optional description for the pipeline being created 
+    objects: ${3:value}                                                    # A list of pipeline object definitions, each of which is a dict that takes the keys C(id), C(name) and C(fields) 
+    parameters: ${4:value}                                                 # A list of parameter objects (dicts) in the pipeline definition 
+    values: ${5:value}                                                     # A list of parameter values (dicts) in the pipeline definition  Each dict takes the keys C(id) and C(stringValue) both of
+    timeout: ${6:300}                                                      # Time in seconds to wait for the pipeline to transition to the requested state, fail otherwise 
+    state: ${7$$(yas-choose-value '("present" "absent" "active" "inactive"))}# choices: present;absent;active;inactive  The requested state of the pipeline 
+    tags: ${8:value}                                                       # A dict of key:value pair(s) to add to the pipeline 
+    debug_botocore_endpoint_logs: ${9:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${10:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${11:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${12:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${13:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${14:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${15:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${16:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage the state of virtual host limits in RabbitMQ
+# prefix: rabbitmq_vhost_limits_snippet
+# key: rabbitmq_vhost_limit
+# group: ansible
+# --
+
+- name: ${0:Manage the state of virtual host limits in RabbitMQ}
+  rabbitmq_vhost_limits:                                                   
+    max_connections: ${1:-1}                                               # Max number of concurrent client connections  Negative value means "no limit"  Ignored when the I(state) is C(absent) 
+    max_queues: ${2:-1}                                                    # Max number of queues  Negative value means "no limit"  Ignored when the I(state) is C(absent) 
+    node: ${3:value}                                                       # Name of the RabbitMQ Erlang node to manage 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify whether the limits are to be set or cleared  If set to C(absent), the limits of both I(
+    vhost: ${5:/}                                                          # Name of the virtual host to manage 

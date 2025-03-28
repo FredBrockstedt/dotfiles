@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Find portgroup(s) in a VMware environment
+# prefix: vmware_dvs_portgroup_find_snippet
+# key: vmware_dvs_portgroup_find
+# group: ansible
+# --
+
+- name: ${0:Find portgroup(s) in a VMware environment}
+  vmware_dvs_portgroup_find:                                               
+    dvswitch: ${1:value}                                                   # Name of a distributed vSwitch to look for 
+    vlanid: ${2:value}                                                     # VLAN id can be any number between 1 and 4094  This search criteria will looks into VLAN ranges to find possible matches 
+    name: ${3:value}                                                       # string to check inside the name of the portgroup  Basic containment check using python C(in) operation 
+    show_uplink: ${4:False}                                                # Show or hide uplink portgroups  Only relevant when C(vlanid) is supplied 
+    hostname: ${5:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${6:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${7:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${8:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${9:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${10:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${11:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

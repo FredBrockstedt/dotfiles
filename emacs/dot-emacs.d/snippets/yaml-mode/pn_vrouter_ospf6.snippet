@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove vrouter-ospf6
+# prefix: pn_vrouter_ospf6_snippet
+# key: pn_vrouter_ospf6
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove vrouter-ospf6}
+  pn_vrouter_ospf6:                                                        
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use C(present) to add vrouter-ospf6 and C(absent) to remove interface from vrouter-ospf6 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_ospf6_area: ${3:value}                                              # area id for this interface in IPv4 address format 
+    pn_nic: ${4:value}                                                     # OSPF6 control for this interface 
+    pn_vrouter_name: ${5:value}                                            # name of service config 

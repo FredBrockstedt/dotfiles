@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Configure 802.1x MAC Authentication Bypass (MAB) policies in Fortinet's FortiOS and FortiGate.
+# prefix: fortios_switch_controller_security_policy_802_1X_snippet
+# key: fortios_switch_controller_security_policy_802_1X
+# group: ansible
+# --
+
+- name: ${0:Configure 802.1x MAC Authentication Bypass (MAB) policies in Fortinet's FortiOS and FortiGate.}
+  fortios_switch_controller_security_policy_802_1X:                        
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Indicates whether to create or remove the object 
+    host: ${2:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${3:value}                                                   # FortiOS or FortiGate username 
+    password: ${4:}                                                        # FortiOS or FortiGate password 
+    vdom: ${5:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${6:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${7:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 
+    switch_controller_security_policy_802_1X: ${8:None}                    # Configure 802 1x MAC Authentication Bypass (MAB) policies 

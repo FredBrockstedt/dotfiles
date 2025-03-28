@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Creates/deletes an issue in a Taiga Project Management Platform
+# prefix: taiga_issue_snippet
+# key: taiga_issu
+# group: ansible
+# --
+
+- name: ${0:Creates/deletes an issue in a Taiga Project Management Platform}
+  taiga_issue:                                                             
+    project: ${1:Name of the project containing the issue}                 # Must exist previously 
+    subject: ${2:The issue subject}                                        #
+    issue_type: ${3:The issue type}                                        # Must exist previously 
+    taiga_host: ${{4:https://api}                                          #taiga io} # not required  The hostname of the Taiga instance 
+    priority: ${5:Normal}                                                  # The issue priority  Must exist previously 
+    status: ${6:New}                                                       # The issue status  Must exist previously 
+    severity: ${7:Normal}                                                  # The issue severity  Must exist previously 
+    description: ${8:}                                                     # The issue description 
+    attachment: ${9:value}                                                 # Path to a file to be attached to the issue 
+    attachment_description: ${10:}                                         # A string describing the file to be attached to the issue 
+    tags: ${11:[]}                                                         # A lists of tags to be assigned to the issue 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Whether the issue should be present or not 

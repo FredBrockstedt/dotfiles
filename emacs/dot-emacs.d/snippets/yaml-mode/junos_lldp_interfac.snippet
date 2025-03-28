@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage link layer discovery protocol (LLDP) attributes of interfaces on Juniper JUNOS devices
+# prefix: junos_lldp_interfaces_snippet
+# key: junos_lldp_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage link layer discovery protocol (LLDP) attributes of interfaces on Juniper JUNOS devices}
+  junos_lldp_interfaces:                                                   
+    config: ${1:value}                                                     # T h e   l i s t   o f   l i n k   l a y e r   d i s c o v e r y   p r o t o c o l   i n t e r f a c e   a t t r i b u t 
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion 

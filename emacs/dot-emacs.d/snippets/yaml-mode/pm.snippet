@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage node.js packages with npm
+# prefix: npm_snippet
+# key: pm
+# group: ansible
+# --
+
+- name: ${0:Manage node.js packages with npm}
+  npm:                                                                     
+    name: ${1:value}                                                       # The name of a node js library to install
+    path: ${2:value}                                                       # The base path where to install the node js libraries
+    version: ${3:value}                                                    # The version to be installed
+    global: ${4:False}                                                     # Install the node js library globally
+    executable: ${5:value}                                                 # The executable location for npm  This is useful if you are using a version manager, such as nvm
+    ignore_scripts: ${6:False}                                             # Use the C(--ignore-scripts) flag when installing 
+    unsafe_perm: ${7:False}                                                # Use the C(--unsafe-perm) flag when installing 
+    ci: ${8:False}                                                         # Install packages based on package-lock file, same as running npm ci
+    production: ${9:False}                                                 # Install dependencies in production mode, excluding devDependencies
+    registry: ${10:value}                                                  # The registry to install modules from 
+    state: ${11$$(yas-choose-value '("present" "absent" "latest"))}        # choices: present;absent;latest  The state of the node js library

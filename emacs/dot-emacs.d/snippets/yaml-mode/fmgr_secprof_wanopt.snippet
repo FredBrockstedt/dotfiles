@@ -1,0 +1,60 @@
+# -*- mode: snippet -*-
+# name: WAN optimization
+# prefix: fmgr_secprof_wanopt_snippet
+# key: fmgr_secprof_wanopt
+# group: ansible
+# --
+
+- name: ${0:WAN optimization}
+  fmgr_secprof_wanopt:                                                     
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    transparent: ${3$$(yas-choose-value '("disable" "enable"))}            # choices: disable;enable  Enable/disable transparent mode 
+    name: ${4:value}                                                       # Profile name 
+    comments: ${5:value}                                                   # Comment 
+    auth_group: ${6:value}                                                 # Optionally add an authentication group to restrict access to the WAN Optimization tunnel to peers in the authentication 
+    cifs: ${7:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    cifs_byte_caching: ${8$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable byte-caching for HTTP  Byte caching reduces the amount of traffic by caching fil
+    cifs_log_traffic: ${9$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable logging 
+    cifs_port: ${10:value}                                                 # Single port number or port number range for CIFS  Only packets with a destination port number that matches this port num
+    cifs_prefer_chunking: ${11$$(yas-choose-value '("dynamic" "fix"))}     # choices: dynamic;fix  Select dynamic or fixed-size data chunking for HTTP WAN Optimization 
+    cifs_secure_tunnel: ${12$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable securing the WAN Opt tunnel using SSL  Secure and non-secure tunnels use the sam
+    cifs_status: ${13$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable HTTP WAN Optimization 
+    cifs_tunnel_sharing: ${14$$(yas-choose-value '("private" "shared" "express-shared"))}# choices: private;shared;express-shared  Tunnel sharing mode for aggressive/non-aggressive and/or interacti
+    ftp: ${15:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ftp_byte_caching: ${16$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable byte-caching for HTTP  Byte caching reduces the amount of traffic by caching fil
+    ftp_log_traffic: ${17$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable logging 
+    ftp_port: ${18:value}                                                  # Single port number or port number range for FTP  Only packets with a destination port number that matches this port numb
+    ftp_prefer_chunking: ${19$$(yas-choose-value '("dynamic" "fix"))}      # choices: dynamic;fix  Select dynamic or fixed-size data chunking for HTTP WAN Optimization 
+    ftp_secure_tunnel: ${20$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable securing the WAN Opt tunnel using SSL  Secure and non-secure tunnels use the sam
+    ftp_status: ${21$$(yas-choose-value '("disable" "enable"))}            # choices: disable;enable  Enable/disable HTTP WAN Optimization 
+    ftp_tunnel_sharing: ${22$$(yas-choose-value '("private" "shared" "express-shared"))}# choices: private;shared;express-shared  Tunnel sharing mode for aggressive/non-aggressive and/or interactiv
+    http: ${23:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    http_byte_caching: ${24$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable byte-caching for HTTP  Byte caching reduces the amount of traffic by caching fil
+    http_log_traffic: ${25$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable logging 
+    http_port: ${26:value}                                                 # Single port number or port number range for HTTP  Only packets with a destination port number that matches this port num
+    http_prefer_chunking: ${27$$(yas-choose-value '("dynamic" "fix"))}     # choices: dynamic;fix  Select dynamic or fixed-size data chunking for HTTP WAN Optimization 
+    http_secure_tunnel: ${28$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable securing the WAN Opt tunnel using SSL  Secure and non-secure tunnels use the sam
+    http_ssl: ${29$$(yas-choose-value '("disable" "enable"))}              # choices: disable;enable  Enable/disable SSL/TLS offloading (hardware acceleration) for HTTPS traffic in this tunnel 
+    http_ssl_port: ${30:value}                                             # Port on which to expect HTTPS traffic for SSL/TLS offloading 
+    http_status: ${31$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable HTTP WAN Optimization 
+    http_tunnel_non_http: ${32$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Configure how to process non-HTTP traffic when a profile configured for HTTP traffic accepts a 
+    http_tunnel_sharing: ${33$$(yas-choose-value '("private" "shared" "express-shared"))}# choices: private;shared;express-shared  Tunnel sharing mode for aggressive/non-aggressive and/or interacti
+    http_unknown_http_version: ${34$$(yas-choose-value '("best-effort" "reject" "tunnel"))}# choices: best-effort;reject;tunnel  How to handle HTTP sessions that do not comply with HTTP 0 9, 1 0, o
+    mapi: ${35:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    mapi_byte_caching: ${36$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable byte-caching for HTTP  Byte caching reduces the amount of traffic by caching fil
+    mapi_log_traffic: ${37$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable logging 
+    mapi_port: ${38:value}                                                 # Single port number or port number range for MAPI  Only packets with a destination port number that matches this port num
+    mapi_secure_tunnel: ${39$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable securing the WAN Opt tunnel using SSL  Secure and non-secure tunnels use the sam
+    mapi_status: ${40$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable HTTP WAN Optimization 
+    mapi_tunnel_sharing: ${41$$(yas-choose-value '("private" "shared" "express-shared"))}# choices: private;shared;express-shared  Tunnel sharing mode for aggressive/non-aggressive and/or interacti
+    tcp: ${42:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    tcp_byte_caching: ${43$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable byte-caching for HTTP  Byte caching reduces the amount of traffic by caching fil
+    tcp_byte_caching_opt: ${44$$(yas-choose-value '("mem-only" "mem-disk"))}# choices: mem-only;mem-disk  Select whether TCP byte-caching uses system memory only or both memory and disk space 
+    tcp_log_traffic: ${45$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable logging 
+    tcp_port: ${46:value}                                                  # Single port number or port number range for TCP  Only packets with a destination port number that matches this port numb
+    tcp_secure_tunnel: ${47$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable securing the WAN Opt tunnel using SSL  Secure and non-secure tunnels use the sam
+    tcp_ssl: ${48$$(yas-choose-value '("disable" "enable"))}               # choices: disable;enable  Enable/disable SSL/TLS offloading 
+    tcp_ssl_port: ${49:value}                                              # Port on which to expect HTTPS traffic for SSL/TLS offloading 
+    tcp_status: ${50$$(yas-choose-value '("disable" "enable"))}            # choices: disable;enable  Enable/disable HTTP WAN Optimization 
+    tcp_tunnel_sharing: ${51$$(yas-choose-value '("private" "shared" "express-shared"))}# choices: private;shared;express-shared  Tunnel sharing mode for aggressive/non-aggressive and/or interactiv

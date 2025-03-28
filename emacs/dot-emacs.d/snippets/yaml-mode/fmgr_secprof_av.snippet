@@ -1,0 +1,102 @@
+# -*- mode: snippet -*-
+# name: Manage security profile
+# prefix: fmgr_secprof_av_snippet
+# key: fmgr_secprof_av
+# group: ansible
+# --
+
+- name: ${0:Manage security profile}
+  fmgr_secprof_av:                                                         
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    scan_mode: ${3$$(yas-choose-value '("quick" "full"))}                  # choices: quick;full  Choose between full scan mode and quick scan mode 
+    replacemsg_group: ${4:value}                                           # Replacement message group customized for this profile 
+    name: ${5:value}                                                       # Profile name 
+    mobile_malware_db: ${6$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable using the mobile malware signature database 
+    inspection_mode: ${7$$(yas-choose-value '("proxy" "flow-based"))}      # choices: proxy;flow-based  Inspection mode 
+    ftgd_analytics: ${8$$(yas-choose-value '("disable" "suspicious" "everything"))}# choices: disable;suspicious;everything  Settings to control which files are uploaded to FortiSandbox 
+    extended_log: ${9$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable extended logging for antivirus 
+    comment: ${10:value}                                                   # Comment 
+    av_virus_log: ${11$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable AntiVirus logging 
+    av_block_log: ${12$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable logging for AntiVirus file blocking 
+    analytics_wl_filetype: ${13:value}                                     # Do not submit files matching this DLP file-pattern to FortiSandbox 
+    analytics_max_upload: ${14:value}                                      # Maximum size of files that can be uploaded to FortiSandbox (1 - 395 MBytes, default = 10) 
+    analytics_db: ${15$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable using the FortiSandbox signature database to supplement the AV signature databas
+    analytics_bl_filetype: ${16:value}                                     # Only submit files matching this DLP file-pattern to FortiSandbox 
+    content_disarm: ${17:value}                                            # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    content_disarm_cover_page: ${18$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable inserting a cover page into the disarmed document 
+    content_disarm_detect_only: ${19$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable only detect disarmable files, do not alter content 
+    content_disarm_office_embed: ${20$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of embedded objects in Microsoft Office documents 
+    content_disarm_office_hylink: ${21$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of hyperlinks in Microsoft Office documents 
+    content_disarm_office_linked: ${22$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of linked objects in Microsoft Office documents 
+    content_disarm_office_macro: ${23$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of macros in Microsoft Office documents 
+    content_disarm_original_file_destination: ${24$$(yas-choose-value '("fortisandbox" "quarantine" "discard"))}# choices: fortisandbox;quarantine;discard  Destination to send original file if acti
+    content_disarm_pdf_act_form: ${25$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of actions that submit data to other targets in PDF documents 
+    content_disarm_pdf_act_gotor: ${26$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of links to other PDFs in PDF documents 
+    content_disarm_pdf_act_java: ${27$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of actions that execute JavaScript code in PDF documents 
+    content_disarm_pdf_act_launch: ${28$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of links to external applications in PDF documents 
+    content_disarm_pdf_act_movie: ${29$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of embedded movies in PDF documents 
+    content_disarm_pdf_act_sound: ${30$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of embedded sound files in PDF documents 
+    content_disarm_pdf_embedfile: ${31$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of embedded files in PDF documents 
+    content_disarm_pdf_hyperlink: ${32$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of hyperlinks from PDF documents 
+    content_disarm_pdf_javacode: ${33$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable stripping of JavaScript code in PDF documents 
+    ftp: ${34:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    ftp_archive_block: ${35$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mul
+    ftp_archive_log: ${36$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;multi
+    ftp_emulator: ${37$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable the virus emulator 
+    ftp_options: ${38$$(yas-choose-value '("scan" "quarantine" "avmonitor"))}# choices: scan;quarantine;avmonitor  Enable/disable FTP AntiVirus scanning, monitoring, and quarantine  FLAG Based Opti
+    ftp_outbreak_prevention: ${39$$(yas-choose-value '("disabled" "files" "full-archive"))}# choices: disabled;files;full-archive  Enable FortiGuard Virus Outbreak Prevention service 
+    http: ${40:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    http_archive_block: ${41$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mu
+    http_archive_log: ${42$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mult
+    http_content_disarm: ${43$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable Content Disarm and Reconstruction for this protocol 
+    http_emulator: ${44$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable the virus emulator 
+    http_options: ${45$$(yas-choose-value '("scan" "quarantine" "avmonitor"))}# choices: scan;quarantine;avmonitor  Enable/disable HTTP AntiVirus scanning, monitoring, and quarantine  FLAG Based Op
+    http_outbreak_prevention: ${46$$(yas-choose-value '("disabled" "files" "full-archive"))}# choices: disabled;files;full-archive  Enable FortiGuard Virus Outbreak Prevention service 
+    imap: ${47:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    imap_archive_block: ${48$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mu
+    imap_archive_log: ${49$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mult
+    imap_content_disarm: ${50$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable Content Disarm and Reconstruction for this protocol 
+    imap_emulator: ${51$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable the virus emulator 
+    imap_executables: ${52$$(yas-choose-value '("default" "virus"))}       # choices: default;virus  Treat Windows executable files as viruses for the purpose of blocking or monitoring 
+    imap_options: ${53$$(yas-choose-value '("scan" "quarantine" "avmonitor"))}# choices: scan;quarantine;avmonitor  Enable/disable IMAP AntiVirus scanning, monitoring, and quarantine  FLAG Based Op
+    imap_outbreak_prevention: ${54$$(yas-choose-value '("disabled" "files" "full-archive"))}# choices: disabled;files;full-archive  Enable FortiGuard Virus Outbreak Prevention service 
+    mapi: ${55:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    mapi_archive_block: ${56$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mu
+    mapi_archive_log: ${57$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mult
+    mapi_emulator: ${58$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable the virus emulator 
+    mapi_executables: ${59$$(yas-choose-value '("default" "virus"))}       # choices: default;virus  Treat Windows executable files as viruses for the purpose of blocking or monitoring 
+    mapi_options: ${60$$(yas-choose-value '("scan" "quarantine" "avmonitor"))}# choices: scan;quarantine;avmonitor  Enable/disable MAPI AntiVirus scanning, monitoring, and quarantine  FLAG Based Op
+    mapi_outbreak_prevention: ${61$$(yas-choose-value '("disabled" "files" "full-archive"))}# choices: disabled;files;full-archive  Enable FortiGuard Virus Outbreak Prevention service 
+    nac_quar: ${62:value}                                                  # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    nac_quar_expiry: ${63:value}                                           # Duration of quarantine 
+    nac_quar_infected: ${64$$(yas-choose-value '("none" "quar-src-ip"))}   # choices: none;quar-src-ip  Enable/Disable quarantining infected hosts to the banned user list 
+    nac_quar_log: ${65$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable AntiVirus quarantine logging 
+    nntp: ${66:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    nntp_archive_block: ${67$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mu
+    nntp_archive_log: ${68$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mult
+    nntp_emulator: ${69$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable the virus emulator 
+    nntp_options: ${70$$(yas-choose-value '("scan" "quarantine" "avmonitor"))}# choices: scan;quarantine;avmonitor  Enable/disable NNTP AntiVirus scanning, monitoring, and quarantine  FLAG Based Op
+    nntp_outbreak_prevention: ${71$$(yas-choose-value '("disabled" "files" "full-archive"))}# choices: disabled;files;full-archive  Enable FortiGuard Virus Outbreak Prevention service 
+    pop3: ${72:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    pop3_archive_block: ${73$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mu
+    pop3_archive_log: ${74$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mult
+    pop3_content_disarm: ${75$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable Content Disarm and Reconstruction for this protocol 
+    pop3_emulator: ${76$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable the virus emulator 
+    pop3_executables: ${77$$(yas-choose-value '("default" "virus"))}       # choices: default;virus  Treat Windows executable files as viruses for the purpose of blocking or monitoring 
+    pop3_options: ${78$$(yas-choose-value '("scan" "quarantine" "avmonitor"))}# choices: scan;quarantine;avmonitor  Enable/disable POP3 AntiVirus scanning, monitoring, and quarantine  FLAG Based Op
+    pop3_outbreak_prevention: ${79$$(yas-choose-value '("disabled" "files" "full-archive"))}# choices: disabled;files;full-archive  Enable FortiGuard Virus Outbreak Prevention service 
+    smb: ${80:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    smb_archive_block: ${81$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mul
+    smb_archive_log: ${82$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;multi
+    smb_emulator: ${83$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable the virus emulator 
+    smb_options: ${84$$(yas-choose-value '("scan" "quarantine" "avmonitor"))}# choices: scan;quarantine;avmonitor  Enable/disable SMB AntiVirus scanning, monitoring, and quarantine  FLAG Based Opti
+    smb_outbreak_prevention: ${85$$(yas-choose-value '("disabled" "files" "full-archive"))}# choices: disabled;files;full-archive  Enable FortiGuard Virus Outbreak Prevention service 
+    smtp: ${86:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    smtp_archive_block: ${87$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mu
+    smtp_archive_log: ${88$$(yas-choose-value '("encrypted" "corrupted" "multipart" "nested" "mailbomb" "unhandled" "partiallycorrupted" "fileslimit" "timeout"))}# choices: encrypted;corrupted;mult
+    smtp_content_disarm: ${89$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable Content Disarm and Reconstruction for this protocol 
+    smtp_emulator: ${90$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable the virus emulator 
+    smtp_executables: ${91$$(yas-choose-value '("default" "virus"))}       # choices: default;virus  Treat Windows executable files as viruses for the purpose of blocking or monitoring 
+    smtp_options: ${92$$(yas-choose-value '("scan" "quarantine" "avmonitor"))}# choices: scan;quarantine;avmonitor  Enable/disable SMTP AntiVirus scanning, monitoring, and quarantine  FLAG Based Op
+    smtp_outbreak_prevention: ${93$$(yas-choose-value '("disabled" "files" "full-archive"))}# choices: disabled;files;full-archive  Enable FortiGuard Virus Outbreak Prevention service 

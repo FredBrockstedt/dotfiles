@@ -1,0 +1,50 @@
+# -*- mode: snippet -*-
+# name: Manage wireless SSIDs in the Meraki cloud
+# prefix: meraki_ssid_snippet
+# key: meraki_ssid
+# group: ansible
+# --
+
+- name: ${0:Manage wireless SSIDs in the Meraki cloud}
+  meraki_ssid:                                                             
+    auth_key: ${1:Authentication key provided by the dashboard}            # Required if environmental variable C(MERAKI_KEY) is not set 
+    state: ${2$$(yas-choose-value '("absent" "query" "present"))}          # choices: absent;query;present  Specifies whether SNMP information should be queried or modified 
+    number: ${3:value}                                                     # SSID number within network 
+    name: ${4:value}                                                       # Name of SSID 
+    net_name: ${5:value}                                                   # Name of network 
+    net_id: ${6:value}                                                     # ID of network 
+    enabled: ${7:value}                                                    # Enable or disable SSID network 
+    auth_mode: ${8$$(yas-choose-value '("open" "psk" "open-with-radius" "8021x-meraki" "8021x-radius"))}# choices: open;psk;open-with-radius;8021x-meraki;8021x-radius  Set authentication mode of ne
+    encryption_mode: ${9$$(yas-choose-value '("wpa" "eap" "wpa-eap"))}     # choices: wpa;eap;wpa-eap  Set encryption mode of network 
+    psk: ${10:value}                                                       # Password for wireless network  Requires auth_mode to be set to psk 
+    wpa_encryption_mode: ${11$$(yas-choose-value '("WPA1 and WPA2" "WPA2 only"))}# choices: WPA1 and WPA2;WPA2 only  Encryption mode within WPA2 specification 
+    splash_page: ${12$$(yas-choose-value '("None" "Click-through splash page" "Billing" "Password-protected with Meraki RADIUS" "Password-protected with custom RADIUS" "Password-protected with Acti
+    radius_servers: ${13:value}                                            # List of RADIUS servers 
+    radius_coa_enabled: ${14:value}                                        # Enable or disable RADIUS CoA (Change of Authorization) on SSID 
+    radius_failover_policy: ${15$$(yas-choose-value '("Deny access" "Allow access"))}# choices: Deny access;Allow access  Set client access policy in case RADIUS servers aren't available 
+    radius_load_balancing_policy: ${16$$(yas-choose-value '("Strict priority order" "Round robin"))}# choices: Strict priority order;Round robin  Set load balancing policy when multiple RADIUS serv
+    radius_accounting_enabled: ${17:value}                                 # Enable or disable RADIUS accounting 
+    radius_accounting_servers: ${18:value}                                 # List of RADIUS servers for RADIUS accounting 
+    ip_assignment_mode: ${19$$(yas-choose-value '("NAT mode" "Bridge mode" "Layer 3 roaming" "Layer 3 roaming with a concentrator" "VPN"))}# choices: NAT mode;Bridge mode;Layer 3 roaming;Layer 3 ro
+    use_vlan_tagging: ${20:value}                                          # Set whether to use VLAN tagging  Requires C(default_vlan_id) to be set 
+    default_vlan_id: ${21:value}                                           # Default VLAN ID  Requires C(ip_assignment_mode) to be C(Bridge mode) or C(Layer 3 roaming) 
+    vlan_id: ${22:value}                                                   # ID number of VLAN on SSID  Requires C(ip_assignment_mode) to be C(ayer 3 roaming with a concentrator) or C(VPN) 
+    ap_tags_vlan_ids: ${23:value}                                          # List of VLAN tags  Requires C(ip_assignment_mode) to be C(Bridge mode) or C(Layer 3 roaming)  Requires C(use_vlan_taggin
+    walled_garden_enabled: ${24:value}                                     # Enable or disable walled garden functionality 
+    walled_garden_ranges: ${25:value}                                      # List of walled garden ranges 
+    min_bitrate: ${{26$$(yas-choose-value '("1" "2" "5}                    #5,6,9,11,12,18,24,36,48,54|} # not required  choices: 1;2;5 5;6;9;11;12;18;24;36;48;54  Minimum bitrate (Mbps) allowed on
+    band_selection: ${27$$(yas-choose-value '("Dual band operation" "5 GHz band only" "Dual band operation with Band Steering"))}# choices: Dual band operation;5 GHz band only;Dual band operation w
+    per_client_bandwidth_limit_up: ${28:value}                             # Maximum bandwidth in Mbps devices on SSID can upload 
+    per_client_bandwidth_limit_down: ${29:value}                           # Maximum bandwidth in Mbps devices on SSID can download 
+    concentrator_network_id: ${30:value}                                   # The concentrator to use for 'Layer 3 roaming with a concentrator' or 'VPN' 
+    host: ${{31:api}                                                       #meraki com} # not required  Hostname for Meraki dashboard  Can be used to access regional Meraki environments, such as Ch
+    use_proxy: ${32:value}                                                 # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_https: ${33:True}                                                  # If C(no), it will use HTTP  Otherwise it will use HTTPS  Only useful for internal Meraki developers 
+    output_format: ${34$$(yas-choose-value '("snakecase" "camelcase"))}    # choices: snakecase;camelcase  Instructs module whether response keys should be snake case (ex  C(net_id)) or camel case 
+    output_level: ${35$$(yas-choose-value '("debug" "normal"))}            # choices: debug;normal  Set amount of debug output during module execution 
+    timeout: ${36:30}                                                      # Time to timeout for HTTP requests 
+    validate_certs: ${37:True}                                             # Whether to validate HTTP certificates 
+    org_name: ${38:value}                                                  # Name of organization 
+    org_id: ${39:value}                                                    # ID of organization 
+    rate_limit_retry_time: ${40:165}                                       # Number of seconds to retry if rate limiter is triggered 
+    internal_error_retry_time: ${41:60}                                    # Number of seconds to retry if server returns an internal server error 

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP ManagedZone
+# prefix: gcp_dns_managed_zone_snippet
+# key: gcp_dns_managed_zo
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP ManagedZone}
+  gcp_dns_managed_zone:                                                    
+    description: ${1:A mutable string of at most 1024 characters associated with this resource for the user's convenience}# Has no effect on the managed zone's function 
+    dns_name: ${2:The DNS name of this managed zone, for instance "example}#com " 
+    name: ${3:User assigned name for this resource}                        # Must be unique within the project 
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    dnssec_config: ${6:value}                                              # DNSSEC configuration 
+    name_server_set: ${7:value}                                            # Optionally specifies the NameServerSet for this ManagedZone  A NameServerSet is a set of DNS name servers that all host 
+    labels: ${8:value}                                                     # A set of key/value label pairs to assign to this ManagedZone 
+    visibility: ${9:public}                                                # The zone's visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private
+    private_visibility_config: ${10:value}                                 # For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from 
+    project: ${11:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${12:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${13:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${14:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${15:value}                                                    # Array of scopes to be used 
+    env_type: ${16:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

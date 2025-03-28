@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Vscan on access policy configuration.
+# prefix: na_ontap_vscan_on_access_policy_snippet
+# key: ontap_vscan_on_access_policy
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Vscan on access policy configuration.}
+  na_ontap_vscan_on_access_policy:                                         
+    vserver: ${1:the name of the data vserver to use}                      #
+    policy_name: ${2:The name of the policy}                               #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether a Vscan on Access policy is present or not
+    file_ext_to_exclude: ${7:value}                                        # File extensions for which On-Access scanning must not be performed 
+    file_ext_to_include: ${8:value}                                        # File extensions for which On-Access scanning is considered  The default value is '*', which means that all files are con
+    filters: ${9:value}                                                    # A list of filters which can be used to define the scope of the On-Access policy more precisely  The filters can be added
+    is_scan_mandatory: ${10:value}                                         # Specifies whether access to a file is allowed if there are no external virus-scanning servers available for virus scanni
+    max_file_size: ${11:value}                                             # Max file-size (in bytes) allowed for scanning  The default value of 2147483648 (2GB) is taken if not provided at the tim
+    paths_to_exclude: ${12:value}                                          # File paths for which On-Access scanning must not be performed 
+    scan_files_with_no_ext: ${13:True}                                     # Specifies whether files without any extension are considered for scanning or not 
+    https: ${14:False}                                                     # Enable and disable https
+    validate_certs: ${15:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${16:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${17:value}                                                    # The ontap api version to use
+    use_rest: ${18$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

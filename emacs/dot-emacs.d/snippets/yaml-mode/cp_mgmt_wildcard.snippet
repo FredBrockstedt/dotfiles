@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manages wildcard objects on Check Point over Web Services API
+# prefix: cp_mgmt_wildcard_snippet
+# key: cp_mgmt_wildcard
+# group: ansible
+# --
+
+- name: ${0:Manages wildcard objects on Check Point over Web Services API}
+  cp_mgmt_wildcard:                                                        
+    name: ${1:Object name}                                                 #
+    ipv4_address: ${2:value}                                               # IPv4 address 
+    ipv4_mask_wildcard: ${3:value}                                         # IPv4 mask wildcard 
+    ipv6_address: ${4:value}                                               # IPv6 address 
+    ipv6_mask_wildcard: ${5:value}                                         # IPv6 mask wildcard 
+    tags: ${6:value}                                                       # Collection of tag identifiers 
+    color: ${7$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebric
+    comments: ${8:value}                                                   # Comments string 
+    details_level: ${9$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    groups: ${10:value}                                                    # Collection of group identifiers 
+    ignore_warnings: ${11:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${12:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${13$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${14:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${15:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${16:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manages alternative programs for common commands
+# prefix: alternatives_snippet
+# key: ternativ
+# group: ansible
+# --
+
+- name: ${0:Manages alternative programs for common commands}
+  alternatives:                                                            
+    name: ${1:The generic name of the link}                                #
+    path: ${2:The path to the real executable that the link should point to}#
+    link: ${3:value}                                                       # The path to the symbolic link that should point to the real executable  This option is always required on RHEL-based dis
+    priority: ${4:50}                                                      # The priority of the alternative 

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage export groups on Vexata VX100 storage arrays
+# prefix: vexata_eg_snippet
+# key: vexata_eg
+# group: ansible
+# --
+
+- name: ${0:Manage export groups on Vexata VX100 storage arrays}
+  vexata_eg:                                                               
+    name: ${1:Export group name}                                           #
+    array: ${2:Vexata VX100 array hostname or IPv4 Address}                #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates export group when present or delete when absent 
+    vg: ${4:value}                                                         # Volume group name 
+    ig: ${5:value}                                                         # Initiator group name 
+    pg: ${6:value}                                                         # Port group name 
+    user: ${7:value}                                                       # Vexata API user with administrative privileges 
+    password: ${8:value}                                                   # Vexata API user password 
+    validate_certs: ${9:false}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If set to C(ye

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Backup / Restore / Reset ESXi host configuration
+# prefix: vmware_cfg_backup_snippet
+# key: vmware_cfg_backup
+# group: ansible
+# --
+
+- name: ${0:Backup / Restore / Reset ESXi host configuration}
+  vmware_cfg_backup:                                                       
+    esxi_hostname: ${1:value}                                              # Name of ESXi server  This is required only if authentication against a vCenter is done 
+    dest: ${2:value}                                                       # The destination where the ESXi configuration bundle will be saved  The I(dest) can be a folder or a file  If I(dest) is 
+    src: ${3:value}                                                        # The file containing the ESXi configuration that will be restored 
+    state: ${4$$(yas-choose-value '("saved" "absent" "loaded"))}           # choices: saved;absent;loaded  If C(saved), the  tgz backup bundle will be saved in I(dest)  If C(absent), the host confi
+    hostname: ${5:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${6:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${7:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${8:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${9:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${10:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${11:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

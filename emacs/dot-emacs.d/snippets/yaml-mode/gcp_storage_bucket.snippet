@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Bucket
+# prefix: gcp_storage_bucket_snippet
+# key: gcp_storage_bucket
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Bucket}
+  gcp_storage_bucket:                                                      
+    auth_kind: ${1$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    acl: ${3:value}                                                        # Access controls on the bucket 
+    cors: ${4:value}                                                       # The bucket's Cross-Origin Resource Sharing (CORS) configuration 
+    default_object_acl: ${5:value}                                         # Default access controls to apply to new objects when no ACL is provided 
+    lifecycle: ${6:value}                                                  # The bucket's lifecycle configuration  See U(https://developers google com/storage/docs/lifecycle) for more information 
+    location: ${7:value}                                                   # The location of the bucket  Object data for objects in the bucket resides in physical storage within this region  Defaul
+    logging: ${8:value}                                                    # The bucket's logging configuration, which defines the destination bucket and optional name prefix for the current bucket
+    metageneration: ${9:value}                                             # The metadata generation of this bucket 
+    name: ${10:value}                                                      # The name of the bucket 
+    owner: ${11:value}                                                     # The owner of the bucket  This is always the project team's owner group 
+    storage_class: ${12:value}                                             # The bucket's default storage class, used whenever no storageClass is specified for a newly-created object  This defines 
+    versioning: ${13:value}                                                # The bucket's versioning configuration 
+    website: ${14:value}                                                   # The bucket's website configuration, controlling how the service behaves when accessing bucket contents as a web site  Se
+    project: ${15:value}                                                   # A valid API project identifier 
+    predefined_default_object_acl: ${16:value}                             # Apply a predefined set of default object access controls to this bucket  Acceptable values are: - "authenticatedRead": O
+    service_account_contents: ${17:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${18:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${19:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${20:value}                                                    # Array of scopes to be used 
+    env_type: ${21:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

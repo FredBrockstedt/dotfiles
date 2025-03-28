@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Configure Element SW Cluster SNMP
+# prefix: na_elementsw_cluster_snmp_snippet
+# key: mentsw_cluster_snmp
+# group: ansible
+# --
+
+- name: ${0:Configure Element SW Cluster SNMP}
+  na_elementsw_cluster_snmp:                                               
+    hostname: ${1:The hostname or IP address of the SolidFire cluster}     #
+    username: ${2:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${3:Password for the specified user}                         #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  This module enables you to enable SNMP on cluster nodes  When you enable SNMP,           the ac
+    snmp_v3_enabled: ${5:value}                                            # Which version of SNMP has to be enabled 
+    networks: ${6:value}                                                   # List of networks and what type of access they have to the SNMP servers running on the cluster nodes  This parameter is r
+    usm_users: ${7:value}                                                  # List of users and the type of access they have to the SNMP servers running on the cluster nodes  This parameter is requi

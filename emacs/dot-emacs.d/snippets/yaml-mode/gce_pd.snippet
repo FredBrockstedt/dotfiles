@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: utilize GCE persistent disk resources
+# prefix: gce_pd_snippet
+# key: gce_pd
+# group: ansible
+# --
+
+- name: ${0:utilize GCE persistent disk resources}
+  gce_pd:                                                                  
+    name: ${1:name of the disk}                                            #
+    detach_only: ${2:false}                                                # do not destroy the disk, merely detach it from an instance
+    instance_name: ${3:value}                                              # instance name if you wish to attach or detach the disk
+    mode: ${4$$(yas-choose-value '("READ_WRITE" "READ_ONLY"))}             # choices: READ_WRITE;READ_ONLY  GCE mount mode of disk, READ_ONLY (default) or READ_WRITE
+    size_gb: ${5:10}                                                       # whole integer size of disk (in GB) to create, default is 10 GB
+    image: ${6:value}                                                      # the source image to use for the disk
+    snapshot: ${7:value}                                                   # the source snapshot to use for the disk
+    state: ${8$$(yas-choose-value '("active" "present" "absent" "deleted"))}# choices: active;present;absent;deleted  desired state of the persistent disk
+    zone: ${9:us-central1-b}                                               # zone in which to create the disk
+    service_account_email: ${10:value}                                     # service account email
+    pem_file: ${11:value}                                                  # path to the pem file associated with the service account email This option is deprecated  Use 'credentials_file' 
+    credentials_file: ${12:value}                                          # path to the JSON file associated with the service account email
+    project_id: ${13:value}                                                # your GCE project ID
+    disk_type: ${14$$(yas-choose-value '("pd-standard" "pd-ssd"))}         # choices: pd-standard;pd-ssd  type of disk provisioned
+    delete_on_termination: ${15:false}                                     # If C(yes), deletes the volume when instance is terminated

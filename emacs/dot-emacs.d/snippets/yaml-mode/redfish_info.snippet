@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages Out-Of-Band controllers using Redfish APIs
+# prefix: redfish_info_snippet
+# key: redfish_info
+# group: ansible
+# --
+
+- name: ${0:Manages Out-Of-Band controllers using Redfish APIs}
+  redfish_info:                                                            
+    baseuri: ${1:Base URI of OOB controller}                               #
+    username: ${2:User for authentication with OOB controller}             #
+    password: ${3:Password for authentication with OOB controller}         #
+    category: ${4:['Systems']}                                             # List of categories to execute on OOB controller
+    command: ${5:value}                                                    # List of commands to execute on OOB controller
+    timeout: ${6:10}                                                       # Timeout in seconds for URL requests to OOB controller

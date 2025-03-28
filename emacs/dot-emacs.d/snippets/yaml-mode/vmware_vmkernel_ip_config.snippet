@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Configure the VMkernel IP Address
+# prefix: vmware_vmkernel_ip_config_snippet
+# key: vmware_vmkernel_ip_config
+# group: ansible
+# --
+
+- name: ${0:Configure the VMkernel IP Address}
+  vmware_vmkernel_ip_config:                                               
+    vmk_name: ${1:VMkernel interface name}                                 #
+    ip_address: ${2:IP address to assign to VMkernel interface}            #
+    subnet_mask: ${3:Subnet Mask to assign to VMkernel interface}          #
+    hostname: ${4:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${5:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${6:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${7:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${8:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${9:value}                                                 # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${10:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

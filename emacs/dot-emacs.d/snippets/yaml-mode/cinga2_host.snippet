@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage a host in Icinga2
+# prefix: icinga2_host_snippet
+# key: cinga2_host
+# group: ansible
+# --
+
+- name: ${0:Manage a host in Icinga2}
+  icinga2_host:                                                            
+    url: ${1:HTTP" " HTTPS" " or FTP URL in the form (http$$(yas-choose-value '("https"))ftp)://[user[:pass]]@host}#domain[:port]/path
+    name: ${2:Name used to create / delete the host}                       # This does not need to be the FQDN, but does needs to be unique 
+    ip: ${3:The IP address of the host}                                    #
+    use_proxy: ${4:true}                                                   # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    validate_certs: ${5:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    url_username: ${6:value}                                               # The username for use in HTTP basic authentication  This parameter can be used without C(url_password) for sites that all
+    url_password: ${7:value}                                               # The password for use in HTTP basic authentication  If the C(url_username) parameter is not specified, the C(url_password
+    force_basic_auth: ${8:false}                                           # httplib2, the library used by the uri module only sends authentication information when a webservice responds to an init
+    client_cert: ${9:value}                                                # PEM formatted certificate chain file to be used for SSL client authentication  This file can also include the key as wel
+    client_key: ${10:value}                                                # PEM formatted file that contains your private key to be used for SSL client authentication  If C(client_cert) contains b
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Apply feature state 
+    zone: ${12:value}                                                      # The zone from where this host should be polled 
+    template: ${13:value}                                                  # The template used to define the host  Template cannot be modified after object creation 
+    check_command: ${14:hostalive}                                         # The command used to check if the host is alive 
+    display_name: ${15:"if none is give it is the value of the <name> parameter"}# The name used to display the host 
+    variables: ${16:value}                                                 # List of variables 

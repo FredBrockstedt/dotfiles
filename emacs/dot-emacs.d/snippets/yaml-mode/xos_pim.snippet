@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages configuration of a PIM instance.
+# prefix: nxos_pim_snippet
+# key: xos_pim
+# group: ansible
+# --
+
+- name: ${0:Manages configuration of a PIM instance.}
+  nxos_pim:                                                                
+    ssm_range: ${1:Configure group ranges for Source Specific Multicast (SSM)}# Valid values are multicast addresses or the keyword C(none) or keyword C(default)  C(none) removes all SSM group rang
+    bfd: ${2$$(yas-choose-value '("enable" "disable"))}                    # choices: enable;disable  Enables BFD on all PIM interfaces  Dependency: 'feature bfd'
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

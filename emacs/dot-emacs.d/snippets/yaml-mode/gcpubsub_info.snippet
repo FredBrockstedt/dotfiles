@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: List Topics/Subscriptions and Messages from Google PubSub.
+# prefix: gcpubsub_info_snippet
+# key: gcpubsub_info
+# group: ansible
+# --
+
+- name: ${0:List Topics/Subscriptions and Messages from Google PubSub.}
+  gcpubsub_info:                                                           
+    view: ${1:Choices are 'topics' or 'subscriptions'}                     #
+    topic: ${2:value}                                                      # GCP pubsub topic name   Only the name, not the full path, is required 
+    state: ${3:value}                                                      # list is the only valid option 

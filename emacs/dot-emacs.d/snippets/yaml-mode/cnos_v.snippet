@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage VLANs on CNOS network devices
+# prefix: cnos_vlan_snippet
+# key: cnos_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLANs on CNOS network devices}
+  cnos_vlan:                                                               
+    vlan_id: ${1:ID of the VLAN}                                           # Range 1-4094 
+    interfaces: ${2:List of interfaces that should be associated to the VLAN}#
+    name: ${3:value}                                                       # Name of the VLAN 
+    associated_interfaces: ${4:value}                                      # This is a intent option and checks the operational state of the for given vlan C(name) for associated interfaces  If the
+    delay: ${5:10}                                                         # Delay the play should wait to check for declarative intent params values 
+    aggregate: ${6:value}                                                  # L i s t   o f   V L A N s   d e f i n i t i o n s  
+    purge: ${7:False}                                                      # Purge VLANs not defined in the I(aggregate) parameter 
+    state: ${8$$(yas-choose-value '("present" "absent" "active" "suspend"))}# choices: present;absent;active;suspend  State of the VLAN configuration 
+    provider: ${9:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

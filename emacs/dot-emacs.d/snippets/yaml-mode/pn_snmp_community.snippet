@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/modify/delete snmp-community
+# prefix: pn_snmp_community_snippet
+# key: pn_snmp_community
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/modify/delete snmp-community}
+  pn_snmp_community:                                                       
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use C(present) to create snmp-community and C(absent) to delete snmp-community C(update) to
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_community_type: ${3$$(yas-choose-value '("read-only" "read-write"))}# choices: read-only;read-write  community type 
+    pn_community_string: ${4:value}                                        # community name 

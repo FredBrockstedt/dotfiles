@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Scaleway SSH keys management module
+# prefix: scaleway_sshkey_snippet
+# key: caleway_sshkey
+# group: ansible
+# --
+
+- name: ${0:Scaleway SSH keys management module}
+  scaleway_sshkey:                                                         
+    ssh_pub_key: ${1:The public SSH key as a string to add}                #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the SSH key 
+    api_url: ${{3:https://account}                                         #scaleway com} # not required  Scaleway API URL
+    api_token: ${4:value}                                                  # Scaleway OAuth token 
+    api_timeout: ${5:30}                                                   # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${6:namespace()}                                     # List of parameters passed to the query string 
+    validate_certs: ${7:True}                                              # Validate SSL certs of the Scaleway API 

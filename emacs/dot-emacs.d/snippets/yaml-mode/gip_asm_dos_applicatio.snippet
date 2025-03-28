@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage application settings for DOS profile
+# prefix: bigip_asm_dos_application_snippet
+# key: gip_asm_dos_applicatio
+# group: ansible
+# --
+
+- name: ${0:Manage application settings for DOS profile}
+  bigip_asm_dos_application:                                               
+    profile: ${1:Specifies the name of the profile to manage application settings in}#
+    rtbh_duration: ${2:value}                                              # Specifies the duration of the RTBH BGP route advertisement, in seconds  The accepted range is between 0 and 4294967295 i
+    rtbh_enable: ${3:value}                                                # Specifies whether to enable Remote Triggered Black Hole C(RTBH) of attacking IPs by advertising BGP routes 
+    scrubbing_duration: ${4:value}                                         # Specifies the duration of the Traffic Scrubbing BGP route advertisement, in seconds  The accepted range is between 0 and
+    scrubbing_enable: ${5:value}                                           # Specifies whether to enable Traffic Scrubbing during attacks by advertising BGP routes 
+    single_page_application: ${6:value}                                    # Specifies, when C(yes), that the system supports a Single Page Applications 
+    trigger_irule: ${7:value}                                              # Specifies, when C(yes), that the system activates an Application DoS iRule event 
+    geolocations: ${8:value}                                               # Manages the geolocations countries whitelist, blacklist 
+    heavy_urls: ${9:value}                                                 # Manages Heavy URL protection  Heavy URLs are a small number of site URLs that might consume considerable server resource
+    mobile_detection: ${10:value}                                          # Configures detection of mobile applications built with the Anti-Bot Mobile SDK and defines how requests from these mobil
+    partition: ${11:Common}                                                # Device partition to manage resources on 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(state) is C(present), ensures that the Application object exists  When C(state) is C(abs
+    provider: ${13:value}                                                  # A dict object containing connection details 

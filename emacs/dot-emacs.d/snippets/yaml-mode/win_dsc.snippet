@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Invokes a PowerShell DSC configuration
+# prefix: win_dsc_snippet
+# key: win_dsc
+# group: ansible
+# --
+
+- name: ${0:Invokes a PowerShell DSC configuration}
+  win_dsc:                                                                 
+    resource_name: ${1:The name of the DSC Resource to use}                # Must be accessible to PowerShell using any of the default paths 
+    free_form: ${2:The M(win_dsc) module takes in multiple free form options based on the DSC resource being invoked by I(resource_name)}# There is no option actually named C(free_form) so see the 
+    module_version: ${3:latest}                                            # Can be used to configure the exact version of the DSC resource to be invoked  Useful if the target node has multiple ver

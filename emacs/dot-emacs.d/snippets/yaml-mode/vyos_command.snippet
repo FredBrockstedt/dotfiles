@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Run one or more commands on VyOS devices
+# prefix: vyos_command_snippet
+# key: vyos_command
+# group: ansible
+# --
+
+- name: ${0:Run one or more commands on VyOS devices}
+  vyos_command:                                                            
+    commands: ${1:The ordered set of commands to execute on the remote device running VyOS}#  The output from the command execution is returned to the playbook   If the I(wait_for) argument is prov
+    wait_for: ${2:value}                                                   # Specifies what to evaluate from the output of the command and what conditionals to apply   This argument will cause the 
+    match: ${3$$(yas-choose-value '("any" "all"))}                         # choices: any;all  The I(match) argument is used in conjunction with the I(wait_for) argument to specify the match policy
+    retries: ${4:10}                                                       # Specifies the number of retries a command should be tried before it is considered failed  The command is run on the targ
+    interval: ${5:1}                                                       # Configures the interval in seconds to wait between I(retries) of the command  If the command does not pass the specified
+    provider: ${6:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

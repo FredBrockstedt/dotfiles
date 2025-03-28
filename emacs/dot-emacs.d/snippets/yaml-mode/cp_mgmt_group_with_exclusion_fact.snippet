@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Get group-with-exclusion objects facts on Check Point over Web Services API
+# prefix: cp_mgmt_group_with_exclusion_facts_snippet
+# key: cp_mgmt_group_with_exclusion_fact
+# group: ansible
+# --
+
+- name: ${0:Get group-with-exclusion objects facts on Check Point over Web Services API}
+  cp_mgmt_group_with_exclusion_facts:                                      
+    name: ${1:value}                                                       # Object name  This parameter is relevant only for getting a specific object 
+    show_as_ranges: ${2:value}                                             # When true, the group with exclusion's matched content is displayed as ranges of IP addresses rather than network objects
+    details_level: ${3$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    limit: ${4:value}                                                      # No more than that many results will be returned  This parameter is relevant only for getting few objects 
+    offset: ${5:value}                                                     # Skip that many results before beginning to return them  This parameter is relevant only for getting few objects 
+    order: ${6:value}                                                      # Sorts results by the given field  By default the results are sorted in the ascending order by name  This parameter is re
+    version: ${7:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

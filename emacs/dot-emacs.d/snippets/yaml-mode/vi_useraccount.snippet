@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Avi UserAccount Module
+# prefix: avi_useraccount_snippet
+# key: vi_useraccount
+# group: ansible
+# --
+
+- name: ${0:Avi UserAccount Module}
+  avi_useraccount:                                                         
+    old_password: ${1:value}                                               # Old password for update password or default password for bootstrap 
+    force_change: ${2:value}                                               # If specifically set to true then old password is tried first for controller and then the new password is tried  If not s
+    controller: ${3:}                                                      # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${4:}                                                        # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${5:}                                                        # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${6:admin}                                                     # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${7:}                                                     # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{8:16}                                                  #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${9:value}                                            # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${10:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${11:value}                         # It disables avi session information to be cached as a fact 

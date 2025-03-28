@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages firewall rules on Vultr.
+# prefix: vultr_firewall_rule_snippet
+# key: vultr_firewall_ru
+# group: ansible
+# --
+
+- name: ${0:Manages firewall rules on Vultr.}
+  vultr_firewall_rule:                                                     
+    group: ${1:Name of the firewall group}                                 #
+    ip_version: ${2$$(yas-choose-value '("v4" "v6"))}                      # choices: v4;v6  IP address version
+    protocol: ${3$$(yas-choose-value '("icmp" "tcp" "udp" "gre"))}         # choices: icmp;tcp;udp;gre  Protocol of the firewall rule 
+    cidr: ${4:value}                                                       # Network in CIDR format The CIDR format must match with the C(ip_version) value  Required if C(state=present)  Defaulted 
+    start_port: ${5:value}                                                 # Start port for the firewall rule  Required if C(protocol) is tcp or udp and I(state=present) 
+    end_port: ${6:value}                                                   # End port for the firewall rule  Only considered if C(protocol) is tcp or udp and I(state=present) 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the firewall rule 
+    api_key: ${8:value}                                                    # API key of the Vultr API  The ENV variable C(VULTR_API_KEY) is used as default, when defined 
+    api_timeout: ${9:value}                                                # HTTP timeout to Vultr API  The ENV variable C(VULTR_API_TIMEOUT) is used as default, when defined  Fallback value is 60 
+    api_retries: ${10:value}                                               # Amount of retries in case of the Vultr API retuns an HTTP 503 code  The ENV variable C(VULTR_API_RETRIES) is used as def
+    api_retry_max_delay: ${11:value}                                       # Retry backoff delay in seconds is exponential up to this max  value, in seconds  The ENV variable C(VULTR_API_RETRY_MAX_
+    api_account: ${12:default}                                             # Name of the ini section in the C(vultr ini) file  The ENV variable C(VULTR_API_ACCOUNT) is used as default, when defined
+    api_endpoint: ${13:value}                                              # URL to API endpint (without trailing slash)  The ENV variable C(VULTR_API_ENDPOINT) is used as default, when defined  Fa
+    validate_certs: ${14:True}                                             # Validate SSL certs of the Vultr API 

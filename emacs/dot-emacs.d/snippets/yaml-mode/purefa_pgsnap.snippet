@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage protection group snapshots on Pure Storage FlashArrays
+# prefix: purefa_pgsnap_snippet
+# key: purefa_pgsnap
+# group: ansible
+# --
+
+- name: ${0:Manage protection group snapshots on Pure Storage FlashArrays}
+  purefa_pgsnap:                                                           
+    name: ${1:The name of the source protection group}                     #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    suffix: ${4:value}                                                     # Suffix of snapshot name 
+    state: ${5$$(yas-choose-value '("absent" "present" "copy"))}           # choices: absent;present;copy  Define whether the protection group snapshot should exist or not  Copy (added in 2 7) will
+    eradicate: ${6:false}                                                  # Define whether to eradicate the snapshot on delete or leave in trash 
+    restore: ${7:value}                                                    # Restore a specific volume from a protection group snapshot 
+    overwrite: ${8:false}                                                  # Define whether to overwrite the target volume if it already exists 
+    target: ${9:value}                                                     # Volume to restore a specified volume to  If not supplied this will default to the volume defined in I(restore)
+    now: ${10:False}                                                       # W h e t h e r   t o   i n i t i a t e   a   s n a p s h o t   o f   t h e   p r o t e c t i o n   g r o u p   i m m e d 
+    apply_retention: ${11:False}                                           # A p p l y   r e t e n t i o n   s c h e d u l e   s e t t i n g s   t o   t h e   s n a p s h o t
+    remote: ${12:False}                                                    # F o r c e   i m m e a d i a t e   s n a p s h o t   t o   r e m o t e   t a r g e t s

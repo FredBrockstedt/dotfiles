@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Deploy Virtual Machine from template stored in content library.
+# prefix: vmware_content_deploy_template_snippet
+# key: vmware_content_deploy_templat
+# group: ansible
+# --
+
+- name: ${0:Deploy Virtual Machine from template stored in content library.}
+  vmware_content_deploy_template:                                          
+    template: ${1:The name of template from which VM to be deployed}       #
+    name: ${2:The name of the VM to be deployed}                           #
+    datacenter: ${3:Name of the datacenter, where VM to be deployed}       #
+    datastore: ${4:Name of the datastore to store deployed VM and disk}    #
+    folder: ${5:Name of the folder in datacenter in which to place deployed VM}#
+    host: ${6:Name of the ESX Host in datacenter in which to place deployed VM}#
+    resource_pool: ${7:value}                                              # Name of the resourcepool in datacenter in which to place deployed VM 
+    cluster: ${8:value}                                                    # Name of the cluster in datacenter in which to place deployed VM 
+    state: ${9$$(yas-choose-value '("present" "poweredon"))}               # choices: present;poweredon  The state of Virtual Machine deployed from template in content library  If set to C(present)
+    hostname: ${10:value}                                                  # The hostname or IP address of the vSphere vCenter server  If the value is not specified in the task, the value of enviro
+    username: ${11:value}                                                  # The username of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    password: ${12:value}                                                  # The password of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    validate_certs: ${13:True}                                             # Allows connection when SSL certificates are not valid  Set to C(no) when certificates are not trusted  If the value is n
+    protocol: ${14$$(yas-choose-value '("http" "https"))}                  # choices: http;https  The connection to protocol 

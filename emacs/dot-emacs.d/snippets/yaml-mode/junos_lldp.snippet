@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP configuration on Juniper JUNOS network devices
+# prefix: junos_lldp_snippet
+# key: junos_lldp
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP configuration on Juniper JUNOS network devices}
+  junos_lldp:                                                              
+    interval: ${1:value}                                                   # Frequency at which LLDP advertisements are sent (in seconds) 
+    transmit_delay: ${2:value}                                             # Specify the number of seconds the device waits before sending advertisements to neighbors after a change is made in loca
+    hold_multiplier: ${3:value}                                            # Specify the number of seconds that LLDP information is held before it is discarded  The multiplier value is used in comb
+    state: ${4$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  Value of C(present) ensures given LLDP configuration is present on device a
+    active: ${5:True}                                                      # Specifies whether or not the configuration is active or deactivated
+    provider: ${6:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

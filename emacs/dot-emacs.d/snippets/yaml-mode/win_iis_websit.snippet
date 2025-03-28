@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Configures a IIS Web site
+# prefix: win_iis_website_snippet
+# key: win_iis_websit
+# group: ansible
+# --
+
+- name: ${0:Configures a IIS Web site}
+  win_iis_website:                                                         
+    name: ${1:Names of web site}                                           #
+    site_id: ${2:value}                                                    # Explicitly set the IIS numeric ID for a site  Note that this value cannot be changed after the website has been created 
+    state: ${3$$(yas-choose-value '("absent" "started" "stopped" "restarted"))}# choices: absent;started;stopped;restarted  State of the web site
+    physical_path: ${4:value}                                              # The physical path on the remote host to use for the new site  The specified folder must already exist 
+    application_pool: ${5:value}                                           # The application pool in which the new site executes 
+    port: ${6:value}                                                       # The port to bind to / use for the new site 
+    ip: ${7:value}                                                         # The IP address to bind to / use for the new site 
+    hostname: ${8:value}                                                   # The host header to bind to / use for the new site 
+    ssl: ${9:value}                                                        # Enables HTTPS binding on the site  
+    parameters: ${10:value}                                                # Custom site Parameters from string where properties are separated by a pipe and property name/values by colon Ex  "foo:1

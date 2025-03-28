@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manage system-level syslog settings on BIG-IP
+# prefix: bigip_device_syslog_snippet
+# key: gip_device_syslog
+# group: ansible
+# --
+
+- name: ${0:Manage system-level syslog settings on BIG-IP}
+  bigip_device_syslog:                                                     
+    auth_priv_from: ${1$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the lowest level o
+    auth_priv_to: ${2$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the highest level of
+    console_log: ${3:value}                                                # Enables or disables logging emergency syslog messages to the console 
+    cron_from: ${4$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the lowest level of mes
+    cron_to: ${5$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the highest level of mess
+    daemon_from: ${6$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the lowest level of m
+    daemon_to: ${7$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the highest level of me
+    include: ${8:value}                                                    # Syslog-NG configuration to include in the device syslog config 
+    iso_date: ${9:value}                                                   # Enables or disables the ISO date format for messages in the log files 
+    kern_from: ${10$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the lowest level of ke
+    kern_to: ${11$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the highest level of ker
+    local6_from: ${12$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the lowest error lev
+    local6_to: ${13$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the highest error leve
+    mail_from: ${14$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the lowest level of ma
+    mail_to: ${15$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the highest level of mai
+    messages_from: ${16$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the lowest level o
+    messages_to: ${17$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the highest level of
+    user_log_from: ${18$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the lowest level o
+    user_log_to: ${19$$(yas-choose-value '("alert" "crit" "debug" "emerg" "err" "info" "notice" "warning"))}# choices: alert;crit;debug;emerg;err;info;notice;warning  Specifies the highest level of
+    provider: ${20:value}                                                  # A dict object containing connection details 

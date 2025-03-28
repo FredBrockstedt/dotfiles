@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages core NTP configuration on HUAWEI CloudEngine switches.
+# prefix: ce_ntp_snippet
+# key: ce_ntp
+# group: ansible
+# --
+
+- name: ${0:Manages core NTP configuration on HUAWEI CloudEngine switches.}
+  ce_ntp:                                                                  
+    server: ${1:value}                                                     # Network address of NTP server 
+    peer: ${2:value}                                                       # Network address of NTP peer 
+    key_id: ${3:value}                                                     # Authentication key identifier to use with given NTP server or peer 
+    is_preferred: ${4$$(yas-choose-value '("enable" "disable"))}           # choices: enable;disable  Makes given NTP server or peer the preferred NTP server or peer for the device 
+    vpn_name: ${5:_public_}                                                # Makes the device communicate with the given NTP server or peer over a specific vpn 
+    source_int: ${6:value}                                                 # Local source interface from which NTP messages are sent  Must be fully qualified interface name, i e  C(40GE1/0/22), C(v
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

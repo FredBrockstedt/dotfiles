@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage HTTP compression profiles on a BIG-IP
+# prefix: bigip_profile_http_compression_snippet
+# key: gip_profile_http_compressio
+# group: ansible
+# --
+
+- name: ${0:Manage HTTP compression profiles on a BIG-IP}
+  bigip_profile_http_compression:                                          
+    name: ${1:Specifies the name of the compression profile}               #
+    parent: ${2:value}                                                     # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    description: ${3:value}                                                # Description of the HTTP compression profile 
+    buffer_size: ${4:value}                                                # Maximum number of compressed bytes that the system buffers before inserting a Content-Length header (which specifies the
+    gzip_level: ${5$$(yas-choose-value '("1" "2" "3" "4" "5" "6" "7" "8" "9"))}# choices: 1;2;3;4;5;6;7;8;9  Specifies the degree to which the system compresses the content  Higher compression leve
+    gzip_memory_level: ${6$$(yas-choose-value '("1" "2" "4" "8" "16" "32" "64" "128" "256"))}# choices: 1;2;4;8;16;32;64;128;256  Number of kilobytes of memory that the system uses for internal com
+    gzip_window_size: ${7$$(yas-choose-value '("1" "2" "4" "8" "16" "32" "64" "128"))}# choices: 1;2;4;8;16;32;64;128  Number of kilobytes in the window size that the system uses when compressing a
+    partition: ${8:Common}                                                 # Device partition to manage resources on 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${10:value}                                                  # A dict object containing connection details 

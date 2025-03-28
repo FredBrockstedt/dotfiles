@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage Red Hat Network registration using the C(rhnreg_ks) command
+# prefix: rhn_register_snippet
+# key: rhn_register
+# group: ansible
+# --
+
+- name: ${0:Manage Red Hat Network registration using the C(rhnreg_ks) command}
+  rhn_register:                                                            
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether to register (C(present)), or unregister (C(absent)) a system 
+    username: ${2:value}                                                   # Red Hat Network username 
+    password: ${3:value}                                                   # Red Hat Network password 
+    server_url: ${4:value}                                                 # Specify an alternative Red Hat Network server URL  The default is the current value of I(serverURL) from C(/etc/sysconfi
+    activationkey: ${5:value}                                              # Supply an activation key for use with registration 
+    profilename: ${6:value}                                                # Supply an profilename for use with registration 
+    ca_cert: ${7:value}                                                    # Supply a custom ssl CA certificate file for use with registration 
+    systemorgid: ${8:value}                                                # Supply an organizational id for use with registration 
+    channels: ${9:[]}                                                      # Optionally specify a list of channels to subscribe to upon successful registration 
+    enable_eus: ${10:False}                                                # If C(no), extended update support will be requested 
+    nopackages: ${11:False}                                                # If C(yes), the registered node will not upload its installed packages information to Satellite server 

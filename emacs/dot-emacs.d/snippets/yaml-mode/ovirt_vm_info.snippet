@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more oVirt/RHV virtual machines
+# prefix: ovirt_vm_info_snippet
+# key: ovirt_vm_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more oVirt/RHV virtual machines}
+  ovirt_vm_info:                                                           
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt: C(username)[I(required)] - The name of the user, something like I(admin@internal)}# Default value is set by I(O
+    pattern: ${2:value}                                                    # Search term which is accepted by oVirt/RHV search backend  For example to search VM X from cluster Y use following patte
+    all_content: ${3:value}                                                # If I(true) all the attributes of the virtual machines should be included in the response 
+    case_sensitive: ${4:True}                                              # If I(true) performed search will take case into account 
+    max: ${5:value}                                                        # The maximum number of results to return 
+    next_run: ${6:value}                                                   # Indicates if the returned result describes the virtual machine as it is currently running or if describes the virtual ma
+    fetch_nested: ${7:value}                                               # If I(yes) the module will fetch additional data from the API  It will fetch only IDs of nested entity  It doesn't fetch 
+    nested_attributes: ${8:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Waits for a condition before continuing
+# prefix: win_wait_for_snippet
+# key: win_wait_for
+# group: ansible
+# --
+
+- name: ${0:Waits for a condition before continuing}
+  win_wait_for:                                                            
+    connect_timeout: ${1:5}                                                # The maximum number of seconds to wait for a connection to happen before closing and retrying 
+    delay: ${2:value}                                                      # The number of seconds to wait before starting to poll 
+    exclude_hosts: ${3:value}                                              # The list of hosts or IPs to ignore when looking for active TCP connections when C(state=drained) 
+    host: ${{4:127}                                                        #0 0 1} # not required  A resolvable hostname or IP address to wait for  If C(state=drained) then it will only check for c
+    path: ${5:value}                                                       # The path to a file on the filesystem to check  If C(state) is present or started then it will wait until the file exists
+    port: ${6:value}                                                       # The port number to poll on C(host) 
+    regex: ${7:value}                                                      # Can be used to match a string in a file  If C(state) is present or started then it will wait until the regex matches  If
+    sleep: ${8:1}                                                          # Number of seconds to sleep between checks 
+    state: ${9$$(yas-choose-value '("absent" "drained" "present" "started" "stopped"))}# choices: absent;drained;present;started;stopped  When checking a port, C(started) will ensure the port is op
+    timeout: ${10:300}                                                     # The maximum number of seconds to wait for 

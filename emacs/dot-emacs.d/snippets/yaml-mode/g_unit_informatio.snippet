@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Get unit information from an Ingate SBC.
+# prefix: ig_unit_information_snippet
+# key: g_unit_informatio
+# group: ansible
+# --
+
+- name: ${0:Get unit information from an Ingate SBC.}
+  ig_unit_information:                                                     
+    client: ${1:value}                                                     # A dict object containing connection details 

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify igmp-snooping
+# prefix: pn_igmp_snooping_snippet
+# key: pn_igmp_snooping
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify igmp-snooping}
+  pn_igmp_snooping:                                                        
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the igmp-snooping 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_enable: ${3:value}                                                  # enable or disable IGMP snooping 
+    pn_query_interval: ${4:value}                                          # IGMP query interval in seconds 
+    pn_igmpv2_vlans: ${5:value}                                            # VLANs on which to use IGMPv2 protocol 
+    pn_igmpv3_vlans: ${6:value}                                            # VLANs on which to use IGMPv3 protocol 
+    pn_enable_vlans: ${7:value}                                            # enable per VLAN IGMP snooping 
+    pn_vxlan: ${8:value}                                                   # enable or disable IGMP snooping on vxlans 
+    pn_query_max_response_time: ${9:value}                                 # maximum response time, in seconds, advertised in IGMP queries 
+    pn_scope: ${10$$(yas-choose-value '("local" "fabric"))}                # choices: local;fabric  IGMP snooping scope - fabric or local 
+    pn_no_snoop_linklocal_vlans: ${11:value}                               # Remove snooping of link-local groups(224 0 0 0/24) on these vlans 
+    pn_snoop_linklocal_vlans: ${12:value}                                  # Allow snooping of link-local groups(224 0 0 0/24) on these vlans 

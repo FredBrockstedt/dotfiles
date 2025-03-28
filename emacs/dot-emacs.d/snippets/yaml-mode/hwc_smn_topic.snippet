@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Creates a resource of SMNTopic in Huaweicloud Cloud
+# prefix: hwc_smn_topic_snippet
+# key: hwc_smn_topic
+# group: ansible
+# --
+
+- name: ${0:Creates a resource of SMNTopic in Huaweicloud Cloud}
+  hwc_smn_topic:                                                           
+    name: ${1:Name of the topic to be created}                             # The topic name is a string of 1 to 256 characters  It must contain upper- or lower-case letters, digits, hyphens (-), an
+    identity_endpoint: ${2:The Identity authentication URL}                #
+    user: ${3:The user name to login with (currently only user names are supported, and not user IDs)}#
+    password: ${4:The password to login with}                              #
+    domain: ${5:The name of the Domain to scope to (Identity v3)}          # (currently only domain names are supported, and not domain IDs) 
+    project: ${6:The name of the Tenant (Identity v2) or Project (Identity v3)}# (currently only project names are supported, and not project IDs) 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in Huaweicloud Cloud 
+    display_name: ${8:value}                                               # Topic display name, which is presented as the name of the email sender in an email message  The topic display name conta
+    region: ${9:value}                                                     # The region to which the project belongs 
+    id: ${10:value}                                                        # The id of resource to be managed 

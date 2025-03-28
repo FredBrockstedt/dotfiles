@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage multiline banners on Juniper JUNOS devices
+# prefix: junos_banner_snippet
+# key: junos_banner
+# group: ansible
+# --
+
+- name: ${0:Manage multiline banners on Juniper JUNOS devices}
+  junos_banner:                                                            
+    banner: ${1$$(yas-choose-value '("login" "motd"))}                     # Specifies which banner that should be configured on the remote device  Value C(login) indicates system login message pri
+    text: ${2:value}                                                       # The banner text that should be present in the remote device running configuration   This argument accepts a multiline st
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies whether or not the configuration is present in the current devices active running con
+    active: ${4:true}                                                      # Specifies whether or not the configuration is active or deactivated
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Gather information about DigitalOcean images
+# prefix: digital_ocean_image_info_snippet
+# key: digital_ocean_image_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about DigitalOcean images}
+  digital_ocean_image_info:                                                
+    image_type: ${1$$(yas-choose-value '("all" "application" "distribution" "private"))}# choices: all;application;distribution;private  Specifies the type of image information to be retrieved  If 
+    oauth_token: ${2:value}                                                # DigitalOcean OAuth token  There are several other environment variables which can be used to provide this value  i e , -
+    timeout: ${3:30}                                                       # The timeout in seconds used for polling DigitalOcean's API 
+    validate_certs: ${4:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled

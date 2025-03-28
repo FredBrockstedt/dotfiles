@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Link Aggregation on Juniper JUNOS devices.
+# prefix: junos_lag_interfaces_snippet
+# key: junos_lag_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Link Aggregation on Juniper JUNOS devices.}
+  junos_lag_interfaces:                                                    
+    config: ${1:value}                                                     # A   l i s t   o f   l i n k   a g g r e g a t i o n   g r o u p   c o n f i g u r a t i o n s  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion

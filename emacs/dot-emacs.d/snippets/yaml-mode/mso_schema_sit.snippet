@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage sites in schemas
+# prefix: mso_schema_site_snippet
+# key: mso_schema_sit
+# group: ansible
+# --
+
+- name: ${0:Manage sites in schemas}
+  mso_schema_site:                                                         
+    schema: ${1:The name of the schema}                                    #
+    site: ${2:The name of the site to manage}                              #
+    template: ${3:The name of the template}                                #
+    host: ${4:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${5:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    state: ${6$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${7:value}                                                       # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${8:admin}                                                   # The username to use for authentication 
+    output_level: ${9$$(yas-choose-value '("debug" "info" "normal"))}      # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${10:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${11:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${12:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${13:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

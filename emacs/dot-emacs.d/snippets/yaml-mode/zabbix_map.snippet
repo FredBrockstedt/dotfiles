@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Create/update/delete Zabbix maps
+# prefix: zabbix_map_snippet
+# key: zabbix_map
+# group: ansible
+# --
+
+- name: ${0:Create/update/delete Zabbix maps}
+  zabbix_map:                                                              
+    name: ${1:Name of the map}                                             #
+    server_url: ${2:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${3:Zabbix user name}                                      #
+    login_password: ${4:Zabbix user password}                              #
+    http_login_user: ${5:Basic Auth login}                                 #
+    data: ${6:value}                                                       # Graph written in DOT language 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the map  On C(present), it will create if map does not exist or update the map if the 
+    width: ${8:800}                                                        # Width of the map 
+    height: ${9:600}                                                       # Height of the map 
+    margin: ${10:40}                                                       # Size of white space between map's borders and its elements 
+    expand_problem: ${11:True}                                             # Whether the problem trigger will be displayed for elements with a single problem 
+    highlight: ${12:True}                                                  # Whether icon highlighting is enabled 
+    label_type: ${13$$(yas-choose-value '("label" "ip" "name" "status" "nothing" "custom"))}# choices: label;ip;name;status;nothing;custom  Map element label type 
+    default_image: ${14:value}                                             # Name of the Zabbix image used to display the element if this element doesn't have the C(zbx_image) attribute defined 
+    http_login_password: ${15:value}                                       # Basic Auth password
+    timeout: ${16:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${17:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

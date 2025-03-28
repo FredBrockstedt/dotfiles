@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: run, start or stop a task in ecs
+# prefix: ecs_task_snippet
+# key: cs_task
+# group: ansible
+# --
+
+- name: ${0:run, start or stop a task in ecs}
+  ecs_task:                                                                
+    operation: ${1$$(yas-choose-value '("run" "start" "stop"))}            # Which task operation to execute
+    cluster: ${2:value}                                                    # The name of the cluster to run the task on
+    task_definition: ${3:value}                                            # The task definition to start or run
+    overrides: ${4:value}                                                  # A dictionary of values to pass to the new instances
+    count: ${5:value}                                                      # How many new instances to start
+    task: ${6:value}                                                       # The task to stop
+    container_instances: ${7:value}                                        # The list of container instances on which to deploy the task
+    started_by: ${8:value}                                                 # A value showing who or what started the task (for informational purposes)
+    network_configuration: ${9:value}                                      # network configuration of the service  Only applicable for task definitions created with C(awsvpc) I(network_mode)  I(net
+    launch_type: ${10$$(yas-choose-value '("EC2" "FARGATE"))}              # choices: EC2;FARGATE  The launch type on which to run your service
+    debug_botocore_endpoint_logs: ${11:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${12:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${13:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${14:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${15:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${16:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${17:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${18:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

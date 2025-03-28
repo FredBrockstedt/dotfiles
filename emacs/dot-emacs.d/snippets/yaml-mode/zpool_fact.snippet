@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Gather facts about ZFS pools.
+# prefix: zpool_facts_snippet
+# key: zpool_fact
+# group: ansible
+# --
+
+- name: ${0:Gather facts about ZFS pools.}
+  zpool_facts:                                                             
+    name: ${1:value}                                                       # ZFS pool name 
+    parsable: ${2:False}                                                   # Specifies if property values should be displayed in machine friendly format 
+    properties: ${3:all}                                                   # Specifies which dataset properties should be queried in comma-separated format  For more information about dataset prope

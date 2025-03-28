@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Manages ISO images on Apache CloudStack based clouds.
+# prefix: cs_iso_snippet
+# key: cs_iso
+# group: ansible
+# --
+
+- name: ${0:Manages ISO images on Apache CloudStack based clouds.}
+  cs_iso:                                                                  
+    name: ${1:Name of the ISO}                                             #
+    display_text: ${2:value}                                               # Display text of the ISO  If not specified, I(name) will be used 
+    url: ${3:value}                                                        # URL where the ISO can be downloaded from  Required if I(state) is present 
+    os_type: ${4:value}                                                    # Name of the OS that best represents the OS of this ISO  If the iso is bootable this parameter needs to be passed  Requir
+    is_ready: ${5:False}                                                   # This flag is used for searching existing ISOs  If set to C(yes), it will only list ISO ready for deployment e g  success
+    is_public: ${6:value}                                                  # Register the ISO to be publicly available to all users  Only used if I(state) is present 
+    is_featured: ${7:value}                                                # Register the ISO to be featured  Only used if I(state) is present 
+    is_dynamically_scalable: ${8:value}                                    # Register the ISO having XS/VMware tools installed inorder to support dynamic scaling of VM cpu/memory  Only used if I(st
+    checksum: ${9:value}                                                   # The MD5 checksum value of this ISO  If set, we search by checksum instead of name 
+    bootable: ${10:value}                                                  # Register the ISO to be bootable  Only used if I(state) is present 
+    domain: ${11:value}                                                    # Domain the ISO is related to 
+    account: ${12:value}                                                   # Account the ISO is related to 
+    project: ${13:value}                                                   # Name of the project the ISO to be registered in 
+    zone: ${14:value}                                                      # Name of the zone you wish the ISO to be registered or deleted from  If not specified, first zone found will be used 
+    cross_zones: ${15:False}                                               # Whether the ISO should be synced or removed across zones  Mutually exclusive with I(zone) 
+    iso_filter: ${16$$(yas-choose-value '("featured" "self" "selfexecutable" "sharedexecutable" "executable" "community"))}# choices: featured;self;selfexecutable;sharedexecutable;executable;commun
+    state: ${17$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the ISO 
+    poll_async: ${18:True}                                                 # Poll async jobs until job has finished 
+    tags: ${19:value}                                                      # List of tags  Tags are a list of dictionaries having keys I(key) and I(value)  To delete all tags, set a empty list e g 
+    api_key: ${20:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${21:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${22:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${23$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${24:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${25:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

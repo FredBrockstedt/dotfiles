@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Gathers facts about remote hosts
+# prefix: gather_facts_snippet
+# key: gather_fact
+# group: ansible
+# --
+
+- name: ${0:Gathers facts about remote hosts}
+  gather_facts:                                                            
+    parallel: ${1:value}                                                   # A toggle that controls if the fact modules are executed in parallel or serially and in order  This can guarantee the mer

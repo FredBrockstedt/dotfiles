@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Configures DNS lookup on Windows hosts
+# prefix: win_dns_client_snippet
+# key: win_dns_client
+# group: ansible
+# --
+
+- name: ${0:Configures DNS lookup on Windows hosts}
+  win_dns_client:                                                          
+    adapter_names: ${1:Adapter name or list of adapter names for which to manage DNS settings ('*' is supported as a wildcard value)}# The adapter name used is the connection caption in the Network
+    ipv4_addresses: ${2:Single or ordered list of DNS server IPv4 addresses to configure for lookup}# An empty list will configure the adapter to use the DHCP-assigned values on connections where D

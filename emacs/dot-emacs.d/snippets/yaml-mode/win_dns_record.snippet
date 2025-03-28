@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage Windows Server DNS records
+# prefix: win_dns_record_snippet
+# key: win_dns_record
+# group: ansible
+# --
+
+- name: ${0:Manage Windows Server DNS records}
+  win_dns_record:                                                          
+    name: ${1:The name of the record}                                      #
+    type: ${2$$(yas-choose-value '("A" "AAAA" "CNAME" "PTR"))}             # The type of DNS record to manage 
+    zone: ${3:The name of the zone to manage (eg C(example}                #com))  The zone must already exist 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the record should exist or not 
+    ttl: ${5:3600}                                                         # The "time to live" of the record, in seconds  Ignored when C(state=absent)  Valid range is 1 - 31557600  Note that an Ac
+    value: ${6:value}                                                      # The value(s) to specify  Required when C(state=present)  When c(type=PTR) only the partial part of the IP should be give
+    computer_name: ${7:value}                                              # Specifies a DNS server  You can specify an IP address or any value that resolves to an IP address, such as a fully quali

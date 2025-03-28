@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Tests reachability using ping from Nexus switch.
+# prefix: nxos_ping_snippet
+# key: xos_ping
+# group: ansible
+# --
+
+- name: ${0:Tests reachability using ping from Nexus switch.}
+  nxos_ping:                                                               
+    dest: ${1:IP address or hostname (resolvable by switch) of remote node}#
+    count: ${2:5}                                                          # Number of packets to send 
+    source: ${3:value}                                                     # Source IP Address or hostname (resolvable by switch)
+    vrf: ${4:value}                                                        # Outgoing VRF 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Determines if the expected result is success or fail 
+    provider: ${6:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

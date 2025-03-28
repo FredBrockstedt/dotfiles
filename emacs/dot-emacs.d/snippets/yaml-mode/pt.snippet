@@ -1,0 +1,49 @@
+# -*- mode: snippet -*-
+# name: Modify iptables rules
+# prefix: iptables_snippet
+# key: pt
+# group: ansible
+# --
+
+- name: ${0:Modify iptables rules}
+  iptables:                                                                
+    table: ${1$$(yas-choose-value '("filter" "nat" "mangle" "raw" "security"))}# choices: filter;nat;mangle;raw;security  This option specifies the packet matching table which the command should op
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the rule should be absent or present 
+    action: ${3$$(yas-choose-value '("append" "insert"))}                  # choices: append;insert  Whether the rule should be appended at the bottom or inserted at the top  If the rule already ex
+    rule_num: ${4:value}                                                   # Insert the rule as the given rule number  This works only with C(action=insert) 
+    ip_version: ${5$$(yas-choose-value '("ipv4" "ipv6"))}                  # choices: ipv4;ipv6  Which version of the IP protocol this rule should apply to 
+    chain: ${6:value}                                                      # Specify the iptables chain to modify  This could be a user-defined chain or one of the standard iptables chains, like C(
+    protocol: ${7:value}                                                   # The protocol of the rule or of the packet to check  The specified protocol can be one of C(tcp), C(udp), C(udplite), C(i
+    source: ${8:value}                                                     # Source specification  Address can be either a network name, a hostname, a network IP address (with /mask), or a plain IP
+    destination: ${9:value}                                                # Destination specification  Address can be either a network name, a hostname, a network IP address (with /mask), or a pla
+    tcp_flags: ${10:namespace()}                                           # TCP flags specification  C(tcp_flags) expects a dict with the two keys C(flags) and C(flags_set) 
+    match: ${11:[]}                                                        # Specifies a match to use, that is, an extension module that tests for a specific property  The set of matches make up th
+    jump: ${12:value}                                                      # This specifies the target of the rule; i e , what to do if the packet matches it  The target can be a user-defined chain
+    gateway: ${13:value}                                                   # This specifies the IP address of host to send the cloned packets  This option is only valid when C(jump) is set to C(TEE
+    log_prefix: ${14:value}                                                # Specifies a log text for the rule  Only make sense with a LOG jump 
+    log_level: ${15$$(yas-choose-value '("0" "1" "2" "3" "4" "5" "6" "7" "emerg" "alert" "crit" "error" "warning" "notice" "info" "debug"))}# choices: 0;1;2;3;4;5;6;7;emerg;alert;crit;error;warning
+    goto: ${16:value}                                                      # This specifies that the processing should continue in a user specified chain  Unlike the jump argument return will not c
+    in_interface: ${17:value}                                              # Name of an interface via which a packet was received (only for packets entering the C(INPUT), C(FORWARD) and C(PREROUTIN
+    out_interface: ${18:value}                                             # Name of an interface via which a packet is going to be sent (for packets entering the C(FORWARD), C(OUTPUT) and C(POSTRO
+    fragment: ${19:value}                                                  # This means that the rule only refers to second and further fragments of fragmented packets  Since there is no way to tel
+    set_counters: ${20:value}                                              # This enables the administrator to initialize the packet and byte counters of a rule (during C(INSERT), C(APPEND), C(REPL
+    source_port: ${21:value}                                               # Source port or port range specification  This can either be a service name or a port number  An inclusive range can also
+    destination_port: ${22:value}                                          # Destination port or port range specification  This can either be a service name or a port number  An inclusive range can
+    to_ports: ${23:value}                                                  # This specifies a destination port or range of ports to use, without this, the destination port is never altered  This is
+    to_destination: ${24:value}                                            # This specifies a destination address to use with C(DNAT)  Without this, the destination address is never altered 
+    to_source: ${25:value}                                                 # This specifies a source address to use with C(SNAT)  Without this, the source address is never altered 
+    syn: ${26$$(yas-choose-value '("ignore" "match" "negate"))}            # choices: ignore;match;negate  This allows matching packets that have the SYN bit set and the ACK and RST bits unset  Whe
+    set_dscp_mark: ${27:value}                                             # This allows specifying a DSCP mark to be added to packets  It takes either an integer or hex value  Mutually exclusive w
+    set_dscp_mark_class: ${28:value}                                       # This allows specifying a predefined DiffServ class which will be translated to the corresponding DSCP mark  Mutually exc
+    comment: ${29:value}                                                   # This specifies a comment that will be added to the rule 
+    ctstate: ${30:[]}                                                      # C(ctstate) is a list of the connection states to match in the conntrack module  Possible states are C(INVALID), C(NEW), 
+    src_range: ${31:value}                                                 # Specifies the source IP range to match in the iprange module 
+    dst_range: ${32:value}                                                 # Specifies the destination IP range to match in the iprange module 
+    limit: ${33:value}                                                     # Specifies the maximum average number of matches to allow per second  The number can specify units explicitly, using `/se
+    limit_burst: ${34:value}                                               # Specifies the maximum burst before the above limit kicks in 
+    uid_owner: ${35:value}                                                 # Specifies the UID or username to use in match by owner rule  From Ansible 2 6 when the C(!) argument is prepended then t
+    gid_owner: ${36:value}                                                 # Specifies the GID or group to use in match by owner rule 
+    reject_with: ${37:value}                                               # Specifies the error packet type to return while rejecting  It implies "jump: REJECT"
+    icmp_type: ${38:value}                                                 # This allows specification of the ICMP type, which can be a numeric ICMP type, type/code pair, or one of the ICMP type na
+    flush: ${39:value}                                                     # Flushes the specified table and chain of all rules  If no chain is specified then the entire table is purged  Ignores al
+    policy: ${40$$(yas-choose-value '("ACCEPT" "DROP" "QUEUE" "RETURN"))}  # choices: ACCEPT;DROP;QUEUE;RETURN  Set the policy for the chain to the given target  Only built-in chains can have polic

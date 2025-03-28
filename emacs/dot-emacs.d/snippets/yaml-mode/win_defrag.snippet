@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Consolidate fragmented files on local volumes
+# prefix: win_defrag_snippet
+# key: win_defrag
+# group: ansible
+# --
+
+- name: ${0:Consolidate fragmented files on local volumes}
+  win_defrag:                                                              
+    include_volumes: ${1:value}                                            # A list of drive letters or mount point paths of the volumes to be defragmented  If this parameter is omitted, all volume
+    exclude_volumes: ${2:value}                                            # A list of drive letters or mount point paths to exclude from defragmentation 
+    freespace_consolidation: ${3:False}                                    # Perform free space consolidation on the specified volumes 
+    priority: ${4$$(yas-choose-value '("low" "normal"))}                   # choices: low;normal  Run the operation at low or normal priority 
+    parallel: ${5:False}                                                   # Run the operation on each volume in parallel in the background 

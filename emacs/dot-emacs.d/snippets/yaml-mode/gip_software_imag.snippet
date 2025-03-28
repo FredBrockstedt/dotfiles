@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage software images on a BIG-IP
+# prefix: bigip_software_image_snippet
+# key: gip_software_imag
+# group: ansible
+# --
+
+- name: ${0:Manage software images on a BIG-IP}
+  bigip_software_image:                                                    
+    force: ${1:False}                                                      # When C(yes), will upload the file every time and replace the file on the device  When C(no), the file will only be uploa
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(present), ensures that the image is uploaded  When C(absent), ensures that the image is 
+    image: ${3:value}                                                      # The image to put on the remote device  This may be an absolute or relative location on the Ansible controller  Image nam
+    provider: ${4:value}                                                   # A dict object containing connection details 

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage templates in schemas
+# prefix: mso_schema_template_snippet
+# key: mso_schema_templat
+# group: ansible
+# --
+
+- name: ${0:Manage templates in schemas}
+  mso_schema_template:                                                     
+    tenant: ${1:The tenant used for this template}                         #
+    schema: ${2:The name of the schema}                                    #
+    host: ${3:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${4:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    template: ${5:value}                                                   # The name of the template 
+    display_name: ${6:value}                                               # The name as displayed on the MSO web interface 
+    state: ${7$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${8:value}                                                       # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${9:admin}                                                   # The username to use for authentication 
+    output_level: ${10$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${11:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${12:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${13:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${14:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Module to manage groups in oVirt/RHV
+# prefix: ovirt_group_snippet
+# key: ovirt_group
+# group: ansible
+# --
+
+- name: ${0:Module to manage groups in oVirt/RHV}
+  ovirt_group:                                                             
+    name: ${1:Name of the group to manage}                                 #
+    authz_name: ${2:Authorization provider of the group}                   # In previous versions of oVirt/RHV known as domain 
+    auth: ${3:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the group be present/absent 
+    namespace: ${5:value}                                                  # Namespace of the authorization provider, where group resides 
+    wait: ${6:True}                                                        # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${7:value}                                               # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${8:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${9:180}                                                      # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${10:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage the configuration database on an Ingate SBC.
+# prefix: ig_config_snippet
+# key: g_config
+# group: ansible
+# --
+
+- name: ${0:Manage the configuration database on an Ingate SBC.}
+  ig_config:                                                               
+    add: ${1:value}                                                        # Add a row to a table 
+    delete: ${2:value}                                                     # Delete all rows in a table or a specific row 
+    get: ${3:value}                                                        # Return all rows in a table or a specific row 
+    modify: ${4:value}                                                     # Modify a row in a table 
+    revert: ${5:value}                                                     # Reset the preliminary configuration 
+    factory: ${6:value}                                                    # Reset the preliminary configuration to its factory defaults 
+    store: ${7:value}                                                      # Store the preliminary configuration 
+    no_response: ${8:value}                                                # Expect no response when storing the preliminary configuration  Refer to the C(store) option 
+    return_rowid: ${9:value}                                               # Get rowid(s) from a table where the columns match 
+    download: ${10:value}                                                  # Download the configuration database from the unit 
+    store_download: ${11:False}                                            # If the downloaded configuration should be stored on disk  Refer to the C(download) option 
+    path: ${12:value}                                                      # Where in the filesystem to store the downloaded configuration  Refer to the C(download) option 
+    filename: ${13:value}                                                  # The name of the file to store the downloaded configuration in  Refer to the C(download) option 
+    table: ${14:value}                                                     # The name of the table 
+    rowid: ${15:value}                                                     # A row id 
+    columns: ${16:value}                                                   # A dict containing column names/values 
+    client: ${17:value}                                                    # A dict object containing connection details 

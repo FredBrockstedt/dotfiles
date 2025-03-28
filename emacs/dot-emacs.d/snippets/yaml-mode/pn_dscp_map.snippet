@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete dscp-map
+# prefix: pn_dscp_map_snippet
+# key: pn_dscp_map
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete dscp-map}
+  pn_dscp_map:                                                             
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use C(present) to create dscp-map and C(absent) to delete 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_name: ${3:value}                                                    # Name for the DSCP map 
+    pn_scope: ${4$$(yas-choose-value '("local" "fabric"))}                 # choices: local;fabric  Scope for dscp map 

@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Create, drop, or alter a PostgreSQL sequence
+# prefix: postgresql_sequence_snippet
+# key: postgresql_sequenc
+# group: ansible
+# --
+
+- name: ${0:Create, drop, or alter a PostgreSQL sequence}
+  postgresql_sequence:                                                     
+    sequence: ${1:The name of the sequence}                                #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The sequence state  If I(state=absent) other options will be ignored except of I(name) and I(sc
+    data_type: ${3$$(yas-choose-value '("bigint" "integer" "smallint"))}   # choices: bigint;integer;smallint  Specifies the data type of the sequence  Valid types are bigint, integer, and smallint
+    increment: ${4:value}                                                  # Increment specifies which value is added to the current sequence value to create a new value  A positive value will make
+    minvalue: ${5:value}                                                   # Minvalue determines the minimum value a sequence can generate  The default for an ascending sequence is 1  The default f
+    maxvalue: ${6:value}                                                   # Maxvalue determines the maximum value for the sequence  The default for an ascending sequence is the maximum value of th
+    start: ${7:value}                                                      # Start allows the sequence to begin anywhere  The default starting value is I(minvalue) for ascending sequences and I(max
+    cache: ${8:value}                                                      # Cache specifies how many sequence numbers are to be preallocated and stored in memory for faster access  The minimum val
+    cycle: ${9:False}                                                      # The cycle option allows the sequence to wrap around when the I(maxvalue) or I(minvalue) has been reached by an ascending
+    cascade: ${10:False}                                                   # Automatically drop objects that depend on the sequence, and in turn all objects that depend on those objects  Ignored if
+    rename_to: ${11:value}                                                 # The new name for the I(sequence)  Works only for existing sequences 
+    owner: ${12:value}                                                     # Set the owner for the I(sequence) 
+    schema: ${13:public}                                                   # The schema of the I(sequence)  This is be used to create and relocate a I(sequence) in the given schema 
+    newschema: ${14:value}                                                 # The new schema for the I(sequence)  Will be used for moving a I(sequence) to another I(schema)  Works only for existing 
+    session_role: ${15:value}                                              # Switch to session_role after connecting  The specified I(session_role) must be a role that the current I(login_user) is 
+    db: ${16:value}                                                        # Name of database to connect to and run queries against 
+    login_user: ${17:postgres}                                             # The username used to authenticate with 
+    login_password: ${18:value}                                            # The password used to authenticate with 
+    login_host: ${19:value}                                                # Host running the database 
+    login_unix_socket: ${20:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${21:5432}                                                       # Database port to connect to 
+    ssl_mode: ${22$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${23:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

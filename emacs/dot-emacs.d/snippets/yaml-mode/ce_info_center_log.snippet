@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages information center log configuration on HUAWEI CloudEngine switches.
+# prefix: ce_info_center_log_snippet
+# key: ce_info_center_log
+# group: ansible
+# --
+
+- name: ${0:Manages information center log configuration on HUAWEI CloudEngine switches.}
+  ce_info_center_log:                                                      
+    log_time_stamp: ${1$$(yas-choose-value '("date_boot" "date_second" "date_tenthsecond" "date_millisecond" "shortdate_second" "shortdate_tenthsecond" "shortdate_millisecond" "formatdate_second" "
+    log_buff_enable: ${2$$(yas-choose-value '("no_use" "true" "false"))}   # choices: no_use;true;false  Enables the Switch to send logs to the log buffer 
+    log_buff_size: ${3:value}                                              # Specifies the maximum number of logs in the log buffer  The value is an integer that ranges from 0 to 10240  If logbuffe
+    module_name: ${4:value}                                                # Specifies the name of a module  The value is a module name in registration logs 
+    channel_id: ${5:value}                                                 # Specifies a channel ID  The value is an integer ranging from 0 to 9 
+    log_enable: ${6$$(yas-choose-value '("no_use" "true" "false"))}        # choices: no_use;true;false  Indicates whether log filtering is enabled 
+    log_level: ${7$$(yas-choose-value '("emergencies" "alert" "critical" "error" "warning" "notification" "informational" "debugging"))}# choices: emergencies;alert;critical;error;warning;notificat
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 

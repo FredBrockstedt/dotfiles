@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages exception-group objects on Check Point over Web Services API
+# prefix: cp_mgmt_exception_group_snippet
+# key: cp_mgmt_exception_group
+# group: ansible
+# --
+
+- name: ${0:Manages exception-group objects on Check Point over Web Services API}
+  cp_mgmt_exception_group:                                                 
+    name: ${1:Object name}                                                 #
+    applied_profile: ${2:value}                                            # The threat profile to apply this group to in the case of apply-on threat-rules-with-specific-profile 
+    applied_threat_rules: ${3:value}                                       # The threat rules to apply this group on in the case of apply-on manually-select-threat-rules 
+    apply_on: ${4$$(yas-choose-value '("all-threat-rules" "all-threat-rules-with-specific-profile" "manually-select-threat-rules"))}# choices: all-threat-rules;all-threat-rules-with-specific-profil
+    tags: ${5:value}                                                       # Collection of tag identifiers 
+    color: ${6$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebric
+    comments: ${7:value}                                                   # Comments string 
+    details_level: ${8$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${9:value}                                            # Apply changes ignoring warnings 
+    ignore_errors: ${10:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${12:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${13:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${14:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Allows to prune various docker objects
+# prefix: docker_prune_snippet
+# key: docker_pru
+# group: ansible
+# --
+
+- name: ${0:Allows to prune various docker objects}
+  docker_prune:                                                            
+    containers: ${1:False}                                                 # Whether to prune containers 
+    containers_filters: ${2:value}                                         # A dictionary of filter values used for selecting containers to delete  For example, C(until: 24h)  See L(the docker docu
+    images: ${3:False}                                                     # Whether to prune images 
+    images_filters: ${4:value}                                             # A dictionary of filter values used for selecting images to delete  For example, C(dangling: true)  See L(the docker docu
+    networks: ${5:False}                                                   # Whether to prune networks 
+    networks_filters: ${6:value}                                           # A dictionary of filter values used for selecting networks to delete  See L(the docker documentation,https://docs docker 
+    volumes: ${7:False}                                                    # Whether to prune volumes 
+    volumes_filters: ${8:value}                                            # A dictionary of filter values used for selecting volumes to delete  See L(the docker documentation,https://docs docker c
+    builder_cache: ${9:False}                                              # Whether to prune the builder cache  Requires version 3 3 0 of the Docker SDK for Python or newer 
+    docker_host: ${{10:unix://var/run/docker}                              #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${11:localhost}                                          # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${12:auto}                                                # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${13:60}                                                      # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${14:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${15:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${16:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${17:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${18:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${19:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${20:False}                                                     # Debug mode

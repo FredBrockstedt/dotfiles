@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Set boot options like boot, kickstart image and issu.
+# prefix: nxos_install_os_snippet
+# key: xos_install_o
+# group: ansible
+# --
+
+- name: ${0:Set boot options like boot, kickstart image and issu.}
+  nxos_install_os:                                                         
+    system_image_file: ${1:Name of the system (or combined) image file on flash}#
+    kickstart_image_file: ${2:value}                                       # Name of the kickstart image file on flash  (Not required on all Nexus platforms)
+    issu: ${3$$(yas-choose-value '("required" "desired" "true" "false"))}  # choices: required;desired;yes;no  Upgrade using In Service Software Upgrade (ISSU)  (Supported on N5k, N7k, N9k platform
+    provider: ${4:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

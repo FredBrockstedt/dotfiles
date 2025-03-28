@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Add and remove shards from a MongoDB Cluster.
+# prefix: mongodb_shard_snippet
+# key: mongodb_shard
+# group: ansible
+# --
+
+- name: ${0:Add and remove shards from a MongoDB Cluster.}
+  mongodb_shard:                                                           
+    shard: ${1:None}:The shard connection string}                          # Should be supplied in the form <replicaset>/host:port as detailed in U(https://docs mongodb com/manual/tutorial/add-shar
+    login_user: ${2:value}                                                 # The user to login with 
+    login_password: ${3:value}                                             # The password used to authenticate with 
+    login_database: ${4:admin}                                             # The database where login credentials are stored 
+    login_host: ${5:localhost}                                             # The host to login to  This must be a mongos 
+    login_port: ${6:27017}                                                 # The port to login to 
+    ssl: ${7:False}                                                        # Whether to use an SSL connection when connecting to the database 
+    ssl_cert_reqs: ${8$$(yas-choose-value '("CERT_REQUIRED" "CERT_OPTIONAL" "CERT_NONE"))}# choices: CERT_REQUIRED;CERT_OPTIONAL;CERT_NONE  Specifies whether a certificate is required from the othe
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the shard should be present or absent from the Cluster 

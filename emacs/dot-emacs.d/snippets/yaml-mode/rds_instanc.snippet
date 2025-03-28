@@ -1,0 +1,87 @@
+# -*- mode: snippet -*-
+# name: Manage RDS instances
+# prefix: rds_instance_snippet
+# key: rds_instanc
+# group: ansible
+# --
+
+- name: ${0:Manage RDS instances}
+  rds_instance:                                                            
+    db_instance_identifier: ${1:The DB instance (lowercase) identifier}    # The identifier must contain from 1 to 63 letters, numbers, or hyphens and the first character must be a letter and may n
+    state: ${2$$(yas-choose-value '("present" "absent" "terminated" "running" "started" "stopped" "rebooted" "restarted"))}# choices: present;absent;terminated;running;started;stopped;rebooted;rest
+    creation_source: ${3$$(yas-choose-value '("snapshot" "s3" "instance"))}# choices: snapshot;s3;instance  W h i c h   s o u r c e   t o   u s e   i f   r e s t o r i n g   f r o m   a   t e m p l
+    force_update_password: ${4:False}                                      # Set to True to update your cluster password with I(master_user_password)  Since comparing passwords to determine if it n
+    purge_cloudwatch_logs_exports: ${5:True}                               # S e t   t o   F a l s e   t o   r e t a i n   a n y   e n a b l e d   c l o u d w a t c h   l o g s   t h a t   a r e n 
+    purge_tags: ${6:True}                                                  # S e t   t o   F a l s e   t o   r e t a i n   a n y   t a g s   t h a t   a r e n ' t   s p e c i f i e d   i n   t a s 
+    read_replica: ${7:value}                                               # Set to False to promote a read replica cluster or true to create one  When creating a read replica C(creation_source) sh
+    wait: ${8:True}                                                        # Whether to wait for the cluster to be available, stopped, or deleted  At a later time a wait_timeout option may be added
+    allocated_storage: ${9:value}                                          # The amount of storage (in gibibytes) to allocate for the DB instance 
+    allow_major_version_upgrade: ${10:value}                               # Whether to allow major version upgrades 
+    apply_immediately: ${11:False}                                         # A value that specifies whether modifying a cluster with I(new_db_instance_identifier) and I(master_user_password) should
+    auto_minor_version_upgrade: ${12:value}                                # Whether minor version upgrades are applied automatically to the DB instance during the maintenance window 
+    availability_zone: ${13:value}                                         # A list of EC2 Availability Zones that instances in the DB cluster can be created in  May be used when creating a cluster
+    backup_retention_period: ${14:value}                                   # The number of days for which automated backups are retained (must be greater or equal to 1)  May be used when creating a
+    ca_certificate_identifier: ${15:value}                                 # The identifier of the CA certificate for the DB instance 
+    character_set_name: ${16:value}                                        # The character set to associate with the DB cluster 
+    copy_tags_to_snapshot: ${17:value}                                     # Whether or not to copy all tags from the DB instance to snapshots of the instance  When initially creating a DB instance
+    db_cluster_identifier: ${18:value}                                     # The DB cluster (lowercase) identifier to add the aurora DB instance to  The identifier must contain from 1 to 63 letters
+    db_instance_class: ${19:value}                                         # The compute and memory capacity of the DB instance, for example db t2 micro 
+    db_name: ${20:value}                                                   # The name for your database  If a name is not provided Amazon RDS will not create a database 
+    db_parameter_group_name: ${21:value}                                   # The name of the DB parameter group to associate with this DB instance  When creating the DB instance if this argument is
+    db_security_groups: ${22:value}                                        # (EC2-Classic platform) A list of DB security groups to associate with this DB instance 
+    db_snapshot_identifier: ${23:value}                                    # The identifier for the DB snapshot to restore from if using I(creation_source=snapshot) 
+    db_subnet_group_name: ${24:value}                                      # The DB subnet group name to use for the DB instance 
+    domain: ${25:value}                                                    # The Active Directory Domain to restore the instance in 
+    domain_iam_role_name: ${26:value}                                      # The name of the IAM role to be used when making API calls to the Directory Service 
+    enable_cloudwatch_logs_exports: ${27:value}                            # A list of log types that need to be enabled for exporting to CloudWatch Logs 
+    enable_iam_database_authentication: ${28:value}                        # Enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts  If this option is omitted when
+    enable_performance_insights: ${29:value}                               # Whether to enable Performance Insights for the DB instance 
+    engine: ${30:value}                                                    # The name of the database engine to be used for this DB instance  This is required to create an instance  Valid choices a
+    engine_version: ${31:value}                                            # The version number of the database engine to use  For Aurora MySQL that could be 5 6 10a , 5 7 12  Aurora PostgreSQL exa
+    final_db_snapshot_identifier: ${32:value}                              # The DB instance snapshot identifier of the new DB instance snapshot created when I(skip_final_snapshot) is false 
+    force_failover: ${33:value}                                            # Set to true to conduct the reboot through a MultiAZ failover 
+    iops: ${34:value}                                                      # The Provisioned IOPS (I/O operations per second) value  Is only set when using I(storage_type) is set to io1 
+    kms_key_id: ${35:value}                                                # The ARN of the AWS KMS key identifier for an encrypted DB instance  If you are creating a DB instance with the same AWS 
+    license_model: ${36:value}                                             # The license model for the DB instance  Several options are license-included, bring-your-own-license, and general-public-
+    master_user_password: ${37:value}                                      # An 8-41 character password for the master database user  The password can contain any printable ASCII character except "
+    master_username: ${38:value}                                           # The name of the master user for the DB cluster  Must be 1-16 letters or numbers and begin with a letter 
+    max_allocated_storage: ${39:value}                                     # The upper limit to which Amazon RDS can automatically scale the storage of the DB instance 
+    monitoring_interval: ${40:value}                                       # The interval, in seconds, when Enhanced Monitoring metrics are collected for the DB instance  To disable collecting metr
+    monitoring_role_arn: ${41:value}                                       # The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to Amazon CloudWatch Logs 
+    multi_az: ${42:value}                                                  # Specifies if the DB instance is a Multi-AZ deployment  Mutually exclusive with I(availability_zone) 
+    new_db_instance_identifier: ${43:value}                                # The new DB cluster (lowercase) identifier for the DB cluster when renaming a DB instance  The identifier must contain fr
+    option_group_name: ${44:value}                                         # The option group to associate with the DB instance 
+    performance_insights_kms_key_id: ${45:value}                           # The AWS KMS key identifier (ARN, name, or alias) for encryption of Performance Insights data 
+    performance_insights_retention_period: ${46:value}                     # The amount of time, in days, to retain Performance Insights data  Valid values are 7 or 731 
+    port: ${47:value}                                                      # The port number on which the instances accept connections 
+    preferred_backup_window: ${48:value}                                   # The daily time range (in UTC) of at least 30 minutes, during which automated backups are created if automated backups ar
+    preferred_maintenance_window: ${49:value}                              # The weekly time range (in UTC) of at least 30 minutes, during which system maintenance can occur  The option must be in 
+    processor_features: ${50:value}                                        # A dictionary of Name, Value pairs to indicate the number of CPU cores and the number of threads per core for the DB inst
+    promotion_tier: ${51:value}                                            # An integer that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of th
+    publicly_accessible: ${52:value}                                       # Specifies the accessibility options for the DB instance  A value of true specifies an Internet-facing instance with a pu
+    restore_time: ${53:value}                                              # If using I(creation_source=instance) this indicates the UTC date and time to restore from the source instance  For examp
+    s3_bucket_name: ${54:value}                                            # The name of the Amazon S3 bucket that contains the data used to create the Amazon DB instance 
+    s3_ingestion_role_arn: ${55:value}                                     # The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that authorizes Amazon RDS to access
+    s3_prefix: ${56:value}                                                 # The prefix for all of the file names that contain the data used to create the Amazon DB instance  If you do not specify 
+    skip_final_snapshot: ${57:False}                                       # Whether a final DB cluster snapshot is created before the DB cluster is deleted  If this is false I(final_db_snapshot_id
+    snapshot_identifier: ${58:value}                                       # The ARN of the DB snapshot to restore from when using I(creation_source=snapshot) 
+    source_db_instance_identifier: ${59:value}                             # The identifier or ARN of the source DB instance from which to restore when creating a read replica or spinning up a poin
+    source_engine: ${60$$(yas-choose-value '("mysql"))}                    # choices: mysql  The identifier for the database engine that was backed up to create the files stored in the Amazon S3 bu
+    source_engine_version: ${61:value}                                     # The version of the database that the backup files were created from 
+    source_region: ${62:value}                                             # The region of the DB instance from which the replica is created 
+    storage_encrypted: ${63:value}                                         # Whether the DB instance is encrypted 
+    storage_type: ${64$$(yas-choose-value '("standard" "gp2" "io1"))}      # choices: standard;gp2;io1  The storage type to be associated with the DB instance  I(storage_type) does not apply to Aur
+    tags: ${65:value}                                                      # A dictionary of key value pairs to assign the DB cluster 
+    tde_credential_arn: ${66:value}                                        # The ARN from the key store with which to associate the instance for Transparent Data Encryption  This is supported by Or
+    tde_credential_password: ${67:value}                                   # The password for the given ARN from the key store in order to access the device 
+    timezone: ${68:value}                                                  # The time zone of the DB instance 
+    use_latest_restorable_time: ${69:value}                                # Whether to restore the DB instance to the latest restorable backup time  Only one of I(use_latest_restorable_time) and I
+    vpc_security_group_ids: ${70:value}                                    # A list of EC2 VPC security groups to associate with the DB cluster 
+    debug_botocore_endpoint_logs: ${71:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${72:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${73:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${74:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${75:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${76:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${77:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${78:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

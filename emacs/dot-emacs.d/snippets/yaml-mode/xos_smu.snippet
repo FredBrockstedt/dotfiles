@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Perform SMUs on Cisco NX-OS devices.
+# prefix: nxos_smu_snippet
+# key: xos_smu
+# group: ansible
+# --
+
+- name: ${0:Perform SMUs on Cisco NX-OS devices.}
+  nxos_smu:                                                                
+    pkg: ${1:Name of the remote package}                                   #
+    file_system: ${2:value}                                                # The remote file system of the device  If omitted, devices that support a file_system parameter will use their default va
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

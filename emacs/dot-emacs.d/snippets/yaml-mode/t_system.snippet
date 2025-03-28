@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage the system attributes on network devices
+# prefix: net_system_snippet
+# key: t_system
+# group: ansible
+# --
+
+- name: ${0:Manage the system attributes on network devices}
+  net_system:                                                              
+    hostname: ${1:value}                                                   # Configure the device hostname parameter  This option takes an ASCII string value 
+    domain_name: ${2:value}                                                # Configure the IP domain name on the remote device to the provided value  Value should be in the dotted name form and wil
+    domain_search: ${3:value}                                              # Provides the list of domain suffixes to append to the hostname for the purpose of doing name resolution  This argument a
+    lookup_source: ${4:value}                                              # Provides one or more source interfaces to use for performing DNS lookups   The interface provided in C(lookup_source) mu
+    name_servers: ${5:value}                                               # List of DNS name servers by IP address to use to perform name resolution lookups   This argument accepts either a list o
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the configuration values in the device's current active configuration   When set to I(

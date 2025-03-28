@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage Elastic Kubernetes Service Clusters
+# prefix: aws_eks_cluster_snippet
+# key: ws_eks_cluster
+# group: ansible
+# --
+
+- name: ${0:Manage Elastic Kubernetes Service Clusters}
+  aws_eks_cluster:                                                         
+    name: ${1:N a m e   o f   E K S   c l u s t e r}                       #
+    version: ${2:value}                                                    # K u b e r n e t e s   v e r s i o n   -   d e f a u l t s   t o   l a t e s t
+    role_arn: ${3:value}                                                   # A R N   o f   I A M   r o l e   u s e d   b y   t h e   E K S   c l u s t e r
+    subnets: ${4:value}                                                    # l i s t   o f   s u b n e t   I D s   f o r   t h e   K u b e r n e t e s   c l u s t e r
+    security_groups: ${5:value}                                            # l i s t   o f   s e c u r i t y   g r o u p   n a m e s   o r   I D s
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  d e s i r e d   s t a t e   o f   t h e   E K S   c l u s t e r
+    wait: ${7:false}                                                       # S p e c i f i e s   w h e t h e r   t h e   m o d u l e   w a i t s   u n t i l   t h e   c l u s t e r   i s   a c t i 
+    wait_timeout: ${8:1200}                                                # T h e   d u r a t i o n   i n   s e c o n d s   t o   w a i t   f o r   t h e   c l u s t e r   t o   b e c o m e   a c 
+    debug_botocore_endpoint_logs: ${9:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${10:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${11:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${12:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${13:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${14:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${15:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${16:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Create or Destroy a Backend Service.
+# prefix: gcp_backend_service_snippet
+# key: gcp_backend_servic
+# group: ansible
+# --
+
+- name: ${0:Create or Destroy a Backend Service.}
+  gcp_backend_service:                                                     
+    backend_service_name: ${1:Name of the Backend Service}                 #
+    backends: ${2:List of backends that make up the backend service}       # A backend is made up of an instance group and optionally several other parameters   See U(https://cloud google com/compu
+    healthchecks: ${3:List of healthchecks}                                # Only one healthcheck is supported 
+    enable_cdn: ${4:value}                                                 # If true, enable Cloud CDN for this Backend Service 
+    port_name: ${5:value}                                                  # Name of the port on the managed instance group (MIG) that backend services can forward data to  Required for external lo
+    protocol: ${6:value}                                                   # The protocol this Backend Service uses to communicate with backends  Possible values are HTTP, HTTPS, TCP, and SSL  The 
+    timeout: ${7:value}                                                    # How many seconds to wait for the backend before considering it a failed request  Default is 30 seconds  Valid range is 1
+    service_account_email: ${8:value}                                      # Service account email
+    credentials_file: ${9:value}                                           # Path to the JSON file associated with the service account email 
+    project_id: ${10:value}                                                # GCE project ID 
+    state: ${11$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Desired state of the resource

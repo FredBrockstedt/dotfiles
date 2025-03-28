@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Gather information on self-heal or rebalance status
+# prefix: gluster_heal_info_snippet
+# key: gluster_heal_info
+# group: ansible
+# --
+
+- name: ${0:Gather information on self-heal or rebalance status}
+  gluster_heal_info:                                                       
+    name: ${1:The volume name}                                             #
+    status_filter: ${2$$(yas-choose-value '("self-heal" "rebalance"))}     # choices: self-heal;rebalance  Determines which facts are to be returned  If the C(status_filter) is C(self-heal), status

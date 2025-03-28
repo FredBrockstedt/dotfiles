@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Adds or removes an SSH authorized key
+# prefix: authorized_key_snippet
+# key: uthorized_key
+# group: ansible
+# --
+
+- name: ${0:Adds or removes an SSH authorized key}
+  authorized_key:                                                          
+    user: ${1:The username on the remote host whose authorized_keys file will be modified}#
+    key: ${2:The SSH public key(s), as a string or (since Ansible 1}       #9) url (https://github com/username keys) 
+    path: ${3:value}                                                       # Alternate path to the authorized_keys file  When unset, this value defaults to I(~/ ssh/authorized_keys) 
+    manage_dir: ${4:True}                                                  # Whether this module should manage the directory of the authorized key file  If set to C(yes), the module will create the
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the given key (with the given key_options) should or should not be in the file 
+    key_options: ${6:value}                                                # A string of ssh key options to be prepended to the key in the authorized_keys file 
+    exclusive: ${7:False}                                                  # Whether to remove all other non-specified keys from the authorized_keys file  Multiple keys can be specified in a single
+    validate_certs: ${8:True}                                              # This only applies if using a https url as the source of the keys  If set to C(no), the SSL certificates will not be vali
+    comment: ${9:value}                                                    # Change the comment on the public key  Rewriting the comment is useful in cases such as fetching it from GitHub or GitLab
+    follow: ${10:False}                                                    # Follow path symlink instead of replacing it 

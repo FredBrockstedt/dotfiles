@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: De-registers or registers instances from EC2 ELBs
+# prefix: elb_instance_snippet
+# key: tanc
+# group: ansible
+# --
+
+- name: ${0:De-registers or registers instances from EC2 ELBs}
+  elb_instance:                                                            
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # register or deregister the instance
+    instance_id: ${2:EC2 Instance ID}                                      #
+    ec2_elbs: ${3:value}                                                   # List of ELB names, required for registration  The ec2_elbs fact should be used if there was a previous de-register 
+    enable_availability_zone: ${4:true}                                    # Whether to enable the availability zone of the instance on the target ELB if the availability zone has not already been 
+    wait: ${5:true}                                                        # Wait for instance registration or deregistration to complete successfully before returning 
+    validate_certs: ${6:true}                                              # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    wait_timeout: ${7:0}                                                   # Number of seconds to wait for an instance to change state  If 0 then this module may return an error if a transient erro
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    profile: ${13:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${14:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

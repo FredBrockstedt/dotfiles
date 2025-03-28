@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage volume groups on Pure Storage FlashArrays
+# prefix: purefa_vg_snippet
+# key: purefa_vg
+# group: ansible
+# --
+
+- name: ${0:Manage volume groups on Pure Storage FlashArrays}
+  purefa_vg:                                                               
+    vgroup: ${1:The name of the volume group}                              #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Define whether the volume group should exist or not 
+    eradicate: ${5:false}                                                  # Define whether to eradicate the volume group on delete and leave in trash 

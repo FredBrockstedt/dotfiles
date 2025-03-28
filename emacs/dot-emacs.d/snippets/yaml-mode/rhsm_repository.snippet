@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage RHSM repositories using the subscription-manager command
+# prefix: rhsm_repository_snippet
+# key: rhsm_repository
+# group: ansible
+# --
+
+- name: ${0:Manage RHSM repositories using the subscription-manager command}
+  rhsm_repository:                                                         
+    state: ${1$$(yas-choose-value '("present" "enabled" "absent" "disabled"))}# If state is equal to present or disabled, indicates the desired repository state 
+    name: ${2:The ID of repositories to enable}                            # To operate on several repositories this can accept a comma separated list or a YAML list 
+    purge: ${3:False}                                                      # Disable all currently enabled repositories that are not not specified in C(name)  Only set this to C(True) if passing in

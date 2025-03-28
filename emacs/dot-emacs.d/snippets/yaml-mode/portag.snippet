@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Package manager for Gentoo
+# prefix: portage_snippet
+# key: portag
+# group: ansible
+# --
+
+- name: ${0:Package manager for Gentoo}
+  portage:                                                                 
+    package: ${1:value}                                                    # Package atom or set, e g  C(sys-apps/foo) or C(>foo-2 13) or C(@world)
+    state: ${2$$(yas-choose-value '("present" "installed" "emerged" "absent" "removed" "unmerged" "latest"))}# choices: present;installed;emerged;absent;removed;unmerged;latest  State of the packag
+    update: ${3:false}                                                     # Update packages to the best version available (--update)
+    deep: ${4:false}                                                       # Consider the entire dependency tree of packages (--deep)
+    newuse: ${5:false}                                                     # Include installed packages where USE flags have changed (--newuse)
+    changed_use: ${6:false}                                                # Include installed packages where USE flags have changed, except when flags that the user has not enabled are added or re
+    oneshot: ${7:false}                                                    # Do not add the packages to the world file (--oneshot)
+    noreplace: ${8:true}                                                   # Do not re-emerge installed packages (--noreplace)
+    nodeps: ${9:false}                                                     # Only merge packages but not their dependencies (--nodeps)
+    onlydeps: ${10:false}                                                  # Only merge packages' dependencies but not the packages (--onlydeps)
+    depclean: ${11:false}                                                  # Remove packages not needed by explicitly merged packages (--depclean) If no package is specified, clean up the world's d
+    quiet: ${12:false}                                                     # Run emerge in quiet mode (--quiet)
+    verbose: ${13:false}                                                   # Run emerge in verbose mode (--verbose)
+    sync: ${14$$(yas-choose-value '("web" "true" "false"))}                # choices: web;yes;no  Sync package repositories first If yes, perform "emerge --sync" If web, perform "emerge-webrsync"
+    getbinpkg: ${15:false}                                                 # Prefer packages specified at PORTAGE_BINHOST in make conf
+    usepkgonly: ${16:false}                                                # Merge only binaries (no compiling)  This sets getbinpkg=yes 
+    keepgoing: ${17:false}                                                 # Continue as much as possible after an error 
+    jobs: ${18:value}                                                      # Specifies the number of packages to build simultaneously  Since version 2 6: Value of 0 or False resets any previously a
+    loadavg: ${19:value}                                                   # Specifies that no new builds should be started if there are other builds running and the load average is at least LOAD S
+    quietbuild: ${20:false}                                                # Redirect all build output to logs alone, and do not display it on stdout (--quiet-build)
+    quietfail: ${21:false}                                                 # Suppresses display of the build log on stdout (--quiet-fail) Only the die message and the path of the build log will be 

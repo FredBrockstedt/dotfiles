@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Creates/updates/deletes GitLab Groups
+# prefix: gitlab_group_snippet
+# key: gitlab_group
+# group: ansible
+# --
+
+- name: ${0:Creates/updates/deletes GitLab Groups}
+  gitlab_group:                                                            
+    name: ${1:Name of the group you want to create}                        #
+    server_url: ${2:value}                                                 # The URL of the GitLab server, with protocol (i e  http or https) 
+    login_user: ${3:value}                                                 # GitLab user name 
+    login_password: ${4:value}                                             # GitLab password for login_user
+    api_token: ${5:value}                                                  # GitLab token for logging in 
+    path: ${6:value}                                                       # The path of the group you want to create, this will be server_url/group_path If not supplied, the group_name will be use
+    description: ${7:value}                                                # A description for the group 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  create or delete group  Possible values are present and absent 
+    parent: ${9:value}                                                     # Allow to create subgroups Id or Full path of parent group in the form of group/name
+    visibility: ${10$$(yas-choose-value '("private" "internal" "public"))} # choices: private;internal;public  Default visibility of the group
+    api_url: ${11:value}                                                   # The resolvable endpoint for the API
+    api_username: ${12:value}                                              # The username to use for authentication against the API
+    api_password: ${13:value}                                              # The password to use for authentication against the API
+    validate_certs: ${14:True}                                             # Whether or not to validate SSL certs when supplying a https endpoint 

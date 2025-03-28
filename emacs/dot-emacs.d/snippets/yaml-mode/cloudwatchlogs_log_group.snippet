@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: create or delete log_group in CloudWatchLogs
+# prefix: cloudwatchlogs_log_group_snippet
+# key: cloudwatchlogs_log_group
+# group: ansible
+# --
+
+- name: ${0:create or delete log_group in CloudWatchLogs}
+  cloudwatchlogs_log_group:                                                
+    log_group_name: ${1:The name of the log group}                         #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the rule is present, absent or get
+    kms_key_id: ${3:value}                                                 # The Amazon Resource Name (ARN) of the CMK to use when encrypting log data 
+    tags: ${4:value}                                                       # The key-value pairs to use for the tags 
+    retention: ${5:value}                                                  # The number of days to retain the log events in the specified log group  Valid values are: [1, 3, 5, 7, 14, 30, 60, 90, 1
+    overwrite: ${6:False}                                                  # Whether an existing log group should be overwritten on create 
+    debug_botocore_endpoint_logs: ${7:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${8:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${9:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${10:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${11:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${12:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${13:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${14:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

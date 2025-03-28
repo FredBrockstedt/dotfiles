@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage Snapshots
+# prefix: na_elementsw_snapshot_snippet
+# key: mentsw_snapshot
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage Snapshots}
+  na_elementsw_snapshot:                                                   
+    src_volume_id: ${1:ID or Name of active volume}                        #
+    account_id: ${2:Account ID or Name of Parent/Source Volume}            #
+    password: ${3:Element OS access account password}                      #
+    username: ${4:Element OS access account user-name}                     #
+    hostname: ${5:The hostname or IP address of the SolidFire cluster}     #
+    name: ${6:value}                                                       # Name of new snapshot create  If unspecified, date and time when the snapshot was taken is used 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified snapshot should exist or not 
+    retention: ${8:value}                                                  # Retention period for the snapshot  Format is 'HH:mm:ss' 
+    src_snapshot_id: ${9:value}                                            # ID or Name of an existing snapshot  Required when C(state=present), to modify snapshot properties  Required when C(state
+    enable_remote_replication: ${10:value}                                 # Flag, whether to replicate the snapshot created to a remote replication cluster  To enable specify 'true' value 
+    snap_mirror_label: ${11:value}                                         # Label used by SnapMirror software to specify snapshot retention policy on SnapMirror endpoint 
+    expiration_time: ${12:value}                                           # The date and time (format ISO 8601 date string) at which this snapshot will expire 

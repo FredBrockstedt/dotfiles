@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Import a role into a play
+# prefix: import_role_snippet
+# key: mport_ro
+# group: ansible
+# --
+
+- name: ${0:Import a role into a play}
+  import_role:                                                             
+    name: ${1:The name of the role to be executed}                         #
+    tasks_from: ${2:main}                                                  # File to load from a role's C(tasks/) directory 
+    vars_from: ${3:main}                                                   # File to load from a role's C(vars/) directory 
+    defaults_from: ${4:main}                                               # File to load from a role's C(defaults/) directory 
+    allow_duplicates: ${5:True}                                            # Overrides the role's metadata setting to allow using a role more than once with the same parameters 
+    handlers_from: ${6:main}                                               # File to load from a role's C(handlers/) directory 

@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower credential.
+# prefix: tower_credential_snippet
+# key: tower_credent
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower credential.}
+  tower_credential:                                                        
+    name: ${1:The name to use for the credential}                          #
+    organization: ${2:Organization that should own the credential}         #
+    kind: ${3$$(yas-choose-value '("ssh" "vault" "net" "scm" "aws" "vmware" "satellite6" "cloudforms" "gce" "azure_rm" "openstack" "rhv" "insights" "tower"))}# Type of credential being added  The s
+    description: ${4:value}                                                # The description to use for the credential 
+    user: ${5:value}                                                       # User that should own this credential 
+    team: ${6:value}                                                       # Team that should own this credential 
+    project: ${7:value}                                                    # Project that should for this credential 
+    host: ${8:value}                                                       # Host for this credential 
+    username: ${9:value}                                                   # Username for this credential  ``access_key`` for AWS 
+    password: ${10:value}                                                  # Password for this credential  ``secret_key`` for AWS  ``api_key`` for RAX  Use "ASK" and launch in Tower to be prompted 
+    ssh_key_data: ${11:value}                                              # SSH private key content  To extract the content from a file path, use the lookup function (see examples) 
+    ssh_key_unlock: ${12:value}                                            # Unlock password for ssh_key  Use "ASK" and launch in Tower to be prompted 
+    authorize: ${13:false}                                                 # Should use authorize for net type 
+    authorize_password: ${14:value}                                        # Password for net credentials that require authorize 
+    client: ${15:value}                                                    # Client or application ID for azure_rm type 
+    security_token: ${16:value}                                            # STS token for aws type 
+    secret: ${17:value}                                                    # Secret token for azure_rm type 
+    subscription: ${18:value}                                              # Subscription ID for azure_rm type 
+    tenant: ${19:value}                                                    # Tenant ID for azure_rm type 
+    domain: ${20:value}                                                    # Domain for openstack type 
+    become_method: ${21$$(yas-choose-value '("None" "sudo" "su" "pbrun" "pfexec" "pmrun"))}# choices: None;sudo;su;pbrun;pfexec;pmrun  Become method to use for privilege escalation 
+    become_username: ${22:value}                                           # Become username  Use "ASK" and launch in Tower to be prompted 
+    become_password: ${23:value}                                           # Become password  Use "ASK" and launch in Tower to be prompted 
+    vault_password: ${24:value}                                            # Vault password  Use "ASK" and launch in Tower to be prompted 
+    vault_id: ${25:value}                                                  # Vault identifier  This parameter is only valid if C(kind) is specified as C(vault) 
+    state: ${26$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Desired state of the resource 
+    tower_host: ${27:value}                                                # URL to your Tower instance 
+    tower_username: ${28:value}                                            # Username for your Tower instance 
+    tower_password: ${29:value}                                            # Password for your Tower instance 
+    validate_certs: ${30:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${31:value}                                         # Path to the Tower config file 

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage AWS IAM roles
+# prefix: iam_role_snippet
+# key: m_ro
+# group: ansible
+# --
+
+- name: ${0:Manage AWS IAM roles}
+  iam_role:                                                                
+    name: ${1:The name of the role to create}                              #
+    path: ${2:/}                                                           # The path to the role  For more information about paths, see U(https://docs aws amazon com/IAM/latest/UserGuide/reference
+    description: ${3:value}                                                # Provide a description of the new role
+    boundary: ${4:value}                                                   # Add the ARN of an IAM managed policy to restrict the permissions this role can pass on to IAM roles/users that it create
+    assume_role_policy_document: ${5:value}                                # The trust relationship policy document that grants an entity permission to assume the role  This parameter is required w
+    managed_policy: ${6:value}                                             # A list of managed policy ARNs or, since Ansible 2 4, a list of either managed policy ARNs or friendly names  To embed an
+    purge_policies: ${7:True}                                              # Detaches any managed policies not listed in the "managed_policy" option  Set to false if you want to attach policies els
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or remove the IAM role
+    create_instance_profile: ${9:True}                                     # Creates an IAM instance profile along with the role
+    debug_botocore_endpoint_logs: ${10:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${11:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${12:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${13:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${14:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${15:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${16:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${17:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

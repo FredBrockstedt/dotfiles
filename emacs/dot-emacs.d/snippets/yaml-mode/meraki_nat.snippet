@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage NAT rules in Meraki cloud
+# prefix: meraki_nat_snippet
+# key: meraki_nat
+# group: ansible
+# --
+
+- name: ${0:Manage NAT rules in Meraki cloud}
+  meraki_nat:                                                              
+    auth_key: ${1:Authentication key provided by the dashboard}            # Required if environmental variable C(MERAKI_KEY) is not set 
+    state: ${2$$(yas-choose-value '("present" "query"))}                   # choices: present;query  Create or modify an organization 
+    net_name: ${3:value}                                                   # Name of a network 
+    net_id: ${4:value}                                                     # ID number of a network 
+    org_id: ${5:value}                                                     # ID of organization associated to a network 
+    subset: ${6$$(yas-choose-value '("1:1" "1:many" "all" "port_forwarding"))}# choices: 1:1;1:many;all;port_forwarding  Specifies which NAT components to query 
+    one_to_one: ${7:value}                                                 # List of 1:1 NAT rules 
+    one_to_many: ${8:value}                                                # List of 1:many NAT rules 
+    port_forwarding: ${9:value}                                            # List of port forwarding rules 
+    host: ${{10:api}                                                       #meraki com} # not required  Hostname for Meraki dashboard  Can be used to access regional Meraki environments, such as Ch
+    use_proxy: ${11:value}                                                 # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_https: ${12:True}                                                  # If C(no), it will use HTTP  Otherwise it will use HTTPS  Only useful for internal Meraki developers 
+    output_format: ${13$$(yas-choose-value '("snakecase" "camelcase"))}    # choices: snakecase;camelcase  Instructs module whether response keys should be snake case (ex  C(net_id)) or camel case 
+    output_level: ${14$$(yas-choose-value '("debug" "normal"))}            # choices: debug;normal  Set amount of debug output during module execution 
+    timeout: ${15:30}                                                      # Time to timeout for HTTP requests 
+    validate_certs: ${16:True}                                             # Whether to validate HTTP certificates 
+    org_name: ${17:value}                                                  # Name of organization 
+    rate_limit_retry_time: ${18:165}                                       # Number of seconds to retry if rate limiter is triggered 
+    internal_error_retry_time: ${19:60}                                    # Number of seconds to retry if server returns an internal server error 

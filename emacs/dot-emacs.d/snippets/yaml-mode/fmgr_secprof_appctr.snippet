@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# name: Manage application control security profiles
+# prefix: fmgr_secprof_appctrl_snippet
+# key: fmgr_secprof_appctr
+# group: ansible
+# --
+
+- name: ${0:Manage application control security profiles}
+  fmgr_secprof_appctrl:                                                    
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    unknown_application_log: ${3$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging for unknown applications  choice | disable | Disable logging for unknown
+    unknown_application_action: ${4$$(yas-choose-value '("pass" "block"))} # choices: pass;block  Pass or block traffic from unknown applications  choice | pass | Pass or allow unknown applications
+    replacemsg_group: ${5:value}                                           # Replacement message group 
+    p2p_black_list: ${6$$(yas-choose-value '("skype" "edonkey" "bittorrent"))}# choices: skype;edonkey;bittorrent  NO DESCRIPTION PARSED ENTER MANUALLY FLAG Based Options  Specify multiple in list 
+    other_application_log: ${7$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable logging for other applications  choice | disable | Disable logging for other app
+    other_application_action: ${8$$(yas-choose-value '("pass" "block"))}   # choices: pass;block  Action for other applications  choice | pass | Allow sessions matching an application in this appli
+    options: ${9$$(yas-choose-value '("allow-dns" "allow-icmp" "allow-http" "allow-ssl" "allow-quic"))}# choices: allow-dns;allow-icmp;allow-http;allow-ssl;allow-quic  NO DESCRIPTION PARSED ENTER M
+    name: ${10:value}                                                      # List name 
+    extended_log: ${11$$(yas-choose-value '("disable" "enable"))}          # choices: disable;enable  Enable/disable extended logging  choice | disable | Disable setting  choice | enable | Enable s
+    deep_app_inspection: ${12$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable/disable deep application inspection  choice | disable | Disable deep application inspect
+    comment: ${13:value}                                                   # comments
+    app_replacemsg: ${14$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable/disable replacement messages for blocked applications  choice | disable | Disable replac
+    entries: ${15:value}                                                   # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    entries_action: ${16$$(yas-choose-value '("pass" "block" "reset"))}    # choices: pass;block;reset  Pass or block traffic, or reset connection for traffic from this application  choice | pass |
+    entries_application: ${17:value}                                       # ID of allowed applications 
+    entries_behavior: ${18:value}                                          # Application behavior filter 
+    entries_category: ${19:value}                                          # Category ID list 
+    entries_log: ${20$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable logging for this application list  choice | disable | Disable logging  choice | 
+    entries_log_packet: ${21$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable packet logging  choice | disable | Disable packet logging  choice | enable | Ena
+    entries_per_ip_shaper: ${22:value}                                     # Per-IP traffic shaper 
+    entries_popularity: ${23$$(yas-choose-value '("1" "2" "3" "4" "5"))}   # choices: 1;2;3;4;5  Application popularity filter (1 - 5, from least to most popular)  FLAG Based Options  Specify multi
+    entries_protocols: ${24:value}                                         # Application protocol filter 
+    entries_quarantine: ${25$$(yas-choose-value '("none" "attacker"))}     # choices: none;attacker  Quarantine method  choice | none | Quarantine is disabled  choice | attacker | Block all traffic
+    entries_quarantine_expiry: ${26:value}                                 # Duration of quarantine  (Format Requires quarantine set to attacker 
+    entries_quarantine_log: ${27$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable quarantine logging  choice | disable | Disable quarantine logging  choice | enab
+    entries_rate_count: ${28:value}                                        # Count of the rate 
+    entries_rate_duration: ${29:value}                                     # Duration (sec) of the rate 
+    entries_rate_mode: ${30$$(yas-choose-value '("periodical" "continuous"))}# choices: periodical;continuous  Rate limit mode  choice | periodical | Allow configured number of packets every rate-d
+    entries_rate_track: ${31$$(yas-choose-value '("none" "src-ip" "dest-ip" "dhcp-client-mac" "dns-domain"))}# choices: none;src-ip;dest-ip;dhcp-client-mac;dns-domain  Track the packet protocol fie
+    entries_risk: ${32:value}                                              # Risk, or impact, of allowing traffic from this application to occur 1 - 5; (Low, Elevated, Medium, High, and Critical) 
+    entries_session_ttl: ${33:value}                                       # Session TTL (0 = default) 
+    entries_shaper: ${34:value}                                            # Traffic shaper 
+    entries_shaper_reverse: ${35:value}                                    # Reverse traffic shaper 
+    entries_sub_category: ${36:value}                                      # Application Sub-category ID list 
+    entries_technology: ${37:value}                                        # Application technology filter 
+    entries_vendor: ${38:value}                                            # Application vendor filter 
+    entries_parameters_value: ${39:value}                                  # Parameter value 

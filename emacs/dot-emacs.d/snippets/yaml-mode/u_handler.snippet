@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages Sensu handler configuration
+# prefix: sensu_handler_snippet
+# key: u_handler
+# group: ansible
+# --
+
+- name: ${0:Manages Sensu handler configuration}
+  sensu_handler:                                                           
+    name: ${1:A unique name for the handler}                               # The name cannot contain special characters or spaces 
+    type: ${2$$(yas-choose-value '("pipe" "tcp" "udp" "transport" "set"))} # The handler type
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the handler should be present or not
+    filter: ${4:value}                                                     # The Sensu event filter (name) to use when filtering events for the handler 
+    filters: ${5:value}                                                    # An array of Sensu event filters (names) to use when filtering events for the handler  Each array item must be a string 
+    severities: ${6$$(yas-choose-value '("warning" "critical" "unknown"))} # choices: warning;critical;unknown  An array of check result severities the handler will handle  NOTE: event resolution b
+    mutator: ${7:value}                                                    # The Sensu event mutator (name) to use to mutate event data for the handler 
+    timeout: ${8:10}                                                       # The handler execution duration timeout in seconds (hard stop)  Only used by pipe and tcp handler types 
+    handle_silenced: ${9:false}                                            # If events matching one or more silence entries should be handled 
+    handle_flapping: ${10:false}                                           # If events in the flapping state should be handled 
+    command: ${11:value}                                                   # The handler command to be executed  The event data is passed to the process via STDIN  NOTE: the command attribute is on
+    socket: ${12:value}                                                    # The socket definition scope, used to configure the TCP/UDP handler socket  NOTE: the socket attribute is only required f
+    pipe: ${13:value}                                                      # The pipe definition scope, used to configure the Sensu transport pipe  NOTE: the pipe attribute is only required for Tra
+    handlers: ${14:value}                                                  # An array of Sensu event handlers (names) to use for events using the handler set  Each array item must be a string  NOTE

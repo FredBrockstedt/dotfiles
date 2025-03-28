@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Manage registration and subscriptions to RHSM using the C(subscription-manager) command
+# prefix: redhat_subscription_snippet
+# key: redhat_subscriptio
+# group: ansible
+# --
+
+- name: ${0:Manage registration and subscriptions to RHSM using the C(subscription-manager) command}
+  redhat_subscription:                                                     
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  whether to register and subscribe (C(present)), or unregister (C(absent)) a system
+    username: ${2:value}                                                   # access redhat com or Sat6  username
+    password: ${3:value}                                                   # access redhat com or Sat6 password
+    server_hostname: ${4:value}                                            # Specify an alternative Red Hat Subscription Management or Sat6 server
+    server_insecure: ${5:value}                                            # Enable or disable https server certificate verification when connecting to C(server_hostname)
+    rhsm_baseurl: ${6:value}                                               # Specify CDN baseurl
+    rhsm_repo_ca_cert: ${7:value}                                          # Specify an alternative location for a CA certificate for CDN
+    server_proxy_hostname: ${8:value}                                      # Specify a HTTP proxy hostname
+    server_proxy_port: ${9:value}                                          # Specify a HTTP proxy port
+    server_proxy_user: ${10:value}                                         # Specify a user for HTTP proxy with basic authentication
+    server_proxy_password: ${11:value}                                     # Specify a password for HTTP proxy with basic authentication
+    auto_attach: ${12:false}                                               # Upon successful registration, auto-consume available subscriptions Added in favor of deprecated autosubscribe in 2 5 
+    activationkey: ${13:value}                                             # supply an activation key for use with registration
+    org_id: ${14:value}                                                    # Organization ID to use in conjunction with activationkey
+    environment: ${15:value}                                               # Register with a specific environment in the destination org  Used with Red Hat Satellite 6 x or Katello
+    pool: ${16:^\$}                                                        # Specify a subscription pool name to consume   Regular expressions accepted  Use I(pool_ids) instead if
+possible, as it i
+    pool_ids: ${17:[]}                                                     # Specify subscription pool IDs to consume  Prefer over I(pool) when possible as it is much faster 
+A pool ID may be speci
+    consumer_type: ${18:value}                                             # The type of unit to register, defaults to system
+    consumer_name: ${19:value}                                             # Name of the system to register, defaults to the hostname
+    consumer_id: ${20:value}                                               # References an existing consumer ID to resume using a previous registration
+for this system  If the  system's identity ce
+    force_register: ${21:false}                                            # Register the system even if it is already registered
+    release: ${22:value}                                                   # Set a release version
+    syspurpose: ${23:namespace()}                                          # Set syspurpose attributes in file C(/etc/rhsm/syspurpose/syspurpose json) and synchronize these attributes with RHSM ser

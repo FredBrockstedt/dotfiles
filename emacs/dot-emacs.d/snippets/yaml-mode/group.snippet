@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Add or remove groups
+# prefix: group_snippet
+# key: group
+# group: ansible
+# --
+
+- name: ${0:Add or remove groups}
+  group:                                                                   
+    name: ${1:Name of the group to manage}                                 #
+    gid: ${2:value}                                                        # Optional I(GID) to set for the group 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the group should be present or not on the remote host 
+    system: ${4:False}                                                     # If I(yes), indicates that the group created is a system group 
+    local: ${5:False}                                                      # Forces the use of "local" command alternatives on platforms that implement it  This is useful in environments that use c
+    non_unique: ${6:False}                                                 # This option allows to change the group ID to a non-unique value  Requires C(gid)  Not supported on macOS or BusyBox dist

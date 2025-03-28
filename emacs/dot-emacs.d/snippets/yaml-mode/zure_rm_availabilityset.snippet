@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Availability Set
+# prefix: azure_rm_availabilityset_snippet
+# key: zure_rm_availabilityset
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Availability Set}
+  azure_rm_availabilityset:                                                
+    resource_group: ${1:Name of a resource group where the availability set exists or will be created}#
+    name: ${2:Name of the availability set}                                #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the availability set  Use C(present) to create or update a availability set
+    location: ${4:value}                                                   # Valid Azure location  Defaults to location of the resource group 
+    platform_update_domain_count: ${5:5}                                   # Update domains indicate groups of virtual machines and underlying physical hardware that can be rebooted at the same tim
+    platform_fault_domain_count: ${6:3}                                    # Fault domains define the group of virtual machines that share a common power source and network switch  Should be betwee
+    sku: ${7$$(yas-choose-value '("Classic" "Aligned"))}                   # choices: Classic;Aligned  Define if the availability set supports managed disks 
+    ad_user: ${8:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${9:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${10:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${11:value}                                           # Your Azure subscription Id 
+    client_id: ${12:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${13:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${14:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${15:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${16:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${17$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${18$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${19:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${20:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${21:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Add, remove or modify a rule in a pg_hba file
+# prefix: postgresql_pg_hba_snippet
+# key: postgresql_pg_h
+# group: ansible
+# --
+
+- name: ${0:Add, remove or modify a rule in a pg_hba file}
+  postgresql_pg_hba:                                                       
+    dest: ${1:Path to C(pg_hba) file to modify}                            #
+    address: ${2:samehost}                                                 # The source address/net where the connections could come from  Will not be used for entries of I(type)=C(local)  You can 
+    backup: ${3:False}                                                     # If set, create a backup of the C(pg_hba) file before it is modified  The location of the backup is returned in the (back
+    backup_file: ${4:value}                                                # Write backup to a specific backupfile rather than a temp file 
+    create: ${5:False}                                                     # Create an C(pg_hba) file if none exists  When set to false, an error is raised when the C(pg_hba) file doesn't exist 
+    contype: ${6$$(yas-choose-value '("local" "host" "hostnossl" "hostssl"))}# choices: local;host;hostnossl;hostssl  Type of the rule  If not set, C(postgresql_pg_hba) will only return contents 
+    databases: ${7:all}                                                    # Databases this line applies to 
+    method: ${8$$(yas-choose-value '("cert" "gss" "ident" "krb5" "ldap" "md5" "pam" "password" "peer" "radius" "reject" "scram-sha-256" "sspi" "trust"))}# choices: cert;gss;ident;krb5;ldap;md5;pam;
+    netmask: ${9:value}                                                    # The netmask of the source address 
+    options: ${10:value}                                                   # Additional options for the authentication I(method) 
+    order: ${11$$(yas-choose-value '("sdu" "sud" "dsu" "dus" "usd" "uds"))}# choices: sdu;sud;dsu;dus;usd;uds  The entries will be written out in a specific order  With this option you can control 
+    state: ${12$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The lines will be added/modified when C(state=present) and removed when C(state=absent) 
+    users: ${13:all}                                                       # Users this line applies to 
+    mode: ${14:value}                                                      # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${15:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${16:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${17:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${18:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${19:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${20:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${21:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${22:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

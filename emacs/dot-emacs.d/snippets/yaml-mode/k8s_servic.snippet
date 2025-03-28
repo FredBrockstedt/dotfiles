@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manage Services on Kubernetes
+# prefix: k8s_service_snippet
+# key: k8s_servic
+# group: ansible
+# --
+
+- name: ${0:Manage Services on Kubernetes}
+  k8s_service:                                                             
+    name: ${1:Use to specify a Service object name}                        #
+    namespace: ${2:Use to specify a Service object namespace}              #
+    resource_definition: ${3:value}                                        # A partial YAML definition of the Service object being created/updated  Here you can define Kubernetes Service Resource p
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines if an object should be created, patched, or deleted  When set to C(present), an obje
+    force: ${5:False}                                                      # If set to C(True), and I(state) is C(present), an existing object will be replaced 
+    merge_type: ${6$$(yas-choose-value '("json" "merge" "strategic-merge"))}# choices: json;merge;strategic-merge  Whether to override the default patch merge approach with a specific type  By defa
+    type: ${7$$(yas-choose-value '("NodePort" "ClusterIP" "LoadBalancer" "ExternalName"))}# choices: NodePort;ClusterIP;LoadBalancer;ExternalName  Specifies the type of Service to create  See U(htt
+    ports: ${8:value}                                                      # A list of ports to expose  U(https://kubernetes io/docs/concepts/services-networking/service/#multi-port-services)
+    selector: ${9:value}                                                   # Label selectors identify objects this Service should apply to  U(https://kubernetes io/docs/concepts/overview/working-wi
+    host: ${10:value}                                                      # Provide a URL for accessing the API  Can also be specified via K8S_AUTH_HOST environment variable 
+    api_key: ${11:value}                                                   # Token used to authenticate with the API  Can also be specified via K8S_AUTH_API_KEY environment variable 
+    kubeconfig: ${12:value}                                                # Path to an existing Kubernetes config file  If not provided, and no other connection options are provided, the openshift
+    context: ${13:value}                                                   # The name of a context found in the config file  Can also be specified via K8S_AUTH_CONTEXT environment variable 
+    username: ${14:value}                                                  # Provide a username for authenticating with the API  Can also be specified via K8S_AUTH_USERNAME environment variable  Pl
+    password: ${15:value}                                                  # Provide a password for authenticating with the API  Can also be specified via K8S_AUTH_PASSWORD environment variable  Pl
+    client_cert: ${16:value}                                               # Path to a certificate used to authenticate with the API  Can also be specified via K8S_AUTH_CERT_FILE environment variab
+    client_key: ${17:value}                                                # Path to a key file used to authenticate with the API  Can also be specified via K8S_AUTH_KEY_FILE environment variable 
+    ca_cert: ${18:value}                                                   # Path to a CA certificate used to authenticate with the API  The full certificate chain must be provided to avoid certifi
+    validate_certs: ${19:value}                                            # Whether or not to verify the API server's SSL certificates  Can also be specified via K8S_AUTH_VERIFY_SSL environment va
+    proxy: ${20:value}                                                     # The URL of an HTTP proxy to use for the connection  Can also be specified via K8S_AUTH_PROXY environment variable  Pleas

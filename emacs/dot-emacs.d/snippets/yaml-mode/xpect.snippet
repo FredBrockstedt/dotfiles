@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Executes a command and responds to prompts.
+# prefix: expect_snippet
+# key: xpect
+# group: ansible
+# --
+
+- name: ${0:Executes a command and responds to prompts.}
+  expect:                                                                  
+    command: ${1:The command module takes command to run}                  #
+    responses: ${2:Mapping of expected string/regex and string to respond with}# If the response is a list, successive matches return successive responses  List functionality is new in 2 1 
+    creates: ${3:value}                                                    # A filename, when it already exists, this step will B(not) be run 
+    removes: ${4:value}                                                    # A filename, when it does not exist, this step will B(not) be run 
+    chdir: ${5:value}                                                      # Change into this directory before running the command 
+    timeout: ${6:30}                                                       # Amount of time in seconds to wait for the expected strings  Use C(null) to disable timeout 
+    echo: ${7:False}                                                       # Whether or not to echo out your response strings 

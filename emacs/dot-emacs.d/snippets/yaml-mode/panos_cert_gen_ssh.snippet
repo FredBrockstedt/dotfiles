@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: generates a self-signed certificate using SSH protocol with SSH key
+# prefix: panos_cert_gen_ssh_snippet
+# key: panos_cert_gen_ssh
+# group: ansible
+# --
+
+- name: ${0:generates a self-signed certificate using SSH protocol with SSH key}
+  panos_cert_gen_ssh:                                                      
+    ip_address: ${1:IP address (or hostname) of PAN-OS device being configured}#
+    key_filename: ${2:Location of the filename that is used for the auth}  # Either I(key_filename) or I(password) is required 
+    password: ${3:Password credentials to use for auth}                    # Either I(key_filename) or I(password) is required 
+    cert_friendly_name: ${4:Human friendly certificate name (not CN but just a friendly name)}#
+    cert_cn: ${5:Certificate CN (common name) embedded in the certificate signature}#
+    signed_by: ${6:Undersigning authority (CA) that MUST already be presents on the device}#
+    rsa_nbits: ${7:2048}                                                   # Number of bits used by the RSA algorithm for the certificate generation 

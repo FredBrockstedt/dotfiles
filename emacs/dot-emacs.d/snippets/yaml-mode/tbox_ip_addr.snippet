@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Creates or removes IP addresses from Netbox
+# prefix: netbox_ip_address_snippet
+# key: tbox_ip_addr
+# group: ansible
+# --
+
+- name: ${0:Creates or removes IP addresses from Netbox}
+  netbox_ip_address:                                                       
+    netbox_url: ${1:URL of the Netbox instance resolvable by Ansible control host}#
+    netbox_token: ${2:The token created within Netbox to authorize API access}#
+    data: ${3:Defines the IP address configuration}                        #
+    state: ${4$$(yas-choose-value '("absent" "new" "present"))}            # choices: absent;new;present  Use C(present), C(new) or C(absent) for adding, force adding or removing 
+C(present) will c
+    validate_certs: ${5:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig

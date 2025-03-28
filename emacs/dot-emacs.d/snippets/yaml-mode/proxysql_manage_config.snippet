@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Writes the proxysql configuration settings between layers.
+# prefix: proxysql_manage_config_snippet
+# key: proxysql_manage_config
+# group: ansible
+# --
+
+- name: ${0:Writes the proxysql configuration settings between layers.}
+  proxysql_manage_config:                                                  
+    action: ${1$$(yas-choose-value '("LOAD" "SAVE"))}                      # The supplied I(action) combines with the supplied I(direction) to provide the semantics of how we want to move the I(con
+    config_settings: ${2$$(yas-choose-value '("MYSQL USERS" "MYSQL SERVERS" "MYSQL QUERY RULES" "MYSQL VARIABLES" "ADMIN VARIABLES" "SCHEDULER"))}# The I(config_settings) specifies which configurat
+    direction: ${3$$(yas-choose-value '("FROM" "TO"))}                     # FROM - denotes we're reading values FROM the supplied I(config_layer) and writing to the next layer  TO - denotes we're 
+    config_layer: ${4$$(yas-choose-value '("MEMORY" "DISK" "RUNTIME" "CONFIG"))}# RUNTIME - represents the in-memory data structures of ProxySQL used by the threads that are handling the requests  
+    login_user: ${5:value}                                                 # The username used to authenticate to ProxySQL admin interface 
+    login_password: ${6:value}                                             # The password used to authenticate to ProxySQL admin interface 
+    login_host: ${{7:127}                                                  #0 0 1} # not required  The host used to connect to ProxySQL admin interface 
+    login_port: ${8:6032}                                                  # The port used to connect to ProxySQL admin interface 
+    config_file: ${9:}                                                     # Specify a config file from which I(login_user) and I(login_password) are to be read 

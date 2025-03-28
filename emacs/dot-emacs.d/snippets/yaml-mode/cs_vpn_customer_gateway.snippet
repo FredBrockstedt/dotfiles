@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manages site-to-site VPN customer gateway configurations on Apache CloudStack based clouds.
+# prefix: cs_vpn_customer_gateway_snippet
+# key: cs_vpn_customer_gateway
+# group: ansible
+# --
+
+- name: ${0:Manages site-to-site VPN customer gateway configurations on Apache CloudStack based clouds.}
+  cs_vpn_customer_gateway:                                                 
+    name: ${1:Name of the gateway}                                         #
+    cidrs: ${2:value}                                                      # List of guest CIDRs behind the gateway  Required if I(state=present) 
+    gateway: ${3:value}                                                    # Public IP address of the gateway  Required if I(state=present) 
+    esp_policy: ${4:value}                                                 # ESP policy in the format e g  C(aes256-sha1;modp1536)  Required if I(state=present) 
+    ike_policy: ${5:value}                                                 # IKE policy in the format e g  C(aes256-sha1;modp1536)  Required if I(state=present) 
+    ipsec_psk: ${6:value}                                                  # IPsec Preshared-Key  Cannot contain newline or double quotes  Required if I(state=present) 
+    ike_lifetime: ${7:value}                                               # Lifetime in seconds of phase 1 VPN connection  Defaulted to 86400 by the API on creation if not set 
+    esp_lifetime: ${8:value}                                               # Lifetime in seconds of phase 2 VPN connection  Defaulted to 3600 by the API on creation if not set 
+    dpd: ${9:value}                                                        # Enable Dead Peer Detection  Disabled per default by the API on creation if not set 
+    force_encap: ${10:value}                                               # Force encapsulation for NAT traversal  Disabled per default by the API on creation if not set 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the VPN customer gateway 
+    domain: ${12:value}                                                    # Domain the VPN customer gateway is related to 
+    account: ${13:value}                                                   # Account the VPN customer gateway is related to 
+    project: ${14:value}                                                   # Name of the project the VPN gateway is related to 
+    poll_async: ${15:True}                                                 # Poll async jobs until job has finished 
+    api_key: ${16:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${17:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${18:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${19$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${20:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${21:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

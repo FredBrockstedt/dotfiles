@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage bits and pieces of XML files or strings
+# prefix: xml_snippet
+# key: xm
+# group: ansible
+# --
+
+- name: ${0:Manage bits and pieces of XML files or strings}
+  xml:                                                                     
+    path: ${1:Path to the file to operate on}                              # This file must exist ahead of time  This parameter is required, unless C(xmlstring) is given 
+    xmlstring: ${2:A string containing XML on which to operate}            # This parameter is required, unless C(path) is given 
+    xpath: ${3:value}                                                      # A valid XPath expression describing the item(s) you want to manipulate  Operates on the document root, C(/), by default 
+    namespaces: ${4:value}                                                 # The namespace C(prefix:uri) mapping for the XPath expression  Needs to be a C(dict), not a C(list) of items 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Set or remove an xpath selection (node(s), attribute(s)) 
+    attribute: ${6:value}                                                  # The attribute to select when using parameter C(value)  This is a string, not prepended with C(@) 
+    value: ${7:value}                                                      # Desired state of the selected attribute  Either a string, or to unset a value, the Python C(None) keyword (YAML Equivale
+    add_children: ${8:value}                                               # Add additional child-element(s) to a selected element for a given C(xpath)  Child elements must be given in a list and e
+    set_children: ${9:value}                                               # Set the child-element(s) of a selected element for a given C(xpath)  Removes any existing children  Child elements must 
+    count: ${10:False}                                                     # Search for a given C(xpath) and provide the count of any matches  This parameter requires C(xpath) to be set 
+    print_match: ${11:False}                                               # Search for a given C(xpath) and print out any matches  This parameter requires C(xpath) to be set 
+    pretty_print: ${12:False}                                              # Pretty print XML output 
+    content: ${13$$(yas-choose-value '("attribute" "text"))}               # choices: attribute;text  Search for a given C(xpath) and get content  This parameter requires C(xpath) to be set 
+    input_type: ${14$$(yas-choose-value '("xml" "yaml"))}                  # choices: xml;yaml  Type of input for C(add_children) and C(set_children) 
+    backup: ${15:False}                                                    # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    strip_cdata_tags: ${16:False}                                          # Remove CDATA tags surrounding text values  Note that this might break your XML file if text values contain characters th
+    insertbefore: ${17:False}                                              # Add additional child-element(s) before the first selected element for a given C(xpath)  Child elements must be given in 
+    insertafter: ${18:False}                                               # Add additional child-element(s) after the last selected element for a given C(xpath)  Child elements must be given in a 

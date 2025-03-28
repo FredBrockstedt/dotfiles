@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Adds or removes a user from a MongoDB database.
+# prefix: mongodb_user_snippet
+# key: mongodb_user
+# group: ansible
+# --
+
+- name: ${0:Adds or removes a user from a MongoDB database.}
+  mongodb_user:                                                            
+    database: ${1:The name of the database to add/remove the user from}    #
+    name: ${2:The name of the user to add or remove}                       #
+    login_user: ${3:value}                                                 # The username used to authenticate with
+    login_password: ${4:value}                                             # The password used to authenticate with
+    login_host: ${5:localhost}                                             # The host running the database
+    login_port: ${6:27017}                                                 # The port to connect to
+    login_database: ${7:value}                                             # The database where login credentials are stored
+    replica_set: ${8:value}                                                # Replica set to connect to (automatically connects to primary for writes)
+    password: ${9:value}                                                   # The password to use for the user
+    ssl: ${10:value}                                                       # Whether to use an SSL connection when connecting to the database
+    ssl_cert_reqs: ${11$$(yas-choose-value '("CERT_REQUIRED" "CERT_OPTIONAL" "CERT_NONE"))}# choices: CERT_REQUIRED;CERT_OPTIONAL;CERT_NONE  Specifies whether a certificate is required from the oth
+    roles: ${12:value}                                                     # The database user roles valid values could either be one or more of the following strings: 'read', 'readWrite', 'dbAdmin
+    state: ${13$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  The database user state
+    update_password: ${14$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will update passwords if they differ   C(on_create) will only set the password for 

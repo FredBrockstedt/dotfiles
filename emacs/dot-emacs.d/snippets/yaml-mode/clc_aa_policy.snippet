@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Create or Delete Anti Affinity Policies at CenturyLink Cloud.
+# prefix: clc_aa_policy_snippet
+# key: clc_aa_policy
+# group: ansible
+# --
+
+- name: ${0:Create or Delete Anti Affinity Policies at CenturyLink Cloud.}
+  clc_aa_policy:                                                           
+    name: ${1:The name of the Anti Affinity Policy}                        #
+    location: ${2:Datacenter in which the policy lives/should live}        #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether to create or delete the policy 
+    wait: ${4:True}                                                        # Whether to wait for the tasks to finish before returning 

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages firewall groups on Vultr.
+# prefix: vultr_firewall_group_snippet
+# key: vultr_firewall_group
+# group: ansible
+# --
+
+- name: ${0:Manages firewall groups on Vultr.}
+  vultr_firewall_group:                                                    
+    name: ${1:Name of the firewall group}                                  #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the firewall group 
+    api_key: ${3:value}                                                    # API key of the Vultr API  The ENV variable C(VULTR_API_KEY) is used as default, when defined 
+    api_timeout: ${4:value}                                                # HTTP timeout to Vultr API  The ENV variable C(VULTR_API_TIMEOUT) is used as default, when defined  Fallback value is 60 
+    api_retries: ${5:value}                                                # Amount of retries in case of the Vultr API retuns an HTTP 503 code  The ENV variable C(VULTR_API_RETRIES) is used as def
+    api_retry_max_delay: ${6:value}                                        # Retry backoff delay in seconds is exponential up to this max  value, in seconds  The ENV variable C(VULTR_API_RETRY_MAX_
+    api_account: ${7:default}                                              # Name of the ini section in the C(vultr ini) file  The ENV variable C(VULTR_API_ACCOUNT) is used as default, when defined
+    api_endpoint: ${8:value}                                               # URL to API endpint (without trailing slash)  The ENV variable C(VULTR_API_ENDPOINT) is used as default, when defined  Fa
+    validate_certs: ${9:True}                                              # Validate SSL certs of the Vultr API 

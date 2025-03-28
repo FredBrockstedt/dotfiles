@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Module which add nodes to Skydive topology
+# prefix: skydive_node_snippet
+# key: kydive_nod
+# group: ansible
+# --
+
+- name: ${0:Module which add nodes to Skydive topology}
+  skydive_node:                                                            
+    name: ${1:To define name for the node}                                 #
+    node_type: ${2:To define type for the node}                            #
+    host: ${3:value}                                                       # To define host for the node 
+    seed: ${4:}                                                            # used to generate the UUID of the node
+    metadata: ${5:value}                                                   # To define metadata for the node 
+    state: ${6$$(yas-choose-value '("present" "update" "absent"))}         # choices: present;update;absent  State of the Skydive Node  If value is I(present) new node will be created else if it is
+    provider: ${7:value}                                                   # A dict object containing connection details 

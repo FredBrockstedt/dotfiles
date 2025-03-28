@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage InfluxDB users
+# prefix: influxdb_user_snippet
+# key: fluxdb_user
+# group: ansible
+# --
+
+- name: ${0:Manage InfluxDB users}
+  influxdb_user:                                                           
+    user_name: ${1:Name of the user}                                       #
+    user_password: ${2:value}                                              # Password to be set for the user 
+    admin: ${3:False}                                                      # Whether the user should be in the admin role or not  Since version 2 8, the role will also be updated 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the user 
+    grants: ${5:value}                                                     # Privileges to grant to this user  Takes a list of dicts containing the "database" and "privilege" keys  If this argument
+    hostname: ${6:localhost}                                               # The hostname or IP address on which InfluxDB server is listening  Since Ansible 2 5, defaulted to localhost 
+    username: ${7:root}                                                    # Username that will be used to authenticate against InfluxDB server  Alias C(login_username) added in Ansible 2 5 
+    password: ${8:root}                                                    # Password that will be used to authenticate against InfluxDB server  Alias C(login_password) added in Ansible 2 5 
+    port: ${9:8086}                                                        # The port on which InfluxDB server is listening
+    validate_certs: ${10:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled
+    ssl: ${11:value}                                                       # Use https instead of http to connect to InfluxDB server 
+    timeout: ${12:value}                                                   # Number of seconds Requests will wait for client to establish a connection 
+    retries: ${13:3}                                                       # Number of retries client will try before aborting  C(0) indicates try until success 
+    use_udp: ${14:value}                                                   # Use UDP to connect to InfluxDB server 
+    udp_port: ${15:4444}                                                   # UDP port to connect to InfluxDB server 
+    proxies: ${16:value}                                                   # HTTP(S) proxy to use for Requests to connect to InfluxDB server 

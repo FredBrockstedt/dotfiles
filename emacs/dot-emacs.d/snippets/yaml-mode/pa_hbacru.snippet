@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage FreeIPA HBAC rule
+# prefix: ipa_hbacrule_snippet
+# key: pa_hbacru
+# group: ansible
+# --
+
+- name: ${0:Manage FreeIPA HBAC rule}
+  ipa_hbacrule:                                                            
+    cn: ${1:Canonical name}                                                # Can not be changed as it is the unique identifier 
+    ipa_pass: ${2:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    description: ${3:value}                                                # D e s c r i p t i o n
+    host: ${4:value}                                                       # List of host names to assign  If an empty list is passed all hosts will be removed from the rule  If option is omitted h
+    hostcategory: ${5$$(yas-choose-value '("all"))}                        # choices: all  H o s t   c a t e g o r y
+    hostgroup: ${6:value}                                                  # List of hostgroup names to assign  If an empty list is passed all hostgroups will be removed  from the rule If option is
+    service: ${7:value}                                                    # List of service names to assign  If an empty list is passed all services will be removed from the rule  If option is omi
+    servicecategory: ${8$$(yas-choose-value '("all"))}                     # choices: all  S e r v i c e   c a t e g o r y
+    servicegroup: ${9:value}                                               # List of service group names to assign  If an empty list is passed all assigned service groups will be removed from the r
+    sourcehost: ${10:value}                                                # List of source host names to assign  If an empty list if passed all assigned source hosts will be removed from the rule 
+    sourcehostcategory: ${11$$(yas-choose-value '("all"))}                 # choices: all  S o u r c e   h o s t   c a t e g o r y
+    sourcehostgroup: ${12:value}                                           # List of source host group names to assign  If an empty list if passed all assigned source host groups will be removed fr
+    state: ${13$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  S t a t e   t o   e n s u r e
+    user: ${14:value}                                                      # List of user names to assign  If an empty list if passed all assigned users will be removed from the rule  If option is 
+    usercategory: ${15$$(yas-choose-value '("all"))}                       # choices: all  U s e r   c a t e g o r y
+    usergroup: ${16:value}                                                 # List of user group names to assign  If an empty list if passed all assigned user groups will be removed from the rule  I
+    ipa_port: ${17:443}                                                    # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{18:ipa}                                                   #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${19:admin}                                                  # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${20$$(yas-choose-value '("http" "https"))}                  # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${21:True}                                             # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${22:10}                                                  # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

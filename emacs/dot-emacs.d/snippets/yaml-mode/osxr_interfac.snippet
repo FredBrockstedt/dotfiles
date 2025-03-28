@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage interface attributes on Cisco IOS-XR network devices
+# prefix: iosxr_interfaces_snippet
+# key: osxr_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage interface attributes on Cisco IOS-XR network devices}
+  iosxr_interfaces:                                                        
+    config: ${1:value}                                                     # A   d i c t i o n a r y   o f   i n t e r f a c e   o p t i o n s
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion

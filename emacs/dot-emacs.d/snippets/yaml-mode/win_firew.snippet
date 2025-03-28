@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Enable or disable the Windows Firewall
+# prefix: win_firewall_snippet
+# key: win_firew
+# group: ansible
+# --
+
+- name: ${0:Enable or disable the Windows Firewall}
+  win_firewall:                                                            
+    profiles: ${1$$(yas-choose-value '("Domain" "Private" "Public"))}      # choices: Domain;Private;Public  Specify one or more profiles to change 
+    state: ${2$$(yas-choose-value '("disabled" "enabled"))}                # choices: disabled;enabled  Set state of firewall for given profile 

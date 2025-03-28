@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Executes a low-down and dirty telnet command
+# prefix: telnet_snippet
+# key: telnet
+# group: ansible
+# --
+
+- name: ${0:Executes a low-down and dirty telnet command}
+  telnet:                                                                  
+    command: ${1:List of commands to be executed in the telnet session}    #
+    host: ${2:remote_addr}                                                 # The host/target on which to execute the command
+    user: ${3:remote_user}                                                 # The user for login
+    password: ${4:value}                                                   # The password for login
+    port: ${5:23}                                                          # Remote port to use
+    timeout: ${6:120}                                                      # timeout for remote operations
+    prompts: ${7:['\$']}                                                   # List of prompts expected before sending next command
+    login_prompt: ${8:"login: "}                                           # Login or username prompt to expect
+    password_prompt: ${9:"Password: "}                                     # Login or username prompt to expect
+    pause: ${10:1}                                                         # Seconds to pause between each command issued
+    send_newline: ${11:False}                                              # Sends a newline character upon successful connection to start the terminal session 

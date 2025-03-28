@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Create or remove a Distributed vSwitch portgroup.
+# prefix: vmware_dvs_portgroup_snippet
+# key: vmware_dvs_portgroup
+# group: ansible
+# --
+
+- name: ${0:Create or remove a Distributed vSwitch portgroup.}
+  vmware_dvs_portgroup:                                                    
+    portgroup_name: ${1:The name of the portgroup that is to be created or deleted}#
+    switch_name: ${2:The name of the distributed vSwitch the port group should be created on}#
+    vlan_id: ${3:The VLAN ID that should be configured with the portgroup, use 0 for no VLAN}# If C(vlan_trunk) is configured to be I(true), this can be a combination of multiple ranges and numbers
+    num_ports: ${4:The number of ports the portgroup should contain}       #
+    portgroup_type: ${5$$(yas-choose-value '("earlyBinding" "lateBinding" "ephemeral"))}# See VMware KB 1022312 regarding portgroup types 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # Determines if the portgroup should be present or not 
+    vlan_trunk: ${7:False}                                                 # Indicates whether this is a VLAN trunk or not 
+    network_policy: ${8:"namespace(promiscuous=False, forged_transmits=False, mac_changes=False)"}# Dictionary which configures the different security values for portgroup  Valid attributes are: - 
+    teaming_policy: ${9:"namespace(notify_switches=True, load_balance_policy='loadbalance_srcid', inbound_policy=False, rolling_order=False)"}# Dictionary which configures the different teaming val
+    port_policy: ${10:"namespace(traffic_filter_override=False, network_rp_override=False, live_port_move=False, security_override=False, vendor_config_override=False, port_config_reset_at_disconne
+    hostname: ${11:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${12:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${13:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${14:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${15:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${16:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${17:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

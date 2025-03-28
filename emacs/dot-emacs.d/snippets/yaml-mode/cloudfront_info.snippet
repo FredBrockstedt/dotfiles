@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Obtain facts about an AWS CloudFront distribution
+# prefix: cloudfront_info_snippet
+# key: cloudfront_info
+# group: ansible
+# --
+
+- name: ${0:Obtain facts about an AWS CloudFront distribution}
+  cloudfront_info:                                                         
+    distribution_id: ${1:value}                                            # The id of the CloudFront distribution  Used with I(distribution), I(distribution_config), I(invalidation), I(streaming_d
+    invalidation_id: ${2:value}                                            # The id of the invalidation to get information about  Used with I(invalidation) 
+    origin_access_identity_id: ${3:value}                                  # The id of the cloudfront origin access identity to get information about 
+    web_acl_id: ${4:value}                                                 # Used with I(list_distributions_by_web_acl_id) 
+    domain_name_alias: ${5:value}                                          # Can be used instead of I(distribution_id) - uses the aliased CNAME for the cloudfront distribution to get the distributi
+    all_lists: ${6:False}                                                  # Get all cloudfront lists that do not require parameters 
+    origin_access_identity: ${7:False}                                     # Get information about an origin access identity  Requires I(origin_access_identity_id) to be specified 
+    origin_access_identity_config: ${8:False}                              # Get the configuration information about an origin access identity  Requires I(origin_access_identity_id) to be specified
+    distribution: ${9:False}                                               # Get information about a distribution  Requires I(distribution_id) or I(domain_name_alias) to be specified 
+    distribution_config: ${10:False}                                       # Get the configuration information about a distribution  Requires I(distribution_id) or I(domain_name_alias) to be specif
+    invalidation: ${11:False}                                              # Get information about an invalidation  Requires I(invalidation_id) to be specified 
+    streaming_distribution: ${12:False}                                    # Get information about a specified RTMP distribution  Requires I(distribution_id) or I(domain_name_alias) to be specified
+    streaming_distribution_config: ${13:False}                             # Get the configuration information about a specified RTMP distribution  Requires I(distribution_id) or I(domain_name_alia
+    list_origin_access_identities: ${14:False}                             # Get a list of cloudfront origin access identities  Requires I(origin_access_identity_id) to be set 
+    list_distributions: ${15:False}                                        # Get a list of cloudfront distributions 
+    list_distributions_by_web_acl_id: ${16:False}                          # Get a list of distributions using web acl id as a filter  Requires I(web_acl_id) to be set 
+    list_invalidations: ${17:False}                                        # Get a list of invalidations  Requires I(distribution_id) or I(domain_name_alias) to be specified 
+    list_streaming_distributions: ${18:False}                              # Get a list of streaming distributions 
+    summary: ${19:False}                                                   # Returns a summary of all distributions, streaming distributions and origin_access_identities  This is the default behavi
+    debug_botocore_endpoint_logs: ${20:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${21:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${22:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${23:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${24:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${25:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${26:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${27:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

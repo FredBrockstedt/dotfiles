@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Module to manage datacenter quotas in oVirt/RHV
+# prefix: ovirt_quota_snippet
+# key: ovirt_quot
+# group: ansible
+# --
+
+- name: ${0:Module to manage datacenter quotas in oVirt/RHV}
+  ovirt_quota:                                                             
+    name: ${1:Name of the quota to manage}                                 #
+    data_center: ${2:Name of the datacenter where quota should be managed} #
+    auth: ${3:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${4:value}                                                         # ID of the quota to manage 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the quota be present/absent 
+    description: ${6:value}                                                # Description of the quota to manage 
+    cluster_threshold: ${7:value}                                          # Cluster threshold(soft limit) defined in percentage (0-100) 
+    cluster_grace: ${8:value}                                              # Cluster grace(hard limit) defined in percentage (1-100) 
+    storage_threshold: ${9:value}                                          # Storage threshold(soft limit) defined in percentage (0-100) 
+    storage_grace: ${10:value}                                             # Storage grace(hard limit) defined in percentage (1-100) 
+    clusters: ${11:value}                                                  # List of dictionary of cluster limits, which is valid to specific cluster  If cluster isn't specified it's valid to all c
+    storages: ${12:value}                                                  # List of dictionary of storage limits, which is valid to specific storage  If storage isn't specified it's valid to all s
+    wait: ${13:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${14:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${15:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${16:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${17:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

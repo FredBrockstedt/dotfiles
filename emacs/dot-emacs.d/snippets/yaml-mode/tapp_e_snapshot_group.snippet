@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage snapshot groups
+# prefix: netapp_e_snapshot_group_snippet
+# key: tapp_e_snapshot_group
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage snapshot groups}
+  netapp_e_snapshot_group:                                                 
+    api_username: ${1:The username to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_password: ${2:The password to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_url: ${3:The url to the SANtricity WebServices Proxy or embedded REST API}#
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # Whether to ensure the group is present or absent 
+    name: ${5:The name to give the snapshot group}                         #
+    base_volume_name: ${6:The name of the base volume or thin volume to use as the base for the new snapshot group}# If a snapshot group with an identical C(name) already exists but with a differen
+    storage_pool_name: ${7:The name of the storage pool on which to allocate the repository volume}#
+    validate_certs: ${8:True}                                              # Should https certificates be validated?
+    repo_pct: ${9:20}                                                      # The size of the repository in relation to the size of the base volume
+    warning_threshold: ${10:80}                                            # The repository utilization warning threshold, as a percentage of the repository volume capacity 
+    delete_limit: ${11:30}                                                 # The automatic deletion indicator  If non-zero, the oldest snapshot image will be automatically deleted when creating a n
+    full_policy: ${12$$(yas-choose-value '("purgepit" "unknown" "failbasewrites" "__UNDEFINED"))}# choices: purgepit;unknown;failbasewrites;__UNDEFINED  The behavior on when the data repository bec
+    rollback_priority: ${13$$(yas-choose-value '("highest" "high" "medium" "low" "lowest" "__UNDEFINED"))}# choices: highest;high;medium;low;lowest;__UNDEFINED  The importance of the rollback opera

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Create or delete a Rackspace Cloud Monitoring entity
+# prefix: rax_mon_entity_snippet
+# key: rax_mon_entity
+# group: ansible
+# --
+
+- name: ${0:Create or delete a Rackspace Cloud Monitoring entity}
+  rax_mon_entity:                                                          
+    label: ${1:Defines a name for this entity}                             # Must be a non-empty string between 1 and 255 characters long 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Ensure that an entity with this C(name) exists or does not exist 
+    agent_id: ${3:value}                                                   # Rackspace monitoring agent on the target device to which this entity is bound  Necessary to collect C(agent ) rax_mon_ch
+    named_ip_addresses: ${4:value}                                         # Hash of IP addresses that may be referenced by name by rax_mon_checks added to this entity  Must be a dictionary of with
+    metadata: ${5:value}                                                   # Hash of arbitrary C(name), C(value) pairs that are passed to associated rax_mon_alarms  Names and values must all be bet
+    api_key: ${6:value}                                                    # Rackspace API key, overrides I(credentials) 
+    auth_endpoint: ${{7:https://identity}                                  #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    credentials: ${8:value}                                                # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${9:value}                                                        # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    identity_type: ${10:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    region: ${11:DFW}                                                      # Region to create an instance in 
+    tenant_id: ${12:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${13:value}                                               # The tenant name used for authentication 
+    username: ${14:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${15:value}                                            # Whether or not to require SSL validation of API endpoints 

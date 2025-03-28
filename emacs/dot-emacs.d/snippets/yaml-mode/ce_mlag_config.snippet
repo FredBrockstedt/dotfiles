@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages MLAG configuration on HUAWEI CloudEngine switches.
+# prefix: ce_mlag_config_snippet
+# key: ce_mlag_config
+# group: ansible
+# --
+
+- name: ${0:Manages MLAG configuration on HUAWEI CloudEngine switches.}
+  ce_mlag_config:                                                          
+    dfs_group_id: ${1:present}                                             # ID of a DFS group  The value is 1 
+    nickname: ${2:value}                                                   # The nickname bound to a DFS group  The value is an integer that ranges from 1 to 65471 
+    pseudo_nickname: ${3:value}                                            # A pseudo nickname of a DFS group  The value is an integer that ranges from 1 to 65471 
+    pseudo_priority: ${4:value}                                            # The priority of a pseudo nickname  The value is an integer that ranges from 128 to 255  The default value is 192  A larg
+    ip_address: ${5:value}                                                 # IP address bound to the DFS group  The value is in dotted decimal notation 
+    vpn_instance_name: ${6:value}                                          # Name of the VPN instance bound to the DFS group  The value is a string of 1 to 31 case-sensitive characters without spac
+    priority_id: ${7:value}                                                # Priority of a DFS group  The value is an integer that ranges from 1 to 254  The default value is 100 
+    eth_trunk_id: ${8:value}                                               # Name of the peer-link interface  The value is in the range from 0 to 511 
+    peer_link_id: ${9:value}                                               # Number of the peer-link interface  The value is 1 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Specify desired state of the resource 

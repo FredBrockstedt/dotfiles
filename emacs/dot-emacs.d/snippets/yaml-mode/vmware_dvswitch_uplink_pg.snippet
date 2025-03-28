@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage uplink portproup configuration of a Distributed Switch
+# prefix: vmware_dvswitch_uplink_pg_snippet
+# key: vmware_dvswitch_uplink_pg
+# group: ansible
+# --
+
+- name: ${0:Manage uplink portproup configuration of a Distributed Switch}
+  vmware_dvswitch_uplink_pg:                                               
+    switch: ${1:The name of the Distributed Switch}                        #
+    name: ${2:value}                                                       # The name of the uplink portgroup  The current name will be used if not specified 
+    description: ${3:value}                                                # The description of the uplink portgroup 
+    advanced: ${4:"namespace(port_config_reset_at_disconnect=True, block_override=True, vendor_config_override=False, vlan_override=False, netflow_override=False, traffic_filter_override=False)"}# 
+    vlan_trunk_range: ${5:['0-4094']}                                      # The VLAN trunk range that should be configured with the uplink portgroup  This can be a combination of multiple ranges a
+    lacp: ${6:"namespace(status='disabled', mode='passive')"}              # Dictionary which configures the LACP settings for the uplink portgroup  The options are only used if the LACP support mo
+    netflow_enabled: ${7:False}                                            # Indicates if NetFlow is enabled on the uplink portgroup 
+    block_all_ports: ${8:False}                                            # Indicates if all ports are blocked on the uplink portgroup 
+    hostname: ${9:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${10:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${11:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${12:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${13:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${14:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${15:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

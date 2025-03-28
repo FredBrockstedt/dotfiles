@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Manage Azure DevTest Lab Custom Image instance
+# prefix: azure_rm_devtestlabcustomimage_snippet
+# key: zure_rm_devtestlabcustomimag
+# group: ansible
+# --
+
+- name: ${0:Manage Azure DevTest Lab Custom Image instance}
+  azure_rm_devtestlabcustomimage:                                          
+    resource_group: ${1:The name of the resource group}                    #
+    lab_name: ${2:The name of the lab}                                     #
+    name: ${3:The name of the custom image}                                #
+    source_vm: ${4:value}                                                  # Source DevTest Lab virtual machine name 
+    windows_os_state: ${5$$(yas-choose-value '("non_sysprepped" "sysprep_requested" "sysprep_applied"))}# choices: non_sysprepped;sysprep_requested;sysprep_applied  The state of the Windows OS 
+    linux_os_state: ${6$$(yas-choose-value '("non_deprovisioned" "deprovision_requested" "deprovision_applied"))}# choices: non_deprovisioned;deprovision_requested;deprovision_applied  The state of
+    description: ${7:value}                                                # The description of the custom image 
+    author: ${8:value}                                                     # The author of the custom image 
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the Custom Image  Use C(present) to create or update an Custom Image and C(
+    ad_user: ${10:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${11:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${12:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${13:value}                                           # Your Azure subscription Id 
+    client_id: ${14:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${15:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${16:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${17:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${18:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${19$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${20$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${21:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${22:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${23:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

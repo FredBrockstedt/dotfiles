@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Request SSL/TLS certificates with the Entrust Certificate Services (ECS) API
+# prefix: ecs_certificate_snippet
+# key: cs_certificat
+# group: ansible
+# --
+
+- name: ${0:Request SSL/TLS certificates with the Entrust Certificate Services (ECS) API}
+  ecs_certificate:                                                         
+    path: ${1:The destination path for the generated certificate as a PEM encoded cert}# If the certificate at this location is not an Entrust issued certificate, a new certificate will always be r
+    requester_name: ${2:T h e   r e q u e s t e r   n a m e   t o   a s s o c i a t e   w i t h   c e r t i f i c a t e   t r a c k i n g   i n f o r m a t i o n }#
+    requester_email: ${3:T h e   r e q u e s t e r   e m a i l   t o   a s s o c i a t e   w i t h   c e r t i f i c a t e   t r a c k i n g   i n f o r m a t i o n   a n d   r e c e i v e   d e l 
+    requester_phone: ${4:T h e   r e q u e s t e r   p h o n e   n u m b e r   t o   a s s o c i a t e   w i t h   c e r t i f i c a t e   t r a c k i n g   i n f o r m a t i o n }#
+    entrust_api_user: ${5:The username for authentication to the Entrust Certificate Services (ECS) API}#
+    entrust_api_key: ${6:The key (password) for authentication to the Entrust Certificate Services (ECS) API}#
+    entrust_api_client_cert_path: ${7:The path to the client certificate used to authenticate to the Entrust Certificate Services (ECS) API}#
+    entrust_api_client_cert_key_path: ${8:The path to the key for the client certificate used to authenticate to the Entrust Certificate Services (ECS) API}#
+    backup: ${9:False}                                                     # Whether a backup should be made for the certificate in I(path) 
+    force: ${10:False}                                                     # If force is used, a certificate is requested regardless of whether I(path) points to an existing valid certificate  If C
+    full_chain_path: ${11:value}                                           # The destination path for the full certificate chain of the certificate, intermediates, and roots 
+    csr: ${12:value}                                                       # Base-64 encoded Certificate Signing Request (CSR)  I(csr) is accepted with or without PEM formatting around the Base-64 
+    tracking_id: ${13:value}                                               # The tracking ID of the certificate to reissue or renew  I(tracking_id) is invalid if C(request_type=new) or C(request_ty
+    remaining_days: ${14:30}                                               # The number of days the certificate must have left being valid  If C(cert_days < remaining_days) then a new certificate w
+    request_type: ${15$$(yas-choose-value '("new" "renew" "reissue" "validate_only"))}# choices: new;renew;reissue;validate_only  The operation performed if I(tracking_id) references a valid certif
+    cert_type: ${16$$(yas-choose-value '("STANDARD_SSL" "ADVANTAGE_SSL" "UC_SSL" "EV_SSL" "WILDCARD_SSL" "PRIVATE_SSL" "PD_SSL" "CODE_SIGNING" "EV_CODE_SIGNING" "CDS_INDIVIDUAL" "CDS_GROUP" "CDS_EN
+    subject_alt_name: ${17:value}                                          # The subject alternative name identifiers, as an array of values (applies to I(cert_type) with a value of C(STANDARD_SSL)
+    eku: ${18$$(yas-choose-value '("SERVER_AUTH" "CLIENT_AUTH" "SERVER_AND_CLIENT_AUTH"))}# choices: SERVER_AUTH;CLIENT_AUTH;SERVER_AND_CLIENT_AUTH  If specified, overrides the key usage in the I(c
+    ct_log: ${19:value}                                                    # In compliance with browser requirements, this certificate may be posted to the Certificate Transparency (CT) logs  This 
+    client_id: ${20:1}                                                     # The client ID to submit the Certificate Signing Request under  If no client ID is specified, the certificate will be sub
+    org: ${21:value}                                                       # Organization "O=" to include in the certificate  If I(org) is not specified, the organization from the client represente
+    ou: ${22:value}                                                        # Organizational unit "OU=" to include in the certificate  I(ou) behavior is dependent on whether organizational units are
+    end_user_key_storage_agreement: ${23:value}                            # The end user of the Code Signing certificate must generate and store the private key for this request on cryptographical
+    tracking_info: ${24:value}                                             # F r e e   f o r m   t r a c k i n g   i n f o r m a t i o n   t o   a t t a c h   t o   t h e   r e c o r d   f o r   t 
+    additional_emails: ${25:value}                                         # A   l i s t   o f   a d d i t i o n a l   e m a i l   a d d r e s s e s   t o   r e c e i v e   t h e   d e l i v e r y 
+    custom_fields: ${26:value}                                             # Mapping of custom fields to associate with the certificate request and certificate  Only supported if custom fields are 
+    cert_expiry: ${27:value}                                               # The date the certificate should be set to expire, in RFC3339 compliant date or date-time format  For example, C(2020-02-
+    cert_lifetime: ${28$$(yas-choose-value '("P1Y" "P2Y" "P3Y"))}          # choices: P1Y;P2Y;P3Y  The lifetime of the certificate  Applies to all certificates for accounts with a non-pooling inven
+    entrust_api_specification_path: ${{29:https://cloud}                   #entrust net/EntrustCloud/documentation/cms-api-2 1 0 yaml} # not required  The path to the specification file defining th

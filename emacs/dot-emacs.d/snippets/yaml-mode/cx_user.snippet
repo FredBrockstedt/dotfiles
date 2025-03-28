@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage the user accounts on Ruckus ICX 7000 series switches.
+# prefix: icx_user_snippet
+# key: cx_user
+# group: ansible
+# --
+
+- name: ${0:Manage the user accounts on Ruckus ICX 7000 series switches.}
+  icx_user:                                                                
+    name: ${1:The username to be configured on the ICX device}             #
+    aggregate: ${2:value}                                                  # The set of username objects to be configured on the remote ICX device  The list entries can either be the username or a 
+    configured_password: ${3:value}                                        # T h e   p a s s w o r d   t o   b e   c o n f i g u r e d   o n   t h e   I C X   d e v i c e  
+    update_password: ${4$$(yas-choose-value '("on_create" "always"))}      # choices: on_create;always  This  argument will instruct the module when to change the password  When set to C(always), t
+    privilege: ${5$$(yas-choose-value '("0" "4" "5"))}                     # choices: 0;4;5  The privilege level to be granted to the user
+    nopassword: ${6:value}                                                 # Defines the username without assigning a password  This will allow the user to login to the system without being authent
+    purge: ${7:False}                                                      # If set to true module will remove any previously configured usernames on the device except the current defined set of us
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the state of the username definition as it relates to the device operational configu
+    access_time: ${9:value}                                                # This parameter indicates the time the file's access time should be set to  Should be preserve when no modification is re
+    check_running_config: ${10:True}                                       # Check running configuration  This can be set as environment variable  Module will use environment variable value(default

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Set the region and format settings
+# prefix: win_region_snippet
+# key: win_regio
+# group: ansible
+# --
+
+- name: ${0:Set the region and format settings}
+  win_region:                                                              
+    location: ${1:value}                                                   # The location to set for the current user, see U(https://msdn microsoft com/en-us/library/dd374073 aspx) for a list of Ge
+    format: ${2:value}                                                     # The language format to set for the current user, see U(https://msdn microsoft com/en-us/library/system globalization cul
+    unicode_language: ${3:value}                                           # The unicode language format to set for all users, see U(https://msdn microsoft com/en-us/library/system globalization cu
+    copy_settings: ${4:False}                                              # This will copy the current format and location values to new user profiles and the welcome screen  This will only run if

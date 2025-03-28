@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage application service deployments
+# prefix: bigip_appsvcs_extension_snippet
+# key: gip_appsvcs_extensio
+# group: ansible
+# --
+
+- name: ${0:Manage application service deployments}
+  bigip_appsvcs_extension:                                                 
+    content: ${1:Declaration of tenants configured on the system}          # This parameter is most often used along with the C(file) or C(template) lookup plugins  Refer to the examples section fo
+    tenants: ${2:value}                                                    # A list of tenants that you want to remove  This parameter is only relevant when C(state) is C(absent)  It will be ignore
+    force: ${3:False}                                                      # Force updates a declaration  This parameter should be used in cases where your declaration includes items that are encry
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(state) is C(present), ensures the configuration exists  When C(state) is C(absent), ensu
+    provider: ${5:value}                                                   # A dict object containing connection details 

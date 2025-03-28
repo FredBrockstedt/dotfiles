@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage filesystemon Pure Storage FlashBlade`
+# prefix: purefb_fs_snippet
+# key: purefb_f
+# group: ansible
+# --
+
+- name: ${0:Manage filesystemon Pure Storage FlashBlade`}
+  purefb_fs:                                                               
+    name: ${1:Filesystem Name}                                             #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create, delete or modifies a filesystem 
+    eradicate: ${3:False}                                                  # Define whether to eradicate the filesystem on delete or leave in trash 
+    size: ${4:32G}                                                         # Volume size in M, G, T or P units  See examples 
+    nfsv3: ${5:True}                                                       # Define whether to NFSv3 protocol is enabled for the filesystem 
+    nfsv4: ${6:True}                                                       # Define whether to NFSv4 1 protocol is enabled for the filesystem 
+    nfs: ${7:True}                                                         # (Deprecate) Define whether to NFSv3 protocol is enabled for the filesystem  This option will be deprecated in 2 10, use 
+    nfs_rules: ${8:*(rw,no_root_squash)}                                   # Define the NFS rules in operation 
+    smb: ${9:False}                                                        # Define whether to SMB protocol is enabled for the filesystem 
+    http: ${10:False}                                                      # Define whether to HTTP/HTTPS protocol is enabled for the filesystem 
+    snapshot: ${11:False}                                                  # Define whether a snapshot directory is enabled for the filesystem 
+    fastremove: ${12:False}                                                # Define whether the fast remove directory is enabled for the filesystem 
+    hard_limit: ${13:False}                                                # Define whether the capacity for a filesystem is a hard limit  CAUTION This will cause the filesystem to go Read-Only if 
+    user_quota: ${14:value}                                                # Default quota in M, G, T or P units for a user under this file system 
+    group_quota: ${15:value}                                               # Default quota in M, G, T or P units for a group under this file system 
+    fb_url: ${16:value}                                                    # FlashBlade management IP address or Hostname 
+    api_token: ${17:value}                                                 # FlashBlade API token for admin privileged user 

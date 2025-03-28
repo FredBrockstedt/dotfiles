@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Create and remove a bigmon inline service chain.
+# prefix: bigmon_chain_snippet
+# key: gmon_ch
+# group: ansible
+# --
+
+- name: ${0:Create and remove a bigmon inline service chain.}
+  bigmon_chain:                                                            
+    name: ${1:The name of the chain}                                       #
+    controller: ${2:The controller IP address}                             #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the service chain should be present or absent 
+    validate_certs: ${4:True}                                              # If C(false), SSL certificates will not be validated  This should only be used on personally controlled devices using sel
+    access_token: ${5:value}                                               # Bigmon access token  If this isn't set, the environment variable C(BIGSWITCH_ACCESS_TOKEN) is used 

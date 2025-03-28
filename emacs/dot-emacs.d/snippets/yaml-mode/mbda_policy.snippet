@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Creates, updates or deletes AWS Lambda policy statements.
+# prefix: lambda_policy_snippet
+# key: mbda_policy
+# group: ansible
+# --
+
+- name: ${0:Creates, updates or deletes AWS Lambda policy statements.}
+  lambda_policy:                                                           
+    function_name: ${1:Name of the Lambda function whose resource policy you are updating by adding a new permission}# You can specify a function name (for example, Thumbnail ) or you can specify A
+    statement_id: ${2:A unique statement identifier}                       #
+    action: ${3:The AWS Lambda action you want to allow in this statement} # Each Lambda action is a string starting with lambda: followed by the API name (see Operations )  For example, lambda:Cre
+    principal: ${4:The principal who is getting this permission}           # It can be Amazon S3 service Principal (s3 amazonaws com ) if you want Amazon S3 to invoke the function, an AWS account I
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Describes the desired state 
+    alias: ${6:value}                                                      # Name of the function alias  Mutually exclusive with C(version) 
+    version: ${7:value}                                                    # Version of the Lambda function  Mutually exclusive with C(alias) 
+    source_arn: ${8:value}                                                 # This is optional; however, when granting Amazon S3 permission to invoke your function, you should specify this field wit
+    source_account: ${9:value}                                             # The AWS account ID (without a hyphen) of the source owner  For example, if the SourceArn identifies a bucket, then this 
+    event_source_token: ${10:value}                                        # Token string representing source ARN or account  Mutually exclusive with C(source_arn) or C(source_account) 
+    debug_botocore_endpoint_logs: ${11:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${12:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${13:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${14:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${15:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${16:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${17:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${18:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

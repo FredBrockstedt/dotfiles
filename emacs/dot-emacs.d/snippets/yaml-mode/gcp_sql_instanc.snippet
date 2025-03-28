@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Instance
+# prefix: gcp_sql_instance_snippet
+# key: gcp_sql_instanc
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Instance}
+  gcp_sql_instance:                                                        
+    name: ${1:Name of the Cloud SQL instance}                              # This does not include the project ID 
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    backend_type: ${4:value}                                               # * FIRST_GEN: First Generation instance  MySQL only  * SECOND_GEN: Second Generation instance or PostgreSQL instance  * E
+    connection_name: ${5:value}                                            # Connection name of the Cloud SQL instance used in connection strings 
+    database_version: ${6:value}                                           # The database engine type and version  For First Generation instances, can be MYSQL_5_5, or MYSQL_5_6  For Second Generat
+    failover_replica: ${7:value}                                           # The name and status of the failover replica  This property is applicable only to Second Generation instances 
+    instance_type: ${8:value}                                              # The instance type  This can be one of the following  * CLOUD_SQL_INSTANCE: A Cloud SQL instance that is not replicating 
+    ipv6_address: ${9:value}                                               # The IPv6 address assigned to the instance  This property is applicable only to First Generation instances 
+    master_instance_name: ${10:value}                                      # The name of the instance which will act as master in the replication setup 
+    max_disk_size: ${11:value}                                             # The maximum disk size of the instance in bytes 
+    region: ${12:value}                                                    # The geographical region  Defaults to us-central or us-central1 depending on the instance type (First Generation or Secon
+    replica_configuration: ${13:value}                                     # Configuration specific to failover replicas and read replicas 
+    settings: ${14:value}                                                  # The user settings 
+    project: ${15:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${16:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${17:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${18:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${19:value}                                                    # Array of scopes to be used 
+    env_type: ${20:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage Solaris SVR4 packages
+# prefix: svr4pkg_snippet
+# key: vr4pkg
+# group: ansible
+# --
+
+- name: ${0:Manage Solaris SVR4 packages}
+  svr4pkg:                                                                 
+    name: ${1:Package name, e}                                             #g  C(SUNWcsr)
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Whether to install (C(present)), or remove (C(absent)) a package  If the package is to be installed, then I(src) is requ
+    src: ${3:value}                                                        # Specifies the location to install the package from  Required when C(state=present)  Can be any path acceptable to the C(
+    proxy: ${4:value}                                                      # HTTP[s] proxy to be used if C(src) is a URL 
+    response_file: ${5:value}                                              # Specifies the location of a response file to be used if package expects input on install  (added in Ansible 1 4)
+    zone: ${6$$(yas-choose-value '("current" "all"))}                      # choices: current;all  Whether to install the package only in the current zone, or install it into all zones  The install
+    category: ${7:value}                                                   # Install/Remove category instead of a single package 

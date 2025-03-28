@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Package manager for MacPorts
+# prefix: macports_snippet
+# key: macport
+# group: ansible
+# --
+
+- name: ${0:Package manager for MacPorts}
+  macports:                                                                
+    name: ${1:value}                                                       # A list of port names 
+    selfupdate: ${2:false}                                                 # Update Macports and the ports tree, either prior to installing ports or as a separate step  Equivalent to running C(port
+    state: ${3$$(yas-choose-value '("present" "absent" "active" "inactive"))}# choices: present;absent;active;inactive  Indicates the desired state of the port 
+    upgrade: ${4:false}                                                    # Upgrade all outdated ports, either prior to installing ports or as a separate step  Equivalent to running C(port upgrade
+    variant: ${5:value}                                                    # A port variant specification  C(variant) is only supported with state: I(installed)/I(present) 

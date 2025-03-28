@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages BIG-IQ HTTPS WAF applications
+# prefix: bigiq_application_https_waf_snippet
+# key: giq_application_https_waf
+# group: ansible
+# --
+
+- name: ${0:Manages BIG-IQ HTTPS WAF applications}
+  bigiq_application_https_waf:                                             
+    name: ${1:Name of the new application}                                 #
+    description: ${2:value}                                                # Description of the application 
+    servers: ${3:value}                                                    # A list of servers that the application is hosted on  If you are familiar with other BIG-IP setting, you might also refer
+    inbound_virtual: ${4:value}                                            # Settings to configure the virtual which will receive the inbound connection  This virtual will be used to host the HTTPS
+    redirect_virtual: ${5:value}                                           # Settings to configure the virtual which will receive the connection to be redirected  This virtual will be used to host 
+    client_ssl_profile: ${6:value}                                         # Specifies the SSL profile for managing client-side SSL traffic 
+    service_environment: ${7:value}                                        # Specifies the name of service environment that the application will be deployed to  When creating a new application, thi
+    add_analytics: ${8:False}                                              # Collects statistics of the BIG-IP that the application is deployed to  This parameter is only relevant when specifying a
+    domain_names: ${9:value}                                               # Specifies host names that are used to access the web application that this security policy protects  When creating a new
+    state: ${10$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource on the system  When C(present), guarantees that the resource exists w
+    wait: ${11:True}                                                       # If the module should wait for the application to be created, deleted or updated 
+    provider: ${12:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage App Service Plan
+# prefix: azure_rm_appserviceplan_snippet
+# key: zure_rm_appservicep
+# group: ansible
+# --
+
+- name: ${0:Manage App Service Plan}
+  azure_rm_appserviceplan:                                                 
+    resource_group: ${1:Name of the resource group to which the resource belongs}#
+    name: ${2:Unique name of the app service plan to create or update}     #
+    location: ${3:value}                                                   # Resource location  If not set, location from the resource group will be used as default 
+    sku: ${4:value}                                                        # The pricing tiers, e g , C(F1), C(D1), C(B1), C(B2), C(B3), C(S1), C(P1), C(P1V2) etc  Please see U(https://azure micros
+    is_linux: ${5:False}                                                   # Describe whether to host webapp on Linux worker 
+    number_of_workers: ${6:value}                                          # Describe number of workers to be allocated 
+    state: ${7$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the app service plan  Use C(present) to create or update an app service pla
+    ad_user: ${8:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${9:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${10:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${11:value}                                           # Your Azure subscription Id 
+    client_id: ${12:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${13:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${14:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${15:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${16:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${17$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${18$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${19:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${20:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${21:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

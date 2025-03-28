@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Manage HA status for cluster
+# prefix: na_ontap_cluster_ha_snippet
+# key: ontap_cluster_h
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Manage HA status for cluster}
+  na_ontap_cluster_ha:                                                     
+    hostname: ${1:The hostname or IP address of the ONTAP instance}        #
+    username: ${2:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${3:Password for the specified user}                         #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether HA on cluster should be enabled or disabled 
+    https: ${5:False}                                                      # Enable and disable https
+    validate_certs: ${6:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${7:value}                                                  # Override the default port (80 or 443) with this port
+    ontapi: ${8:value}                                                     # The ontap api version to use
+    use_rest: ${9$$(yas-choose-value '("Never" "Always" "Auto"))}          # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

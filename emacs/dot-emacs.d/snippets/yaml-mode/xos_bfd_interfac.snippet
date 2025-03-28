@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages BFD attributes of nxos interfaces.
+# prefix: nxos_bfd_interfaces_snippet
+# key: xos_bfd_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages BFD attributes of nxos interfaces.}
+  nxos_bfd_interfaces:                                                     
+    config: ${1:value}                                                     # T h e   p r o v i d e d   c o n f i g u r a t i o n
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion

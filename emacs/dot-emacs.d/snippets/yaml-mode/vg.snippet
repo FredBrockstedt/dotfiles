@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Configure LVM volume groups
+# prefix: lvg_snippet
+# key: vg
+# group: ansible
+# --
+
+- name: ${0:Configure LVM volume groups}
+  lvg:                                                                     
+    vg: ${1:The name of the volume group}                                  #
+    pvs: ${2:value}                                                        # List of comma-separated devices to use as physical devices in this volume group  Required when creating or resizing volu
+    pesize: ${3:4}                                                         # The size of the physical extent  I(pesize) must be a power of 2 of at least 1 sector (where the sector size is the large
+    pv_options: ${4:value}                                                 # Additional options to pass to C(pvcreate) when creating the volume group 
+    vg_options: ${5:value}                                                 # Additional options to pass to C(vgcreate) when creating the volume group 
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Control if the volume group exists 
+    force: ${7:False}                                                      # If C(yes), allows to remove volume group with logical volumes 

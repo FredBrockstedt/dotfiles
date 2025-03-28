@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages timeout mode of NetStream on HUAWEI CloudEngine switches.
+# prefix: ce_netstream_aging_snippet
+# key: ce_netstream_aging
+# group: ansible
+# --
+
+- name: ${0:Manages timeout mode of NetStream on HUAWEI CloudEngine switches.}
+  ce_netstream_aging:                                                      
+    timeout_interval: ${1:30}                                              # Netstream timeout interval  If is active type the interval is 1-60  If is inactive ,the interval is 5-600 
+    type: ${2$$(yas-choose-value '("ip" "vxlan"))}                         # choices: ip;vxlan  Specifies the packet type of netstream timeout active interval 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    timeout_type: ${4$$(yas-choose-value '("active" "inactive" "tcp-session" "manual"))}# choices: active;inactive;tcp-session;manual  Netstream timeout type 
+    manual_slot: ${5:value}                                                # Specifies the slot number of netstream manual timeout 

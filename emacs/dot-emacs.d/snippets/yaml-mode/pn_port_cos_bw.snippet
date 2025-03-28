@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify port-cos-bw
+# prefix: pn_port_cos_bw_snippet
+# key: pn_port_cos_bw
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify port-cos-bw}
+  pn_port_cos_bw:                                                          
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the port-cos-bw 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_max_bw_limit: ${3:value}                                            # Maximum b/w in percentage 
+    pn_cos: ${4:value}                                                     # CoS priority 
+    pn_port: ${5:value}                                                    # physical port number 
+    pn_weight: ${6$$(yas-choose-value '("priority" "no-priority"))}        # choices: priority;no-priority  Scheduling weight (1 to 127) after b/w guarantee met 
+    pn_min_bw_guarantee: ${7:value}                                        # Minimum b/w in percentage 

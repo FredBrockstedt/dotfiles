@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Retrieve the public IP of your internet gateway
+# prefix: ipify_facts_snippet
+# key: pify_fact
+# group: ansible
+# --
+
+- name: ${0:Retrieve the public IP of your internet gateway}
+  ipify_facts:                                                             
+    api_url: ${{1:https://api}                                             #ipify org/} # not required  URL of the ipify org API service  C(?format=json) will be appended per default 
+    timeout: ${2:10}                                                       # HTTP connection timeout in seconds 
+    validate_certs: ${3:True}                                              # When set to C(NO), SSL certificates will not be validated 

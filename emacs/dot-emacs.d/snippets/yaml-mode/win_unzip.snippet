@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Unzips compressed files and archives on the Windows node
+# prefix: win_unzip_snippet
+# key: win_unzip
+# group: ansible
+# --
+
+- name: ${0:Unzips compressed files and archives on the Windows node}
+  win_unzip:                                                               
+    src: ${1:File to be unzipped (provide absolute path)}                  #
+    dest: ${2:Destination of zip file (provide absolute path of directory)}# If it does not exist, the directory will be created 
+    delete_archive: ${3:False}                                             # Remove the zip file, after unzipping 
+    recurse: ${4:False}                                                    # Recursively expand zipped files within the src file  Setting to a value of C(yes) requires the PSCX module to be install
+    creates: ${5:value}                                                    # If this file or directory exists the specified src will not be extracted 

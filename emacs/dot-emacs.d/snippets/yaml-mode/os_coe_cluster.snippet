@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Add/Remove COE cluster from OpenStack Cloud
+# prefix: os_coe_cluster_snippet
+# key: os_coe_cluster
+# group: ansible
+# --
+
+- name: ${0:Add/Remove COE cluster from OpenStack Cloud}
+  os_coe_cluster:                                                          
+    cluster_template_id: ${1:The template ID of cluster template}          #
+    name: ${2:Name that has to be given to the cluster template}           #
+    availability_zone: ${3:value}                                          # Ignored  Present for backwards compatibility
+    discovery_url: ${4:value}                                              # Url used for cluster node discovery
+    docker_volume_size: ${5:value}                                         # The size in GB of the docker volume
+    flavor_id: ${6:value}                                                  # The flavor of the minion node for this ClusterTemplate
+    keypair: ${7:value}                                                    # Name of the keypair to use 
+    labels: ${8:value}                                                     # One or more key/value pairs
+    master_flavor_id: ${9:value}                                           # The flavor of the master node for this ClusterTemplate
+    master_count: ${10:1}                                                  # The number of master nodes for this cluster
+    node_count: ${11:1}                                                    # The number of nodes for this cluster
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Indicate desired state of the resource 
+    timeout: ${13:60}                                                      # Timeout for creating the cluster in minutes  Default to 60 mins if not set
+    cloud: ${14:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${15:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${16:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${17:value}                                               # Name of the region 
+    wait: ${18:True}                                                       # Should ansible wait until the requested resource is complete 
+    api_timeout: ${19:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${20:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${21:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${22:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${23:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${24$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

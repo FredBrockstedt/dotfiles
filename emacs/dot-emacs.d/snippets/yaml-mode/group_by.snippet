@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Create Ansible groups based on facts
+# prefix: group_by_snippet
+# key: group_by
+# group: ansible
+# --
+
+- name: ${0:Create Ansible groups based on facts}
+  group_by:                                                                
+    key: ${1:The variables whose values will be used as groups}            #
+    parents: ${2:all}                                                      # The list of the parent groups 

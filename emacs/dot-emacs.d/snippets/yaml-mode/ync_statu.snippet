@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Obtain status of asynchronous task
+# prefix: async_status_snippet
+# key: ync_statu
+# group: ansible
+# --
+
+- name: ${0:Obtain status of asynchronous task}
+  async_status:                                                            
+    jid: ${1:Job or task identifier}                                       #
+    mode: ${2$$(yas-choose-value '("cleanup" "status"))}                   # choices: cleanup;status  If C(status), obtain the status  If C(cleanup), clean up the async job cache (by default in C(~

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Configure Element SW Cluster
+# prefix: na_elementsw_cluster_config_snippet
+# key: mentsw_cluster_config
+# group: ansible
+# --
+
+- name: ${0:Configure Element SW Cluster}
+  na_elementsw_cluster_config:                                             
+    hostname: ${1:The hostname or IP address of the SolidFire cluster}     #
+    username: ${2:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${3:Password for the specified user}                         #
+    modify_cluster_full_threshold: ${4:value}                              # The capacity level at which the cluster generates an event Requires a stage3_block_threshold_percent or max_metadata_ove
+    encryption_at_rest: ${5$$(yas-choose-value '("present" "absent"))}     # choices: present;absent  enable or disable the Advanced Encryption Standard (AES) 256-bit encryption at rest on the clus
+    set_ntp_info: ${6:value}                                               # configure NTP on cluster node Requires a list of one or more ntp_servers
+    enable_virtual_volumes: ${7:True}                                      # Enable the NetApp SolidFire VVols cluster feature

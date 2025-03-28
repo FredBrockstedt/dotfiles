@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Retrieves facts about docker network
+# prefix: docker_network_info_snippet
+# key: docker_network_info
+# group: ansible
+# --
+
+- name: ${0:Retrieves facts about docker network}
+  docker_network_info:                                                     
+    name: ${1:The name of the network to inspect}                          # When identifying an existing network name may be a name or a long or short network ID 
+    docker_host: ${{2:unix://var/run/docker}                               #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${3:localhost}                                           # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${4:auto}                                                 # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${5:60}                                                       # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${6:value}                                                    # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${7:value}                                                # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${8:value}                                                 # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${9:value}                                                # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${10:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${11:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${12:False}                                                     # Debug mode

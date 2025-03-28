@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Configure block device partitions
+# prefix: parted_snippet
+# key: parted
+# group: ansible
+# --
+
+- name: ${0:Configure block device partitions}
+  parted:                                                                  
+    device: ${1:T h e   b l o c k   d e v i c e   ( d i s k )   w h e r e   t o   o p e r a t e }#
+    align: ${2$$(yas-choose-value '("cylinder" "minimal" "none" "optimal"))}# choices: cylinder;minimal;none;optimal  S e t   a l i g n m e n t   f o r   n e w l y   c r e a t e d   p a r t i t i o
+    number: ${3:value}                                                     # The number of the partition to work with or the number of the partition that will be created  Required when performing a
+    unit: ${4$$(yas-choose-value '("s" "B" "KB" "KiB" "MB" "MiB" "GB" "GiB" "TB" "TiB" "%" "cyl" "chs" "compact"))}# choices: s;B;KB;KiB;MB;MiB;GB;GiB;TB;TiB;%;cyl;chs;compact  Selects the current 
+    label: ${5$$(yas-choose-value '("aix" "amiga" "bsd" "dvh" "gpt" "loop" "mac" "msdos" "pc98" "sun"))}# choices: aix;amiga;bsd;dvh;gpt;loop;mac;msdos;pc98;sun  C r e a t e s   a   n e w   d i s k
+    part_type: ${6$$(yas-choose-value '("extended" "logical" "primary"))}  # choices: extended;logical;primary  May be specified only with 'msdos' or 'dvh' partition tables  A C(name) must be speci
+    part_start: ${7:0%}                                                    # Where the partition will start as offset from the beginning of the disk, that is, the "distance" from the start of the d
+    part_end: ${8:100%}                                                    # Where the partition will end as offset from the beginning of the disk, that is, the "distance" from the start of the dis
+    name: ${9:value}                                                       # Sets the name for the partition number (GPT, Mac, MIPS and PC98 only) 
+    flags: ${10:value}                                                     # A   l i s t   o f   t h e   f l a g s   t h a t   h a s   t o   b e   s e t   o n   t h e   p a r t i t i o n  
+    state: ${11$$(yas-choose-value '("absent" "present" "info"))}          # choices: absent;present;info  Whether to create or delete a partition  If set to C(info) the module will only return the

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manages GitLab project hooks.
+# prefix: gitlab_hook_snippet
+# key: gitlab_hook
+# group: ansible
+# --
+
+- name: ${0:Manages GitLab project hooks.}
+  gitlab_hook:                                                             
+    project: ${1:Id or Full path of the project in the form of group/name} #
+    hook_url: ${2:The url that you want GitLab to post to, this is used as the primary key for updates and deletion}#
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # When C(present) the hook will be updated to match the input or created if it doesn't exist  When C(absent) hook will be 
+    api_token: ${4:value}                                                  # GitLab token for logging in 
+    push_events: ${5:True}                                                 # Trigger hook on push events 
+    issues_events: ${6:False}                                              # Trigger hook on issues events 
+    merge_requests_events: ${7:False}                                      # Trigger hook on merge requests events 
+    tag_push_events: ${8:False}                                            # Trigger hook on tag push events 
+    note_events: ${9:False}                                                # Trigger hook on note events or when someone adds a comment 
+    job_events: ${10:False}                                                # Trigger hook on job events 
+    pipeline_events: ${11:False}                                           # Trigger hook on pipeline events 
+    wiki_page_events: ${12:False}                                          # Trigger hook on wiki events 
+    hook_validate_certs: ${13:False}                                       # Whether GitLab will do SSL verification when triggering the hook 
+    token: ${14:value}                                                     # Secret token to validate hook messages at the receiver  If this is present it will always result in a change as it canno
+    api_url: ${15:value}                                                   # The resolvable endpoint for the API
+    api_username: ${16:value}                                              # The username to use for authentication against the API
+    api_password: ${17:value}                                              # The password to use for authentication against the API
+    validate_certs: ${18:True}                                             # Whether or not to validate SSL certs when supplying a https endpoint 

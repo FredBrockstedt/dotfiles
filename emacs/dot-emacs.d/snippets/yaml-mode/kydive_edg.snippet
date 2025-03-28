@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Module to add edges to Skydive topology
+# prefix: skydive_edge_snippet
+# key: kydive_edg
+# group: ansible
+# --
+
+- name: ${0:Module to add edges to Skydive topology}
+  skydive_edge:                                                            
+    parent_node: ${1:To defined the first node of the link, it can be either an ID or a gremlin expression}#
+    child_node: ${2:To defined the second node of the link, it can be either an ID or a gremlin expression}#
+    relation_type: ${3:To define relation type of the node I(ownership, layer2, layer3)}#
+    host: ${4:}                                                            # To define the host of the node 
+    metadata: ${5:value}                                                   # To define metadata for the edge 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the Skydive Edge  If value is I(present) new edge will be created else if it is I(abse
+    provider: ${7:value}                                                   # A dict object containing connection details 

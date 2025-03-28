@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage AWS Config delivery channels
+# prefix: aws_config_delivery_channel_snippet
+# key: ws_config_delivery_ch
+# group: ansible
+# --
+
+- name: ${0:Manage AWS Config delivery channels}
+  aws_config_delivery_channel:                                             
+    name: ${1:The name of the AWS Config resource}                         #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the Config rule should be present or absent 
+    s3_bucket: ${3:value}                                                  # The name of the Amazon S3 bucket to which AWS Config delivers configuration snapshots and configuration history files 
+    s3_prefix: ${4:value}                                                  # The prefix for the specified Amazon S3 bucket 
+    sns_topic_arn: ${5:value}                                              # The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration chang
+    delivery_frequency: ${6$$(yas-choose-value '("One_Hour" "Three_Hours" "Six_Hours" "Twelve_Hours" "TwentyFour_Hours"))}# choices: One_Hour;Three_Hours;Six_Hours;Twelve_Hours;TwentyFour_Hours  Th
+    debug_botocore_endpoint_logs: ${7:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${8:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${9:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${10:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${11:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${12:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${13:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${14:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

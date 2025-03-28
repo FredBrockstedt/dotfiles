@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Check remote PostgreSQL server availability
+# prefix: postgresql_ping_snippet
+# key: postgresql_ping
+# group: ansible
+# --
+
+- name: ${0:Check remote PostgreSQL server availability}
+  postgresql_ping:                                                         
+    db: ${1:value}                                                         # Name of a database to connect to 
+    login_user: ${2:postgres}                                              # The username used to authenticate with 
+    login_password: ${3:value}                                             # The password used to authenticate with 
+    login_host: ${4:value}                                                 # Host running the database 
+    login_unix_socket: ${5:value}                                          # Path to a Unix domain socket for local connections 
+    port: ${6:5432}                                                        # Database port to connect to 
+    ssl_mode: ${7$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wha
+    ca_cert: ${8:value}                                                    # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configuration of alert profiles for ManageIQ
+# prefix: manageiq_alert_profiles_snippet
+# key: manageiq_alert_prof
+# group: ansible
+# --
+
+- name: ${0:Configuration of alert profiles for ManageIQ}
+  manageiq_alert_profiles:                                                 
+    manageiq_connection: ${1:ManageIQ connection configuration information}#
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  absent - alert profile should not exist, present - alert profile should exist,
+    name: ${3:value}                                                       # The unique alert profile name in ManageIQ  Required when state is "absent" or "present" 
+    resource_type: ${4$$(yas-choose-value '("Vm" "ContainerNode" "MiqServer" "Host" "Storage" "EmsCluster" "ExtManagementSystem" "MiddlewareServer"))}# choices: Vm;ContainerNode;MiqServer;Host;Stor
+    alerts: ${5:value}                                                     # List of alert descriptions to assign to this profile  Required if state is "present"
+    notes: ${6:value}                                                      # Optional notes for this profile

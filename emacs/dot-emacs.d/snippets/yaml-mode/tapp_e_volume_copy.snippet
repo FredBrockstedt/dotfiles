@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series create volume copy pairs
+# prefix: netapp_e_volume_copy_snippet
+# key: tapp_e_volume_copy
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series create volume copy pairs}
+  netapp_e_volume_copy:                                                    
+    api_username: ${1:The username to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_password: ${2:The password to authenticate with the SANtricity WebServices Proxy or embedded REST API}#
+    api_url: ${3:The url to the SANtricity WebServices Proxy or embedded REST API, for example C(https://prod-1}#wahoo acme com/devmgr/v2) 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # Whether the specified volume copy pair should exist or not 
+    validate_certs: ${5:True}                                              # Should https certificates be validated?
+    source_volume_id: ${6:value}                                           # The id of the volume copy source  If used, must be paired with destination_volume_id Mutually exclusive with volume_copy
+    destination_volume_id: ${7:value}                                      # The id of the volume copy destination  If used, must be paired with source_volume_id Mutually exclusive with volume_copy
+    volume_copy_pair_id: ${8:value}                                        # The id of a given volume copy pair Mutually exclusive with destination_volume_id, source_volume_id, and search_volume_id
+    create_copy_pair_if_does_not_exist: ${9:True}                          # Defines if a copy pair will be created if it does not exist  If set to True destination_volume_id and source_volume_id a
+    start_stop_copy: ${10:value}                                           # starts a re-copy or stops a copy in progress Note: If you stop the initial file copy before it it done the copy pair wil
+    search_volume_id: ${11:value}                                          # Searches for all valid potential target and source volumes that could be used in a copy_pair Mutually exclusive with vol
+    ssid: ${12:1}                                                          # The ID of the array to manage  This value must be unique for each array 

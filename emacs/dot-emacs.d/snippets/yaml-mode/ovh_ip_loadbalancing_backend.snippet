@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage OVH IP LoadBalancing backends
+# prefix: ovh_ip_loadbalancing_backend_snippet
+# key: ovh_ip_loadbalancing_backend
+# group: ansible
+# --
+
+- name: ${0:Manage OVH IP LoadBalancing backends}
+  ovh_ip_loadbalancing_backend:                                            
+    name: ${1:Name of the LoadBalancing internal name (ip-X}               #X X X)
+    backend: ${2:The IP address of the backend to update / modify / delete}#
+    endpoint: ${3:The endpoint to use ( for instance ovh-eu)}              #
+    application_key: ${4:The applicationKey to use}                        #
+    application_secret: ${5:The application secret to use}                 #
+    consumer_key: ${6:The consumer key to use}                             #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the backend is to be created/modified or deleted
+    probe: ${8$$(yas-choose-value '("none" "http" "icmp" "oco"))}          # choices: none;http;icmp;oco  Determines the type of probe to use for this backend
+    weight: ${9:8}                                                         # Determines the weight for this backend
+    timeout: ${10:120}                                                     # The timeout in seconds used to wait for a task to be completed 

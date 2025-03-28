@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Adds or removes a Windows PowerShell module
+# prefix: win_psmodule_snippet
+# key: win_psmodu
+# group: ansible
+# --
+
+- name: ${0:Adds or removes a Windows PowerShell module}
+  win_psmodule:                                                            
+    name: ${1:Name of the Windows PowerShell module that has to be installed}#
+    state: ${2$$(yas-choose-value '("absent" "latest" "present"))}         # choices: absent;latest;present  If C(present) a new module is installed  If C(absent) a module is removed  If C(latest) 
+    required_version: ${3:value}                                           # The exact version of the PowerShell module that has to be installed 
+    minimum_version: ${4:value}                                            # The minimum version of the PowerShell module that has to be installed 
+    maximum_version: ${5:value}                                            # The maximum version of the PowerShell module that has to be installed 
+    allow_clobber: ${6:False}                                              # If C(yes) allows install modules that contains commands those have the same names as commands that already exists 
+    skip_publisher_check: ${7:False}                                       # If C(yes), allows you to install a different version of a module that already exists on your computer in the case when a
+    allow_prerelease: ${8:False}                                           # If C(yes) installs modules marked as prereleases  It doesn't work with the parameters C(minimum_version) and/or C(maximu
+    repository: ${9:value}                                                 # Name of the custom repository to use 
+    url: ${10:value}                                                       # URL of the custom repository to register  This option is deprecated and will be removed in Ansible 2 12  Use the M(win_p

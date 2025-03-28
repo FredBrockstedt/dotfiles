@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages Chocolatey features
+# prefix: win_chocolatey_feature_snippet
+# key: win_chocolatey_featur
+# group: ansible
+# --
+
+- name: ${0:Manages Chocolatey features}
+  win_chocolatey_feature:                                                  
+    name: ${1:The name of the feature to manage}                           # Run C(choco exe feature list) to get a list of features that can be managed 
+    state: ${2$$(yas-choose-value '("disabled" "enabled"))}                # choices: disabled;enabled  When C(disabled) then the feature will be disabled  When C(enabled) then the feature will be 

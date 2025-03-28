@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Encrypted Linux block devices
+# prefix: crypttab_snippet
+# key: cryptt
+# group: ansible
+# --
+
+- name: ${0:Encrypted Linux block devices}
+  crypttab:                                                                
+    name: ${1:Name of the encrypted block device as it appears in the C(/etc/crypttab) file, or optionally prefixed with C(/dev/mapper/), as it appears in the filesystem}# I(/dev/mapper/) will be s
+    state: ${2$$(yas-choose-value '("absent" "opts_absent" "opts_present" "present"))}# Use I(present) to add a line to C(/etc/crypttab) or update its definition if already present  Use I(absent) t
+    backing_device: ${3:value}                                             # Path to the underlying block device or file, or the UUID of a block-device prefixed with I(UUID=) 
+    password: ${4:value}                                                   # Encryption password, the path to a file containing the password, or C(-) or unset if the password should be entered at b
+    opts: ${5:value}                                                       # A comma-delimited list of options  See C(crypttab(5) ) for details 
+    path: ${6:/etc/crypttab}                                               # Path to file to use instead of C(/etc/crypttab)  This might be useful in a chroot environment 

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Add or remove PostgreSQL extensions from a database
+# prefix: postgresql_ext_snippet
+# key: postgresql_ext
+# group: ansible
+# --
+
+- name: ${0:Add or remove PostgreSQL extensions from a database}
+  postgresql_ext:                                                          
+    name: ${1:Name of the extension to add or remove}                      #
+    db: ${2:Name of the database to add or remove the extension to/from}   #
+    schema: ${3:value}                                                     # Name of the schema to add the extension to 
+    session_role: ${4:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The database extension state 
+    cascade: ${6:False}                                                    # Automatically install/remove any extensions that this extension depends on that are not already installed/removed (suppo
+    login_unix_socket: ${7:value}                                          # Path to a Unix domain socket for local connections 
+    ssl_mode: ${8$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wha
+    ca_cert: ${9:value}                                                    # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 
+    version: ${10:value}                                                   # Extension version to add or update to  Has effect with I(state=present) only  If not specified, the latest extension ver
+    login_user: ${11:postgres}                                             # The username used to authenticate with 
+    login_password: ${12:value}                                            # The password used to authenticate with 
+    login_host: ${13:value}                                                # Host running the database 
+    port: ${14:5432}                                                       # Database port to connect to 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP system database variables
+# prefix: bigip_sys_db_snippet
+# key: gip_sys_d
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP system database variables}
+  bigip_sys_db:                                                            
+    key: ${1:The database variable to manipulate}                          #
+    state: ${2$$(yas-choose-value '("present" "reset"))}                   # choices: present;reset  The state of the variable on the system  When C(present), guarantees that an existing variable i
+    value: ${3:value}                                                      # The value to set the key to  At least one of value and state C(reset) are required 
+    provider: ${4:value}                                                   # A dict object containing connection details 

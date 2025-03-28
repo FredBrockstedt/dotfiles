@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Modify SVM Options
+# prefix: na_ontap_svm_options_snippet
+# key: ontap_svm_optio
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Modify SVM Options}
+  na_ontap_svm_options:                                                    
+    vserver: ${1:The name of the vserver to which this option belongs to}  #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    name: ${5:value}                                                       # Name of the option 
+    value: ${6:value}                                                      # Value of the option  Value must be in quote
+    https: ${7:False}                                                      # Enable and disable https
+    validate_certs: ${8:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${9:value}                                                  # Override the default port (80 or 443) with this port
+    ontapi: ${10:value}                                                    # The ontap api version to use
+    use_rest: ${11$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages HSRP configuration on NX-OS switches.
+# prefix: nxos_hsrp_snippet
+# key: xos_hsrp
+# group: ansible
+# --
+
+- name: ${0:Manages HSRP configuration on NX-OS switches.}
+  nxos_hsrp:                                                               
+    group: ${1:HSRP group number}                                          #
+    interface: ${2:Full name of interface that is being managed for HSRP}  #
+    version: ${3$$(yas-choose-value '("1" "2"))}                           # choices: 1;2  HSRP version 
+    priority: ${4:value}                                                   # HSRP priority or keyword 'default' 
+    preempt: ${5$$(yas-choose-value '("enabled" "disabled"))}              # choices: enabled;disabled  Enable/Disable preempt 
+    vip: ${6:value}                                                        # HSRP virtual IP address or keyword 'default'
+    auth_string: ${7:value}                                                # Authentication string  If this needs to be hidden(for md5 type), the string should be 7 followed by the key string  Othe
+    auth_type: ${8$$(yas-choose-value '("text" "md5"))}                    # choices: text;md5  Authentication type 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

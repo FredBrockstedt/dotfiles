@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage FreeIPA role
+# prefix: ipa_role_snippet
+# key: pa_ro
+# group: ansible
+# --
+
+- name: ${0:Manage FreeIPA role}
+  ipa_role:                                                                
+    cn: ${1:Role name}                                                     # Can not be changed as it is the unique identifier 
+    ipa_pass: ${2:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    description: ${3:value}                                                # A description of this role-group 
+    group: ${4:value}                                                      # List of group names assign to this role  If an empty list is passed all assigned groups will be unassigned from the role
+    host: ${5:value}                                                       # List of host names to assign  If an empty list is passed all assigned hosts will be unassigned from the role  If option 
+    hostgroup: ${6:value}                                                  # List of host group names to assign  If an empty list is passed all assigned host groups will be removed from the role  I
+    privilege: ${7:value}                                                  # List of privileges granted to the role  If an empty list is passed all assigned privileges will be removed  If option is
+    service: ${8:value}                                                    # List of service names to assign  If an empty list is passed all assigned services will be removed from the role  If opti
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  S t a t e   t o   e n s u r e
+    user: ${10:value}                                                      # List of user names to assign  If an empty list is passed all assigned users will be removed from the role  If option is 
+    ipa_port: ${11:443}                                                    # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{12:ipa}                                                   #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${13:admin}                                                  # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${14$$(yas-choose-value '("http" "https"))}                  # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${15:True}                                             # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${16:10}                                                  # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage multiline banners on VyOS devices
+# prefix: vyos_banner_snippet
+# key: vyos_banner
+# group: ansible
+# --
+
+- name: ${0:Manage multiline banners on VyOS devices}
+  vyos_banner:                                                             
+    banner: ${1$$(yas-choose-value '("pre-login" "post-login"))}           # Specifies which banner that should be configured on the remote device 
+    text: ${2:value}                                                       # The banner text that should be present in the remote device running configuration  This argument accepts a multiline str
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies whether or not the configuration is present in the current devices active running con
+    provider: ${4:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Retrieve IP geolocation facts of a host's IP address
+# prefix: ipinfoio_facts_snippet
+# key: pinfoio_fact
+# group: ansible
+# --
+
+- name: ${0:Retrieve IP geolocation facts of a host's IP address}
+  ipinfoio_facts:                                                          
+    timeout: ${1:10}                                                       # HTTP connection timeout in seconds
+    http_agent: ${{2:ansible-ipinfoio-module/0}                            #0 1} # not required  Set http user agent

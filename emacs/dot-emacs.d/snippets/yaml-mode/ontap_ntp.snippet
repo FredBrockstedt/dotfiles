@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP NTP server
+# prefix: na_ontap_ntp_snippet
+# key: ontap_ntp
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP NTP server}
+  na_ontap_ntp:                                                            
+    server_name: ${1:The name of the NTP server to manage}                 #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified NTP server should exist or not 
+    version: ${6$$(yas-choose-value '("auto" "3" "4"))}                    # choices: auto;3;4  give version for NTP server
+    https: ${7:False}                                                      # Enable and disable https
+    validate_certs: ${8:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${9:value}                                                  # Override the default port (80 or 443) with this port
+    ontapi: ${10:value}                                                    # The ontap api version to use
+    use_rest: ${11$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

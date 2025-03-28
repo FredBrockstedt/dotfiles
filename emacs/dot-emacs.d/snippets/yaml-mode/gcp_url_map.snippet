@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Create, Update or Destroy a Url_Map.
+# prefix: gcp_url_map_snippet
+# key: gcp_url_map
+# group: ansible
+# --
+
+- name: ${0:Create, Update or Destroy a Url_Map.}
+  gcp_url_map:                                                             
+    url_map_name: ${1:Name of the Url_Map}                                 #
+    default_service: ${2:Default Backend Service if no host rules match}   #
+    host_rules: ${3:value}                                                 # The list of HostRules to use against the URL  Contains a list of hosts and an associated path_matcher  The 'hosts' param
+    path_matchers: ${4:value}                                              # The list of named PathMatchers to use against the URL  Contains path_rules, which is a list of paths and an associated s

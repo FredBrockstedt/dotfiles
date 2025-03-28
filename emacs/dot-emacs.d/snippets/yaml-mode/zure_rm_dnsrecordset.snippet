@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Create, delete and update DNS record sets and records
+# prefix: azure_rm_dnsrecordset_snippet
+# key: zure_rm_dnsrecordset
+# group: ansible
+# --
+
+- name: ${0:Create, delete and update DNS record sets and records}
+  azure_rm_dnsrecordset:                                                   
+    resource_group: ${1:Name of resource group}                            #
+    zone_name: ${2:Name of the existing DNS zone in which to manage the record set}#
+    relative_name: ${3:Relative name of the record set}                    #
+    record_type: ${4$$(yas-choose-value '("A" "AAAA" "CNAME" "MX" "NS" "SRV" "TXT" "PTR" "CAA" "SOA"))}# The type of record set to create or delete 
+    record_mode: ${5$$(yas-choose-value '("append" "purge"))}              # choices: append;purge  Whether existing record values not sent to the module should be purged 
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the record set  Use C(present) to create or update and C(absent) to delete 
+    time_to_live: ${7:3600}                                                # Time to live of the record set in seconds 
+    records: ${8:value}                                                    # List of records to be created depending on the type of record (set) 
+    ad_user: ${9:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${10:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${11:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${12:value}                                           # Your Azure subscription Id 
+    client_id: ${13:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${14:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${15:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${16:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${17:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${18$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${19$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${20:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${21:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${22:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

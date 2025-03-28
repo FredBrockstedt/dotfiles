@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage the state of a program monitored via Monit
+# prefix: monit_snippet
+# key: monit
+# group: ansible
+# --
+
+- name: ${0:Manage the state of a program monitored via Monit}
+  monit:                                                                   
+    name: ${1:The name of the I(monit) program/process to manage}          #
+    state: ${2$$(yas-choose-value '("present" "started" "stopped" "restarted" "monitored" "unmonitored" "reloaded"))}# The state of service
+    timeout: ${3:300}                                                      # If there are pending actions for the service monitored by monit, then Ansible will check for up to this many seconds to 

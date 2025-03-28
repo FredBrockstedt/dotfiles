@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Create/Delete/Update Zabbix actions
+# prefix: zabbix_action_snippet
+# key: zabbix_actio
+# group: ansible
+# --
+
+- name: ${0:Create/Delete/Update Zabbix actions}
+  zabbix_action:                                                           
+    name: ${1:Name of the action}                                          #
+    server_url: ${2:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${3:Zabbix user name}                                      #
+    login_password: ${4:Zabbix user password}                              #
+    http_login_user: ${5:Basic Auth login}                                 #
+    event_source: ${6$$(yas-choose-value '("trigger" "discovery" "auto_registration" "internal"))}# choices: trigger;discovery;auto_registration;internal  Type of events that the action will handle
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the action  On C(present), it will create an action if it does not exist or update the
+    status: ${8$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  Status of the action 
+    pause_in_maintenance: ${9:True}                                        # Whether to pause escalation during maintenance periods or not  Can be used when I(event_source=trigger) 
+    esc_period: ${10:value}                                                # Default operation step duration  Must be greater than 60 seconds  Accepts seconds, time unit with suffix and user macro 
+    conditions: ${11:value}                                                # List of dictionaries of conditions to evaluate  For more information about suboptions of this option please check out Za
+    eval_type: ${12$$(yas-choose-value '("andor" "and" "or" "custom_expression"))}# choices: andor;and;or;custom_expression  Filter condition evaluation method  Defaults to C(andor) if conditions a
+    formula: ${13:value}                                                   # User-defined expression to be used for evaluating conditions of filters with a custom expression  The expression must co
+    default_message: ${14:value}                                           # Problem message default text 
+    default_subject: ${15:value}                                           # Problem message default subject 
+    recovery_default_message: ${16:value}                                  # Recovery message text  Works only with >= Zabbix 3 2
+    recovery_default_subject: ${17:value}                                  # Recovery message subject  Works only with >= Zabbix 3 2
+    acknowledge_default_message: ${18:value}                               # Update operation (known as "Acknowledge operation" before Zabbix 4 0) message text  Works only with >= Zabbix 3 4
+    acknowledge_default_subject: ${19:value}                               # Update operation (known as "Acknowledge operation" before Zabbix 4 0) message subject  Works only with >= Zabbix 3 4
+    operations: ${20:value}                                                # List of action operations
+    recovery_operations: ${21:value}                                       # List of recovery operations  C(Suboptions) are the same as for I(operations)  Works only with >= Zabbix 3 2
+    acknowledge_operations: ${22:value}                                    # List of acknowledge operations  C(Suboptions) are the same as for I(operations)  Works only with >= Zabbix 3 4
+    http_login_password: ${23:value}                                       # Basic Auth password
+    timeout: ${24:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${25:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

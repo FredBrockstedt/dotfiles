@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Gather infos about your Hetzner Cloud ssh_keys.
+# prefix: hcloud_ssh_key_info_snippet
+# key: hcloud_ssh_key_info
+# group: ansible
+# --
+
+- name: ${0:Gather infos about your Hetzner Cloud ssh_keys.}
+  hcloud_ssh_key_info:                                                     
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the ssh key you want to get 
+    name: ${3:value}                                                       # The name of the ssh key you want to get 
+    fingerprint: ${4:value}                                                # The fingerprint of the ssh key you want to get 
+    label_selector: ${5:value}                                             # The label selector for the ssh key you want to get 
+    endpoint: ${{6:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

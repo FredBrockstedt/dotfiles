@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages load balancer rule members on Apache CloudStack based clouds.
+# prefix: cs_loadbalancer_rule_member_snippet
+# key: cs_loadbalancer_rule_member
+# group: ansible
+# --
+
+- name: ${0:Manages load balancer rule members on Apache CloudStack based clouds.}
+  cs_loadbalancer_rule_member:                                             
+    name: ${1:The name of the load balancer rule}                          #
+    vms: ${2:List of VMs to assign to or remove from the rule}             #
+    ip_address: ${3:value}                                                 # Public IP address from where the network traffic will be load balanced from  Only needed to find the rule if I(name) is 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the VMs be present or absent from the rule 
+    project: ${5:value}                                                    # Name of the project the firewall rule is related to 
+    domain: ${6:value}                                                     # Domain the rule is related to 
+    account: ${7:value}                                                    # Account the rule is related to 
+    zone: ${8:value}                                                       # Name of the zone in which the rule should be located  If not set, default zone is used 
+    poll_async: ${9:True}                                                  # Poll async jobs until job has finished 
+    api_key: ${10:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${11:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${12:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${13$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${14:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${15:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage GitHub webhooks
+# prefix: github_webhook_snippet
+# key: github_webhook
+# group: ansible
+# --
+
+- name: ${0:Manage GitHub webhooks}
+  github_webhook:                                                          
+    repository: ${1:Full name of the repository to configure a hook for}   #
+    url: ${2:URL to which payloads will be delivered}                      #
+    user: ${3:User to authenticate to GitHub as}                           #
+    content_type: ${4$$(yas-choose-value '("form" "json"))}                # choices: form;json  The media type used to serialize the payloads
+    secret: ${5:value}                                                     # The shared secret between GitHub and the payload URL 
+    insecure_ssl: ${6:False}                                               # Flag to indicate that GitHub should skip SSL verification when calling the hook 
+
+    events: ${7:value}                                                     # A list of GitHub events the hook is triggered for  Events are listed at U(https://developer github com/v3/activity/event
+    active: ${8:True}                                                      # Whether or not the hook is active
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the hook should be present or absent
+    password: ${10:value}                                                  # Password to authenticate to GitHub with
+    token: ${11:value}                                                     # Token to authenticate to GitHub with
+    github_url: ${{12:https://api}                                         #github com} # not required  Base URL of the GitHub API

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Create and manage reverse DNS entries on the Hetzner Cloud.
+# prefix: hcloud_rdns_snippet
+# key: hcloud_rd
+# group: ansible
+# --
+
+- name: ${0:Create and manage reverse DNS entries on the Hetzner Cloud.}
+  hcloud_rdns:                                                             
+    server: ${1:The name of the Hetzner Cloud server you want to add the reverse DNS entry to}#
+    ip_address: ${2:The IP address that should point to I(dns_ptr)}        #
+    api_token: ${3:This is the API Token for the Hetzner Cloud}            #
+    dns_ptr: ${4:value}                                                    # The DNS address the I(ip_address) should resolve to  Omit the param to reset the reverse DNS entry to the default value 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the reverse DNS entry 
+    endpoint: ${{6:https://api}                                            #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

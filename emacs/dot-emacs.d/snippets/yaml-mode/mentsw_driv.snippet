@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage Node Drives
+# prefix: na_elementsw_drive_snippet
+# key: mentsw_driv
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage Node Drives}
+  na_elementsw_drive:                                                      
+    node_id: ${1:ID or Name of cluster node}                               #
+    hostname: ${2:The hostname or IP address of the SolidFire cluster}     #
+    username: ${3:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${4:Password for the specified user}                         #
+    drive_id: ${5:value}                                                   # Drive ID or Serial Name of Node drive  If not specified, add and remove action will be performed on all drives of node_i
+    state: ${6$$(yas-choose-value '("present" "absent" "clean"))}          # choices: present;absent;clean  Element SW Storage Drive operation state  present - To add drive of node to participate i
+    force_during_upgrade: ${7:value}                                       # Flag to force drive operation during upgrade 
+    force_during_bin_sync: ${8:value}                                      # Flag to force during a bin sync operation 

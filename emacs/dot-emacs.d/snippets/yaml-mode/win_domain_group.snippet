@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Creates, modifies or removes domain groups
+# prefix: win_domain_group_snippet
+# key: win_domain_group
+# group: ansible
+# --
+
+- name: ${0:Creates, modifies or removes domain groups}
+  win_domain_group:                                                        
+    name: ${1:The name of the group to create, modify or remove}           # This value can be in the forms C(Distinguished Name), C(objectGUID), C(objectSid) or C(sAMAccountName), see examples for
+    attributes: ${2:value}                                                 # A dict of custom LDAP attributes to set on the group  This can be used to set custom attributes that are not exposed as 
+    category: ${3$$(yas-choose-value '("distribution" "security"))}        # choices: distribution;security  The category of the group, this is the value to assign to the LDAP C(groupType) attribut
+    description: ${4:value}                                                # The value to be assigned to the LDAP C(description) attribute 
+    display_name: ${5:value}                                               # The value to assign to the LDAP C(displayName) attribute 
+    domain_username: ${6:value}                                            # The username to use when interacting with AD  If this is not set then the user Ansible used to log in with will be used 
+    domain_password: ${7:value}                                            # The password for C(username) 
+    domain_server: ${8:value}                                              # Specifies the Active Directory Domain Services instance to connect to  Can be in the form of an FQDN or NetBIOS name  If
+    ignore_protection: ${9:False}                                          # Will ignore the C(ProtectedFromAccidentalDeletion) flag when deleting or moving a group  The module will fail if one of 
+    managed_by: ${10:value}                                                # The value to be assigned to the LDAP C(managedBy) attribute  This value can be in the forms C(Distinguished Name), C(obj
+    organizational_unit: ${11:value}                                       # The full LDAP path to create or move the group to  This should be the path to the parent object to create or move the gr
+    protect: ${12:value}                                                   # Will set the C(ProtectedFromAccidentalDeletion) flag based on this value  This flag stops a user from deleting or moving
+    scope: ${13$$(yas-choose-value '("domainlocal" "global" "universal"))} # choices: domainlocal;global;universal  The scope of the group  If C(state=present) and the group doesn't exist then this
+    state: ${14$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  If C(state=present) this module will ensure the group is created and is configured accordingly 

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Dependency Manager for PHP
+# prefix: composer_snippet
+# key: composer
+# group: ansible
+# --
+
+- name: ${0:Dependency Manager for PHP}
+  composer:                                                                
+    command: ${1:install}                                                  # Composer command like "install", "update" and so on 
+    arguments: ${2:value}                                                  # Composer arguments like required package, version and so on 
+    executable: ${3:value}                                                 # Path to PHP Executable on the remote host, if PHP is not in PATH 
+    working_dir: ${4:value}                                                # Directory of your project (see --working-dir)  This is required when the command is not run globally  Will be ignored if
+    global_command: ${5:False}                                             # Runs the specified command globally 
+    prefer_source: ${6:False}                                              # Forces installation from package sources when possible (see --prefer-source) 
+    prefer_dist: ${7:False}                                                # Forces installation from package dist even for dev versions (see --prefer-dist) 
+    no_dev: ${8:True}                                                      # Disables installation of require-dev packages (see --no-dev) 
+    no_scripts: ${9:False}                                                 # Skips the execution of all scripts defined in composer json (see --no-scripts) 
+    no_plugins: ${10:False}                                                # Disables all plugins ( see --no-plugins ) 
+    optimize_autoloader: ${11:True}                                        # Optimize autoloader during autoloader dump (see --optimize-autoloader)  Convert PSR-0/4 autoloading to classmap to get a
+    classmap_authoritative: ${12:False}                                    # Autoload classes from classmap only  Implicitely enable optimize_autoloader  Recommended especially for production, but 
+    apcu_autoloader: ${13:False}                                           # Uses APCu to cache found/not-found classes
+    ignore_platform_reqs: ${14:False}                                      # Ignore php, hhvm, lib-* and ext-* requirements and force the installation even if the local machine does not fulfill the

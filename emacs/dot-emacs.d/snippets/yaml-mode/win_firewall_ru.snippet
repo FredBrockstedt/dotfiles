@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Windows firewall automation
+# prefix: win_firewall_rule_snippet
+# key: win_firewall_ru
+# group: ansible
+# --
+
+- name: ${0:Windows firewall automation}
+  win_firewall_rule:                                                       
+    name: ${1:The rule's display name}                                     #
+    enabled: ${2:value}                                                    # Whether this firewall rule is enabled or disabled  Defaults to C(true) when creating a new rule 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Should this rule be added or removed 
+    group: ${4:value}                                                      # The group name for the rule 
+    direction: ${5$$(yas-choose-value '("in" "out"))}                      # choices: in;out  Whether this rule is for inbound or outbound traffic  Defaults to C(in) when creating a new rule 
+    action: ${6$$(yas-choose-value '("allow" "block"))}                    # choices: allow;block  What to do with the items this rule is for  Defaults to C(allow) when creating a new rule 
+    description: ${7:value}                                                # Description for the firewall rule 
+    localip: ${8:value}                                                    # The local ip address this rule applies to  Set to C(any) to apply to all local ip addresses  Defaults to C(any) when cre
+    remoteip: ${9:value}                                                   # The remote ip address/range this rule applies to  Set to C(any) to apply to all remote ip addresses  Defaults to C(any) 
+    localport: ${10:value}                                                 # The local port this rule applies to  Set to C(any) to apply to all local ports  Defaults to C(any) when creating a new r
+    remoteport: ${11:value}                                                # The remote port this rule applies to  Set to C(any) to apply to all remote ports  Defaults to C(any) when creating a new
+    program: ${12:value}                                                   # The program this rule applies to  Set to C(any) to apply to all programs  Defaults to C(any) when creating a new rule 
+    service: ${13:value}                                                   # The service this rule applies to  Set to C(any) to apply to all services  Defaults to C(any) when creating a new rule 
+    protocol: ${14:value}                                                  # The protocol this rule applies to  Set to C(any) to apply to all services  Defaults to C(any) when creating a new rule 
+    profiles: ${15:value}                                                  # The profile this rule applies to  Defaults to C(domain,private,public) when creating a new rule 

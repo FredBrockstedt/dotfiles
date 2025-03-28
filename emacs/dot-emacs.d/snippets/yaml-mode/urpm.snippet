@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Urpmi manager
+# prefix: urpmi_snippet
+# key: urpm
+# group: ansible
+# --
+
+- name: ${0:Urpmi manager}
+  urpmi:                                                                   
+    name: ${1:A list of package names to install, upgrade or remove}       #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicates the desired package state 
+    update_cache: ${3:false}                                               # Update the package database first C(urpmi update -a) 
+    no-recommends: ${4:true}                                               # Corresponds to the C(--no-recommends) option for I(urpmi) 
+    force: ${5:true}                                                       # Assume "yes" is the answer to any question urpmi has to ask  Corresponds to the C(--force) option for I(urpmi) 
+    root: ${6:/}                                                           # Specifies an alternative install root, relative to which all packages will be installed  Corresponds to the C(--root) op

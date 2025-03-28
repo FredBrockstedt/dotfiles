@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage system authentication on a BIG-IP
+# prefix: bigip_device_auth_snippet
+# key: gip_device_auth
+# group: ansible
+# --
+
+- name: ${0:Manage system authentication on a BIG-IP}
+  bigip_device_auth:                                                       
+    type: ${1$$(yas-choose-value '("tacacs" "local"))}                     # choices: tacacs;local  The authentication type to manage with this module  Take special note that the parameters support
+    servers: ${2:value}                                                    # Specifies a list of the IPv4 addresses for servers using the Terminal Access Controller Access System (TACACS)+ protocol
+    secret: ${3:value}                                                     # Secret key used to encrypt and decrypt packets sent or received from the server  B(Do not) use the pound/hash sign in th
+    service_name: ${4$$(yas-choose-value '("slip" "ppp" "arap" "shell" "tty-daemon" "connection" "system" "firewall"))}# choices: slip;ppp;arap;shell;tty-daemon;connection;system;firewall  Specifie
+    protocol_name: ${5$$(yas-choose-value '("lcp" "ip" "ipx" "atalk" "vines" "lat" "xremote" "tn3270" "telnet" "rlogin" "pad" "vpdn" "ftp" "http" "deccp" "osicp" "unknown"))}# choices: lcp;ip;ipx;a
+    authentication: ${6$$(yas-choose-value '("use-first-server" "use-all-servers"))}# choices: use-first-server;use-all-servers  Specifies the process the system employs when sending authentication
+    use_for_auth: ${7:value}                                               # Specifies whether or not this auth source is put in use on the system 
+    state: ${8$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state of the authentication configuration on the system  When C(present), guarantees that t
+    update_secret: ${9$$(yas-choose-value '("always" "on_create"))}        # choices: always;on_create  C(always) will allow to update secrets if the user chooses to do so  C(on_create) will only s
+    provider: ${10:value}                                                  # A dict object containing connection details 

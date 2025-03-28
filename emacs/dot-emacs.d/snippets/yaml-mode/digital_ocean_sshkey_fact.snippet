@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: DigitalOcean SSH keys facts
+# prefix: digital_ocean_sshkey_facts_snippet
+# key: digital_ocean_sshkey_fact
+# group: ansible
+# --
+
+- name: ${0:DigitalOcean SSH keys facts}
+  digital_ocean_sshkey_facts:                                              
+    oauth_token: ${1:value}                                                # DigitalOcean OAuth token  There are several other environment variables which can be used to provide this value  i e , -
+    timeout: ${2:30}                                                       # The timeout in seconds used for polling DigitalOcean's API 
+    validate_certs: ${3:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled

@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Quotas
+# prefix: na_ontap_quotas_snippet
+# key: ontap_quot
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Quotas}
+  na_ontap_quotas:                                                         
+    vserver: ${1:Name of the vserver to use}                               #
+    volume: ${2:The name of the volume that the quota resides on}          #
+    quota_target: ${3:The quota target of the type specified}              #
+    type: ${4$$(yas-choose-value '("user" "group" "tree"))}                # The type of quota rule
+    hostname: ${5:The hostname or IP address of the ONTAP instance}        #
+    username: ${6:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${7:Password for the specified user}                         #
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified quota should exist or not 
+    qtree: ${9:}                                                           # Name of the qtree for the quota  For user or group rules, it can be the qtree name or "" if no qtree  For tree type rule
+    policy: ${10:value}                                                    # Name of the quota policy from which the quota rule should be obtained 
+    set_quota_status: ${11:value}                                          # Whether the specified volume should have quota status on or off 
+    file_limit: ${12:-}                                                    # The number of files that the target can have 
+    disk_limit: ${13:-}                                                    # The amount of disk space that is reserved for the target 
+    threshold: ${14:-}                                                     # The amount of disk space the target would have to exceed before a message is logged 
+    https: ${15:False}                                                     # Enable and disable https
+    validate_certs: ${16:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${17:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${18:value}                                                    # The ontap api version to use
+    use_rest: ${19$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

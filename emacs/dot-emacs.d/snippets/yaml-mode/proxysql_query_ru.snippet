@@ -1,0 +1,43 @@
+# -*- mode: snippet -*-
+# name: Modifies query rules using the proxysql admin interface.
+# prefix: proxysql_query_rules_snippet
+# key: proxysql_query_ru
+# group: ansible
+# --
+
+- name: ${0:Modifies query rules using the proxysql admin interface.}
+  proxysql_query_rules:                                                    
+    rule_id: ${1:value}                                                    # The unique id of the rule  Rules are processed in rule_id order 
+    active: ${2:value}                                                     # A rule with I(active) set to C(False) will be tracked in the database, but will be never loaded in the in-memory data st
+    username: ${3:value}                                                   # Filtering criteria matching username   If I(username) is non-NULL, a query will match only if the connection is made wit
+    schemaname: ${4:value}                                                 # Filtering criteria matching schemaname  If I(schemaname) is non-NULL, a query will match only if the connection uses sch
+    flagIN: ${5:value}                                                     # Used in combination with I(flagOUT) and I(apply) to create chains of rules 
+    client_addr: ${6:value}                                                # Match traffic from a specific source 
+    proxy_addr: ${7:value}                                                 # Match incoming traffic on a specific local IP 
+    proxy_port: ${8:value}                                                 # Match incoming traffic on a specific local port 
+    digest: ${9:value}                                                     # Match queries with a specific digest, as returned by stats_mysql_query_digest digest 
+    match_digest: ${10:value}                                              # Regular expression that matches the query digest  The dialect of regular expressions used is that of re2 - https://githu
+    match_pattern: ${11:value}                                             # Regular expression that matches the query text  The dialect of regular expressions used is that of re2 - https://github 
+    negate_match_pattern: ${12:value}                                      # If I(negate_match_pattern) is set to C(True), only queries not matching the query text will be considered as a match  Th
+    flagOUT: ${13:value}                                                   # Used in combination with I(flagIN) and apply to create chains of rules  When set, I(flagOUT) signifies the I(flagIN) to 
+    replace_pattern: ${14:value}                                           # This is the pattern with which to replace the matched pattern  Note that this is optional, and when omitted, the query p
+    destination_hostgroup: ${15:value}                                     # Route matched queries to this hostgroup  This happens unless there is a started transaction and the logged in user has I
+    cache_ttl: ${16:value}                                                 # The number of milliseconds for which to cache the result of the query  Note in ProxySQL 1 1 I(cache_ttl) was in seconds 
+    timeout: ${17:value}                                                   # The maximum timeout in milliseconds with which the matched or rewritten query should be executed  If a query run for lon
+    retries: ${18:value}                                                   # The maximum number of times a query needs to be re-executed in case of detected failure during the execution of the quer
+    delay: ${19:value}                                                     # Number of milliseconds to delay the execution of the query  This is essentially a throttling mechanism and QoS, and allo
+    mirror_flagOUT: ${20:value}                                            # Enables query mirroring  If set I(mirror_flagOUT) can be used to evaluates the mirrored query against the specified chai
+    mirror_hostgroup: ${21:value}                                          # Enables query mirroring  If set I(mirror_hostgroup) can be used to mirror queries to the same or different hostgroup 
+    error_msg: ${22:value}                                                 # Query will be blocked, and the specified error_msg will be returned to the client 
+    log: ${23:value}                                                       # Query will be logged 
+    apply: ${24:value}                                                     # Used in combination with I(flagIN) and I(flagOUT) to create chains of rules  Setting apply to True signifies the last ru
+    comment: ${25:value}                                                   # Free form text field, usable for a descriptive comment of the query rule 
+    state: ${26$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present) - adds the rule, when C(absent) - removes the rule 
+    force_delete: ${27:False}                                              # By default we avoid deleting more than one schedule in a single batch, however if you need this behaviour and you're not
+    save_to_disk: ${28:true}                                               # Save config to sqlite db on disk to persist the configuration 
+    load_to_runtime: ${29:true}                                            # Dynamically load config to runtime memory 
+    login_user: ${30:value}                                                # The username used to authenticate to ProxySQL admin interface 
+    login_password: ${31:value}                                            # The password used to authenticate to ProxySQL admin interface 
+    login_host: ${{32:127}                                                 #0 0 1} # not required  The host used to connect to ProxySQL admin interface 
+    login_port: ${33:6032}                                                 # The port used to connect to ProxySQL admin interface 
+    config_file: ${34:}                                                    # Specify a config file from which I(login_user) and I(login_password) are to be read 

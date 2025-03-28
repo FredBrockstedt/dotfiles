@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage consistency group snapshot
+# prefix: na_ontap_cg_snapshot_snippet
+# key: ontap_cg_snapshot
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage consistency group snapshot}
+  na_ontap_cg_snapshot:                                                    
+    vserver: ${1:Name of the vserver}                                      #
+    volumes: ${2:A list of volumes in this filer that is part of this CG operation}#
+    snapshot: ${3:The provided name of the snapshot that is created in each volume}#
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7:present}                                                    # If you want to create a snapshot 
+    timeout: ${8$$(yas-choose-value '("urgent" "medium" "relaxed"))}       # choices: urgent;medium;relaxed  Timeout selector 
+    snapmirror_label: ${9:value}                                           # A human readable SnapMirror label to be attached with the consistency group snapshot copies 
+    https: ${10:False}                                                     # Enable and disable https
+    validate_certs: ${11:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${12:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${13:value}                                                    # The ontap api version to use
+    use_rest: ${14$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

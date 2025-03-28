@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage email notification settings
+# prefix: netapp_e_alerts_snippet
+# key: tapp_e_alert
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage email notification settings}
+  netapp_e_alerts:                                                         
+    api_username: ${1:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${2:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${3:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    state: ${4$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  Enable/disable the sending of email-based alerts 
+    server: ${5:value}                                                     # A fully qualified domain name, IPv4 address, or IPv6 address of a mail server  To use a fully qualified domain name, you
+    sender: ${6:value}                                                     # This is the sender that the recipient will see  It doesn't necessarily need to be a valid email account  Required when I
+    contact: ${7:value}                                                    # Allows the owner to specify some free-form contact information to be included in the emails  This is typically utilized 
+    recipients: ${8:value}                                                 # The email addresses that will receive the email notifications  Required when I(state=enabled) 
+    test: ${9:False}                                                       # When a change is detected in the configuration, a test email will be sent  This may take a few minutes to process  Only 
+    log_path: ${10:value}                                                  # Path to a file on the Ansible control node to be used for debug logging
+    validate_certs: ${11:True}                                             # Should https certificates be validated?
+    ssid: ${12:1}                                                          # The ID of the array to manage  This value must be unique for each array 

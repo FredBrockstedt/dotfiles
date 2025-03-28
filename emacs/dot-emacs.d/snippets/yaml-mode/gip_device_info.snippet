@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Collect information from F5 BIG-IP devices
+# prefix: bigip_device_info_snippet
+# key: gip_device_info
+# group: ansible
+# --
+
+- name: ${0:Collect information from F5 BIG-IP devices}
+  bigip_device_info:                                                       
+    gather_subset: ${1$$(yas-choose-value '("all" "monitors" "profiles" "asm-policy-stats" "asm-policies" "asm-server-technologies" "asm-signature-sets" "client-ssl-profiles" "devices" "device-grou
+    provider: ${2:value}                                                   # A dict object containing connection details 

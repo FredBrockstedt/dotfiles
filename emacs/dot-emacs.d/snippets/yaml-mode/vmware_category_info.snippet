@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Gather info about VMware tag categories
+# prefix: vmware_category_info_snippet
+# key: vmware_category_info
+# group: ansible
+# --
+
+- name: ${0:Gather info about VMware tag categories}
+  vmware_category_info:                                                    
+    hostname: ${1:value}                                                   # The hostname or IP address of the vSphere vCenter server  If the value is not specified in the task, the value of enviro
+    username: ${2:value}                                                   # The username of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    password: ${3:value}                                                   # The password of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    validate_certs: ${4:True}                                              # Allows connection when SSL certificates are not valid  Set to C(no) when certificates are not trusted  If the value is n
+    protocol: ${5$$(yas-choose-value '("http" "https"))}                   # choices: http;https  The connection to protocol 

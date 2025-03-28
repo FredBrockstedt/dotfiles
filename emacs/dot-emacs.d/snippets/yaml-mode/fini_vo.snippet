@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create, Delete or Modify volumes on Infinibox
+# prefix: infini_vol_snippet
+# key: fini_vo
+# group: ansible
+# --
+
+- name: ${0:Create, Delete or Modify volumes on Infinibox}
+  infini_vol:                                                              
+    name: ${1:Volume Name}                                                 #
+    pool: ${2:Pool that volume will reside on}                             #
+    system: ${3:Infinibox Hostname or IPv4 Address}                        #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates/Modifies volume when present or removes when absent
+    size: ${5:value}                                                       # Volume size in MB, GB or TB units  See examples 
+    user: ${6:value}                                                       # Infinibox User username with sufficient priveledges ( see notes ) 
+    password: ${7:value}                                                   # Infinibox User password 

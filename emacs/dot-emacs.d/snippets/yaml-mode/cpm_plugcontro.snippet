@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Get and Set Plug actions on WTI OOB and PDU power devices
+# prefix: cpm_plugcontrol_snippet
+# key: cpm_plugcontro
+# group: ansible
+# --
+
+- name: ${0:Get and Set Plug actions on WTI OOB and PDU power devices}
+  cpm_plugcontrol:                                                         
+    cpm_action: ${1$$(yas-choose-value '("getplugcontrol" "setplugcontrol"))}# This is the Action to send the module 
+    cpm_url: ${2:This is the URL of the WTI device  to send the module}    #
+    plug_id: ${3:This is the plug number or the plug name that is to be manipulated For the plugget command, the plug_id 'all' will return the status of all the plugs the user has rights to access}
+    cpm_username: ${4:value}                                               # This is the Username of the WTI device to send the module 
+    cpm_password: ${5:value}                                               # This is the Password of the WTI device to send the module 
+    use_https: ${6:True}                                                   # Designates to use an https connection or http connection 
+    validate_certs: ${7:True}                                              # If false, SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    use_proxy: ${8:False}                                                  # F l a g   t o   c o n t r o l   i f   t h e   l o o k u p   w i l l   o b s e r v e   H T T P   p r o x y   e n v i r o 
+    plug_state: ${9$$(yas-choose-value '("on" "off" "boot" "default"))}    # choices: on;off;boot;default  This is what action to take on the plug 

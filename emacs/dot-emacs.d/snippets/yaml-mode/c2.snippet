@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Create and optionally attach an Elastic Network Interface (ENI) to an instance
+# prefix: ec2_eni_snippet
+# key: c2
+# group: ansible
+# --
+
+- name: ${0:Create and optionally attach an Elastic Network Interface (ENI) to an instance}
+  ec2_eni:                                                                 
+    eni_id: ${1:value}                                                     # The ID of the ENI (to modify); if null and state is present, a new eni will be created 
+    instance_id: ${2:value}                                                # Instance ID that you wish to attach ENI to  Since version 2 2, use the 'attached' parameter to attach or detach an ENI  
+    private_ip_address: ${3:value}                                         # Private IP address 
+    subnet_id: ${4:value}                                                  # ID of subnet in which to create the ENI 
+    description: ${5:value}                                                # Optional description of the ENI 
+    security_groups: ${6:value}                                            # List of security groups associated with the interface  Only used when state=present  Since version 2 2, you can specify 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or delete ENI
+    device_index: ${8:0}                                                   # The index of the device for the network interface attachment on the instance 
+    attached: ${9:value}                                                   # Specifies if network interface should be attached or detached from instance  If omitted, attachment status won't change
+    force_detach: ${10:false}                                              # Force detachment of the interface  This applies either when explicitly detaching the interface by setting instance_id to
+    delete_on_termination: ${11:value}                                     # Delete the interface when the instance it is attached to is terminated  You can only specify this flag when the interfac
+    source_dest_check: ${12:value}                                         # By default, interfaces perform source/destination checks  NAT instances however need this check to be disabled  You can 
+    secondary_private_ip_addresses: ${13:value}                            # A list of IP addresses to assign as secondary IP addresses to the network interface  This option is mutually exclusive o
+    purge_secondary_private_ip_addresses: ${14:False}                      # To be used with I(secondary_private_ip_addresses) to determine whether or not to remove any secondary IP addresses other
+    secondary_private_ip_address_count: ${15:value}                        # The number of secondary IP addresses to assign to the network interface  This option is mutually exclusive of secondary_
+    allow_reassignment: ${16:false}                                        # Indicates whether to allow an IP address that is already assigned to another network interface or instance to be reassig
+    debug_botocore_endpoint_logs: ${17:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${18:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${19:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${20:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${21:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${22:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${23:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${24:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,106 @@
+# -*- mode: snippet -*-
+# name: manage docker containers
+# prefix: docker_container_snippet
+# key: docker_container
+# group: ansible
+# --
+
+- name: ${0:manage docker containers}
+  docker_container:                                                        
+    name: ${1:Assign a name to a new container or match an existing container}# When identifying an existing container name may be a name or a long or short container ID 
+    auto_remove: ${2:False}                                                # Enable auto-removal of the container on daemon side when the container's process exits 
+    blkio_weight: ${3:value}                                               # Block IO (relative weight), between 10 and 1000 
+    capabilities: ${4:value}                                               # List of capabilities to add to the container 
+    cap_drop: ${5:value}                                                   # List of capabilities to drop from the container 
+    cleanup: ${6:False}                                                    # Use with I(detach=false) to remove the container after successful execution 
+    command: ${7:value}                                                    # Command to execute when the container starts  A command may be either a string or a list  Prior to version 2 4, strings 
+    comparisons: ${8:value}                                                # Allows to specify how properties of existing containers are compared with module options to decide whether the container
+    cpu_period: ${9:value}                                                 # Limit CPU CFS (Completely Fair Scheduler) period 
+    cpu_quota: ${10:value}                                                 # Limit CPU CFS (Completely Fair Scheduler) quota 
+    cpuset_cpus: ${11:value}                                               # CPUs in which to allow execution C(1,3) or C(1-3) 
+    cpuset_mems: ${12:value}                                               # Memory nodes (MEMs) in which to allow execution C(0-3) or C(0,1) 
+    cpu_shares: ${13:value}                                                # CPU shares (relative weight) 
+    detach: ${14:True}                                                     # Enable detached mode to leave the container running in background  If disabled, the task will reflect the status of the 
+    devices: ${15:value}                                                   # List of host device bindings to add to the container  Each binding is a mapping expressed in the format C(<path_on_host>
+    device_read_bps: ${16:value}                                           # List of device path and read rate (bytes per second) from device 
+    device_write_bps: ${17:value}                                          # List of device and write rate (bytes per second) to device 
+    device_read_iops: ${18:value}                                          # List of device and read rate (IO per second) from device 
+    device_write_iops: ${19:value}                                         # List of device and write rate (IO per second) to device 
+    dns_opts: ${20:value}                                                  # List of DNS options 
+    dns_servers: ${21:value}                                               # List of custom DNS servers 
+    dns_search_domains: ${22:value}                                        # List of custom DNS search domains 
+    domainname: ${23:value}                                                # Container domainname 
+    env: ${24:value}                                                       # Dictionary of key,value pairs  Values which might be parsed as numbers, booleans or other types by the YAML parser must 
+    env_file: ${25:value}                                                  # Path to a file, present on the target, containing environment variables I(FOO=BAR)  If variable also present in I(env), 
+    entrypoint: ${26:value}                                                # Command that overwrites the default C(ENTRYPOINT) of the image 
+    etc_hosts: ${27:value}                                                 # Dict of host-to-IP mappings, where each host name is a key in the dictionary  Each host name will be added to the contai
+    exposed_ports: ${28:value}                                             # List of additional container ports which informs Docker that the container listens on the specified network ports at run
+    force_kill: ${29:False}                                                # Use the kill command when stopping a running container 
+    groups: ${30:value}                                                    # List of additional group names and/or IDs that the container process will run as 
+    healthcheck: ${31:value}                                               # Configure a check that is run to determine whether or not containers for this service are "healthy"  See the docs for th
+    hostname: ${32:value}                                                  # The container's hostname 
+    ignore_image: ${33:False}                                              # When I(state) is C(present) or C(started), the module compares the configuration of an existing container to requested c
+    image: ${34:value}                                                     # Repository path and tag used to create the container  If an image is not found or pull is true, the image will be pulled
+    init: ${35:False}                                                      # Run an init inside the container that forwards signals and reaps processes  This option requires Docker API >= 1 25 
+    interactive: ${36:False}                                               # Keep stdin open after a container is launched, even if not attached 
+    ipc_mode: ${37:value}                                                  # Set the IPC mode for the container  Can be one of C(container:<name|id>) to reuse another container's IPC namespace or C
+    keep_volumes: ${38:True}                                               # Retain volumes associated with a removed container 
+    kill_signal: ${39:value}                                               # Override default signal used to kill a running container 
+    kernel_memory: ${40:value}                                             # Kernel memory limit in format C(<number>[<unit>])  Number is a positive integer  Unit can be C(B) (byte), C(K) (kibibyte
+    labels: ${41:value}                                                    # Dictionary of key value pairs 
+    links: ${42:value}                                                     # List of name aliases for linked containers in the format C(container_name:alias)  Setting this will force container to b
+    log_driver: ${43:value}                                                # Specify the logging driver  Docker uses C(json-file) by default  See L(here,https://docs docker com/config/containers/lo
+    log_options: ${44:value}                                               # Dictionary of options specific to the chosen I(log_driver)  See U(https://docs docker com/engine/admin/logging/overview/
+    mac_address: ${45:value}                                               # Container MAC address (e g  92:d0:c6:0a:29:33) 
+    memory: ${46:0}                                                        # Memory limit in format C(<number>[<unit>])  Number is a positive integer  Unit can be C(B) (byte), C(K) (kibibyte, 1024B
+    memory_reservation: ${47:value}                                        # Memory soft limit in format C(<number>[<unit>])  Number is a positive integer  Unit can be C(B) (byte), C(K) (kibibyte, 
+    memory_swap: ${48:value}                                               # Total memory limit (memory + swap) in format C(<number>[<unit>])  Number is a positive integer  Unit can be C(B) (byte),
+    memory_swappiness: ${49:value}                                         # Tune a container's memory swappiness behavior  Accepts an integer between 0 and 100  If not set, the value will be remai
+    mounts: ${50:value}                                                    # Specification for mounts to be added to the container  More powerful alternative to I(volumes) 
+    network_mode: ${51:value}                                              # Connect the container to a network  Choices are C(bridge), C(host), C(none) or C(container:<name|id>) 
+    userns_mode: ${52:value}                                               # Set the user namespace mode for the container  Currently, the only valid value are C(host) and the empty string 
+    networks: ${53:value}                                                  # List of networks the container belongs to  For examples of the data structure and usage see EXAMPLES below  To remove a 
+    networks_cli_compatible: ${54:value}                                   # When networks are provided to the module via the I(networks) option, the module behaves differently than C(docker run --
+    oom_killer: ${55:value}                                                # Whether or not to disable OOM Killer for the container 
+    oom_score_adj: ${56:value}                                             # An integer value containing the score given to the container in order to tune OOM killer preferences 
+    output_logs: ${57:False}                                               # If set to true, output of the container command will be printed  Only effective when I(log_driver) is set to C(json-file
+    paused: ${58:False}                                                    # Use with the started state to pause running processes inside the container 
+    pid_mode: ${59:value}                                                  # Set the PID namespace mode for the container  Note that Docker SDK for Python < 2 0 only supports C(host)  Newer version
+    pids_limit: ${60:value}                                                # Set PIDs limit for the container  It accepts an integer value  Set C(-1) for unlimited PIDs 
+    privileged: ${61:False}                                                # Give extended privileges to the container 
+    published_ports: ${62:value}                                           # List of ports to publish from the container to the host  Use docker CLI syntax: C(8000), C(9000:8000), or C(0 0 0 0:9000
+    pull: ${63:False}                                                      # If true, always pull the latest version of an image  Otherwise, will only pull an image when missing  *Note:* images are
+    purge_networks: ${64:False}                                            # Remove the container from ALL networks not included in I(networks) parameter  Any default networks such as C(bridge), if
+    read_only: ${65:False}                                                 # Mount the container's root file system as read-only 
+    recreate: ${66:False}                                                  # Use with present and started states to force the re-creation of an existing container 
+    restart: ${67:False}                                                   # Use with started state to force a matching container to be stopped and restarted 
+    restart_policy: ${68$$(yas-choose-value '("false" "on-failure" "always" "unless-stopped"))}# choices: no;on-failure;always;unless-stopped  Container restart policy  Place quotes around C(no) op
+    restart_retries: ${69:value}                                           # Use with restart policy to control maximum number of restart attempts 
+    runtime: ${70:value}                                                   # Runtime to use for the container 
+    shm_size: ${71:value}                                                  # Size of C(/dev/shm) in format C(<number>[<unit>])  Number is positive integer  Unit can be C(B) (byte), C(K) (kibibyte, 
+    security_opts: ${72:value}                                             # List of security options in the form of C("label:user:User") 
+    state: ${73$$(yas-choose-value '("absent" "present" "stopped" "started"))}# choices: absent;present;stopped;started  C(absent) - A container matching the specified name will be stopped and remo
+    stop_signal: ${74:value}                                               # Override default signal used to stop the container 
+    stop_timeout: ${75:value}                                              # Number of seconds to wait for the container to stop before sending C(SIGKILL)  When the container is created by this mod
+    trust_image_content: ${76:False}                                       # If C(yes), skip image verification 
+    tmpfs: ${77:value}                                                     # Mount a tmpfs directory 
+    tty: ${78:False}                                                       # Allocate a pseudo-TTY 
+    ulimits: ${79:value}                                                   # List of ulimit options  A ulimit is specified as C(nofile:262144:262144) 
+    sysctls: ${80:value}                                                   # Dictionary of key,value pairs 
+    user: ${81:value}                                                      # Sets the username or UID used and optionally the groupname or GID for the specified command  Can be of the forms C(user)
+    uts: ${82:value}                                                       # Set the UTS namespace mode for the container 
+    volumes: ${83:value}                                                   # List of volumes to mount within the container  Use docker CLI-style syntax: C(/host:/container[:mode]) Mount modes can b
+    volume_driver: ${84:value}                                             # The container volume driver 
+    volumes_from: ${85:value}                                              # List of container names or IDs to get volumes from 
+    working_dir: ${86:value}                                               # Path to the working directory 
+    docker_host: ${{87:unix://var/run/docker}                              #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${88:localhost}                                          # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${89:auto}                                                # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${90:60}                                                      # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${91:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${92:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${93:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${94:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${95:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${96:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${97:False}                                                     # Debug mode

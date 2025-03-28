@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Updates Vertica configuration parameters.
+# prefix: vertica_configuration_snippet
+# key: vertica_configuratio
+# group: ansible
+# --
+
+- name: ${0:Updates Vertica configuration parameters.}
+  vertica_configuration:                                                   
+    name: ${1:Name of the parameter to update}                             #
+    value: ${2:Value of the parameter to be set}                           #
+    db: ${3:value}                                                         # Name of the Vertica database 
+    cluster: ${4:localhost}                                                # Name of the Vertica cluster 
+    port: ${5:5433}                                                        # Vertica cluster port to connect to 
+    login_user: ${6:dbadmin}                                               # The username used to authenticate with 
+    login_password: ${7:value}                                             # The password used to authenticate with 

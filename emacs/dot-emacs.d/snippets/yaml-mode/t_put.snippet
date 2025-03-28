@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Copy a file from Ansible Controller to a network device
+# prefix: net_put_snippet
+# key: t_put
+# group: ansible
+# --
+
+- name: ${0:Copy a file from Ansible Controller to a network device}
+  net_put:                                                                 
+    src: ${1:Specifies the source file}                                    # The path to the source file can either be the full path on the Ansible control host or a relative path from the playbook
+    protocol: ${2$$(yas-choose-value '("scp" "sftp"))}                     # choices: scp;sftp  Protocol used to transfer file 
+    dest: ${{3:"['Filename from src and at default directory of user shell on network_os}#']"} # not required  Specifies the destination file  The path to destination file can either be the full pa
+    mode: ${4$$(yas-choose-value '("binary" "text"))}                      # choices: binary;text  Set the file transfer mode  If mode is set to I(text) then I(src) file will go through Jinja2 temp

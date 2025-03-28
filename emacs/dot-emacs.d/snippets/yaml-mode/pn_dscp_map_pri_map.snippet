@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify dscp-map-pri-map
+# prefix: pn_dscp_map_pri_map_snippet
+# key: pn_dscp_map_pri_map
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify dscp-map-pri-map}
+  pn_dscp_map_pri_map:                                                     
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the dscp-map-pri-map 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_pri: ${3:value}                                                     # CoS priority 
+    pn_name: ${4:value}                                                    # Name for the DSCP map 
+    pn_dsmap: ${5:value}                                                   # DSCP value(s) 

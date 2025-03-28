@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage volume groups and disk pools
+# prefix: netapp_e_storagepool_snippet
+# key: tapp_e_storagepoo
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage volume groups and disk pools}
+  netapp_e_storagepool:                                                    
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified storage pool should exist or not  Note that removing a storage pool currently requires the removal
+    name: ${2:The name of the storage pool to manage}                      #
+    api_username: ${3:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${4:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${5:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    criteria_drive_count: ${6:value}                                       # The number of disks to use for building the storage pool  When I(state=="present") then I(criteria_drive_count) or I(cri
+    criteria_min_usable_capacity: ${7:value}                               # The minimum size of the storage pool (in size_unit)  When I(state=="present") then I(criteria_drive_count) or I(criteria
+    criteria_drive_type: ${8$$(yas-choose-value '("hdd" "ssd"))}           # choices: hdd;ssd  The type of disk (hdd or ssd) to use when searching for candidates to use  When not specified each dri
+    criteria_size_unit: ${9$$(yas-choose-value '("bytes" "b" "kb" "mb" "gb" "tb" "pb" "eb" "zb" "yb"))}# choices: bytes;b;kb;mb;gb;tb;pb;eb;zb;yb  The unit used to interpret size parameters
+    criteria_drive_min_size: ${10:value}                                   # The minimum individual drive size (in size_unit) to consider when choosing drives for the storage pool 
+    criteria_drive_interface_type: ${11$$(yas-choose-value '("sas" "sas4k" "fibre" "fibre520b" "scsi" "sata" "pata"))}# choices: sas;sas4k;fibre;fibre520b;scsi;sata;pata  The interface type to use 
+    criteria_drive_require_da: ${12:False}                                 # Ensures the storage pool will be created with only data assurance (DA) capable drives  Only available for new storage po
+    criteria_drive_require_fde: ${13:False}                                # Whether full disk encryption ability is required for drives to be added to the storage pool
+    raid_level: ${14$$(yas-choose-value '("raidAll" "raid0" "raid1" "raid3" "raid5" "raid6" "raidDiskPool"))}# choices: raidAll;raid0;raid1;raid3;raid5;raid6;raidDiskPool  The RAID level of the sto
+    secure_pool: ${15:value}                                               # Enables security at rest feature on the storage pool  Will only work if all drives in the pool are security capable (FDE
+    reserve_drive_count: ${16:value}                                       # Set the number of drives reserved by the storage pool for reconstruction operations  Only valid on raid disk pools 
+    remove_volumes: ${17:True}                                             # Prior to removing a storage pool, delete all volumes in the pool 
+    erase_secured_drives: ${18:True}                                       # If I(state=="absent") then all storage pool drives will be erase If I(state=="present") then delete all available storag
+    validate_certs: ${19:True}                                             # Should https certificates be validated?
+    ssid: ${20:1}                                                          # The ID of the array to manage  This value must be unique for each array 

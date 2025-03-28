@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: create, update or destroy reverse_proxy auth_profile entry in Sophos UTM
+# prefix: utm_proxy_auth_profile_snippet
+# key: utm_proxy_auth_prof
+# group: ansible
+# --
+
+- name: ${0:create, update or destroy reverse_proxy auth_profile entry in Sophos UTM}
+  utm_proxy_auth_profile:                                                  
+    name: ${1:The name of the object}                                      # Will be used to identify the entry
+    aaa: ${2:List of references to utm_aaa objects (allowed users or groups)}#
+    basic_prompt: ${3:The message in the basic authentication prompt}      #
+    frontend_session_lifetime: ${4:session lifetime}                       #
+    frontend_session_timeout: ${5:session timeout}                         #
+    utm_host: ${6:The REST Endpoint of the Sophos UTM}                     #
+    utm_token: ${7:The token used to identify at the REST-API}             # See U(https://www sophos com/en-us/medialibrary/PDFs/documentation/UTMonAWS/Sophos-UTM-RESTful-API pdf?la=en), Chapter 2
+    backend_mode: ${8$$(yas-choose-value '("Basic" "None"))}               # choices: Basic;None  Specifies if the backend server needs authentication ([Basic|None])
+    backend_strip_basic_auth: ${9$$(yas-choose-value '("True" "False"))}   # choices: True;False  Should the login data be stripped when proxying the request to the backend host
+    backend_user_prefix: ${10:}                                            # Prefix string to prepend to the username for backend authentication
+    backend_user_suffix: ${11:}                                            # Suffix string to append to the username for backend authentication
+    comment: ${12:}                                                        # Optional comment string
+    frontend_cookie: ${13:value}                                           # Frontend cookie name
+    frontend_cookie_secret: ${14:value}                                    # Frontend cookie secret
+    frontend_form: ${15:value}                                             # Frontend authentication form name
+    frontend_form_template: ${16:}                                         # Frontend authentication form template
+    frontend_login: ${17:value}                                            # Frontend login name
+    frontend_logout: ${18:value}                                           # Frontend logout name
+    frontend_mode: ${19$$(yas-choose-value '("Basic" "Form"))}             # choices: Basic;Form  Frontend authentication mode (Form|Basic)
+    frontend_realm: ${20:value}                                            # Frontend authentication realm
+    frontend_session_allow_persistency: ${21$$(yas-choose-value '("True" "False"))}# choices: True;False  Allow session persistency
+    frontend_session_lifetime_limited: ${22$$(yas-choose-value '("True" "False"))}# choices: True;False  Specifies if limitation of session lifetime is active
+    frontend_session_lifetime_scope: ${23$$(yas-choose-value '("days" "hours" "minutes"))}# choices: days;hours;minutes  scope for frontend_session_lifetime (days|hours|minutes)
+    frontend_session_timeout_enabled: ${24$$(yas-choose-value '("True" "False"))}# choices: True;False  Specifies if session timeout is active
+    frontend_session_timeout_scope: ${25$$(yas-choose-value '("days" "hours" "minutes"))}# choices: days;hours;minutes  scope for frontend_session_timeout (days|hours|minutes)
+    logout_delegation_urls: ${26:[]}                                       # List of logout URLs that logouts are delegated to
+    logout_mode: ${27$$(yas-choose-value '("None" "Delegation"))}          # choices: None;Delegation  Mode of logout (None|Delegation)
+    redirect_to_requested_url: ${28$$(yas-choose-value '("True" "False"))} # choices: True;False  Should a redirect to the requested URL be made
+    headers: ${29:value}                                                   # A dictionary of additional headers to be sent to POST and PUT requests  Is needed for some modules
+    utm_port: ${30:4444}                                                   # The port of the REST interface 
+    utm_protocol: ${31$$(yas-choose-value '("http" "https"))}              # choices: http;https  The protocol of the REST Endpoint 
+    validate_certs: ${32:True}                                             # Whether the REST interface's ssl certificate should be verified or not 
+    state: ${33$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The desired state of the object  C(present) will create or update an object C(absent) will dele

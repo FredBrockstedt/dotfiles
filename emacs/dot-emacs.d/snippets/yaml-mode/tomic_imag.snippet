@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage the container images on the atomic host platform
+# prefix: atomic_image_snippet
+# key: tomic_imag
+# group: ansible
+# --
+
+- name: ${0:Manage the container images on the atomic host platform}
+  atomic_image:                                                            
+    name: ${1:Name of the container image}                                 #
+    backend: ${2$$(yas-choose-value '("docker" "ostree"))}                 # choices: docker;ostree  Define the backend where the image is pulled 
+    state: ${3$$(yas-choose-value '("absent" "latest" "present"))}         # choices: absent;latest;present  The state of the container image  The state C(latest) will ensure container image is upg
+    started: ${4:true}                                                     # Start or Stop the container 

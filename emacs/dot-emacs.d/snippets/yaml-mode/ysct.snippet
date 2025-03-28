@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage entries in sysctl.conf.
+# prefix: sysctl_snippet
+# key: ysct
+# group: ansible
+# --
+
+- name: ${0:Manage entries in sysctl.conf.}
+  sysctl:                                                                  
+    name: ${1:The dot-separated path (aka I(key)) specifying the sysctl variable}#
+    value: ${2:value}                                                      # Desired value of the sysctl key 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the entry should be present or absent in the sysctl file 
+    ignoreerrors: ${4:false}                                               # Use this option to ignore errors about unknown keys 
+    reload: ${5:true}                                                      # If C(yes), performs a I(/sbin/sysctl -p) if the C(sysctl_file) is updated  If C(no), does not reload I(sysctl) even if t
+    sysctl_file: ${{6:/etc/sysctl}                                         #conf} # not required  Specifies the absolute path to C(sysctl conf), if not C(/etc/sysctl conf) 
+    sysctl_set: ${7:false}                                                 # Verify token value with the sysctl command and set with -w if necessary

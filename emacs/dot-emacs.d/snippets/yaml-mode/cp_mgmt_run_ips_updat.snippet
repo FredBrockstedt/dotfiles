@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Runs IPS database update. If "package-path" is not provided server will try to get the latest package from the User Center.
+# prefix: cp_mgmt_run_ips_update_snippet
+# key: cp_mgmt_run_ips_updat
+# group: ansible
+# --
+
+- name: ${0:Runs IPS database update. If "package-path" is not provided server will try to get the latest package from the User Center.}
+  cp_mgmt_run_ips_update:                                                  
+    package_path: ${1:value}                                               # Offline update package path 
+    wait_for_task: ${2:True}                                               # Wait for the task to end  Such as publish task 
+    version: ${3:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

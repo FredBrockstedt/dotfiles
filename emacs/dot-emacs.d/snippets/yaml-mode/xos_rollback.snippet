@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Set a checkpoint or rollback to a checkpoint.
+# prefix: nxos_rollback_snippet
+# key: xos_rollback
+# group: ansible
+# --
+
+- name: ${0:Set a checkpoint or rollback to a checkpoint.}
+  nxos_rollback:                                                           
+    checkpoint_file: ${1:value}                                            # Name of checkpoint file to create  Mutually exclusive with rollback_to 
+    rollback_to: ${2:value}                                                # Name of checkpoint file to rollback to  Mutually exclusive with checkpoint_file 
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

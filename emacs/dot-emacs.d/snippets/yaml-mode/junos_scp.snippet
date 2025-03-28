@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Transfer files from or to remote devices running Junos
+# prefix: junos_scp_snippet
+# key: junos_scp
+# group: ansible
+# --
+
+- name: ${0:Transfer files from or to remote devices running Junos}
+  junos_scp:                                                               
+    src: ${1:The C(src) argument takes a single path, or a list of paths to be transferred}# The argument C(recursive) must be C(true) to transfer directories 
+    dest: ${{2:}                                                           #} # not required  The C(dest) argument specifies the path in which to receive the files 
+    recursive: ${3:false}                                                  # The C(recursive) argument enables recursive transfer of files and directories 
+    remote_src: ${4:false}                                                 # The C(remote_src) argument enables the download of files (I(scp get)) from the remote device  The default behavior is to
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

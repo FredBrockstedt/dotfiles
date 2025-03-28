@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Create, modify, and delete EC2 VPN connections.
+# prefix: ec2_vpc_vpn_snippet
+# key: c2_vpc_vp
+# group: ansible
+# --
+
+- name: ${0:Create, modify, and delete EC2 VPN connections.}
+  ec2_vpc_vpn:                                                             
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The desired state of the VPN connection 
+    customer_gateway_id: ${2:value}                                        # The ID of the customer gateway 
+    connection_type: ${{3$$(yas-choose-value '("ipsec}                     #1|} # not required  choices: ipsec 1  The type of VPN connection 
+    vpn_gateway_id: ${4:value}                                             # The ID of the virtual private gateway 
+    vpn_connection_id: ${5:value}                                          # The ID of the VPN connection  Required to modify or delete a connection if the filters option does not provide a unique 
+    tags: ${6:value}                                                       # Tags to attach to the VPN connection 
+    purge_tags: ${7:False}                                                 # Whether or not to delete VPN connections tags that are associated with the connection but not specified in the task 
+    static_only: ${8:False}                                                # Indicates whether the VPN connection uses static routes only  Static routes must be used for devices that don't support 
+    tunnel_options: ${9:value}                                             # An optional list object containing no more than two dict members, each of which may contain 'TunnelInsideCidr' and/or 'P
+    filters: ${10:value}                                                   # An alternative to using vpn_connection_id  If multiple matches are found, vpn_connection_id is required  If one of the f
+    routes: ${11:value}                                                    # Routes to add to the connection 
+    purge_routes: ${12:value}                                              # Whether or not to delete VPN connections routes that are not specified in the task 
+    wait_timeout: ${13:600}                                                # How long before wait gives up, in seconds 
+    delay: ${14:15}                                                        # The time to wait before checking operation again  in seconds 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 
+    debug_botocore_endpoint_logs: ${16:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${17:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${18:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${19:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${20:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${21:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${22:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create, Delete or Modify NFS Exports on Infinibox
+# prefix: infini_export_snippet
+# key: fini_export
+# group: ansible
+# --
+
+- name: ${0:Create, Delete or Modify NFS Exports on Infinibox}
+  infini_export:                                                           
+    name: ${1:Export name}                                                 # Should always start with C(/)  (ex  name=/data)
+    filesystem: ${2:Name of exported file system}                          #
+    system: ${3:Infinibox Hostname or IPv4 Address}                        #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates/Modifies export when present and removes when absent 
+    inner_path: ${5:/}                                                     # Internal path of the export 
+    client_list: ${6:"All Hosts(*), RW, no_root_squash: True"}             # List of dictionaries with client entries  See examples  Check infini_export_client module to modify individual NFS clien
+    user: ${7:value}                                                       # Infinibox User username with sufficient priveledges ( see notes ) 
+    password: ${8:value}                                                   # Infinibox User password 

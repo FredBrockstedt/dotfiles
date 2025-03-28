@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Gather facts about Online user.
+# prefix: online_user_facts_snippet
+# key: online_user_fact
+# group: ansible
+# --
+
+- name: ${0:Gather facts about Online user.}
+  online_user_facts:                                                       
+    api_token: ${1:value}                                                  # Online OAuth token 
+    api_url: ${{2:https://api}                                             #online net} # not required  Online API URL
+    api_timeout: ${3:30}                                                   # HTTP timeout to Online API in seconds 
+    validate_certs: ${4:True}                                              # Validate SSL certs of the Online API 

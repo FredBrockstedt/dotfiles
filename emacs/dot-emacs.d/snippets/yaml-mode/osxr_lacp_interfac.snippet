@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Link Aggregation Control Protocol (LACP) attributes of interfaces on IOS-XR devices.
+# prefix: iosxr_lacp_interfaces_snippet
+# key: osxr_lacp_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Link Aggregation Control Protocol (LACP) attributes of interfaces on IOS-XR devices.}
+  iosxr_lacp_interfaces:                                                   
+    config: ${1:value}                                                     # A   d i c t i o n a r y   o f   L A C P   i n t e r f a c e s   o p t i o n s  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion 

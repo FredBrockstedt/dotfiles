@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Package manager for Source Mage GNU/Linux
+# prefix: sorcery_snippet
+# key: orcery
+# group: ansible
+# --
+
+- name: ${0:Package manager for Source Mage GNU/Linux}
+  sorcery:                                                                 
+    name: ${1:value}                                                       # Name of the spell multiple names can be given, separated by commas special value '*' in conjunction with states C(latest
+    state: ${2$$(yas-choose-value '("present" "latest" "absent" "cast" "dispelled" "rebuild"))}# choices: present;latest;absent;cast;dispelled;rebuild  Whether to cast, dispel or rebuild a package 
+    depends: ${3:value}                                                    # Comma-separated list of _optional_ dependencies to build a spell (or make sure it is built) with; use +/- in front of de
+    update: ${4:false}                                                     # Whether or not to update sorcery scripts at the very first stage
+    update_cache: ${5:false}                                               # Whether or not to update grimoire collection before casting spells
+    cache_valid_time: ${6:value}                                           # Time in seconds to invalidate grimoire collection on update especially useful for SCM and rsync grimoires makes sense on

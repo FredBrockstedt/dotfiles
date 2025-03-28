@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage replication connections between two FlashArrays
+# prefix: purefa_connect_snippet
+# key: purefa_connect
+# group: ansible
+# --
+
+- name: ${0:Manage replication connections between two FlashArrays}
+  purefa_connect:                                                          
+    target_url: ${1:Management IP address of remote array}                 #
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete array connection
+    target_api: ${5:value}                                                 # API token for target array
+    connection: ${6$$(yas-choose-value '("sync" "async"))}                 # choices: sync;async  T y p e   o f   c o n n e c t i o n   b e t w e e n   a r r a y s  

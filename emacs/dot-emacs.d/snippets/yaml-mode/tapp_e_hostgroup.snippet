@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage array host groups
+# prefix: netapp_e_hostgroup_snippet
+# key: tapp_e_hostgroup
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage array host groups}
+  netapp_e_hostgroup:                                                      
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified host group should exist or not 
+    api_username: ${2:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${3:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${4:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    name: ${5:value}                                                       # Name of the host group to manage This option is mutually exclusive with I(id) 
+    new_name: ${6:value}                                                   # Specify this when you need to update the name of a host group
+    id: ${7:value}                                                         # Host reference identifier for the host group to manage  This option is mutually exclusive with I(name) 
+    hosts: ${8:value}                                                      # List of host names/labels to add to the group
+    validate_certs: ${9:True}                                              # Should https certificates be validated?
+    ssid: ${10:1}                                                          # The ID of the array to manage  This value must be unique for each array 

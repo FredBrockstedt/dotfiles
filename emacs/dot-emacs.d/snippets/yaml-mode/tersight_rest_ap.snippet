@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: REST API configuration for Cisco Intersight
+# prefix: intersight_rest_api_snippet
+# key: tersight_rest_ap
+# group: ansible
+# --
+
+- name: ${0:REST API configuration for Cisco Intersight}
+  intersight_rest_api:                                                     
+    resource_path: ${1:Resource URI being configured related to api_uri}   #
+    api_private_key: ${2:Filename (absolute path) of a PEM formatted file that contains your private key to be used for Intersight API authentication}#
+    api_key_id: ${3:Public API Key ID associated with the private key}     #
+    query_params: ${4:value}                                               # Query parameters for the Intersight API query language 
+    update_method: ${5$$(yas-choose-value '("patch" "post"))}              # choices: patch;post  The HTTP method used for update operations  Some Intersight resources require POST operations for m
+    api_body: ${6:value}                                                   # The payload for API requests used to modify resources 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify the resource is present and will create if needed  If C(absent), wil
+    api_uri: ${{8:https://intersight}                                      #com/api/v1} # not required  URI used to access the Intersight API 
+    validate_certs: ${9:True}                                              # Boolean control for verifying the api_uri TLS certificate
+    use_proxy: ${10:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 

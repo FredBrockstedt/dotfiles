@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Module to control VDO
+# prefix: vdo_snippet
+# key: vdo
+# group: ansible
+# --
+
+- name: ${0:Module to control VDO}
+  vdo:                                                                     
+    name: ${1:The name of the VDO volume}                                  #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # Whether this VDO volume should be "present" or "absent"  If a "present" VDO volume does not exist, it will be created   
+    activated: ${3:value}                                                  # The "activate" status for a VDO volume   If this is set to "no", the VDO volume cannot be started, and it will not start
+    running: ${4:value}                                                    # Whether this VDO volume is running  A VDO volume must be activated in order to be started 
+    device: ${5:value}                                                     # The full path of the device to use for VDO storage  This is required if "state" is "present" 
+    logicalsize: ${6:value}                                                # The logical size of the VDO volume (in megabytes, or LVM suffix format)   If not specified for a new volume, this defaul
+    deduplication: ${7$$(yas-choose-value '("disabled" "enabled"))}        # choices: disabled;enabled  Configures whether deduplication is enabled   The default for a created volume is 'enabled'  
+    compression: ${8$$(yas-choose-value '("disabled" "enabled"))}          # choices: disabled;enabled  Configures whether compression is enabled   The default for a created volume is 'enabled'   E
+    blockmapcachesize: ${9:value}                                          # The amount of memory allocated for caching block map pages, in megabytes (or may be issued with an LVM-style suffix of K
+    readcache: ${10$$(yas-choose-value '("disabled" "enabled"))}           # choices: disabled;enabled  Enables or disables the read cache   The default is 'disabled'   Choosing 'enabled' enables a
+    readcachesize: ${11:value}                                             # Specifies the extra VDO device read cache size in megabytes   This is in addition to a system-defined minimum   Using a 
+    emulate512: ${12:value}                                                # Enables 512-byte emulation mode, allowing drivers or filesystems to access the VDO volume at 512-byte granularity, inste
+    growphysical: ${13:False}                                              # Specifies whether to attempt to execute a growphysical operation, if there is enough unused space on the device   A grow
+    slabsize: ${14:value}                                                  # The size of the increment by which the physical size of a VDO volume is grown, in megabytes (or may be issued with an LV
+    writepolicy: ${15$$(yas-choose-value '("async" "auto" "sync"))}        # choices: async;auto;sync  Specifies the write policy of the VDO volume   The 'sync' mode acknowledges writes only after 
+    indexmem: ${16:value}                                                  # Specifies the amount of index memory in gigabytes   The default is 0 25   The special decimal values 0 25, 0 5, and 0 75
+    indexmode: ${17$$(yas-choose-value '("dense" "sparse"))}               # choices: dense;sparse  Specifies the index mode of the Albireo index   The default is 'dense', which has a deduplication
+    ackthreads: ${18:value}                                                # Specifies the number of threads to use for acknowledging completion of requested VDO I/O operations  Valid values are in
+    biothreads: ${19:value}                                                # Specifies the number of threads to use for submitting I/O operations to the storage device   Valid values are integer va
+    cputhreads: ${20:value}                                                # Specifies the number of threads to use for CPU-intensive work such as hashing or compression   Valid values are integer 
+    logicalthreads: ${21:value}                                            # Specifies the number of threads across which to subdivide parts of the VDO processing based on logical block addresses  
+    physicalthreads: ${22:value}                                           # Specifies the number of threads across which to subdivide parts of the VDO processing based on physical block addresses 

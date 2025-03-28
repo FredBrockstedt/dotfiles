@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages replication hostgroups using the proxysql admin interface.
+# prefix: proxysql_replication_hostgroups_snippet
+# key: proxysql_replication_hostgroup
+# group: ansible
+# --
+
+- name: ${0:Manages replication hostgroups using the proxysql admin interface.}
+  proxysql_replication_hostgroups:                                         
+    writer_hostgroup: ${1:Id of the writer hostgroup}                      #
+    reader_hostgroup: ${2:Id of the reader hostgroup}                      #
+    comment: ${3:value}                                                    # Text field that can be used for any purposes defined by the user 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present) - adds the replication hostgroup, when C(absent) - removes the replication host
+    save_to_disk: ${5:true}                                                # Save config to sqlite db on disk to persist the configuration 
+    load_to_runtime: ${6:true}                                             # Dynamically load config to runtime memory 
+    login_user: ${7:value}                                                 # The username used to authenticate to ProxySQL admin interface 
+    login_password: ${8:value}                                             # The password used to authenticate to ProxySQL admin interface 
+    login_host: ${{9:127}                                                  #0 0 1} # not required  The host used to connect to ProxySQL admin interface 
+    login_port: ${10:6032}                                                 # The port used to connect to ProxySQL admin interface 
+    config_file: ${11:}                                                    # Specify a config file from which I(login_user) and I(login_password) are to be read 

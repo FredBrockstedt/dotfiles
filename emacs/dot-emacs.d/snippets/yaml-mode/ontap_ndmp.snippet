@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP NDMP services configuration
+# prefix: na_ontap_ndmp_snippet
+# key: ontap_ndmp
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP NDMP services configuration}
+  na_ontap_ndmp:                                                           
+    vserver: ${1:Name of the vserver}                                      #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    abort_on_disk_error: ${5:value}                                        # Enable abort on disk error 
+    authtype: ${6:value}                                                   # Authentication type 
+    backup_log_enable: ${7:value}                                          # Enable backup log 
+    data_port_range: ${8:value}                                            # Data port range 
+    debug_enable: ${9:value}                                               # Enable debug 
+    debug_filter: ${10:value}                                              # Debug filter 
+    dump_detailed_stats: ${11:value}                                       # Enable logging of VM stats for dump 
+    dump_logical_find: ${12:value}                                         # Enable logical find for dump 
+    enable: ${13:value}                                                    # Enable NDMP on vserver 
+    fh_dir_retry_interval: ${14:value}                                     # FH throttle value for dir 
+    fh_node_retry_interval: ${15:value}                                    # FH throttle value for node 
+    ignore_ctime_enabled: ${16:value}                                      # Ignore ctime 
+    is_secure_control_connection_enabled: ${17:value}                      # Is secure control connection enabled 
+    offset_map_enable: ${18:value}                                         # Enable offset map 
+    per_qtree_exclude_enable: ${19:value}                                  # Enable per qtree exclusion 
+    preferred_interface_role: ${20:value}                                  # Preferred interface role 
+    restore_vm_cache_size: ${21:value}                                     # Restore VM file cache size 
+    secondary_debug_filter: ${22:value}                                    # Secondary debug filter 
+    tcpnodelay: ${23:value}                                                # Enable TCP nodelay 
+    tcpwinsize: ${24:value}                                                # TCP window size 
+    https: ${25:False}                                                     # Enable and disable https
+    validate_certs: ${26:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${27:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${28:value}                                                    # The ontap api version to use
+    use_rest: ${29$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP configuration on Cisco IOS network devices.
+# prefix: ios_lldp_snippet
+# key: os_lldp
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP configuration on Cisco IOS network devices.}
+  ios_lldp:                                                                
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the LLDP configuration  If value is I(present) lldp will be enabled else if it is I(ab
+    authorize: ${2:False}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  For more infor
+    auth_pass: ${3:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes) with C(become_p
+    provider: ${4:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

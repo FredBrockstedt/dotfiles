@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manages registration key pools on BIG-IQ
+# prefix: bigiq_regkey_pool_snippet
+# key: giq_regkey_poo
+# group: ansible
+# --
+
+- name: ${0:Manages registration key pools on BIG-IQ}
+  bigiq_regkey_pool:                                                       
+    name: ${1:Specifies the name of the registration key pool}             # You must be mindful to name your registration pools unique names  While BIG-IQ does not require this, this module does  
+    description: ${2:value}                                                # A description to attach to the pool 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state of the regkey pool on the system  When C(present), guarantees that the pool exists  W
+    provider: ${4:value}                                                   # A dict object containing connection details 

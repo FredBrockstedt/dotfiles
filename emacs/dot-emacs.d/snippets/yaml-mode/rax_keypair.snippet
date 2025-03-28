@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Create a keypair for use with Rackspace Cloud Servers
+# prefix: rax_keypair_snippet
+# key: rax_keypair
+# group: ansible
+# --
+
+- name: ${0:Create a keypair for use with Rackspace Cloud Servers}
+  rax_keypair:                                                             
+    name: ${1:Name of keypair}                                             #
+    public_key: ${2:value}                                                 # Public Key string to upload  Can be a file path or string
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource
+    api_key: ${4:value}                                                    # Rackspace API key, overrides I(credentials) 
+    auth_endpoint: ${{5:https://identity}                                  #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    credentials: ${6:value}                                                # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${7:value}                                                        # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    identity_type: ${8:rackspace}                                          # Authentication mechanism to use, such as rackspace or keystone 
+    region: ${9:DFW}                                                       # Region to create an instance in 
+    tenant_id: ${10:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${11:value}                                               # The tenant name used for authentication 
+    username: ${12:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${13:value}                                            # Whether or not to require SSL validation of API endpoints 

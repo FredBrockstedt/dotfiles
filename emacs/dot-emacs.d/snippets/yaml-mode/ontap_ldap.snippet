@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP LDAP
+# prefix: na_ontap_ldap_snippet
+# key: ontap_ldap
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP LDAP}
+  na_ontap_ldap:                                                           
+    vserver: ${1:vserver/svm configured to use LDAP}                       #
+    name: ${2:The name of LDAP client configuration}                       #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the LDAP is present or not 
+    skip_config_validation: ${7$$(yas-choose-value '("true" "false"))}     # choices: true;false  Skip LDAP validation
+    https: ${8:False}                                                      # Enable and disable https
+    validate_certs: ${9:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${10:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${11:value}                                                    # The ontap api version to use
+    use_rest: ${12$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

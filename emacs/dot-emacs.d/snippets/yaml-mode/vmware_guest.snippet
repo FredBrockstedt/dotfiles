@@ -1,0 +1,46 @@
+# -*- mode: snippet -*-
+# name: Manages virtual machines in vCenter
+# prefix: vmware_guest_snippet
+# key: vmware_guest
+# group: ansible
+# --
+
+- name: ${0:Manages virtual machines in vCenter}
+  vmware_guest:                                                            
+    name: ${1:Name of the virtual machine to work with}                    # Virtual machine names in vCenter are not necessarily unique, which may be problematic, see C(name_match)  If multiple vi
+    state: ${2$$(yas-choose-value '("present" "absent" "poweredon" "poweredoff" "restarted" "suspended" "shutdownguest" "rebootguest"))}# choices: present;absent;poweredon;poweredoff;restarted;susp
+    name_match: ${3$$(yas-choose-value '("first" "last"))}                 # choices: first;last  If multiple virtual machines matching the name, use the first or last found 
+    uuid: ${4:value}                                                       # UUID of the virtual machine to manage if known, this is VMware's unique identifier  This is required if C(name) is not s
+    use_instance_uuid: ${5:False}                                          # Whether to use the VMware instance UUID rather than the BIOS UUID 
+    template: ${6:value}                                                   # Template or existing virtual machine used to create new virtual machine  If this value is not set, virtual machine is cr
+    is_template: ${7:false}                                                # Flag the instance as a template  This will mark the given virtual machine as template 
+    folder: ${8:value}                                                     # Destination folder, absolute path to find an existing guest or create the new guest  The folder should include the datac
+    hardware: ${9:value}                                                   # Manage virtual machine's hardware attributes  All parameters case sensitive  Valid attributes are:  - C(hotadd_cpu) (boo
+    guest_id: ${10:value}                                                  # Set the guest ID  This parameter is case sensitive  Examples:   virtual machine with RHEL7 64 bit, will be 'rhel7_64Gues
+    disk: ${11:value}                                                      # A list of disks to add  This parameter is case sensitive  Shrinking disks is not supported  Removing existing disks of t
+    cdrom: ${12:value}                                                     # A CD-ROM configuration for the virtual machine  Or a list of CD-ROMs configuration for the virtual machine  Added in ver
+    resource_pool: ${13:value}                                             # Use the given resource pool for virtual machine operation  This parameter is case sensitive  Resource pool should be chi
+    wait_for_ip_address: ${14:false}                                       # Wait until vCenter detects an IP address for the virtual machine  This requires vmware-tools (vmtoolsd) to properly work
+    wait_for_customization: ${15:false}                                    # Wait until vCenter detects all guest customizations as successfully completed  When enabled, the VM will automatically b
+    state_change_timeout: ${16:0}                                          # If the C(state) is set to C(shutdownguest), by default the module will return immediately after sending the shutdown sig
+    snapshot_src: ${17:value}                                              # Name of the existing snapshot to use to create a clone of a virtual machine  This parameter is case sensitive  While cre
+    linked_clone: ${18:false}                                              # Whether to create a linked clone from the snapshot specified  If specified, then C(snapshot_src) is required parameter 
+    force: ${19:false}                                                     # Ignore warnings and complete the actions  This parameter is useful while removing virtual machine which is powered on st
+    datacenter: ${20:ha-datacenter}                                        # Destination datacenter for the deploy operation  This parameter is case sensitive 
+    cluster: ${21:value}                                                   # The cluster name where the virtual machine will run  This is a required parameter, if C(esxi_hostname) is not set  C(esx
+    esxi_hostname: ${22:value}                                             # The ESXi hostname where the virtual machine will run  This is a required parameter, if C(cluster) is not set  C(esxi_hos
+    annotation: ${23:value}                                                # A note or annotation to include in the virtual machine 
+    customvalues: ${24:value}                                              # Define a list of custom values to set on virtual machine  A custom value object takes two fields C(key) and C(value)  In
+    networks: ${25:value}                                                  # A list of networks (in the order of the NICs)  Removing NICs is not allowed, while reconfiguring the virtual machine  Al
+    customization: ${26:value}                                             # Parameters for OS customization when cloning from the template or the virtual machine, or apply to the existing virtual 
+    vapp_properties: ${27:value}                                           # A list of vApp properties For full list of attributes and types refer to: U(https://github com/vmware/pyvmomi/blob/maste
+    customization_spec: ${28:value}                                        # Unique name identifying the requested customization specification  This parameter is case sensitive  If set, then overri
+    datastore: ${29:value}                                                 # Specify datastore or datastore cluster to provision virtual machine  This parameter takes precedence over "disk datastor
+    convert: ${30$$(yas-choose-value '("thin" "thick" "eagerzeroedthick"))}# choices: thin;thick;eagerzeroedthick  Specify convert disk type while cloning template or virtual machine 
+    hostname: ${31:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${32:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${33:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${34:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${35:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${36:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${37:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

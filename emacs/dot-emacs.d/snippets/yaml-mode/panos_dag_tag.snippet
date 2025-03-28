@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Create tags for DAG's on PAN-OS devices.
+# prefix: panos_dag_tags_snippet
+# key: panos_dag_tag
+# group: ansible
+# --
+
+- name: ${0:Create tags for DAG's on PAN-OS devices.}
+  panos_dag_tags:                                                          
+    ip_address: ${1:IP address (or hostname) of PAN-OS device}             #
+    password: ${2:Password for authentication}                             #
+    api_key: ${3:value}                                                    # API key that can be used instead of I(username)/I(password) credentials 
+    description: ${4:value}                                                # The purpose / objective of the static Address Group
+    commit: ${5:True}                                                      # commit if changed
+    devicegroup: ${6:value}                                                # -   D e v i c e   g r o u p s   a r e   u s e d   f o r   t h e   P a n o r a m a   i n t e r a c t i o n   w i t h   F 
+    operation: ${7:value}                                                  # The action to be taken  Supported values are I(add)/I(update)/I(find)/I(delete) 
+    tag_names: ${8:value}                                                  # The list of the tags that will be added or removed from the IP address 
+    ip_to_register: ${9:value}                                             # IP that will be registered with the given tag names 
+    username: ${10:admin}                                                  # Username for authentication 

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Get IoT Hub facts
+# prefix: azure_rm_iothub_info_snippet
+# key: zure_rm_iothub_info
+# group: ansible
+# --
+
+- name: ${0:Get IoT Hub facts}
+  azure_rm_iothub_info:                                                    
+    name: ${1:value}                                                       # Limit results to a specific resource group 
+    resource_group: ${2:value}                                             # The resource group to search for the desired IoT Hub 
+    tags: ${3:value}                                                       # Limit results by providing a list of tags  Format tags as 'key' or 'key:value' 
+    show_stats: ${4:value}                                                 # Show the statistics for IoT Hub  Note this will have network overhead for each IoT Hub 
+    show_quota_metrics: ${5:value}                                         # Get the quota metrics for an IoT hub  Note this will have network overhead for each IoT Hub 
+    show_endpoint_health: ${6:value}                                       # Get the health for routing endpoints  Note this will have network overhead for each IoT Hub 
+    test_route_message: ${7:value}                                         # Test routes message  It will be used to test all routes 
+    list_consumer_groups: ${8:value}                                       # List the consumer group of the built-in event hub 
+    list_keys: ${9:value}                                                  # List the keys of IoT Hub  Note this will have network overhead for each IoT Hub 
+    ad_user: ${10:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${11:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${12:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${13:value}                                           # Your Azure subscription Id 
+    client_id: ${14:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${15:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${16:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${17:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${18:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${19$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${20$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${21:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

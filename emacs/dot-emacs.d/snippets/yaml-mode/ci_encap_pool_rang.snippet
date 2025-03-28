@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manage encap ranges assigned to pools (fvns:EncapBlk, fvns:VsanEncapBlk)
+# prefix: aci_encap_pool_range_snippet
+# key: ci_encap_pool_rang
+# group: ansible
+# --
+
+- name: ${0:Manage encap ranges assigned to pools (fvns:EncapBlk, fvns:VsanEncapBlk)}
+  aci_encap_pool_range:                                                    
+    pool_type: ${1$$(yas-choose-value '("vlan" "vxlan" "vsan"))}           # The encap type of C(pool) 
+    host: ${2:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${4:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    allocation_mode: ${5$$(yas-choose-value '("dynamic" "inherit" "static"))}# choices: dynamic;inherit;static  The method used for allocating encaps to resources  Only vlan and vsan support alloca
+    description: ${6:value}                                                # Description for the pool range 
+    pool: ${7:value}                                                       # The name of the pool that the range should be assigned to 
+    pool_allocation_mode: ${8$$(yas-choose-value '("dynamic" "static"))}   # choices: dynamic;static  The method used for allocating encaps to resources  Only vlan and vsan support allocation modes
+    range_end: ${9:value}                                                  # The end of encap range 
+    range_name: ${10:value}                                                # The name to give to the encap range 
+    range_start: ${11:value}                                               # The start of the encap range 
+    state: ${12$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${13:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${14:admin}                                                  # The username to use for authentication 
+    certificate_name: ${15:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${16$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${17:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${18:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${19:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${20:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

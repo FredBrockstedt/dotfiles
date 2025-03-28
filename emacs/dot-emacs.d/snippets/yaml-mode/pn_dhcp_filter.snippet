@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/modify/delete dhcp-filter
+# prefix: pn_dhcp_filter_snippet
+# key: pn_dhcp_filter
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/modify/delete dhcp-filter}
+  pn_dhcp_filter:                                                          
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use C(present) to create dhcp-filter and C(absent) to delete dhcp-filter C(update) to modif
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_trusted_ports: ${3:value}                                           # trusted ports of dhcp config 
+    pn_name: ${4:value}                                                    # name of the DHCP filter 

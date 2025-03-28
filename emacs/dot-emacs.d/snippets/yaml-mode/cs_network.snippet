@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: Manages networks on Apache CloudStack based clouds.
+# prefix: cs_network_snippet
+# key: cs_network
+# group: ansible
+# --
+
+- name: ${0:Manages networks on Apache CloudStack based clouds.}
+  cs_network:                                                              
+    name: ${1:Name (case sensitive) of the network}                        #
+    display_text: ${2:value}                                               # Display text of the network  If not specified, I(name) will be used as I(display_text) 
+    network_offering: ${3:value}                                           # Name of the offering for the network  Required if I(state=present) 
+    start_ip: ${4:value}                                                   # The beginning IPv4 address of the network belongs to  Only considered on create 
+    end_ip: ${5:value}                                                     # The ending IPv4 address of the network belongs to  If not specified, value of I(start_ip) is used  Only considered on cr
+    gateway: ${6:value}                                                    # The gateway of the network  Required for shared networks and isolated networks when it belongs to a VPC  Only considered
+    netmask: ${7:value}                                                    # The netmask of the network  Required for shared networks and isolated networks when it belongs to a VPC  Only considered
+    start_ipv6: ${8:value}                                                 # The beginning IPv6 address of the network belongs to  Only considered on create 
+    end_ipv6: ${9:value}                                                   # The ending IPv6 address of the network belongs to  If not specified, value of I(start_ipv6) is used  Only considered on 
+    cidr_ipv6: ${10:value}                                                 # CIDR of IPv6 network, must be at least /64  Only considered on create 
+    gateway_ipv6: ${11:value}                                              # The gateway of the IPv6 network  Required for shared networks  Only considered on create 
+    vlan: ${12:value}                                                      # The ID or VID of the network 
+    vpc: ${13:value}                                                       # Name of the VPC of the network 
+    isolated_pvlan: ${14:value}                                            # The isolated private VLAN for this network 
+    clean_up: ${15:False}                                                  # Cleanup old network elements  Only considered on I(state=restarted) 
+    acl_type: ${16$$(yas-choose-value '("account" "domain"))}              # choices: account;domain  Access control type for the network  If not specified, Cloudstack will default to C(account) fo
+    acl: ${17:value}                                                       # The name of the access control list for the VPC network tier 
+    subdomain_access: ${18:value}                                          # Defines whether to allow subdomains to use networks dedicated to their parent domain(s)  Should be used with I(acl_type=
+    network_domain: ${19:value}                                            # The network domain 
+    state: ${20$$(yas-choose-value '("present" "absent" "restarted"))}     # choices: present;absent;restarted  State of the network 
+    zone: ${21:value}                                                      # Name of the zone in which the network should be deployed  If not set, default zone is used 
+    project: ${22:value}                                                   # Name of the project the network to be deployed in 
+    domain: ${23:value}                                                    # Domain the network is related to 
+    account: ${24:value}                                                   # Account the network is related to 
+    poll_async: ${25:True}                                                 # Poll async jobs until job has finished 
+    tags: ${26:value}                                                      # List of tags  Tags are a list of dictionaries having keys I(key) and I(value)  To delete all tags, set a empty list e g 
+    api_key: ${27:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${28:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${29:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${30$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${31:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${32:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

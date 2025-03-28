@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage IPL (inter-peer link) on Mellanox ONYX network devices
+# prefix: onyx_mlag_ipl_snippet
+# key: onyx_mlag_ip
+# group: ansible
+# --
+
+- name: ${0:Manage IPL (inter-peer link) on Mellanox ONYX network devices}
+  onyx_mlag_ipl:                                                           
+    name: ${1:Name of the interface (port-channel) IPL should be configured on}#
+    vlan_interface: ${2:value}                                             # Name of the IPL vlan interface 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  IPL state 
+    peer_address: ${4:value}                                               # IPL peer IP address 

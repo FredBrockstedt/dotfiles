@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Manage the atomic host platform
+# prefix: atomic_host_snippet
+# key: tomic_host
+# group: ansible
+# --
+
+- name: ${0:Manage the atomic host platform}
+  atomic_host:                                                             
+    revision: ${1:latest}                                                  # The version number of the atomic host to be deployed  Providing C(latest) will upgrade to the latest available version 

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage RabbitMQ users
+# prefix: rabbitmq_user_snippet
+# key: rabbitmq_user
+# group: ansible
+# --
+
+- name: ${0:Manage RabbitMQ users}
+  rabbitmq_user:                                                           
+    user: ${1:Name of user to add}                                         #
+    password: ${2:value}                                                   # Password of user to add  To change the password of an existing user, you must also specify C(update_password=always) 
+    tags: ${3:value}                                                       # User tags specified as comma delimited
+    permissions: ${4:[]}                                                   # a list of dicts, each dict contains vhost, configure_priv, write_priv, and read_priv, and represents a permission rule f
+    vhost: ${5:/}                                                          # vhost to apply access privileges  This option will be ignored when permissions option is used 
+    node: ${6:rabbit}                                                      # erlang node name of the rabbit we wish to configure
+    configure_priv: ${7:^\$}                                               # Regular expression to restrict configure actions on a resource for the specified vhost  By default all actions are restr
+    write_priv: ${8:^\$}                                                   # Regular expression to restrict configure actions on a resource for the specified vhost  By default all actions are restr
+    read_priv: ${9:^\$}                                                    # Regular expression to restrict configure actions on a resource for the specified vhost  By default all actions are restr
+    force: ${10:false}                                                     # Deletes and recreates the user 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Specify if user is to be added or removed
+    update_password: ${12$$(yas-choose-value '("on_create" "always"))}     # choices: on_create;always  C(on_create) will only set the password for newly created users   C(always) will update passw

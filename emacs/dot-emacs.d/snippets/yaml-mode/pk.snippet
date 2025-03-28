@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages apk packages
+# prefix: apk_snippet
+# key: pk
+# group: ansible
+# --
+
+- name: ${0:Manages apk packages}
+  apk:                                                                     
+    available: ${1:false}                                                  # During upgrade, reset versioned world dependencies and change logic to prefer replacing or downgrading packages (instead
+    name: ${2:value}                                                       # A package name, like C(foo), or multiple packages, like C(foo, bar) 
+    repository: ${3:value}                                                 # A package repository or multiple repositories  Unlike with the underlying apk command, this list will override the syste
+    state: ${4$$(yas-choose-value '("present" "absent" "latest"))}         # choices: present;absent;latest  Indicates the desired package(s) state  C(present) ensures the package(s) is/are present
+    update_cache: ${5:false}                                               # Update repository indexes  Can be run with other steps or on it's own 
+    upgrade: ${6:false}                                                    # Upgrade all installed packages to their latest version 

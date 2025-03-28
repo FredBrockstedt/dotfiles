@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Ensure a particular line is in a file, or replace an existing line using a back-referenced regular expression
+# prefix: win_lineinfile_snippet
+# key: win_lineinf
+# group: ansible
+# --
+
+- name: ${0:Ensure a particular line is in a file, or replace an existing line using a back-referenced regular expression}
+  win_lineinfile:                                                          
+    path: ${1:The path of the file to modify}                              # Note that the Windows path delimiter C(\\) must be escaped as C(\\\\) when the line is double quoted  Before Ansible 2 3
+    backup: ${2:False}                                                     # Determine whether a backup should be created  When set to C(yes), create a backup file including the timestamp informati
+    regex: ${3:value}                                                      # The regular expression to look for in every line of the file  For C(state=present), the pattern to replace if found; onl
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the line should be there or not 
+    line: ${5:value}                                                       # Required for C(state=present)  The line to insert/replace into the file  If C(backrefs) is set, may contain backreferenc
+    backrefs: ${6:False}                                                   # Used with C(state=present)  If set, line can contain backreferences (both positional and named) that will get populated 
+    insertafter: ${7$$(yas-choose-value '("EOF" "*regex*"))}               # choices: EOF;*regex*  Used with C(state=present)  If specified, the line will be inserted after the last match of specif
+    insertbefore: ${8$$(yas-choose-value '("BOF" "*regex*"))}              # choices: BOF;*regex*  Used with C(state=present)  If specified, the line will be inserted before the last match of speci
+    create: ${9:False}                                                     # Used with C(state=present)  If specified, the file will be created if it does not already exist  By default it will fail
+    validate: ${10:value}                                                  # Validation to run before copying into place  Use %s in the command to indicate the current file to validate  The command
+    encoding: ${11:auto}                                                   # Specifies the encoding of the source text file to operate on (and thus what the output encoding will be)  The default of
+    newline: ${12$$(yas-choose-value '("unix" "windows"))}                 # choices: unix;windows  Specifies the line separator style to use for the modified file  This defaults to the windows lin

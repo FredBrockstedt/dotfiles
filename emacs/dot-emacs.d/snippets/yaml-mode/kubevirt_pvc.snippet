@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Manage PVCs on Kubernetes
+# prefix: kubevirt_pvc_snippet
+# key: kubevirt_pvc
+# group: ansible
+# --
+
+- name: ${0:Manage PVCs on Kubernetes}
+  kubevirt_pvc:                                                            
+    name: ${1:Use to specify a PVC object name}                            #
+    namespace: ${2:Use to specify a PVC object namespace}                  #
+    resource_definition: ${3:value}                                        # A partial YAML definition of the PVC object being created/updated  Here you can define Kubernetes PVC Resource parameter
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines if an object should be created, patched, or deleted  When set to C(present), an obje
+    force: ${5:False}                                                      # If set to C(True), and I(state) is C(present), an existing object will be replaced 
+    merge_type: ${6$$(yas-choose-value '("json" "merge" "strategic-merge"))}# choices: json;merge;strategic-merge  Whether to override the default patch merge approach with a specific type  This de
+    annotations: ${7:value}                                                # Annotations attached to this object  U(https://kubernetes io/docs/concepts/overview/working-with-objects/annotations/)
+    labels: ${8:value}                                                     # Labels attached to this object  U(https://kubernetes io/docs/concepts/overview/working-with-objects/labels/)
+    selector: ${9:value}                                                   # A label query over volumes to consider for binding  U(https://kubernetes io/docs/concepts/overview/working-with-objects/
+    access_modes: ${10:value}                                              # Contains the desired access modes the volume should have  More info: U(https://kubernetes io/docs/concepts/storage/persi
+    size: ${11:value}                                                      # How much storage to allocate to the PVC 
+    storage_class_name: ${12:value}                                        # Name of the StorageClass required by the claim  More info: U(https://kubernetes io/docs/concepts/storage/persistent-volu
+    volume_mode: ${13:value}                                               # This defines what type of volume is required by the claim  Value of Filesystem is implied when not included in claim spe
+    volume_name: ${14:value}                                               # This is the binding reference to the PersistentVolume backing this claim 
+    cdi_source: ${15:value}                                                # If data is to be copied onto the PVC using the Containerized Data Importer you can specify the source of the data (along
+    wait: ${16:False}                                                      # If set, this module will wait for the PVC to become bound and CDI (if enabled) to finish its operation before returning 
+    wait_timeout: ${17:300}                                                # Specifies how much time in seconds to wait for PVC creation to complete if I(wait) option is enabled  Default value is r
+    host: ${18:value}                                                      # Provide a URL for accessing the API  Can also be specified via K8S_AUTH_HOST environment variable 
+    api_key: ${19:value}                                                   # Token used to authenticate with the API  Can also be specified via K8S_AUTH_API_KEY environment variable 
+    kubeconfig: ${20:value}                                                # Path to an existing Kubernetes config file  If not provided, and no other connection options are provided, the openshift
+    context: ${21:value}                                                   # The name of a context found in the config file  Can also be specified via K8S_AUTH_CONTEXT environment variable 
+    username: ${22:value}                                                  # Provide a username for authenticating with the API  Can also be specified via K8S_AUTH_USERNAME environment variable  Pl
+    password: ${23:value}                                                  # Provide a password for authenticating with the API  Can also be specified via K8S_AUTH_PASSWORD environment variable  Pl
+    client_cert: ${24:value}                                               # Path to a certificate used to authenticate with the API  Can also be specified via K8S_AUTH_CERT_FILE environment variab
+    client_key: ${25:value}                                                # Path to a key file used to authenticate with the API  Can also be specified via K8S_AUTH_KEY_FILE environment variable 
+    ca_cert: ${26:value}                                                   # Path to a CA certificate used to authenticate with the API  The full certificate chain must be provided to avoid certifi
+    validate_certs: ${27:value}                                            # Whether or not to verify the API server's SSL certificates  Can also be specified via K8S_AUTH_VERIFY_SSL environment va
+    proxy: ${28:value}                                                     # The URL of an HTTP proxy to use for the connection  Can also be specified via K8S_AUTH_PROXY environment variable  Pleas

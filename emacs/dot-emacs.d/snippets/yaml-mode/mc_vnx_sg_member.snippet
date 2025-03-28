@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage storage group member on EMC VNX
+# prefix: emc_vnx_sg_member_snippet
+# key: mc_vnx_sg_member
+# group: ansible
+# --
+
+- name: ${0:Manage storage group member on EMC VNX}
+  emc_vnx_sg_member:                                                       
+    name: ${1:Name of the Storage group to manage}                         #
+    lunid: ${2:Lun id to be added}                                         #
+    sp_address: ${3:Address of the SP of target/secondary storage}         #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicates the desired lunid state  C(present) ensures specified lunid is present in the Storage
+    sp_user: ${5:sysadmin}                                                 # Username for accessing SP 
+    sp_password: ${6:sysadmin}                                             # password for accessing SP 

@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Manage PostgreSQL Server instance
+# prefix: azure_rm_postgresqlserver_snippet
+# key: zure_rm_postgresqlserver
+# group: ansible
+# --
+
+- name: ${0:Manage PostgreSQL Server instance}
+  azure_rm_postgresqlserver:                                               
+    resource_group: ${1:The name of the resource group that contains the resource}# You can obtain this value from the Azure Resource Manager API or the portal 
+    name: ${2:The name of the server}                                      #
+    sku: ${3:value}                                                        # The SKU (pricing tier) of the server 
+    location: ${4:value}                                                   # Resource location  If not set, location from the resource group will be used as default 
+    storage_mb: ${5:value}                                                 # The maximum storage allowed for a server 
+    version: ${{6$$(yas-choose-value '("9}                                 #5,9 6,10|} # not required  choices: 9 5;9 6;10  Server version 
+    enforce_ssl: ${7:False}                                                # Enable SSL enforcement 
+    admin_username: ${8:value}                                             # The administrator's login name of a server  Can only be specified when the server is being created (and is required for 
+    admin_password: ${9:value}                                             # The password of the administrator login 
+    create_mode: ${10:Default}                                             # Create mode of SQL Server 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Assert the state of the PostgreSQL server  Use C(present) to create or update a server and C(ab
+    ad_user: ${12:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${13:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${14:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${15:value}                                           # Your Azure subscription Id 
+    client_id: ${16:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${17:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${18:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${19:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${20:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${21$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${22$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${23:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${24:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${25:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

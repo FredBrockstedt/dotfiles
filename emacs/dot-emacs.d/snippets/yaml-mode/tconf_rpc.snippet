@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Execute operations on NETCONF enabled network devices.
+# prefix: netconf_rpc_snippet
+# key: tconf_rpc
+# group: ansible
+# --
+
+- name: ${0:Execute operations on NETCONF enabled network devices.}
+  netconf_rpc:                                                             
+    rpc: ${1:value}                                                        # This argument specifies the request (name of the operation) to be executed on the remote NETCONF enabled device 
+    xmlns: ${2:value}                                                      # NETCONF operations not defined in rfc6241 typically require the appropriate XML namespace to be set  In the case the I(r
+    content: ${3:value}                                                    # This argument specifies the optional request content (all RPC attributes)  The I(content) value can either be provided a
+    display: ${4$$(yas-choose-value '("json" "pretty" "xml"))}             # choices: json;pretty;xml  Encoding scheme to use when serializing output from the device  The option I(json) will serial

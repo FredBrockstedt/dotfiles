@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage Cluster Pair
+# prefix: na_elementsw_cluster_pair_snippet
+# key: mentsw_cluster_pair
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage Cluster Pair}
+  na_elementsw_cluster_pair:                                               
+    dest_mvip: ${1:Destination IP address of the cluster to be paired}     #
+    hostname: ${2:The hostname or IP address of the SolidFire cluster}     #
+    username: ${3:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified cluster pair should exist or not 
+    dest_username: ${6:value}                                              # Destination username for the cluster to be paired  Optional if this is same as source cluster username 
+    dest_password: ${7:value}                                              # Destination password for the cluster to be paired  Optional if this is same as source cluster password 

@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: create a policy NAT rule
+# prefix: panos_nat_rule_snippet
+# key: panos_nat_ru
+# group: ansible
+# --
+
+- name: ${0:create a policy NAT rule}
+  panos_nat_rule:                                                          
+    ip_address: ${1:IP address (or hostname) of PAN-OS device being configured}#
+    password: ${2:Password credentials to use for auth unless I(api_key) is set}#
+    operation: ${3$$(yas-choose-value '("add" "update" "delete" "find"))}  # The action to be taken   Supported values are I(add)/I(update)/I(find)/I(delete) 
+    rule_name: ${4:name of the SNAT rule}                                  #
+    source_zone: ${5:list of source zones}                                 #
+    destination_zone: ${6:destination zone}                                #
+    username: ${7:admin}                                                   # Username credentials to use for auth unless I(api_key) is set 
+    api_key: ${8:value}                                                    # API key that can be used instead of I(username)/I(password) credentials 
+    devicegroup: ${9:value}                                                # If Panorama, the device group to put this rule in 
+    description: ${10:value}                                               # The description
+    source_ip: ${11:['any']}                                               # list of source addresses
+    destination_ip: ${12:['any']}                                          # list of destination addresses
+    service: ${13:any}                                                     # service
+    snat_type: ${14$$(yas-choose-value '("static-ip" "dynamic-ip-and-port" "dynamic-ip"))}# choices: static-ip;dynamic-ip-and-port;dynamic-ip  type of source translation
+    snat_address_type: ${15$$(yas-choose-value '("interface-address" "translated-address"))}# choices: interface-address;translated-address  type of source translation  Supported values are I(trans
+    snat_static_address: ${16:value}                                       # Source NAT translated address  Used with Static-IP translation 
+    snat_dynamic_address: ${17:value}                                      # Source NAT translated address  Used with Dynamic-IP and Dynamic-IP-and-Port 
+    snat_interface: ${18:value}                                            # snat interface
+    snat_interface_address: ${19:value}                                    # snat interface address
+    snat_bidirectional: ${20:false}                                        # bidirectional flag
+    dnat_address: ${21:value}                                              # dnat translated address
+    dnat_port: ${22:value}                                                 # dnat translated port
+    tag_name: ${23:value}                                                  # Tag for the NAT rule 
+    to_interface: ${24:any}                                                # Destination interface 
+    commit: ${25:true}                                                     # Commit configuration if changed 

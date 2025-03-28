@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Configure Infoblox NIOS host records
+# prefix: nios_host_record_snippet
+# key: os_host_record
+# group: ansible
+# --
+
+- name: ${0:Configure Infoblox NIOS host records}
+  nios_host_record:                                                        
+    name: ${1:Specifies the fully qualified hostname to add or remove from the system}# User can also update the hostname as it is possible to pass a dict containing I(new_name), I(old_name)  See e
+    view: ${2:default}:Sets the DNS view to associate this host record with}#  The DNS view must already be configured on the system
+    configure_for_dns: ${3:True}                                           # Sets the DNS to particular parent  If user needs to bypass DNS user can make the value to false 
+    ipv4addrs: ${4:value}                                                  # Configures the IPv4 addresses for this host record   This argument accepts a list of values (see suboptions)
+    ipv6addrs: ${5:value}                                                  # Configures the IPv6 addresses for the host record   This argument accepts a list of values (see options)
+    aliases: ${6:value}                                                    # Configures an optional list of additional aliases to add to the host record  These are equivalent to CNAMEs but held wit
+    ttl: ${7:value}                                                        # Configures the TTL to be associated with this host record
+    extattrs: ${8:value}                                                   # Allows for the configuration of Extensible Attributes on the instance of the object   This argument accepts a set of key
+    comment: ${9:value}                                                    # Configures a text string comment to be associated with the instance of this object   The provided text string will be co
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Configures the intended state of the instance of the object on the NIOS server   When this valu
+    provider: ${11:value}                                                  # A dict object containing connection details 

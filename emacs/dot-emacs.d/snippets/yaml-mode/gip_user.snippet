@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage user accounts and user attributes on a BIG-IP
+# prefix: bigip_user_snippet
+# key: gip_user
+# group: ansible
+# --
+
+- name: ${0:Manage user accounts and user attributes on a BIG-IP}
+  bigip_user:                                                              
+    username_credential: ${1:Name of the user to create, remove or modify} # The C(root) user may not be removed 
+    full_name: ${2:value}                                                  # Full name of the user 
+    password_credential: ${3:value}                                        # Set the users password to this unencrypted value  C(password_credential) is required when creating a new account 
+    shell: ${4$$(yas-choose-value '("bash" "none" "tmsh"))}                # choices: bash;none;tmsh  Optionally set the users shell 
+    partition_access: ${5:value}                                           # Specifies the administrative partition to which the user has access  C(partition_access) is required when creating a new
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the account should exist or not, taking action if the state is different from what is s
+    update_password: ${7$$(yas-choose-value '("always" "on_create"))}      # choices: always;on_create  C(always) will allow to update passwords if the user chooses to do so  C(on_create) will only
+    partition: ${8:Common}                                                 # Device partition to manage resources on 
+    provider: ${9:value}                                                   # A dict object containing connection details 

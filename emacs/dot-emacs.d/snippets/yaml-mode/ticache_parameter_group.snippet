@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage cache security groups in Amazon Elasticache.
+# prefix: elasticache_parameter_group_snippet
+# key: ticache_parameter_group
+# group: ansible
+# --
+
+- name: ${0:Manage cache security groups in Amazon Elasticache.}
+  elasticache_parameter_group:                                             
+    name: ${1:A user-specified name for the cache parameter group}         #
+    state: ${2$$(yas-choose-value '("present" "absent" "reset"))}          # Idempotent actions that will create/modify, destroy, or reset a cache parameter group as needed 
+    group_family: ${{3$$(yas-choose-value '("memcached1}                   #4,memcached1 5,redis2 6,redis2 8,redis3 2,redis4 0,redis5 0|} # not required  choices: memcached1 4;memcached1 5;redis2 6
+    description: ${4:value}                                                # A user-specified description for the cache parameter group 
+    values: ${5:value}                                                     # A user-specified dictionary of parameters to reset or modify for the cache parameter group 
+    debug_botocore_endpoint_logs: ${6:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${7:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${8:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${9:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${10:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${11:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${12:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${13:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage OneView Logical Interconnect Group resources
+# prefix: oneview_logical_interconnect_group_snippet
+# key: oneview_logical_interconnect_group
+# group: ansible
+# --
+
+- name: ${0:Manage OneView Logical Interconnect Group resources}
+  oneview_logical_interconnect_group:                                      
+    data: ${1:List with the Logical Interconnect Group properties}         #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicates the desired state for the Logical Interconnect Group resource  C(absent) will remove 
+    config: ${3:value}                                                     # Path to a  json configuration file containing the OneView client configuration  The configuration file is optional and w
+    validate_etag: ${4:True}                                               # When the ETag Validation is enabled, the request will be conditionally processed only if the current ETag for the resour

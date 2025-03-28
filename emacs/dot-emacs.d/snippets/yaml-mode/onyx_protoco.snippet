@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Enables/Disables protocols on Mellanox ONYX network devices
+# prefix: onyx_protocol_snippet
+# key: onyx_protoco
+# group: ansible
+# --
+
+- name: ${0:Enables/Disables protocols on Mellanox ONYX network devices}
+  onyx_protocol:                                                           
+    mlag: ${1$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  M L A G   p r o t o c o l
+    magp: ${2$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  M A G P   p r o t o c o l
+    spanning_tree: ${3$$(yas-choose-value '("enabled" "disabled"))}        # choices: enabled;disabled  S p a n n i n g   T r e e   s u p p o r t
+    dcb_pfc: ${4$$(yas-choose-value '("enabled" "disabled"))}              # choices: enabled;disabled  D C B   p r i o r i t y   f l o w   c o n t r o l
+    igmp_snooping: ${5$$(yas-choose-value '("enabled" "disabled"))}        # choices: enabled;disabled  I P   I G M P   s n o o p i n g
+    lacp: ${6$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  L A C P   p r o t o c o l
+    ip_l3: ${7$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  I P   L 3   s u p p o r t
+    ip_routing: ${8$$(yas-choose-value '("enabled" "disabled"))}           # choices: enabled;disabled  I P   r o u t i n g   s u p p o r t
+    lldp: ${9$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  L L D P   p r o t o c o l
+    bgp: ${10$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  B G P   p r o t o c o l
+    ospf: ${11$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  O S P F   p r o t o c o l
+    nve: ${12$$(yas-choose-value '("enabled" "disabled"))}                 # choices: enabled;disabled  n v e   p r o t o c o l

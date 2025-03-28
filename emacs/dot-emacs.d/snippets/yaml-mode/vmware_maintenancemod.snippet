@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Place a host into maintenance mode
+# prefix: vmware_maintenancemode_snippet
+# key: vmware_maintenancemod
+# group: ansible
+# --
+
+- name: ${0:Place a host into maintenance mode}
+  vmware_maintenancemode:                                                  
+    esxi_hostname: ${1:Name of the host as defined in vCenter}             #
+    vsan: ${2$$(yas-choose-value '("ensureObjectAccessibility" "evacuateAllData" "noAction"))}# choices: ensureObjectAccessibility;evacuateAllData;noAction  Specify which VSAN compliant mode to ent
+    evacuate: ${3:False}                                                   # If set to C(True), evacuate all powered off VMs 
+    timeout: ${4:0}                                                        # Specify a timeout for the operation 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Enter or exit maintenance mode 
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${7:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${8:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${10:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${11:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${12:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

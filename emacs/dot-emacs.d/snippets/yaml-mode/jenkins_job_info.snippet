@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Get information about Jenkins jobs
+# prefix: jenkins_job_info_snippet
+# key: jenkins_job_info
+# group: ansible
+# --
+
+- name: ${0:Get information about Jenkins jobs}
+  jenkins_job_info:                                                        
+    name: ${1:value}                                                       # Exact name of the Jenkins job to fetch information about 
+    glob: ${2:value}                                                       # A shell glob of Jenkins job names to fetch information about 
+    color: ${3:value}                                                      # Only fetch jobs with the given status color 
+    password: ${4:value}                                                   # Password to authenticate with the Jenkins server  This is a required parameter, if C(token) is not provided 
+    token: ${5:value}                                                      # API token used to authenticate with the Jenkins server  This is a required parameter, if C(password) is not provided 
+    url: ${6:http://localhost:8080}                                        # URL where the Jenkins server is accessible 
+    user: ${7:value}                                                       # User to authenticate with the Jenkins server 
+    validate_certs: ${8:True}                                              # If set to C(False), the SSL certificates will not be validated  This should only set to C(False) used on personally cont

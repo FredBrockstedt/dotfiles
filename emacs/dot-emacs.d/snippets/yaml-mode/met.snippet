@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Execute Ansible 'actions'
+# prefix: meta_snippet
+# key: met
+# group: ansible
+# --
+
+- name: ${0:Execute Ansible 'actions'}
+  meta:                                                                    
+    free_form: ${1$$(yas-choose-value '("clear_facts" "clear_host_errors" "end_host" "end_play" "flush_handlers" "noop" "refresh_inventory" "reset_connection"))}# This module takes a free form comm

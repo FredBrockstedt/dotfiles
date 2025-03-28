@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Ensures the existence of a Windows domain
+# prefix: win_domain_snippet
+# key: win_dom
+# group: ansible
+# --
+
+- name: ${0:Ensures the existence of a Windows domain}
+  win_domain:                                                              
+    dns_domain_name: ${1:The DNS name of the domain which should exist and be reachable or reside on the target Windows host}#
+    safe_mode_password: ${2:Safe mode password for the domain controller}  #
+    domain_netbios_name: ${3:value}                                        # The NetBIOS name for the root domain in the new forest  For NetBIOS names to be valid for use with this parameter they m
+    database_path: ${4:value}                                              # The path to a directory on a fixed disk of the Windows host where the domain database will be created  If not set then t
+    sysvol_path: ${5:value}                                                # The path to a directory on a fixed disk of the Windows host where the Sysvol file will be created  If not set then the d
+    create_dns_delegation: ${6:value}                                      # Whether to create a DNS delegation that references the new DNS server that you install along with the domain controller 
+    domain_mode: ${7$$(yas-choose-value '("Win2003" "Win2008" "Win2008R2" "Win2012" "Win2012R2" "WinThreshold"))}# choices: Win2003;Win2008;Win2008R2;Win2012;Win2012R2;WinThreshold  Specifies the d
+    forest_mode: ${8$$(yas-choose-value '("Win2003" "Win2008" "Win2008R2" "Win2012" "Win2012R2" "WinThreshold"))}# choices: Win2003;Win2008;Win2008R2;Win2012;Win2012R2;WinThreshold  Specifies the f

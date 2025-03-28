@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Executes the script on a given list of targets.
+# prefix: cp_mgmt_run_script_snippet
+# key: cp_mgmt_run_script
+# group: ansible
+# --
+
+- name: ${0:Executes the script on a given list of targets.}
+  cp_mgmt_run_script:                                                      
+    script_name: ${1:value}                                                # Script name 
+    script: ${2:value}                                                     # Script body 
+    targets: ${3:value}                                                    # On what targets to execute this command  Targets may be identified by their name, or object unique identifier 
+    args: ${4:value}                                                       # Script arguments 
+    comments: ${5:value}                                                   # Comments string 
+    wait_for_task: ${6:True}                                               # Wait for the task to end  Such as publish task 
+    version: ${7:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

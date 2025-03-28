@@ -1,0 +1,69 @@
+# -*- mode: snippet -*-
+# name: Manage SmartOS virtual machines and zones.
+# prefix: vmadm_snippet
+# key: vmadm
+# group: ansible
+# --
+
+- name: ${0:Manage SmartOS virtual machines and zones.}
+  vmadm:                                                                   
+    brand: ${1$$(yas-choose-value '("joyent" "joyent-minimal" "kvm" "lx"))}# Type of virtual machine 
+    state: ${2$$(yas-choose-value '("present" "absent" "stopped" "restarted"))}# States for the VM to be in  Please note that C(present), C(stopped) and C(restarted) operate on a VM that is current
+    archive_on_delete: ${3:value}                                          # When enabled, the zone dataset will be mounted on C(/zones/archive) upon removal 
+    autoboot: ${4:value}                                                   # Whether or not a VM is booted when the system is rebooted 
+    boot: ${5:value}                                                       # Set the boot order for KVM VMs 
+    cpu_cap: ${6:value}                                                    # Sets a limit on the amount of CPU time that can be used by a VM  Use C(0) for no cap 
+    cpu_shares: ${7:value}                                                 # Sets a limit on the number of fair share scheduler (FSS) CPU shares for a VM  This limit is relative to all other VMs on
+    cpu_type: ${8$$(yas-choose-value '("qemu64" "host"))}                  # choices: qemu64;host  Control the type of virtual CPU exposed to KVM VMs 
+    customer_metadata: ${9:value}                                          # Metadata to be set and associated with this VM, this contain customer modifiable keys 
+    delegate_dataset: ${10:value}                                          # Whether to delegate a ZFS dataset to an OS VM 
+    disk_driver: ${11:value}                                               # Default value for a virtual disk model for KVM guests 
+    disks: ${12:value}                                                     # A list of disks to add, valid properties are documented in vmadm(1M) 
+    dns_domain: ${13:value}                                                # Domain value for C(/etc/hosts) 
+    docker: ${14:value}                                                    # Docker images need this flag enabled along with the I(brand) set to C(lx) 
+    filesystems: ${15:value}                                               # Mount additional filesystems into an OS VM 
+    firewall_enabled: ${16:value}                                          # Enables the firewall, allowing fwadm(1M) rules to be applied 
+    force: ${17:value}                                                     # Force a particular action (i e  stop or delete a VM) 
+    fs_allowed: ${18:value}                                                # Comma separated list of filesystem types this zone is allowed to mount 
+    hostname: ${19:value}                                                  # Zone/VM hostname 
+    image_uuid: ${20:value}                                                # Image UUID 
+    indestructible_delegated: ${21:value}                                  # Adds an C(@indestructible) snapshot to delegated datasets 
+    indestructible_zoneroot: ${22:value}                                   # Adds an C(@indestructible) snapshot to zoneroot 
+    internal_metadata: ${23:value}                                         # Metadata to be set and associated with this VM, this contains operator generated keys 
+    internal_metadata_namespace: ${24:value}                               # List of namespaces to be set as I(internal_metadata-only); these namespaces will come from I(internal_metadata) rather t
+    kernel_version: ${25:value}                                            # Kernel version to emulate for LX VMs 
+    limit_priv: ${26:value}                                                # Set (comma separated) list of privileges the zone is allowed to use 
+    maintain_resolvers: ${27:value}                                        # Resolvers in C(/etc/resolv conf) will be updated when updating the I(resolvers) property 
+    max_locked_memory: ${28:value}                                         # Total amount of memory (in MiBs) on the host that can be locked by this VM 
+    max_lwps: ${29:value}                                                  # Maximum number of lightweight processes this VM is allowed to have running 
+    max_physical_memory: ${30:value}                                       # Maximum amount of memory (in MiBs) on the host that the VM is allowed to use 
+    max_swap: ${31:value}                                                  # Maximum amount of virtual memory (in MiBs) the VM is allowed to use 
+    mdata_exec_timeout: ${32:value}                                        # Timeout in seconds (or 0 to disable) for the C(svc:/smartdc/mdata:execute) service that runs user-scripts in the zone 
+    name: ${33:value}                                                      # Name of the VM  vmadm(1M) uses this as an optional name 
+    nic_driver: ${34:value}                                                # Default value for a virtual NIC model for KVM guests 
+    nics: ${35:value}                                                      # A list of nics to add, valid properties are documented in vmadm(1M) 
+    nowait: ${36:value}                                                    # Consider the provisioning complete when the VM first starts, rather than when the VM has rebooted 
+    qemu_opts: ${37:value}                                                 # Additional qemu arguments for KVM guests  This overwrites the default arguments provided by vmadm(1M) and should only be
+    qemu_extra_opts: ${38:value}                                           # Additional qemu cmdline arguments for KVM guests 
+    quota: ${39:value}                                                     # Quota on zone filesystems (in MiBs) 
+    ram: ${40:value}                                                       # Amount of virtual RAM for a KVM guest (in MiBs) 
+    resolvers: ${41:value}                                                 # List of resolvers to be put into C(/etc/resolv conf) 
+    routes: ${42:value}                                                    # Dictionary that maps destinations to gateways, these will be set as static routes in the VM 
+    spice_opts: ${43:value}                                                # Addition options for SPICE-enabled KVM VMs 
+    spice_password: ${44:value}                                            # Password required to connect to SPICE  By default no password is set  Please note this can be read from the Global Zone 
+    tmpfs: ${45:value}                                                     # Amount of memory (in MiBs) that will be available in the VM for the C(/tmp) filesystem 
+    uuid: ${46:value}                                                      # UUID of the VM  Can either be a full UUID or C(*) for all VMs 
+    vcpus: ${47:value}                                                     # Number of virtual CPUs for a KVM guest 
+    vga: ${48:value}                                                       # Specify VGA emulation used by KVM VMs 
+    virtio_txburst: ${49:value}                                            # Number of packets that can be sent in a single flush of the tx queue of virtio NICs 
+    virtio_txtimer: ${50:value}                                            # Timeout (in nanoseconds) for the TX timer of virtio NICs 
+    vnc_password: ${51:value}                                              # Password required to connect to VNC  By default no password is set  Please note this can be read from the Global Zone 
+    vnc_port: ${52:value}                                                  # TCP port to listen of the VNC server  Or set C(0) for random, or C(-1) to disable 
+    zfs_data_compression: ${53:value}                                      # Specifies compression algorithm used for this VMs data dataset  This option only has effect on delegated datasets 
+    zfs_data_recsize: ${54:value}                                          # Suggested block size (power of 2) for files in the delegated dataset's filesystem 
+    zfs_filesystem_limit: ${55:value}                                      # Maximum number of filesystems the VM can have 
+    zfs_io_priority: ${56:value}                                           # IO throttle priority value relative to other VMs 
+    zfs_root_compression: ${57:value}                                      # Specifies compression algorithm used for this VMs root dataset  This option only has effect on the zoneroot dataset 
+    zfs_root_recsize: ${58:value}                                          # Suggested block size (power of 2) for files in the zoneroot dataset's filesystem 
+    zfs_snapshot_limit: ${59:value}                                        # Number of snapshots the VM can have 
+    zpool: ${60:value}                                                     # ZFS pool the VM's zone dataset will be created in 

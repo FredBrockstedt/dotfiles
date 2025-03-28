@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP NodePool
+# prefix: gcp_container_node_pool_snippet
+# key: gcp_container_node_poo
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP NodePool}
+  gcp_container_node_pool:                                                 
+    initial_node_count: ${1:The initial node count for the pool}           # You must ensure that your Compute Engine resource quota is sufficient for this number of instances  You must also have a
+    cluster: ${2:The cluster this node pool belongs to}                    # This field represents a link to a Cluster resource in GCP  It can be specified in two ways  First, you can place a dicti
+    location: ${3:The location where the node pool is deployed}            #
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    name: ${6:value}                                                       # The name of the node pool 
+    config: ${7:value}                                                     # The node configuration of the pool 
+    version: ${8:value}                                                    # The version of the Kubernetes of this node 
+    autoscaling: ${9:value}                                                # Autoscaler configuration for this NodePool  Autoscaler is enabled only if a valid configuration is present 
+    management: ${10:value}                                                # Management configuration for this NodePool 
+    max_pods_constraint: ${11:value}                                       # The constraint on the maximum number of pods that can be run simultaneously on a node in the node pool 
+    conditions: ${12:value}                                                # Which conditions caused the current node pool state 
+    project: ${13:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${14:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${15:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${16:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${17:value}                                                    # Array of scopes to be used 
+    env_type: ${18:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

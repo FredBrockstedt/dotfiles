@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Add/Update/Delete ports from an OpenStack cloud.
+# prefix: os_port_snippet
+# key: os_port
+# group: ansible
+# --
+
+- name: ${0:Add/Update/Delete ports from an OpenStack cloud.}
+  os_port:                                                                 
+    network: ${1:Network ID or name this port belongs to}                  #
+    name: ${2:value}                                                       # Name that has to be given to the port 
+    fixed_ips: ${3:value}                                                  # Desired IP and/or subnet for this port   Subnet is referenced by subnet_id and IP is referenced by ip_address 
+    admin_state_up: ${4:value}                                             # Sets admin state 
+    mac_address: ${5:value}                                                # MAC address of this port 
+    security_groups: ${6:value}                                            # Security group(s) ID(s) or name(s) associated with the port (comma separated string or YAML list)
+    no_security_groups: ${7:false}                                         # Do not associate a security group with this port 
+    allowed_address_pairs: ${8:value}                                      # Allowed address pairs list   Allowed address pairs are supported with dictionary structure  e g   allowed_address_pairs:
+    extra_dhcp_opts: ${9:value}                                            # Extra dhcp options to be assigned to this port   Extra options are supported with dictionary structure  e g   extra_dhcp
+    device_owner: ${10:value}                                              # The ID of the entity that uses this port 
+    device_id: ${11:value}                                                 # Device ID of device using this port 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Should the resource be present or absent 
+    availability_zone: ${13:value}                                         # Ignored  Present for backwards compatibility
+    vnic_type: ${14$$(yas-choose-value '("normal" "direct" "direct-physical" "macvtap" "baremetal" "virtio-forwarder"))}# choices: normal;direct;direct-physical;macvtap;baremetal;virtio-forwarder  
+    port_security_enabled: ${15:value}                                     # Whether to enable or disable the port security on the network 
+    cloud: ${16:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${17:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${18:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${19:value}                                               # Name of the region 
+    wait: ${20:True}                                                       # Should ansible wait until the requested resource is complete 
+    timeout: ${21:180}                                                     # How long should ansible wait for the requested resource 
+    api_timeout: ${22:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${23:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${24:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${25:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${26:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${27$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

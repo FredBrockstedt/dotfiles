@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages STP configuration on HUAWEI CloudEngine switches.
+# prefix: ce_stp_snippet
+# key: ce_stp
+# group: ansible
+# --
+
+- name: ${0:Manages STP configuration on HUAWEI CloudEngine switches.}
+  ce_stp:                                                                  
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 
+    stp_mode: ${2$$(yas-choose-value '("stp" "rstp" "mstp"))}              # choices: stp;rstp;mstp  Set an operation mode for the current MSTP process  The mode can be STP, RSTP, or MSTP 
+    stp_enable: ${3$$(yas-choose-value '("enable" "disable"))}             # choices: enable;disable  Enable or disable STP on a switch 
+    stp_converge: ${4$$(yas-choose-value '("fast" "normal"))}              # choices: fast;normal  STP convergence mode  Fast means set STP aging mode to Fast  Normal means set STP aging mode to No
+    bpdu_protection: ${5$$(yas-choose-value '("enable" "disable"))}        # choices: enable;disable  Configure BPDU protection on an edge port  This function prevents network flapping caused by at
+    tc_protection: ${6$$(yas-choose-value '("enable" "disable"))}          # choices: enable;disable  Configure the TC BPDU protection function for an MSTP process 
+    tc_protection_interval: ${7:value}                                     # Set the time the MSTP device takes to handle the maximum number of TC BPDUs and immediately refresh forwarding entries  
+    tc_protection_threshold: ${8:value}                                    # Set the maximum number of TC BPDUs that the MSTP can handle  The value is an integer ranging from 1 to 255  The default 
+    interface: ${9:value}                                                  # Interface name  If the value is C(all), will apply configuration to all interfaces  if the value is a special name, only
+    edged_port: ${10$$(yas-choose-value '("enable" "disable"))}            # choices: enable;disable  Set the current port as an edge port 
+    bpdu_filter: ${11$$(yas-choose-value '("enable" "disable"))}           # choices: enable;disable  Specify a port as a BPDU filter port 
+    cost: ${12:value}                                                      # Set the path cost of the current port  The default instance is 0 
+    root_protection: ${13$$(yas-choose-value '("enable" "disable"))}       # choices: enable;disable  Enable root protection on the current port 
+    loop_protection: ${14$$(yas-choose-value '("enable" "disable"))}       # choices: enable;disable  Enable loop protection on the current port 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Configuration of alerts in ManageIQ
+# prefix: manageiq_alerts_snippet
+# key: manageiq_alert
+# group: ansible
+# --
+
+- name: ${0:Configuration of alerts in ManageIQ}
+  manageiq_alerts:                                                         
+    manageiq_connection: ${1:ManageIQ connection configuration information}#
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  absent - alert should not exist, present - alert should exist,
+    description: ${3:value}                                                # The unique alert description in ManageIQ  Required when state is "absent" or "present" 
+    resource_type: ${4$$(yas-choose-value '("Vm" "ContainerNode" "MiqServer" "Host" "Storage" "EmsCluster" "ExtManagementSystem" "MiddlewareServer"))}# choices: Vm;ContainerNode;MiqServer;Host;Stor
+    expression_type: ${5$$(yas-choose-value '("hash" "miq"))}              # choices: hash;miq  Expression type 
+    expression: ${6:value}                                                 # The alert expression for ManageIQ  Can either be in the "Miq Expression" format or the "Hash Expression format"  Require
+    enabled: ${7:value}                                                    # Enable or disable the alert  Required if state is "present" 
+    options: ${8:value}                                                    # Additional alert options, such as notification type and frequency

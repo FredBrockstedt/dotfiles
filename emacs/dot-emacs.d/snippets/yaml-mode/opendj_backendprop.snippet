@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Will update the backend configuration of OpenDJ via the dsconfig set-backend-prop command.
+# prefix: opendj_backendprop_snippet
+# key: opendj_backendprop
+# group: ansible
+# --
+
+- name: ${0:Will update the backend configuration of OpenDJ via the dsconfig set-backend-prop command.}
+  opendj_backendprop:                                                      
+    hostname: ${1:The hostname of the OpenDJ server}                       #
+    port: ${2:The Admin port on which the OpenDJ instance is available}    #
+    backend: ${3:The name of the backend on which the property needs to be updated}#
+    name: ${4:The configuration setting to update}                         #
+    value: ${5:The value for the configuration item}                       #
+    opendj_bindir: ${6:/opt/opendj/bin}                                    # The path to the bin directory of OpenDJ 
+    username: ${7:"cn=Directory Manager"}                                  # The username to connect to 
+    password: ${8:value}                                                   # The password for the cn=Directory Manager user  Either password or passwordfile is needed 
+    passwordfile: ${9:value}                                               # Location to the password file which holds the password for the cn=Directory Manager user  Either password or passwordfil
+    state: ${10:present}                                                   # If configuration needs to be added/updated

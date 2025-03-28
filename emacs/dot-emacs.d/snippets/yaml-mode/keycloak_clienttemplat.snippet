@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Allows administration of Keycloak client templates via Keycloak API
+# prefix: keycloak_clienttemplate_snippet
+# key: keycloak_clienttemplat
+# group: ansible
+# --
+
+- name: ${0:Allows administration of Keycloak client templates via Keycloak API}
+  keycloak_clienttemplate:                                                 
+    auth_keycloak_url: ${1:URL to the Keycloak instance}                   #
+    auth_client_id: ${2:admin-cli}:OpenID Connect I(client_id) to authenticate to the API with}#
+    auth_realm: ${3:Keycloak realm name to authenticate to for API access} #
+    auth_username: ${4:Username to authenticate for API access with}       #
+    auth_password: ${5:Password to authenticate for API access with}       #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the client template On C(present), the client template will be created (or updated if 
+    id: ${7:value}                                                         # Id of client template to be worked on  This is usually a UUID 
+    realm: ${8:value}                                                      # Realm this client template is found in 
+    name: ${9:value}                                                       # Name of the client template
+    description: ${10:value}                                               # Description of the client template in Keycloak
+    protocol: ${11$$(yas-choose-value '("openid-connect" "saml"))}         # choices: openid-connect;saml  Type of client template (either C(openid-connect) or C(saml) 
+    full_scope_allowed: ${12:value}                                        # Is the "Full Scope Allowed" feature set for this client template or not  This is 'fullScopeAllowed' in the Keycloak REST
+    protocol_mappers: ${13:value}                                          # a list of dicts defining protocol mappers for this client template  This is 'protocolMappers' in the Keycloak REST API 
+    attributes: ${14:value}                                                # A dict of further attributes for this client template  This can contain various configuration settings, though in the de
+    auth_client_secret: ${15:value}                                        # Client Secret to use in conjunction with I(auth_client_id) (if required) 
+    validate_certs: ${16:True}                                             # Verify TLS certificates (do not disable this in production) 

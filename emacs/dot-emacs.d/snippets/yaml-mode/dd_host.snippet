@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Add a host (and alternatively a group) to the ansible-playbook in-memory inventory
+# prefix: add_host_snippet
+# key: dd_host
+# group: ansible
+# --
+
+- name: ${0:Add a host (and alternatively a group) to the ansible-playbook in-memory inventory}
+  add_host:                                                                
+    name: ${1:The hostname/ip of the host to add to the inventory, can include a colon and a port number}#
+    groups: ${2:value}                                                     # The groups to add the hostname to 

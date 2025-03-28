@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Module for setup of AlertConfig Avi RESTful Object
+# prefix: avi_alertconfig_snippet
+# key: vi_alertconfig
+# group: ansible
+# --
+
+- name: ${0:Module for setup of AlertConfig Avi RESTful Object}
+  avi_alertconfig:                                                         
+    alert_rule: ${1:List of filters matching on events or client logs used for triggering alerts}#
+    category: ${2:Determines whether an alert is raised immediately when event occurs (realtime) or after specified number of events occurs within rolling time window}# Enum options - REALTIME, ROL
+    name: ${3:Name of the alert configuration}                             #
+    source: ${4:Signifies system events or the type of client logsused in this alert configuration}# Enum options - CONN_LOGS, APP_LOGS, EVENT_LOGS, METRICS 
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${6$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${7$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    action_group_ref: ${8:value}                                           # The alert config will trigger the selected alert action, which can send notifications and execute a controlscript  It is
+    autoscale_alert: ${9:value}                                            # This alert config applies to auto scale alerts 
+    description: ${10:value}                                               # A custom description field 
+    enabled: ${11:value}                                                   # Enable or disable this alert config from generating new alerts  Default value when not specified in API or module is int
+    expiry_time: ${12:value}                                               # An alert is expired and deleted after the expiry time has elapsed  The original event triggering the alert remains in th
+    obj_uuid: ${13:value}                                                  # Uuid of the resource for which alert was raised 
+    object_type: ${14:value}                                               # The object type to which the alert config is associated with  Valid object types are - virtual service, pool, service en
+    recommendation: ${15:value}                                            # Recommendation of alertconfig 
+    rolling_window: ${16:value}                                            # Only if the number of events is reached or exceeded within the time window will an alert be generated  Allowed values ar
+    summary: ${17:value}                                                   # Summary of reason why alert is generated 
+    tenant_ref: ${18:value}                                                # It is a reference to an object of type tenant 
+    threshold: ${19:value}                                                 # An alert is created only when the number of events meets or exceeds this number within the chosen time frame  Allowed va
+    throttle: ${20:value}                                                  # Alerts are suppressed (throttled) for this duration of time since the last alert was raised for this alert config  Allow
+    url: ${21:value}                                                       # Avi controller URL of the object 
+    uuid: ${22:value}                                                      # Unique object identifier of the object 
+    controller: ${23:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${24:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${25:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${26:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${27:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{28:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${29:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${30:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${31:value}                         # It disables avi session information to be cached as a fact 

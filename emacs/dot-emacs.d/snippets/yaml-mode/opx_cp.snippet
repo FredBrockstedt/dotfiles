@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: CPS operations on networking device running Openswitch (OPX)
+# prefix: opx_cps_snippet
+# key: opx_cp
+# group: ansible
+# --
+
+- name: ${0:CPS operations on networking device running Openswitch (OPX)}
+  opx_cps:                                                                 
+    module_name: ${1:value}                                                # Yang path to be configured 
+    attr_type: ${2:value}                                                  # Attribute Yang type 
+    attr_data: ${3:value}                                                  # Attribute Yang path and their corresponding data 
+    operation: ${4$$(yas-choose-value '("delete" "create" "set" "action" "get"))}# choices: delete;create;set;action;get  Operation to be performed on the object 
+    db: ${5:false}                                                         # Queries/Writes the specified yang path from/to the db 
+    qualifier: ${6$$(yas-choose-value '("target" "observed" "proposed" "realtime" "registration" "running" "startup"))}# choices: target;observed;proposed;realtime;registration;running;startup  A q
+    commit_event: ${7:false}                                               # Attempts to force the auto-commit event to the specified yang object 

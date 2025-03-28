@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages networks on Vultr.
+# prefix: vultr_network_snippet
+# key: vultr_network
+# group: ansible
+# --
+
+- name: ${0:Manages networks on Vultr.}
+  vultr_network:                                                           
+    name: ${1:Name of the network}                                         #
+    cidr: ${2:value}                                                       # The CIDR IPv4 network block to be used when attaching servers to this network  Required if I(state=present) 
+    region: ${3:value}                                                     # Region the network is deployed into  Required if I(state=present) 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the network 
+    api_key: ${5:value}                                                    # API key of the Vultr API  The ENV variable C(VULTR_API_KEY) is used as default, when defined 
+    api_timeout: ${6:value}                                                # HTTP timeout to Vultr API  The ENV variable C(VULTR_API_TIMEOUT) is used as default, when defined  Fallback value is 60 
+    api_retries: ${7:value}                                                # Amount of retries in case of the Vultr API retuns an HTTP 503 code  The ENV variable C(VULTR_API_RETRIES) is used as def
+    api_retry_max_delay: ${8:value}                                        # Retry backoff delay in seconds is exponential up to this max  value, in seconds  The ENV variable C(VULTR_API_RETRY_MAX_
+    api_account: ${9:default}                                              # Name of the ini section in the C(vultr ini) file  The ENV variable C(VULTR_API_ACCOUNT) is used as default, when defined
+    api_endpoint: ${10:value}                                              # URL to API endpint (without trailing slash)  The ENV variable C(VULTR_API_ENDPOINT) is used as default, when defined  Fa
+    validate_certs: ${11:True}                                             # Validate SSL certs of the Vultr API 

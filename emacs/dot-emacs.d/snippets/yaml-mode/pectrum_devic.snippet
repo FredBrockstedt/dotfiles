@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Creates/deletes devices in CA Spectrum.
+# prefix: spectrum_device_snippet
+# key: pectrum_devic
+# group: ansible
+# --
+
+- name: ${0:Creates/deletes devices in CA Spectrum.}
+  spectrum_device:                                                         
+    device: ${1:IP address of the device}                                  # If a hostname is given, it will be resolved to the IP address 
+    landscape: ${2:Landscape handle of the SpectroServer to which add or remove the device}#
+    url: ${3:HTTP" " HTTPS URL of the Oneclick server in the form (http$$(yas-choose-value '("https)://host}#domain[:port]
+    url_username: ${4:Oneclick user name}                                  #
+    url_password: ${5:Oneclick user password}                              #
+    community: ${6:value}                                                  # SNMP community used for device discovery  Required when C(state=present) 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  On C(present) creates the device when it does not exist  On C(absent) removes the device when i
+    use_proxy: ${8:true}                                                   # if C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    validate_certs: ${9:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    agentport: ${10:161}                                                   # UDP port used for SNMP discovery 

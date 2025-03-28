@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Module to manage Virtual Machine Snapshots in oVirt/RHV
+# prefix: ovirt_snapshot_snippet
+# key: ovirt_snapshot
+# group: ansible
+# --
+
+- name: ${0:Module to manage Virtual Machine Snapshots in oVirt/RHV}
+  ovirt_snapshot:                                                          
+    vm_name: ${1:Name of the Virtual Machine to manage}                    #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    snapshot_id: ${3:value}                                                # ID of the snapshot to manage 
+    state: ${4$$(yas-choose-value '("restore" "present" "absent"))}        # choices: restore;present;absent  Should the Virtual Machine snapshot be restore/present/absent 
+    description: ${5:value}                                                # Description of the snapshot 
+    disk_id: ${6:value}                                                    # Disk id which you want to upload or download To get disk, you need to define disk_id or disk_name
+    disk_name: ${7:value}                                                  # Disk name which you want to upload or download
+    download_image_path: ${8:value}                                        # Path on a file system where snapshot should be downloaded  Note that you must have an valid oVirt/RHV engine CA in your 
+    upload_image_path: ${9:value}                                          # Path to disk image, which should be uploaded 
+    use_memory: ${10:value}                                                # If I(true) and C(state) is I(present) save memory of the Virtual Machine if it's running  If I(true) and C(state) is I(r
+    keep_days_old: ${11:value}                                             # Number of days after which should snapshot be deleted  It will check all snapshots of virtual machine and delete them, i
+    wait: ${12:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${13:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${14:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${15:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${16:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage link properties on Solaris/illumos systems.
+# prefix: dladm_linkprop_snippet
+# key: dladm_linkprop
+# group: ansible
+# --
+
+- name: ${0:Manage link properties on Solaris/illumos systems.}
+  dladm_linkprop:                                                          
+    link: ${1:Link interface name}                                         #
+    property: ${2:Specifies the name of the property we want to manage}    #
+    value: ${3:value}                                                      # Specifies the value we want to set for the link property 
+    temporary: ${4:False}                                                  # Specifies that lin property configuration is temporary  Temporary link property configuration does not persist across re
+    state: ${5$$(yas-choose-value '("present" "absent" "reset"))}          # choices: present;absent;reset  Set or reset the property value 

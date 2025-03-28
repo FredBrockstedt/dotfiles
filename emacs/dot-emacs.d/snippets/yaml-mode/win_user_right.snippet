@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage Windows User Rights
+# prefix: win_user_right_snippet
+# key: win_user_right
+# group: ansible
+# --
+
+- name: ${0:Manage Windows User Rights}
+  win_user_right:                                                          
+    name: ${1:The name of the User Right as shown by the C(Constant Name) value from U(https://technet}#microsoft com/en-us/library/dd349804 aspx)  The module will return an error if the right is i
+    users: ${2:A list of users or groups to add/remove on the User Right}  # These can be in the form DOMAIN\\user-group, user-group@DOMAIN COM for domain users/groups  For local users/groups it ca
+    action: ${3$$(yas-choose-value '("add" "remove" "set"))}               # choices: add;remove;set  C(add) will add the users/groups to the existing right  C(remove) will remove the users/groups 

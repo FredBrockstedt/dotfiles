@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Manages service-udp objects on Check Point over Web Services API
+# prefix: cp_mgmt_service_udp_snippet
+# key: cp_mgmt_service_udp
+# group: ansible
+# --
+
+- name: ${0:Manages service-udp objects on Check Point over Web Services API}
+  cp_mgmt_service_udp:                                                     
+    name: ${1:Object name}                                                 #
+    accept_replies: ${2:value}                                             # N/A
+    aggressive_aging: ${3:value}                                           # Sets short (aggressive) timeouts for idle connections 
+    keep_connections_open_after_policy_installation: ${4:value}            # Keep connections open after policy has been installed even if they are not allowed under the new policy  This overrides 
+    match_by_protocol_signature: ${5:value}                                # A value of true enables matching by the selected protocol's signature - the signature identifies the protocol as genuine
+    match_for_any: ${6:value}                                              # Indicates whether this service is used when 'Any' is set as the rule's service and there are several service objects wit
+    override_default_settings: ${7:value}                                  # Indicates whether this service is a Data Domain service which has been overridden 
+    port: ${8:value}                                                       # The number of the port used to provide this service  To specify a port range, place a hyphen between the lowest and high
+    protocol: ${9:value}                                                   # Select the protocol type associated with the service, and by implication, the management server (if any) that enforces C
+    session_timeout: ${10:value}                                           # Time (in seconds) before the session times out 
+    source_port: ${11:value}                                               # Port number for the client side service  If specified, only those Source port Numbers will be Accepted, Dropped, or Reje
+    sync_connections_on_cluster: ${12:value}                               # Enables state-synchronized High Availability or Load Sharing on a ClusterXL or OPSEC-certified cluster 
+    tags: ${13:value}                                                      # Collection of tag identifiers 
+    use_default_session_timeout: ${14:value}                               # Use default virtual session timeout 
+    color: ${15$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${16:value}                                                  # Comments string 
+    details_level: ${17$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    groups: ${18:value}                                                    # Collection of group identifiers 
+    ignore_warnings: ${19:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${20:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${21$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${22:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${23:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${24:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

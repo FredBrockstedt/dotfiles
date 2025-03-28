@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Enable, disable, and set weights for HAProxy backend servers using socket commands
+# prefix: haproxy_snippet
+# key: haproxy
+# group: ansible
+# --
+
+- name: ${0:Enable, disable, and set weights for HAProxy backend servers using socket commands}
+  haproxy:                                                                 
+    host: ${1:Name of the backend host to change}                          #
+    state: ${2$$(yas-choose-value '("disabled" "drain" "enabled"))}        # Desired state of the provided backend host  Note that C(drain) state was added in version 2 4  It is supported only by H
+    backend: ${3:value}                                                    # Name of the HAProxy backend pool  If this parameter is unset, it will be auto-detected 
+    drain: ${4:value}                                                      # Wait until the server has no active connections or until the timeout determined by wait_interval and wait_retries is rea
+    shutdown_sessions: ${5:False}                                          # When disabling a server, immediately terminate all the sessions attached to the specified server  This can be used to te
+    socket: ${{6:/var/run/haproxy}                                         #sock} # not required  Path to the HAProxy socket file 
+    fail_on_not_found: ${7:False}                                          # Fail whenever trying to enable/disable a backend host that does not exist
+    wait: ${8:False}                                                       # Wait until the server reports a status of 'UP' when C(state=enabled), status of 'MAINT' when C(state=disabled) or status
+    wait_interval: ${9:5}                                                  # Number of seconds to wait between retries 
+    wait_retries: ${10:25}                                                 # Number of times to check for status after changing the state 
+    weight: ${11:value}                                                    # The value passed in argument  If the value ends with the `%` sign, then the new weight will be relative to the initially

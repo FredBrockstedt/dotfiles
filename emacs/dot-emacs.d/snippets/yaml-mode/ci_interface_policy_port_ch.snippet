@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage port channel interface policies (lacp:LagPol)
+# prefix: aci_interface_policy_port_channel_snippet
+# key: ci_interface_policy_port_ch
+# group: ansible
+# --
+
+- name: ${0:Manage port channel interface policies (lacp:LagPol)}
+  aci_interface_policy_port_channel:                                       
+    port_channel: ${1:Name of the port channel}                            #
+    host: ${2:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${4:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    description: ${5:value}                                                # The description for the port channel 
+    max_links: ${6:value}                                                  # Maximum links  Accepted values range between 1 and 16  The APIC defaults to C(16) when unset during creation 
+    min_links: ${7:value}                                                  # Minimum links  Accepted values range between 1 and 16  The APIC defaults to C(1) when unset during creation 
+    mode: ${8$$(yas-choose-value '("active" "mac-pin" "mac-pin-nicload" "off" "passive"))}# choices: active;mac-pin;mac-pin-nicload;off;passive  Port channel interface policy mode  Determines the L
+    fast_select: ${9:value}                                                # Determines if Fast Select is enabled for Hot Standby Ports  This makes up the LACP Policy Control Policy; if one setting
+    graceful_convergence: ${10:value}                                      # Determines if Graceful Convergence is enabled  This makes up the LACP Policy Control Policy; if one setting is defined, 
+    load_defer: ${11:value}                                                # Determines if Load Defer is enabled  This makes up the LACP Policy Control Policy; if one setting is defined, then all o
+    suspend_individual: ${12:value}                                        # Determines if Suspend Individual is enabled  This makes up the LACP Policy Control Policy; if one setting is defined, th
+    symmetric_hash: ${13:value}                                            # Determines if Symmetric Hashing is enabled  This makes up the LACP Policy Control Policy; if one setting is defined, the
+    state: ${14$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${15:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${16:admin}                                                  # The username to use for authentication 
+    certificate_name: ${17:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${18$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${19:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${20:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${21:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${22:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

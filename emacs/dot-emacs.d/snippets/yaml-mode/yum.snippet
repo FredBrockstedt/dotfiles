@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Manages packages with the I(yum) package manager
+# prefix: yum_snippet
+# key: yum
+# group: ansible
+# --
+
+- name: ${0:Manages packages with the I(yum) package manager}
+  yum:                                                                     
+    use_backend: ${1$$(yas-choose-value '("auto" "yum" "yum4" "dnf"))}     # choices: auto;yum;yum4;dnf  This module supports C(yum) (as it always has), this is known as C(yum3)/C(YUM3)/C(yum-depre
+    name: ${2:value}                                                       # A package name or package specifier with version, like C(name-1 0)  If a previous version is specified, the task also ne
+    exclude: ${3:value}                                                    # Package name(s) to exclude when state=present, or latest
+    list: ${4:value}                                                       # Package name to run the equivalent of yum list --show-duplicates <package> against  In addition to listing packages, use
+    state: ${5$$(yas-choose-value '("absent" "installed" "latest" "present" "removed"))}# choices: absent;installed;latest;present;removed  Whether to install (C(present) or C(installed), C(latest)
+    enablerepo: ${6:value}                                                 # I(Repoid) of repositories to enable for the install/update operation  These repos will not persist beyond the transactio
+    disablerepo: ${7:value}                                                # I(Repoid) of repositories to disable for the install/update operation  These repos will not persist beyond the transacti
+    conf_file: ${8:value}                                                  # The remote yum configuration file to use for the transaction 
+    disable_gpg_check: ${9:false}                                          # Whether to disable the GPG checking of signatures of packages being installed  Has an effect only if state is I(present)
+    skip_broken: ${10:false}                                               # Skip packages with broken dependencies(devsolve) and are causing problems 
+    update_cache: ${11:false}                                              # Force yum to check if cache is out of date and redownload if needed  Has an effect only if state is I(present) or I(late
+    validate_certs: ${12:true}                                             # This only applies if using a https url as the source of the rpm  e g  for localinstall  If set to C(no), the SSL certifi
+    update_only: ${13:false}                                               # When using latest, only update installed packages  Do not install packages  Has an effect only if state is I(latest)
+    installroot: ${14:/}                                                   # Specifies an alternative installroot, relative to which all packages will be installed 
+    security: ${15:false}                                                  # If set to C(yes), and C(state=latest) then only installs updates that have been marked security related 
+    bugfix: ${16:false}                                                    # If set to C(yes), and C(state=latest) then only installs updates that have been marked bugfix related 
+    allow_downgrade: ${17:false}                                           # Specify if the named package and version is allowed to downgrade a maybe already installed higher version of that packag
+    enable_plugin: ${18:value}                                             # I(Plugin) name to enable for the install/update operation  The enabled plugin will not persist beyond the transaction 
+    disable_plugin: ${19:value}                                            # I(Plugin) name to disable for the install/update operation  The disabled plugins will not persist beyond the transaction
+    releasever: ${20:value}                                                # Specifies an alternative release from which all packages will be installed 
+    autoremove: ${21:false}                                                # If C(yes), removes all "leaf" packages from the system that were originally installed as dependencies of user-installed 
+    disable_excludes: ${22:value}                                          # Disable the excludes defined in YUM config files  If set to C(all), disables all excludes  If set to C(main), disable ex
+    download_only: ${23:false}                                             # Only download the packages, do not install them 
+    lock_timeout: ${24:30}                                                 # Amount of time to wait for the yum lockfile to be freed 
+    install_weak_deps: ${25:true}                                          # Will also install all packages linked by a weak dependency relation  NOTE: This feature requires yum >= 4 (RHEL/CentOS 8
+    download_dir: ${26:value}                                              # Specifies an alternate directory to store packages  Has an effect only if I(download_only) is specified 

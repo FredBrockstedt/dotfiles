@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Enable or Disable Pure Storage FlashArray Remote Assist
+# prefix: purefa_ra_snippet
+# key: purefa_r
+# group: ansible
+# --
+
+- name: ${0:Enable or Disable Pure Storage FlashArray Remote Assist}
+  purefa_ra:                                                               
+    fa_url: ${1:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${2:FlashArray API token for admin privileged user}         #
+    state: ${3$$(yas-choose-value '("enable" "disable"))}                  # choices: enable;disable  Define state of remote assist When set to I(enable) the RA port can be exposed using the I(debu

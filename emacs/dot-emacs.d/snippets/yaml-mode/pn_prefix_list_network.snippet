@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove prefix-list-network
+# prefix: pn_prefix_list_network_snippet
+# key: pn_prefix_list_network
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove prefix-list-network}
+  pn_prefix_list_network:                                                  
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use C(present) to create prefix-list-network and C(absent) to delete prefix-list-network 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_netmask: ${3:value}                                                 # netmask of the network associated the prefix list 
+    pn_name: ${4:value}                                                    # Prefix List Name 
+    pn_network: ${5:value}                                                 # network associated with the prefix list 

@@ -1,0 +1,72 @@
+# -*- mode: snippet -*-
+# name: Generate and/or check OpenSSL certificates
+# prefix: openssl_certificate_snippet
+# key: openssl_certificat
+# group: ansible
+# --
+
+- name: ${0:Generate and/or check OpenSSL certificates}
+  openssl_certificate:                                                     
+    path: ${1:Remote absolute path where the generated certificate file should be created or is already located}#
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the certificate should exist or not, taking action if the state is different from what 
+    provider: ${3$$(yas-choose-value '("acme" "assertonly" "entrust" "ownca" "selfsigned"))}# choices: acme;assertonly;entrust;ownca;selfsigned  Name of the provider to use to generate/retrieve the
+    force: ${4:False}                                                      # Generate the certificate, even if it already exists 
+    csr_path: ${5:value}                                                   # Path to the Certificate Signing Request (CSR) used to generate this certificate  This is not required in C(assertonly) m
+    privatekey_path: ${6:value}                                            # Path to the private key to use when signing the certificate 
+    privatekey_passphrase: ${7:value}                                      # The passphrase for the I(privatekey_path)  This is required if the private key is password protected 
+    selfsigned_version: ${8:3}                                             # Version of the C(selfsigned) certificate  Nowadays it should almost always be C(3)  This is only used by the C(selfsigne
+    selfsigned_digest: ${9:sha256}                                         # Digest algorithm to be used when self-signing the certificate  This is only used by the C(selfsigned) provider 
+    selfsigned_not_before: ${10:+0s}                                       # The point in time the certificate is valid from  Time can be specified either as relative time or as absolute timestamp 
+    selfsigned_not_after: ${11:+3650d}                                     # The point in time at which the certificate stops being valid  Time can be specified either as relative time or as absolu
+    selfsigned_create_subject_key_identifier: ${12$$(yas-choose-value '("create_if_not_provided" "always_create" "never_create"))}# choices: create_if_not_provided;always_create;never_create  Wheth
+    ownca_path: ${13:value}                                                # Remote absolute path of the CA (Certificate Authority) certificate  This is only used by the C(ownca) provider 
+    ownca_privatekey_path: ${14:value}                                     # Path to the CA (Certificate Authority) private key to use when signing the certificate  This is only used by the C(ownca
+    ownca_privatekey_passphrase: ${15:value}                               # The passphrase for the I(ownca_privatekey_path)  This is only used by the C(ownca) provider 
+    ownca_digest: ${16:sha256}                                             # The digest algorithm to be used for the C(ownca) certificate  This is only used by the C(ownca) provider 
+    ownca_version: ${17:3}                                                 # The version of the C(ownca) certificate  Nowadays it should almost always be C(3)  This is only used by the C(ownca) pro
+    ownca_not_before: ${18:+0s}                                            # The point in time the certificate is valid from  Time can be specified either as relative time or as absolute timestamp 
+    ownca_not_after: ${19:+3650d}                                          # The point in time at which the certificate stops being valid  Time can be specified either as relative time or as absolu
+    ownca_create_subject_key_identifier: ${20$$(yas-choose-value '("create_if_not_provided" "always_create" "never_create"))}# choices: create_if_not_provided;always_create;never_create  Whether to
+    ownca_create_authority_key_identifier: ${21:True}                      # Create a Authority Key Identifier from the CA's certificate  If the CSR provided a authority key identifier, it is ignor
+    acme_accountkey_path: ${22:value}                                      # The path to the accountkey for the C(acme) provider  This is only used by the C(acme) provider 
+    acme_challenge_path: ${23:value}                                       # The path to the ACME challenge directory that is served on U(http://<HOST>:80/ well-known/acme-challenge/) This is only 
+    acme_chain: ${24:False}                                                # Include the intermediate certificate to the generated certificate This is only used by the C(acme) provider  Note that t
+    signature_algorithms: ${25:value}                                      # A list of algorithms that you would accept the certificate to be signed with (e g  ['sha256WithRSAEncryption', 'sha512Wi
+    issuer: ${26:value}                                                    # The key/value pairs that must be present in the issuer name field of the certificate  If you need to specify more than o
+    issuer_strict: ${27:False}                                             # If set to C(yes), the I(issuer) field must contain only these values  This is only used by the C(assertonly) provider  T
+    subject: ${28:value}                                                   # The key/value pairs that must be present in the subject name field of the certificate  If you need to specify more than 
+    subject_strict: ${29:False}                                            # If set to C(yes), the I(subject) field must contain only these values  This is only used by the C(assertonly) provider  
+    has_expired: ${30:False}                                               # Checks if the certificate is expired/not expired at the time the module is executed  This is only used by the C(asserton
+    version: ${31:value}                                                   # The version of the certificate  Nowadays it should almost always be 3  This is only used by the C(assertonly) provider  
+    valid_at: ${32:value}                                                  # The certificate must be valid at this point in time  The timestamp is formatted as an ASN 1 TIME  This is only used by t
+    invalid_at: ${33:value}                                                # The certificate must be invalid at this point in time  The timestamp is formatted as an ASN 1 TIME  This is only used by
+    not_before: ${34:value}                                                # The certificate must start to become valid at this point in time  The timestamp is formatted as an ASN 1 TIME  This is o
+    not_after: ${35:value}                                                 # The certificate must expire at this point in time  The timestamp is formatted as an ASN 1 TIME  This is only used by the
+    valid_in: ${36:value}                                                  # The certificate must still be valid at this relative time offset from now  Valid format is C([+-]timespec | number_of_se
+    key_usage: ${37:value}                                                 # The I(key_usage) extension field must contain all these values  This is only used by the C(assertonly) provider  This op
+    key_usage_strict: ${38:False}                                          # If set to C(yes), the I(key_usage) extension field must contain only these values  This is only used by the C(assertonly
+    extended_key_usage: ${39:value}                                        # The I(extended_key_usage) extension field must contain all these values  This is only used by the C(assertonly) provider
+    extended_key_usage_strict: ${40:False}                                 # If set to C(yes), the I(extended_key_usage) extension field must contain only these values  This is only used by the C(a
+    subject_alt_name: ${41:value}                                          # The I(subject_alt_name) extension field must contain these values  This is only used by the C(assertonly) provider  This
+    subject_alt_name_strict: ${42:False}                                   # If set to C(yes), the I(subject_alt_name) extension field must contain only these values  This is only used by the C(ass
+    select_crypto_backend: ${43$$(yas-choose-value '("auto" "cryptography" "pyopenssl"))}# choices: auto;cryptography;pyopenssl  Determines which crypto backend to use  The default choice is C(auto
+    backup: ${44:False}                                                    # Create a backup file including a timestamp so you can get the original certificate back if you overwrote it with a new o
+    entrust_cert_type: ${45$$(yas-choose-value '("STANDARD_SSL" "ADVANTAGE_SSL" "UC_SSL" "EV_SSL" "WILDCARD_SSL" "PRIVATE_SSL" "PD_SSL" "CDS_ENT_LITE" "CDS_ENT_PRO" "SMIME_ENT"))}# choices: STANDAR
+    entrust_requester_email: ${46:value}                                   # The email of the requester of the certificate (for tracking purposes)  This is only used by the C(entrust) provider  Thi
+    entrust_requester_name: ${47:value}                                    # The name of the requester of the certificate (for tracking purposes)  This is only used by the C(entrust) provider  This
+    entrust_requester_phone: ${48:value}                                   # The phone number of the requester of the certificate (for tracking purposes)  This is only used by the C(entrust) provid
+    entrust_api_user: ${49:value}                                          # The username for authentication to the Entrust Certificate Services (ECS) API  This is only used by the C(entrust) provi
+    entrust_api_key: ${50:value}                                           # The key (password) for authentication to the Entrust Certificate Services (ECS) API  This is only used by the C(entrust)
+    entrust_api_client_cert_path: ${51:value}                              # The path to the client certificate used to authenticate to the Entrust Certificate Services (ECS) API  This is only used
+    entrust_api_client_cert_key_path: ${52:value}                          # The path to the private key of the client certificate used to authenticate to the Entrust Certificate Services (ECS) API
+    entrust_not_after: ${53:+365d}                                         # The point in time at which the certificate stops being valid  Time can be specified either as relative time or as an abs
+    entrust_api_specification_path: ${{54:https://cloud}                   #entrust net/EntrustCloud/documentation/cms-api-2 1 0 yaml} # not required  The path to the specification file defining th
+    mode: ${55:value}                                                      # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${56:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${57:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${58:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${59:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${60:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${61:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${62:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${63:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

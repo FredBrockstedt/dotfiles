@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: create, update, or destroy Ansible Tower user.
+# prefix: tower_user_snippet
+# key: tower_user
+# group: ansible
+# --
+
+- name: ${0:create, update, or destroy Ansible Tower user.}
+  tower_user:                                                              
+    username: ${1:The username of the user}                                #
+    email: ${2:Email address of the user}                                  #
+    first_name: ${3:value}                                                 # First name of the user 
+    last_name: ${4:value}                                                  # Last name of the user 
+    password: ${5:value}                                                   # Password of the user 
+    superuser: ${6:false}                                                  # User is a system wide administrator 
+    auditor: ${7:false}                                                    # User is a system wide auditor 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of the resource 
+    tower_host: ${9:value}                                                 # URL to your Tower instance 
+    tower_username: ${10:value}                                            # Username for your Tower instance 
+    tower_password: ${11:value}                                            # Password for your Tower instance 
+    validate_certs: ${12:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${13:value}                                         # Path to the Tower config file 

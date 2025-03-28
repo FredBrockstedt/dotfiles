@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify fabric-local
+# prefix: pn_fabric_local_snippet
+# key: pn_fabric_loc
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify fabric-local}
+  pn_fabric_local:                                                         
+    pn_cliswitch: ${1:Target switch to run the CLI on}                     #
+    state: ${2$$(yas-choose-value '("update"))}                            # choices: update  State the action to perform  Use C(update) to modify the fabric-local 
+    pn_fabric_network: ${3$$(yas-choose-value '("in-band" "mgmt" "vmgmt"))}# choices: in-band;mgmt;vmgmt  fabric administration network 
+    pn_vlan: ${4:value}                                                    # VLAN assigned to fabric 
+    pn_control_network: ${5$$(yas-choose-value '("in-band" "mgmt" "vmgmt"))}# choices: in-band;mgmt;vmgmt  control plane network 
+    pn_fabric_advertisement_network: ${6$$(yas-choose-value '("inband-mgmt" "inband-only" "inband-vmgmt" "mgmt-only"))}# choices: inband-mgmt;inband-only;inband-vmgmt;mgmt-only  network to send fab

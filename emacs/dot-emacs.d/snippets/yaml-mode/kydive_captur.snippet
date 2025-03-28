@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Module which manages flow capture on interfaces
+# prefix: skydive_capture_snippet
+# key: kydive_captur
+# group: ansible
+# --
+
+- name: ${0:Module which manages flow capture on interfaces}
+  skydive_capture:                                                         
+    query: ${1:value}                                                      # It's the complete gremlin query which the users can input, I(G V() Has('Name', 'eth0', 'Type', 'device')), to create the
+    interface_name: ${2:value}                                             # To define flow capture interface name 
+    type: ${3:value}                                                       # To define flow capture interface type 
+    capture_name: ${4:}                                                    # To define flow capture name 
+    description: ${5:}                                                     # Configures a text string to be associated with the instance of this object 
+    extra_tcp_metric: ${6:False}                                           # To define flow capture ExtraTCPMetric 
+    ip_defrag: ${7:False}                                                  # To define flow capture IPDefrag 
+    reassemble_tcp: ${8:False}                                             # To define flow capture ReassembleTCP 
+    layer_key_mode: ${9:L2}                                                # To define flow capture Layer KeyMode 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the flow capture  If value is I(present) flow capture will be created else if it is I(
+    provider: ${11:value}                                                  # A dict object containing connection details 

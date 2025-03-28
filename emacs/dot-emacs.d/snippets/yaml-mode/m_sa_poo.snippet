@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Handles pools on IBM Spectrum Accelerate Family storage systems.
+# prefix: ibm_sa_pool_snippet
+# key: m_sa_poo
+# group: ansible
+# --
+
+- name: ${0:Handles pools on IBM Spectrum Accelerate Family storage systems.}
+  ibm_sa_pool:                                                             
+    pool: ${1:Pool name}                                                   #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Pool state 
+    username: ${3:Management user on the spectrum accelerate storage system}#
+    password: ${4:Password for username on the spectrum accelerate storage system}#
+    endpoints: ${5:The hostname or management IP of Spectrum Accelerate storage system}#
+    size: ${6:value}                                                       # Pool size in GB
+    snapshot_size: ${7:value}                                              # Pool snapshot size in GB
+    domain: ${8:value}                                                     # Adds the pool to the specified domain 
+    perf_class: ${9:value}                                                 # Assigns a perf_class to the pool 

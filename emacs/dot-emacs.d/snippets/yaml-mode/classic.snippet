@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Creates or destroys Amazon ELB.
+# prefix: elb_classic_lb_snippet
+# key: classic
+# group: ansible
+# --
+
+- name: ${0:Creates or destroys Amazon ELB.}
+  elb_classic_lb:                                                          
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Create or destroy the ELB
+    name: ${2:The name of the ELB}                                         #
+    listeners: ${3:value}                                                  # List of ports/protocols for this ELB to listen on (see example)
+    purge_listeners: ${4:true}                                             # Purge existing listeners on ELB that are not found in listeners
+    instance_ids: ${5:value}                                               # List of instance ids to attach to this ELB
+    purge_instance_ids: ${6:false}                                         # Purge existing instance ids on ELB that are not found in instance_ids
+    zones: ${7:value}                                                      # List of availability zones to enable on this ELB
+    purge_zones: ${8:false}                                                # Purge existing availability zones on ELB that are not found in zones
+    security_group_ids: ${9:value}                                         # A list of security groups to apply to the elb
+    security_group_names: ${10:value}                                      # A list of security group names to apply to the elb
+    health_check: ${11:value}                                              # An associative array of health check configuration settings (see example)
+    access_logs: ${12:value}                                               # An associative array of access logs configuration settings (see example)
+    subnets: ${13:value}                                                   # A list of VPC subnets to use when creating ELB  Zones should be empty if using this 
+    purge_subnets: ${14:false}                                             # Purge existing subnet on ELB that are not found in subnets
+    scheme: ${15$$(yas-choose-value '("internal" "internet-facing"))}      # choices: internal;internet-facing  The scheme to use when creating the ELB  For a private VPC-visible ELB use 'internal'
+    validate_certs: ${16:true}                                             # When set to C(no), SSL certificates will not be validated for boto versions >= 2 6 0 
+    connection_draining_timeout: ${17:value}                               # Wait a specified timeout allowing connections to drain before terminating an instance
+    idle_timeout: ${18:value}                                              # ELB connections from clients and to servers are timed out after this amount of time
+    cross_az_load_balancing: ${19:false}                                   # Distribute load across all configured Availability Zones
+    stickiness: ${20:value}                                                # An associative array of stickiness policy settings  Policy will be applied to all listeners ( see example )
+    wait: ${21:false}                                                      # When specified, Ansible will check the status of the load balancer to ensure it has been successfully removed from AWS 
+    wait_timeout: ${22:60}                                                 # Used in conjunction with wait  Number of seconds to wait for the elb to be terminated  A maximum of 600 seconds (10 minu
+    tags: ${23:value}                                                      # An associative array of tags  To delete all tags, supply an empty dict 
+    debug_botocore_endpoint_logs: ${24:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${25:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${26:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${27:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${28:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    profile: ${29:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${30:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

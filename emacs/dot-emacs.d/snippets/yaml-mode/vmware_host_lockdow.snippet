@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage administrator permission for the local administrative account for the ESXi host
+# prefix: vmware_host_lockdown_snippet
+# key: vmware_host_lockdow
+# group: ansible
+# --
+
+- name: ${0:Manage administrator permission for the local administrative account for the ESXi host}
+  vmware_host_lockdown:                                                    
+    cluster_name: ${1:value}                                               # Name of cluster  All host systems from given cluster used to manage lockdown  Required parameter, if C(esxi_hostname) is
+    esxi_hostname: ${2:value}                                              # List of ESXi hostname to manage lockdown  Required parameter, if C(cluster_name) is not set  See examples for specificat
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of hosts system If set to C(present), all host systems will be set in lockdown mode  If h
+    hostname: ${4:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${5:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${6:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${7:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${8:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${9:value}                                                 # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${10:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

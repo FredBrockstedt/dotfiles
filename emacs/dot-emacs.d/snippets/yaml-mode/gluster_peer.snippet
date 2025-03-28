@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Attach/Detach peers to/from the cluster
+# prefix: gluster_peer_snippet
+# key: gluster_peer
+# group: ansible
+# --
+
+- name: ${0:Attach/Detach peers to/from the cluster}
+  gluster_peer:                                                            
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Determines whether the nodes should be attached to the pool or removed from the pool  If the state is present, nodes wil
+    nodes: ${2:List of nodes that have to be probed into the pool}         #
+    force: ${3:false}                                                      # Applicable only while removing the nodes from the pool  gluster will refuse to detach a node from the pool if any one of

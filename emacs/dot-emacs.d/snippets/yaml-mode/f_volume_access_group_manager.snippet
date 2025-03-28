@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage SolidFire Volume Access Groups
+# prefix: sf_volume_access_group_manager_snippet
+# key: f_volume_access_group_manager
+# group: ansible
+# --
+
+- name: ${0:Manage SolidFire Volume Access Groups}
+  sf_volume_access_group_manager:                                          
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified volume access group should exist or not 
+    name: ${2:Name of the volume access group}                             # It is not required to be unique, but recommended 
+    hostname: ${3:The hostname or IP address of the SolidFire cluster}     #
+    username: ${4:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${5:Password for the specified user}                         #
+    initiators: ${6:value}                                                 # List of initiators to include in the volume access group  If unspecified, the access group will start out without config
+    volumes: ${7:value}                                                    # List of volumes to initially include in the volume access group  If unspecified, the access group will start without any
+    virtual_network_id: ${8:value}                                         # The ID of the SolidFire Virtual Network ID to associate the volume access group with 
+    virtual_network_tags: ${9:value}                                       # The ID of the VLAN Virtual Network Tag to associate the volume access group with 
+    attributes: ${10:value}                                                # L i s t   o f   N a m e / V a l u e   p a i r s   i n   J S O N   o b j e c t   f o r m a t  
+    volume_access_group_id: ${11:value}                                    # The ID of the volume access group to modify or delete 

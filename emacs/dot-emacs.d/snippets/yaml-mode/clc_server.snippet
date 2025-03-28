@@ -1,0 +1,46 @@
+# -*- mode: snippet -*-
+# name: Create, Delete, Start and Stop servers in CenturyLink Cloud.
+# prefix: clc_server_snippet
+# key: clc_server
+# group: ansible
+# --
+
+- name: ${0:Create, Delete, Start and Stop servers in CenturyLink Cloud.}
+  clc_server:                                                              
+    additional_disks: ${1:[]}                                              # The list of additional disks for the server
+    add_public_ip: ${2:false}                                              # Whether to add a public ip to the server
+    alias: ${3:value}                                                      # The account alias to provision the servers under 
+    anti_affinity_policy_id: ${4:value}                                    # The anti-affinity policy to assign to the server  This is mutually exclusive with 'anti_affinity_policy_name' 
+    anti_affinity_policy_name: ${5:value}                                  # The anti-affinity policy to assign to the server  This is mutually exclusive with 'anti_affinity_policy_id' 
+    alert_policy_id: ${6:value}                                            # The alert policy to assign to the server  This is mutually exclusive with 'alert_policy_name' 
+    alert_policy_name: ${7:value}                                          # The alert policy to assign to the server  This is mutually exclusive with 'alert_policy_id' 
+    count: ${8:1}                                                          # The number of servers to build (mutually exclusive with exact_count)
+    count_group: ${9:value}                                                # Required when exact_count is specified   The Server Group use to determine how many servers to deploy 
+    cpu: ${10:1}                                                           # How many CPUs to provision on the server
+    cpu_autoscale_policy_id: ${11:value}                                   # The autoscale policy to assign to the server 
+    custom_fields: ${12:[]}                                                # The list of custom fields to set on the server 
+    description: ${13:value}                                               # The description to set for the server 
+    exact_count: ${14:value}                                               # Run in idempotent mode   Will insure that this exact number of servers are running in the provided group, creating and d
+    group: ${15:"Default Group"}                                           # The Server Group to create servers under 
+    ip_address: ${16:value}                                                # The IP Address for the server  One is assigned if not provided 
+    location: ${17:value}                                                  # The Datacenter to create servers in 
+    managed_os: ${18:false}                                                # Whether to create the server as 'Managed' or not 
+    memory: ${19:1}                                                        # Memory in GB 
+    name: ${20:value}                                                      # A 1 to 6 character identifier to use for the server  This is required when state is 'present'
+    network_id: ${21:value}                                                # The network UUID on which to create servers 
+    packages: ${22:[]}                                                     # The list of blue print packages to run on the server after its created 
+    password: ${23:value}                                                  # Password for the administrator / root user
+    primary_dns: ${24:value}                                               # Primary DNS used by the server 
+    public_ip_protocol: ${25$$(yas-choose-value '("TCP" "UDP" "ICMP"))}    # choices: TCP;UDP;ICMP  The protocol to use for the public ip if add_public_ip is set to True 
+    public_ip_ports: ${26:[]}                                              # A list of ports to allow on the firewall to the servers public ip, if add_public_ip is set to True 
+    secondary_dns: ${27:value}                                             # Secondary DNS used by the server 
+    server_ids: ${28:[]}                                                   # Required for started, stopped, and absent states  A list of server Ids to insure are started, stopped, or absent 
+    source_server_password: ${29:value}                                    # The password for the source server if a clone is specified 
+    state: ${30$$(yas-choose-value '("present" "absent" "started" "stopped"))}# choices: present;absent;started;stopped  The state to insure that the provided resources are in 
+    storage_type: ${31$$(yas-choose-value '("standard" "hyperscale"))}     # choices: standard;hyperscale  The type of storage to attach to the server 
+    template: ${32:value}                                                  # The template to use for server creation   Will search for a template if a partial string is provided  This is required w
+    ttl: ${33:value}                                                       # The time to live for the server in seconds   The server will be deleted when this time expires 
+    type: ${34$$(yas-choose-value '("standard" "hyperscale" "bareMetal"))} # choices: standard;hyperscale;bareMetal  The type of server to create 
+    configuration_id: ${35:value}                                          # Only required for bare metal servers  Specifies the identifier for the specific configuration type of bare metal server 
+    os_type: ${36$$(yas-choose-value '("redHat6_64Bit" "centOS6_64Bit" "windows2012R2Standard_64Bit" "ubuntu14_64Bit"))}# choices: redHat6_64Bit;centOS6_64Bit;windows2012R2Standard_64Bit;ubuntu14_6
+    wait: ${37:true}                                                       # Whether to wait for the provisioning tasks to finish before returning 

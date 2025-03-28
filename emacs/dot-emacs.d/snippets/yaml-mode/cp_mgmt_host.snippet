@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manages host objects on Check Point over Web Services API
+# prefix: cp_mgmt_host_snippet
+# key: cp_mgmt_host
+# group: ansible
+# --
+
+- name: ${0:Manages host objects on Check Point over Web Services API}
+  cp_mgmt_host:                                                            
+    name: ${1:Object name}                                                 #
+    ip_address: ${2:value}                                                 # IPv4 or IPv6 address  If both addresses are required use ipv4-address and ipv6-address fields explicitly 
+    ipv4_address: ${3:value}                                               # IPv4 address 
+    ipv6_address: ${4:value}                                               # IPv6 address 
+    interfaces: ${5:value}                                                 # Host interfaces 
+    nat_settings: ${6:value}                                               # NAT settings 
+    tags: ${7:value}                                                       # Collection of tag identifiers 
+    host_servers: ${8:value}                                               # Servers Configuration 
+    color: ${9$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebric
+    comments: ${10:value}                                                  # Comments string 
+    details_level: ${11$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    groups: ${12:value}                                                    # Collection of group identifiers 
+    ignore_warnings: ${13:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${14:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${16:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${17:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${18:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

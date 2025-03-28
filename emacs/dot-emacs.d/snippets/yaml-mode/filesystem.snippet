@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Makes a filesystem
+# prefix: filesystem_snippet
+# key: filesystem
+# group: ansible
+# --
+
+- name: ${0:Makes a filesystem}
+  filesystem:                                                              
+    fstype: ${1$$(yas-choose-value '("btrfs" "ext2" "ext3" "ext4" "ext4dev" "f2fs" "lvm" "ocfs2" "reiserfs" "xfs" "vfat" "swap"))}# Filesystem type to be created  reiserfs support was added in 2 2 
+    dev: ${2:Target path to device or image file}                          #
+    force: ${3:false}                                                      # If C(yes), allows to create new filesystem on devices that already has filesystem 
+    resizefs: ${4:false}                                                   # If C(yes), if the block device and filesystem size differ, grow the filesystem into the space  Supported for C(ext2), C(
+    opts: ${5:value}                                                       # List of options to be passed to mkfs command 

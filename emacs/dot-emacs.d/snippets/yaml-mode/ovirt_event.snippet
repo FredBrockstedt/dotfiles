@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Create or delete an event in oVirt/RHV
+# prefix: ovirt_event_snippet
+# key: ovirt_event
+# group: ansible
+# --
+
+- name: ${0:Create or delete an event in oVirt/RHV}
+  ovirt_event:                                                             
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the event be present/absent  The C(wait) option must be set to false when state is absen
+    description: ${3:value}                                                # Message for the event  Required when state is present 
+    severity: ${4$$(yas-choose-value '("error" "normal" "warning"))}       # choices: error;normal;warning  Severity of the event  Required when state is present 
+    origin: ${5:value}                                                     # Originator of the event  Required when state is present 
+    custom_id: ${6:value}                                                  # Custom ID for the event  This ID must be unique for each event  Required when state is present 
+    id: ${7:value}                                                         # The event ID in the oVirt/RHV audit_log table  This ID is not the same as custom_id and is only used when state is absen
+    cluster: ${8:value}                                                    # The id of the cluster associated with this event 
+    data_center: ${9:value}                                                # The id of the data center associated with this event 
+    host: ${10:value}                                                      # The id of the host associated with this event 
+    storage_domain: ${11:value}                                            # The id of the storage domain associated with this event 
+    template: ${12:value}                                                  # The id of the template associated with this event 
+    user: ${13:value}                                                      # The id of the user associated with this event 
+    vm: ${14:value}                                                        # The id of the VM associated with this event 
+    wait: ${15:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${16:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${17:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${18:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${19:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

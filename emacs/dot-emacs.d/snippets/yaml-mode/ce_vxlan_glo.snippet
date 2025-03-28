@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages global attributes of VXLAN and bridge domain on HUAWEI CloudEngine devices.
+# prefix: ce_vxlan_global_snippet
+# key: ce_vxlan_glo
+# group: ansible
+# --
+
+- name: ${0:Manages global attributes of VXLAN and bridge domain on HUAWEI CloudEngine devices.}
+  ce_vxlan_global:                                                         
+    bridge_domain_id: ${1:value}                                           # Specifies a bridge domain ID  The value is an integer ranging from 1 to 16777215 
+    tunnel_mode_vxlan: ${2$$(yas-choose-value '("enable" "disable"))}      # choices: enable;disable  Set the tunnel mode to VXLAN when configuring the VXLAN feature 
+    nvo3_prevent_loops: ${3$$(yas-choose-value '("enable" "disable"))}     # choices: enable;disable  Loop prevention of VXLAN traffic in non-enhanced mode  When the device works in non-enhanced mo
+    nvo3_acl_extend: ${4$$(yas-choose-value '("enable" "disable"))}        # choices: enable;disable  Enabling or disabling the VXLAN ACL extension function 
+    nvo3_gw_enhanced: ${5$$(yas-choose-value '("l2" "l3"))}                # choices: l2;l3  Configuring the Layer 3 VXLAN Gateway to Work in Non-loopback Mode 
+    nvo3_service_extend: ${6$$(yas-choose-value '("enable" "disable"))}    # choices: enable;disable  Enabling or disabling the VXLAN service extension function 
+    nvo3_eth_trunk_hash: ${7$$(yas-choose-value '("enable" "disable"))}    # choices: enable;disable  Eth-Trunk from load balancing VXLAN packets in optimized mode 
+    nvo3_ecmp_hash: ${8$$(yas-choose-value '("enable" "disable"))}         # choices: enable;disable  Load balancing of VXLAN packets through ECMP in optimized mode 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manages host objects on Check Point over Web Services API
+# prefix: checkpoint_host_snippet
+# key: checkpoint_host
+# group: ansible
+# --
+
+- name: ${0:Manages host objects on Check Point over Web Services API}
+  checkpoint_host:                                                         
+    name: ${1:Name of the access rule}                                     #
+    ip_address: ${2:value}                                                 # IP address of the host object 
+    state: ${3:present}                                                    # State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${4:true}                                        # Publish the current session if changes have been performed after task completes 
+    auto_install_policy: ${5:true}                                         # Install the package policy if changes have been performed after the task completes 
+    policy_package: ${6:standard}                                          # Package policy name to be installed 
+    targets: ${7:value}                                                    # Targets to install the package policy on 

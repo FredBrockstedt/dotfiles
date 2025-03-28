@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Create Volume Clone
+# prefix: na_elementsw_volume_clone_snippet
+# key: mentsw_volume_clo
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Create Volume Clone}
+  na_elementsw_volume_clone:                                               
+    name: ${1:The name of the clone}                                       #
+    src_volume_id: ${2:The id of the src volume to clone}                  # id may be a numeric identifier or a volume name 
+    account_id: ${3:Account ID for the owner of this cloned volume}        # id may be a numeric identifier or an account name 
+    hostname: ${4:The hostname or IP address of the SolidFire cluster}     #
+    username: ${5:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${6:Password for the specified user}                         #
+    src_snapshot_id: ${7:value}                                            # The id of the snapshot to clone  id may be a numeric identifier or a snapshot name 
+    attributes: ${8:value}                                                 # A   Y A M L   d i c t i o n a r y   o f   a t t r i b u t e s   t h a t   y o u   w o u l d   l i k e   t o   a p p l y 
+    size: ${9:value}                                                       # The size of the cloned volume in (size_unit) 
+    size_unit: ${10$$(yas-choose-value '("bytes" "b" "kb" "mb" "gb" "tb" "pb" "eb" "zb" "yb"))}# choices: bytes;b;kb;mb;gb;tb;pb;eb;zb;yb  The unit used to interpret the size parameter 
+    access: ${11$$(yas-choose-value '("readOnly" "readWrite" "locked" "replicationTarget"))}# choices: readOnly;readWrite;locked;replicationTarget  Access allowed for the volume  If unspecified, th

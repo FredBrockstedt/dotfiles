@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage attack vector configuration in an AFM DoS profile
+# prefix: bigip_firewall_dos_vector_snippet
+# key: gip_firewall_dos_vector
+# group: ansible
+# --
+
+- name: ${0:Manage attack vector configuration in an AFM DoS profile}
+  bigip_firewall_dos_vector:                                               
+    profile: ${1:Specifies the name of the profile to manage vectors in}   # The name C(device-config) is reserved for use by this module  Vectors can be managed in either DoS Profiles, or Device C
+    state: ${2$$(yas-choose-value '("mitigate" "detect-only" "learn-only" "disabled"))}# When C(state) is C(mitigate), ensures that the vector enforces limits and thresholds  When C(state) is C(det
+    name: ${3$$(yas-choose-value '("ext-hdr-too-large" "hop-cnt-low" "host-unreachable" "icmp-frag" "icmpv4-flood" "icmpv6-flood" "ip-frag-flood" "ip-low-ttl" "ip-opt-frames" "ipv6-frag-flood" "opt
+    auto_blacklist: ${4:value}                                             # Automatically blacklists detected bad actors  To enable this parameter, the C(bad_actor_detection) must also be enabled 
+    bad_actor_detection: ${5:value}                                        # Whether Bad Actor detection is enabled or disabled for a vector, if available  This parameter must be enabled to enable 
+    attack_ceiling: ${6:value}                                             # Specifies the absolute maximum allowable for packets of this type  This setting rate limits packets to the packets per s
+    attack_floor: ${7:value}                                               # Specifies packets per second to identify an attack  These settings provide an absolute minimum of packets to allow befor
+    allow_advertisement: ${8:value}                                        # Specifies that addresses that are identified for blacklisting are advertised to BGP routers
+    simulate_auto_threshold: ${9:value}                                    # Specifies that results of the current automatic thresholds are logged, though manual thresholds are enforced, and no act
+    blacklist_detection_seconds: ${10:value}                               # Detection, in seconds, before blacklisting occurs 
+    blacklist_duration: ${11:value}                                        # Duration, in seconds, that the blacklist will last 
+    per_source_ip_detection_threshold: ${12:value}                         # Specifies the number of packets per second to identify an IP address as a bad actor 
+    per_source_ip_mitigation_threshold: ${13:value}                        # Specifies the rate limit applied to a source IP that is identified as a bad actor 
+    detection_threshold_percent: ${14:value}                               # Lists the threshold percent increase over time that the system must detect in traffic in order to detect this attack  Th
+    detection_threshold_eps: ${15:value}                                   # Lists how many packets per second the system must discover in traffic in order to detect this attack 
+    mitigation_threshold_eps: ${16:value}                                  # Specify the maximum number of this type of packet per second the system allows for a vector  The system drops packets on
+    threshold_mode: ${17$$(yas-choose-value '("manual" "stress-based-mitigation" "fully-automatic"))}# choices: manual;stress-based-mitigation;fully-automatic  The C(dns-malformed) vector does not 
+    partition: ${18:Common}                                                # Device partition to manage resources on 
+    provider: ${19:value}                                                  # A dict object containing connection details 

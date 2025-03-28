@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Manage VMware vSphere clusters
+# prefix: vmware_cluster_snippet
+# key: vmware_cluster
+# group: ansible
+# --
+
+- name: ${0:Manage VMware vSphere clusters}
+  vmware_cluster:                                                          
+    cluster_name: ${1:The name of the cluster to be managed}               #
+    datacenter: ${2:The name of the datacenter}                            #
+    ignore_drs: ${3:false}                                                 # If set to C(yes), DRS will not be configured; all explicit and default DRS related configurations will be ignored 
+    ignore_ha: ${4:false}                                                  # If set to C(yes), HA will not be configured; all explicit and default HA related configurations will be ignored 
+    ignore_vsan: ${5:false}                                                # If set to C(yes), VSAN will not be configured; all explicit and default VSAN related configurations will be ignored 
+    enable_drs: ${6:false}                                                 # If set to C(yes), will enable DRS when the cluster is created 
+    drs_enable_vm_behavior_overrides: ${7:True}                            # Determines whether DRS Behavior overrides for individual virtual machines are enabled  If set to C(True), overrides C(dr
+    drs_default_vm_behavior: ${8$$(yas-choose-value '("fullyAutomated" "manual" "partiallyAutomated"))}# choices: fullyAutomated;manual;partiallyAutomated  Specifies the cluster-wide default DRS be
+    drs_vmotion_rate: ${9$$(yas-choose-value '("1" "2" "3" "4" "5"))}      # choices: 1;2;3;4;5  Threshold for generated ClusterRecommendations 
+    enable_ha: ${10:false}                                                 # If set to C(yes) will enable HA when the cluster is created 
+    ha_host_monitoring: ${11$$(yas-choose-value '("enabled" "disabled"))}  # choices: enabled;disabled  Indicates whether HA restarts virtual machines after a host fails  If set to C(enabled), HA r
+    ha_vm_monitoring: ${12$$(yas-choose-value '("vmAndAppMonitoring" "vmMonitoringOnly" "vmMonitoringDisabled"))}# choices: vmAndAppMonitoring;vmMonitoringOnly;vmMonitoringDisabled  Indicates the s
+    ha_failover_level: ${13:2}                                             # Number of host failures that should be tolerated, still guaranteeing sufficient resources to restart virtual machines on
+    ha_admission_control_enabled: ${14:True}                               # Determines if strict admission control is enabled  It is recommended to set this parameter to C(True), please refer docu
+    ha_vm_failure_interval: ${15:30}                                       # The number of seconds after which virtual machine is declared as failed if no heartbeat has been received  This setting 
+    ha_vm_min_up_time: ${16:120}                                           # The number of seconds for the virtual machine's heartbeats to stabilize after the virtual machine has been powered on  T
+    ha_vm_max_failures: ${17:3}                                            # Maximum number of failures and automated resets allowed during the time that C(ha_vm_max_failure_window) specifies  This
+    ha_vm_max_failure_window: ${18:-1}                                     # The number of seconds for the window during which up to C(ha_vm_max_failures) resets can occur before automated response
+    ha_restart_priority: ${19$$(yas-choose-value '("disabled" "high" "low" "medium"))}# choices: disabled;high;low;medium  Determines the preference that HA gives to a virtual machine if sufficient
+    enable_vsan: ${20:false}                                               # If set to C(yes) will enable vSAN when the cluster is created 
+    vsan_auto_claim_storage: ${21:False}                                   # Determines whether the VSAN service is configured to automatically claim local storage on VSAN-enabled hosts in the clus
+    state: ${22$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Create C(present) or remove C(absent) a VMware vSphere cluster 
+    hostname: ${23:value}                                                  # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${24:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${25:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${26:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${27:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${28:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${29:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP InstanceGroup
+# prefix: gcp_compute_instance_group_snippet
+# key: gcp_compute_instance_group
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP InstanceGroup}
+  gcp_compute_instance_group:                                              
+    zone: ${1:A reference to the zone where the instance group resides}    #
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${4:value}                                                # An optional description of this resource  Provide this property when you create the resource 
+    name: ${5:value}                                                       # The name of the instance group  The name must be 1-63 characters long, and comply with RFC1035 
+    named_ports: ${6:value}                                                # Assigns a name to a port number  For example: {name: "http", port: 80\}  This allows the system to reference ports by th
+    network: ${7:value}                                                    # The network to which all instances in the instance group belong  This field represents a link to a Network resource in G
+    region: ${8:value}                                                     # The region where the instance group is located (for regional resources) 
+    subnetwork: ${9:value}                                                 # The subnetwork to which all instances in the instance group belong  This field represents a link to a Subnetwork resourc
+    instances: ${10:value}                                                 # The list of instances associated with this InstanceGroup  All instances must be created before being added to an Instanc
+    project: ${11:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${12:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${13:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${14:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${15:value}                                                    # Array of scopes to be used 
+    env_type: ${16:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

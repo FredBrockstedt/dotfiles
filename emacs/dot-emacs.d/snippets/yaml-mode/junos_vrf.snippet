@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage the VRF definitions on Juniper JUNOS devices
+# prefix: junos_vrf_snippet
+# key: junos_vrf
+# group: ansible
+# --
+
+- name: ${0:Manage the VRF definitions on Juniper JUNOS devices}
+  junos_vrf:                                                               
+    name: ${1:value}                                                       # The name of the VRF definition to be managed on the remote IOS device   The VRF definition name is an ASCII string name 
+    description: ${2:value}                                                # Provides a short description of the VRF definition in the current active configuration   The VRF definition value accept
+    rd: ${3:value}                                                         # The router-distinguisher value uniquely identifies the VRF to routing processes on the remote IOS system   The RD value 
+    interfaces: ${4:value}                                                 # Identifies the set of interfaces that should be configured in the VRF  Interfaces must be routed interfaces in order to 
+    target: ${5:value}                                                     # It configures VRF target community configuration  The target value takes the form of C(target:A:B) where C(A) and C(B) a
+    table_label: ${6:value}                                                # Causes JUNOS to allocate a VPN label per VRF rather than per VPN FEC  This allows for forwarding of traffic to directly 
+    aggregate: ${7:value}                                                  # The set of VRF definition objects to be configured on the remote JUNOS device   Ths list entries can either be the VRF n
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the state of the VRF definition as it relates to the device operational configuratio
+    active: ${9:True}                                                      # Specifies whether or not the configuration is active or deactivated
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

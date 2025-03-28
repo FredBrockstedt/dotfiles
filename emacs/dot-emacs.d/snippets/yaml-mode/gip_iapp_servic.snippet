@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages TCL iApp services on a BIG-IP
+# prefix: bigip_iapp_service_snippet
+# key: gip_iapp_servic
+# group: ansible
+# --
+
+- name: ${0:Manages TCL iApp services on a BIG-IP}
+  bigip_iapp_service:                                                      
+    name: ${1:The name of the iApp service that you want to deploy}        #
+    template: ${2:value}                                                   # The iApp template from which to instantiate a new service  This template must exist on your BIG-IP before you can succes
+    parameters: ${3:value}                                                 # A hash of all the required template variables for the iApp template  If your parameters are stored in a file (the more c
+    force: ${4:False}                                                      # Forces the updating of an iApp service even if the parameters to the service have not changed  This option is of particu
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the iApp service is created and running  When C(absent), ensures 
+    partition: ${6:Common}                                                 # Device partition to manage resources on 
+    strict_updates: ${7:True}                                              # Indicates whether the application service is tied to the template, so when the template is updated, the application serv
+    traffic_group: ${8:value}                                              # The traffic group for the iApp service  When creating a new service, if this value is not specified, the default of C(/C
+    metadata: ${9:value}                                                   # Metadata associated with the iApp service  If this option is specified in the Ansible task, it will take precedence over
+    description: ${10:value}                                               # Description of the iApp service  If this option is specified in the Ansible task, it will take precedence over any simil
+    device_group: ${11:value}                                              # The device group for the iApp service  If this option is specified in the Ansible task, it will take precedence over any
+    provider: ${12:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Manages access-rule objects on Check Point over Web Services API
+# prefix: cp_mgmt_access_rule_snippet
+# key: cp_mgmt_access_ru
+# group: ansible
+# --
+
+- name: ${0:Manages access-rule objects on Check Point over Web Services API}
+  cp_mgmt_access_rule:                                                     
+    name: ${1:Object name}                                                 #
+    layer: ${2:value}                                                      # Layer that the rule belongs to identified by the name or UID 
+    position: ${3:value}                                                   # Position in the rulebase 
+    action: ${4:value}                                                     # a "Accept", "Drop", "Ask", "Inform", "Reject", "User Auth", "Client Auth", "Apply Layer" 
+    action_settings: ${5:value}                                            # Action settings 
+    content: ${6:value}                                                    # List of processed file types that this rule applies on 
+    content_direction: ${7$$(yas-choose-value '("any" "up" "down"))}       # choices: any;up;down  On which direction the file types processing is applied 
+    content_negate: ${8:value}                                             # True if negate is set for data 
+    custom_fields: ${9:value}                                              # Custom fields 
+    destination: ${10:value}                                               # Collection of Network objects identified by the name or UID 
+    destination_negate: ${11:value}                                        # True if negate is set for destination 
+    enabled: ${12:value}                                                   # Enable/Disable the rule 
+    inline_layer: ${13:value}                                              # Inline Layer identified by the name or UID  Relevant only if "Action" was set to "Apply Layer" 
+    install_on: ${14:value}                                                # Which Gateways identified by the name or UID to install the policy on 
+    service: ${15:value}                                                   # Collection of Network objects identified by the name or UID 
+    service_negate: ${16:value}                                            # True if negate is set for service 
+    source: ${17:value}                                                    # Collection of Network objects identified by the name or UID 
+    source_negate: ${18:value}                                             # True if negate is set for source 
+    time: ${19:value}                                                      # List of time objects  For example, "Weekend", "Off-Work", "Every-Day" 
+    track: ${20:value}                                                     # Track Settings 
+    user_check: ${21:value}                                                # User check settings 
+    vpn: ${22:value}                                                       # Communities or Directional 
+    comments: ${23:value}                                                  # Comments string 
+    details_level: ${24$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${25:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${26:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${27$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${28:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${29:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${30:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

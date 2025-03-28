@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Send BearyChat notifications
+# prefix: bearychat_snippet
+# key: rychat
+# group: ansible
+# --
+
+- name: ${0:Send BearyChat notifications}
+  bearychat:                                                               
+    url: ${1:BearyChat WebHook URL}                                        # This authenticates you to the bearychat service  It looks like C(https://hook bearychat com/=ae2CF/incoming/e61bd5c57b16
+    text: ${2:value}                                                       # Message to send 
+    markdown: ${3:true}                                                    # If C(yes), text will be parsed as markdown 
+    channel: ${4:value}                                                    # Channel to send the message to  If absent, the message goes to the default channel selected by the I(url) 
+    attachments: ${5:value}                                                # Define a list of attachments  For more information, see https://github com/bearyinnovative/bearychat-tutorial/blob/maste

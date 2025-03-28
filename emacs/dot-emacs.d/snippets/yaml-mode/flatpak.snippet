@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage flatpaks
+# prefix: flatpak_snippet
+# key: flatpak
+# group: ansible
+# --
+
+- name: ${0:Manage flatpaks}
+  flatpak:                                                                 
+    name: ${1:The name of the flatpak to manage}                           # When used with I(state=present), I(name) can be specified as an C(http(s)) URL to a C(flatpakref) file or the unique rev
+    executable: ${2:flatpak}                                               # The path to the C(flatpak) executable to use  By default, this module looks for the C(flatpak) executable on the path 
+    method: ${3$$(yas-choose-value '("system" "user"))}                    # choices: system;user  The installation method to use  Defines if the I(flatpak) is supposed to be installed globally for
+    remote: ${4:flathub}                                                   # The flatpak remote (repository) to install the flatpak from  By default, C(flathub) is assumed, but you do need to add t
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicates the desired package state 

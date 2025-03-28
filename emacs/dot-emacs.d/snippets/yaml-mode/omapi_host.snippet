@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Setup OMAPI hosts.
+# prefix: omapi_host_snippet
+# key: omapi_host
+# group: ansible
+# --
+
+- name: ${0:Setup OMAPI hosts.}
+  omapi_host:                                                              
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # Create or remove OMAPI host 
+    key_name: ${2:Sets the TSIG key name for authenticating against OMAPI server}#
+    key: ${3:Sets the TSIG key content for authenticating against OMAPI server}#
+    macaddr: ${4:Sets the lease host MAC address}                          #
+    hostname: ${5:value}                                                   # Sets the host lease hostname (mandatory if state=present) 
+    host: ${6:localhost}                                                   # Sets OMAPI server host to interact with 
+    port: ${7:7911}                                                        # Sets the OMAPI server port to interact with 
+    ip: ${8:value}                                                         # Sets the lease host IP address 
+    statements: ${9:[]}                                                    # Attach a list of OMAPI DHCP statements with host lease (without ending semicolon) 
+    ddns: ${10:False}                                                      # Enable dynamic DNS updates for this host 

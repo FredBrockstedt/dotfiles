@@ -1,0 +1,98 @@
+# -*- mode: snippet -*-
+# name: Module for setup of AnalyticsProfile Avi RESTful Object
+# prefix: avi_analyticsprofile_snippet
+# key: vi_analyticsprof
+# group: ansible
+# --
+
+- name: ${0:Module for setup of AnalyticsProfile Avi RESTful Object}
+  avi_analyticsprofile:                                                    
+    name: ${1:The name of the analytics profile}                           #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    apdex_response_threshold: ${5:value}                                   # If a client receives an http response in less than the satisfactory latency threshold, the request is considered satisfi
+    apdex_response_tolerated_factor: ${6:value}                            # Client tolerated response latency factor  Client must receive a response within this factor times the satisfactory thres
+    apdex_rtt_threshold: ${7:value}                                        # Satisfactory client to avi round trip time(rtt)  Allowed values are 1-2000  Default value when not specified in API or m
+    apdex_rtt_tolerated_factor: ${8:value}                                 # Tolerated client to avi round trip time(rtt) factor  It is a multiple of apdex_rtt_tolerated_factor  Allowed values are 
+    apdex_rum_threshold: ${9:value}                                        # If a client is able to load a page in less than the satisfactory latency threshold, the pageload is considered satisfied
+    apdex_rum_tolerated_factor: ${10:value}                                # Virtual service threshold factor for tolerated page load time (plt) as multiple of apdex_rum_threshold  Allowed values a
+    apdex_server_response_threshold: ${11:value}                           # A server http response is considered satisfied if latency is less than the satisfactory latency threshold  The response 
+    apdex_server_response_tolerated_factor: ${12:value}                    # Server tolerated response latency factor  Servermust response within this factor times the satisfactory threshold (apdex
+    apdex_server_rtt_threshold: ${13:value}                                # Satisfactory client to avi round trip time(rtt)  Allowed values are 1-2000  Default value when not specified in API or m
+    apdex_server_rtt_tolerated_factor: ${14:value}                         # Tolerated client to avi round trip time(rtt) factor  It is a multiple of apdex_rtt_tolerated_factor  Allowed values are 
+    client_log_config: ${15:value}                                         # Configure which logs are sent to the avi controller from ses and how they are processed 
+    client_log_streaming_config: ${16:value}                               # Configure to stream logs to an external server  Field introduced in 17 1 1 
+    conn_lossy_ooo_threshold: ${17:value}                                  # A connection between client and avi is considered lossy when more than this percentage of out of order packets are recei
+    conn_lossy_timeo_rexmt_threshold: ${18:value}                          # A connection between client and avi is considered lossy when more than this percentage of packets are retransmitted due 
+    conn_lossy_total_rexmt_threshold: ${19:value}                          # A connection between client and avi is considered lossy when more than this percentage of packets are retransmitted  All
+    conn_lossy_zero_win_size_event_threshold: ${20:value}                  # A client connection is considered lossy when percentage of times a packet could not be transmitted due to tcp zero windo
+    conn_server_lossy_ooo_threshold: ${21:value}                           # A connection between avi and server is considered lossy when more than this percentage of out of order packets are recei
+    conn_server_lossy_timeo_rexmt_threshold: ${22:value}                   # A connection between avi and server is considered lossy when more than this percentage of packets are retransmitted due 
+    conn_server_lossy_total_rexmt_threshold: ${23:value}                   # A connection between avi and server is considered lossy when more than this percentage of packets are retransmitted  All
+    conn_server_lossy_zero_win_size_event_threshold: ${24:value}           # A server connection is considered lossy when percentage of times a packet could not be transmitted due to tcp zero windo
+    description: ${25:value}                                               # User defined description for the object 
+    disable_ondemand_metrics: ${26:value}                                  # Virtual service (vs) metrics are processed only when there is live data traffic on the vs  In case, vs is idle for a per
+    disable_se_analytics: ${27:value}                                      # Disable node (service engine) level analytics forvs metrics  Default value when not specified in API or module is interp
+    disable_server_analytics: ${28:value}                                  # Disable analytics on backend servers  This may be desired in container environment when there are large number of epheme
+    disable_vs_analytics: ${29:value}                                      # Disable virtualservice (frontend) analytics  This flag disables metrics and healthscore for virtualservice  Field introd
+    enable_advanced_analytics: ${30:value}                                 # Enables advanced analytics features like anomaly detection  If set to false, anomaly computation (and associated rules/e
+    exclude_client_close_before_request_as_error: ${31:value}              # Exclude client closed connection before an http request could be completed from being classified as an error  Default va
+    exclude_dns_policy_drop_as_significant: ${32:value}                    # Exclude dns policy drops from the list of errors  Field introduced in 17 2 2  Default value when not specified in API or
+    exclude_gs_down_as_error: ${33:value}                                  # Exclude queries to gslb services that are operationally down from the list of errors  Default value when not specified i
+    exclude_http_error_codes: ${34:value}                                  # List of http status codes to be excluded from being classified as an error  Error connections or responses impacts healt
+    exclude_invalid_dns_domain_as_error: ${35:value}                       # Exclude dns queries to domains outside the domains configured in the dns application profile from the list of errors  De
+    exclude_invalid_dns_query_as_error: ${36:value}                        # Exclude invalid dns queries from the list of errors  Default value when not specified in API or module is interpreted by
+    exclude_no_dns_record_as_error: ${37:value}                            # Exclude queries to domains that did not have configured services/records from the list of errors  Default value when not
+    exclude_no_valid_gs_member_as_error: ${38:value}                       # Exclude queries to gslb services that have no available members from the list of errors  Default value when not specifie
+    exclude_persistence_change_as_error: ${39:value}                       # Exclude persistence server changed while load balancing' from the list of errors  Default value when not specified in AP
+    exclude_server_dns_error_as_error: ${40:value}                         # Exclude server dns error response from the list of errors  Default value when not specified in API or module is interpre
+    exclude_server_tcp_reset_as_error: ${41:value}                         # Exclude server tcp reset from errors  It is common for applications like ms exchange  Default value when not specified i
+    exclude_sip_error_codes: ${42:value}                                   # List of sip status codes to be excluded from being classified as an error  Field introduced in 17 2 13, 18 1 5, 18 2 1 
+    exclude_syn_retransmit_as_error: ${43:value}                           # Exclude 'server unanswered syns' from the list of errors  Default value when not specified in API or module is interpret
+    exclude_tcp_reset_as_error: ${44:value}                                # Exclude tcp resets by client from the list of potential errors  Default value when not specified in API or module is int
+    exclude_unsupported_dns_query_as_error: ${45:value}                    # Exclude unsupported dns queries from the list of errors  Default value when not specified in API or module is interprete
+    healthscore_max_server_limit: ${46:value}                              # Skips health score computation of pool servers when number of servers in a pool is more than this setting  Allowed value
+    hs_event_throttle_window: ${47:value}                                  # Time window (in secs) within which only unique health change events should occur  Default value when not specified in AP
+    hs_max_anomaly_penalty: ${48:value}                                    # Maximum penalty that may be deducted from health score for anomalies  Allowed values are 0-100  Default value when not s
+    hs_max_resources_penalty: ${49:value}                                  # Maximum penalty that may be deducted from health score for high resource utilization  Allowed values are 0-100  Default 
+    hs_max_security_penalty: ${50:value}                                   # Maximum penalty that may be deducted from health score based on security assessment  Allowed values are 0-100  Default v
+    hs_min_dos_rate: ${51:value}                                           # Dos connection rate below which the dos security assessment will not kick in  Default value when not specified in API or
+    hs_performance_boost: ${52:value}                                      # Adds free performance score credits to health score  It can be used for compensating health score for known slow applica
+    hs_pscore_traffic_threshold_l4_client: ${53:value}                     # Threshold number of connections in 5min, below which apdexr, apdexc, rum_apdex, and other network quality metrics are no
+    hs_pscore_traffic_threshold_l4_server: ${54:value}                     # Threshold number of connections in 5min, below which apdexr, apdexc, rum_apdex, and other network quality metrics are no
+    hs_security_certscore_expired: ${55:value}                             # Score assigned when the certificate has expired  Allowed values are 0-5  Default value when not specified in API or modu
+    hs_security_certscore_gt30d: ${56:value}                               # Score assigned when the certificate expires in more than 30 days  Allowed values are 0-5  Default value when not specifi
+    hs_security_certscore_le07d: ${57:value}                               # Score assigned when the certificate expires in less than or equal to 7 days  Allowed values are 0-5  Default value when 
+    hs_security_certscore_le30d: ${58:value}                               # Score assigned when the certificate expires in less than or equal to 30 days  Allowed values are 0-5  Default value when
+    hs_security_chain_invalidity_penalty: ${59:value}                      # Penalty for allowing certificates with invalid chain  Allowed values are 0-5  Default value when not specified in API or
+    hs_security_cipherscore_eq000b: ${60:value}                            # Score assigned when the minimum cipher strength is 0 bits  Allowed values are 0-5  Default value when not specified in A
+    hs_security_cipherscore_ge128b: ${61:value}                            # Score assigned when the minimum cipher strength is greater than equal to 128 bits  Allowed values are 0-5  Default value
+    hs_security_cipherscore_lt128b: ${62:value}                            # Score assigned when the minimum cipher strength is less than 128 bits  Allowed values are 0-5  Default value when not sp
+    hs_security_encalgo_score_none: ${63:value}                            # Score assigned when no algorithm is used for encryption  Allowed values are 0-5  Default value when not specified in API
+    hs_security_encalgo_score_rc4: ${64:value}                             # Score assigned when rc4 algorithm is used for encryption  Allowed values are 0-5  Default value when not specified in AP
+    hs_security_hsts_penalty: ${65:value}                                  # Penalty for not enabling hsts  Allowed values are 0-5  Default value when not specified in API or module is interpreted 
+    hs_security_nonpfs_penalty: ${66:value}                                # Penalty for allowing non-pfs handshakes  Allowed values are 0-5  Default value when not specified in API or module is in
+    hs_security_selfsignedcert_penalty: ${67:value}                        # Deprecated  Allowed values are 0-5  Default value when not specified in API or module is interpreted by Avi Controller a
+    hs_security_ssl30_score: ${68:value}                                   # Score assigned when supporting ssl3 0 encryption protocol  Allowed values are 0-5  Default value when not specified in A
+    hs_security_tls10_score: ${69:value}                                   # Score assigned when supporting tls1 0 encryption protocol  Allowed values are 0-5  Default value when not specified in A
+    hs_security_tls11_score: ${70:value}                                   # Score assigned when supporting tls1 1 encryption protocol  Allowed values are 0-5  Default value when not specified in A
+    hs_security_tls12_score: ${71:value}                                   # Score assigned when supporting tls1 2 encryption protocol  Allowed values are 0-5  Default value when not specified in A
+    hs_security_weak_signature_algo_penalty: ${72:value}                   # Penalty for allowing weak signature algorithm(s)  Allowed values are 0-5  Default value when not specified in API or mod
+    ondemand_metrics_idle_timeout: ${73:value}                             # This flag sets the time duration of no live data traffic after which virtual service metrics processing is suspended  It
+    ranges: ${74:value}                                                    # List of http status code ranges to be excluded from being classified as an error 
+    resp_code_block: ${75:value}                                           # Block of http response codes to be excluded from being classified as an error  Enum options - AP_HTTP_RSP_4XX, AP_HTTP_R
+    sensitive_log_profile: ${76:value}                                     # Rules applied to the http application log for filtering sensitive information  Field introduced in 17 2 10, 18 1 2 
+    sip_log_depth: ${77:value}                                             # Maximum number of sip messages added in logs for a sip transaction  By default, this value is 20  Allowed values are 1-1
+    tenant_ref: ${78:value}                                                # It is a reference to an object of type tenant 
+    url: ${79:value}                                                       # Avi controller URL of the object 
+    uuid: ${80:value}                                                      # Uuid of the analytics profile 
+    controller: ${81:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${82:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${83:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${84:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${85:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{86:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${87:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${88:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${89:value}                         # It disables avi session information to be cached as a fact 

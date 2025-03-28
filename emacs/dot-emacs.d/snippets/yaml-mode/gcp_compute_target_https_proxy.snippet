@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP TargetHttpsProxy
+# prefix: gcp_compute_target_https_proxy_snippet
+# key: gcp_compute_target_https_proxy
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP TargetHttpsProxy}
+  gcp_compute_target_https_proxy:                                          
+    name: ${1:Name of the resource}                                        # Provided by the client when the resource is created  The name must be 1-63 characters long, and comply with RFC1035  Spe
+    ssl_certificates: ${2:A list of SslCertificate resources that are used to authenticate connections between users and the load balancer}# Currently, exactly one SSL certificate must be specified
+    url_map: ${3:A reference to the UrlMap resource that defines the mapping from URL to the BackendService}# This field represents a link to a UrlMap resource in GCP  It can be specified in two wa
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${6:value}                                                # An optional description of this resource 
+    quic_override: ${7:value}                                              # Specifies the QUIC override policy for this resource  This determines whether the load balancer will attempt to negotiat
+    ssl_policy: ${8:value}                                                 # A reference to the SslPolicy resource that will be associated with the TargetHttpsProxy resource  If not set, the Target
+    project: ${9:value}                                                    # The Google Cloud Platform project to use 
+    service_account_contents: ${10:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${11:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${12:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${13:value}                                                    # Array of scopes to be used 
+    env_type: ${14:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Configures a IIS Web site binding
+# prefix: win_iis_webbinding_snippet
+# key: win_iis_webbinding
+# group: ansible
+# --
+
+- name: ${0:Configures a IIS Web site binding}
+  win_iis_webbinding:                                                      
+    name: ${1:Names of web site}                                           #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the binding 
+    port: ${3:80}                                                          # The port to bind to / use for the new site 
+    ip: ${4:*}                                                             # The IP address to bind to / use for the new site 
+    host_header: ${5:value}                                                # The host header to bind to / use for the new site  If you are creating/removing a catch-all binding, omit this parameter
+    protocol: ${6:http}                                                    # The protocol to be used for the Web binding (usually HTTP, HTTPS, or FTP) 
+    certificate_hash: ${7:value}                                           # Certificate hash (thumbprint) for the SSL binding  The certificate hash is the unique identifier for the certificate 
+    certificate_store_name: ${8:my}                                        # Name of the certificate store where the certificate for the binding is located 
+    ssl_flags: ${9:value}                                                  # This parameter is only valid on Server 2012 and newer  Primarily used for enabling and disabling server name indication 

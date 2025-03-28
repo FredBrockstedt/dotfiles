@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage cache clusters in Amazon Elasticache.
+# prefix: elasticache_snippet
+# key: ticach
+# group: ansible
+# --
+
+- name: ${0:Manage cache clusters in Amazon Elasticache.}
+  elasticache:                                                             
+    state: ${1$$(yas-choose-value '("present" "absent" "rebooted"))}       # C(absent) or C(present) are idempotent actions that will create or destroy a cache cluster as needed  C(rebooted) will r
+    name: ${2:The cache cluster identifier}                                #
+    engine: ${3$$(yas-choose-value '("redis" "memcached"))}                # choices: redis;memcached  Name of the cache engine to be used 
+    cache_engine_version: ${4:value}                                       # The version number of the cache engine
+    node_type: ${{5:cache}                                                 #m1 small} # not required  The compute and memory capacity of the nodes in the cache cluster
+    num_nodes: ${6:value}                                                  # The initial number of cache nodes that the cache cluster will have  Required when state=present 
+    cache_port: ${7:value}                                                 # The port number on which each of the cache nodes will accept connections
+    cache_parameter_group: ${8:value}                                      # The name of the cache parameter group to associate with this cache cluster  If this argument is omitted, the default cac
+    cache_subnet_group: ${9:value}                                         # The subnet group name to associate with  Only use if inside a vpc  Required if inside a vpc
+    security_group_ids: ${10:value}                                        # A list of vpc security group IDs to associate with this cache cluster  Only use if inside a vpc
+    cache_security_groups: ${11:value}                                     # A list of cache security group names to associate with this cache cluster  Must be an empty list if inside a vpc
+    zone: ${12:value}                                                      # The EC2 Availability Zone in which the cache cluster will be created
+    wait: ${13:true}                                                       # Wait for cache cluster result before returning
+    hard_modify: ${14:false}                                               # Whether to destroy and recreate an existing cache cluster if necessary in order to modify its state
+    debug_botocore_endpoint_logs: ${15:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${16:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${17:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${18:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${19:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${20:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${21:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${22:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

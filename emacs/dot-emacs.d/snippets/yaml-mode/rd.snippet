@@ -1,0 +1,50 @@
+# -*- mode: snippet -*-
+# name: create, delete, or modify Amazon rds instances, rds snapshots, and related facts
+# prefix: rds_snippet
+# key: rd
+# group: ansible
+# --
+
+- name: ${0:create, delete, or modify Amazon rds instances, rds snapshots, and related facts}
+  rds:                                                                     
+    command: ${1$$(yas-choose-value '("create" "replicate" "delete" "facts" "modify" "promote" "snapshot" "reboot" "restore"))}# Specifies the action to take  The 'reboot' option is available start
+    region: ${2:The AWS region to use}                                     # If not specified then the value of the EC2_REGION environment variable, if any, is used 
+    instance_name: ${3:value}                                              # Database instance identifier  Required except when using command=facts or command=delete on just a snapshot
+    source_instance: ${4:value}                                            # Name of the database to replicate  Used only when command=replicate 
+    db_engine: ${5$$(yas-choose-value '("mariadb" "MySQL" "oracle-se1" "oracle-se2" "oracle-se" "oracle-ee" "sqlserver-ee" "sqlserver-se" "sqlserver-ex" "sqlserver-web" "postgres" "aurora"))}# choi
+    size: ${6:value}                                                       # Size in gigabytes of the initial storage for the DB instance  Used only when command=create or command=modify 
+    instance_type: ${7:value}                                              # The instance type of the database   Must be specified when command=create  Optional when command=replicate, command=modi
+    username: ${8:value}                                                   # Master database username  Used only when command=create 
+    password: ${9:value}                                                   # Password for the master database username  Used only when command=create or command=modify 
+    db_name: ${10:value}                                                   # Name of a database to create within the instance   If not specified then no database is created  Used only when command=
+    engine_version: ${11:value}                                            # Version number of the database engine to use  Used only when command=create  If not specified then the current Amazon RD
+    parameter_group: ${12:value}                                           # Name of the DB parameter group to associate with this instance   If omitted then the RDS default DBParameterGroup will b
+    license_model: ${13$$(yas-choose-value '("license-included" "bring-your-own-license" "general-public-license" "postgresql-license"))}# choices: license-included;bring-your-own-license;general-p
+    multi_zone: ${14:value}                                                # Specifies if this is a Multi-availability-zone deployment  Can not be used in conjunction with zone parameter  Used only
+    iops: ${15:value}                                                      # Specifies the number of IOPS for the instance   Used only when command=create or command=modify  Must be an integer grea
+    security_groups: ${16:value}                                           # Comma separated list of one or more security groups   Used only when command=create or command=modify 
+    vpc_security_groups: ${17:value}                                       # Comma separated list of one or more vpc security group ids  Also requires `subnet` to be specified  Used only when comma
+    port: ${{18:"3306 for mysql, 1521 for Oracle, 1433 for SQL Server, 5432 for PostgreSQL}#"} # not required  Port number that the DB instance uses for connections  Used only when command=create o
+    upgrade: ${19:false}                                                   # Indicates that minor version upgrades should be applied automatically  Used only when command=create or command=modify o
+    option_group: ${20:value}                                              # The name of the option group to use   If not specified then the default option group is used  Used only when command=cre
+    maint_window: ${21:value}                                              # Maintenance window in format of ddd:hh24:mi-ddd:hh24:mi   (Example: Mon:22:00-Mon:23:15) If not specified then a random 
+    backup_window: ${22:value}                                             # Backup window in format of hh24:mi-hh24:mi   If not specified then a random backup window is assigned  Used only when co
+    backup_retention: ${23:value}                                          # Number of days backups are retained   Set to 0 to disable backups   Default is 1 day   Valid range: 0-35  Used only when
+    zone: ${24:value}                                                      # availability zone in which to launch the instance  Used only when command=create, command=replicate or command=restore 
+    subnet: ${25:value}                                                    # VPC subnet group   If specified then a VPC instance is created  Used only when command=create 
+    snapshot: ${26:value}                                                  # Name of snapshot to take  When command=delete, if no snapshot name is provided then no snapshot is taken  If used with c
+    aws_secret_key: ${27:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_KEY environment variable is used 
+    aws_access_key: ${28:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY environment variable is used 
+    wait: ${29:false}                                                      # When command=create, replicate, modify or restore then wait for the database to enter the 'available' state   When comma
+    wait_timeout: ${30:300}                                                # how long before wait gives up, in seconds
+    apply_immediately: ${31:false}                                         # Used only when command=modify   If enabled, the modifications will be applied as soon as possible rather than waiting fo
+    force_failover: ${32:false}                                            # Used only when command=reboot   If enabled, the reboot is done using a MultiAZ failover 
+    new_instance_name: ${33:value}                                         # Name to rename an instance to  Used only when command=modify 
+    character_set_name: ${34:value}                                        # Associate the DB instance with a specified character set  Used with command=create 
+    publicly_accessible: ${35:value}                                       # explicitly set whether the resource should be publicly accessible or not  Used with command=create, command=replicate  R
+    tags: ${36:value}                                                      # tags dict to apply to a resource  Used with command=create, command=replicate, command=restore  Requires boto >= 2 26 0
+    debug_botocore_endpoint_logs: ${37:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${38:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    security_token: ${39:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${40:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${41:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 

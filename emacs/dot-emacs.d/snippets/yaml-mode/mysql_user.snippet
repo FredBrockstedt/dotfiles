@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Adds or removes a user from a MySQL database
+# prefix: mysql_user_snippet
+# key: mysql_user
+# group: ansible
+# --
+
+- name: ${0:Adds or removes a user from a MySQL database}
+  mysql_user:                                                              
+    name: ${1:Name of the user (role) to add or remove}                    #
+    password: ${2:value}                                                   # Set the user's password  
+    encrypted: ${3:False}                                                  # Indicate that the 'password' field is a `mysql_native_password` hash 
+    host: ${4:localhost}                                                   # The 'host' part of the MySQL username 
+    host_all: ${5:False}                                                   # Override the host option, making ansible apply changes to all hostnames for a given user  This option cannot be used whe
+    priv: ${6:value}                                                       # MySQL privileges string in the format: C(db table:priv1,priv2)  Multiple privileges can be specified by separating each 
+    append_privs: ${7:False}                                               # Append the privileges defined by priv to the existing ones for this user instead of overwriting existing ones 
+    sql_log_bin: ${8:True}                                                 # Whether binary logging should be enabled or disabled for the connection 
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the user should exist  When C(absent), removes the user 
+    check_implicit_admin: ${10:False}                                      # Check if mysql allows login as root/nopassword before trying supplied credentials 
+    update_password: ${11$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will update passwords if they differ  C(on_create) will only set the password for n
+    login_user: ${12:value}                                                # The username used to authenticate with 
+    login_password: ${13:value}                                            # The password used to authenticate with 
+    login_host: ${14:localhost}                                            # Host running the database 
+    login_port: ${15:3306}                                                 # Port of the MySQL server  Requires I(login_host) be defined as other than localhost if login_port is used 
+    login_unix_socket: ${16:value}                                         # The path to a Unix domain socket for local connections 
+    connect_timeout: ${17:30}                                              # The connection timeout when connecting to the MySQL server 
+    config_file: ${{18:~/}                                                 #my cnf} # not required  Specify a config file from which user and password are to be read 
+    ca_cert: ${19:value}                                                   # The path to a Certificate Authority (CA) certificate  This option, if used, must specify the same certificate as used by
+    client_cert: ${20:value}                                               # The path to a client public key certificate 
+    client_key: ${21:value}                                                # The path to the client private key 

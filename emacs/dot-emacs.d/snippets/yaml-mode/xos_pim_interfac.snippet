@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages PIM interface configuration.
+# prefix: nxos_pim_interface_snippet
+# key: xos_pim_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages PIM interface configuration.}
+  nxos_pim_interface:                                                      
+    interface: ${1:Full name of the interface such as Ethernet1/33}        #
+    sparse: ${2:False}                                                     # Enable/disable sparse-mode on the interface 
+    bfd: ${3$$(yas-choose-value '("enable" "disable" "default"))}          # choices: enable;disable;default  Enables BFD for PIM at the interface level  This overrides the bfd variable set at the 
+    dr_prio: ${4:value}                                                    # Configures priority for PIM DR election on interface 
+    hello_auth_key: ${5:value}                                             # Authentication for hellos on this interface 
+    hello_interval: ${6:value}                                             # Hello interval in milliseconds for this interface 
+    jp_policy_out: ${7:value}                                              # Policy for join-prune messages (outbound) 
+    jp_policy_in: ${8:value}                                               # Policy for join-prune messages (inbound) 
+    jp_type_out: ${9$$(yas-choose-value '("prefix" "routemap"))}           # choices: prefix;routemap  Type of policy mapped to C(jp_policy_out) 
+    jp_type_in: ${10$$(yas-choose-value '("prefix" "routemap"))}           # choices: prefix;routemap  Type of policy mapped to C(jp_policy_in) 
+    border: ${11:False}                                                    # Configures interface to be a boundary of a PIM domain 
+    neighbor_policy: ${12:value}                                           # Configures a neighbor policy for filtering adjacencies 
+    neighbor_type: ${13$$(yas-choose-value '("prefix" "routemap"))}        # choices: prefix;routemap  Type of policy mapped to neighbor_policy 
+    state: ${14$$(yas-choose-value '("present" "default"))}                # choices: present;default  Manages desired state of the resource 
+    provider: ${15:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

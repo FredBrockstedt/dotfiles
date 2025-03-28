@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages MTU settings on HUAWEI CloudEngine switches.
+# prefix: ce_mtu_snippet
+# key: ce_mtu
+# group: ansible
+# --
+
+- name: ${0:Manages MTU settings on HUAWEI CloudEngine switches.}
+  ce_mtu:                                                                  
+    interface: ${1:value}                                                  # Full name of interface, i e  40GE1/0/22 
+    mtu: ${2:value}                                                        # MTU for a specific interface  The value is an integer ranging from 46 to 9600, in bytes 
+    jumbo_max: ${3:value}                                                  # Maximum frame size  The default value is 9216  The value is an integer and expressed in bytes  The value range is 1536 t
+    jumbo_min: ${4:value}                                                  # Non-jumbo frame size threshold  The default value is 1518  The value is an integer that ranges from 1518 to jumbo_max, i
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specify desired state of the resource 

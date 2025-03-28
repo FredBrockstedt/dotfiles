@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Include a play or task list
+# prefix: include_snippet
+# key: clud
+# group: ansible
+# --
+
+- name: ${0:Include a play or task list}
+  include:                                                                 
+    free-form: ${1:value}                                                  # This module allows you to specify the name of the file directly without any other options 

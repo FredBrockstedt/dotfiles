@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage domains on Rackspace Cloud DNS
+# prefix: rax_dns_snippet
+# key: rax_d
+# group: ansible
+# --
+
+- name: ${0:Manage domains on Rackspace Cloud DNS}
+  rax_dns:                                                                 
+    comment: ${1:value}                                                    # Brief description of the domain  Maximum length of 160 characters
+    email: ${2:value}                                                      # Email address of the domain administrator
+    name: ${3:value}                                                       # Domain name to create
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource
+    ttl: ${5:3600}                                                         # Time to live of domain in seconds
+    api_key: ${6:value}                                                    # Rackspace API key, overrides I(credentials) 
+    credentials: ${7:value}                                                # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${8:value}                                                        # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    region: ${9:DFW}                                                       # Region to create an instance in 
+    username: ${10:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${11:value}                                            # Whether or not to require SSL validation of API endpoints 
+    auth_endpoint: ${{12:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    identity_type: ${13:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    tenant_id: ${14:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${15:value}                                               # The tenant name used for authentication 

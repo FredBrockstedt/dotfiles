@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Add or delete app collaborators on Heroku
+# prefix: heroku_collaborator_snippet
+# key: heroku_collaborator
+# group: ansible
+# --
+
+- name: ${0:Add or delete app collaborators on Heroku}
+  heroku_collaborator:                                                     
+    apps: ${1:List of Heroku App names}                                    #
+    user: ${2:User ID or e-mail}                                           #
+    api_key: ${3:value}                                                    # Heroku API key
+    suppress_invitation: ${4:false}                                        # Suppress email invitation when creating collaborator
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or remove the heroku collaborator

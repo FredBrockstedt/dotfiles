@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage Admin Users
+# prefix: na_elementsw_admin_users_snippet
+# key: mentsw_admin_user
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage Admin Users}
+  na_elementsw_admin_users:                                                
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified account should exist or not 
+    element_username: ${2:Unique username for this account}                # (May be 1 to 64 characters in length) 
+    hostname: ${3:The hostname or IP address of the SolidFire cluster}     #
+    username: ${4:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${5:Password for the specified user}                         #
+    element_password: ${6:value}                                           # The password for the new admin account  Setting the password attribute will always reset your password, even if the pass
+    acceptEula: ${7:value}                                                 # Boolean, true for accepting Eula, False Eula
+    access: ${8:value}                                                     # A list of type the admin has access to

@@ -1,0 +1,76 @@
+# -*- mode: snippet -*-
+# name: docker swarm service
+# prefix: docker_swarm_service_snippet
+# key: docker_swarm_servic
+# group: ansible
+# --
+
+- name: ${0:docker swarm service}
+  docker_swarm_service:                                                    
+    name: ${1:Service name}                                                # Corresponds to the C(--name) option of C(docker service create) 
+    args: ${2:value}                                                       # List arguments to be passed to the container  Corresponds to the C(ARG) parameter of C(docker service create) 
+    command: ${3:value}                                                    # Command to execute when the container starts  A command may be either a string or a list or a list of strings  Correspon
+    configs: ${4:value}                                                    # List of dictionaries describing the service configs  Corresponds to the C(--config) option of C(docker service create)  
+    constraints: ${5:value}                                                # List of the service constraints  Corresponds to the C(--constraint) option of C(docker service create)  Deprecated in 2 
+    container_labels: ${6:value}                                           # Dictionary of key value pairs  Corresponds to the C(--container-label) option of C(docker service create) 
+    dns: ${7:value}                                                        # List of custom DNS servers  Corresponds to the C(--dns) option of C(docker service create)  Requires API version >= 1 25
+    dns_search: ${8:value}                                                 # List of custom DNS search domains  Corresponds to the C(--dns-search) option of C(docker service create)  Requires API v
+    dns_options: ${9:value}                                                # List of custom DNS options  Corresponds to the C(--dns-option) option of C(docker service create)  Requires API version 
+    endpoint_mode: ${10$$(yas-choose-value '("vip" "dnsrr"))}              # choices: vip;dnsrr  Service endpoint mode  Corresponds to the C(--endpoint-mode) option of C(docker service create)  Req
+    env: ${11:value}                                                       # List or dictionary of the service environment variables  If passed a list each items need to be in the format of C(KEY=V
+    env_files: ${12:value}                                                 # List of paths to files, present on the target, containing environment variables C(FOO=BAR)  The order of the list is sig
+    force_update: ${13:False}                                              # Force update even if no changes require it  Corresponds to the C(--force) option of C(docker service update)  Requires A
+    groups: ${14:value}                                                    # List of additional group names and/or IDs that the container process will run as  Corresponds to the C(--group) option o
+    healthcheck: ${15:value}                                               # Configure a check that is run to determine whether or not containers for this service are "healthy"  See the docs for th
+    hostname: ${16:value}                                                  # Container hostname  Corresponds to the C(--hostname) option of C(docker service create)  Requires API version >= 1 25 
+    hosts: ${17:value}                                                     # Dict of host-to-IP mappings, where each host name is a key in the dictionary  Each host name will be added to the contai
+    image: ${18:value}                                                     # Service image path and tag  Corresponds to the C(IMAGE) parameter of C(docker service create) 
+    labels: ${19:value}                                                    # Dictionary of key value pairs  Corresponds to the C(--label) option of C(docker service create) 
+    limits: ${20:value}                                                    # Configures service resource limits 
+    limit_cpu: ${21:value}                                                 # Service CPU limit  C(0) equals no limit  Corresponds to the C(--limit-cpu) option of C(docker service create)  Deprecate
+    limit_memory: ${22:value}                                              # Service memory limit in format C(<number>[<unit>])  Number is a positive integer  Unit can be C(B) (byte), C(K) (kibibyt
+    logging: ${23:value}                                                   # Logging configuration for the service 
+    log_driver: ${24:value}                                                # Configure the logging driver for a service  Corresponds to the C(--log-driver) option of C(docker service create)  Depre
+    log_driver_options: ${25:value}                                        # Options for service logging driver  Corresponds to the C(--log-opt) option of C(docker service create)  Deprecated in 2 
+    mode: ${26$$(yas-choose-value '("replicated" "global"))}               # choices: replicated;global  Service replication mode  Service will be removed and recreated when changed  Corresponds to
+    mounts: ${27:value}                                                    # List of dictionaries describing the service mounts  Corresponds to the C(--mount) option of C(docker service create) 
+    networks: ${28:value}                                                  # List of the service networks names or dictionaries  When passed dictionaries valid sub-options are I(name), which is req
+    placement: ${29:value}                                                 # Configures service placement preferences and constraints 
+    publish: ${30:value}                                                   # List of dictionaries describing the service published ports  Corresponds to the C(--publish) option of C(docker service 
+    read_only: ${31:value}                                                 # Mount the containers root filesystem as read only  Corresponds to the C(--read-only) option of C(docker service create) 
+    replicas: ${32:-1}                                                     # Number of containers instantiated in the service  Valid only if I(mode) is C(replicated)  If set to C(-1), and service i
+    reservations: ${33:value}                                              # Configures service resource reservations 
+    reserve_cpu: ${34:value}                                               # Service CPU reservation  C(0) equals no reservation  Corresponds to the C(--reserve-cpu) option of C(docker service crea
+    reserve_memory: ${35:value}                                            # Service memory reservation in format C(<number>[<unit>])  Number is a positive integer  Unit can be C(B) (byte), C(K) (k
+    resolve_image: ${36:False}                                             # If the current image digest should be resolved from registry and updated if changed  Requires API version >= 1 30 
+    restart_config: ${37:value}                                            # Configures if and how to restart containers when they exit 
+    restart_policy: ${38$$(yas-choose-value '("none" "on-failure" "any"))} # choices: none;on-failure;any  Restart condition of the service  Corresponds to the C(--restart-condition) option of C(do
+    restart_policy_attempts: ${39:value}                                   # Maximum number of service restarts  Corresponds to the C(--restart-condition) option of C(docker service create)  Deprec
+    restart_policy_delay: ${40:value}                                      # Delay between restarts  Accepts a duration as an integer in nanoseconds or as a string in a format that look like: C(5h3
+    restart_policy_window: ${41:value}                                     # Restart policy evaluation window  Accepts a duration as an integer in nanoseconds or as a string in a format that look l
+    rollback_config: ${42:value}                                           # Configures how the service should be rolled back in case of a failing update 
+    secrets: ${43:value}                                                   # List of dictionaries describing the service secrets  Corresponds to the C(--secret) option of C(docker service create)  
+    state: ${44$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  C(absent) - A service matching the specified name will be removed and have its tasks stopped  C
+    stop_grace_period: ${45:value}                                         # Time to wait before force killing a container  Accepts a duration as a string in a format that look like: C(5h34m56s), C
+    stop_signal: ${46:value}                                               # Override default signal used to stop the container  Corresponds to the C(--stop-signal) option of C(docker service creat
+    tty: ${47:value}                                                       # Allocate a pseudo-TTY  Corresponds to the C(--tty) option of C(docker service create)  Requires API version >= 1 25 
+    update_config: ${48:value}                                             # Configures how the service should be updated  Useful for configuring rolling updates 
+    update_delay: ${49:value}                                              # Rolling update delay  Accepts a duration as an integer in nanoseconds or as a string in a format that look like: C(5h34m
+    update_parallelism: ${50:value}                                        # Rolling update parallelism  Corresponds to the C(--update-parallelism) option of C(docker service create)  Before Ansibl
+    update_failure_action: ${51$$(yas-choose-value '("continue" "pause" "rollback"))}# choices: continue;pause;rollback  Action to take in case of container failure  Corresponds to the C(--update-f
+    update_monitor: ${52:value}                                            # Time to monitor updated tasks for failures  Accepts a duration as an integer in nanoseconds or as a string in a format t
+    update_max_failure_ratio: ${53:value}                                  # Fraction of tasks that may fail during an update before the failure action is invoked  Corresponds to the C(--update-max
+    update_order: ${54$$(yas-choose-value '("stop-first" "start-first"))}  # choices: stop-first;start-first  Specifies the order of operations when rolling out an updated task  Corresponds to the 
+    user: ${55:value}                                                      # Sets the username or UID used for the specified command  Before Ansible 2 8, the default value for this option was C(roo
+    working_dir: ${56:value}                                               # Path to the working directory  Corresponds to the C(--workdir) option of C(docker service create) 
+    docker_host: ${{57:unix://var/run/docker}                              #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${58:localhost}                                          # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${59:auto}                                                # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${60:60}                                                      # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${61:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${62:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${63:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${64:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${65:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${66:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${67:False}                                                     # Debug mode

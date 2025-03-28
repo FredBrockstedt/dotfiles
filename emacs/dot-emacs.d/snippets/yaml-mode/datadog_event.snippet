@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Posts events to Datadog  service
+# prefix: datadog_event_snippet
+# key: datadog_event
+# group: ansible
+# --
+
+- name: ${0:Posts events to Datadog  service}
+  datadog_event:                                                           
+    api_key: ${1:Your DataDog API key}                                     #
+    app_key: ${2:Your DataDog app key}                                     #
+    title: ${3:The event title}                                            #
+    text: ${4:The body of the event}                                       #
+    date_happened: ${5:falsew}                                             # POSIX timestamp of the event  Default value is now 
+    priority: ${6$$(yas-choose-value '("normal" "low"))}                   # choices: normal;low  The priority of the event 
+    host: ${7:"{{ ansible_hostname \}\}"}                                  # Host name to associate with the event 
+    tags: ${8:value}                                                       # Comma separated list of tags to apply to the event 
+    alert_type: ${9$$(yas-choose-value '("error" "warning" "info" "success"))}# choices: error;warning;info;success  Type of alert 
+    aggregation_key: ${10:value}                                           # An arbitrary string to use for aggregation 
+    validate_certs: ${11:true}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: NetApp AWS Cloud Volumes Service Manage Pools.
+# prefix: aws_netapp_cvs_pool_snippet
+# key: ws_netapp_cvs_poo
+# group: ansible
+# --
+
+- name: ${0:NetApp AWS Cloud Volumes Service Manage Pools.}
+  aws_netapp_cvs_pool:                                                     
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified pool should exist or not 
+    region: ${2:The region to which the Pool is associated}                #
+    name: ${3:pool name ( The human readable name of the Pool ) name can be used for create, update and delete operations}#
+    api_key: ${4:The access key to authenticate with the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    secret_key: ${5:The secret_key to authenticate with the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    api_url: ${6:The url to the AWSCVS Web Services Proxy or Embedded Web Services API}#
+    serviceLevel: ${7$$(yas-choose-value '("basic" "standard" "extreme"))} # choices: basic;standard;extreme  The service level of the Pool can be used with pool create, update operations
+    sizeInBytes: ${8:value}                                                # Size of the Pool in bytes can be used with pool create, update operations minimum value is 4000000000000 bytes
+    vendorID: ${9:value}                                                   # A vendor ID for the Pool  E g  an ID allocated by a vendor service for the Pool  can be used with pool create, update op
+    from_name: ${10:value}                                                 # rename the existing pool name ( The human readable name of the Pool ) I(from_name) is the existing name, and I(name) the
+    validate_certs: ${11:True}                                             # Should https certificates be validated?

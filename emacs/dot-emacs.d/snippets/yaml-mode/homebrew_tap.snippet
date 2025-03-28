@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Tap a Homebrew repository.
+# prefix: homebrew_tap_snippet
+# key: homebrew_tap
+# group: ansible
+# --
+
+- name: ${0:Tap a Homebrew repository.}
+  homebrew_tap:                                                            
+    name: ${1:The GitHub user/organization repository to tap}              #
+    url: ${2:value}                                                        # The optional git URL of the repository to tap  The URL is not assumed to be on GitHub, and the protocol doesn't have to 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  state of the repository 

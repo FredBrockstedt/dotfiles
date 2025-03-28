@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Enable or Disable Pure Storage FlashArray Phonehome
+# prefix: purefa_phonehome_snippet
+# key: purefa_phonehom
+# group: ansible
+# --
+
+- name: ${0:Enable or Disable Pure Storage FlashArray Phonehome}
+  purefa_phonehome:                                                        
+    fa_url: ${1:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${2:FlashArray API token for admin privileged user}         #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Define state of phonehome

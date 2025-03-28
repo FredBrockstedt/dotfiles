@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manipulate entries in the key/value store of a consul cluster
+# prefix: consul_kv_snippet
+# key: consul_kv
+# group: ansible
+# --
+
+- name: ${0:Manipulate entries in the key/value store of a consul cluster}
+  consul_kv:                                                               
+    key: ${1:The key at which the value should be stored}                  #
+    value: ${2:The value should be associated with the given key, required if C(state) is C(present)}#
+    state: ${3$$(yas-choose-value '("absent" "acquire" "present" "release"))}# choices: absent;acquire;present;release  The action to take with the supplied key and value  If the state is 'present'
+    recurse: ${4:false}                                                    # If the key represents a prefix, each entry with the prefix can be retrieved by setting this to C(yes) 
+    retrieve: ${5:True}                                                    # If the I(state) is C(present) and I(value) is set, perform a read after setting the value and return this value 
+    session: ${6:value}                                                    # The session that should be used to acquire or release a lock associated with a key/value pair 
+    token: ${7:value}                                                      # The token key identifying an ACL rule set that controls access to the key value pair
+    cas: ${8:value}                                                        # Used when acquiring a lock with a session  If the C(cas) is C(0), then Consul will only put the key if it does not alrea
+    flags: ${9:value}                                                      # Opaque positive integer value that can be passed when setting a value 
+    host: ${10:localhost}                                                  # Host of the consul agent 
+    port: ${11:8500}                                                       # The port on which the consul agent is running 
+    scheme: ${12:http}                                                     # The protocol scheme on which the consul agent is running 
+    validate_certs: ${13:true}                                             # Whether to verify the tls certificate of the consul agent 

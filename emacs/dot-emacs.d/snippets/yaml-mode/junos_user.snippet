@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage local user accounts on Juniper JUNOS devices
+# prefix: junos_user_snippet
+# key: junos_user
+# group: ansible
+# --
+
+- name: ${0:Manage local user accounts on Juniper JUNOS devices}
+  junos_user:                                                              
+    aggregate: ${1:value}                                                  # The C(aggregate) argument defines a list of users to be configured on the remote device   The list of users will be comp
+    name: ${2:value}                                                       # The C(name) argument defines the username of the user to be created on the system   This argument must follow appropriat
+    full_name: ${3:value}                                                  # The C(full_name) argument provides the full name of the user account to be created on the remote device   This argument 
+    role: ${4$$(yas-choose-value '("operator" "read-only" "super-user" "unauthorized"))}# choices: operator;read-only;super-user;unauthorized  The C(role) argument defines the role of the user acco
+    sshkey: ${5:value}                                                     # The C(sshkey) argument defines the public SSH key to be configured for the user account on the remote system   This argu
+    encrypted_password: ${6:value}                                         # The C(encrypted_password) argument set already hashed password for the user account on the remote system 
+    purge: ${7:false}                                                      # The C(purge) argument instructs the module to consider the users definition absolute   It will remove any previously con
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The C(state) argument configures the state of the user definitions as it relates to the device 
+    active: ${9:true}                                                      # Specifies whether or not the configuration is active or deactivated
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Vscan enable/disable.
+# prefix: na_ontap_vscan_snippet
+# key: ontap_vsc
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Vscan enable/disable.}
+  na_ontap_vscan:                                                          
+    vserver: ${1:the name of the data vserver to use}                      #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    enable: ${5:True}                                                      # Whether to enable to disable a Vscan
+    https: ${6:False}                                                      # Enable and disable https
+    validate_certs: ${7:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${8:value}                                                  # Override the default port (80 or 443) with this port
+    ontapi: ${9:value}                                                     # The ontap api version to use
+    use_rest: ${10$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

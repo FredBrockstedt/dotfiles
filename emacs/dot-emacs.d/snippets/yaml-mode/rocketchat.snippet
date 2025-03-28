@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Send notifications to Rocket Chat
+# prefix: rocketchat_snippet
+# key: rocketchat
+# group: ansible
+# --
+
+- name: ${0:Send notifications to Rocket Chat}
+  rocketchat:                                                              
+    domain: ${1:The domain for your environment without protocol}          # (i e  C(example com) or C(chat example com))
+    token: ${2:Rocket Chat Incoming Webhook integration token}             #  This provides authentication to Rocket Chat's Incoming webhook for posting messages 
+    protocol: ${3$$(yas-choose-value '("http" "https"))}                   # choices: http;https  Specify the protocol used to send notification messages before the webhook url  (i e  http or https
+    msg: ${4:value}                                                        # Message to be sent 
+    channel: ${5:value}                                                    # Channel to send the message to  If absent, the message goes to the channel selected for the I(token) specified during th
+    username: ${6:Ansible}                                                 # This is the sender of the message 
+    icon_url: ${{7:https://www}                                            #ansible com/favicon ico} # not required  URL for the message sender's icon 
+    icon_emoji: ${8:value}                                                 # Emoji for the message sender  The representation for the available emojis can be got from Rocket Chat  (for example :thu
+    link_names: ${9$$(yas-choose-value '("1" "0"))}                        # choices: 1;0  Automatically create links for channels and usernames in I(msg) 
+    validate_certs: ${10:true}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    color: ${11$$(yas-choose-value '("normal" "good" "warning" "danger"))} # choices: normal;good;warning;danger  Allow text to use default colors - use the default of 'normal' to not send a custom
+    attachments: ${12:value}                                               # Define a list of attachments 

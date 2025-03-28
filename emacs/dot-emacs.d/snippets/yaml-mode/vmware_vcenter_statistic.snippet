@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Configures statistics on a vCenter server
+# prefix: vmware_vcenter_statistics_snippet
+# key: vmware_vcenter_statistic
+# group: ansible
+# --
+
+- name: ${0:Configures statistics on a vCenter server}
+  vmware_vcenter_statistics:                                               
+    interval_past_day: ${1:value}                                          # Settings for vCenter server past day statistic collection  Valid attributes are: - C(enabled) (bool): Past day statistic
+    interval_past_week: ${2:value}                                         # Settings for vCenter server past week statistic collection  Valid attributes are: - C(enabled) (bool): Past week statist
+    interval_past_month: ${3:value}                                        # Settings for vCenter server past month statistic collection  Valid attributes are: - C(enabled) (bool): Past month stati
+    interval_past_year: ${4:value}                                         # Settings for vCenter server past month statistic collection  Valid attributes are: - C(enabled) (bool): Past month stati
+    hostname: ${5:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${6:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${7:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${8:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${9:443}                                                         # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${10:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${11:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

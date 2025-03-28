@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Package manager for Homebrew
+# prefix: homebrew_snippet
+# key: homebrew
+# group: ansible
+# --
+
+- name: ${0:Package manager for Homebrew}
+  homebrew:                                                                
+    name: ${1:value}                                                       # list of names of packages to install/remove
+    path: ${2:/usr/local/bin}                                              # A ':' separated list of paths to search for 'brew' executable  Since a package (I(formula) in homebrew parlance) locatio
+    state: ${3$$(yas-choose-value '("head" "latest" "present" "absent" "linked" "unlinked"))}# choices: head;latest;present;absent;linked;unlinked  state of the package
+    update_homebrew: ${4:false}                                            # update homebrew itself first
+    upgrade_all: ${5:false}                                                # upgrade all homebrew packages
+    install_options: ${6:value}                                            # options flags to install a package

@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: Manage EC2 launch templates
+# prefix: ec2_launch_template_snippet
+# key: c2_launch_templat
+# group: ansible
+# --
+
+- name: ${0:Manage EC2 launch templates}
+  ec2_launch_template:                                                     
+    template_id: ${1:value}                                                # The ID for the launch template, can be used for all cases except creating a new Launch Template 
+    template_name: ${2:value}                                              # The template name  This must be unique in the region-account combination you are using 
+    default_version: ${3:latest}                                           # Which version should be the default when users spin up new instances based on this template? By default, the latest vers
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the launch template should exist or not  Deleting specific versions of a launch templat
+    block_device_mappings: ${5:value}                                      # The block device mapping  Supplying both a snapshot ID and an encryption value as arguments for block-device mapping res
+    cpu_options: ${6:value}                                                # Choose CPU settings for the EC2 instances that will be created with this template  For more information, see U(http://do
+    credit_specification: ${7:value}                                       # T h e   c r e d i t   o p t i o n   f o r   C P U   u s a g e   o f   t h e   i n s t a n c e     V a l i d   f o r   T 
+    disable_api_termination: ${8:value}                                    # T h i s   h e l p s   p r o t e c t   i n s t a n c e s   f r o m   a c c i d e n t a l   t e r m i n a t i o n     I f 
+    ebs_optimized: ${9:value}                                              # I n d i c a t e s   w h e t h e r   t h e   i n s t a n c e   i s   o p t i m i z e d   f o r   A m a z o n   E B S   I 
+    elastic_gpu_specifications: ${10:value}                                # S e t t i n g s   f o r   E l a s t i c   G P U   a t t a c h m e n t s     S e e   U ( h t t p s : / / a w s   a m a z 
+    iam_instance_profile: ${11:value}                                      # T h e   n a m e   o r   A R N   o f   a n   I A M   i n s t a n c e   p r o f i l e     R e q u i r e s   p e r m i s s 
+    image_id: ${12:value}                                                  # T h e   A M I   I D   t o   u s e   f o r   n e w   i n s t a n c e s   l a u n c h e d   w i t h   t h i s   t e m p l 
+    instance_initiated_shutdown_behavior: ${13$$(yas-choose-value '("stop" "terminate"))}# choices: stop;terminate  I n d i c a t e s   w h e t h e r   a n   i n s t a n c e   s t o p s   o r   t e
+    instance_market_options: ${14:value}                                   # O p t i o n s   f o r   a l t e r n a t i v e   i n s t a n c e   m a r k e t s ,   c u r r e n t l y   o n l y   t h e 
+    instance_type: ${15:value}                                             # T h e   i n s t a n c e   t y p e ,   s u c h   a s   I ( c 5   2 x l a r g e )     F o r   a   f u l l   l i s t   o f 
+    kernel_id: ${16:value}                                                 # T h e   I D   o f   t h e   k e r n e l     W e   r e c o m m e n d   t h a t   y o u   u s e   P V - G R U B   i n s t 
+    key_name: ${17:value}                                                  # The name of the key pair  You can create a key pair using I(CreateKeyPair) or I(ImportKeyPair)  If you do not specify a 
+    monitoring: ${18:value}                                                # S e t t i n g s   f o r   i n s t a n c e   m o n i t o r i n g
+    network_interfaces: ${19:value}                                        # O n e   o r   m o r e   n e t w o r k   i n t e r f a c e s  
+    placement: ${20:value}                                                 # T h e   p l a c e m e n t   g r o u p   s e t t i n g s   f o r   t h e   i n s t a n c e  
+    ram_disk_id: ${21:value}                                               # T h e   I D   o f   t h e   R A M   d i s k   t o   l a u n c h   t h e   i n s t a n c e   w i t h     W e   r e c o m 
+    security_group_ids: ${22:value}                                        # A   l i s t   o f   s e c u r i t y   g r o u p   I D s   ( V P C   o r   E C 2 - C l a s s i c )   t h a t   t h e   n 
+    security_groups: ${23:value}                                           # A   l i s t   o f   s e c u r i t y   g r o u p   n a m e s   ( V P C   o r   E C 2 - C l a s s i c )   t h a t   t h e 
+    tags: ${24:value}                                                      # A set of key-value pairs to be applied to resources when this Launch Template is used  Tag key constraints: Tag keys are
+    user_data: ${25:value}                                                 # T h e   B a s e 6 4 - e n c o d e d   u s e r   d a t a   t o   m a k e   a v a i l a b l e   t o   t h e   i n s t a n 
+    debug_botocore_endpoint_logs: ${26:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${27:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${28:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${29:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${30:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${31:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${32:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${33:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

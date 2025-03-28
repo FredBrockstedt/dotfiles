@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Installs packages on remote devices running Junos
+# prefix: junos_package_snippet
+# key: junos_packag
+# group: ansible
+# --
+
+- name: ${0:Installs packages on remote devices running Junos}
+  junos_package:                                                           
+    src: ${1:The I(src) argument specifies the path to the source package to be installed on the remote device in the advent of a version mismatch}# The I(src) argument can be either a localized pa
+    version: ${2:value}                                                    # The I(version) argument can be used to explicitly specify the version of the package that should be installed on the rem
+    reboot: ${3:true}                                                      # In order for a package to take effect, the remote device must be restarted   When enabled, this argument will instruct t
+    no_copy: ${4:false}                                                    # The I(no_copy) argument is responsible for instructing the remote device on where to install the package from   When ena
+    validate: ${5:true}                                                    # The I(validate) argument is responsible for instructing the remote device to skip checking the current device configurat
+    force: ${6:false}                                                      # The I(force) argument instructs the module to bypass the package version check and install the packaged identified in I(
+    force_host: ${7:False}                                                 # The I(force_host) argument controls the way software package or bundle is added on remote JUNOS host and is applicable f
+    issu: ${8:False}                                                       # The I(issu) argument is a boolean flag when set to C(True) allows unified in-service software upgrade (ISSU) feature whi
+    provider: ${9:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

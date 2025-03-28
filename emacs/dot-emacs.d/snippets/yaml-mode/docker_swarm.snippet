@@ -1,0 +1,45 @@
+# -*- mode: snippet -*-
+# name: Manage Swarm cluster
+# prefix: docker_swarm_snippet
+# key: docker_swarm
+# group: ansible
+# --
+
+- name: ${0:Manage Swarm cluster}
+  docker_swarm:                                                            
+    advertise_addr: ${1:value}                                             # Externally reachable address advertised to other nodes  This can either be an address/port combination in the form C(192
+    default_addr_pool: ${2:value}                                          # Default address pool in CIDR format  Only used when swarm is initialised  Because of this it's not considered for idempo
+    subnet_size: ${3:value}                                                # Default address pool subnet mask length  Only used when swarm is initialised  Because of this it's not considered for id
+    listen_addr: ${{4:0}                                                   #0 0 0:2377} # not required  Listen address used for inter-manager communication  This can either be an address/port combi
+    force: ${5:False}                                                      # Use with state C(present) to force creating a new Swarm, even if already part of one  Use with state C(absent) to Leave 
+    state: ${6$$(yas-choose-value '("present" "join" "absent" "remove" "inspect"))}# choices: present;join;absent;remove;inspect  Set to C(present), to create/update a new cluster  Set to C(join), 
+    node_id: ${7:value}                                                    # Swarm id of the node to remove  Used with I(state=remove) 
+    join_token: ${8:value}                                                 # Swarm token used to join a swarm cluster  Used with I(state=join) 
+    remote_addrs: ${9:value}                                               # Remote address of one or more manager nodes of an existing Swarm to connect to  Used with I(state=join) 
+    task_history_retention_limit: ${10:value}                              # Maximum number of tasks history stored  Docker default value is C(5) 
+    snapshot_interval: ${11:value}                                         # Number of logs entries between snapshot  Docker default value is C(10000) 
+    keep_old_snapshots: ${12:value}                                        # Number of snapshots to keep beyond the current snapshot  Docker default value is C(0) 
+    log_entries_for_slow_followers: ${13:value}                            # Number of log entries to keep around to sync up slow followers after a snapshot is created 
+    heartbeat_tick: ${14:value}                                            # Amount of ticks (in seconds) between each heartbeat  Docker default value is C(1s) 
+    election_tick: ${15:value}                                             # Amount of ticks (in seconds) needed without a leader to trigger a new election  Docker default value is C(10s) 
+    dispatcher_heartbeat_period: ${16:value}                               # The delay for an agent to send a heartbeat to the dispatcher  Docker default value is C(5s) 
+    node_cert_expiry: ${17:value}                                          # Automatic expiry for nodes certificates  Docker default value is C(3months) 
+    name: ${18:value}                                                      # The name of the swarm 
+    labels: ${19:value}                                                    # User-defined key/value metadata  Label operations in this module apply to the docker swarm cluster  Use M(docker_node) m
+    signing_ca_cert: ${20:value}                                           # The desired signing CA certificate for all swarm node TLS leaf certificates, in PEM format  This must not be a path to a
+    signing_ca_key: ${21:value}                                            # The desired signing CA key for all swarm node TLS leaf certificates, in PEM format  This must not be a path to a key, bu
+    ca_force_rotate: ${22:value}                                           # An integer whose purpose is to force swarm to generate a new signing CA certificate and key, if none have been specified
+    autolock_managers: ${23:value}                                         # If set, generate a key and use it to lock data stored on the managers  Docker default value is C(no)  M(docker_swarm_inf
+    rotate_worker_token: ${24:False}                                       # R o t a t e   t h e   w o r k e r   j o i n   t o k e n  
+    rotate_manager_token: ${25:False}                                      # R o t a t e   t h e   m a n a g e r   j o i n   t o k e n  
+    docker_host: ${{26:unix://var/run/docker}                              #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${27:localhost}                                          # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${28:auto}                                                # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${29:60}                                                      # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${30:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${31:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${32:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${33:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${34:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${35:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${36:False}                                                     # Debug mode

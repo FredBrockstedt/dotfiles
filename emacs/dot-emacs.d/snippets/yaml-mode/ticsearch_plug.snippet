@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage Elasticsearch plugins
+# prefix: elasticsearch_plugin_snippet
+# key: ticsearch_plug
+# group: ansible
+# --
+
+- name: ${0:Manage Elasticsearch plugins}
+  elasticsearch_plugin:                                                    
+    name: ${1:Name of the plugin to install}                               #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of a plugin 
+    src: ${3:value}                                                        # Optionally set the source location to retrieve the plugin from  This can be a file:// URL to install from a local file, 
+    url: ${4:value}                                                        # Set exact URL to download the plugin from (Only works for ES 1 x)  For ES 2 x and higher, use src 
+    timeout: ${5:1m}                                                       # Timeout setting: 30s, 1m, 1h    Only valid for Elasticsearch < 5 0  This option is ignored for Elasticsearch > 5 0 
+    force: ${6:False}                                                      # Force batch mode when installing plugins  This is only necessary if a plugin requires additional permissions and console
+    plugin_bin: ${7:value}                                                 # Location of the plugin binary  If this file is not found, the default plugin binaries will be used  The default changed 
+    plugin_dir: ${8:/usr/share/elasticsearch/plugins/}                     # Your configured plugin directory specified in Elasticsearch
+    proxy_host: ${9:value}                                                 # Proxy host to use during plugin installation
+    proxy_port: ${10:value}                                                # Proxy port to use during plugin installation
+    version: ${11:value}                                                   # Version of the plugin to be installed  If plugin exists with previous version, it will NOT be updated

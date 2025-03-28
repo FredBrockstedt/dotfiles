@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP configuration on VyOS network devices
+# prefix: vyos_lldp_snippet
+# key: vyos_lldp
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP configuration on VyOS network devices}
+  vyos_lldp:                                                               
+    interfaces: ${1:value}                                                 # Name of the interfaces 
+    state: ${2$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  State of the link aggregation group 
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

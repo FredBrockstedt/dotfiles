@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages power states of virtual machines running on Citrix Hypervisor/XenServer host or pool
+# prefix: xenserver_guest_powerstate_snippet
+# key: xenserver_guest_powerstat
+# group: ansible
+# --
+
+- name: ${0:Manages power states of virtual machines running on Citrix Hypervisor/XenServer host or pool}
+  xenserver_guest_powerstate:                                              
+    name: ${1:Name of the VM to manage}                                    # VMs running on XenServer do not necessarily have unique names  The module will fail if multiple VMs with same name are f
+    state: ${2$$(yas-choose-value '("powered-on" "powered-off" "restarted" "shutdown-guest" "reboot-guest" "suspended" "present"))}# choices: powered-on;powered-off;restarted;shutdown-guest;reboot-
+    uuid: ${3:value}                                                       # UUID of the VM to manage if known  This is XenServer's unique identifier  It is required if name is not unique 
+    wait_for_ip_address: ${4:False}                                        # Wait until XenServer detects an IP address for the VM  This requires XenServer Tools to be preinstalled on the VM to wor
+    state_change_timeout: ${5:0}                                           # By default, module will wait indefinitely for VM to change state or acquire an IP address if C(wait_for_ip_address: yes)
+    hostname: ${6:localhost}                                               # The hostname or IP address of the XenServer host or XenServer pool master  If the value is not specified in the task, th
+    username: ${7:root}                                                    # The username to use for connecting to XenServer  If the value is not specified in the task, the value of environment var
+    password: ${8:value}                                                   # The password to use for connecting to XenServer  If the value is not specified in the task, the value of environment var
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i

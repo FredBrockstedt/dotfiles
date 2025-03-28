@@ -1,0 +1,48 @@
+# -*- mode: snippet -*-
+# name: Manages advanced ACL configuration on HUAWEI CloudEngine switches.
+# prefix: ce_acl_advance_snippet
+# key: ce_acl_advanc
+# group: ansible
+# --
+
+- name: ${0:Manages advanced ACL configuration on HUAWEI CloudEngine switches.}
+  ce_acl_advance:                                                          
+    acl_name: ${1:ACL number or name}                                      # For a numbered rule group, the value ranging from 3000 to 3999 indicates a advance ACL  For a named rule group, the valu
+    state: ${2$$(yas-choose-value '("present" "absent" "delete_acl"))}     # choices: present;absent;delete_acl  Specify desired state of the resource 
+    acl_num: ${3:value}                                                    # ACL number  The value is an integer ranging from 3000 to 3999 
+    acl_step: ${4:value}                                                   # ACL step  The value is an integer ranging from 1 to 20  The default value is 5 
+    acl_description: ${5:value}                                            # ACL description  The value is a string of 1 to 127 characters 
+    rule_name: ${6:value}                                                  # Name of a basic ACL rule  The value is a string of 1 to 32 characters 
+    rule_id: ${7:value}                                                    # ID of a basic ACL rule in configuration mode  The value is an integer ranging from 0 to 4294967294 
+    rule_action: ${8$$(yas-choose-value '("permit" "deny"))}               # choices: permit;deny  Matching mode of basic ACL rules 
+    protocol: ${9$$(yas-choose-value '("ip" "icmp" "igmp" "ipinip" "tcp" "udp" "gre" "ospf"))}# choices: ip;icmp;igmp;ipinip;tcp;udp;gre;ospf  Protocol type 
+    source_ip: ${10:value}                                                 # Source IP address  The value is a string of 0 to 255 characters The default value is 0 0 0 0  The value is in dotted dec
+    src_mask: ${11:value}                                                  # Source IP address mask  The value is an integer ranging from 1 to 32 
+    src_pool_name: ${12:value}                                             # Name of a source pool  The value is a string of 1 to 32 characters 
+    dest_ip: ${13:value}                                                   # Destination IP address  The value is a string of 0 to 255 characters The default value is 0 0 0 0  The value is in dotte
+    dest_mask: ${14:value}                                                 # Destination IP address mask  The value is an integer ranging from 1 to 32 
+    dest_pool_name: ${15:value}                                            # Name of a destination pool  The value is a string of 1 to 32 characters 
+    src_port_op: ${16$$(yas-choose-value '("lt" "eq" "gt" "range"))}       # choices: lt;eq;gt;range  Range type of the source port 
+    src_port_begin: ${17:value}                                            # Start port number of the source port  The value is an integer ranging from 0 to 65535 
+    src_port_end: ${18:value}                                              # End port number of the source port  The value is an integer ranging from 0 to 65535 
+    src_port_pool_name: ${19:value}                                        # Name of a source port pool  The value is a string of 1 to 32 characters 
+    dest_port_op: ${20$$(yas-choose-value '("lt" "eq" "gt" "range"))}      # choices: lt;eq;gt;range  Range type of the destination port 
+    dest_port_begin: ${21:value}                                           # Start port number of the destination port  The value is an integer ranging from 0 to 65535 
+    dest_port_end: ${22:value}                                             # End port number of the destination port  The value is an integer ranging from 0 to 65535 
+    dest_port_pool_name: ${23:value}                                       # Name of a destination port pool  The value is a string of 1 to 32 characters 
+    frag_type: ${24$$(yas-choose-value '("fragment" "clear_fragment"))}    # choices: fragment;clear_fragment  Type of packet fragmentation 
+    precedence: ${25:value}                                                # Data packets can be filtered based on the priority field  The value is an integer ranging from 0 to 7 
+    tos: ${26:value}                                                       # ToS value on which data packet filtering is based  The value is an integer ranging from 0 to 15 
+    dscp: ${27:value}                                                      # Differentiated Services Code Point  The value is an integer ranging from 0 to 63 
+    icmp_name: ${28$$(yas-choose-value '("unconfiged" "echo" "echo-reply" "fragmentneed-DFset" "host-redirect" "host-tos-redirect" "host-unreachable" "information-reply" "information-request" "net-
+    icmp_type: ${29:value}                                                 # ICMP type  This parameter is available only when the packet protocol is ICMP  The value is an integer ranging from 0 to 
+    icmp_code: ${30:value}                                                 # ICMP message code  Data packets can be filtered based on the ICMP message code  The value is an integer ranging from 0 t
+    ttl_expired: ${31:false}                                               # Whether TTL Expired is matched, with the TTL value of 1 
+    vrf_name: ${32:value}                                                  # VPN instance name  The value is a string of 1 to 31 characters The default value is _public_ 
+    syn_flag: ${33:value}                                                  # TCP flag value  The value is an integer ranging from 0 to 63 
+    tcp_flag_mask: ${34:value}                                             # TCP flag mask value  The value is an integer ranging from 0 to 63 
+    established: ${35:false}                                               # Match established connections 
+    time_range: ${36:value}                                                # Name of a time range in which an ACL rule takes effect 
+    rule_description: ${37:value}                                          # Description about an ACL rule 
+    igmp_type: ${38$$(yas-choose-value '("host-query" "mrouter-adver" "mrouter-solic" "mrouter-termi" "mtrace-resp" "mtrace-route" "v1host-report" "v2host-report" "v2leave-group" "v3host-report"))}
+    log_flag: ${39:false}                                                  # Flag of logging matched data packets 

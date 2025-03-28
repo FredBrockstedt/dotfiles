@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage association of VMware tags with VMware objects
+# prefix: vmware_tag_manager_snippet
+# key: vmware_tag_manager
+# group: ansible
+# --
+
+- name: ${0:Manage association of VMware tags with VMware objects}
+  vmware_tag_manager:                                                      
+    tag_names: ${1:List of tag(s) to be managed}                           # You can also specify category name by specifying colon separated value  For example, "category_name:tag_name"  You can s
+    object_type: ${2$$(yas-choose-value '("VirtualMachine" "Datacenter" "ClusterComputeResource" "HostSystem" "DistributedVirtualSwitch" "DistributedVirtualPortgroup"))}# Type of object to work wit
+    object_name: ${3:Name of the object to work with}                      # For DistributedVirtualPortgroups the format should be "switch_name:portgroup_name"
+    state: ${4$$(yas-choose-value '("present" "absent" "add" "remove" "set"))}# choices: present;absent;add;remove;set  If C(state) is set to C(add) or C(present) will add the tags to the existing 
+    hostname: ${5:value}                                                   # The hostname or IP address of the vSphere vCenter server  If the value is not specified in the task, the value of enviro
+    username: ${6:value}                                                   # The username of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    password: ${7:value}                                                   # The password of the vSphere vCenter server  If the value is not specified in the task, the value of environment variable
+    validate_certs: ${8:True}                                              # Allows connection when SSL certificates are not valid  Set to C(no) when certificates are not trusted  If the value is n
+    protocol: ${9$$(yas-choose-value '("http" "https"))}                   # choices: http;https  The connection to protocol 

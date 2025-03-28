@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP or ElementSW Manage SnapMirror
+# prefix: na_ontap_snapmirror_snippet
+# key: ontap_snapmirror
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP or ElementSW Manage SnapMirror}
+  na_ontap_snapmirror:                                                     
+    hostname: ${1:The hostname or IP address of the ONTAP instance}        #
+    username: ${2:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${3:Password for the specified user}                         #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified relationship should exist or not 
+    source_volume: ${5:value}                                              # Specifies the name of the source volume for the SnapMirror 
+    destination_volume: ${6:value}                                         # Specifies the name of the destination volume for the SnapMirror 
+    source_vserver: ${7:value}                                             # Name of the source vserver for the SnapMirror 
+    destination_vserver: ${8:value}                                        # Name of the destination vserver for the SnapMirror 
+    source_path: ${9:value}                                                # Specifies the source endpoint of the SnapMirror relationship  If the source is an ONTAP volume, format should be <[vserv
+    destination_path: ${10:value}                                          # Specifies the destination endpoint of the SnapMirror relationship 
+    relationship_type: ${11$$(yas-choose-value '("data_protection" "load_sharing" "vault" "restore" "transition_data_protection" "extended_data_protection"))}# choices: data_protection;load_sharing
+    schedule: ${12:value}                                                  # Specify the name of the current schedule, which is used to update the SnapMirror relationship  Optional for create, modi
+    policy: ${13:value}                                                    # Specify the name of the SnapMirror policy that applies to this relationship 
+    source_hostname: ${14:value}                                           # Source hostname or management IP address for ONTAP or ElementSW cluster  Required for SnapMirror delete
+    source_username: ${15:value}                                           # Source username for ONTAP or ElementSW cluster  Optional if this is same as destination username 
+    source_password: ${16:value}                                           # Source password for ONTAP or ElementSW cluster  Optional if this is same as destination password 
+    connection_type: ${17$$(yas-choose-value '("ontap_ontap" "elementsw_ontap" "ontap_elementsw"))}# choices: ontap_ontap;elementsw_ontap;ontap_elementsw  Type of SnapMirror relationship  Pre-requi
+    max_transfer_rate: ${18:value}                                         # Specifies the upper bound, in kilobytes per second, at which data is transferred  Default is unlimited, it can be explic
+    identity_preserve: ${19:value}                                         # Specifies whether or not the identity of the source Vserver is replicated to the destination Vserver  If this parameter 
+    https: ${20:False}                                                     # Enable and disable https
+    validate_certs: ${21:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${22:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${23:value}                                                    # The ontap api version to use
+    use_rest: ${24$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

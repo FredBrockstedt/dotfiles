@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage system management routes on a BIG-IP
+# prefix: bigip_management_route_snippet
+# key: gip_management_rout
+# group: ansible
+# --
+
+- name: ${0:Manage system management routes on a BIG-IP}
+  bigip_management_route:                                                  
+    name: ${1:Specifies the name of the management route}                  #
+    description: ${2:value}                                                # Description of the management route 
+    gateway: ${3:value}                                                    # Specifies that the system forwards packets to the destination through the gateway with the specified IP address 
+    network: ${4:value}                                                    # The subnet and netmask to be used for the route  To specify that the route is the default route for the system, provide 
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${7:value}                                                   # A dict object containing connection details 

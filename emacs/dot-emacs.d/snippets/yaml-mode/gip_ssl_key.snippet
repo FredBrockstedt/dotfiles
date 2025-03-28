@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Import/Delete SSL keys from BIG-IP
+# prefix: bigip_ssl_key_snippet
+# key: gip_ssl_key
+# group: ansible
+# --
+
+- name: ${0:Import/Delete SSL keys from BIG-IP}
+  bigip_ssl_key:                                                           
+    name: ${1:The name of the key}                                         #
+    content: ${2:value}                                                    # Sets the contents of a key directly to the specified value  This is used with lookup plugins or for anything with format
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the key is uploaded to the device  When C(absent), ensures that t
+    passphrase: ${4:value}                                                 # Passphrase on key 
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    provider: ${6:value}                                                   # A dict object containing connection details 

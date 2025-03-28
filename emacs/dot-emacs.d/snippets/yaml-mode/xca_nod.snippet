@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Custom module for lxca nodes inventory utility
+# prefix: lxca_nodes_snippet
+# key: xca_nod
+# group: ansible
+# --
+
+- name: ${0:Custom module for lxca nodes inventory utility}
+  lxca_nodes:                                                              
+    login_user: ${1:The username for use in HTTP basic authentication}     #
+    login_password: ${2:The password for use in HTTP basic authentication} #
+    auth_url: ${3:lxca https full web address}                             #
+    uuid: ${4:value}                                                       # u u i d   o f   d e v i c e ,   t h i s   i s   s t r i n g   w i t h   l e n g t h   g r e a t e r   t h a n   1 6  
+    command_options: ${5$$(yas-choose-value '("nodes" "nodes_by_uuid" "nodes_by_chassis_uuid" "nodes_status_managed" "nodes_status_unmanaged"))}# choices: nodes;nodes_by_uuid;nodes_by_chassis_uuid;
+    chassis: ${6:value}                                                    # u u i d   o f   c h a s s i s ,   t h i s   i s   s t r i n g   w i t h   l e n g t h   g r e a t e r   t h a n   1 6  

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Pause and start Uptime Robot monitoring
+# prefix: uptimerobot_snippet
+# key: uptimerobot
+# group: ansible
+# --
+
+- name: ${0:Pause and start Uptime Robot monitoring}
+  uptimerobot:                                                             
+    state: ${1$$(yas-choose-value '("started" "paused"))}                  # Define whether or not the monitor should be running or paused 
+    monitorid: ${2:ID of the monitor to check}                             #
+    apikey: ${3:Uptime Robot API key}                                      #

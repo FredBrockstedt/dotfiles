@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Creates a Virtual Network Identifier member (VNI)
+# prefix: nxos_vxlan_vtep_vni_snippet
+# key: xos_vxlan_vtep_v
+# group: ansible
+# --
+
+- name: ${0:Creates a Virtual Network Identifier member (VNI)}
+  nxos_vxlan_vtep_vni:                                                     
+    interface: ${1:Interface name for the VXLAN Network Virtualization Endpoint}#
+    vni: ${2:ID of the Virtual Network Identifier}                         #
+    assoc_vrf: ${3:value}                                                  # This attribute is used to identify and separate processing VNIs that are associated with a VRF and used for routing  The
+    ingress_replication: ${4$$(yas-choose-value '("bgp" "static" "default"))}# choices: bgp;static;default  Specifies mechanism for host reachability advertisement 
+    multicast_group: ${5:value}                                            # The multicast group (range) of the VNI  Valid values are string and keyword 'default' 
+    peer_list: ${6:value}                                                  # Set the ingress-replication static peer list  Valid values are an array, a space-separated string of ip addresses, or th
+    suppress_arp: ${7:value}                                               # Suppress arp under layer 2 VNI 
+    suppress_arp_disable: ${8:value}                                       # Overrides the global ARP suppression config  This is available on NX-OS 9K series running 9 2 x or higher 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: create/read/update/delete object in PAN-OS or Panorama
+# prefix: panos_object_snippet
+# key: panos_object
+# group: ansible
+# --
+
+- name: ${0:create/read/update/delete object in PAN-OS or Panorama}
+  panos_object:                                                            
+    ip_address: ${1:IP address (or hostname) of PAN-OS device or Panorama management console being configured}#
+    password: ${2:Password credentials to use for authentication}          #
+    operation: ${3$$(yas-choose-value '("add" "update" "delete" "find"))}  # The operation to be performed   Supported values are I(add)/I(delete)/I(find) 
+    username: ${4:admin}                                                   # Username credentials to use for authentication 
+    api_key: ${5:value}                                                    # API key that can be used instead of I(username)/I(password) credentials 
+    addressobject: ${6:value}                                              # The name of the address object 
+    address: ${7:value}                                                    # The IP address of the host or network in CIDR notation 
+    address_type: ${8$$(yas-choose-value '("ip-netmask" "ip-range" "fqdn"))}# choices: ip-netmask;ip-range;fqdn  The type of address object definition   Valid types are I(ip-netmask) and I(ip-range
+    addressgroup: ${9:value}                                               # A static group of address objects or dynamic address group 
+    static_value: ${10:value}                                              # A group of address objects to be used in an addressgroup definition 
+    dynamic_value: ${11:value}                                             # The filter match criteria to be used in a dynamic addressgroup definition 
+    serviceobject: ${12:value}                                             # The name of the service object 
+    source_port: ${13:value}                                               # The source port to be used in a service object definition 
+    destination_port: ${14:value}                                          # The destination port to be used in a service object definition 
+    protocol: ${15$$(yas-choose-value '("tcp" "udp"))}                     # choices: tcp;udp  The IP protocol to be used in a service object definition   Valid values are I(tcp) or I(udp) 
+    servicegroup: ${16:value}                                              # A group of service objects 
+    services: ${17:value}                                                  # The group of service objects used in a servicegroup definition 
+    description: ${18:value}                                               # The description of the object 
+    tag_name: ${19:value}                                                  # The name of an object or rule tag 
+    color: ${20$$(yas-choose-value '("red" "green" "blue" "yellow" "copper" "orange" "purple" "gray" "light green" "cyan" "light gray" "blue gray" "lime" "black" "gold" "brown"))}# choices: red;gre
+    devicegroup: ${21:value}                                               # -   T h e   n a m e   o f   t h e   P a n o r a m a   d e v i c e   g r o u p     T h e   g r o u p   m u s t   e x i s 

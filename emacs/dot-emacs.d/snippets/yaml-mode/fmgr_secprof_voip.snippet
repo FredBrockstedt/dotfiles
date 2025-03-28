@@ -1,0 +1,117 @@
+# -*- mode: snippet -*-
+# name: VOIP security profiles in FMG
+# prefix: fmgr_secprof_voip_snippet
+# key: fmgr_secprof_voip
+# group: ansible
+# --
+
+- name: ${0:VOIP security profiles in FMG}
+  fmgr_secprof_voip:                                                       
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    name: ${3:value}                                                       # Profile name 
+    comment: ${4:value}                                                    # Comment 
+    sccp: ${5:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    sccp_block_mcast: ${6$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable block multicast RTP connections  choice | disable | Disable status  choice | ena
+    sccp_log_call_summary: ${7$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable log summary of SCCP calls  choice | disable | Disable status  choice | enable | 
+    sccp_log_violations: ${8$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable logging of SCCP violations  choice | disable | Disable status  choice | enable |
+    sccp_max_calls: ${9:value}                                             # Maximum calls per minute per SCCP client (max 65535) 
+    sccp_status: ${10$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable SCCP  choice | disable | Disable status  choice | enable | Enable status 
+    sccp_verify_header: ${11$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable verify SCCP header content  choice | disable | Disable status  choice | enable |
+    sip: ${12:value}                                                       # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    sip_ack_rate: ${13:value}                                              # ACK request rate limit (per second, per policy) 
+    sip_block_ack: ${14$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable block ACK requests  choice | disable | Disable status  choice | enable | Enable 
+    sip_block_bye: ${15$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable block BYE requests  choice | disable | Disable status  choice | enable | Enable 
+    sip_block_cancel: ${16$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable block CANCEL requests  choice | disable | Disable status  choice | enable | Enab
+    sip_block_geo_red_options: ${17$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable block OPTIONS requests, but OPTIONS requests still notify for redundancy  cho
+    sip_block_info: ${18$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable/disable block INFO requests  choice | disable | Disable status  choice | enable | Enable
+    sip_block_invite: ${19$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable block INVITE requests  choice | disable | Disable status  choice | enable | Enab
+    sip_block_long_lines: ${20$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable block requests with headers exceeding max-line-length  choice | disable | Disabl
+    sip_block_message: ${21$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable block MESSAGE requests  choice | disable | Disable status  choice | enable | Ena
+    sip_block_notify: ${22$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable block NOTIFY requests  choice | disable | Disable status  choice | enable | Enab
+    sip_block_options: ${23$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable block OPTIONS requests and no OPTIONS as notifying message for redundancy either
+    sip_block_prack: ${24$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable block prack requests  choice | disable | Disable status  choice | enable | Enabl
+    sip_block_publish: ${25$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Enable/disable block PUBLISH requests  choice | disable | Disable status  choice | enable | Ena
+    sip_block_refer: ${26$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable block REFER requests  choice | disable | Disable status  choice | enable | Enabl
+    sip_block_register: ${27$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable block REGISTER requests  choice | disable | Disable status  choice | enable | En
+    sip_block_subscribe: ${28$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable/disable block SUBSCRIBE requests  choice | disable | Disable status  choice | enable | E
+    sip_block_unknown: ${29$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Block unrecognized SIP requests (enabled by default)  choice | disable | Disable status  choice
+    sip_block_update: ${30$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable block UPDATE requests  choice | disable | Disable status  choice | enable | Enab
+    sip_bye_rate: ${31:value}                                              # BYE request rate limit (per second, per policy) 
+    sip_call_keepalive: ${32:value}                                        # Continue tracking calls with no RTP for this many minutes 
+    sip_cancel_rate: ${33:value}                                           # CANCEL request rate limit (per second, per policy) 
+    sip_contact_fixup: ${34$$(yas-choose-value '("disable" "enable"))}     # choices: disable;enable  Fixup contact anyway even if contact's IP|port doesn't match session's IP|port  choice | disabl
+    sip_hnt_restrict_source_ip: ${35$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable restrict RTP source IP to be the same as SIP source IP when HNT is enabled  
+    sip_hosted_nat_traversal: ${36$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Hosted NAT Traversal (HNT)  choice | disable | Disable status  choice | enable | Enable statu
+    sip_info_rate: ${37:value}                                             # INFO request rate limit (per second, per policy) 
+    sip_invite_rate: ${38:value}                                           # INVITE request rate limit (per second, per policy) 
+    sip_ips_rtp: ${39$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable allow IPS on RTP  choice | disable | Disable status  choice | enable | Enable st
+    sip_log_call_summary: ${40$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable logging of SIP call summary  choice | disable | Disable status  choice | enable 
+    sip_log_violations: ${41$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable logging of SIP violations  choice | disable | Disable status  choice | enable | 
+    sip_malformed_header_allow: ${42$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Allow header  choice | pass | Bypass malformed messages 
+    sip_malformed_header_call_id: ${43$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Call-ID header  choice | pass | Bypass malformed messa
+    sip_malformed_header_contact: ${44$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Contact header  choice | pass | Bypass malformed messa
+    sip_malformed_header_content_length: ${45$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Content-Length header  choice | pass | Bypass m
+    sip_malformed_header_content_type: ${46$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Content-Type header  choice | pass | Bypass malfo
+    sip_malformed_header_cseq: ${47$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed CSeq header  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_expires: ${48$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Expires header  choice | pass | Bypass malformed messa
+    sip_malformed_header_from: ${49$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed From header  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_max_forwards: ${50$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Max-Forwards header  choice | pass | Bypass malfo
+    sip_malformed_header_p_asserted_identity: ${51$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed P-Asserted-Identity header  choice | pass 
+    sip_malformed_header_rack: ${52$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed RAck header  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_record_route: ${53$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Record-Route header  choice | pass | Bypass malfo
+    sip_malformed_header_route: ${54$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed Route header  choice | pass | Bypass malformed messages 
+    sip_malformed_header_rseq: ${55$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed RSeq header  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_a: ${56$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP a line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_b: ${57$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP b line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_c: ${58$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP c line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_i: ${59$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP i line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_k: ${60$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP k line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_m: ${61$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP m line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_o: ${62$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP o line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_r: ${63$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP r line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_s: ${64$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP s line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_t: ${65$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP t line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_v: ${66$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP v line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_sdp_z: ${67$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed SDP z line  choice | pass | Bypass malformed messages  c
+    sip_malformed_header_to: ${68$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed To header  choice | pass | Bypass malformed messages  choic
+    sip_malformed_header_via: ${69$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed VIA header  choice | pass | Bypass malformed messages  cho
+    sip_malformed_request_line: ${70$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for malformed request line  choice | pass | Bypass malformed messages 
+    sip_max_body_length: ${71:value}                                       # Maximum SIP message body length (0 meaning no limit) 
+    sip_max_dialogs: ${72:value}                                           # Maximum number of concurrent calls/dialogs (per policy) 
+    sip_max_idle_dialogs: ${73:value}                                      # Maximum number established but idle dialogs to retain (per policy) 
+    sip_max_line_length: ${74:value}                                       # Maximum SIP header line length (78-4096) 
+    sip_message_rate: ${75:value}                                          # MESSAGE request rate limit (per second, per policy) 
+    sip_nat_trace: ${76$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable preservation of original IP in SDP i line  choice | disable | Disable status  ch
+    sip_no_sdp_fixup: ${77$$(yas-choose-value '("disable" "enable"))}      # choices: disable;enable  Enable/disable no SDP fix-up  choice | disable | Disable status  choice | enable | Enable statu
+    sip_notify_rate: ${78:value}                                           # NOTIFY request rate limit (per second, per policy) 
+    sip_open_contact_pinhole: ${79$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable open pinhole for non-REGISTER Contact port  choice | disable | Disable status 
+    sip_open_record_route_pinhole: ${80$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable open pinhole for Record-Route port  choice | disable | Disable status  ch
+    sip_open_register_pinhole: ${81$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable open pinhole for REGISTER Contact port  choice | disable | Disable status  ch
+    sip_open_via_pinhole: ${82$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable open pinhole for Via port  choice | disable | Disable status  choice | enable | 
+    sip_options_rate: ${83:value}                                          # OPTIONS request rate limit (per second, per policy) 
+    sip_prack_rate: ${84:value}                                            # PRACK request rate limit (per second, per policy) 
+    sip_preserve_override: ${85$$(yas-choose-value '("disable" "enable"))} # choices: disable;enable  Override i line to preserve original IPS (default| append)  choice | disable | Disable status  
+    sip_provisional_invite_expiry_time: ${86:value}                        # Expiry time for provisional INVITE (10 - 3600 sec) 
+    sip_publish_rate: ${87:value}                                          # PUBLISH request rate limit (per second, per policy) 
+    sip_refer_rate: ${88:value}                                            # REFER request rate limit (per second, per policy) 
+    sip_register_contact_trace: ${89$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable trace original IP/port within the contact header of REGISTER requests  choic
+    sip_register_rate: ${90:value}                                         # REGISTER request rate limit (per second, per policy) 
+    sip_rfc2543_branch: ${91$$(yas-choose-value '("disable" "enable"))}    # choices: disable;enable  Enable/disable support via branch compliant with RFC 2543  choice | disable | Disable status  c
+    sip_rtp: ${92$$(yas-choose-value '("disable" "enable"))}               # choices: disable;enable  Enable/disable create pinholes for RTP traffic to traverse firewall  choice | disable | Disable
+    sip_ssl_algorithm: ${93$$(yas-choose-value '("high" "medium" "low"))}  # choices: high;medium;low  Relative strength of encryption algorithms accepted in negotiation  choice | high | High encry
+    sip_ssl_auth_client: ${94:value}                                       # Require a client certificate and authenticate it with the peer/peergrp 
+    sip_ssl_auth_server: ${95:value}                                       # Authenticate the server's certificate with the peer/peergrp 
+    sip_ssl_client_certificate: ${96:value}                                # Name of Certificate to offer to server if requested 
+    sip_ssl_client_renegotiation: ${97$$(yas-choose-value '("allow" "deny" "secure"))}# choices: allow;deny;secure  Allow/block client renegotiation by server  choice | allow | Allow a SSL client t
+    sip_ssl_max_version: ${{98$$(yas-choose-value '("ssl-3}                #0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  Highest SSL/TLS version to negotiat
+    sip_ssl_min_version: ${{99$$(yas-choose-value '("ssl-3}                #0,tls-1 0,tls-1 1,tls-1 2|} # not required  choices: ssl-3 0;tls-1 0;tls-1 1;tls-1 2  Lowest SSL/TLS version to negotiate
+    sip_ssl_mode: ${100$$(yas-choose-value '("off" "full"))}               # choices: off;full  SSL/TLS mode for encryption &amp; decryption of traffic  choice | off | No SSL  choice | full | Clien
+    sip_ssl_pfs: ${101$$(yas-choose-value '("require" "deny" "allow"))}    # choices: require;deny;allow  SSL Perfect Forward Secrecy  choice | require | PFS mandatory  choice | deny | PFS rejected
+    sip_ssl_send_empty_frags: ${102$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Send empty fragments to avoid attack on CBC IV (SSL 3 0 &amp; TLS 1 0 only)  choice | disabl
+    sip_ssl_server_certificate: ${103:value}                               # Name of Certificate return to the client in every SSL connection 
+    sip_status: ${104$$(yas-choose-value '("disable" "enable"))}           # choices: disable;enable  Enable/disable SIP  choice | disable | Disable status  choice | enable | Enable status 
+    sip_strict_register: ${105$$(yas-choose-value '("disable" "enable"))}  # choices: disable;enable  Enable/disable only allow the registrar to connect  choice | disable | Disable status  choice |
+    sip_subscribe_rate: ${106:value}                                       # SUBSCRIBE request rate limit (per second, per policy) 
+    sip_unknown_header: ${107$$(yas-choose-value '("pass" "discard" "respond"))}# choices: pass;discard;respond  Action for unknown SIP header  choice | pass | Bypass malformed messages  choice | d
+    sip_update_rate: ${108:value}                                          # UPDATE request rate limit (per second, per policy) 

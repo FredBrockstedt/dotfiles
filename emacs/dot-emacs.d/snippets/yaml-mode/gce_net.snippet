@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: create/destroy GCE networks and firewall rules
+# prefix: gce_net_snippet
+# key: gce_net
+# group: ansible
+# --
+
+- name: ${0:create/destroy GCE networks and firewall rules}
+  gce_net:                                                                 
+    allowed: ${1:value}                                                    # the protocol:ports to allow (I(tcp:80) or I(tcp:80,443) or I(tcp:80-800;udp:1-25)) this parameter is mandatory when crea
+    ipv4_range: ${2:value}                                                 # the IPv4 address range in CIDR notation for the network this parameter is not mandatory when you specified existing netw
+    fwname: ${3:value}                                                     # name of the firewall rule
+    name: ${4:value}                                                       # name of the network
+    src_range: ${5:[]}                                                     # the source IPv4 address range in CIDR notation
+    src_tags: ${6:[]}                                                      # the source instance tags for creating a firewall rule
+    target_tags: ${7:[]}                                                   # the target instance tags for creating a firewall rule
+    state: ${8$$(yas-choose-value '("active" "present" "absent" "deleted"))}# choices: active;present;absent;deleted  desired state of the network or firewall
+    service_account_email: ${9:value}                                      # service account email
+    pem_file: ${10:value}                                                  # path to the pem file associated with the service account email This option is deprecated  Use C(credentials_file) 
+    credentials_file: ${11:value}                                          # path to the JSON file associated with the service account email
+    project_id: ${12:value}                                                # your GCE project ID
+    mode: ${13$$(yas-choose-value '("legacy" "auto" "custom"))}            # choices: legacy;auto;custom  network mode for Google Cloud C(legacy) indicates a network with an IP address range; C(aut
+    subnet_name: ${14:value}                                               # name of subnet to create
+    subnet_region: ${15:value}                                             # region of subnet to create
+    subnet_desc: ${16:value}                                               # description of subnet to create

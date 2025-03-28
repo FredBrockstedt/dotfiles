@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify admin-service
+# prefix: pn_admin_service_snippet
+# key: pn_admin_servic
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify admin-service}
+  pn_admin_service:                                                        
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the admin-service 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_web: ${3:value}                                                     # Web (HTTP) to enable or disable 
+    pn_web_ssl: ${4:value}                                                 # Web SSL (HTTPS) to enable or disable 
+    pn_snmp: ${5:value}                                                    # Simple Network Monitoring Protocol (SNMP) to enable or disable 
+    pn_web_port: ${6:value}                                                # Web (HTTP) port to enable or disable 
+    pn_web_ssl_port: ${7:value}                                            # Web SSL (HTTPS) port to enable or disable 
+    pn_nfs: ${8:value}                                                     # Network File System (NFS) to enable or disable 
+    pn_ssh: ${9:value}                                                     # Secure Shell to enable or disable 
+    pn_web_log: ${10:value}                                                # Web logging to enable or disable 
+    pn__if: ${11$$(yas-choose-value '("mgmt" "data"))}                     # choices: mgmt;data  administrative service interface 
+    pn_icmp: ${12:value}                                                   # Internet Message Control Protocol (ICMP) to enable or disable 
+    pn_net_api: ${13:value}                                                # Netvisor API to enable or disable APIs 

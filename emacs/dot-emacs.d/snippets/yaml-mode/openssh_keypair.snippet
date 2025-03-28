@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Generate OpenSSH private and public keys.
+# prefix: openssh_keypair_snippet
+# key: openssh_keypair
+# group: ansible
+# --
+
+- name: ${0:Generate OpenSSH private and public keys.}
+  openssh_keypair:                                                         
+    path: ${1:Name of the files containing the public and private key}     # The file containing the public key will have the extension C( pub) 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the private and public keys should exist or not, taking action if the state is differen
+    size: ${3:value}                                                       # Specifies the number of bits in the private key to create  For RSA keys, the minimum size is 1024 bits and the default i
+    type: ${4$$(yas-choose-value '("rsa" "dsa" "rsa1" "ecdsa" "ed25519"))} # choices: rsa;dsa;rsa1;ecdsa;ed25519  The algorithm used to generate the SSH private key  C(rsa1) is for protocol version
+    force: ${5:False}                                                      # Should the key be regenerated even if it already exists
+    comment: ${6:value}                                                    # Provides a new comment to the public key  When checking if the key is in the correct state this will be ignored 
+    mode: ${7:value}                                                       # The permissions the resulting file or directory should have  For those used to I(/usr/bin/chmod) remember that modes are
+    owner: ${8:value}                                                      # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${9:value}                                                      # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${10:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${11:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${12:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${13:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${14:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${15:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on

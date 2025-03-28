@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manipulate Rackspace Cloud Autoscale Scaling Policy
+# prefix: rax_scaling_policy_snippet
+# key: rax_scaling_policy
+# group: ansible
+# --
+
+- name: ${0:Manipulate Rackspace Cloud Autoscale Scaling Policy}
+  rax_scaling_policy:                                                      
+    name: ${1:Name to give the policy}                                     #
+    policy_type: ${2$$(yas-choose-value '("webhook" "schedule"))}          # The type of policy that will be executed for the current release 
+    scaling_group: ${3:Name of the scaling group that this policy will be added to}#
+    at: ${4:value}                                                         # The UTC time when this policy will be executed  The time must be formatted according to C(yyyy-MM-dd'T'HH:mm:ss SSS) suc
+    change: ${5:value}                                                     # The change, either as a number of servers or as a percentage, to make in the scaling group  If this is a percentage, you
+    cron: ${6:value}                                                       # The time when the policy will be executed, as a cron entry  For example, if this is parameter is set to C(1 0 * * *)
+    cooldown: ${7:value}                                                   # The period of time, in seconds, that must pass before any scaling can occur after the previous scaling  Must be an integ
+    desired_capacity: ${8:value}                                           # The desired server capacity of the scaling the group; that is, how many servers should be in the scaling group 
+    is_percent: ${9:False}                                                 # Whether the value in I(change) is a percent value
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Indicate desired state of the resource
+    api_key: ${11:value}                                                   # Rackspace API key, overrides I(credentials) 
+    credentials: ${12:value}                                               # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${13:value}                                                       # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    region: ${14:DFW}                                                      # Region to create an instance in 
+    username: ${15:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${16:value}                                            # Whether or not to require SSL validation of API endpoints 
+    auth_endpoint: ${{17:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    identity_type: ${18:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    tenant_id: ${19:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${20:value}                                               # The tenant name used for authentication 

@@ -1,0 +1,51 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage volumes.
+# prefix: na_ontap_volume_snippet
+# key: ontap_volum
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage volumes.}
+  na_ontap_volume:                                                         
+    name: ${1:The name of the volume to manage}                            #
+    vserver: ${2:Name of the vserver to use}                               #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified volume should exist or not 
+    from_name: ${7:value}                                                  # Name of the existing volume to be renamed to name 
+    is_infinite: ${8:value}                                                # S e t   T r u e   i f   t h e   v o l u m e   i s   a n   I n f i n i t e   V o l u m e     D e l e t i n g   a n   i n 
+    is_online: ${9:True}                                                   # Whether the specified volume is online, or not 
+    aggregate_name: ${10:value}                                            # The name of the aggregate the flexvol should exist on  Required when C(state=present) 
+    size: ${11:value}                                                      # The size of the volume in (size_unit)  Required when C(state=present) 
+    size_unit: ${12$$(yas-choose-value '("bytes" "b" "kb" "mb" "gb" "tb" "pb" "eb" "zb" "yb"))}# choices: bytes;b;kb;mb;gb;tb;pb;eb;zb;yb  The unit used to interpret the size parameter 
+    type: ${13:value}                                                      # The volume type, either read-write (RW) or data-protection (DP) 
+    policy: ${14:value}                                                    # Name of the export policy 
+    junction_path: ${15:value}                                             # Junction path of the volume  To unmount, use junction path C('') 
+    space_guarantee: ${16$$(yas-choose-value '("none" "file" "volume"))}   # choices: none;file;volume  Space guarantee style for the volume 
+    percent_snapshot_space: ${17:value}                                    # Amount of space reserved for snapshot copies of the volume 
+    volume_security_style: ${18$$(yas-choose-value '("mixed" "ntfs" "unified" "unix"))}# choices: mixed;ntfs;unified;unix  The security style associated with this volume 
+    encrypt: ${19:False}                                                   # Whether or not to enable Volume Encryption 
+    efficiency_policy: ${20:value}                                         # Allows a storage efficiency policy to be set on volume creation 
+    unix_permissions: ${21:value}                                          # Unix permission bits in octal or symbolic format  For example, 0 is equivalent to ------------, 777 is equivalent to ---
+    snapshot_policy: ${22:value}                                           # The name of the snapshot policy  the default policy name is 'default' 
+    aggr_list: ${23:value}                                                 # an array of names of aggregates to be used for FlexGroup constituents 
+    aggr_list_multiplier: ${24:value}                                      # The number of times to iterate over the aggregates listed with the aggr_list parameter when creating a FlexGroup 
+    auto_provision_as: ${25$$(yas-choose-value '("flexgroup"))}            # choices: flexgroup  Automatically provision a FlexGroup volume 
+    snapdir_access: ${26:value}                                            # This is an advanced option, the default is False  Enable the visible ' snapshot' directory that is normally present at s
+    atime_update: ${27:value}                                              # This is an advanced option, the default is True  If false, prevent the update of inode access times when a file is read 
+    wait_for_completion: ${28:False}                                       # Set this parameter to 'true' for synchronous execution during create (wait until volume status is online) Set this param
+    time_out: ${29:180}                                                    # time to wait for flexGroup creation, modification, or deletion in seconds  Error out if task is not completed in defined
+    language: ${30:value}                                                  # Language to use for Volume Default uses SVM language Possible values   Language c                 POSIX ar              
+    qos_policy_group: ${31:value}                                          # Specifies a QoS policy group to be set on volume 
+    qos_adaptive_policy_group: ${32:value}                                 # Specifies a QoS adaptive policy group to be set on volume 
+    tiering_policy: ${33$$(yas-choose-value '("snapshot-only" "auto" "backup" "none"))}# choices: snapshot-only;auto;backup;none  The tiering policy that is to be associated with the volume  This p
+    space_slo: ${34$$(yas-choose-value '("none" "thick" "semi-thick"))}    # choices: none;thick;semi-thick  Specifies the space SLO type for the volume  The space SLO type is the Service Level Obj
+    nvfail_enabled: ${35:value}                                            # If true, the controller performs additional work at boot and takeover times if it finds that there has been any potentia
+    vserver_dr_protection: ${36$$(yas-choose-value '("protected" "unprotected"))}# choices: protected;unprotected  Specifies the protection type for the volume in a Vserver DR setup 
+    comment: ${37:value}                                                   # Sets a comment associated with the volume 
+    https: ${38:False}                                                     # Enable and disable https
+    validate_certs: ${39:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${40:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${41:value}                                                    # The ontap api version to use
+    use_rest: ${42$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

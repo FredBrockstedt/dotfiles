@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Configures NetConf sub-system service on Cisco IOS-XR devices
+# prefix: iosxr_netconf_snippet
+# key: osxr_netconf
+# group: ansible
+# --
+
+- name: ${0:Configures NetConf sub-system service on Cisco IOS-XR devices}
+  iosxr_netconf:                                                           
+    netconf_port: ${1:830}                                                 # This argument specifies the port the netconf service should listen on for SSH connections   The default port as defined 
+    netconf_vrf: ${2:default}                                              # netconf vrf name
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies the state of the C(iosxr_netconf) resource on the remote device   If the I(state) arg
+    provider: ${4:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

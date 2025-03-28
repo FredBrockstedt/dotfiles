@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Configures BGP on Mellanox ONYX network devices
+# prefix: onyx_bgp_snippet
+# key: onyx_bgp
+# group: ansible
+# --
+
+- name: ${0:Configures BGP on Mellanox ONYX network devices}
+  onyx_bgp:                                                                
+    as_number: ${1:Local AS number}                                        #
+    router_id: ${2:value}                                                  # Router IP address 
+    neighbors: ${3:value}                                                  # List of neighbors  Required if I(state=present) 
+    networks: ${4:value}                                                   # List of advertised networks 
+    fast_external_fallover: ${5:value}                                     # will configure fast_external_fallover when it is True 
+    max_paths: ${6:value}                                                  # Maximum bgp paths 
+    ecmp_bestpath: ${7:value}                                              # Enables ECMP across AS paths 
+    evpn: ${8:value}                                                       # Configure evpn peer-group 
+    vrf: ${9:value}                                                        # vrf name 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  BGP state 
+    purge: ${11:False}                                                     # will remove all neighbors when it is True 

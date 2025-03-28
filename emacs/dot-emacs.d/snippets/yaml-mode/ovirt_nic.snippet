@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Module to manage network interfaces of Virtual Machines in oVirt/RHV
+# prefix: ovirt_nic_snippet
+# key: ovirt_nic
+# group: ansible
+# --
+
+- name: ${0:Module to manage network interfaces of Virtual Machines in oVirt/RHV}
+  ovirt_nic:                                                               
+    name: ${1:Name of the network interface to manage}                     #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${3:value}                                                         # ID of the nic to manage 
+    vm: ${4:value}                                                         # Name of the Virtual Machine to manage  You must provide either C(vm) parameter or C(template) parameter 
+    template: ${5:value}                                                   # Name of the template to manage  You must provide either C(vm) parameter or C(template) parameter 
+    state: ${6$$(yas-choose-value '("absent" "plugged" "present" "unplugged"))}# choices: absent;plugged;present;unplugged  Should the Virtual Machine NIC be present/absent/plugged/unplugged 
+    network: ${7:value}                                                    # Logical network to which the VM network interface should use, by default Empty network is used if network is not specifi
+    profile: ${8:value}                                                    # Virtual network interface profile to be attached to VM network interface  When not specified and network has only single
+    interface: ${9:value}                                                  # Type of the network interface  For example e1000, pci_passthrough, rtl8139, rtl8139_virtio, spapr_vlan or virtio  It's r
+    mac_address: ${10:value}                                               # Custom MAC address of the network interface, by default it's obtained from MAC pool 
+    linked: ${11:value}                                                    # Defines if the NIC is linked to the virtual machine 
+    wait: ${12:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${13:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${14:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${15:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${16:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

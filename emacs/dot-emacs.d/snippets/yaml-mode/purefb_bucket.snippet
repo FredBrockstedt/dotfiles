@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage Object Store Buckets on a  Pure Storage FlashBlade.
+# prefix: purefb_bucket_snippet
+# key: purefb_bucket
+# group: ansible
+# --
+
+- name: ${0:Manage Object Store Buckets on a  Pure Storage FlashBlade.}
+  purefb_bucket:                                                           
+    name: ${1:Bucket Name}                                                 #
+    account: ${2:Object Store Account for Bucket}                          #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create, delete or modifies a bucket 
+    eradicate: ${4:False}                                                  # Define whether to eradicate the bucket on delete or leave in trash 
+    fb_url: ${5:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${6:value}                                                  # FlashBlade API token for admin privileged user 

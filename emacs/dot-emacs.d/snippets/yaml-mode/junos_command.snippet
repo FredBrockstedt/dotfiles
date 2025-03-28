@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Run arbitrary commands on an Juniper JUNOS device
+# prefix: junos_command_snippet
+# key: junos_command
+# group: ansible
+# --
+
+- name: ${0:Run arbitrary commands on an Juniper JUNOS device}
+  junos_command:                                                           
+    commands: ${1:value}                                                   # The commands to send to the remote junos device over the configured provider   The resulting output from the command is 
+    rpcs: ${2:value}                                                       # The C(rpcs) argument accepts a list of RPCs to be executed over a netconf session and the results from the RPC execution
+    wait_for: ${3:value}                                                   # Specifies what to evaluate from the output of the command and what conditionals to apply   This argument will cause the 
+    match: ${4$$(yas-choose-value '("any" "all"))}                         # choices: any;all  The I(match) argument is used in conjunction with the I(wait_for) argument to specify the match policy
+    retries: ${5:10}                                                       # Specifies the number of retries a command should be tried before it is considered failed   The command is run on the tar
+    interval: ${6:1}                                                       # Configures the interval in seconds to wait between retries of the command   If the command does not pass the specified c
+    display: ${7$$(yas-choose-value '("text" "json" "xml" "set"))}         # choices: text;json;xml;set  Encoding scheme to use when serializing output from the device  This handles how to properly
+    provider: ${8:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

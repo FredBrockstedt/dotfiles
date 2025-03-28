@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Adds, removes or updates a Windows PowerShell repository.
+# prefix: win_psrepository_snippet
+# key: win_psrepository
+# group: ansible
+# --
+
+- name: ${0:Adds, removes or updates a Windows PowerShell repository.}
+  win_psrepository:                                                        
+    name: ${1:Name of the repository to work with}                         #
+    source: ${2:value}                                                     # Specifies the URI for discovering and installing modules from this repository  A URI can be a NuGet server feed (most co
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If C(present) a new repository is added or updated  If C(absent) a repository is removed 
+    installation_policy: ${4$$(yas-choose-value '("trusted" "untrusted"))} # choices: trusted;untrusted  Sets the C(InstallationPolicy) of a repository  Will default to C(trusted) when creating a n

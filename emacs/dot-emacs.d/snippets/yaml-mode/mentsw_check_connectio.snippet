@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Check connectivity to MVIP and SVIP.
+# prefix: na_elementsw_check_connections_snippet
+# key: mentsw_check_connectio
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Check connectivity to MVIP and SVIP.}
+  na_elementsw_check_connections:                                          
+    hostname: ${1:The hostname or IP address of the SolidFire cluster}     #
+    username: ${2:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${3:Password for the specified user}                         #
+    skip: ${4$$(yas-choose-value '("svip" "mvip"))}                        # choices: svip;mvip  Skip checking connection to SVIP or MVIP 
+    mvip: ${5:value}                                                       # Optionally, use to test connection of a different MVIP  This is not needed to test the connection to the target cluster 
+    svip: ${6:value}                                                       # Optionally, use to test connection of a different SVIP  This is not needed to test the connection to the target cluster 

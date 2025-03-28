@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage Cisco IMC hardware through its REST API
+# prefix: imc_rest_snippet
+# key: mc_rest
+# group: ansible
+# --
+
+- name: ${0:Manage Cisco IMC hardware through its REST API}
+  imc_rest:                                                                
+    hostname: ${1:IP Address or hostname of Cisco IMC, resolvable by Ansible control host}#
+    username: ${2:admin}                                                   # Username used to login to the switch 
+    password: ${3:password}                                                # The password to use for authentication 
+    path: ${4:value}                                                       # Name of the absolute path of the filename that includes the body of the http request being sent to the Cisco IMC REST AP
+    content: ${5:value}                                                    # When used instead of C(path), sets the content of the API requests directly  This may be convenient to template simple r
+    protocol: ${6$$(yas-choose-value '("http" "https"))}                   # choices: http;https  Connection protocol to use 
+    timeout: ${7:60}                                                       # The socket level timeout in seconds  This is the time that every single connection (every fragment) can spend  If this C
+    validate_certs: ${8:true}                                              # If C(no), SSL certificates will not be validated  This should only set to C(no) used on personally controlled sites usin

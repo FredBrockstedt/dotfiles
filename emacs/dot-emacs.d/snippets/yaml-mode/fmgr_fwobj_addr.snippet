@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Allows the management of firewall objects in FortiManager
+# prefix: fmgr_fwobj_address_snippet
+# key: fmgr_fwobj_addr
+# group: ansible
+# --
+
+- name: ${0:Allows the management of firewall objects in FortiManager}
+  fmgr_fwobj_address:                                                      
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    allow_routing: ${2$$(yas-choose-value '("enable" "disable"))}          # choices: enable;disable  Enable/disable use of this address in the static route configuration 
+    associated_interface: ${3:value}                                       # Associated interface name 
+    cache_ttl: ${4:value}                                                  # Minimal TTL of individual IP addresses in FQDN cache  Only applies when type = wildcard-fqdn 
+    color: ${5:22}                                                         # Color of the object in FortiManager GUI  Takes integers 1-32
+    comment: ${6:value}                                                    # Comment for the object in FortiManager 
+    country: ${7:value}                                                    # Country name  Required if type = geographic 
+    end_ip: ${8:value}                                                     # End IP  Only used when ipv4 = iprange 
+    group_members: ${9:value}                                              # Address group member  If this is defined w/out group_name, the operation will fail 
+    group_name: ${10:value}                                                # Address group name  If this is defined in playbook task, all other options are ignored 
+    ipv4: ${11$$(yas-choose-value '("ipmask" "iprange" "fqdn" "wildcard" "geography" "wildcard-fqdn" "group"))}# choices: ipmask;iprange;fqdn;wildcard;geography;wildcard-fqdn;group  Type of IPv4 Ob
+    ipv4addr: ${12:value}                                                  # IP and network mask  If only defining one IP use this parameter  (i e  10 7 220 30/255 255 255 255) Can also define subn
+    ipv6: ${13$$(yas-choose-value '("ip" "iprange" "group"))}              # choices: ip;iprange;group  Puts module into IPv6 mode  Must not be specified with either ipv4 or multicast parameters 
+    ipv6addr: ${14:value}                                                  # IPv6 address in full  (i e  2001:0db8:85a3:0000:0000:8a2e:0370:7334)
+    fqdn: ${15:value}                                                      # Fully qualified domain name 
+    mode: ${16$$(yas-choose-value '("add" "set" "delete"))}                # choices: add;set;delete  Sets one of three modes for managing the object 
+    multicast: ${17$$(yas-choose-value '("multicastrange" "broadcastmask" "ip6"))}# choices: multicastrange;broadcastmask;ip6  Manages Multicast Address Objects  Sets either a Multicast IP Range or
+    name: ${18:value}                                                      # Friendly Name Address object name in FortiManager 
+    obj_id: ${19:value}                                                    # Object ID for NSX 
+    start_ip: ${20:value}                                                  # Start IP  Only used when ipv4 = iprange 
+    visibility: ${21$$(yas-choose-value '("enable" "disable"))}            # choices: enable;disable  Enable/disable address visibility 
+    wildcard: ${22:value}                                                  # IP address and wildcard netmask  Required if ipv4 = wildcard 
+    wildcard_fqdn: ${23:value}                                             # Wildcard FQDN  Required if ipv4 = wildcard-fqdn 

@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Allows the editing of IP Pool Objects within FortiManager.
+# prefix: fmgr_fwobj_ippool6_snippet
+# key: fmgr_fwobj_ippool6
+# group: ansible
+# --
+
+- name: ${0:Allows the editing of IP Pool Objects within FortiManager.}
+  fmgr_fwobj_ippool6:                                                      
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    startip: ${3:value}                                                    # First IPv6 address (inclusive) in the range for the address pool 
+    name: ${4:value}                                                       # IPv6 IP pool name 
+    endip: ${5:value}                                                      # Final IPv6 address (inclusive) in the range for the address pool 
+    comments: ${6:value}                                                   # Comment 
+    dynamic_mapping: ${7:value}                                            # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    dynamic_mapping_comments: ${8:value}                                   # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_endip: ${9:value}                                      # Dynamic Mapping clone of original suffixed parameter 
+    dynamic_mapping_startip: ${10:value}                                   # Dynamic Mapping clone of original suffixed parameter 

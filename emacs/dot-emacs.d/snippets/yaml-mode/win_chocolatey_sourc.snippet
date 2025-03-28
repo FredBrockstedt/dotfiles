@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages Chocolatey sources
+# prefix: win_chocolatey_source_snippet
+# key: win_chocolatey_sourc
+# group: ansible
+# --
+
+- name: ${0:Manages Chocolatey sources}
+  win_chocolatey_source:                                                   
+    name: ${1:The name of the source to configure}                         #
+    admin_only: ${2:value}                                                 # Makes the source visible to Administrators only  Requires Chocolatey >= 0 10 8  When creating a new source, this default
+    allow_self_service: ${3:value}                                         # Allow the source to be used with self-service Requires Chocolatey >= 0 10 4  When creating a new source, this defaults t
+    bypass_proxy: ${4:value}                                               # Bypass the proxy when using this source  Requires Chocolatey >= 0 10 4  When creating a new source, this defaults to C(n
+    certificate: ${5:value}                                                # The path to a  pfx file to use for X509 authenticated feeds  Requires Chocolatey >= 0 9 10 
+    certificate_password: ${6:value}                                       # The password for I(certificate) if required  Requires Chocolatey >= 0 9 10 
+    priority: ${7:value}                                                   # The priority order of this source compared to other sources, lower is better  All priorities above C(0) will be evaluate
+    source: ${8:value}                                                     # The file/folder/url of the source  Required when I(state) is C(present) or C(disabled) and the source does not already e
+    source_username: ${9:value}                                            # The username used to access I(source) 
+    source_password: ${10:value}                                           # The password for I(source_username)  Required if I(source_username) is set 
+    state: ${11$$(yas-choose-value '("absent" "disabled" "present"))}      # choices: absent;disabled;present  When C(absent), will remove the source  When C(disabled), will ensure the source exist
+    update_password: ${12$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  When C(always), the module will always set the password and report a change if I(certificate_

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Send Mattermost notifications
+# prefix: mattermost_snippet
+# key: mattermost
+# group: ansible
+# --
+
+- name: ${0:Send Mattermost notifications}
+  mattermost:                                                              
+    url: ${1:Mattermost url (i}                                            #e  http://mattermost yourcompany com) 
+    api_key: ${2:Mattermost webhook api key}                               # Log into your mattermost site, go to Menu -> Integration -> Incoming Webhook -> Add Incoming Webhook  This will give you
+    text: ${3:Text to send}                                                # Note that the module does not handle escaping characters 
+    channel: ${4:value}                                                    # Channel to send the message to  If absent, the message goes to the channel selected for the I(api_key) 
+    username: ${5:Ansible}                                                 # This is the sender of the message (Username Override need to be enabled by mattermost admin, see mattermost doc 
+    icon_url: ${{6:https://www}                                            #ansible com/favicon ico} # not required  Url for the message sender's icon 
+    validate_certs: ${7:True}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig

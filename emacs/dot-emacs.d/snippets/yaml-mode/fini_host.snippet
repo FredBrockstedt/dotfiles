@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create, Delete and Modify Hosts on Infinibox
+# prefix: infini_host_snippet
+# key: fini_host
+# group: ansible
+# --
+
+- name: ${0:Create, Delete and Modify Hosts on Infinibox}
+  infini_host:                                                             
+    name: ${1:Host Name}                                                   #
+    system: ${2:Infinibox Hostname or IPv4 Address}                        #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates/Modifies Host when present or removes when absent
+    wwns: ${4:value}                                                       # List of wwns of the host
+    volume: ${5:value}                                                     # Volume name to map to the host
+    user: ${6:value}                                                       # Infinibox User username with sufficient priveledges ( see notes ) 
+    password: ${7:value}                                                   # Infinibox User password 

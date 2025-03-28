@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Module for CyberArk User Management using PAS Web Services SDK
+# prefix: cyberark_user_snippet
+# key: cyberark_user
+# group: ansible
+# --
+
+- name: ${0:Module for CyberArk User Management using PAS Web Services SDK}
+  cyberark_user:                                                           
+    username: ${1:The name of the user who will be queried (for details), added, updated or deleted}#
+    cyberark_session: ${2:Dictionary set by a CyberArk authentication containing the different values to perform actions on a logged-on CyberArk session, please see M(cyberark_authentication) modul
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Specifies the state needed for the user present for create user, absent for delete user 
+    initial_password: ${4:value}                                           # The password that the new user will use to log on the first time  This password must meet the password policy requiremen
+    new_password: ${5:value}                                               # The user updated password  Make sure that this password meets the password policy requirements 
+    email: ${6:value}                                                      # The user email address 
+    first_name: ${7:value}                                                 # The user first name 
+    last_name: ${8:value}                                                  # The user last name 
+    change_password_on_the_next_logon: ${9:False}                          # Whether or not the user must change their password in their next logon 
+    expiry_date: ${10:value}                                               # The date and time when the user account will expire and become disabled 
+    user_type_name: ${11:value}                                            # The type of user  The parameter defaults to C(EPVUser) 
+    disabled: ${12:False}                                                  # Whether or not the user will be disabled 
+    location: ${13:value}                                                  # The Vault Location for the user 
+    group_name: ${14:value}                                                # The name of the group the user will be added to 

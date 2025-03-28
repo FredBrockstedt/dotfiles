@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage device groups on a BIG-IP
+# prefix: bigip_device_group_snippet
+# key: gip_device_group
+# group: ansible
+# --
+
+- name: ${0:Manage device groups on a BIG-IP}
+  bigip_device_group:                                                      
+    name: ${1:Specifies the name of the device group}                      #
+    type: ${2$$(yas-choose-value '("sync-failover" "sync-only"))}          # choices: sync-failover;sync-only  Specifies that the type of group  A C(sync-failover) device group contains devices tha
+    description: ${3:value}                                                # Description of the device group 
+    auto_sync: ${4:value}                                                  # Indicates whether configuration synchronization occurs manually or automatically  When creating a new device group, this
+    save_on_auto_sync: ${5:value}                                          # When performing an auto-sync, specifies whether the configuration will be saved or not  When C(no), only the running con
+    full_sync: ${6:value}                                                  # Specifies whether the system synchronizes the entire configuration during synchronization operations  When C(no), the sy
+    max_incremental_sync_size: ${7:value}                                  # Specifies the size of the changes cache for incremental sync  For example, using the default, if you make more than 1024
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(state) is C(present), ensures the device group exists  When C(state) is C(absent), ensur
+    network_failover: ${9:value}                                           # Indicates whether failover occurs over the network or is hard-wired  This parameter is only valid for C(type)'s that are
+    provider: ${10:value}                                                  # A dict object containing connection details 

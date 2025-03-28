@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove ospf area to/from a vrouter.
+# prefix: pn_ospfarea_snippet
+# key: pn_ospfar
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove ospf area to/from a vrouter.}
+  pn_ospfarea:                                                             
+    pn_cliusername: ${1:Login username}                                    #
+    pn_clipassword: ${2:Login password}                                    #
+    state: ${3$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use 'present' to add ospf-area, 'absent' to remove ospf-area and 'update' to modify ospf-ar
+    pn_vrouter_name: ${4:Specify the name of the vRouter}                  #
+    pn_ospf_area: ${5:Specify the OSPF area number}                        #
+    pn_cliswitch: ${6:value}                                               # Target switch(es) to run the CLI on 
+    pn_stub_type: ${7$$(yas-choose-value '("none" "stub" "stub-no-summary" "nssa" "nssa-no-summary"))}# choices: none;stub;stub-no-summary;nssa;nssa-no-summary  Specify the OSPF stub type 
+    pn_prefix_listin: ${8:value}                                           # OSPF prefix list for filtering incoming packets 
+    pn_prefix_listout: ${9:value}                                          # OSPF prefix list for filtering outgoing packets 
+    pn_quiet: ${10:True}                                                   # Enable/disable system information 

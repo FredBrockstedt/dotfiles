@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Text to speech module for Windows to speak messages and optionally play sounds
+# prefix: win_say_snippet
+# key: win_say
+# group: ansible
+# --
+
+- name: ${0:Text to speech module for Windows to speak messages and optionally play sounds}
+  win_say:                                                                 
+    msg: ${1:value}                                                        # The text to be spoken  Use either C(msg) or C(msg_file)  Optional so that you can use this module just to play sounds 
+    msg_file: ${2:value}                                                   # Full path to a windows format text file containing the text to be spoken  Use either C(msg) or C(msg_file)  Optional so 
+    voice: ${3:value}                                                      # Which voice to use  See notes for how to discover installed voices  If the requested voice is not available the default 
+    speech_speed: ${4:0}                                                   # How fast or slow to speak the text  Must be an integer value in the range -10 to 10  -10 is slowest, 10 is fastest 
+    start_sound_path: ${5:value}                                           # Full path to a C( wav) file containing a sound to play before the text is spoken  Useful on conference calls to alert ot
+    end_sound_path: ${6:value}                                             # Full path to a C( wav) file containing a sound to play after the text has been spoken  Useful on conference calls to ale

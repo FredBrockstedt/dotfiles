@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete/modify a vrouter.
+# prefix: pn_vrouter_snippet
+# key: pn_vrouter
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete/modify a vrouter.}
+  pn_vrouter:                                                              
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use 'present' to create vrouter, 'absent' to delete vrouter and 'update' to modify vrouter 
+    pn_name: ${2:Specify the name of the vRouter}                          #
+    pn_cliusername: ${3:value}                                             # Provide login username if user is not root 
+    pn_clipassword: ${4:value}                                             # Provide login password if user is not root 
+    pn_cliswitch: ${5:local}                                               # Target switch(es) to run the CLI on 
+    pn_vnet: ${6:value}                                                    # Specify the name of the VNET  Required for vrouter-create 
+    pn_service_type: ${7$$(yas-choose-value '("dedicated" "shared"))}      # choices: dedicated;shared  Specify if the vRouter is a dedicated or shared VNET service 
+    pn_service_state: ${8$$(yas-choose-value '("enable" "disable"))}       # choices: enable;disable  Specify to enable or disable vRouter service 
+    pn_router_type: ${9$$(yas-choose-value '("hardware" "software"))}      # choices: hardware;software  Specify if the vRouter uses software or hardware  Note that if you specify hardware as route
+    pn_hw_vrrp_id: ${10:value}                                             # Specifies the VRRP ID for a hardware vrouter 
+    pn_router_id: ${11:value}                                              # Specify the vRouter IP address 
+    pn_bgp_as: ${12:value}                                                 # Specify the Autonomous System Number(ASN) if the vRouter runs Border Gateway Protocol(BGP) 
+    pn_bgp_redistribute: ${13$$(yas-choose-value '("static" "connected" "rip" "ospf"))}# choices: static;connected;rip;ospf  Specify how BGP routes are redistributed 
+    pn_bgp_max_paths: ${14:value}                                          # Specify the maximum number of paths for BGP  This is a number between 1 and 255 or 0 to unset 
+    pn_bgp_options: ${15:value}                                            # Specify other BGP options as a whitespaces separated string within single quotes '' 
+    pn_rip_redistribute: ${16$$(yas-choose-value '("static" "connected" "ospf" "bgp"))}# choices: static;connected;ospf;bgp  Specify how RIP routes are redistributed 
+    pn_ospf_redistribute: ${17$$(yas-choose-value '("static" "connected" "bgp" "rip"))}# choices: static;connected;bgp;rip  Specify how OSPF routes are redistributed 
+    pn_ospf_options: ${18:value}                                           # Specify other OSPF options as a whitespaces separated string within single quotes '' 
+    pn_vrrp_track_port: ${19:value}                                        # Specify list of ports and port ranges 

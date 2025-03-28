@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP network routes
+# prefix: na_ontap_net_routes_snippet
+# key: ontap_net_rout
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP network routes}
+  na_ontap_net_routes:                                                     
+    vserver: ${1:The name of the vserver}                                  #
+    destination: ${2:Specify the route destination}                        # Example 10 7 125 5/20, fd20:13::/64 
+    gateway: ${3:Specify the route gateway}                                # Example 10 7 125 1, fd20:13::1 
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether you want to create or delete a network route 
+    metric: ${8:value}                                                     # Specify the route metric  If this field is not provided the default will be set to 20 
+    from_destination: ${9:value}                                           # Specify the route destination that should be changed  new_destination was removed to fix idempotency issues  To rename d
+    from_gateway: ${10:value}                                              # Specify the route gateway that should be changed 
+    from_metric: ${11:value}                                               # Specify the route metric that should be changed 
+    https: ${12:False}                                                     # Enable and disable https
+    validate_certs: ${13:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${14:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${15:value}                                                    # The ontap api version to use
+    use_rest: ${16$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

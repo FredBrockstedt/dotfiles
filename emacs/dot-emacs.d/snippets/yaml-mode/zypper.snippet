@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage packages on SUSE and openSUSE
+# prefix: zypper_snippet
+# key: zypper
+# group: ansible
+# --
+
+- name: ${0:Manage packages on SUSE and openSUSE}
+  zypper:                                                                  
+    name: ${1:Package name C(name) or package specifier or a list of either}# Can include a version like C(name=1 0), C(name>3 4) or C(name<=2 7)  If a version is given, C(oldpackage) is implied an
+    state: ${2$$(yas-choose-value '("present" "latest" "absent" "dist-upgrade"))}# choices: present;latest;absent;dist-upgrade  C(present) will make sure the package is installed  C(latest)  will m
+    type: ${3$$(yas-choose-value '("package" "patch" "pattern" "product" "srcpackage" "application"))}# choices: package;patch;pattern;product;srcpackage;application  The type of package to be oper
+    extra_args_precommand: ${4:value}                                      # Add additional global target options to C(zypper)  Options should be supplied in a single line as if given in the comman
+    disable_gpg_check: ${5:false}                                          # Whether to disable to GPG signature checking of the package signature being installed  Has an effect only if state is I(
+    disable_recommends: ${6:true}                                          # Corresponds to the C(--no-recommends) option for I(zypper)  Default behavior (C(yes)) modifies zypper's default behavior
+    force: ${7:false}                                                      # Adds C(--force) option to I(zypper)  Allows to downgrade packages and change vendor or architecture 
+    update_cache: ${8:false}                                               # Run the equivalent of C(zypper refresh) before the operation  Disabled in check mode 
+    oldpackage: ${9:false}                                                 # Adds C(--oldpackage) option to I(zypper)  Allows to downgrade packages with less side-effects than force  This is implie
+    extra_args: ${10:value}                                                # Add additional options to C(zypper) command  Options should be supplied in a single line as if given in the command line

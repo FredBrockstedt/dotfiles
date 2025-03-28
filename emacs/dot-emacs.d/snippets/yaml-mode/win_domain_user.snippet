@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Manages Windows Active Directory user accounts
+# prefix: win_domain_user_snippet
+# key: win_domain_user
+# group: ansible
+# --
+
+- name: ${0:Manages Windows Active Directory user accounts}
+  win_domain_user:                                                         
+    name: ${1:Name of the user to create, remove or modify}                #
+    state: ${2$$(yas-choose-value '("absent" "present" "query"))}          # choices: absent;present;query  When C(present), creates or updates the user account  When C(absent), removes the user ac
+    enabled: ${3:True}                                                     # C(yes) will enable the user account  C(no) will disable the account 
+    account_locked: ${4$$(yas-choose-value '("False"))}                    # choices: False  C(no) will unlock the user account if locked  Note that there is not a way to lock an account as an admi
+    description: ${5:value}                                                # Description of the user
+    groups: ${6:value}                                                     # Adds or removes the user from this list of groups, depending on the value of I(groups_action)  To remove all but the Pri
+    groups_action: ${7$$(yas-choose-value '("add" "remove" "replace"))}    # choices: add;remove;replace  If C(add), the user is added to each group in I(groups) where not already a member  If C(re
+    password: ${8:value}                                                   # Optionally set the user's password to this (plain text) value  To enable an account - I(enabled) - a password must alrea
+    update_password: ${9$$(yas-choose-value '("always" "on_create" "when_changed"))}# choices: always;on_create;when_changed  C(always) will always update passwords  C(on_create) will only set the 
+    password_expired: ${10:value}                                          # C(yes) will require the user to change their password at next login  C(no) will clear the expired password flag  This is
+    password_never_expires: ${11:value}                                    # C(yes) will set the password to never expire  C(no) will allow the password to expire  This is mutually exclusive with I
+    user_cannot_change_password: ${12:value}                               # C(yes) will prevent the user from changing their password  C(no) will allow the user to change their password 
+    firstname: ${13:value}                                                 # Configures the user's first name (given name) 
+    surname: ${14:value}                                                   # Configures the user's last name (surname) 
+    company: ${15:value}                                                   # Configures the user's company name 
+    upn: ${16:value}                                                       # Configures the User Principal Name (UPN) for the account  This is not required, but is best practice to configure for mo
+    email: ${17:value}                                                     # Configures the user's email address  This is a record in AD and does not do anything to configure any email servers or s
+    street: ${18:value}                                                    # Configures the user's street address 
+    city: ${19:value}                                                      # Configures the user's city 
+    state_province: ${20:value}                                            # Configures the user's state or province 
+    postal_code: ${21:value}                                               # Configures the user's postal code / zip code 
+    country: ${22:value}                                                   # Configures the user's country code  Note that this is a two-character ISO 3166 code 
+    path: ${23:value}                                                      # Container or OU for the new user; if you do not specify this, the user will be placed in the default container for users
+    attributes: ${24:value}                                                # A dict of custom LDAP attributes to set on the user  This can be used to set custom attributes that are not exposed as m
+    domain_username: ${25:value}                                           # The username to use when interacting with AD  If this is not set then the user Ansible used to log in with will be used 
+    domain_password: ${26:value}                                           # The password for I(username) 
+    domain_server: ${27:value}                                             # Specifies the Active Directory Domain Services instance to connect to  Can be in the form of an FQDN or NetBIOS name  If

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage LTM DNS nameservers on a BIG-IP
+# prefix: bigip_dns_nameserver_snippet
+# key: gip_dns_nameserver
+# group: ansible
+# --
+
+- name: ${0:Manage LTM DNS nameservers on a BIG-IP}
+  bigip_dns_nameserver:                                                    
+    name: ${1:Specifies the name of the nameserver}                        #
+    address: ${2:value}                                                    # Specifies the IP address on which the DNS nameserver (client) or back-end DNS authoritative server (DNS Express server) 
+    service_port: ${3:value}                                               # Specifies the service port on which the DNS nameserver (client) or back-end DNS authoritative server (DNS Express server
+    route_domain: ${4:value}                                               # Specifies the local route domain that the DNS nameserver (client) or back-end DNS authoritative server (DNS Express serv
+    tsig_key: ${5:value}                                                   # Specifies the TSIG key the system uses to communicate with this DNS nameserver (client) or back-end DNS authoritative se
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    partition: ${7:Common}                                                 # Device partition to manage resources on 
+    provider: ${8:value}                                                   # A dict object containing connection details 

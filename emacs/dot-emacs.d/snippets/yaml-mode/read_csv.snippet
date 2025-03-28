@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Read a CSV file
+# prefix: read_csv_snippet
+# key: read_csv
+# group: ansible
+# --
+
+- name: ${0:Read a CSV file}
+  read_csv:                                                                
+    path: ${1:The CSV filename to read data from}                          #
+    key: ${2:value}                                                        # The column name used as a key for the resulting dictionary  If C(key) is unset, the module returns a list of dictionarie
+    dialect: ${3:excel}                                                    # The CSV dialect to use when parsing the CSV file  Possible values include C(excel), C(excel-tab) or C(unix) 
+    fieldnames: ${4:value}                                                 # A list of field names for every column  This is needed if the CSV does not have a header 
+    unique: ${5:True}                                                      # Whether the C(key) used is expected to be unique 
+    delimiter: ${6:value}                                                  # A one-character string used to separate fields  When using this parameter, you change the default value used by C(dialec
+    skipinitialspace: ${7:value}                                           # Whether to ignore any whitespaces immediately following the delimiter  When using this parameter, you change the default
+    strict: ${8:value}                                                     # Whether to raise an exception on bad CSV input  When using this parameter, you change the default value used by C(dialec

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manages local Windows user accounts
+# prefix: win_user_snippet
+# key: win_user
+# group: ansible
+# --
+
+- name: ${0:Manages local Windows user accounts}
+  win_user:                                                                
+    name: ${1:Name of the user to create, remove or modify}                #
+    fullname: ${2:value}                                                   # Full name of the user 
+    description: ${3:value}                                                # Description of the user 
+    password: ${4:value}                                                   # Optionally set the user's password to this (plain text) value 
+    update_password: ${5$$(yas-choose-value '("always" "on_create"))}      # choices: always;on_create  C(always) will update passwords if they differ   C(on_create) will only set the password for 
+    password_expired: ${6:value}                                           # C(yes) will require the user to change their password at next login  C(no) will clear the expired password flag 
+    password_never_expires: ${7:value}                                     # C(yes) will set the password to never expire  C(no) will allow the password to expire 
+    user_cannot_change_password: ${8:value}                                # C(yes) will prevent the user from changing their password  C(no) will allow the user to change their password 
+    account_disabled: ${9:value}                                           # C(yes) will disable the user account  C(no) will clear the disabled flag 
+    account_locked: ${10$$(yas-choose-value '("false"))}                   # choices: no  C(no) will unlock the user account if locked 
+    groups: ${11:value}                                                    # Adds or removes the user from this comma-separated list of groups, depending on the value of I(groups_action)  When I(gr
+    groups_action: ${12$$(yas-choose-value '("add" "replace" "remove"))}   # choices: add;replace;remove  If C(add), the user is added to each group in I(groups) where not already a member  If C(re
+    state: ${13$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  When C(absent), removes the user account if it exists  When C(present), creates or update

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Describe Kubernetes (K8s) objects
+# prefix: k8s_info_snippet
+# key: k8s_info
+# group: ansible
+# --
+
+- name: ${0:Describe Kubernetes (K8s) objects}
+  k8s_info:                                                                
+    kind: ${1:Use to specify an object model}                              # Use in conjunction with I(api_version), I(name), and I(namespace) to identify a specific object 
+    api_version: ${2:v1}                                                   # Use to specify the API version  in conjunction with I(kind), I(name), and I(namespace) to identify a specific object 
+    name: ${3:value}                                                       # Use to specify an object name   Use in conjunction with I(api_version), I(kind) and I(namespace) to identify a specific 
+    namespace: ${4:value}                                                  # Use to specify an object namespace  Use in conjunction with I(api_version), I(kind), and I(name) to identify a specific 
+    label_selectors: ${5:value}                                            # L i s t   o f   l a b e l   s e l e c t o r s   t o   u s e   t o   f i l t e r   r e s u l t s
+    field_selectors: ${6:value}                                            # L i s t   o f   f i e l d   s e l e c t o r s   t o   u s e   t o   f i l t e r   r e s u l t s
+    host: ${7:value}                                                       # Provide a URL for accessing the API  Can also be specified via K8S_AUTH_HOST environment variable 
+    api_key: ${8:value}                                                    # Token used to authenticate with the API  Can also be specified via K8S_AUTH_API_KEY environment variable 
+    kubeconfig: ${9:value}                                                 # Path to an existing Kubernetes config file  If not provided, and no other connection options are provided, the openshift
+    context: ${10:value}                                                   # The name of a context found in the config file  Can also be specified via K8S_AUTH_CONTEXT environment variable 
+    username: ${11:value}                                                  # Provide a username for authenticating with the API  Can also be specified via K8S_AUTH_USERNAME environment variable  Pl
+    password: ${12:value}                                                  # Provide a password for authenticating with the API  Can also be specified via K8S_AUTH_PASSWORD environment variable  Pl
+    client_cert: ${13:value}                                               # Path to a certificate used to authenticate with the API  Can also be specified via K8S_AUTH_CERT_FILE environment variab
+    client_key: ${14:value}                                                # Path to a key file used to authenticate with the API  Can also be specified via K8S_AUTH_KEY_FILE environment variable 
+    ca_cert: ${15:value}                                                   # Path to a CA certificate used to authenticate with the API  The full certificate chain must be provided to avoid certifi
+    validate_certs: ${16:value}                                            # Whether or not to verify the API server's SSL certificates  Can also be specified via K8S_AUTH_VERIFY_SSL environment va
+    proxy: ${17:value}                                                     # The URL of an HTTP proxy to use for the connection  Can also be specified via K8S_AUTH_PROXY environment variable  Pleas

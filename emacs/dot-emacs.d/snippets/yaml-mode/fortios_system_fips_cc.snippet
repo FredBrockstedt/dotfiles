@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Configure FIPS-CC mode in Fortinet's FortiOS and FortiGate.
+# prefix: fortios_system_fips_cc_snippet
+# key: fortios_system_fips_cc
+# group: ansible
+# --
+
+- name: ${0:Configure FIPS-CC mode in Fortinet's FortiOS and FortiGate.}
+  fortios_system_fips_cc:                                                  
+    host: ${1:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${2:value}                                                   # FortiOS or FortiGate username 
+    password: ${3:}                                                        # FortiOS or FortiGate password 
+    vdom: ${4:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${5:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${6:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 
+    system_fips_cc: ${7:None}                                              # Configure FIPS-CC mode 

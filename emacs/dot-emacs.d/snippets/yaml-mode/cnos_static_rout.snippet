@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage static IP routes on Lenovo CNOS network devices
+# prefix: cnos_static_route_snippet
+# key: cnos_static_rout
+# group: ansible
+# --
+
+- name: ${0:Manage static IP routes on Lenovo CNOS network devices}
+  cnos_static_route:                                                       
+    prefix: ${1:value}                                                     # Network prefix of the static route 
+    mask: ${2:value}                                                       # Network prefix mask of the static route 
+    next_hop: ${3:value}                                                   # Next hop IP of the static route 
+    interface: ${4:value}                                                  # Interface of the static route 
+    description: ${5:value}                                                # Name of the static route
+    admin_distance: ${6:1}                                                 # Admin distance of the static route 
+    tag: ${7:value}                                                        # Set tag of the static route 
+    aggregate: ${8:value}                                                  # L i s t   o f   s t a t i c   r o u t e   d e f i n i t i o n s  
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the static route configuration 

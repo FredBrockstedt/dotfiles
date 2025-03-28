@@ -1,0 +1,57 @@
+# -*- mode: snippet -*-
+# name: Module for setup of Cloud Avi RESTful Object
+# prefix: avi_cloud_snippet
+# key: vi_cloud
+# group: ansible
+# --
+
+- name: ${0:Module for setup of Cloud Avi RESTful Object}
+  avi_cloud:                                                               
+    name: ${1:Name of the object}                                          #
+    vtype: ${2:Cloud type}                                                 # Enum options - CLOUD_NONE, CLOUD_VCENTER, CLOUD_OPENSTACK, CLOUD_AWS, CLOUD_VCA, CLOUD_APIC, CLOUD_MESOS, CLOUD_LINUXSER
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${4$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${5$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    apic_configuration: ${6:value}                                         # Apicconfiguration settings for cloud 
+    apic_mode: ${7:value}                                                  # Boolean flag to set apic_mode  Default value when not specified in API or module is interpreted by Avi Controller as Fal
+    autoscale_polling_interval: ${8:value}                                 # Cloudconnector polling interval for external autoscale groups  Field introduced in 18 2 2  Default value when not specif
+    aws_configuration: ${9:value}                                          # Awsconfiguration settings for cloud 
+    azure_configuration: ${10:value}                                       # Field introduced in 17 2 1 
+    cloudstack_configuration: ${11:value}                                  # Cloudstackconfiguration settings for cloud 
+    custom_tags: ${12:value}                                               # Custom tags for all avi created resources in the cloud infrastructure  Field introduced in 17 1 5 
+    dhcp_enabled: ${13:value}                                              # Select the ip address management scheme  Default value when not specified in API or module is interpreted by Avi Control
+    dns_provider_ref: ${14:value}                                          # Dns profile for the cloud  It is a reference to an object of type ipamdnsproviderprofile 
+    docker_configuration: ${15:value}                                      # Dockerconfiguration settings for cloud 
+    east_west_dns_provider_ref: ${16:value}                                # Dns profile for east-west services  It is a reference to an object of type ipamdnsproviderprofile 
+    east_west_ipam_provider_ref: ${17:value}                               # Ipam profile for east-west services  Warning - please use virtual subnets in this ipam profile that do not conflict with
+    enable_vip_static_routes: ${18:value}                                  # Use static routes for vip side network resolution during virtualservice placement  Default value when not specified in A
+    gcp_configuration: ${19:value}                                         # Google cloud platform configuration  Field introduced in 18 2 1 
+    ip6_autocfg_enabled: ${20:value}                                       # Enable ipv6 auto configuration  Field introduced in 18 1 1  Default value when not specified in API or module is interpr
+    ipam_provider_ref: ${21:value}                                         # Ipam profile for the cloud  It is a reference to an object of type ipamdnsproviderprofile 
+    license_tier: ${22:value}                                              # Specifies the default license tier which would be used by new se groups  This field by default inherits the value from s
+    license_type: ${23:value}                                              # If no license type is specified then default license enforcement for the cloud type is chosen  The default mappings are 
+    linuxserver_configuration: ${24:value}                                 # Linuxserverconfiguration settings for cloud 
+    mesos_configuration: ${25:value}                                       # Field deprecated in 18 2 2 
+    mtu: ${26:value}                                                       # Mtu setting for the cloud  Default value when not specified in API or module is interpreted by Avi Controller as 1500 
+    nsx_configuration: ${27:value}                                         # Configuration parameters for nsx manager  Field introduced in 17 1 1 
+    obj_name_prefix: ${28:value}                                           # Default prefix for all automatically created objects in this cloud  This prefix can be overridden by the se-group templa
+    openstack_configuration: ${29:value}                                   # Openstackconfiguration settings for cloud 
+    oshiftk8s_configuration: ${30:value}                                   # Oshiftk8sconfiguration settings for cloud 
+    prefer_static_routes: ${31:value}                                      # Prefer static routes over interface routes during virtualservice placement  Default value when not specified in API or m
+    proxy_configuration: ${32:value}                                       # Proxyconfiguration settings for cloud 
+    rancher_configuration: ${33:value}                                     # Rancherconfiguration settings for cloud 
+    state_based_dns_registration: ${34:value}                              # Dns records for vips are added/deleted based on the operational state of the vips  Field introduced in 17 1 12  Default 
+    tenant_ref: ${35:value}                                                # It is a reference to an object of type tenant 
+    url: ${36:value}                                                       # Avi controller URL of the object 
+    uuid: ${37:value}                                                      # Unique object identifier of the object 
+    vca_configuration: ${38:value}                                         # Vcloudairconfiguration settings for cloud 
+    vcenter_configuration: ${39:value}                                     # Vcenterconfiguration settings for cloud 
+    controller: ${40:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${41:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${42:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${43:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${44:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{45:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${46:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${47:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${48:value}                         # It disables avi session information to be cached as a fact 

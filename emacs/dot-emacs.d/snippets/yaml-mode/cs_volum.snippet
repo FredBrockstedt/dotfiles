@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: Manages volumes on Apache CloudStack based clouds.
+# prefix: cs_volume_snippet
+# key: cs_volum
+# group: ansible
+# --
+
+- name: ${0:Manages volumes on Apache CloudStack based clouds.}
+  cs_volume:                                                               
+    name: ${1:Name of the volume}                                          # I(name) can only contain ASCII letters 
+    account: ${2:value}                                                    # Account the volume is related to 
+    device_id: ${3:value}                                                  # ID of the device on a VM the volume is attached to  Only considered if I(state) is C(attached) 
+    custom_id: ${4:value}                                                  # Custom id to the resource  Allowed to Root Admins only 
+    disk_offering: ${5:value}                                              # Name of the disk offering to be used  Required one of I(disk_offering), I(snapshot) if volume is not already I(state=pre
+    display_volume: ${6:value}                                             # Whether to display the volume to the end user or not  Allowed to Root Admins only 
+    domain: ${7:value}                                                     # Name of the domain the volume to be deployed in 
+    max_iops: ${8:value}                                                   # Max iops
+    min_iops: ${9:value}                                                   # Min iops
+    project: ${10:value}                                                   # Name of the project the volume to be deployed in 
+    size: ${11:value}                                                      # Size of disk in GB
+    snapshot: ${12:value}                                                  # The snapshot name for the disk volume  Required one of I(disk_offering), I(snapshot) if volume is not already I(state=pr
+    force: ${13:False}                                                     # Force removal of volume even it is attached to a VM  Considered on I(state=absent) only 
+    shrink_ok: ${14:False}                                                 # Whether to allow to shrink the volume 
+    vm: ${15:value}                                                        # Name of the virtual machine to attach the volume to 
+    zone: ${16:value}                                                      # Name of the zone in which the volume should be deployed  If not set, default zone is used 
+    state: ${17$$(yas-choose-value '("present" "absent" "attached" "detached" "extracted" "uploaded"))}# choices: present;absent;attached;detached;extracted;uploaded  State of the volume  The choic
+    poll_async: ${18:True}                                                 # Poll async jobs until job has finished 
+    tags: ${19:value}                                                      # List of tags  Tags are a list of dictionaries having keys I(key) and I(value)  To delete all tags, set a empty list e g 
+    url: ${20:value}                                                       # URL to which the volume would be extracted on I(state=extracted) or the URL where to download the volume on I(state=uplo
+    mode: ${21$$(yas-choose-value '("http_download" "ftp_upload"))}        # choices: http_download;ftp_upload  Mode for the volume extraction  Only considered if I(state=extracted) 
+    format: ${22$$(yas-choose-value '("QCOW2" "RAW" "VHD" "VHDX" "OVA"))}  # choices: QCOW2;RAW;VHD;VHDX;OVA  The format for the volume  Only considered if I(state=uploaded) 
+    api_key: ${23:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${24:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${25:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${26$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${27:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${28:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

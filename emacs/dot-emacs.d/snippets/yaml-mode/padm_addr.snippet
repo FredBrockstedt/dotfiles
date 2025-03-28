@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage IP addresses on an interface on Solaris/illumos systems
+# prefix: ipadm_addr_snippet
+# key: padm_addr
+# group: ansible
+# --
+
+- name: ${0:Manage IP addresses on an interface on Solaris/illumos systems}
+  ipadm_addr:                                                              
+    addrobj: ${1:Specifies an unique IP address on the system}             #
+    address: ${2:value}                                                    # Specifiies an IP address to configure in CIDR notation 
+    addrtype: ${3$$(yas-choose-value '("static" "dhcp" "addrconf"))}       # choices: static;dhcp;addrconf  Specifiies a type of IP address to configure 
+    temporary: ${4:False}                                                  # Specifies that the configured IP address is temporary  Temporary IP addresses do not persist across reboots 
+    wait: ${5:60}                                                          # Specifies the time in seconds we wait for obtaining address via DHCP 
+    state: ${6$$(yas-choose-value '("absent" "present" "up" "down" "enabled" "disabled" "refreshed"))}# choices: absent;present;up;down;enabled;disabled;refreshed  Create/delete/enable/disable an I

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage Katello Resources
+# prefix: katello_snippet
+# key: katello
+# group: ansible
+# --
+
+- name: ${0:Manage Katello Resources}
+  katello:                                                                 
+    server_url: ${1:URL of Foreman server}                                 #
+    username: ${2:Username on Foreman server}                              #
+    password: ${3:Password for user accessing Foreman server}              #
+    entity: ${4$$(yas-choose-value '("repository" "manifest" "repository_set" "sync_plan" "content_view" "lifecycle_environment" "activation_key" "product"))}# The Foreman resource that the action 
+    params: ${5:Parameters associated to the entity resource and action, to set or edit in dictionary format}# Each choice may be only available with specific entitys and actions  Possible Choices 
+    action: ${6$$(yas-choose-value '("sync" "publish" "promote"))}         # choices: sync;publish;promote  action associated to the entity resource to set or edit in dictionary format  Possible Ac
+    task_timeout: ${7:1000}                                                # The timeout in seconds to wait for the started Foreman action to finish  If the timeout is reached and the Foreman actio
+    verify_ssl: ${8:False}                                                 # verify the ssl/https connection (e g for a valid certificate)

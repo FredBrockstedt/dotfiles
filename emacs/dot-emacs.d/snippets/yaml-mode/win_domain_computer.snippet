@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage computers in Active Directory
+# prefix: win_domain_computer_snippet
+# key: win_domain_computer
+# group: ansible
+# --
+
+- name: ${0:Manage computers in Active Directory}
+  win_domain_computer:                                                     
+    name: ${1:Specifies the name of the object}                            # This parameter sets the Name property of the Active Directory object  The LDAP display name (ldapDisplayName) of this pr
+    sam_account_name: ${2:value}                                           # Specifies the Security Account Manager (SAM) account name of the computer  It maximum is 256 characters, 15 is advised f
+    enabled: ${3:True}                                                     # Specifies if an account is enabled  An enabled account requires a password  This parameter sets the Enabled property for
+    ou: ${4:value}                                                         # Specifies the X 500 path of the Organizational Unit (OU) or container where the new object is created  Required when I(s
+    description: ${5:}                                                     # Specifies a description of the object  This parameter sets the value of the Description property for the object  The LDA
+    dns_hostname: ${6:value}                                               # Specifies the fully qualified domain name (FQDN) of the computer  This parameter sets the DNSHostName property for a com
+    domain_username: ${7:value}                                            # The username to use when interacting with AD  If this is not set then the user Ansible used to log in with will be used 
+    domain_password: ${8:value}                                            # The password for I(username) 
+    domain_server: ${9:value}                                              # Specifies the Active Directory Domain Services instance to connect to  Can be in the form of an FQDN or NetBIOS name  If
+    state: ${10$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Specified whether the computer should be C(present) or C(absent) in Active Directory 

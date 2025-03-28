@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Dpkg package selection selections
+# prefix: dpkg_selections_snippet
+# key: dpkg_selectio
+# group: ansible
+# --
+
+- name: ${0:Dpkg package selection selections}
+  dpkg_selections:                                                         
+    name: ${1:Name of the package}                                         #
+    selection: ${2$$(yas-choose-value '("install" "hold" "deinstall" "purge"))}# The selection state to set the package to 

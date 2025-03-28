@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Deploy applications to JBoss
+# prefix: jboss_snippet
+# key: jbo
+# group: ansible
+# --
+
+- name: ${0:Deploy applications to JBoss}
+  jboss:                                                                   
+    deployment: ${1:The name of the deployment}                            #
+    src: ${2:value}                                                        # The remote path of the application ear or war to deploy  Required when I(state=present)  Ignored when I(state=absent) 
+    deploy_path: ${3:/var/lib/jbossas/standalone/deployments}              # The location in the filesystem where the deployment scanner listens 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the application should be deployed or undeployed 

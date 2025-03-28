@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Icinga2 feature
+# prefix: icinga2_feature_snippet
+# key: cinga2_featur
+# group: ansible
+# --
+
+- name: ${0:Manage Icinga2 feature}
+  icinga2_feature:                                                         
+    name: ${1:This is the feature name to enable or disable}               #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If set to C(present) and feature is disabled, then feature is enabled  If set to C(present) and

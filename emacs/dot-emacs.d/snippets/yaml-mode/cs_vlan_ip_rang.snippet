@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Manages VLAN IP ranges on Apache CloudStack based clouds.
+# prefix: cs_vlan_ip_range_snippet
+# key: cs_vlan_ip_rang
+# group: ansible
+# --
+
+- name: ${0:Manages VLAN IP ranges on Apache CloudStack based clouds.}
+  cs_vlan_ip_range:                                                        
+    start_ip: ${1:The beginning IPv4 address in the VLAN IP range}         # Only considered on create 
+    network: ${2:value}                                                    # The network name or id  Required if I(for_virtual_network) and I(physical_network) are not set 
+    physical_network: ${3:value}                                           # The physical network name or id 
+    end_ip: ${4:value}                                                     # The ending IPv4 address in the VLAN IP range  If not specified, value of I(start_ip) is used  Only considered on create 
+    gateway: ${5:value}                                                    # The gateway of the VLAN IP range  Required if I(state=present) 
+    netmask: ${6:value}                                                    # The netmask of the VLAN IP range  Required if I(state=present) 
+    start_ipv6: ${7:value}                                                 # The beginning IPv6 address in the IPv6 network range  Only considered on create 
+    end_ipv6: ${8:value}                                                   # The ending IPv6 address in the IPv6 network range  If not specified, value of I(start_ipv6) is used  Only considered on 
+    gateway_ipv6: ${9:value}                                               # The gateway of the IPv6 network  Only considered on create 
+    cidr_ipv6: ${10:value}                                                 # The CIDR of IPv6 network, must be at least /64 
+    vlan: ${11:value}                                                      # The ID or VID of the network  If not specified, will be defaulted to the vlan of the network 
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the network ip range 
+    zone: ${13:value}                                                      # The Zone ID of the VLAN IP range  If not set, default zone is used 
+    domain: ${14:value}                                                    # Domain of the account owning the VLAN 
+    account: ${15:value}                                                   # Account who owns the VLAN  Mutually exclusive with I(project) 
+    project: ${16:value}                                                   # Project who owns the VLAN  Mutually exclusive with I(account) 
+    for_virtual_network: ${17:False}                                       # C(yes) if VLAN is of Virtual type, C(no) if Direct  If set to C(yes) but neither I(physical_network) or I(network) is se
+    api_key: ${18:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${19:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${20:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${21$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${22:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${23:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

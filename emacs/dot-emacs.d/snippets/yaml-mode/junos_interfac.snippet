@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages interface attributes of Juniper Junos OS network devices.
+# prefix: junos_interfaces_snippet
+# key: junos_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages interface attributes of Juniper Junos OS network devices.}
+  junos_interfaces:                                                        
+    config: ${1:value}                                                     # T h e   p r o v i d e d   c o n f i g u r a t i o n
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion

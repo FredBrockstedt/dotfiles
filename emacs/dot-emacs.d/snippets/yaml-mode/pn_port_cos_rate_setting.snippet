@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify port-cos-rate-setting
+# prefix: pn_port_cos_rate_setting_snippet
+# key: pn_port_cos_rate_setting
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify port-cos-rate-setting}
+  pn_port_cos_rate_setting:                                                
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the port-cos-rate-setting 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_cos0_rate: ${3:value}                                               # cos0 rate limit (pps) unlimited or 0 to 10000000 
+    pn_cos1_rate: ${4:value}                                               # cos1 rate limit (pps) unlimited or 0 to 10000000 
+    pn_cos2_rate: ${5:value}                                               # cos2 rate limit (pps) unlimited or 0 to 10000000 
+    pn_cos3_rate: ${6:value}                                               # cos3 rate limit (pps) unlimited or 0 to 10000000 
+    pn_cos4_rate: ${7:value}                                               # cos4 rate limit (pps) unlimited or 0 to 10000000 
+    pn_cos5_rate: ${8:value}                                               # cos5 rate limit (pps) unlimited or 0 to 10000000 
+    pn_cos6_rate: ${9:value}                                               # cos6 rate limit (pps) unlimited or 0 to 10000000 
+    pn_cos7_rate: ${10:value}                                              # cos7 rate limit (pps) unlimited or 0 to 10000000 
+    pn_port: ${11$$(yas-choose-value '("control-port" "data-port" "span-ports"))}# choices: control-port;data-port;span-ports  port 

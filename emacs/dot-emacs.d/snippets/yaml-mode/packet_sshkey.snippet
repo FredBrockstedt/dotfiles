@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create/delete an SSH key in Packet host.
+# prefix: packet_sshkey_snippet
+# key: packet_sshkey
+# group: ansible
+# --
+
+- name: ${0:Create/delete an SSH key in Packet host.}
+  packet_sshkey:                                                           
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the target 
+    auth_token: ${2:value}                                                 # Packet api token  You can also supply it in env var C(PACKET_API_TOKEN) 
+    label: ${3:value}                                                      # Label for the key  If you keep it empty, it will be read from key string 
+    id: ${4:value}                                                         # UUID of the key which you want to remove 
+    fingerprint: ${5:value}                                                # Fingerprint of the key which you want to remove 
+    key: ${6:value}                                                        # Public Key string ({type\} {base64 encoded key\} {description\}) 
+    key_file: ${7:value}                                                   # File with the public key 

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: apt_rpm package manager
+# prefix: apt_rpm_snippet
+# key: pt_rpm
+# group: ansible
+# --
+
+- name: ${0:apt_rpm package manager}
+  apt_rpm:                                                                 
+    pkg: ${1:name of package to install, upgrade or remove}                #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicates the desired package state 
+    update_cache: ${3:false}                                               # update the package database first C(apt-get update) 

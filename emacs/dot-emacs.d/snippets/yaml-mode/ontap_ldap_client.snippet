@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP LDAP client
+# prefix: na_ontap_ldap_client_snippet
+# key: ontap_ldap_client
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP LDAP client}
+  na_ontap_ldap_client:                                                    
+    vserver: ${1:vserver/svm that holds LDAP client configuration}         #
+    name: ${2:The name of LDAP client configuration}                       #
+    hostname: ${3:The hostname or IP address of the ONTAP instance}        #
+    username: ${4:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${5:Password for the specified user}                         #
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified LDAP client configuration exist or not 
+    ldap_servers: ${7:value}                                               # Comma separated list of LDAP servers  FQDN's or IP addresses Required if I(state=present) 
+    schema: ${8$$(yas-choose-value '("AD-IDMU" "AD-SFU" "MS-AD-BIS" "RFC-2307"))}# choices: AD-IDMU;AD-SFU;MS-AD-BIS;RFC-2307  LDAP schema Required if I(state=present) 
+    base_dn: ${9:value}                                                    # LDAP base DN
+    base_scope: ${10$$(yas-choose-value '("subtree" "onelevel" "base"))}   # choices: subtree;onelevel;base  LDAP search scope
+    port: ${11:value}                                                      # LDAP server port
+    query_timeout: ${12:value}                                             # LDAP server query timeout
+    min_bind_level: ${13$$(yas-choose-value '("anonymous" "simple" "sasl"))}# choices: anonymous;simple;sasl  Minimal LDAP server bind level 
+    bind_dn: ${14:value}                                                   # LDAP bind user DN
+    bind_password: ${15:value}                                             # LDAP bind user password
+    use_start_tls: ${16$$(yas-choose-value '("true" "false"))}             # choices: true;false  Start TLS on LDAP connection
+    referral_enabled: ${17$$(yas-choose-value '("true" "false"))}          # choices: true;false  LDAP Referral Chasing
+    session_security: ${18$$(yas-choose-value '("true" "false"))}          # choices: true;false  Client Session Security
+    https: ${19:False}                                                     # Enable and disable https
+    validate_certs: ${20:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${21:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${22:value}                                                    # The ontap api version to use
+    use_rest: ${23$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

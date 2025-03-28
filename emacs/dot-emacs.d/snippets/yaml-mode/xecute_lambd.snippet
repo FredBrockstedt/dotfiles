@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Execute an AWS Lambda function
+# prefix: execute_lambda_snippet
+# key: xecute_lambd
+# group: ansible
+# --
+
+- name: ${0:Execute an AWS Lambda function}
+  execute_lambda:                                                          
+    name: ${1:value}                                                       # The name of the function to be invoked  This can only be used for invocations within the calling account  To invoke a fu
+    function_arn: ${2:value}                                               # The name of the function to be invoked
+    tail_log: ${3:false}                                                   # If C(tail_log=yes), the result of the task will include the last 4 KB of the CloudWatch log for the function execution  
+    wait: ${4:true}                                                        # Whether to wait for the function results or not  If I(wait) is C(no), the task will not return any results  To wait for 
+    dry_run: ${5:false}                                                    # Do not *actually* invoke the function  A C(DryRun) call will check that the caller has permissions to call the function,
+    version_qualifier: ${6:LATEST}                                         # Which version/alias of the function to run  This defaults to the C(LATEST) revision, but can be set to any existing vers
+    payload: ${7:namespace()}                                              # A dictionary in any form to be provided as input to the Lambda function 
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

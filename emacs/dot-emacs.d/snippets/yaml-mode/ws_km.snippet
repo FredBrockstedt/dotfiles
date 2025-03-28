@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Perform various KMS management tasks.
+# prefix: aws_kms_snippet
+# key: ws_km
+# group: ansible
+# --
+
+- name: ${0:Perform various KMS management tasks.}
+  aws_kms:                                                                 
+    alias: ${1:value}                                                      # A n   a l i a s   f o r   a   k e y     F o r   s a f e t y ,   e v e n   t h o u g h   K M S   d o e s   n o t   r e q 
+    key_id: ${2:value}                                                     # Key ID or ARN of the key  One of C(alias) or C(key_id) are required 
+    policy_mode: ${3$$(yas-choose-value '("grant" "deny"))}                # choices: grant;deny  (deprecated) Grant or deny access  Used for modifying the Key Policy rather than modifying a grant 
+    policy_role_name: ${4:value}                                           # (deprecated) Role to allow/deny access  One of C(policy_role_name) or C(policy_role_arn) are required  Used for modifyin
+    policy_role_arn: ${5:value}                                            # (deprecated) ARN of role to allow/deny access  One of C(policy_role_name) or C(policy_role_arn) are required  Used for m
+    policy_grant_types: ${6:value}                                         # (deprecated) List of grants to give to user/role  Likely "role,role grant" or "role,role grant,admin"  Required when C(p
+    policy_clean_invalid_entries: ${7:True}                                # (deprecated) If adding/removing a role and invalid grantees are found, remove them  These entries will cause an update t
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  W h e t h e r   a   k e y   s h o u l d   b e   p r e s e n t   o r   a b s e n t     N o t e  
+    enabled: ${9:True}                                                     # W h e t h e r   o r   n o t   a   k e y   i s   e n a b l e d
+    description: ${10:value}                                               # A   d e s c r i p t i o n   o f   t h e   C M K     U s e   a   d e s c r i p t i o n   t h a t   h e l p s   y o u   d 
+    tags: ${11:value}                                                      # A   d i c t i o n a r y   o f   t a g s   t o   a p p l y   t o   a   k e y  
+    purge_tags: ${12:False}                                                # W h e t h e r   t h e   I ( t a g s )   a r g u m e n t   s h o u l d   c a u s e   t a g s   n o t   i n   t h e   l i 
+    purge_grants: ${13:False}                                              # W h e t h e r   t h e   I ( g r a n t s )   a r g u m e n t   s h o u l d   c a u s e   g r a n t s   n o t   i n   t h 
+    grants: ${14:value}                                                    # A list of grants to apply to the key  Each item must contain I(grantee_principal)  Each item can optionally contain I(re
+    policy: ${15:value}                                                    # policy to apply to the KMS key See U(https://docs aws amazon com/kms/latest/developerguide/key-policies html)
+    debug_botocore_endpoint_logs: ${16:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${17:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${18:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${19:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${20:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${21:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${22:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${23:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

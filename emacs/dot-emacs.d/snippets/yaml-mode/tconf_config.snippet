@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: netconf device configuration
+# prefix: netconf_config_snippet
+# key: tconf_config
+# group: ansible
+# --
+
+- name: ${0:netconf device configuration}
+  netconf_config:                                                          
+    host: ${1:Specifies the DNS host name or address for connecting to the remote device over the specified transport}#  The value of host is used as the destination address for the transport 
+    content: ${2:value}                                                    # The configuration data as defined by the device's data models, the value can be either in xml string format or text form
+    target: ${3:auto}                                                      # N a m e   o f   t h e   c o n f i g u r a t i o n   d a t a s t o r e   t o   b e   e d i t e d     -   a u t o ,   u s 
+    source_datastore: ${4:value}                                           # Name of the configuration datastore to use as the source to copy the configuration to the datastore mentioned by C(targe
+    format: ${5$$(yas-choose-value '("xml" "text"))}                       # choices: xml;text  The format of the configuration provided as value of C(content)  Accepted values are I(xml) and I(tex
+    lock: ${6$$(yas-choose-value '("never" "always" "if-supported"))}      # choices: never;always;if-supported  Instructs the module to explicitly lock the datastore specified as C(target)  By set
+    default_operation: ${7$$(yas-choose-value '("merge" "replace" "none"))}# choices: merge;replace;none  The default operation for <edit-config> rpc, valid values are I(merge), I(replace) and I(no
+    confirm: ${8:0}                                                        # This argument will configure a timeout value for the commit to be confirmed before it is automatically rolled back  If t
+    confirm_commit: ${9:false}                                             # This argument will execute commit operation on remote device  It can be used to confirm a previous commit 
+    error_option: ${10$$(yas-choose-value '("stop-on-error" "continue-on-error" "rollback-on-error"))}# choices: stop-on-error;continue-on-error;rollback-on-error  This option controls the netconf 
+    save: ${11:False}                                                      # The C(save) argument instructs the module to save the configuration in C(target) datastore to the startup-config if chan
+    backup: ${12:false}                                                    # This argument will cause the module to create a full backup of the current C(running-config) from the remote device befo
+    delete: ${13:false}                                                    # It instructs the module to delete the configuration from value mentioned in C(target) datastore 
+    commit: ${14:True}                                                     # This boolean flag controls if the configuration changes should be committed or not after editing the candidate datastore
+    validate: ${15:False}                                                  # This boolean flag if set validates the content of datastore given in C(target) option  For this option to work remote Ne
+    src: ${16:value}                                                       # Specifies the source path to the xml file that contains the configuration or configuration template to load  The path to
+    backup_options: ${17:value}                                            # This is a dict object containing configurable options related to backup file path  The value of this option is read only
+    port: ${18:830}                                                        # Specifies the port to use when building the connection to the remote device   The port value will default to port 830 
+    username: ${19:value}                                                  # Configures the username to use to authenticate the connection to the remote device   This value is used to authenticate 
+    password: ${20:value}                                                  # Specifies the password to use to authenticate the connection to the remote device    This value is used to authenticate 
+    timeout: ${21:10}                                                      # Specifies the timeout in seconds for communicating with the network device for either connecting or sending commands   I
+    ssh_keyfile: ${22:value}                                               # Specifies the SSH key to use to authenticate the connection to the remote device    This value is the path to the key us
+    hostkey_verify: ${23:True}                                             # If set to C(yes), the ssh host key of the device must match a ssh key present on the host if set to C(no), the ssh host 
+    look_for_keys: ${24:True}                                              # Enables looking in the usual locations for the ssh keys (e g  :file:`~/ ssh/id_*`)

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configures Vxlan
+# prefix: onyx_vxlan_snippet
+# key: onyx_vx
+# group: ansible
+# --
+
+- name: ${0:Configures Vxlan}
+  onyx_vxlan:                                                              
+    nve_id: ${1:nve interface ID}                                          #
+    loopback_id: ${2:value}                                                # loopback interface ID 
+    bgp: ${3:True}                                                         # configure bgp on nve interface 
+    mlag_tunnel_ip: ${4:value}                                             # vxlan Mlag tunnel IP
+    vni_vlan_list: ${5:value}                                              # Each item in the list has two attributes vlan_id, vni_id 
+    arp_suppression: ${6:False}                                            # A flag telling if to configure arp suppression 

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Create, modify or delete ACME accounts
+# prefix: acme_account_snippet
+# key: cme_account
+# group: ansible
+# --
+
+- name: ${0:Create, modify or delete ACME accounts}
+  acme_account:                                                            
+    state: ${1$$(yas-choose-value '("present" "absent" "changed_key"))}    # The state of the account, to be identified by its account key  If the state is C(absent), the account will either not ex
+    allow_creation: ${2:True}                                              # Whether account creation is allowed (when state is C(present)) 
+    contact: ${3:[]}                                                       # A list of contact URLs  Email addresses must be prefixed with C(mailto:)  See U(https://tools ietf org/html/rfc8555#sect
+    terms_agreed: ${4:False}                                               # Boolean indicating whether you agree to the terms of service document  ACME servers can require this to be true 
+    new_account_key_src: ${5:value}                                        # Path to a file containing the ACME account RSA or Elliptic Curve key to change to  Same restrictions apply as to C(accou
+    new_account_key_content: ${6:value}                                    # Content of the ACME account RSA or Elliptic Curve key to change to  Same restrictions apply as to C(account_key_content)
+    account_key_src: ${7:value}                                            # Path to a file containing the ACME account RSA or Elliptic Curve key  RSA keys can be created with C(openssl genrsa    )
+    account_key_content: ${8:value}                                        # Content of the ACME account RSA or Elliptic Curve key  Mutually exclusive with C(account_key_src)  Required if C(account
+    account_uri: ${9:value}                                                # If specified, assumes that the account URI is as given  If the account key does not match this account, or an account wi
+    acme_version: ${10$$(yas-choose-value '("1" "2"))}                     # choices: 1;2  The ACME version of the endpoint  Must be 1 for the classic Let's Encrypt and Buypass ACME endpoints, or 2
+    acme_directory: ${{11:https://acme-staging}                            #api letsencrypt org/directory} # not required  The ACME directory to use  This is the entry point URL to access CA server
+    validate_certs: ${12:True}                                             # Whether calls to the ACME directory will validate TLS certificates  I(Warning): Should I(only ever) be set to C(no) for 
+    select_crypto_backend: ${13$$(yas-choose-value '("auto" "cryptography" "openssl"))}# choices: auto;cryptography;openssl  Determines which crypto backend to use  The default choice is C(auto), w

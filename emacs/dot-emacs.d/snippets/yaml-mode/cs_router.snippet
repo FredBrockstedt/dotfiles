@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages routers on Apache CloudStack based clouds.
+# prefix: cs_router_snippet
+# key: cs_router
+# group: ansible
+# --
+
+- name: ${0:Manages routers on Apache CloudStack based clouds.}
+  cs_router:                                                               
+    name: ${1:Name of the router}                                          #
+    service_offering: ${2:value}                                           # Name or id of the service offering of the router 
+    domain: ${3:value}                                                     # Domain the router is related to 
+    account: ${4:value}                                                    # Account the router is related to 
+    project: ${5:value}                                                    # Name of the project the router is related to 
+    zone: ${6:value}                                                       # Name of the zone the router is deployed in  If not set, all zones are used 
+    state: ${7$$(yas-choose-value '("present" "absent" "started" "stopped" "restarted"))}# choices: present;absent;started;stopped;restarted  State of the router 
+    poll_async: ${8:True}                                                  # Poll async jobs until job has finished 
+    api_key: ${9:value}                                                    # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${10:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${11:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${12$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${13:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${14:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: module for sending notifications via telegram
+# prefix: telegram_snippet
+# key: telegram
+# group: ansible
+# --
+
+- name: ${0:module for sending notifications via telegram}
+  telegram:                                                                
+    msg: ${1:What message you wish to send}                                #
+    token: ${2:Token identifying your telegram bot}                        #
+    chat_id: ${3:Telegram group or user chat_id}                           #
+    msg_format: ${4$$(yas-choose-value '("plain" "markdown" "html"))}      # choices: plain;markdown;html  Message format  Formatting options `markdown` and `html` described in Telegram API docs (h

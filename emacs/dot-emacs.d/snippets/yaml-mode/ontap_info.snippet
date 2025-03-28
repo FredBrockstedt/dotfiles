@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: NetApp information gatherer
+# prefix: na_ontap_info_snippet
+# key: ontap_info
+# group: ansible
+# --
+
+- name: ${0:NetApp information gatherer}
+  na_ontap_info:                                                           
+    hostname: ${1:The hostname or IP address of the ONTAP instance}        #
+    username: ${2:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${3:Password for the specified user}                         #
+    state: ${4$$(yas-choose-value '("info"))}                              # choices: info  Returns "info"
+    gather_subset: ${5:all}                                                # When supplied, this argument will restrict the information collected to a given subset   Possible values for this argume
+    https: ${6:False}                                                      # Enable and disable https
+    validate_certs: ${7:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${8:value}                                                  # Override the default port (80 or 443) with this port
+    ontapi: ${9:value}                                                     # The ontap api version to use
+    use_rest: ${10$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more oVirt/RHV templates
+# prefix: ovirt_template_info_snippet
+# key: ovirt_template_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more oVirt/RHV templates}
+  ovirt_template_info:                                                     
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt: C(username)[I(required)] - The name of the user, something like I(admin@internal)}# Default value is set by I(O
+    pattern: ${2:value}                                                    # Search term which is accepted by oVirt/RHV search backend  For example to search template X from datacenter Y use follow
+    fetch_nested: ${3:value}                                               # If I(yes) the module will fetch additional data from the API  It will fetch only IDs of nested entity  It doesn't fetch 
+    nested_attributes: ${4:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages interface specific VPN configuration on HUAWEI CloudEngine switches.
+# prefix: ce_vrf_interface_snippet
+# key: ce_vrf_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages interface specific VPN configuration on HUAWEI CloudEngine switches.}
+  ce_vrf_interface:                                                        
+    vrf: ${1:VPN instance, the length of vrf name is 1 ~ 31, i}            #e  "test", but can not be C(_public_) 
+    vpn_interface: ${2:An interface that can binding VPN instance, i}      #e  40GE1/0/22, Vlanif10  Must be fully qualified interface name  Interface types, such as 10GE, 40GE, 100GE, LoopBack, ME
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Instance
+# prefix: gcp_filestore_instance_snippet
+# key: gcp_filestore_instanc
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Instance}
+  gcp_filestore_instance:                                                  
+    name: ${1:The resource name of the instance}                           #
+    tier: ${2:The service tier of the instance}                            # Some valid choices include: "TIER_UNSPECIFIED", "STANDARD", "PREMIUM"
+    file_shares: ${3:File system shares on the instance}                   # For this version, only a single file share is supported 
+    networks: ${4:VPC networks to which the instance is connected}         # For this version, only a single network is supported 
+    zone: ${5:The name of the Filestore zone of the instance}              #
+    auth_kind: ${6$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${8:value}                                                # A description of the instance 
+    labels: ${9:value}                                                     # Resource labels to represent user-provided metadata 
+    project: ${10:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${11:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${12:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${13:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${14:value}                                                    # Array of scopes to be used 
+    env_type: ${15:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

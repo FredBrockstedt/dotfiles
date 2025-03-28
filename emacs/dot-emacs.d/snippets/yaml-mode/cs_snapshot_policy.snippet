@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manages volume snapshot policies on Apache CloudStack based clouds.
+# prefix: cs_snapshot_policy_snippet
+# key: cs_snapshot_policy
+# group: ansible
+# --
+
+- name: ${0:Manages volume snapshot policies on Apache CloudStack based clouds.}
+  cs_snapshot_policy:                                                      
+    volume: ${1:value}                                                     # Name of the volume  Either I(volume) or I(vm) is required 
+    volume_type: ${2$$(yas-choose-value '("DATADISK" "ROOT"))}             # choices: DATADISK;ROOT  Type of the volume 
+    vm: ${3:value}                                                         # Name of the instance to select the volume from  Use I(volume_type) if VM has a DATADISK and ROOT volume  In case of I(vo
+    device_id: ${4:value}                                                  # ID of the device on a VM the volume is attached to  This will only be considered if VM has multiple DATADISK volumes 
+    vpc: ${5:value}                                                        # Name of the vpc the instance is deployed in 
+    interval_type: ${6$$(yas-choose-value '("hourly" "daily" "weekly" "monthly"))}# choices: hourly;daily;weekly;monthly  Interval of the snapshot 
+    max_snaps: ${7:8}                                                      # Max number of snapshots 
+    schedule: ${8:value}                                                   # Time the snapshot is scheduled  Required if I(state=present)  Format for I(interval_type=HOURLY): C(MM) Format for I(int
+    time_zone: ${9:UTC}                                                    # Specifies a timezone for this command 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the snapshot policy 
+    domain: ${11:value}                                                    # Domain the volume is related to 
+    account: ${12:value}                                                   # Account the volume is related to 
+    project: ${13:value}                                                   # Name of the project the volume is related to 
+    api_key: ${14:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${15:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${16:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${17$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${18:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${19:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

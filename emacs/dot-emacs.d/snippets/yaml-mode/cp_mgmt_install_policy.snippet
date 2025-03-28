@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: install policy on Check Point over Web Services API
+# prefix: cp_mgmt_install_policy_snippet
+# key: cp_mgmt_install_policy
+# group: ansible
+# --
+
+- name: ${0:install policy on Check Point over Web Services API}
+  cp_mgmt_install_policy:                                                  
+    policy_package: ${1:value}                                             # The name of the Policy Package to be installed 
+    targets: ${2:value}                                                    # On what targets to execute this command  Targets may be identified by their name, or object unique identifier 
+    access: ${3:value}                                                     # Set to be true in order to install the Access Control policy  By default, the value is true if Access Control policy is 
+    desktop_security: ${4:value}                                           # Set to be true in order to install the Desktop Security policy  By default, the value is true if desktop security policy
+    qos: ${5:value}                                                        # Set to be true in order to install the QoS policy  By default, the value is true if Quality-of-Service policy is enabled
+    threat_prevention: ${6:value}                                          # Set to be true in order to install the Threat Prevention policy  By default, the value is true if Threat Prevention poli
+    install_on_all_cluster_members_or_fail: ${7:value}                     # Relevant for the gateway clusters  If true, the policy is installed on all the cluster members  If the installation on a
+    prepare_only: ${8:value}                                               # If true, prepares the policy for the installation, but doesn't install it on an installation target 
+    revision: ${9:value}                                                   # The UID of the revision of the policy to install 
+    wait_for_task: ${10:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${11:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

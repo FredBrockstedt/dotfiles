@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Model
+# prefix: gcp_mlengine_model_snippet
+# key: gcp_mlengine_mod
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Model}
+  gcp_mlengine_model:                                                      
+    name: ${1:The name specified for the model}                            #
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${4:value}                                                # The description specified for the model when it was created 
+    default_version: ${5:value}                                            # The default version of the model  This version will be used to handle prediction requests that do not specify a version 
+    regions: ${6:value}                                                    # The list of regions where the model is going to be deployed  Currently only one region per model is supported  
+    online_prediction_logging: ${7:value}                                  # If true, online prediction access logs are sent to StackDriver Logging 
+    online_prediction_console_logging: ${8:value}                          # If true, online prediction nodes send stderr and stdout streams to Stackdriver Logging 
+    labels: ${9:value}                                                     # One or more labels that you can add, to organize your models 
+    project: ${10:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${11:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${12:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${13:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${14:value}                                                    # Array of scopes to be used 
+    env_type: ${15:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

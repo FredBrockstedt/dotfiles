@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage link aggregation groups on Mellanox ONYX network devices
+# prefix: onyx_linkagg_snippet
+# key: onyx_linkagg
+# group: ansible
+# --
+
+- name: ${0:Manage link aggregation groups on Mellanox ONYX network devices}
+  onyx_linkagg:                                                            
+    name: ${1:Name of the link aggregation group}                          #
+    members: ${2:List of members interfaces of the link aggregation group} # The value can be single interface or list of interfaces 
+    mode: ${3$$(yas-choose-value '("on" "active" "passive"))}              # choices: on;active;passive  Mode of the link aggregation group  A value of C(on) will enable LACP  C(active) configures 
+    aggregate: ${4:value}                                                  # L i s t   o f   l i n k   a g g r e g a t i o n   d e f i n i t i o n s  
+    purge: ${5:False}                                                      # Purge link aggregation groups not defined in the I(aggregate) parameter 
+    state: ${6$$(yas-choose-value '("present" "absent" "up" "down"))}      # choices: present;absent;up;down  State of the link aggregation group 

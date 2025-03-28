@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage SolidFire volumes
+# prefix: sf_volume_manager_snippet
+# key: f_volume_manager
+# group: ansible
+# --
+
+- name: ${0:Manage SolidFire volumes}
+  sf_volume_manager:                                                       
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified volume should exist or not 
+    name: ${2:The name of the volume to manage}                            #
+    account_id: ${3:Account ID for the owner of this volume}               #
+    hostname: ${4:The hostname or IP address of the SolidFire cluster}     #
+    username: ${5:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${6:Password for the specified user}                         #
+    512emulation: ${7:value}                                               # Should the volume provide 512-byte sector emulation? Required when C(state=present)
+    qos: ${8:value}                                                        # I n i t i a l   q u a l i t y   o f   s e r v i c e   s e t t i n g s   f o r   t h i s   v o l u m e     C o n f i g u 
+    attributes: ${9:value}                                                 # A   Y A M L   d i c t i o n a r y   o f   a t t r i b u t e s   t h a t   y o u   w o u l d   l i k e   t o   a p p l y 
+    volume_id: ${10:value}                                                 # The ID of the volume to manage or update  In order to create multiple volumes with the same name, but different volume_i
+    size: ${11:value}                                                      # The size of the volume in (size_unit)  Required when C(state = present) 
+    size_unit: ${12$$(yas-choose-value '("bytes" "b" "kb" "mb" "gb" "tb" "pb" "eb" "zb" "yb"))}# choices: bytes;b;kb;mb;gb;tb;pb;eb;zb;yb  The unit used to interpret the size parameter 
+    access: ${13$$(yas-choose-value '("readOnly" "readWrite" "locked" "replicationTarget"))}# choices: readOnly;readWrite;locked;replicationTarget  Access allowed for the volume  readOnly: Only rea

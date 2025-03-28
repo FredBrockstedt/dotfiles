@@ -1,0 +1,37 @@
+# -*- mode: snippet -*-
+# name: management of instances in Proxmox VE cluster
+# prefix: proxmox_snippet
+# key: proxmox
+# group: ansible
+# --
+
+- name: ${0:management of instances in Proxmox VE cluster}
+  proxmox:                                                                 
+    api_host: ${1:the host of the Proxmox VE cluster}                      #
+    api_user: ${2:the user to authenticate with}                           #
+    api_password: ${3:value}                                               # the password to authenticate with you can use PROXMOX_PASSWORD environment variable
+    vmid: ${4:value}                                                       # the instance id if not set, the next available VM ID will be fetched from ProxmoxAPI  if not set, will be fetched from P
+    validate_certs: ${5:false}                                             # enable / disable https certificate verification
+    node: ${6:value}                                                       # Proxmox VE node, when new VM will be created required only for C(state=present) for another states will be autodiscovere
+    pool: ${7:value}                                                       # Proxmox VE resource pool
+    password: ${8:value}                                                   # the instance root password required only for C(state=present)
+    hostname: ${9:value}                                                   # the instance hostname required only for C(state=present) must be unique if vmid is not passed
+    ostemplate: ${10:value}                                                # the template for VM creating required only for C(state=present)
+    disk: ${11:3}                                                          # hard disk size in GB for instance
+    cores: ${12:1}                                                         # Specify number of cores per socket 
+    cpus: ${13:1}                                                          # numbers of allocated cpus for instance
+    memory: ${14:512}                                                      # memory size in MB for instance
+    swap: ${15:0}                                                          # swap memory size in MB for instance
+    netif: ${16:value}                                                     # specifies network interfaces for the container  As a hash/dictionary defining interfaces 
+    mounts: ${17:value}                                                    # specifies additional mounts (separate disks) for the container  As a hash/dictionary defining mount points
+    ip_address: ${18:value}                                                # specifies the address the container will be assigned
+    onboot: ${19:false}                                                    # specifies whether a VM will be started during system bootup
+    storage: ${20:local}                                                   # target storage
+    cpuunits: ${21:1000}                                                   # CPU weight for a VM
+    nameserver: ${22:value}                                                # sets DNS server IP address for a container
+    searchdomain: ${23:value}                                              # sets DNS search domain for a container
+    timeout: ${24:30}                                                      # timeout for operations
+    force: ${25:false}                                                     # forcing operations can be used only with states C(present), C(stopped), C(restarted) with C(state=present) force option 
+    state: ${26$$(yas-choose-value '("present" "started" "absent" "stopped" "restarted"))}# choices: present;started;absent;stopped;restarted  Indicate desired state of the instance
+    pubkey: ${27:value}                                                    # Public key to add to /root/ ssh/authorized_keys  This was added on Proxmox 4 2, it is ignored for earlier versions
+    unprivileged: ${28:false}                                              # Indicate if the container should be unprivileged

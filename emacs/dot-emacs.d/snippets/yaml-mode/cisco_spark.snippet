@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Send a message to a Cisco Spark Room or Individual.
+# prefix: cisco_spark_snippet
+# key: cisco_spark
+# group: ansible
+# --
+
+- name: ${0:Send a message to a Cisco Spark Room or Individual.}
+  cisco_spark:                                                             
+    recipient_type: ${1$$(yas-choose-value '("roomId" "toPersonEmail" "toPersonId"))}# The request parameter you would like to send the message to  Messages can be sent to either a room or individu
+    recipient_id: ${2:The unique identifier associated with the supplied C(recipient_type)}#
+    personal_token: ${3:Your personal access token required to validate the Spark API}#
+    message: ${4:The message you would like to send}                       #
+    message_type: ${5$$(yas-choose-value '("text" "markdown"))}            # choices: text;markdown  Specifies how you would like the message formatted 

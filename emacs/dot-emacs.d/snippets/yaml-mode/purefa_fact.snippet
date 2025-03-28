@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Collect facts from Pure Storage FlashArray
+# prefix: purefa_facts_snippet
+# key: purefa_fact
+# group: ansible
+# --
+
+- name: ${0:Collect facts from Pure Storage FlashArray}
+  purefa_facts:                                                            
+    fa_url: ${1:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${2:FlashArray API token for admin privileged user}         #
+    gather_subset: ${3:minimum}                                            # When supplied, this argument will define the facts to be collected  Possible values for this include all, minimum, confi

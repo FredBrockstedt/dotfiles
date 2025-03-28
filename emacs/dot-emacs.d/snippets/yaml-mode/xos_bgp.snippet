@@ -1,0 +1,50 @@
+# -*- mode: snippet -*-
+# name: Manages BGP configuration.
+# prefix: nxos_bgp_snippet
+# key: xos_bgp
+# group: ansible
+# --
+
+- name: ${0:Manages BGP configuration.}
+  nxos_bgp:                                                                
+    asn: ${1:BGP autonomous system number}                                 # Valid values are String, Integer in ASPLAIN or ASDOT notation 
+    vrf: ${2:value}                                                        # Name of the VRF  The name 'default' is a valid VRF representing the global BGP 
+    bestpath_always_compare_med: ${3:value}                                # Enable/Disable MED comparison on paths from different autonomous systems 
+    bestpath_aspath_multipath_relax: ${4:value}                            # Enable/Disable load sharing across the providers with different (but equal-length) AS paths 
+    bestpath_compare_routerid: ${5:value}                                  # Enable/Disable comparison of router IDs for identical eBGP paths 
+    bestpath_compare_neighborid: ${6:value}                                # Enable/Disable neighborid  Use this when more paths available than max path config 
+    bestpath_cost_community_ignore: ${7:value}                             # Enable/Disable Ignores the cost community for BGP best-path calculations 
+    bestpath_med_confed: ${8:value}                                        # Enable/Disable enforcement of bestpath to do a MED comparison only between paths originated within a confederation 
+    bestpath_med_missing_as_worst: ${9:value}                              # Enable/Disable assigns the value of infinity to received routes that do not carry the MED attribute, making these routes
+    bestpath_med_non_deterministic: ${10:value}                            # Enable/Disable deterministic selection of the best MED pat from among the paths from the same autonomous system 
+    cluster_id: ${11:value}                                                # Route Reflector Cluster-ID 
+    confederation_id: ${12:value}                                          # Routing domain confederation AS 
+    confederation_peers: ${13:value}                                       # AS confederation parameters 
+    disable_policy_batching: ${14:value}                                   # Enable/Disable the batching evaluation of prefix advertisement to all peers 
+    disable_policy_batching_ipv4_prefix_list: ${15:value}                  # Enable/Disable the batching evaluation of prefix advertisements to all peers with prefix list 
+    disable_policy_batching_ipv6_prefix_list: ${16:value}                  # Enable/Disable the batching evaluation of prefix advertisements to all peers with prefix list 
+    enforce_first_as: ${17:value}                                          # Enable/Disable enforces the neighbor autonomous system to be the first AS number listed in the AS path attribute for eBG
+    event_history_cli: ${18$$(yas-choose-value '("size_small" "size_medium" "size_large" "size_disable" "default"))}# choices: size_small;size_medium;size_large;size_disable;default  Enable/Disable
+    event_history_detail: ${19$$(yas-choose-value '("size_small" "size_medium" "size_large" "size_disable" "default"))}# choices: size_small;size_medium;size_large;size_disable;default  Enable/Disa
+    event_history_events: ${20$$(yas-choose-value '("size_small" "size_medium" "size_large" "size_disable" "default"))}# choices: size_small;size_medium;size_large;size_disable;default  Enable/Disa
+    event_history_periodic: ${21$$(yas-choose-value '("size_small" "size_medium" "size_large" "size_disable" "default"))}# choices: size_small;size_medium;size_large;size_disable;default  Enable/Di
+    fast_external_fallover: ${22:value}                                    # Enable/Disable immediately reset the session if the link to a directly connected BGP peer goes down   Only supported in 
+    flush_routes: ${23:value}                                              # Enable/Disable flush routes in RIB upon controlled restart  On NX-OS, this property is only supported in the global BGP 
+    graceful_restart: ${24:value}                                          # Enable/Disable graceful restart 
+    graceful_restart_helper: ${25:value}                                   # Enable/Disable graceful restart helper mode 
+    graceful_restart_timers_restart: ${26:value}                           # Set maximum time for a restart sent to the BGP peer 
+    graceful_restart_timers_stalepath_time: ${27:value}                    # Set maximum time that BGP keeps the stale routes from the restarting BGP peer 
+    isolate: ${28:value}                                                   # Enable/Disable isolate this router from BGP perspective 
+    local_as: ${29:value}                                                  # Local AS number to be used within a VRF instance 
+    log_neighbor_changes: ${30:value}                                      # Enable/Disable message logging for neighbor up/down event 
+    maxas_limit: ${31:value}                                               # Specify Maximum number of AS numbers allowed in the AS-path attribute  Valid values are between 1 and 512 
+    neighbor_down_fib_accelerate: ${32:value}                              # Enable/Disable handle BGP neighbor down event, due to various reasons 
+    reconnect_interval: ${33:value}                                        # The BGP reconnection interval for dropped sessions  Valid values are between 1 and 60 
+    router_id: ${34:value}                                                 # Router Identifier (ID) of the BGP router VRF instance 
+    shutdown: ${35:value}                                                  # Administratively shutdown the BGP protocol 
+    suppress_fib_pending: ${36:value}                                      # Enable/Disable advertise only routes programmed in hardware to peers 
+    timer_bestpath_limit: ${37:value}                                      # Specify timeout for the first best path after a restart, in seconds 
+    timer_bgp_hold: ${38:value}                                            # Set BGP hold timer 
+    timer_bgp_keepalive: ${39:value}                                       # Set BGP keepalive timer 
+    state: ${40$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${41:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage IP tunnel interfaces on Solaris/illumos systems.
+# prefix: dladm_iptun_snippet
+# key: dladm_iptu
+# group: ansible
+# --
+
+- name: ${0:Manage IP tunnel interfaces on Solaris/illumos systems.}
+  dladm_iptun:                                                             
+    name: ${1:IP tunnel interface name}                                    #
+    temporary: ${2:False}                                                  # Specifies that the IP tunnel interface is temporary  Temporary IP tunnel interfaces do not persist across reboots 
+    type: ${3$$(yas-choose-value '("ipv4" "ipv6" "6to4"))}                 # choices: ipv4;ipv6;6to4  Specifies the type of tunnel to be created 
+    local_address: ${4:value}                                              # Literal IP address or hostname corresponding to the tunnel source 
+    remote_address: ${5:value}                                             # Literal IP address or hostname corresponding to the tunnel destination 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or delete Solaris/illumos VNIC 

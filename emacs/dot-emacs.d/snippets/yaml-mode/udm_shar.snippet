@@ -1,0 +1,62 @@
+# -*- mode: snippet -*-
+# name: Manage samba shares on a univention corporate server
+# prefix: udm_share_snippet
+# key: udm_shar
+# group: ansible
+# --
+
+- name: ${0:Manage samba shares on a univention corporate server}
+  udm_share:                                                               
+    name: ${1:Name}                                                        #
+    ou: ${2:Organisational unit, inside the LDAP Base DN}                  #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the share is present or not 
+    host: ${4:value}                                                       # Host FQDN (server which provides the share), e g  C({{ ansible_fqdn \}\})  Required if C(state=present) 
+    path: ${5:value}                                                       # Directory on the providing server, e g  C(/home)  Required if C(state=present) 
+    samba_name: ${6:value}                                                 # Windows name  Required if C(state=present) 
+    owner: ${7:0}                                                          # Directory owner of the share's root directory 
+    group: ${8:0}                                                          # Directory owner group of the share's root directory 
+    directorymode: ${9:00755}                                              # Permissions for the share's root directory 
+    root_squash: ${10$$(yas-choose-value '("0" "1"))}                      # choices: 0;1  Modify user ID for root user (root squashing) 
+    subtree_checking: ${11$$(yas-choose-value '("0" "1"))}                 # choices: 0;1  Subtree checking 
+    sync: ${12:sync}                                                       # NFS synchronisation 
+    writeable: ${13$$(yas-choose-value '("0" "1"))}                        # choices: 0;1  NFS write access 
+    samba_block_size: ${14:value}                                          # Blocking size 
+    samba_blocking_locks: ${15$$(yas-choose-value '("0" "1"))}             # choices: 0;1  Blocking locks 
+    samba_browseable: ${16$$(yas-choose-value '("0" "1"))}                 # choices: 0;1  Show in Windows network environment 
+    samba_create_mode: ${17:0744}                                          # File mode 
+    samba_csc_policy: ${18:manual}                                         # Client-side caching policy 
+    samba_custom_settings: ${19:[]}                                        # Option name in smb conf and its value 
+    samba_directory_mode: ${20:0755}                                       # Directory mode 
+    samba_directory_security_mode: ${21:0777}                              # Directory security mode 
+    samba_dos_filemode: ${22$$(yas-choose-value '("0" "1"))}               # choices: 0;1  Users with write access may modify permissions 
+    samba_fake_oplocks: ${23$$(yas-choose-value '("0" "1"))}               # choices: 0;1  Fake oplocks 
+    samba_force_create_mode: ${24$$(yas-choose-value '("0" "1"))}          # choices: 0;1  Force file mode 
+    samba_force_directory_mode: ${25$$(yas-choose-value '("0" "1"))}       # choices: 0;1  Force directory mode 
+    samba_force_directory_security_mode: ${26$$(yas-choose-value '("0" "1"))}# choices: 0;1  Force directory security mode 
+    samba_force_group: ${27:value}                                         # Force group 
+    samba_force_security_mode: ${28$$(yas-choose-value '("0" "1"))}        # choices: 0;1  Force security mode 
+    samba_force_user: ${29:value}                                          # Force user 
+    samba_hide_files: ${30:value}                                          # Hide files 
+    samba_hide_unreadable: ${31$$(yas-choose-value '("0" "1"))}            # choices: 0;1  Hide unreadable files/directories 
+    samba_hosts_allow: ${32:[]}                                            # Allowed host/network 
+    samba_hosts_deny: ${33:[]}                                             # Denied host/network 
+    samba_inherit_acls: ${34$$(yas-choose-value '("0" "1"))}               # choices: 0;1  Inherit ACLs 
+    samba_inherit_owner: ${35$$(yas-choose-value '("0" "1"))}              # choices: 0;1  Create files/directories with the owner of the parent directory 
+    samba_inherit_permissions: ${36$$(yas-choose-value '("0" "1"))}        # choices: 0;1  Create files/directories with permissions of the parent directory 
+    samba_invalid_users: ${37:value}                                       # Invalid users or groups 
+    samba_level_2_oplocks: ${38$$(yas-choose-value '("0" "1"))}            # choices: 0;1  Level 2 oplocks 
+    samba_locking: ${39$$(yas-choose-value '("0" "1"))}                    # choices: 0;1  Locking 
+    samba_msdfs_root: ${40$$(yas-choose-value '("0" "1"))}                 # choices: 0;1  MSDFS root 
+    samba_nt_acl_support: ${41$$(yas-choose-value '("0" "1"))}             # choices: 0;1  NT ACL support 
+    samba_oplocks: ${42$$(yas-choose-value '("0" "1"))}                    # choices: 0;1  Oplocks 
+    samba_postexec: ${43:value}                                            # Postexec script 
+    samba_preexec: ${44:value}                                             # Preexec script 
+    samba_public: ${45$$(yas-choose-value '("0" "1"))}                     # choices: 0;1  Allow anonymous read-only access with a guest user 
+    samba_security_mode: ${46:0777}                                        # Security mode 
+    samba_strict_locking: ${47:Auto}                                       # Strict locking 
+    samba_vfs_objects: ${48:value}                                         # VFS objects 
+    samba_valid_users: ${49:value}                                         # Valid users or groups 
+    samba_write_list: ${50:value}                                          # Restrict write access to these users/groups 
+    samba_writeable: ${51$$(yas-choose-value '("0" "1"))}                  # choices: 0;1  Samba write access 
+    nfs_hosts: ${52:[]}                                                    # Only allow access for this host, IP address or network 
+    nfs_custom_settings: ${53:[]}                                          # Option name in exports file 

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Obtain a session token from the AWS Security Token Service
+# prefix: sts_session_token_snippet
+# key: ts_session_tok
+# group: ansible
+# --
+
+- name: ${0:Obtain a session token from the AWS Security Token Service}
+  sts_session_token:                                                       
+    duration_seconds: ${1:value}                                           # The duration, in seconds, of the session token  See U(https://docs aws amazon com/STS/latest/APIReference/API_GetSession
+    mfa_serial_number: ${2:value}                                          # The identification number of the MFA device that is associated with the user who is making the GetSessionToken call 
+    mfa_token: ${3:value}                                                  # The value provided by the MFA device, if the trust policy of the user requires MFA 
+    debug_botocore_endpoint_logs: ${4:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${5:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${6:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${7:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${8:value}                                             # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${9:True}                                              # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${10:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${11:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

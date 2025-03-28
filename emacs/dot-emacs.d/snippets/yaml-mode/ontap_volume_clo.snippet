@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage volume clones.
+# prefix: na_ontap_volume_clone_snippet
+# key: ontap_volume_clo
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage volume clones.}
+  na_ontap_volume_clone:                                                   
+    parent_volume: ${1:The parent volume of the volume clone being created}#
+    name: ${2:The name of the volume clone being created}                  #
+    vserver: ${3:Vserver in which the volume clone should be created}      #
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present"))}                           # choices: present  Whether volume clone should be created 
+    parent_snapshot: ${8:value}                                            # Parent snapshot in which volume clone is created off 
+    parent_vserver: ${9:value}                                             # Vserver of parent volume in which clone is created off 
+    qos_policy_group_name: ${10:value}                                     # The qos-policy-group-name which should be set for volume clone 
+    space_reserve: ${11$$(yas-choose-value '("volume" "none"))}            # choices: volume;none  The space_reserve setting which should be used for the volume clone 
+    volume_type: ${12$$(yas-choose-value '("rw" "dp"))}                    # choices: rw;dp  The volume-type setting which should be used for the volume clone 
+    junction_path: ${13:value}                                             # Junction path of the volume 
+    uid: ${14:value}                                                       # The UNIX user ID for the clone volume 
+    gid: ${15:value}                                                       # The UNIX group ID for the clone volume 
+    https: ${16:False}                                                     # Enable and disable https
+    validate_certs: ${17:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${18:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${19:value}                                                    # The ontap api version to use
+    use_rest: ${20$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

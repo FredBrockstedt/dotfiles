@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Exports the asm policy from remote nodes.
+# prefix: bigip_asm_policy_fetch_snippet
+# key: gip_asm_policy_fetch
+# group: ansible
+# --
+
+- name: ${0:Exports the asm policy from remote nodes.}
+  bigip_asm_policy_fetch:                                                  
+    name: ${1:The name of the policy exported to create a file on the remote device for downloading}#
+    dest: ${2:value}                                                       # A directory to save the policy file into  This option is ignored when C(inline) is set to c(yes) 
+    file: ${3:value}                                                       # The name of the file to be create on the remote device for downloading  When C(binary) is set to C(no) the ASM policy wi
+    inline: ${4:value}                                                     # If C(yes), the ASM policy will be exported C(inline) as a string instead of a file  The policy can be be retrieved in pl
+    compact: ${5:value}                                                    # If C(yes), only the ASM policy custom settings will be exported  Only applies to XML type ASM policy exports 
+    base64: ${6:value}                                                     # If C(yes), the returned C(inline) ASM policy content will be Base64 encoded  Only applies to C(inline) ASM policy export
+    binary: ${7:value}                                                     # If C(yes), the exported ASM policy will be in binary format  Only applies to C(file) ASM policy exports 
+    force: ${8:True}                                                       # If C(no), the file will only be transferred if it does not exist in the the destination 
+    partition: ${9:Common}                                                 # Device partition which contains ASM policy to export 
+    provider: ${10:value}                                                  # A dict object containing connection details 

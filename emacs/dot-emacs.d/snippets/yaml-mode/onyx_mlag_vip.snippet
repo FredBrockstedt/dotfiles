@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Configures MLAG VIP on Mellanox ONYX network devices
+# prefix: onyx_mlag_vip_snippet
+# key: onyx_mlag_vip
+# group: ansible
+# --
+
+- name: ${0:Configures MLAG VIP on Mellanox ONYX network devices}
+  onyx_mlag_vip:                                                           
+    ipaddress: ${1:value}                                                  # Virtual IP address of the MLAG  Required if I(state=present) 
+    group_name: ${2:value}                                                 # MLAG group name  Required if I(state=present) 
+    mac_address: ${3:value}                                                # MLAG system MAC address  Required if I(state=present) 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  MLAG VIP state 
+    delay: ${5:12}                                                         # Delay interval, in seconds, waiting for the changes on mlag VIP to take effect 

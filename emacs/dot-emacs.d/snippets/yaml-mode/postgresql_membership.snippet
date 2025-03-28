@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Add or remove PostgreSQL roles from groups
+# prefix: postgresql_membership_snippet
+# key: postgresql_membership
+# group: ansible
+# --
+
+- name: ${0:Add or remove PostgreSQL roles from groups}
+  postgresql_membership:                                                   
+    groups: ${1:The list of groups (roles) that need to be granted to or revoked from I(target_roles)}#
+    target_roles: ${2:The list of target roles (groups will be granted to them)}#
+    fail_on_role: ${3:True}                                                # If C(yes), fail when group or target_role doesn't exist  If C(no), just warn and continue 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Membership state  I(state=present) implies the I(groups)must be granted to I(target_roles)  I(s
+    db: ${5:value}                                                         # Name of database to connect to 
+    session_role: ${6:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    login_user: ${7:postgres}                                              # The username used to authenticate with 
+    login_password: ${8:value}                                             # The password used to authenticate with 
+    login_host: ${9:value}                                                 # Host running the database 
+    login_unix_socket: ${10:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${11:5432}                                                       # Database port to connect to 
+    ssl_mode: ${12$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${13:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

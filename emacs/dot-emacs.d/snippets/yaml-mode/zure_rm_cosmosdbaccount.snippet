@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Database Account instance
+# prefix: azure_rm_cosmosdbaccount_snippet
+# key: zure_rm_cosmosdbaccount
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Database Account instance}
+  azure_rm_cosmosdbaccount:                                                
+    resource_group: ${1:Name of an Azure resource group}                   #
+    name: ${2:Cosmos DB database account name}                             #
+    location: ${3:value}                                                   # The location of the resource group to which the resource belongs  Required when I(state=present) 
+    kind: ${4$$(yas-choose-value '("global_document_db" "mongo_db" "parse"))}# choices: global_document_db;mongo_db;parse  Indicates the type of database account  This can only be set at database a
+    consistency_policy: ${5:value}                                         # The consistency policy for the Cosmos DB account 
+    geo_rep_locations: ${6:value}                                          # An array that contains the georeplication locations enabled for the Cosmos DB account  Required when I(state=present) 
+    database_account_offer_type: ${7:value}                                # Database account offer type, for example I(Standard) Required when I(state=present) 
+    ip_range_filter: ${8:value}                                            # Cosmos DB Firewall support  This value specifies the set of IP addresses or IP address ranges  In CIDR form to be includ
+    is_virtual_network_filter_enabled: ${9:value}                          # Flag to indicate whether to enable/disable Virtual Network ACL rules 
+    enable_automatic_failover: ${10:value}                                 # Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage  Automa
+    enable_cassandra: ${11:value}                                          # Enable Cassandra 
+    enable_table: ${12:value}                                              # Enable Table 
+    enable_gremlin: ${13:value}                                            # Enable Gremlin 
+    virtual_network_rules: ${14:value}                                     # List of Virtual Network ACL rules configured for the Cosmos DB account 
+    enable_multiple_write_locations: ${15:value}                           # Enables the account to write in multiple locations
+    state: ${16$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the Database Account  Use C(present) to create or update an Database Accoun
+    ad_user: ${17:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${18:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${19:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${20:value}                                           # Your Azure subscription Id 
+    client_id: ${21:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${22:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${23:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${24:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${25:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${26$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${27$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${28:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${29:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${30:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

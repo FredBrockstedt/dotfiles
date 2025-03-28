@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Send a message to jabber user or chat room
+# prefix: jabber_snippet
+# key: jabber
+# group: ansible
+# --
+
+- name: ${0:Send a message to jabber user or chat room}
+  jabber:                                                                  
+    user: ${1:User as which to connect}                                    #
+    password: ${2:password for user to connect}                            #
+    to: ${3:user ID or name of the room, when using room use a slash to indicate your nick}#
+    msg: ${4:The message body}                                             #
+    host: ${5:value}                                                       # host to connect, overrides user info
+    port: ${6:5222}                                                        # port to connect to, overrides default
+    encoding: ${7:value}                                                   # message encoding

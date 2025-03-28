@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: A windows version of the classic ping module
+# prefix: win_ping_snippet
+# key: win_ping
+# group: ansible
+# --
+
+- name: ${0:A windows version of the classic ping module}
+  win_ping:                                                                
+    data: ${1:pong}                                                        # Alternate data to return instead of 'pong'  If this parameter is set to C(crash), the module will cause an exception 

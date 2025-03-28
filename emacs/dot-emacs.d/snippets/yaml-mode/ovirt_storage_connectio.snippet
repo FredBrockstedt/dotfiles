@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Module to manage storage connections in oVirt
+# prefix: ovirt_storage_connection_snippet
+# key: ovirt_storage_connectio
+# group: ansible
+# --
+
+- name: ${0:Module to manage storage connections in oVirt}
+  ovirt_storage_connection:                                                
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${2:value}                                                         # Id of the storage connection to manage 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the storage connection be present or absent 
+    storage: ${4:value}                                                    # Name of the storage domain to be used with storage connection 
+    address: ${5:value}                                                    # Address of the storage server  E g : myserver mydomain com
+    path: ${6:value}                                                       # Path of the mount point of the storage  E g : /path/to/my/data
+    nfs_version: ${7:value}                                                # NFS version  One of: I(auto), I(v3), I(v4) or I(v4_1) 
+    nfs_timeout: ${8:value}                                                # The time in tenths of a second to wait for a response before retrying NFS requests  Range 0 to 65535 
+    nfs_retrans: ${9:value}                                                # The number of times to retry a request before attempting further recovery actions  Range 0 to 65535 
+    mount_options: ${10:value}                                             # Option which will be passed when mounting storage 
+    password: ${11:value}                                                  # A CHAP password for logging into a target 
+    username: ${12:value}                                                  # A CHAP username for logging into a target 
+    port: ${13:value}                                                      # Port of the iSCSI storage server 
+    target: ${14:value}                                                    # The target IQN for the storage device 
+    type: ${15:value}                                                      # Storage type  For example: I(nfs), I(iscsi), etc 
+    vfs_type: ${16:value}                                                  # Virtual File System type 
+    force: ${17:value}                                                     # This parameter is relevant only when updating a connection  If I(true) the storage domain don't have to be in I(MAINTENA
+    wait: ${18:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${19:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${20:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${21:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${22:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

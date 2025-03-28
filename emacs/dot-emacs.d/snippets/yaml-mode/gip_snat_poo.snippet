@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage SNAT pools on a BIG-IP
+# prefix: bigip_snat_pool_snippet
+# key: gip_snat_poo
+# group: ansible
+# --
+
+- name: ${0:Manage SNAT pools on a BIG-IP}
+  bigip_snat_pool:                                                         
+    name: ${1:The name of the SNAT pool}                                   #
+    members: ${2:value}                                                    # List of members to put in the SNAT pool  When a C(state) of present is provided, this parameter is required  Otherwise, 
+    description: ${3:value}                                                # A general description of the SNAT pool, provided by the user for their benefit  It is optional 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the SNAT pool should exist or not 
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    provider: ${6:value}                                                   # A dict object containing connection details 

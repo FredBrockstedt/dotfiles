@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Gather information about Intersight
+# prefix: intersight_info_snippet
+# key: tersight_info
+# group: ansible
+# --
+
+- name: ${0:Gather information about Intersight}
+  intersight_info:                                                         
+    server_names: ${1:Server names to retrieve information from}           # An empty list will return all servers 
+    api_private_key: ${2:Filename (absolute path) of a PEM formatted file that contains your private key to be used for Intersight API authentication}#
+    api_key_id: ${3:Public API Key ID associated with the private key}     #
+    api_uri: ${{4:https://intersight}                                      #com/api/v1} # not required  URI used to access the Intersight API 
+    validate_certs: ${5:True}                                              # Boolean control for verifying the api_uri TLS certificate
+    use_proxy: ${6:True}                                                   # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 

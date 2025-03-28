@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage route domains on a BIG-IP
+# prefix: bigip_routedomain_snippet
+# key: gip_routedom
+# group: ansible
+# --
+
+- name: ${0:Manage route domains on a BIG-IP}
+  bigip_routedomain:                                                       
+    name: ${1:value}                                                       # The name of the route domain 
+    bwc_policy: ${2:value}                                                 # The bandwidth controller for the route domain 
+    connection_limit: ${3:value}                                           # The maximum number of concurrent connections allowed for the route domain  Setting this to C(0) turns off connection lim
+    description: ${4:value}                                                # Specifies descriptive text that identifies the route domain 
+    flow_eviction_policy: ${5:value}                                       # The eviction policy to use with this route domain  Apply an eviction policy to provide customized responses to flow over
+    id: ${6:value}                                                         # The unique identifying integer representing the route domain  This field is required when creating a new route domain  I
+    parent: ${7:value}                                                     # Specifies the route domain the system searches when it cannot find a route in the configured domain 
+    partition: ${8:Common}                                                 # Partition to create the route domain on  Partitions cannot be updated once they are created 
+    routing_protocol: ${9$$(yas-choose-value '("none" "BFD" "BGP" "IS-IS" "OSPFv2" "OSPFv3" "PIM" "RIP" "RIPng"))}# choices: none;BFD;BGP;IS-IS;OSPFv2;OSPFv3;PIM;RIP;RIPng  Dynamic routing protocol
+    service_policy: ${10:value}                                            # Service policy to associate with the route domain 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Whether the route domain should exist or not 
+    strict: ${12:value}                                                    # Specifies whether the system enforces cross-routing restrictions or not 
+    vlans: ${13:value}                                                     # VLANs for the system to use in the route domain 
+    fw_enforced_policy: ${14:value}                                        # Specifies AFM policy to be attached to route domain 
+    provider: ${15:value}                                                  # A dict object containing connection details 

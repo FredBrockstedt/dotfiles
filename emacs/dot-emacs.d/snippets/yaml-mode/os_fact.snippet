@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Collect facts from devices running Extreme NOS
+# prefix: nos_facts_snippet
+# key: os_fact
+# group: ansible
+# --
+
+- name: ${0:Collect facts from devices running Extreme NOS}
+  nos_facts:                                                               
+    gather_subset: ${1:!config}                                            # When supplied, this argument will restrict the facts collected to a given subset  Possible values for this argument incl

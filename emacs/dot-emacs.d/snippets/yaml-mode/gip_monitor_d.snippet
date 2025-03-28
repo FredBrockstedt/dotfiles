@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Manage DNS monitors on a BIG-IP
+# prefix: bigip_monitor_dns_snippet
+# key: gip_monitor_d
+# group: ansible
+# --
+
+- name: ${0:Manage DNS monitors on a BIG-IP}
+  bigip_monitor_dns:                                                       
+    name: ${1:Specifies the name of the monitor}                           #
+    parent: ${2:/Common/dns}                                               # The parent template of this monitor template  Once this value has been set, it cannot be changed  By default, this value
+    description: ${3:value}                                                # The description of the monitor 
+    interval: ${4:value}                                                   # The interval specifying how frequently the monitor instance of this template will run  This value B(must) be less than t
+    up_interval: ${5:value}                                                # Specifies the interval for the system to use to perform the health check when a resource is up  When C(0), specifies tha
+    timeout: ${6:value}                                                    # The number of seconds in which the node or service must respond to the monitor request  If the target responds within th
+    transparent: ${7:value}                                                # Specifies whether the monitor operates in transparent mode  Monitors in transparent mode can monitor pool members throug
+    reverse: ${8:value}                                                    # Specifies whether the monitor operates in reverse mode  When the monitor is in reverse mode, a successful receive string
+    receive: ${9:value}                                                    # Specifies the IP address that the monitor uses from the resource record sections of the DNS response  The IP address sho
+    time_until_up: ${10:value}                                             # Specifies the amount of time in seconds after the first successful response before a node will be marked up  A value of 
+    manual_resume: ${11:value}                                             # Specifies whether the system automatically changes the status of a resource to B(enabled) at the next successful monitor
+    ip: ${12:value}                                                        # IP address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the defau
+    port: ${13:value}                                                      # Port address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the def
+    query_name: ${14:value}                                                # Specifies a query name for the monitor to use in a DNS query 
+    query_type: ${15$$(yas-choose-value '("a" "aaaa"))}                    # choices: a;aaaa  Specifies the type of DNS query that the monitor sends  When creating a new monitor, if this parameter 
+    answer_section_contains: ${16$$(yas-choose-value '("any-type" "anything" "query-type"))}# choices: any-type;anything;query-type  Specifies the type of DNS query that the monitor sends  When cre
+    accept_rcode: ${17$$(yas-choose-value '("no-error" "anything"))}       # choices: no-error;anything  Specifies the RCODE required in the response for an up status  When creating a new monitor, 
+    adaptive: ${18:value}                                                  # Specifies whether adaptive response time monitoring is enabled for this monitor  When C(yes), the monitor determines the
+    allowed_divergence_type: ${19$$(yas-choose-value '("relative" "absolute"))}# choices: relative;absolute  When specifying a new monitor, if C(adaptive) is C(yes), the default is C(relative) When
+    allowed_divergence_value: ${20:value}                                  # When specifying a new monitor, if C(adaptive) is C(yes), and C(type) is C(relative), the default is C(25) percent 
+    adaptive_limit: ${21:value}                                            # Specifies the absolute number of milliseconds that may not be exceeded by a monitor probe, regardless of C(allowed_diver
+    sampling_timespan: ${22:value}                                         # Specifies the length, in seconds, of the probe history window that the system uses to calculate the mean latency and sta
+    partition: ${23:Common}                                                # Device partition to manage resources on 
+    state: ${24$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the monitor exists  When C(absent), ensures the monitor is remove
+    provider: ${25:value}                                                  # A dict object containing connection details 

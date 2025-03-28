@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Configure Node Network Interfaces
+# prefix: na_elementsw_network_interfaces_snippet
+# key: mentsw_network_interfac
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Configure Node Network Interfaces}
+  na_elementsw_network_interfaces:                                         
+    method: ${1$$(yas-choose-value '("loopback" "manual" "dhcp" "static"))}# Type of Method used to configure the interface  method depends on other settings such as the use of a static IP address,
+    ip_address_1g: ${2:IP address for the 1G network}                      #
+    ip_address_10g: ${3:IP address for the 10G network}                    #
+    subnet_1g: ${4:1GbE Subnet Mask}                                       #
+    subnet_10g: ${5:10GbE Subnet Mask}                                     #
+    gateway_address_1g: ${6:Router network address to send packets out of the local network}#
+    gateway_address_10g: ${7:Router network address to send packets out of the local network}#
+    hostname: ${8:The hostname or IP address of the SolidFire cluster}     #
+    username: ${9:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${10:Password for the specified user}                        #
+    mtu_1g: ${11:1500}                                                     # Maximum Transmission Unit for 1GbE, Largest packet size that a network protocol can transmit  Must be greater than or eq
+    mtu_10g: ${12:1500}                                                    # Maximum Transmission Unit for 10GbE, Largest packet size that a network protocol can transmit  Must be greater than or e
+    dns_nameservers: ${13:value}                                           # List of addresses for domain name servers 
+    dns_search_domains: ${14:value}                                        # List of DNS search domains 
+    bond_mode_1g: ${15$$(yas-choose-value '("ActivePassive" "ALB" "LACP"))}# choices: ActivePassive;ALB;LACP  Bond mode for 1GbE configuration 
+    bond_mode_10g: ${16$$(yas-choose-value '("ActivePassive" "ALB" "LACP"))}# choices: ActivePassive;ALB;LACP  Bond mode for 10GbE configuration 
+    lacp_1g: ${17$$(yas-choose-value '("Fast" "Slow"))}                    # choices: Fast;Slow  Link Aggregation Control Protocol useful only if LACP is selected as the Bond Mode  Slow - Packets a
+    lacp_10g: ${18$$(yas-choose-value '("Fast" "Slow"))}                   # choices: Fast;Slow  Link Aggregation Control Protocol useful only if LACP is selected as the Bond Mode  Slow - Packets a
+    virtual_network_tag: ${19:value}                                       # This is the primary network tag  All nodes in a cluster have the same VLAN tag 

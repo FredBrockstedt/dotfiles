@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage subnets in AWS virtual private clouds
+# prefix: ec2_vpc_subnet_snippet
+# key: c2_vpc_subnet
+# group: ansible
+# --
+
+- name: ${0:Manage subnets in AWS virtual private clouds}
+  ec2_vpc_subnet:                                                          
+    vpc_id: ${1:VPC ID of the VPC in which to create or delete the subnet} #
+    az: ${2:value}                                                         # The availability zone for the subnet 
+    cidr: ${3:value}                                                       # The CIDR block for the subnet  E g  192 0 2 0/24 
+    ipv6_cidr: ${4:value}                                                  # The IPv6 CIDR block for the subnet  The VPC must have a /56 block assigned and this value must be a valid IPv6 /64 that 
+    tags: ${5:value}                                                       # A dict of tags to apply to the subnet  Any tags currently applied to the subnet and not present here will be removed 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or remove the subnet
+    map_public: ${7:false}                                                 # Specify C(yes) to indicate that instances launched into the subnet should be assigned public IP address by default 
+    assign_instances_ipv6: ${8:false}                                      # Specify C(yes) to indicate that instances launched into the subnet should be automatically assigned an IPv6 address 
+    wait: ${9:true}                                                        # When specified,I(state=present) module will wait for subnet to be in available state before continuing 
+    wait_timeout: ${10:300}                                                # Number of seconds to wait for subnet to become available I(wait=True) 
+    purge_tags: ${11:true}                                                 # Whether or not to remove tags that do not appear in the I(tags) list 
+    debug_botocore_endpoint_logs: ${12:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${13:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${14:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${15:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${16:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${17:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${18:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${19:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

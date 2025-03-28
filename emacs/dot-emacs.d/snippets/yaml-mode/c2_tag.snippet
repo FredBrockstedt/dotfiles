@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: create and remove tags on ec2 resources.
+# prefix: ec2_tag_snippet
+# key: c2_tag
+# group: ansible
+# --
+
+- name: ${0:create and remove tags on ec2 resources.}
+  ec2_tag:                                                                 
+    resource: ${1:The EC2 resource id}                                     #
+    tags: ${2:A dictionary of tags to add or remove from the resource}     # If the value provided for a tag is null and C(state) is I(absent), the tag will be removed regardless of its current val
+    state: ${3$$(yas-choose-value '("present" "absent" "list"))}           # choices: present;absent;list  Whether the tags should be present or absent on the resource  Use list to interrogate the 
+    purge_tags: ${4:False}                                                 # Whether unspecified tags should be removed from the resource  Note that when combined with C(state: absent), specified t
+    debug_botocore_endpoint_logs: ${5:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${6:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${7:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${8:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${9:value}                                             # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${10:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${11:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${12:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

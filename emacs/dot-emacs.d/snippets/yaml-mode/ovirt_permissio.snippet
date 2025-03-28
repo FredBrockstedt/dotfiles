@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Module to manage permissions of users/groups in oVirt/RHV
+# prefix: ovirt_permission_snippet
+# key: ovirt_permissio
+# group: ansible
+# --
+
+- name: ${0:Module to manage permissions of users/groups in oVirt/RHV}
+  ovirt_permission:                                                        
+    authz_name: ${1:Authorization provider of the user/group}              #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    role: ${3:UserRole}                                                    # Name of the role to be assigned to user/group on specific object 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Should the permission be present/absent 
+    object_id: ${5:value}                                                  # ID of the object where the permissions should be managed 
+    object_name: ${6:value}                                                # Name of the object where the permissions should be managed 
+    object_type: ${7$$(yas-choose-value '("cluster" "cpu_profile" "data_center" "disk" "disk_profile" "host" "network" "storage_domain" "system" "template" "vm" "vm_pool" "vnic_profile"))}# choices
+    user_name: ${8:value}                                                  # Username of the user to manage  In most LDAPs it's I(uid) of the user, but in Active Directory you must specify I(UPN) o
+    group_name: ${9:value}                                                 # Name of the group to manage  Note that if group does not exist in the system this module will fail, you should ensure th
+    namespace: ${10:value}                                                 # Namespace of the authorization provider, where user/group resides 
+    quota_name: ${11:value}                                                # Name of the quota to assign permission  Works only with C(object_type) I(data_center) 
+    wait: ${12:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${13:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${14:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${15:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${16:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

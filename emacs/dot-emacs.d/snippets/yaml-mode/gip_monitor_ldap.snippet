@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manages BIG-IP LDAP monitors
+# prefix: bigip_monitor_ldap_snippet
+# key: gip_monitor_ldap
+# group: ansible
+# --
+
+- name: ${0:Manages BIG-IP LDAP monitors}
+  bigip_monitor_ldap:                                                      
+    name: ${1:Monitor name}                                                #
+    description: ${2:value}                                                # Specifies descriptive text that identifies the monitor 
+    parent: ${3:/Common/ldap}                                              # The parent template of this monitor template  Once this value has been set, it cannot be changed  By default, this value
+    ip: ${4:value}                                                         # IP address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the defau
+    port: ${5:value}                                                       # Port address part of the IP/port definition  If this parameter is not provided when creating a new monitor, then the def
+    interval: ${6:value}                                                   # Specifies, in seconds, the frequency at which the system issues the monitor check when either the resource is down or th
+    timeout: ${7:value}                                                    # Specifies the number of seconds the target has in which to respond to the monitor request  If the target responds within
+    time_until_up: ${8:value}                                              # Specifies the number of seconds to wait after a resource first responds correctly to the monitor before setting the reso
+    up_interval: ${9:value}                                                # Specifies the interval for the system to use to perform the health check when a resource is up  When C(0), specifies tha
+    manual_resume: ${10:value}                                             # Specifies whether the system automatically changes the status of a resource to B(enabled) at the next successful monitor
+    target_username: ${11:value}                                           # Specifies the user name, if the monitored target requires authentication 
+    target_password: ${12:value}                                           # Specifies the password, if the monitored target requires authentication 
+    base: ${13:value}                                                      # Specifies the location in the LDAP tree from which the monitor starts the health check 
+    filter: ${14:value}                                                    # Specifies an LDAP key for which the monitor searches 
+    security: ${15$$(yas-choose-value '("none" "ssl" "tls"))}              # choices: none;ssl;tls  Specifies the secure protocol type for communications with the target 
+    mandatory_attributes: ${16:value}                                      # Specifies whether the target must include attributes in its response to be considered up 
+    chase_referrals: ${17:value}                                           # Specifies whether, upon receipt of an LDAP referral entry, the target follows (or chases) that referral 
+    debug: ${18:value}                                                     # Specifies whether the monitor sends error messages and additional information to a log file created and labeled specific
+    update_password: ${19$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will update passwords if the C(target_password) is specified  C(on_create) will onl
+    partition: ${20:Common}                                                # Device partition to manage resources on 
+    state: ${21$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the monitor exists  When C(absent), ensures the monitor is remove
+    provider: ${22:value}                                                  # A dict object containing connection details 

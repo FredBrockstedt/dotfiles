@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Request reload of Memset's DNS infrastructure,
+# prefix: memset_dns_reload_snippet
+# key: memset_dns_reload
+# group: ansible
+# --
+
+- name: ${0:Request reload of Memset's DNS infrastructure,}
+  memset_dns_reload:                                                       
+    api_key: ${1:The API key obtained from the Memset control panel}       #
+    poll: ${2:False}                                                       # Boolean value, if set will poll the reload job's status and return when the job has completed (unless the 30 second time

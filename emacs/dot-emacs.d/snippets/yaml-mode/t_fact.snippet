@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Set host facts from a task
+# prefix: set_fact_snippet
+# key: t_fact
+# group: ansible
+# --
+
+- name: ${0:Set host facts from a task}
+  set_fact:                                                                
+    key_value: ${1:The C(set_fact) module takes key=value pairs as variables to set in the playbook scope}# Or alternatively, accepts complex arguments using the C(args:) statement 
+    cacheable: ${2:False}                                                  # This boolean converts the variable into an actual 'fact' which will also be added to the fact cache, if fact caching is 

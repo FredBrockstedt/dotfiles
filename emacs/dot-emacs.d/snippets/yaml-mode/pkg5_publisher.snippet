@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages Solaris 11 Image Packaging System publishers
+# prefix: pkg5_publisher_snippet
+# key: pkg5_publisher
+# group: ansible
+# --
+
+- name: ${0:Manages Solaris 11 Image Packaging System publishers}
+  pkg5_publisher:                                                          
+    name: ${1:The publisher's name}                                        #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether to ensure that a publisher is present or absent 
+    sticky: ${3:value}                                                     # Packages installed from a sticky repository can only receive updates from that repository 
+    enabled: ${4:value}                                                    # Is the repository enabled or disabled?
+    origin: ${5:value}                                                     # A path or URL to the repository  Multiple values may be provided 
+    mirror: ${6:value}                                                     # A path or URL to the repository mirror  Multiple values may be provided 

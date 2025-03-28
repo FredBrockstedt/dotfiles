@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: CLI command to modify port-config
+# prefix: pn_port_config_snippet
+# key: pn_port_config
+# group: ansible
+# --
+
+- name: ${0:CLI command to modify port-config}
+  pn_port_config:                                                          
+    state: ${1$$(yas-choose-value '("update"))}                            # State the action to perform  Use C(update) to modify the port-config 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_intf: ${3:value}                                                    # physical interface 
+    pn_crc_check_enable: ${4:value}                                        # CRC check on ingress and rewrite on egress 
+    pn_dscp_map: ${5:value}                                                # DSCP map name to enable on port 
+    pn_autoneg: ${6:value}                                                 # physical port autonegotiation 
+    pn_speed: ${{7$$(yas-choose-value '("disable" "10m" "100m" "1g" "2}    #5g,10g,25g,40g,50g,100g|} # not required  choices: disable;10m;100m;1g;2 5g;10g;25g;40g;50g;100g  physical port speed 
+    pn_port: ${8:value}                                                    # physical port 
+    pn_vxlan_termination: ${9:value}                                       # physical port vxlan termination setting 
+    pn_pause: ${10:value}                                                  # physical port pause 
+    pn_loopback: ${11:value}                                               # physical port loopback 
+    pn_loop_vlans: ${12:value}                                             # looping vlans 
+    pn_routing: ${13:value}                                                # routing 
+    pn_edge_switch: ${14:value}                                            # physical port edge switch 
+    pn_enable: ${15:value}                                                 # physical port enable 
+    pn_description: ${16:value}                                            # physical port description 
+    pn_host_enable: ${17:value}                                            # Host facing port control setting 
+    pn_allowed_tpid: ${18$$(yas-choose-value '("vlan" "q-in-q" "q-in-q-old"))}# choices: vlan;q-in-q;q-in-q-old  Allowed TPID in addition to 0x8100 on Vlan header 
+    pn_mirror_only: ${19:value}                                            # physical port mirror only 
+    pn_reflect: ${20:value}                                                # physical port reflection 
+    pn_jumbo: ${21:value}                                                  # jumbo frames on physical port 
+    pn_egress_rate_limit: ${22:value}                                      # max egress port data rate limit 
+    pn_eth_mode: ${23$$(yas-choose-value '("1000base-x" "sgmii" "disabled" "GMII"))}# choices: 1000base-x;sgmii;disabled;GMII  physical Ethernet mode 
+    pn_fabric_guard: ${24:value}                                           # Fabric guard configuration 
+    pn_local_switching: ${25:value}                                        # no-local-switching port cannot bridge traffic to another no-local-switching port 
+    pn_lacp_priority: ${26:value}                                          # LACP priority from 1 to 65535 
+    pn_send_port: ${27:value}                                              # send port 
+    pn_port_mac_address: ${28:value}                                       # physical port MAC Address 
+    pn_defer_bringup: ${29:value}                                          # defer port bringup 

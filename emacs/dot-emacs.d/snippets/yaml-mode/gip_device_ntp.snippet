@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage NTP servers on a BIG-IP
+# prefix: bigip_device_ntp_snippet
+# key: gip_device_ntp
+# group: ansible
+# --
+
+- name: ${0:Manage NTP servers on a BIG-IP}
+  bigip_device_ntp:                                                        
+    ntp_servers: ${1:value}                                                # A list of NTP servers to set on the device  At least one of C(ntp_servers) or C(timezone) is required 
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state of the NTP servers on the system  When C(present), guarantees that the NTP servers ar
+    timezone: ${3:value}                                                   # The timezone to set for NTP lookups  At least one of C(ntp_servers) or C(timezone) is required 
+    provider: ${4:value}                                                   # A dict object containing connection details 

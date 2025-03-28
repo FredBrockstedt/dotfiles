@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Manage LXC Containers
+# prefix: lxc_container_snippet
+# key: xc_container
+# group: ansible
+# --
+
+- name: ${0:Manage LXC Containers}
+  lxc_container:                                                           
+    name: ${1:Name of a container}                                         #
+    backing_store: ${2$$(yas-choose-value '("dir" "lvm" "loop" "btrfs" "overlayfs" "zfs"))}# choices: dir;lvm;loop;btrfs;overlayfs;zfs  Backend storage type for the container 
+    template: ${3:ubuntu}                                                  # Name of the template to use within an LXC create 
+    template_options: ${4:value}                                           # Template options when building the container 
+    config: ${5:value}                                                     # Path to the LXC configuration file 
+    lv_name: ${6:\$CONTAINER_NAME}                                         # Name of the logical volume, defaults to the container name 
+    vg_name: ${7:lxc}                                                      # If Backend store is lvm, specify the name of the volume group 
+    thinpool: ${8:value}                                                   # Use LVM thin pool called TP 
+    fs_type: ${9:ext4}                                                     # Create fstype TYPE 
+    fs_size: ${10:5G}                                                      # File system Size 
+    directory: ${11:value}                                                 # Place rootfs directory under DIR 
+    zfs_root: ${12:value}                                                  # Create zfs under given zfsroot 
+    container_command: ${13:value}                                         # Run a command within a container 
+    lxc_path: ${14:value}                                                  # Place container under PATH
+    container_log: ${15$$(yas-choose-value '("True" "False"))}             # choices: True;False  Enable a container log for host actions to the container 
+    container_log_level: ${16$$(yas-choose-value '("INFO" "ERROR" "DEBUG"))}# choices: INFO;ERROR;DEBUG  Set the log level for a container where *container_log* was set 
+    clone_name: ${17:value}                                                # Name of the new cloned server  This is only used when state is clone 
+    clone_snapshot: ${18$$(yas-choose-value '("True" "False"))}            # choices: True;False  Create a snapshot a container when cloning  This is not supported by all container storage backends
+    archive: ${19$$(yas-choose-value '("True" "False"))}                   # choices: True;False  Create an archive of a container  This will create a tarball of the running container 
+    archive_path: ${20:value}                                              # Path the save the archived container  If the path does not exist the archive method will attempt to create it 
+    archive_compression: ${21$$(yas-choose-value '("gzip" "bzip2" "none"))}# choices: gzip;bzip2;none  Type of compression to use when creating an archive of a running container 
+    state: ${22$$(yas-choose-value '("started" "stopped" "restarted" "absent" "frozen"))}# choices: started;stopped;restarted;absent;frozen  Define the state of a container  If you clone a containe
+    container_config: ${23:value}                                          # list of 'key=value' options to use when configuring a container 

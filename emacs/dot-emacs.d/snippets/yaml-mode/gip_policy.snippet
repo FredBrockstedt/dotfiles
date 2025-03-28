@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage general policy configuration on a BIG-IP
+# prefix: bigip_policy_snippet
+# key: gip_policy
+# group: ansible
+# --
+
+- name: ${0:Manage general policy configuration on a BIG-IP}
+  bigip_policy:                                                            
+    name: ${1:The name of the policy to create}                            #
+    description: ${2:value}                                                # The description to attach to the policy  This parameter is only supported on versions of BIG-IP >= 12 1 0  On earlier ve
+    state: ${3$$(yas-choose-value '("present" "absent" "draft"))}          # choices: present;absent;draft  When C(state) is C(present), ensures that the policy exists and is published  When C(stat
+    strategy: ${4$$(yas-choose-value '("first" "all" "best"))}             # choices: first;all;best  Specifies the method to determine which actions get executed in the case where there are multip
+    rules: ${5:value}                                                      # Specifies a list of rules that you want associated with this policy  The order of this list is the order they will be ev
+    partition: ${6:Common}                                                 # Device partition to manage resources on 
+    provider: ${7:value}                                                   # A dict object containing connection details 

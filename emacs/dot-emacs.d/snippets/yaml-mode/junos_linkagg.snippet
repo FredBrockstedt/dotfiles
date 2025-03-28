@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage link aggregation groups on Juniper JUNOS network devices
+# prefix: junos_linkagg_snippet
+# key: junos_linkagg
+# group: ansible
+# --
+
+- name: ${0:Manage link aggregation groups on Juniper JUNOS network devices}
+  junos_linkagg:                                                           
+    name: ${1:Name of the link aggregation group}                          #
+    members: ${2:List of members interfaces of the link aggregation group} # The value can be single interface or list of interfaces 
+    mode: ${3$$(yas-choose-value '("on" "off" "active" "passive"))}        # choices: on;off;active;passive  Mode of the link aggregation group  A value of C(on) will enable LACP in C(passive) mode
+    min_links: ${4:value}                                                  # Minimum members that should be up before bringing up the link aggregation group 
+    device_count: ${5:value}                                               # Number of aggregated ethernet devices that can be configured  Acceptable integer value is between 1 and 128 
+    description: ${6:value}                                                # Description of Interface 
+    aggregate: ${7:value}                                                  # L i s t   o f   l i n k   a g g r e g a t i o n   d e f i n i t i o n s  
+    state: ${8$$(yas-choose-value '("present" "absent" "up" "down"))}      # choices: present;absent;up;down  State of the link aggregation group 
+    active: ${9:True}                                                      # Specifies whether or not the configuration is active or deactivated
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Set and/or get members' attributes of an Apache httpd 2.4 mod_proxy balancer pool
+# prefix: apache2_mod_proxy_snippet
+# key: pache2_mod_proxy
+# group: ansible
+# --
+
+- name: ${0:Set and/or get members' attributes of an Apache httpd 2.4 mod_proxy balancer pool}
+  apache2_mod_proxy:                                                       
+    balancer_vhost: ${1:(ipv4$$(yas-choose-value '("ipv6"))fqdn):port of the Apache httpd 2}#4 mod_proxy balancer pool 
+    balancer_url_suffix: ${2:/balancer-manager/}                           # Suffix of the balancer pool url required to access the balancer pool status page (e g  balancer_vhost[:port]/balancer_ur
+    member_host: ${3:value}                                                # (ipv4|ipv6|fqdn) of the balancer member to get or to set attributes to  Port number is autodetected and should not be sp
+    state: ${4$$(yas-choose-value '("present" "absent" "enabled" "disabled" "drained" "hot_standby" "ignore_errors"))}# choices: present;absent;enabled;disabled;drained;hot_standby;ignore_errors  D
+    tls: ${5:false}                                                        # Use https to access balancer management page 
+    validate_certs: ${6:true}                                              # Validate ssl/tls certificates 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage CSW-Packages on Solaris
+# prefix: pkgutil_snippet
+# key: pkgut
+# group: ansible
+# --
+
+- name: ${0:Manage CSW-Packages on Solaris}
+  pkgutil:                                                                 
+    name: ${1:Package name, e}                                             #g  (C(CSWnrpe))
+    state: ${2$$(yas-choose-value '("present" "absent" "latest"))}         # Whether to install (C(present)), or remove (C(absent)) a package  The upgrade (C(latest)) operation will update/install 
+    site: ${3:value}                                                       # Specifies the repository path to install the package from  Its global definition is done in C(/etc/opt/csw/pkgutil conf)
+    update_catalog: ${4:False}                                             # If you want to refresh your catalog from the mirror, set this to (C(yes)) 

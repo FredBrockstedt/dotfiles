@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manages access-layer objects on Check Point over Web Services API
+# prefix: cp_mgmt_access_layer_snippet
+# key: cp_mgmt_access_layer
+# group: ansible
+# --
+
+- name: ${0:Manages access-layer objects on Check Point over Web Services API}
+  cp_mgmt_access_layer:                                                    
+    name: ${1:Object name}                                                 #
+    add_default_rule: ${2:value}                                           # Indicates whether to include a cleanup rule in the new layer 
+    applications_and_url_filtering: ${3:value}                             # Whether to enable Applications & URL Filtering blade on the layer 
+    content_awareness: ${4:value}                                          # Whether to enable Content Awareness blade on the layer 
+    detect_using_x_forward_for: ${5:value}                                 # Whether to use X-Forward-For HTTP header, which is added by the  proxy server to keep track of the original source IP 
+    firewall: ${6:value}                                                   # Whether to enable Firewall blade on the layer 
+    implicit_cleanup_action: ${7$$(yas-choose-value '("drop" "accept"))}   # choices: drop;accept  The default "catch-all" action for traffic that does not match any explicit or implied rules in th
+    mobile_access: ${8:value}                                              # Whether to enable Mobile Access blade on the layer 
+    shared: ${9:value}                                                     # Whether this layer is shared 
+    tags: ${10:value}                                                      # Collection of tag identifiers 
+    color: ${11$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${12:value}                                                  # Comments string 
+    details_level: ${13$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${14:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${15:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${16$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${17:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${18:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${19:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

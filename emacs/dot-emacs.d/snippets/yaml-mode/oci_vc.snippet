@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage Virtual Cloud Networks(VCN) in OCI
+# prefix: oci_vcn_snippet
+# key: oci_vc
+# group: ansible
+# --
+
+- name: ${0:Manage Virtual Cloud Networks(VCN) in OCI}
+  oci_vcn:                                                                 
+    cidr_block: ${1:value}                                                 # T h e   C I D R   I P   a d d r e s s   b l o c k   o f   t h e   V C N     R e q u i r e d   w h e n   c r e a t i n g 
+    compartment_id: ${2:value}                                             # T h e   O C I D   o f   t h e   c o m p a r t m e n t   t o   c o n t a i n   t h e   V C N     R e q u i r e d   w h e 
+    display_name: ${3:value}                                               # A   u s e r - f r i e n d l y   n a m e     D o e s   n o t   h a v e   t o   b e   u n i q u e ,   a n d   i t ' s   c 
+    dns_label: ${4:value}                                                  # A   D N S   l a b e l   f o r   t h e   V C N ,   u s e d   i n   c o n j u n c t i o n   w i t h   t h e   V N I C ' s 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  C r e a t e   o r   u p d a t e   a   V C N   w i t h   I ( s t a t e = p r e s e n t )     U s
+    vcn_id: ${6:value}                                                     # T h e   O C I D   o f   t h e   V C N     R e q u i r e d   w h e n   d e l e t i n g   a   V C N   w i t h   I ( s t a 
+    config_file_location: ${7:value}                                       # Path to configuration file  If not set then the value of the OCI_CONFIG_FILE environment variable, if any, is used  Othe
+    config_profile_name: ${8:DEFAULT}                                      # The profile to load from the config file referenced by C(config_file_location)  If not set, then the value of the OCI_CO
+    api_user: ${9:value}                                                   # The OCID of the user, on whose behalf, OCI APIs are invoked  If not set, then the value of the OCI_USER_OCID environment
+    api_user_fingerprint: ${10:value}                                      # Fingerprint for the key pair being used  If not set, then the value of the OCI_USER_FINGERPRINT environment variable, if
+    api_user_key_file: ${11:value}                                         # Full path and filename of the private key (in PEM format)  If not set, then the value of the OCI_USER_KEY_FILE variable,
+    api_user_key_pass_phrase: ${12:value}                                  # Passphrase used by the key referenced in C(api_user_key_file), if it is encrypted  If not set, then the value of the OCI
+    auth_type: ${13$$(yas-choose-value '("api_key" "instance_principal"))} # choices: api_key;instance_principal  The type of authentication to use for making API requests  By default C(auth_type="
+    tenancy: ${14:value}                                                   # OCID of your tenancy  If not set, then the value of the OCI_TENANCY variable, if any, is used  This option is required i
+    region: ${15:value}                                                    # The Oracle Cloud Infrastructure region to use for all OCI API requests  If not set, then the value of the OCI_REGION var
+    force_create: ${16:False}                                              # W h e t h e r   t o   a t t e m p t   n o n - i d e m p o t e n t   c r e a t i o n   o f   a   r e s o u r c e     B y 
+    key_by: ${17:value}                                                    # T h e   l i s t   o f   c o m m a - s e p a r a t e d   a t t r i b u t e s   o f   t h i s   r e s o u r c e   w h i c 
+    wait: ${18:True}                                                       # W h e t h e r   t o   w a i t   f o r   c r e a t e   o r   d e l e t e   o p e r a t i o n   t o   c o m p l e t e  
+    wait_timeout: ${19:1200}                                               # T i m e ,   i n   s e c o n d s ,   t o   w a i t   w h e n   I ( w a i t = y e s )  
+    wait_until: ${20:value}                                                # T h e   l i f e c y c l e   s t a t e   t o   w a i t   f o r   t h e   r e s o u r c e   t o   t r a n s i t i o n   i 
+    defined_tags: ${21:value}                                              # D e f i n e d   t a g s   f o r   t h i s   r e s o u r c e     E a c h   k e y   i s   p r e d e f i n e d   a n d   s 
+    freeform_tags: ${22:value}                                             # F r e e - f o r m   t a g s   f o r   t h i s   r e s o u r c e     E a c h   t a g   i s   a   s i m p l e   k e y - v 

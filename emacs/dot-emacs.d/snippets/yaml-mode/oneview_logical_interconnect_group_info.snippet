@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more of the OneView Logical Interconnect Groups
+# prefix: oneview_logical_interconnect_group_info_snippet
+# key: oneview_logical_interconnect_group_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more of the OneView Logical Interconnect Groups}
+  oneview_logical_interconnect_group_info:                                 
+    name: ${1:value}                                                       # Logical Interconnect Group name 
+    config: ${2:value}                                                     # Path to a  json configuration file containing the OneView client configuration  The configuration file is optional and w
+    params: ${3:value}                                                     # List of params to delimit, filter and sort the list of resources  params allowed: - C(start): The first item to return, 

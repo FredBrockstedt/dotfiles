@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Execute a single command based on condition on devices running Lenovo CNOS
+# prefix: cnos_conditional_command_snippet
+# key: cnos_conditional_command
+# group: ansible
+# --
+
+- name: ${0:Execute a single command based on condition on devices running Lenovo CNOS}
+  cnos_conditional_command:                                                
+    clicommand: ${1:None}:This specifies the CLI command as an attribute to this method}# The command is passed using double quotes  The variables can be placed directly on to the CLI commands or c
+    condition: ${2:None}:If you specify condition=false in the inventory file against any device, the command execution is skipped for that device}#
+    flag: ${3:None}:If a task needs to be executed, you have to set the flag the same as it is specified in the inventory for that device}#
+    outputfile: ${4:This specifies the file path where the output of each command execution is saved}# Each command that is specified in the merged template file and each response from the device a
+    host: ${5:This is the variable used to search the hosts file at /etc/ansible/hosts and identify the IP address of the device on which the template is going to be applied}# Usually the Ansible k
+    username: ${6:Configures the username used to authenticate the connection to the remote device}# The value of the username parameter is used to authenticate the SSH session  While generally the
+    password: ${7:Configures the password used to authenticate the connection to the remote device}# The value of the password parameter is used to authenticate the SSH session  While generally the
+    deviceType: ${8$$(yas-choose-value '("g8272_cnos" "g8296_cnos" "g8332_cnos" "NE0152T" "NE1072T" "NE1032" "NE1032T" "NE10032" "NE2572"))}# This specifies the type of device where the method is e
+    enablePassword: ${9:value}                                             # Configures the password used to enter Global Configuration command mode on the switch  If the switch does not request th

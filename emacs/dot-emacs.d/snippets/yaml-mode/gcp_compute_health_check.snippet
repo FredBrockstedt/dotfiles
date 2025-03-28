@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP HealthCheck
+# prefix: gcp_compute_health_check_snippet
+# key: gcp_compute_health_check
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP HealthCheck}
+  gcp_compute_health_check:                                                
+    name: ${1:Name of the resource}                                        # Provided by the client when the resource is created  The name must be 1-63 characters long, and comply with RFC1035  Spe
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    check_interval_sec: ${4:5}                                             # How often (in seconds) to send a health check  The default value is 5 seconds 
+    description: ${5:value}                                                # An optional description of this resource  Provide this property when you create the resource 
+    healthy_threshold: ${6:2}                                              # A so-far unhealthy instance will be marked healthy after this many consecutive successes  The default value is 2 
+    timeout_sec: ${7:5}                                                    # How long (in seconds) to wait before claiming failure  The default value is 5 seconds  It is invalid for timeoutSec to h
+    unhealthy_threshold: ${8:2}                                            # A so-far healthy instance will be marked unhealthy after this many consecutive failures  The default value is 2 
+    type: ${9:value}                                                       # Specifies the type of the healthCheck, either TCP, SSL, HTTP or HTTPS  If not specified, the default is TCP  Exactly one
+    http_health_check: ${10:value}                                         # A nested object resource 
+    https_health_check: ${11:value}                                        # A nested object resource 
+    tcp_health_check: ${12:value}                                          # A nested object resource 
+    ssl_health_check: ${13:value}                                          # A nested object resource 
+    project: ${14:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${15:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${16:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${17:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${18:value}                                                    # Array of scopes to be used 
+    env_type: ${19:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

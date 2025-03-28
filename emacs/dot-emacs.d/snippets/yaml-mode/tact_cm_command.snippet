@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage network configuration data in Nokia Core and Radio networks
+# prefix: netact_cm_command_snippet
+# key: tact_cm_command
+# group: ansible
+# --
+
+- name: ${0:Manage network configuration data in Nokia Core and Radio networks}
+  netact_cm_command:                                                       
+    operation: ${1$$(yas-choose-value '("upload" "provision" "import" "export" "Provision_Mass_Modification"))}# S u p p o r t e d   o p e r a t i o n s   a l l o w   u s e r   t o   u p l o a d   
+    opsName: ${2:value}                                                    # user specified operation name
+    DN: ${3:value}                                                         # S e t s   t h e   e x a c t   s c o p e   o f   t h e   o p e r a t i o n   i n   f o r m   o f   a   l i s t   o f   m 
+    WS: ${4:value}                                                         # S e t s   t h e   s c o p e   o f   t h e   o p e r a t i o n   t o   u s e   o n e   o r   m o r e   p r e - d e f i n 
+    MR: ${5:value}                                                         # S e t s   t h e   s c o p e   o f   t h e   o p e r a t i o n   t o   n e t w o r k   e l e m e n t s   a s s i g n e d 
+    planName: ${6:value}                                                   # Specifies a plan name 
+    typeOption: ${7$$(yas-choose-value '("plan" "actual" "reference" "template" "siteTemplate"))}# choices: plan;actual;reference;template;siteTemplate  S p e c i f i e s   t h e   t y p e   o f   
+    fileFormat: ${8$$(yas-choose-value '("RAML2" "CSV" "XLSX"))}           # choices: RAML2;CSV;XLSX  I n d i c a t e s   f i l e   f o r m a t  
+    fileName: ${9:value}                                                   # Specifies a file name  Valid for Import and Export operations 
+    inputFile: ${10:value}                                                 # S p e c i f i e s   f u l l   p a t h   t o   p l a n   f i l e   l o c a t i o n   f o r   t h e   i m p o r t   o p e 
+    createBackupPlan: ${11:value}                                          # Specifies if backup plan generation is enabled 
+    backupPlanName: ${12:value}                                            # Specifies a backup plan name
+    verbose: ${13:value}                                                   # N e t A c t   C o n f i g u r a t o r   w i l l   p r i n t   m o r e   i n f o
+    extra_opts: ${14:value}                                                # E x t r a   o p t i o n s   t o   b e   s e t   f o r   o p e r a t i o n s     C h e c k   C o n f i g u r a t i o n   

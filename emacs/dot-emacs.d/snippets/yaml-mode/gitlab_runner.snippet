@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Create, modify and delete GitLab Runners.
+# prefix: gitlab_runner_snippet
+# key: gitlab_runner
+# group: ansible
+# --
+
+- name: ${0:Create, modify and delete GitLab Runners.}
+  gitlab_runner:                                                           
+    api_token: ${1:Your private token to interact with the GitLab API}     #
+    description: ${2:The unique name of the runner}                        #
+    registration_token: ${3:The registration token is used to register new runners}#
+    url: ${4:value}                                                        # The URL of the GitLab server, with protocol (i e  http or https) 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Make sure that the runner with the same name exists with the same configuration or delete the r
+    active: ${6:True}                                                      # Define if the runners is immediately active after creation 
+    locked: ${7:False}                                                     # Determines if the runner is locked or not 
+    access_level: ${8$$(yas-choose-value '("ref_protected" "not_protected"))}# choices: ref_protected;not_protected  Determines if a runner can pick up jobs from protected branches 
+    maximum_timeout: ${9:3600}                                             # The maximum timeout that a runner has to pick up a specific job 
+    run_untagged: ${10:True}                                               # Run untagged jobs or not 
+    tag_list: ${11:[]}                                                     # T h e   t a g s   t h a t   a p p l y   t o   t h e   r u n n e r  
+    api_url: ${12:value}                                                   # The resolvable endpoint for the API
+    api_username: ${13:value}                                              # The username to use for authentication against the API
+    api_password: ${14:value}                                              # The password to use for authentication against the API
+    validate_certs: ${15:True}                                             # Whether or not to validate SSL certs when supplying a https endpoint 

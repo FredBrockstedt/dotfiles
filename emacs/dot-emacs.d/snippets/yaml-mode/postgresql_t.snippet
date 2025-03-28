@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Create, drop, or modify a PostgreSQL table
+# prefix: postgresql_table_snippet
+# key: postgresql_t
+# group: ansible
+# --
+
+- name: ${0:Create, drop, or modify a PostgreSQL table}
+  postgresql_table:                                                        
+    table: ${1:Table name}                                                 #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The table state  I(state=absent) is mutually exclusive with I(tablespace), I(owner), I(unlogged
+    tablespace: ${3:value}                                                 # Set a tablespace for the table 
+    owner: ${4:value}                                                      # Set a table owner 
+    unlogged: ${5:False}                                                   # Create an unlogged table 
+    like: ${6:value}                                                       # Create a table like another table (with similar DDL)  Mutually exclusive with I(columns), I(rename), and I(truncate) 
+    including: ${7:value}                                                  # Keywords that are used with like parameter, may be DEFAULTS, CONSTRAINTS, INDEXES, STORAGE, COMMENTS or ALL  Needs I(lik
+    columns: ${8:value}                                                    # Columns that are needed 
+    rename: ${9:value}                                                     # New table name  Mutually exclusive with I(tablespace), I(owner), I(unlogged), I(like), I(including), I(columns), I(trunc
+    truncate: ${10:False}                                                  # Truncate a table  Mutually exclusive with I(tablespace), I(owner), I(unlogged), I(like), I(including), I(columns), I(ren
+    storage_params: ${11:value}                                            # Storage parameters like fillfactor, autovacuum_vacuum_treshold, etc  Mutually exclusive with I(rename) and I(truncate) 
+    db: ${12:value}                                                        # Name of database to connect and where the table will be created 
+    session_role: ${13:value}                                              # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    cascade: ${14:False}                                                   # Automatically drop objects that depend on the table (such as views)  Used with I(state=absent) only 
+    login_user: ${15:postgres}                                             # The username used to authenticate with 
+    login_password: ${16:value}                                            # The password used to authenticate with 
+    login_host: ${17:value}                                                # Host running the database 
+    login_unix_socket: ${18:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${19:5432}                                                       # Database port to connect to 
+    ssl_mode: ${20$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${21:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Configure open vswitch database.
+# prefix: openvswitch_db_snippet
+# key: openvswitch_d
+# group: ansible
+# --
+
+- name: ${0:Configure open vswitch database.}
+  openvswitch_db:                                                          
+    table: ${1:Identifies the table in the database}                       #
+    record: ${2:Identifies the record in the table}                        #
+    col: ${3:Identifies the column in the record}                          #
+    value: ${4:Expected value for the table, record, column and key}       #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the state of the key  When set to I(present), the I(key) and I(value) pair will be s
+    key: ${6:value}                                                        # Identifies the key in the record column, when the column is a map type 
+    timeout: ${7:5}                                                        # How long to wait for ovs-vswitchd to respond

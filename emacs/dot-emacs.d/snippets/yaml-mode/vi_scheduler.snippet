@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Module for setup of Scheduler Avi RESTful Object
+# prefix: avi_scheduler_snippet
+# key: vi_scheduler
+# group: ansible
+# --
+
+- name: ${0:Module for setup of Scheduler Avi RESTful Object}
+  avi_scheduler:                                                           
+    name: ${1:Name of scheduler}                                           #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    backup_config_ref: ${5:value}                                          # Backup configuration to be executed by this scheduler  It is a reference to an object of type backupconfiguration 
+    enabled: ${6:value}                                                    # Boolean flag to set enabled  Default value when not specified in API or module is interpreted by Avi Controller as True 
+    end_date_time: ${7:value}                                              # Scheduler end date and time 
+    frequency: ${8:value}                                                  # Frequency at which custom scheduler will run  Allowed values are 0-60 
+    frequency_unit: ${9:value}                                             # Unit at which custom scheduler will run  Enum options - SCHEDULER_FREQUENCY_UNIT_MIN, SCHEDULER_FREQUENCY_UNIT_HOUR, SCH
+    run_mode: ${10:value}                                                  # Scheduler run mode  Enum options - RUN_MODE_PERIODIC, RUN_MODE_AT, RUN_MODE_NOW 
+    run_script_ref: ${11:value}                                            # Control script to be executed by this scheduler  It is a reference to an object of type alertscriptconfig 
+    scheduler_action: ${12:value}                                          # Define scheduler action  Enum options - SCHEDULER_ACTION_RUN_A_SCRIPT, SCHEDULER_ACTION_BACKUP  Default value when not s
+    start_date_time: ${13:value}                                           # Scheduler start date and time 
+    tenant_ref: ${14:value}                                                # It is a reference to an object of type tenant 
+    url: ${15:value}                                                       # Avi controller URL of the object 
+    uuid: ${16:value}                                                      # Unique object identifier of the object 
+    controller: ${17:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${18:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${19:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${20:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${21:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{22:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${23:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${24:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${25:value}                         # It disables avi session information to be cached as a fact 

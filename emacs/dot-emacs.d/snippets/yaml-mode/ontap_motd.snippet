@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Setup motd
+# prefix: na_ontap_motd_snippet
+# key: ontap_motd
+# group: ansible
+# --
+
+- name: ${0:Setup motd}
+  na_ontap_motd:                                                           
+    vserver: ${1:The name of the SVM motd should be set for}               #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(state=present) sets MOTD given in I(message) C(state=absent) removes it 
+    message: ${6:value}                                                    # MOTD Text message, required when C(state=present) 
+    show_cluster_motd: ${7:True}                                           # Set to I(false) if Cluster-level Message of the Day should not be shown
+    https: ${8:False}                                                      # Enable and disable https
+    validate_certs: ${9:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${10:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${11:value}                                                    # The ontap api version to use
+    use_rest: ${12$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

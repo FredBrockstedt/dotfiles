@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Copy files to remote locations
+# prefix: copy_snippet
+# key: copy
+# group: ansible
+# --
+
+- name: ${0:Copy files to remote locations}
+  copy:                                                                    
+    dest: ${1:Remote absolute path where the file should be copied to}     # If C(src) is a directory, this must be a directory too  If C(dest) is a non-existent path and if either C(dest) ends wit
+    src: ${2:value}                                                        # Local path to a file to copy to the remote server  This can be absolute or relative  If path is a directory, it is copie
+    content: ${3:value}                                                    # When used instead of C(src), sets the contents of a file directly to the specified value  Works only when C(dest) is a f
+    backup: ${4:False}                                                     # Create a backup file including the timestamp information so you can get the original file back if you somehow clobbered 
+    force: ${5:True}                                                       # Influence whether the remote file must always be replaced  If C(yes), the remote file will be replaced when contents are
+    mode: ${6:value}                                                       # The permissions of the destination file or directory  For those used to C(/usr/bin/chmod) remember that modes are actual
+    directory_mode: ${7:value}                                             # When doing a recursive copy set the mode for the directories  If this is not set we will use the system defaults  The mo
+    remote_src: ${8:False}                                                 # Influence whether C(src) needs to be transferred or already is present remotely  If C(no), it will search for C(src) at 
+    follow: ${9:False}                                                     # This flag indicates that filesystem links in the destination, if they exist, should be followed 
+    local_follow: ${10:True}                                               # This flag indicates that filesystem links in the source tree, if they exist, should be followed 
+    checksum: ${11:value}                                                  # SHA1 checksum of the file being transferred  Used to validate that the copy of the file was successful  If this is not p
+    decrypt: ${12:True}                                                    # This option controls the autodecryption of source files using vault 
+    owner: ${13:value}                                                     # Name of the user that should own the file/directory, as would be fed to I(chown) 
+    group: ${14:value}                                                     # Name of the group that should own the file/directory, as would be fed to I(chown) 
+    seuser: ${15:value}                                                    # The user part of the SELinux file context  By default it uses the C(system) policy, where applicable  When set to C(_def
+    serole: ${16:value}                                                    # The role part of the SELinux file context  When set to C(_default), it will use the C(role) portion of the policy if ava
+    setype: ${17:value}                                                    # The type part of the SELinux file context  When set to C(_default), it will use the C(type) portion of the policy if ava
+    selevel: ${18:s0}                                                      # The level part of the SELinux file context  This is the MLS/MCS attribute, sometimes known as the C(range)  When set to 
+    unsafe_writes: ${19:False}                                             # Influence when to use atomic operation to prevent data corruption or inconsistent reads from the target file  By default
+    attributes: ${20:value}                                                # The attributes the resulting file or directory should have  To get supported flags look at the man page for I(chattr) on
+    validate: ${21:value}                                                  # The validation command to run before copying into place  The path to the file to validate is passed in via '%s' which mu

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages SES inbound receipt rule sets
+# prefix: aws_ses_rule_set_snippet
+# key: ws_ses_rule_set
+# group: ansible
+# --
+
+- name: ${0:Manages SES inbound receipt rule sets}
+  aws_ses_rule_set:                                                        
+    name: ${1:The name of the receipt rule set}                            #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether to create (or update) or destroy the receipt rule set 
+    active: ${3:value}                                                     # Whether or not this rule set should be the active rule set  Only has an impact if I(state) is C(present)  If omitted, th
+    force: ${4:False}                                                      # When deleting a rule set, deactivate it first (AWS prevents deletion of the active rule set) 
+    debug_botocore_endpoint_logs: ${5:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${6:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${7:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${8:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${9:value}                                             # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${10:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${11:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${12:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

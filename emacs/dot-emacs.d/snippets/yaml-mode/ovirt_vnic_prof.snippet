@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Module to manage vNIC profile of network in oVirt/RHV
+# prefix: ovirt_vnic_profile_snippet
+# key: ovirt_vnic_prof
+# group: ansible
+# --
+
+- name: ${0:Module to manage vNIC profile of network in oVirt/RHV}
+  ovirt_vnic_profile:                                                      
+    name: ${1:A human-readable name in plain text}                         #
+    data_center: ${2:Datacenter name where network reside}                 #
+    network: ${3:Name of network to which is vNIC attached}                #
+    auth: ${4:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Should the vNIC be absent/present 
+    description: ${6:value}                                                # A human-readable description in plain text 
+    network_filter: ${7:value}                                             # The network filter enables to filter packets send to/from the VM's nic according to defined rules 
+    custom_properties: ${8:value}                                          # Custom properties applied to the vNIC profile  Custom properties is a list of dictionary which can have following values
+    qos: ${9:value}                                                        # Quality of Service attributes regulate inbound and outbound network traffic of the NIC 
+    port_mirroring: ${10:value}                                            # Enables port mirroring 
+    pass_through: ${11$$(yas-choose-value '("disabled" "enabled"))}        # choices: disabled;enabled  Enables passthrough to an SR-IOV-enabled host NIC  When enabled C(qos) and  C(network_filter)
+    migratable: ${12:value}                                                # Marks whether pass_through NIC is migratable or not 
+    wait: ${13:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${14:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${15:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${16:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${17:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

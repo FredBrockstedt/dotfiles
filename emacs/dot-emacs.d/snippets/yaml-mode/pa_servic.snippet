@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage FreeIPA service
+# prefix: ipa_service_snippet
+# key: pa_servic
+# group: ansible
+# --
+
+- name: ${0:Manage FreeIPA service}
+  ipa_service:                                                             
+    krbcanonicalname: ${1:principal of the service Can not be changed as it is the unique identifier}#
+    ipa_pass: ${2:Password of administrative user}                         # If the value is not specified in the task, the value of environment variable C(IPA_PASS) will be used instead  Note that
+    hosts: ${3:value}                                                      # defines the list of 'ManagedBy' hosts
+    force: ${4:value}                                                      # Force principal name even if host is not in DNS 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  S t a t e   t o   e n s u r e
+    ipa_port: ${6:443}                                                     # Port of FreeIPA / IPA server  If the value is not specified in the task, the value of environment variable C(IPA_PORT) w
+    ipa_host: ${{7:ipa}                                                    #example com} # not required  IP or hostname of IPA server  If the value is not specified in the task, the value of enviro
+    ipa_user: ${8:admin}                                                   # Administrative account used on IPA server  If the value is not specified in the task, the value of environment variable 
+    ipa_prot: ${9$$(yas-choose-value '("http" "https"))}                   # choices: http;https  Protocol used by IPA server  If the value is not specified in the task, the value of environment va
+    validate_certs: ${10:True}                                             # This only applies if C(ipa_prot) is I(https)  If set to C(no), the SSL certificates will not be validated  This should o
+    ipa_timeout: ${11:10}                                                  # Specifies idle timeout (in seconds) for the connection  For bulk operations, you may want to increase this in order to a

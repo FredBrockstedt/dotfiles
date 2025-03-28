@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP traps.
+# prefix: nxos_snmp_traps_snippet
+# key: xos_snmp_trap
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP traps.}
+  nxos_snmp_traps:                                                         
+    group: ${1$$(yas-choose-value '("aaa" "bfd" "bgp" "bridge" "callhome" "cfs" "config" "eigrp" "entity" "feature-control" "generic" "hsrp" "license" "link" "lldp" "mmode" "ospf" "pim" "rf" "rmon"
+    state: ${2$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  Manage the state of the resource 
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

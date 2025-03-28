@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages attributes of LAG/Ether-Bundle interfaces on IOS-XR devices.
+# prefix: iosxr_lag_interfaces_snippet
+# key: osxr_lag_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages attributes of LAG/Ether-Bundle interfaces on IOS-XR devices.}
+  iosxr_lag_interfaces:                                                    
+    config: ${1:value}                                                     # A   p r o v i d e d   L i n k   A g g r e g a t i o n   G r o u p   ( L A G )   c o n f i g u r a t i o n  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion 

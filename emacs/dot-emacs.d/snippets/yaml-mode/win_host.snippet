@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages hosts file entries on Windows.
+# prefix: win_hosts_snippet
+# key: win_host
+# group: ansible
+# --
+
+- name: ${0:Manages hosts file entries on Windows.}
+  win_hosts:                                                               
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the entry should be present or absent  If only I(canonical_name) is provided when C(sta
+    canonical_name: ${2:value}                                             # A canonical name for the host entry  required for C(state=present) 
+    ip_address: ${3:value}                                                 # The ip address for the host entry  Can be either IPv4 (A record) or IPv6 (AAAA record)  Required for C(state=present) 
+    aliases: ${4:value}                                                    # A list of additional names (cname records) for the host entry  Only applicable when C(state=present) 
+    action: ${5$$(yas-choose-value '("add" "remove" "set"))}               # choices: add;remove;set  Controls the behavior of I(aliases)  Only applicable when C(state=present)  If C(add), each ali

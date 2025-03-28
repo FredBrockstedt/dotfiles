@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Configures disk group policies on Cisco UCS Manager
+# prefix: ucs_disk_group_policy_snippet
+# key: ucs_disk_group_policy
+# group: ansible
+# --
+
+- name: ${0:Configures disk group policies on Cisco UCS Manager}
+  ucs_disk_group_policy:                                                   
+    name: ${1:The name of the disk group policy}                           # This name can be between 1 and 16 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of the disk group policy  If C(present), will verify that the disk group policy i
+    description: ${5:value}                                                # The user-defined description of the storage profile  Enter up to 256 characters  "You can use any characters or spaces e
+    raid_level: ${6$$(yas-choose-value '("stripe" "mirror" "mirror-stripe" "stripe-parity" "stripe-dual-parity" "stripe-parity-stripe" "stripe-dual-parity-stripe"))}# choices: stripe;mirror;mirror-
+    configuration_mode: ${7$$(yas-choose-value '("automatic" "manual"))}   # choices: automatic;manual  Disk group configuration mode  Choose one of the following: automatic - Automatically configu
+    num_drives: ${8:1}                                                     # Specify the number of drives for the disk group  This can be from 0 to 24  Option only applies when configuration mode i
+    drive_type: ${9$$(yas-choose-value '("unspecified" "HDD" "SSD"))}      # choices: unspecified;HDD;SSD  Specify the drive type to use in the drive group  This can be one of the following: unspec
+    num_ded_hot_spares: ${10:unspecified}                                  # Specify the number of hot spares for the disk group  This can be from 0 to 24  Option only applies when configuration mo
+    num_glob_hot_spares: ${11:unspecified}                                 # Specify the number of global hot spares for the disk group  This can be from 0 to 24  Option only applies when configura
+    min_drive_size: ${12:unspecified}                                      # Specify the minimum drive size or unspecified to allow all drive sizes  This can be from 0 to 10240 GB  Option only appl
+    use_remaining_disks: ${13$$(yas-choose-value '("true" "false"))}       # choices: yes;no  Specifies whether you can use all the remaining disks in the disk group or not  Option only applies whe
+    manual_disks: ${14:value}                                              # List of manually configured disks  Options are only used when you choose manual configuration_mode 
+    virtual_drive: ${15:value}                                             # Configuration of virtual drive options 
+    org_dn: ${16:org-root}                                                 # The distinguished name (dn) of the organization where the resource is assigned 
+    username: ${17:admin}                                                  # Username for Cisco UCS Manager authentication 
+    port: ${18:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${19:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${20:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${21:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

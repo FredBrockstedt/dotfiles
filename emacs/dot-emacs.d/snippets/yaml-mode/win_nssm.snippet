@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Install a service using NSSM
+# prefix: win_nssm_snippet
+# key: win_nssm
+# group: ansible
+# --
+
+- name: ${0:Install a service using NSSM}
+  win_nssm:                                                                
+    name: ${1:Name of the service to operate on}                           #
+    state: ${2$$(yas-choose-value '("absent" "present" "started" "stopped" "restarted"))}# choices: absent;present;started;stopped;restarted  State of the service on the system  Values C(started), 
+    application: ${3:value}                                                # The application binary to run as a service Required when I(state) is C(present), C(started), C(stopped), or C(restarted)
+    executable: ${{4:nssm}                                                 #exe} # not required  The location of the NSSM utility (in case it is not located in your PATH) 
+    description: ${5:value}                                                # The description to set for the service 
+    display_name: ${6:value}                                               # The display name to set for the service 
+    working_directory: ${7:value}                                          # The working directory to run the service executable from (defaults to the directory containing the application binary)
+    stdout_file: ${8:value}                                                # Path to receive output 
+    stderr_file: ${9:value}                                                # Path to receive error output 
+    app_parameters: ${10:value}                                            # A string representing a dictionary of parameters to be passed to the application when it starts  DEPRECATED since v2 8, 
+    arguments: ${11:value}                                                 # Parameters to be passed to the application when it starts  This can be either a simple string or a list  This parameter 
+    dependencies: ${12:value}                                              # Service dependencies that has to be started to trigger startup, separated by comma  DEPRECATED since v2 8, please use th
+    user: ${13:value}                                                      # User to be used for service startup  DEPRECATED since v2 8, please use the M(win_service) module instead 
+    password: ${14:value}                                                  # Password to be used for service startup  DEPRECATED since v2 8, please use the M(win_service) module instead 
+    start_mode: ${15$$(yas-choose-value '("auto" "delayed" "disabled" "manual"))}# choices: auto;delayed;disabled;manual  If C(auto) is selected, the service will start at bootup  C(delayed) causes

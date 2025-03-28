@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Executes Cisco NSO actions and verifies output.
+# prefix: nso_action_snippet
+# key: o_actio
+# group: ansible
+# --
+
+- name: ${0:Executes Cisco NSO actions and verifies output.}
+  nso_action:                                                              
+    path: ${1:P a t h   t o   N S O   a c t i o n }                        #
+    url: ${2:N S O   J S O N - R P C   U R L ,   h t t p : / / l o c a l h o s t : 8 0 8 0 / j s o n r p c}#
+    username: ${3:N S O   u s e r n a m e}                                 #
+    password: ${4:N S O   p a s s w o r d}                                 #
+    input: ${5:value}                                                      # N S O   a c t i o n   p a r a m e t e r s   
+
+    output_required: ${6:value}                                            # R e q u i r e d   o u t p u t   p a r a m e t e r s   
+
+    output_invalid: ${7:value}                                             # L i s t   o f   r e s u l t   p a r a m e t e r   n a m e s   t h a t   w i l l   c a u s e   t h e   t a s k   t o   f 
+    validate_strict: ${8:value}                                            # I f   s e t   t o   t r u e ,   t h e   t a s k   w i l l   f a i l   i f   a n y   o u t p u t   p a r a m e t e r s   
+    timeout: ${9:300}                                                      # J S O N - R P C   r e q u e s t   t i m e o u t   i n   s e c o n d s
+    validate_certs: ${10:False}                                            # W h e n   s e t   t o   t r u e ,   v a l i d a t e s   t h e   S S L   c e r t i f i c a t e   o f   N S O   w h e n   

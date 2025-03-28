@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Configure 1&1 load balancer.
+# prefix: oneandone_load_balancer_snippet
+# key: oneandone_load_balancer
+# group: ansible
+# --
+
+- name: ${0:Configure 1&1 load balancer.}
+  oneandone_load_balancer:                                                 
+    auth_token: ${1:Authenticating API token provided by 1&1}              #
+    load_balancer: ${2:The identifier (id or name) of the load balancer used with update state}#
+    name: ${3:Load balancer name used with present state}                  # Used as identifier (id or name) when used with absent state  maxLength=128
+    health_check_test: ${4$$(yas-choose-value '("NONE" "TCP" "HTTP" "ICMP"))}# Type of the health check  At the moment, HTTP is not allowed 
+    health_check_interval: ${5:Health check period in seconds}             # minimum=5, maximum=300, multipleOf=1
+    persistence: ${6:Persistence}                                          #
+    persistence_time: ${7:Persistence time in seconds}                     # Required if persistence is enabled  minimum=30, maximum=1200, multipleOf=1
+    method: ${8$$(yas-choose-value '("ROUND_ROBIN" "LEAST_CONNECTIONS"))}  # Balancing procedure 
+    rules: ${9:A list of rule objects that will be set for the load balancer}# Each rule must contain protocol, port_balancer, and port_server parameters, in addition to source parameter, which is 
+    state: ${10$$(yas-choose-value '("present" "absent" "update"))}        # choices: present;absent;update  Define a load balancer state to create, remove, or update 
+    api_url: ${11:value}                                                   # Custom API URL  Overrides the ONEANDONE_API_URL environement variable 
+    health_check_path: ${12:value}                                         # Url to call for checking  Required for HTTP health check  maxLength=1000
+    health_check_parse: ${13:value}                                        # Regular expression to check  Required for HTTP health check  maxLength=64
+    datacenter: ${14$$(yas-choose-value '("US" "ES" "DE" "GB"))}           # choices: US;ES;DE;GB  ID or country code of the datacenter where the load balancer will be created 
+    description: ${15:value}                                               # Description of the load balancer  maxLength=256
+    add_server_ips: ${16:value}                                            # A list of server identifiers (id or name) to be assigned to a load balancer  Used in combination with update state 
+    remove_server_ips: ${17:value}                                         # A list of server IP ids to be unassigned from a load balancer  Used in combination with update state 
+    add_rules: ${18:value}                                                 # A list of rules that will be added to an existing load balancer  It is syntax is the same as the one used for rules para
+    remove_rules: ${19:value}                                              # A list of rule ids that will be removed from an existing load balancer  Used in combination with update state 
+    wait: ${20:true}                                                       # wait for the instance to be in state 'running' before returning
+    wait_timeout: ${21:600}                                                # how long before wait gives up, in seconds
+    wait_interval: ${22:5}                                                 # Defines the number of seconds to wait when using the _wait_for methods

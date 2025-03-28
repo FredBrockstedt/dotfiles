@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Test for match against a security rule on PAN-OS devices or Panorama management console.
+# prefix: panos_match_rule_snippet
+# key: panos_match_ru
+# group: ansible
+# --
+
+- name: ${0:Test for match against a security rule on PAN-OS devices or Panorama management console.}
+  panos_match_rule:                                                        
+    ip_address: ${1:IP address (or hostname) of PAN-OS device being configured}#
+    password: ${2:Password credentials to use for auth unless I(api_key) is set}#
+    rule_type: ${3$$(yas-choose-value '("security" "nat"))}                # Type of rule  Valid types are I(security) or I(nat) 
+    source_ip: ${4:The source IP address}                                  #
+    vsys_id: ${5:vsys1}:ID of the VSYS object}                             #
+    username: ${6:admin}                                                   # Username credentials to use for auth unless I(api_key) is set 
+    api_key: ${7:value}                                                    # API key that can be used instead of I(username)/I(password) credentials 
+    source_zone: ${8:value}                                                # The source zone 
+    source_port: ${9:value}                                                # The source port 
+    source_user: ${10:value}                                               # The source user or group 
+    to_interface: ${11:value}                                              # The inbound interface in a NAT rule 
+    destination_zone: ${12:value}                                          # The destination zone 
+    destination_ip: ${13:value}                                            # The destination IP address 
+    destination_port: ${14:value}                                          # The destination port 
+    application: ${15:value}                                               # The application 
+    protocol: ${16:value}                                                  # The IP protocol number from 1 to 255 
+    category: ${17:value}                                                  # URL category

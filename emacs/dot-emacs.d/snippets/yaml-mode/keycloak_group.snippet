@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Allows administration of Keycloak groups via Keycloak API
+# prefix: keycloak_group_snippet
+# key: keycloak_group
+# group: ansible
+# --
+
+- name: ${0:Allows administration of Keycloak groups via Keycloak API}
+  keycloak_group:                                                          
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State of the group  On C(present), the group will be created if it does not yet exist, or updated with the parameters yo
+    auth_keycloak_url: ${2:URL to the Keycloak instance}                   #
+    auth_client_id: ${3:admin-cli}:OpenID Connect I(client_id) to authenticate to the API with}#
+    auth_realm: ${4:Keycloak realm name to authenticate to for API access} #
+    auth_username: ${5:Username to authenticate for API access with}       #
+    auth_password: ${6:Password to authenticate for API access with}       #
+    name: ${7:value}                                                       # Name of the group  This parameter is required only when creating or updating the group 
+    realm: ${8:master}                                                     # They Keycloak realm under which this group resides 
+    id: ${9:value}                                                         # The unique identifier for this group  This parameter is not required for updating or deleting a group but providing it w
+    attributes: ${10:value}                                                # A dict of key/value pairs to set as custom attributes for the group  Values may be single values (e g  a string) or a li
+    auth_client_secret: ${11:value}                                        # Client Secret to use in conjunction with I(auth_client_id) (if required) 
+    validate_certs: ${12:True}                                             # Verify TLS certificates (do not disable this in production) 

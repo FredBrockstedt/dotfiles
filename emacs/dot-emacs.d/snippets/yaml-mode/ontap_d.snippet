@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Create, delete, modify DNS servers.
+# prefix: na_ontap_dns_snippet
+# key: ontap_d
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Create, delete, modify DNS servers.}
+  na_ontap_dns:                                                            
+    vserver: ${1:The name of the vserver to use}                           #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the DNS servers should be enabled for the given vserver 
+    domains: ${6:value}                                                    # List of DNS domains such as 'sales bar com'  The first domain is the one that the Vserver belongs to 
+    nameservers: ${7:value}                                                # List of IPv4 addresses of name servers such as '123 123 123 123' 
+    skip_validation: ${8:value}                                            # By default, all nameservers are checked to validate they are available to resolve  If you DNS servers are not yet instal
+    https: ${9:False}                                                      # Enable and disable https
+    validate_certs: ${10:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${11:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${12:value}                                                    # The ontap api version to use
+    use_rest: ${13$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

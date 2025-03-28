@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages BFD session view configuration on HUAWEI CloudEngine devices.
+# prefix: ce_bfd_view_snippet
+# key: ce_bfd_view
+# group: ansible
+# --
+
+- name: ${0:Manages BFD session view configuration on HUAWEI CloudEngine devices.}
+  ce_bfd_view:                                                             
+    session_name: ${1:Specifies the name of a BFD session}                 # The value is a string of 1 to 15 case-sensitive characters without spaces 
+    local_discr: ${2:value}                                                # Specifies the local discriminator of a BFD session  The value is an integer that ranges from 1 to 16384 
+    remote_discr: ${3:value}                                               # Specifies the remote discriminator of a BFD session  The value is an integer that ranges from 1 to 4294967295 
+    min_tx_interval: ${4:value}                                            # Specifies the minimum interval for receiving BFD packets  The value is an integer that ranges from 50 to 1000, in millis
+    min_rx_interval: ${5:value}                                            # Specifies the minimum interval for sending BFD packets  The value is an integer that ranges from 50 to 1000, in millisec
+    detect_multi: ${6:value}                                               # Specifies the local detection multiplier of a BFD session  The value is an integer that ranges from 3 to 50 
+    wtr_interval: ${7:value}                                               # Specifies the WTR time of a BFD session  The value is an integer that ranges from 1 to 60, in minutes  The default value
+    tos_exp: ${8:value}                                                    # Specifies a priority for BFD control packets  The value is an integer ranging from 0 to 7  The default value is 7, which
+    admin_down: ${9:false}                                                 # Enables the BFD session to enter the AdminDown state  By default, a BFD session is enabled  The default value is bool ty
+    description: ${10:value}                                               # Specifies the description of a BFD session  The value is a string of 1 to 51 case-sensitive characters with spaces 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${12:value}                                                  # A dict object containing connection details 

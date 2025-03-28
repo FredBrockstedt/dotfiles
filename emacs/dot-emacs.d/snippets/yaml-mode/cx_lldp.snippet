@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP configuration on Ruckus ICX 7000 series switches
+# prefix: icx_lldp_snippet
+# key: cx_lldp
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP configuration on Ruckus ICX 7000 series switches}
+  icx_lldp:                                                                
+    interfaces: ${1:value}                                                 # specify interfaces
+    check_running_config: ${2:True}                                        # Check running configuration  This can be set as environment variable  Module will use environment variable value(default
+    state: ${3$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  Enables the receipt and transmission of Link Layer Discovery Protocol (LLDP

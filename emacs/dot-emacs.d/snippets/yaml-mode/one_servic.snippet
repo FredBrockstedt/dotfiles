@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Deploy and manage OpenNebula services
+# prefix: one_service_snippet
+# key: one_servic
+# group: ansible
+# --
+
+- name: ${0:Deploy and manage OpenNebula services}
+  one_service:                                                             
+    api_url: ${1:value}                                                    # URL of the OpenNebula OneFlow API server  It is recommended to use HTTPS so that the username/password are not transferr
+    api_username: ${2:value}                                               # Name of the user to login into the OpenNebula OneFlow API server  If not set then the value of the C(ONEFLOW_USERNAME) e
+    api_password: ${3:value}                                               # Password of the user to login into OpenNebula OneFlow API server  If not set then the value of the C(ONEFLOW_PASSWORD) e
+    template_name: ${4:value}                                              # Name of service template to use to create a new instance of a service
+    template_id: ${5:value}                                                # ID of a service template to use to create a new instance of a service
+    service_id: ${6:value}                                                 # ID of a service instance that you would like to manage
+    service_name: ${7:value}                                               # Name of a service instance that you would like to manage
+    unique: ${8:False}                                                     # Setting C(unique=yes) will make sure that there is only one service instance running with a name set with C(service_name
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  C(present) - instantiate a service from a template specified with C(template_id)/C(template_nam
+    mode: ${10:value}                                                      # Set permission mode of a service instance in octet format, e g  C(600) to give owner C(use) and C(manage) and nothing to
+    owner_id: ${11:value}                                                  # ID of the user which will be set as the owner of the service
+    group_id: ${12:value}                                                  # ID of the group which will be set as the group of the service
+    wait: ${13:False}                                                      # Wait for the instance to reach RUNNING state after DEPLOYING or COOLDOWN state after SCALING
+    wait_timeout: ${14:300}                                                # How long before wait gives up, in seconds
+    custom_attrs: ${15:namespace()}                                        # Dictionary of key/value custom attributes which will be used when instantiating a new service 
+    role: ${16:value}                                                      # Name of the role whose cardinality should be changed
+    cardinality: ${17:value}                                               # Number of VMs for the specified role
+    force: ${18:False}                                                     # Force the new cardinality even if it is outside the limits

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Module to manage logical networks in oVirt/RHV
+# prefix: ovirt_network_snippet
+# key: ovirt_network
+# group: ansible
+# --
+
+- name: ${0:Module to manage logical networks in oVirt/RHV}
+  ovirt_network:                                                           
+    name: ${1:Name of the network to manage}                               #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${3:value}                                                         # ID of the network to manage 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the network be present or absent
+    data_center: ${5:value}                                                # Datacenter name where network reside 
+    description: ${6:value}                                                # Description of the network 
+    comment: ${7:value}                                                    # Comment of the network 
+    vlan_tag: ${8:value}                                                   # Specify VLAN tag 
+    external_provider: ${9:value}                                          # Name of external network provider  At first it tries to import the network when not found it will create network in exte
+    vm_network: ${10:value}                                                # If I(True) network will be marked as network for VM  VM network carries traffic relevant to the virtual machine 
+    mtu: ${11:value}                                                       # Maximum transmission unit (MTU) of the network 
+    clusters: ${12:value}                                                  # List of dictionaries describing how the network is managed in specific cluster 
+    label: ${13:value}                                                     # Name of the label to assign to the network 
+    wait: ${14:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${15:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${16:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${17:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${18:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

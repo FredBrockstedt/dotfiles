@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Module for setup of SystemConfiguration Avi RESTful Object
+# prefix: avi_systemconfiguration_snippet
+# key: vi_systemconfiguratio
+# group: ansible
+# --
+
+- name: ${0:Module for setup of SystemConfiguration Avi RESTful Object}
+  avi_systemconfiguration:                                                 
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${2$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${3$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    admin_auth_configuration: ${4:value}                                   # Adminauthconfiguration settings for systemconfiguration 
+    default_license_tier: ${5:value}                                       # Specifies the default license tier which would be used by new clouds  Enum options - ENTERPRISE_16, ENTERPRISE_18  Field
+    dns_configuration: ${6:value}                                          # Dnsconfiguration settings for systemconfiguration 
+    dns_virtualservice_refs: ${7:value}                                    # Dns virtualservices hosting fqdn records for applications across avi vantage  If no virtualservices are provided, avi va
+    docker_mode: ${8:value}                                                # Boolean flag to set docker_mode  Default value when not specified in API or module is interpreted by Avi Controller as F
+    email_configuration: ${9:value}                                        # Emailconfiguration settings for systemconfiguration 
+    global_tenant_config: ${10:value}                                      # Tenantconfiguration settings for systemconfiguration 
+    linux_configuration: ${11:value}                                       # Linuxconfiguration settings for systemconfiguration 
+    mgmt_ip_access_control: ${12:value}                                    # Configure ip access control for controller to restrict open access 
+    ntp_configuration: ${13:value}                                         # Ntpconfiguration settings for systemconfiguration 
+    portal_configuration: ${14:value}                                      # Portalconfiguration settings for systemconfiguration 
+    proxy_configuration: ${15:value}                                       # Proxyconfiguration settings for systemconfiguration 
+    secure_channel_configuration: ${16:value}                              # Configure secure channel properties  Field introduced in 18 1 4, 18 2 1 
+    snmp_configuration: ${17:value}                                        # Snmpconfiguration settings for systemconfiguration 
+    ssh_ciphers: ${18:value}                                               # Allowed ciphers list for ssh to the management interface on the controller and service engines  If this is not specified
+    ssh_hmacs: ${19:value}                                                 # Allowed hmac list for ssh to the management interface on the controller and service engines  If this is not specified, a
+    url: ${20:value}                                                       # Avi controller URL of the object 
+    uuid: ${21:value}                                                      # Unique object identifier of the object 
+    welcome_workflow_complete: ${22:value}                                 # This flag is set once the initial controller setup workflow is complete  Field introduced in 18 2 3  Default value when 
+    controller: ${23:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${24:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${25:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${26:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${27:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{28:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${29:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${30:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${31:value}                         # It disables avi session information to be cached as a fact 

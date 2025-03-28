@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Create Cluster
+# prefix: na_elementsw_cluster_snippet
+# key: mentsw_cluster
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Create Cluster}
+  na_elementsw_cluster:                                                    
+    management_virtual_ip: ${1:Floating (virtual) IP address for the cluster on the management network}#
+    storage_virtual_ip: ${2:Floating (virtual) IP address for the cluster on the storage (iSCSI) network}#
+    nodes: ${3:Storage IP (SIP) addresses of the initial set of nodes making up the cluster}# nodes IP must be in the list 
+    hostname: ${4:The hostname or IP address of the SolidFire cluster}     #
+    username: ${5:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${6:Password for the specified user}                         #
+    replica_count: ${7:2}                                                  # Number of replicas of each piece of data to store in the cluster 
+    cluster_admin_username: ${8:value}                                     # Username for the cluster admin  If not provided, default to login username 
+    cluster_admin_password: ${9:value}                                     # Initial password for the cluster admin account  If not provided, default to login password 
+    accept_eula: ${10:value}                                               # Required to indicate your acceptance of the End User License Agreement when creating this cluster  To accept the EULA, s
+    attributes: ${11:value}                                                # List of name-value pairs in JSON object format 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Install and uninstalls Windows hotfixes
+# prefix: win_hotfix_snippet
+# key: win_hotfix
+# group: ansible
+# --
+
+- name: ${0:Install and uninstalls Windows hotfixes}
+  win_hotfix:                                                              
+    hotfix_identifier: ${1:value}                                          # The name of the hotfix as shown in DISM, see examples for details  This or C(hotfix_kb) MUST be set when C(state=absent)
+    hotfix_kb: ${2:value}                                                  # The name of the KB the hotfix relates to, see examples for details  This or C(hotfix_identifier) MUST be set when C(stat
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether to install or uninstall the hotfix  When C(present), C(source) MUST be set  When C(abse
+    source: ${4:value}                                                     # The path to the downloaded hotfix  msu file  This MUST be set if C(state=present) and MUST be a  msu hotfix file 

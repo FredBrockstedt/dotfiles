@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configure FlashArray Directory Service Roles
+# prefix: purefa_dsrole_snippet
+# key: purefa_dsro
+# group: ansible
+# --
+
+- name: ${0:Configure FlashArray Directory Service Roles}
+  purefa_dsrole:                                                           
+    fa_url: ${1:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${2:FlashArray API token for admin privileged user}         #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete directory service role
+    role: ${4$$(yas-choose-value '("array_admin" "ops_admin" "readonly" "storage_admin"))}# choices: array_admin;ops_admin;readonly;storage_admin  The directory service role to work on
+    group_base: ${5:value}                                                 # Specifies where the configured group is located in the directory tree  This field consists of Organizational Units (OUs)
+    group: ${6:value}                                                      # Sets the common Name (CN) of the configured directory service group containing users for the FlashBlade  This name shoul

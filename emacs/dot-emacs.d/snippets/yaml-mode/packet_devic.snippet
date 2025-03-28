@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage a bare metal server in the Packet Host.
+# prefix: packet_device_snippet
+# key: packet_devic
+# group: ansible
+# --
+
+- name: ${0:Manage a bare metal server in the Packet Host.}
+  packet_device:                                                           
+    project_id: ${1:ID of project of the device}                           #
+    auth_token: ${2:value}                                                 # Packet api token  You can also supply it in env var C(PACKET_API_TOKEN) 
+    count: ${3:1}                                                          # The number of devices to create  Count number can be included in hostname via the %d string formatter 
+    count_offset: ${4:1}                                                   # From which number to start the count 
+    device_ids: ${5:value}                                                 # List of device IDs on which to operate 
+    facility: ${6:value}                                                   # Facility slug for device creation  See Packet API for current list - U(https://www packet net/developers/api/facilities/
+    features: ${7:value}                                                   # Dict with "features" for device creation  See Packet API docs for details 
+    hostnames: ${8:value}                                                  # A hostname of a device, or a list of hostnames  If given string or one-item list, you can use the C("%d") Python string 
+    locked: ${9:False}                                                     # Whether to lock a created device 
+    operating_system: ${10:value}                                          # OS slug for device creation  See Packet API for current list - U(https://www packet net/developers/api/operatingsystems/
+    plan: ${11:value}                                                      # Plan slug for device creation  See Packet API for current list - U(https://www packet net/developers/api/plans/) 
+    state: ${12$$(yas-choose-value '("present" "absent" "active" "inactive" "rebooted"))}# choices: present;absent;active;inactive;rebooted  Desired state of the device  If set to C(present) (the d
+    user_data: ${13:value}                                                 # Userdata blob made available to the machine
+    wait_for_public_IPv: ${14$$(yas-choose-value '("4" "6"))}              # choices: 4;6  Whether to wait for the instance to be assigned a public IPv4/IPv6 address  If set to 4, it will wait unti
+    wait_timeout: ${15:900}                                                # How long (seconds) to wait either for automatic IP address assignment, or for the device to reach the C(active) I(state)
+    ipxe_script_url: ${16:value}                                           # URL of custom iPXE script for provisioning  More about custom iPXE for Packet devices at U(https://help packet net/techn
+    always_pxe: ${17:False}                                                # Persist PXE as the first boot option  Normally, the PXE process happens only on the first boot  Set this arg to have you

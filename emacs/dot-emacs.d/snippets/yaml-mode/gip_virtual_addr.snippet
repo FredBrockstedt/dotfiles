@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage LTM virtual addresses on a BIG-IP
+# prefix: bigip_virtual_address_snippet
+# key: gip_virtual_addr
+# group: ansible
+# --
+
+- name: ${0:Manage LTM virtual addresses on a BIG-IP}
+  bigip_virtual_address:                                                   
+    name: ${1:value}                                                       # Name of the virtual address  If this parameter is not provided, then the value of C(address) will be used 
+    address: ${2:value}                                                    # Virtual address  This value cannot be modified after it is set  If you never created a virtual address, but did create v
+    netmask: ${3:value}                                                    # Netmask of the provided virtual address  This value cannot be modified after it is set  When creating a new virtual addr
+    connection_limit: ${4:value}                                           # Specifies the number of concurrent connections that the system allows on this virtual address 
+    arp_state: ${5$$(yas-choose-value '("enabled" "disabled"))}            # choices: enabled;disabled  Specifies whether the system accepts ARP requests  When (disabled), specifies that the system
+    arp: ${6:value}                                                        # Specifies whether the system accepts ARP requests  When C(no), specifies that the system does not accept ARP requests  W
+    auto_delete: ${7:value}                                                # Specifies whether the system automatically deletes the virtual address with the deletion of the last associated virtual 
+    icmp_echo: ${8$$(yas-choose-value '("enabled" "disabled" "selective"))}# choices: enabled;disabled;selective  Specifies how the systems sends responses to (ICMP) echo requests on a per-virtual 
+    state: ${9$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  The virtual address state  If C(absent), an attempt to delete the virtual a
+    availability_calculation: ${10$$(yas-choose-value '("always" "when_all_available" "when_any_available"))}# choices: always;when_all_available;when_any_available  Specifies what routes of the vi
+    route_advertisement: ${11$$(yas-choose-value '("disabled" "enabled" "always" "selective" "any" "all"))}# choices: disabled;enabled;always;selective;any;all  Specifies whether the system uses ro
+    partition: ${12:Common}                                                # Device partition to manage resources on 
+    traffic_group: ${13:value}                                             # The traffic group for the virtual address  When creating a new address, if this value is not specified, the default of C
+    route_domain: ${14:value}                                              # The route domain of the C(address) that you want to use  This value cannot be modified after it is set 
+    spanning: ${15:value}                                                  # Enables all BIG-IP systems in a device group to listen for and process traffic on the same virtual address  Spanning for
+    provider: ${16:value}                                                  # A dict object containing connection details 

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages core NTP configuration.
+# prefix: nxos_ntp_snippet
+# key: xos_ntp
+# group: ansible
+# --
+
+- name: ${0:Manages core NTP configuration.}
+  nxos_ntp:                                                                
+    server: ${1:value}                                                     # Network address of NTP server 
+    peer: ${2:value}                                                       # Network address of NTP peer 
+    key_id: ${3:value}                                                     # Authentication key identifier to use with given NTP server or peer or keyword 'default' 
+    prefer: ${4$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  Makes given NTP server or peer the preferred NTP server or peer for the device 
+    vrf_name: ${5:value}                                                   # Makes the device communicate with the given NTP server or peer over a specific VRF or keyword 'default' 
+    source_addr: ${6:value}                                                # Local source address from which NTP messages are sent or keyword 'default'
+    source_int: ${7:value}                                                 # Local source interface from which NTP messages are sent  Must be fully qualified interface name or keyword 'default'
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 
+    provider: ${9:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

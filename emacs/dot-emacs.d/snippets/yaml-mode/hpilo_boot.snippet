@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Boot system using specific media through HP iLO interface
+# prefix: hpilo_boot_snippet
+# key: hpilo_boot
+# group: ansible
+# --
+
+- name: ${0:Boot system using specific media through HP iLO interface}
+  hpilo_boot:                                                              
+    host: ${1:The HP iLO hostname/address that is linked to the physical system}#
+    login: ${2:Administrator}                                              # The login name to authenticate to the HP iLO interface 
+    password: ${3:admin}                                                   # The password to authenticate to the HP iLO interface 
+    media: ${4$$(yas-choose-value '("cdrom" "floppy" "hdd" "network" "normal" "usb"))}# choices: cdrom;floppy;hdd;network;normal;usb  The boot media to boot the system from
+    image: ${5:value}                                                      # The URL of a cdrom, floppy or usb boot media image  protocol://username:password@hostname:port/filename protocol is eith
+    state: ${6$$(yas-choose-value '("boot_always" "boot_once" "connect" "disconnect" "no_boot" "poweroff"))}# choices: boot_always;boot_once;connect;disconnect;no_boot;poweroff  The state of the bo
+    force: ${7:False}                                                      # Whether to force a reboot (even when the system is already booted)  As a safeguard, without force, hpilo_boot will refus
+    ssl_version: ${8$$(yas-choose-value '("SSLv3" "SSLv23" "TLSv1" "TLSv1_1" "TLSv1_2"))}# choices: SSLv3;SSLv23;TLSv1;TLSv1_1;TLSv1_2  Change the ssl_version used 

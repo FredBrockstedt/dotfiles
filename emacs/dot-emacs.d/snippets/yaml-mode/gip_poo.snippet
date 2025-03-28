@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manages F5 BIG-IP LTM pools
+# prefix: bigip_pool_snippet
+# key: gip_poo
+# group: ansible
+# --
+
+- name: ${0:Manages F5 BIG-IP LTM pools}
+  bigip_pool:                                                              
+    name: ${1:Pool name}                                                   #
+    description: ${2:value}                                                # Specifies descriptive text that identifies the pool 
+    lb_method: ${3$$(yas-choose-value '("dynamic-ratio-member" "dynamic-ratio-node" "fastest-app-response" "fastest-node" "least-connections-member" "least-connections-node" "least-sessions" "obser
+    monitor_type: ${4$$(yas-choose-value '("and_list" "m_of_n" "single"))} # choices: and_list;m_of_n;single  Monitor rule type when C(monitors) is specified  When creating a new pool, if this valu
+    quorum: ${5:value}                                                     # Monitor quorum value when C(monitor_type) is C(m_of_n)  Quorum must be a value of 1 or greater when C(monitor_type) is C
+    monitors: ${6:value}                                                   # Monitor template name list  If the partition is not provided as part of the monitor name, then the C(partition) option w
+    slow_ramp_time: ${7:value}                                             # Sets the ramp-up time (in seconds) to gradually ramp up the load on newly added or freshly detected up pool members 
+    reselect_tries: ${8:value}                                             # Sets the number of times the system tries to contact a pool member after a passive failure 
+    service_down_action: ${9$$(yas-choose-value '("none" "reset" "drop" "reselect"))}# choices: none;reset;drop;reselect  Sets the action to take when node goes down in pool 
+    partition: ${10:Common}                                                # Device partition to manage resources on 
+    state: ${11$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  When C(present), guarantees that the pool exists with the provided attributes  When C(absent), 
+    metadata: ${12:value}                                                  # Arbitrary key/value pairs that you can attach to a pool  This is useful in situations where you might want to annotate a
+    priority_group_activation: ${13:value}                                 # Specifies whether the system load balances traffic according to the priority number assigned to the pool member  When cr
+    aggregate: ${14:value}                                                 # List of pool definitions to be created, modified or removed  When using C(aggregates) if one of the aggregate definition
+    replace_all_with: ${15:False}                                          # Remove pools not defined in the C(aggregate) parameter  This operation is all or none, meaning that it will stop if ther
+    provider: ${16:value}                                                  # A dict object containing connection details 

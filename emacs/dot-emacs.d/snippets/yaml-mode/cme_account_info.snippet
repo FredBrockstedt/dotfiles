@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Retrieves information on ACME accounts
+# prefix: acme_account_info_snippet
+# key: cme_account_info
+# group: ansible
+# --
+
+- name: ${0:Retrieves information on ACME accounts}
+  acme_account_info:                                                       
+    retrieve_orders: ${1$$(yas-choose-value '("ignore" "url_list" "object_list"))}# choices: ignore;url_list;object_list  Whether to retrieve the list of order URLs or order objects, if provided by
+    account_key_src: ${2:value}                                            # Path to a file containing the ACME account RSA or Elliptic Curve key  RSA keys can be created with C(openssl genrsa    )
+    account_key_content: ${3:value}                                        # Content of the ACME account RSA or Elliptic Curve key  Mutually exclusive with C(account_key_src)  Required if C(account
+    account_uri: ${4:value}                                                # If specified, assumes that the account URI is as given  If the account key does not match this account, or an account wi
+    acme_version: ${5$$(yas-choose-value '("1" "2"))}                      # choices: 1;2  The ACME version of the endpoint  Must be 1 for the classic Let's Encrypt and Buypass ACME endpoints, or 2
+    acme_directory: ${{6:https://acme-staging}                             #api letsencrypt org/directory} # not required  The ACME directory to use  This is the entry point URL to access CA server
+    validate_certs: ${7:True}                                              # Whether calls to the ACME directory will validate TLS certificates  I(Warning): Should I(only ever) be set to C(no) for 
+    select_crypto_backend: ${8$$(yas-choose-value '("auto" "cryptography" "openssl"))}# choices: auto;cryptography;openssl  Determines which crypto backend to use  The default choice is C(auto), wh

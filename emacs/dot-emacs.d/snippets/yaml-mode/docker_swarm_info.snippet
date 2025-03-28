@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Retrieves facts about Docker Swarm cluster.
+# prefix: docker_swarm_info_snippet
+# key: docker_swarm_info
+# group: ansible
+# --
+
+- name: ${0:Retrieves facts about Docker Swarm cluster.}
+  docker_swarm_info:                                                       
+    nodes: ${1:False}                                                      # Whether to list swarm nodes 
+    nodes_filters: ${2:value}                                              # A dictionary of filter values used for selecting nodes to list  For example, C(name: mynode)  See L(the docker documenta
+    services: ${3:False}                                                   # Whether to list swarm services 
+    services_filters: ${4:value}                                           # A dictionary of filter values used for selecting services to list  For example, C(name: myservice)  See L(the docker doc
+    tasks: ${5:False}                                                      # Whether to list containers 
+    tasks_filters: ${6:value}                                              # A dictionary of filter values used for selecting tasks to list  For example, C(node: mynode-1)  See L(the docker documen
+    unlock_key: ${7:False}                                                 # Whether to retrieve the swarm unlock key 
+    verbose_output: ${8:False}                                             # When set to C(yes) and I(nodes), I(services) or I(tasks) is set to C(yes), then the module output will contain verbose i
+    docker_host: ${{9:unix://var/run/docker}                               #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${10:localhost}                                          # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${11:auto}                                                # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${12:60}                                                      # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${13:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${14:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${15:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${16:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${17:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${18:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${19:False}                                                     # Debug mode

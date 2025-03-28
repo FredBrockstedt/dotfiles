@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manages users on Apache CloudStack based clouds.
+# prefix: cs_user_snippet
+# key: cs_user
+# group: ansible
+# --
+
+- name: ${0:Manages users on Apache CloudStack based clouds.}
+  cs_user:                                                                 
+    username: ${1:Username of the user}                                    #
+    account: ${2:value}                                                    # Account the user will be created under  Required on I(state=present) 
+    password: ${3:value}                                                   # Password of the user to be created  Required on I(state=present)  Only considered on creation and will not be updated if
+    first_name: ${4:value}                                                 # First name of the user  Required on I(state=present) 
+    last_name: ${5:value}                                                  # Last name of the user  Required on I(state=present) 
+    email: ${6:value}                                                      # Email of the user  Required on I(state=present) 
+    timezone: ${7:value}                                                   # Timezone of the user 
+    keys_registered: ${8:False}                                            # If API keys of the user should be generated  Note: Keys can not be removed by the API again 
+    domain: ${9:ROOT}                                                      # Domain the user is related to 
+    state: ${10$$(yas-choose-value '("present" "absent" "enabled" "disabled" "locked" "unlocked"))}# choices: present;absent;enabled;disabled;locked;unlocked  State of the user  C(unlocked) is an a
+    poll_async: ${11:True}                                                 # Poll async jobs until job has finished 
+    api_key: ${12:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${13:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${14:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${15$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${16:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${17:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Add or remove PostgreSQL schema
+# prefix: postgresql_schema_snippet
+# key: postgresql_schem
+# group: ansible
+# --
+
+- name: ${0:Add or remove PostgreSQL schema}
+  postgresql_schema:                                                       
+    name: ${1:Name of the schema to add or remove}                         #
+    database: ${2:postgres}                                                # Name of the database to connect to and add or remove the schema 
+    owner: ${3:value}                                                      # Name of the role to set as owner of the schema 
+    session_role: ${4:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The schema state 
+    cascade_drop: ${6:False}                                               # Drop schema with CASCADE to remove child objects 
+    ssl_mode: ${7$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wha
+    ca_cert: ${8:value}                                                    # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 
+    login_user: ${9:postgres}                                              # The username used to authenticate with 
+    login_password: ${10:value}                                            # The password used to authenticate with 
+    login_host: ${11:value}                                                # Host running the database 
+    login_unix_socket: ${12:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${13:5432}                                                       # Database port to connect to 

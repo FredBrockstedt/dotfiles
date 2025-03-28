@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Create PagerDuty maintenance windows
+# prefix: pagerduty_snippet
+# key: pagerduty
+# group: ansible
+# --
+
+- name: ${0:Create PagerDuty maintenance windows}
+  pagerduty:                                                               
+    state: ${1$$(yas-choose-value '("running" "started" "ongoing" "absent"))}# Create a maintenance window or get a list of ongoing windows 
+    token: ${2:A pagerduty token, generated on the pagerduty site}         # It is used for authorization 
+    name: ${3:value}                                                       # PagerDuty unique subdomain  Obsolete  It is not used with PagerDuty REST v2 API 
+    user: ${4:value}                                                       # PagerDuty user ID  Obsolete  Please, use I(token) for authorization 
+    requester_id: ${5:value}                                               # ID of user making the request  Only needed when creating a maintenance_window 
+    service: ${6:value}                                                    # A comma separated list of PagerDuty service IDs 
+    window_id: ${7:value}                                                  # ID of maintenance window  Only needed when absent a maintenance_window 
+    hours: ${8:1}                                                          # Length of maintenance window in hours 
+    minutes: ${9:0}                                                        # Maintenance window in minutes (this is added to the hours) 
+    desc: ${10:"Created by Ansible"}                                       # Short description of maintenance window 
+    validate_certs: ${11:true}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages SELinux file context mapping definitions
+# prefix: sefcontext_snippet
+# key: fcontext
+# group: ansible
+# --
+
+- name: ${0:Manages SELinux file context mapping definitions}
+  sefcontext:                                                              
+    target: ${1:Target path (expression)}                                  #
+    setype: ${2:SELinux type for the specified target}                     #
+    ftype: ${3$$(yas-choose-value '("a" "b" "c" "d" "f" "l" "p" "s"))}     # choices: a;b;c;d;f;l;p;s  The file type that should have SELinux contexts applied  The following file type options are a
+    seuser: ${4:value}                                                     # SELinux user for the specified target 
+    selevel: ${5:value}                                                    # SELinux range for the specified target 
+    state: ${6$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the SELinux file context must be C(absent) or C(present) 
+    reload: ${7:True}                                                      # Reload SELinux policy after commit  Note that this does not apply SELinux file contexts to existing files 
+    ignore_selinux_state: ${8:False}                                       # Useful for scenarios (chrooted environment) that you can't get the real SELinux state 

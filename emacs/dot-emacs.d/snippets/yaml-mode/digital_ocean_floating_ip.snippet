@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage DigitalOcean Floating IPs
+# prefix: digital_ocean_floating_ip_snippet
+# key: digital_ocean_floating_ip
+# group: ansible
+# --
+
+- name: ${0:Manage DigitalOcean Floating IPs}
+  digital_ocean_floating_ip:                                               
+    oauth_token: ${1:DigitalOcean OAuth token}                             #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the target 
+    ip: ${3:value}                                                         # Public IP address of the Floating IP  Used to remove an IP
+    region: ${4:value}                                                     # The region that the Floating IP is reserved to 
+    droplet_id: ${5:value}                                                 # The Droplet that the Floating IP has been assigned to 

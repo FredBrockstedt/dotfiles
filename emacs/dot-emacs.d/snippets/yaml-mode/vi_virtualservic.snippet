@@ -1,0 +1,119 @@
+# -*- mode: snippet -*-
+# name: Module for setup of VirtualService Avi RESTful Object
+# prefix: avi_virtualservice_snippet
+# key: vi_virtualservic
+# group: ansible
+# --
+
+- name: ${0:Module for setup of VirtualService Avi RESTful Object}
+  avi_virtualservice:                                                      
+    name: ${1:Name for the virtual service}                                #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    active_standby_se_tag: ${5:value}                                      # This configuration only applies if the virtualservice is in legacy active standby ha mode and load distribution among ac
+    allow_invalid_client_cert: ${6:value}                                  # Process request even if invalid client certificate is presented  Datascript apis need to be used for processing of such 
+    analytics_policy: ${7:value}                                           # Determines analytics settings for the application 
+    analytics_profile_ref: ${8:value}                                      # Specifies settings related to analytics  It is a reference to an object of type analyticsprofile 
+    apic_contract_graph: ${9:value}                                        # The name of the contract/graph associated with the virtual service  Should be in the <contract name> <graph name> format
+    application_profile_ref: ${10:value}                                   # Enable application layer specific features for the virtual service  It is a reference to an object of type applicationpr
+    auto_allocate_floating_ip: ${11:value}                                 # Auto-allocate floating/elastic ip from the cloud infrastructure  Field deprecated in 17 1 1 
+    auto_allocate_ip: ${12:value}                                          # Auto-allocate vip from the provided subnet  Field deprecated in 17 1 1 
+    availability_zone: ${13:value}                                         # Availability-zone to place the virtual service  Field deprecated in 17 1 1 
+    avi_allocated_fip: ${14:value}                                         # (internal-use) fip allocated by avi in the cloud infrastructure  Field deprecated in 17 1 1 
+    avi_allocated_vip: ${15:value}                                         # (internal-use) vip allocated by avi in the cloud infrastructure  Field deprecated in 17 1 1 
+    azure_availability_set: ${16:value}                                    # (internal-use)applicable for azure only  Azure availability set to which this vs is associated  Internally set by the cl
+    bulk_sync_kvcache: ${17:value}                                         # (this is a beta feature)  Sync key-value cache to the new ses when vs is scaled out  For ex  ssl sessions are stored usi
+    client_auth: ${18:value}                                               # Http authentication configuration for protected resources 
+    close_client_conn_on_config_update: ${19:value}                        # Close client connection on vs config update  Field introduced in 17 2 4  Default value when not specified in API or modu
+    cloud_config_cksum: ${20:value}                                        # Checksum of cloud configuration for vs  Internally set by cloud connector 
+    cloud_ref: ${21:value}                                                 # It is a reference to an object of type cloud 
+    cloud_type: ${22:value}                                                # Enum options - cloud_none, cloud_vcenter, cloud_openstack, cloud_aws, cloud_vca, cloud_apic, cloud_mesos, cloud_linuxser
+    connections_rate_limit: ${23:value}                                    # Rate limit the incoming connections to this virtual service 
+    content_rewrite: ${24:value}                                           # Profile used to match and rewrite strings in request and/or response body 
+    created_by: ${25:value}                                                # Creator name 
+    delay_fairness: ${26:value}                                            # Select the algorithm for qos fairness  This determines how multiple virtual services sharing the same service engines wi
+    description: ${27:value}                                               # User defined description for the object 
+    discovered_network_ref: ${28:value}                                    # (internal-use) discovered networks providing reachability for client facing virtual service ip  This field is deprecated
+    discovered_networks: ${29:value}                                       # (internal-use) discovered networks providing reachability for client facing virtual service ip  This field is used inter
+    discovered_subnet: ${30:value}                                         # (internal-use) discovered subnets providing reachability for client facing virtual service ip  This field is deprecated 
+    dns_info: ${31:value}                                                  # Service discovery specific data including fully qualified domain name, type and time-to-live of the dns record  Note tha
+    dns_policies: ${32:value}                                              # Dns policies applied on the dns traffic of the virtual service  Field introduced in 17 1 1 
+    east_west_placement: ${33:value}                                       # Force placement on all se's in service group (mesos mode only)  Default value when not specified in API or module is int
+    enable_autogw: ${34:value}                                             # Response traffic to clients will be sent back to the source mac address of the connection, rather than statically sent t
+    enable_rhi: ${35:value}                                                # Enable route health injection using the bgp config in the vrf context 
+    enable_rhi_snat: ${36:value}                                           # Enable route health injection for source nat'ted floating ip address using the bgp config in the vrf context 
+    enabled: ${37:value}                                                   # Enable or disable the virtual service  Default value when not specified in API or module is interpreted by Avi Controlle
+    error_page_profile_ref: ${38:value}                                    # Error page profile to be used for this virtualservice this profile is used to send the custom error page to the client g
+    floating_ip: ${39:value}                                               # Floating ip to associate with this virtual service  Field deprecated in 17 1 1 
+    floating_subnet_uuid: ${40:value}                                      # If auto_allocate_floating_ip is true and more than one floating-ip subnets exist, then the subnet for the floating ip ad
+    flow_dist: ${41:value}                                                 # Criteria for flow distribution among ses  Enum options - LOAD_AWARE, CONSISTENT_HASH_SOURCE_IP_ADDRESS, CONSISTENT_HASH_
+    flow_label_type: ${42:value}                                           # Criteria for flow labelling  Enum options - NO_LABEL, APPLICATION_LABEL, SERVICE_LABEL  Default value when not specified
+    fqdn: ${43:value}                                                      # Dns resolvable, fully qualified domain name of the virtualservice  Only one of 'fqdn' and 'dns_info' configuration is al
+    host_name_xlate: ${44:value}                                           # Translate the host name sent to the servers to this value  Translate the host name sent from servers back to the value u
+    http_policies: ${45:value}                                             # Http policies applied on the data traffic of the virtual service 
+    ign_pool_net_reach: ${46:value}                                        # Ignore pool servers network reachability constraints for virtual service placement  Default value when not specified in 
+    ip_address: ${47:value}                                                # Ip address of the virtual service  Field deprecated in 17 1 1 
+    ipam_network_subnet: ${48:value}                                       # Subnet and/or network for allocating virtualservice ip by ipam provider module  Field deprecated in 17 1 1 
+    l4_policies: ${49:value}                                               # L4 policies applied to the data traffic of the virtual service  Field introduced in 17 2 7 
+    limit_doser: ${50:value}                                               # Limit potential dos attackers who exceed max_cps_per_client significantly to a fraction of max_cps_per_client for a whil
+    max_cps_per_client: ${51:value}                                        # Maximum connections per second per client ip  Allowed values are 10-1000  Special values are 0- 'unlimited'  Default val
+    microservice_ref: ${52:value}                                          # Microservice representing the virtual service  It is a reference to an object of type microservice 
+    min_pools_up: ${53:value}                                              # Minimum number of up pools to mark vs up  Field introduced in 18 2 1, 17 2 12 
+    network_profile_ref: ${54:value}                                       # Determines network settings such as protocol, tcp or udp, and related options for the protocol  It is a reference to an 
+    network_ref: ${55:value}                                               # Manually override the network on which the virtual service is placed  It is a reference to an object of type network  Fi
+    network_security_policy_ref: ${56:value}                               # Network security policies for the virtual service  It is a reference to an object of type networksecuritypolicy 
+    nsx_securitygroup: ${57:value}                                         # A list of nsx service groups representing the clients which can access the virtual ip of the virtual service  Field intr
+    performance_limits: ${58:value}                                        # Optional settings that determine performance limits like max connections or bandwidth etc 
+    pool_group_ref: ${59:value}                                            # The pool group is an object that contains pools  It is a reference to an object of type poolgroup 
+    pool_ref: ${60:value}                                                  # The pool is an object that contains destination servers and related attributes such as load-balancing and persistence  I
+    port_uuid: ${61:value}                                                 # (internal-use) network port assigned to the virtual service ip address  Field deprecated in 17 1 1 
+    remove_listening_port_on_vs_down: ${62:value}                          # Remove listening port if virtualservice is down  Default value when not specified in API or module is interpreted by Avi
+    requests_rate_limit: ${63:value}                                       # Rate limit the incoming requests to this virtual service 
+    saml_sp_config: ${64:value}                                            # Application-specific saml config  Field introduced in 18 2 3 
+    scaleout_ecmp: ${65:value}                                             # Disable re-distribution of flows across service engines for a virtual service  Enable if the network itself performs flo
+    se_group_ref: ${66:value}                                              # The service engine group to use for this virtual service  Moving to a new se group is disruptive to existing connections
+    security_policy_ref: ${67:value}                                       # Security policy applied on the traffic of the virtual service  This policy is used to perform security actions such as d
+    server_network_profile_ref: ${68:value}                                # Determines the network settings profile for the server side of tcp proxied connections  Leave blank to use the same sett
+    service_metadata: ${69:value}                                          # Metadata pertaining to the service provided by this virtual service  In openshift/kubernetes environments, egress pod in
+    service_pool_select: ${70:value}                                       # Select pool based on destination port 
+    services: ${71:value}                                                  # List of services defined for this virtual service 
+    sideband_profile: ${72:value}                                          # Sideband configuration to be used for this virtualservice it can be used for sending traffic to sideband vips for extern
+    snat_ip: ${73:value}                                                   # Nat'ted floating source ip address(es) for upstream connection to servers 
+    sp_pool_refs: ${74:value}                                              # Gslb pools used to manage site-persistence functionality  Each site-persistence pool contains the virtualservices in all
+    ssl_key_and_certificate_refs: ${75:value}                              # Select or create one or two certificates, ec and/or rsa, that will be presented to ssl/tls terminated connections  It is
+    ssl_profile_ref: ${76:value}                                           # Determines the set of ssl versions and ciphers to accept for ssl/tls terminated connections  It is a reference to an obj
+    ssl_profile_selectors: ${77:value}                                     # Select ssl profile based on client ip address match  Field introduced in 18 2 3 
+    ssl_sess_cache_avg_size: ${78:value}                                   # Expected number of ssl session cache entries (may be exceeded)  Allowed values are 1024-16383  Default value when not sp
+    sso_policy: ${79:value}                                                # Client authentication and authorization policy for the virtualservice  Field deprecated in 18 2 3  Field introduced in 1
+    sso_policy_ref: ${80:value}                                            # The sso policy attached to the virtualservice  It is a reference to an object of type ssopolicy  Field introduced in 18 
+    static_dns_records: ${81:value}                                        # List of static dns records applied to this virtual service  These are static entries and no health monitoring is perform
+    subnet: ${82:value}                                                    # Subnet providing reachability for client facing virtual service ip  Field deprecated in 17 1 1 
+    subnet_uuid: ${83:value}                                               # It represents subnet for the virtual service ip address allocation when auto_allocate_ip is true it is only applicable i
+    tenant_ref: ${84:value}                                                # It is a reference to an object of type tenant 
+    topology_policies: ${85:value}                                         # Topology policies applied on the dns traffic of the virtual service based ongslb topology algorithm  Field introduced in
+    traffic_clone_profile_ref: ${86:value}                                 # Server network or list of servers for cloning traffic  It is a reference to an object of type trafficcloneprofile  Field
+    traffic_enabled: ${87:value}                                           # Knob to enable the virtual service traffic on its assigned service engines  This setting is effective only when the enab
+    type: ${88:value}                                                      # Specify if this is a normal virtual service, or if it is the parent or child of an sni-enabled virtual hosted virtual se
+    url: ${89:value}                                                       # Avi controller URL of the object 
+    use_bridge_ip_as_vip: ${90:value}                                      # Use bridge ip as vip on each host in mesos deployments  Default value when not specified in API or module is interpreted
+    use_vip_as_snat: ${91:value}                                           # Use the virtual ip as the snat ip for health monitoring and sending traffic to the backend servers instead of the servic
+    uuid: ${92:value}                                                      # Uuid of the virtualservice 
+    vh_domain_name: ${93:value}                                            # The exact name requested from the client's sni-enabled tls hello domain name field  If this is a match, the parent vs wi
+    vh_parent_vs_uuid: ${94:value}                                         # Specifies the virtual service acting as virtual hosting (sni) parent 
+    vip: ${95:value}                                                       # List of virtual service ips  While creating a 'shared vs',please use vsvip_ref to point to the shared entities  Field in
+    vrf_context_ref: ${96:value}                                           # Virtual routing context that the virtual service is bound to  This is used to provide the isolation of the set of networ
+    vs_datascripts: ${97:value}                                            # Datascripts applied on the data traffic of the virtual service 
+    vsvip_cloud_config_cksum: ${98:value}                                  # Checksum of cloud configuration for vsvip  Internally set by cloud connector  Field introduced in 17 2 9, 18 1 2 
+    vsvip_ref: ${99:value}                                                 # Mostly used during the creation of shared vs, this field refers to entities that can be shared across virtual services  
+    waf_policy_ref: ${100:value}                                           # Waf policy for the virtual service  It is a reference to an object of type wafpolicy  Field introduced in 17 2 1 
+    weight: ${101:value}                                                   # The quality of service weight to assign to traffic transmitted from this virtual service  A higher weight will prioritiz
+    controller: ${102:}                                                    # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${103:}                                                      # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${104:}                                                      # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${105:admin}                                                   # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${106:}                                                   # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{107:16}                                                #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${108:value}                                          # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${109:value}                                              # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${110:value}                        # It disables avi session information to be cached as a fact 

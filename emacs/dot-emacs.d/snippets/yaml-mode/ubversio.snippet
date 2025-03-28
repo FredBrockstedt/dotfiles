@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Deploys a subversion repository
+# prefix: subversion_snippet
+# key: ubversio
+# group: ansible
+# --
+
+- name: ${0:Deploys a subversion repository}
+  subversion:                                                              
+    repo: ${1:The subversion URL to the repository}                        #
+    dest: ${2:Absolute path where the repository should be deployed}       #
+    revision: ${3:HEAD}                                                    # Specific revision to checkout 
+    force: ${4:false}                                                      # If C(yes), modified files will be discarded  If C(no), module will fail if it encounters modified files  Prior to 1 9 th
+    in_place: ${5:false}                                                   # If the directory exists, then the working copy will be checked-out over-the-top using svn checkout --force; if force is 
+    username: ${6:value}                                                   # C(--username) parameter passed to svn 
+    password: ${7:value}                                                   # C(--password) parameter passed to svn 
+    executable: ${8:value}                                                 # Path to svn executable to use  If not supplied, the normal mechanism for resolving binary paths will be used 
+    checkout: ${9:true}                                                    # If C(no), do not check out the repository if it does not exist locally 
+    update: ${10:true}                                                     # If C(no), do not retrieve new revisions from the origin repository 
+    export: ${11:false}                                                    # If C(yes), do export instead of checkout/update 
+    switch: ${12:true}                                                     # If C(no), do not call svn switch before update 

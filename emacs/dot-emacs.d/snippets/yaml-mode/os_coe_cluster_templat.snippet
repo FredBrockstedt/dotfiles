@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: Add/Remove COE cluster template from OpenStack Cloud
+# prefix: os_coe_cluster_template_snippet
+# key: os_coe_cluster_templat
+# group: ansible
+# --
+
+- name: ${0:Add/Remove COE cluster template from OpenStack Cloud}
+  os_coe_cluster_template:                                                 
+    name: ${1:Name that has to be given to the cluster template}           #
+    availability_zone: ${2:value}                                          # Ignored  Present for backwards compatibility
+    coe: ${3$$(yas-choose-value '("kubernetes" "swarm" "mesos"))}          # choices: kubernetes;swarm;mesos  The Container Orchestration Engine for this clustertemplate
+    dns_nameserver: ${{4:8}                                                #8 8 8} # not required  The DNS nameserver address
+    docker_storage_driver: ${5$$(yas-choose-value '("devicemapper" "overlay"))}# choices: devicemapper;overlay  Docker storage driver
+    docker_volume_size: ${6:value}                                         # The size in GB of the docker volume
+    external_network_id: ${7:value}                                        # The external network to attach to the Cluster
+    fixed_network: ${8:value}                                              # The fixed network name to attach to the Cluster
+    fixed_subnet: ${9:value}                                               # The fixed subnet name to attach to the Cluster
+    flavor_id: ${10:value}                                                 # The flavor of the minion node for this ClusterTemplate
+    floating_ip_enabled: ${11:true}                                        # Indicates whether created clusters should have a floating ip or not
+    keypair_id: ${12:value}                                                # Name or ID of the keypair to use 
+    image_id: ${13:value}                                                  # Image id the cluster will be based on
+    labels: ${14:value}                                                    # One or more key/value pairs
+    http_proxy: ${15:value}                                                # Address of a proxy that will receive all HTTP requests and relay them The format is a URL including a port number
+    https_proxy: ${16:value}                                               # Address of a proxy that will receive all HTTPS requests and relay them  The format is a URL including a port number
+    master_flavor_id: ${17:value}                                          # The flavor of the master node for this ClusterTemplate
+    master_lb_enabled: ${18:false}                                         # Indicates whether created clusters should have a load balancer for master nodes or not
+    network_driver: ${19$$(yas-choose-value '("flannel" "calico" "docker"))}# choices: flannel;calico;docker  The name of the driver used for instantiating container networks
+    no_proxy: ${20:value}                                                  # A comma separated list of IPs for which proxies should not be used in the cluster
+    public: ${21:false}                                                    # Indicates whether the ClusterTemplate is public or not
+    registry_enabled: ${22:false}                                          # Indicates whether the docker registry is enabled
+    server_type: ${23$$(yas-choose-value '("vm" "bm"))}                    # choices: vm;bm  Server type for this ClusterTemplate
+    state: ${24$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Indicate desired state of the resource 
+    tls_disabled: ${25:false}                                              # Indicates whether the TLS should be disabled
+    volume_driver: ${26$$(yas-choose-value '("cinder" "rexray"))}          # choices: cinder;rexray  The name of the driver used for instantiating container volumes
+    cloud: ${27:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${28:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${29:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${30:value}                                               # Name of the region 
+    wait: ${31:True}                                                       # Should ansible wait until the requested resource is complete 
+    timeout: ${32:180}                                                     # How long should ansible wait for the requested resource 
+    api_timeout: ${33:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${34:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${35:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${36:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${37:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${38$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

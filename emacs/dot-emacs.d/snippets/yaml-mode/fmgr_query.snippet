@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Query FortiManager data objects for use in Ansible workflows.
+# prefix: fmgr_query_snippet
+# key: fmgr_query
+# group: ansible
+# --
+
+- name: ${0:Query FortiManager data objects for use in Ansible workflows.}
+  fmgr_query:                                                              
+    object: ${1$$(yas-choose-value '("device" "cluster_nodes" "task" "custom"))}# The data object we wish to query (device, package, rule, etc)  Will expand choices as improves 
+    adom: ${2:root}                                                        # The ADOM the configuration should belong to 
+    custom_endpoint: ${3:value}                                            # ADVANCED USERS ONLY! REQUIRES KNOWLEDGE OF FMGR JSON API! The HTTP Endpoint on FortiManager you wish to GET from 
+    custom_dict: ${4:value}                                                # ADVANCED USERS ONLY! REQUIRES KNOWLEDGE OF FMGR JSON API! DICTIONARY JSON FORMAT ONLY -- Custom dictionary/datagram to s
+    device_ip: ${5:value}                                                  # The IP of the device you want to query 
+    device_unique_name: ${6:value}                                         # The desired "friendly" name of the device you want to query 
+    device_serial: ${7:value}                                              # The serial number of the device you want to query 
+    task_id: ${8:value}                                                    # The ID of the task you wish to query status on  If left blank and object = 'task' a list of tasks are returned 
+    nodes: ${9:value}                                                      # A LIST of firewalls in the cluster you want to verify i e  ["firewall_A","firewall_B"] 

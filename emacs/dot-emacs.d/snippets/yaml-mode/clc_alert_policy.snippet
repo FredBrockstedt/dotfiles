@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create or Delete Alert Policies at CenturyLink Cloud.
+# prefix: clc_alert_policy_snippet
+# key: clc_alert_policy
+# group: ansible
+# --
+
+- name: ${0:Create or Delete Alert Policies at CenturyLink Cloud.}
+  clc_alert_policy:                                                        
+    alias: ${1:The alias of your CLC Account}                              #
+    name: ${2:value}                                                       # The name of the alert policy  This is mutually exclusive with id
+    id: ${3:value}                                                         # The alert policy id  This is mutually exclusive with name
+    alert_recipients: ${4:value}                                           # A list of recipient email ids to notify the alert  This is required for state 'present'
+    metric: ${5$$(yas-choose-value '("cpu" "memory" "disk"))}              # choices: cpu;memory;disk  The metric on which to measure the condition that will trigger the alert  This is required for
+    duration: ${6:value}                                                   # The length of time in minutes that the condition must exceed the threshold  This is required for state 'present'
+    threshold: ${7:value}                                                  # The threshold that will trigger the alert when the metric equals or exceeds it  This is required for state 'present' Thi
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether to create or delete the policy 

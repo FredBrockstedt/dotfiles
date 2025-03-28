@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about the OneView Network Sets
+# prefix: oneview_network_set_info_snippet
+# key: oneview_network_set_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about the OneView Network Sets}
+  oneview_network_set_info:                                                
+    name: ${1:value}                                                       # Network Set name 
+    options: ${2:value}                                                    # List with options to gather information about Network Set  Option allowed: C(withoutEthernet)  The option C(withoutEther
+    config: ${3:value}                                                     # Path to a  json configuration file containing the OneView client configuration  The configuration file is optional and w
+    params: ${4:value}                                                     # List of params to delimit, filter and sort the list of resources  params allowed: - C(start): The first item to return, 

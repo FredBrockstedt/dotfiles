@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Send a message to typetalk
+# prefix: typetalk_snippet
+# key: typetalk
+# group: ansible
+# --
+
+- name: ${0:Send a message to typetalk}
+  typetalk:                                                                
+    client_id: ${1:OAuth2 client ID}                                       #
+    client_secret: ${2:OAuth2 client secret}                               #
+    topic: ${3:topic id to post message}                                   #
+    msg: ${4:message body}                                                 #

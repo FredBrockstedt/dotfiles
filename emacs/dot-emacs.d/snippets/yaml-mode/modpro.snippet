@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Load or unload kernel modules
+# prefix: modprobe_snippet
+# key: modpro
+# group: ansible
+# --
+
+- name: ${0:Load or unload kernel modules}
+  modprobe:                                                                
+    name: ${1:Name of kernel module to manage}                             #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the module should be present or absent 
+    params: ${3:}                                                          # Modules parameters 

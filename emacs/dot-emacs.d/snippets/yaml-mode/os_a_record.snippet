@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Configure Infoblox NIOS A records
+# prefix: nios_a_record_snippet
+# key: os_a_record
+# group: ansible
+# --
+
+- name: ${0:Configure Infoblox NIOS A records}
+  nios_a_record:                                                           
+    name: ${1:Specifies the fully qualified hostname to add or remove from the system}#
+    view: ${2:default}:Sets the DNS view to associate this A record with}  #  The DNS view must already be configured on the system
+    ipv4addr: ${3:Configures the IPv4 address for this A record}           # Users can dynamically allocate ipv4 address to A record by passing dictionary containing, I(nios_next_ip) and I(CIDR net
+    ttl: ${4:value}                                                        # Configures the TTL to be associated with this A record
+    extattrs: ${5:value}                                                   # Allows for the configuration of Extensible Attributes on the instance of the object   This argument accepts a set of key
+    comment: ${6:value}                                                    # Configures a text string comment to be associated with the instance of this object   The provided text string will be co
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the intended state of the instance of the object on the NIOS server   When this valu
+    provider: ${8:value}                                                   # A dict object containing connection details 

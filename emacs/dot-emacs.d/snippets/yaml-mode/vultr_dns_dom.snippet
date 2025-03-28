@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages DNS domains on Vultr.
+# prefix: vultr_dns_domain_snippet
+# key: vultr_dns_dom
+# group: ansible
+# --
+
+- name: ${0:Manages DNS domains on Vultr.}
+  vultr_dns_domain:                                                        
+    name: ${1:The domain name}                                             #
+    server_ip: ${2:value}                                                  # The default server IP  Use M(vultr_dns_record) to change it once the domain is created  Required if C(state=present) 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the DNS domain 
+    api_key: ${4:value}                                                    # API key of the Vultr API  The ENV variable C(VULTR_API_KEY) is used as default, when defined 
+    api_timeout: ${5:value}                                                # HTTP timeout to Vultr API  The ENV variable C(VULTR_API_TIMEOUT) is used as default, when defined  Fallback value is 60 
+    api_retries: ${6:value}                                                # Amount of retries in case of the Vultr API retuns an HTTP 503 code  The ENV variable C(VULTR_API_RETRIES) is used as def
+    api_retry_max_delay: ${7:value}                                        # Retry backoff delay in seconds is exponential up to this max  value, in seconds  The ENV variable C(VULTR_API_RETRY_MAX_
+    api_account: ${8:default}                                              # Name of the ini section in the C(vultr ini) file  The ENV variable C(VULTR_API_ACCOUNT) is used as default, when defined
+    api_endpoint: ${9:value}                                               # URL to API endpint (without trailing slash)  The ENV variable C(VULTR_API_ENDPOINT) is used as default, when defined  Fa
+    validate_certs: ${10:True}                                             # Validate SSL certs of the Vultr API 

@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Add or remove a user (role) from a PostgreSQL server instance
+# prefix: postgresql_user_snippet
+# key: postgresql_user
+# group: ansible
+# --
+
+- name: ${0:Add or remove a user (role) from a PostgreSQL server instance}
+  postgresql_user:                                                         
+    name: ${1:Name of the user (role) to add or remove}                    #
+    password: ${2:value}                                                   # Set the user's password, before 1 4 this was required  Password can be passed unhashed or hashed (MD5-hashed)  Unhashed 
+    db: ${3:value}                                                         # Name of database to connect to and where user's permissions will be granted 
+    fail_on_user: ${4:true}                                                # If C(yes), fail when user (role) can't be removed  Otherwise just log and continue 
+    priv: ${5:value}                                                       # Slash-separated PostgreSQL privileges string: C(priv1/priv2), where privileges can be defined for database ( allowed opt
+    role_attr_flags: ${6$$(yas-choose-value '("[NO]SUPERUSER" "[NO]CREATEROLE" "[NO]CREATEDB" "[NO]INHERIT" "[NO]LOGIN" "[NO]REPLICATION" "[NO]BYPASSRLS"))}# choices: [NO]SUPERUSER;[NO]CREATEROLE;[
+    session_role: ${7:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    state: ${8$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The user (role) state 
+    encrypted: ${9:true}                                                   # Whether the password is stored hashed in the database  Passwords can be passed already hashed or unhashed, and postgresq
+    expires: ${10:value}                                                   # The date at which the user's password is to expire  If set to C('infinity'), user's password never expire  Note that thi
+    no_password_changes: ${11:false}                                       # If C(yes), don't inspect database for password changes  Effective when C(pg_authid) is not accessible (such as AWS RDS) 
+    conn_limit: ${12:value}                                                # Specifies the user (role) connection limit 
+    ssl_mode: ${13$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${14:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 
+    groups: ${15:value}                                                    # The list of groups (roles) that need to be granted to the user 
+    login_user: ${16:postgres}                                             # The username used to authenticate with 
+    login_password: ${17:value}                                            # The password used to authenticate with 
+    login_host: ${18:value}                                                # Host running the database 
+    login_unix_socket: ${19:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${20:5432}                                                       # Database port to connect to 

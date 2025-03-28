@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages SES sending authorization policies
+# prefix: aws_ses_identity_policy_snippet
+# key: ws_ses_identity_policy
+# group: ansible
+# --
+
+- name: ${0:Manages SES sending authorization policies}
+  aws_ses_identity_policy:                                                 
+    identity: ${1:T h e   S E S   i d e n t i t y   t o   a t t a c h   o r   r e m o v e   a   p o l i c y   f r o m }#   T h i s   c a n   b e   e i t h e r   t h e   f u l l   A R N   o r   j u 
+    policy_name: ${2:T h e   n a m e   u s e d   t o   i d e n t i f y   t h e   p o l i c y   w i t h i n   t h e   s c o p e   o f   t h e   i d e n t i t y   i t ' s   a t t a c h e d   t o }#
+    policy: ${3:value}                                                     # A   p r o p e r l y   f o r m a t t e d   J S O N   s e n d i n g   a u t h o r i z a t i o n   p o l i c y     R e q u 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  W h e t h e r   t o   c r e a t e ( o r   u p d a t e )   o r   d e l e t e   t h e   a u t h o
+    debug_botocore_endpoint_logs: ${5:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${6:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${7:value}                                             # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${8:value}                                             # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${9:value}                                             # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${10:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${11:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${12:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

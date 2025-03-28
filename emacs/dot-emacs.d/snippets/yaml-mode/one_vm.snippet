@@ -1,0 +1,35 @@
+# -*- mode: snippet -*-
+# name: Creates or terminates OpenNebula instances
+# prefix: one_vm_snippet
+# key: one_vm
+# group: ansible
+# --
+
+- name: ${0:Creates or terminates OpenNebula instances}
+  one_vm:                                                                  
+    api_url: ${1:value}                                                    # URL of the OpenNebula RPC server  It is recommended to use HTTPS so that the username/password are not transferred over 
+    api_username: ${2:value}                                               # Name of the user to login into the OpenNebula RPC server  If not set then the value of the C(ONE_USERNAME) environment v
+    api_password: ${3:value}                                               # Password of the user to login into OpenNebula RPC server  If not set then the value of the C(ONE_PASSWORD) environment v
+    template_name: ${4:value}                                              # Name of VM template to use to create a new instace
+    template_id: ${5:value}                                                # ID of a VM template to use to create a new instance
+    vm_start_on_hold: ${6:False}                                           # Set to true to put vm on hold while creating
+    instance_ids: ${7:value}                                               # A list of instance ids used for states':' C(absent), C(running), C(rebooted), C(poweredoff)
+    state: ${8$$(yas-choose-value '("present" "absent" "running" "rebooted" "poweredoff"))}# choices: present;absent;running;rebooted;poweredoff  C(present) - create instances from a template speci
+    hard: ${9:False}                                                       # Reboot, power-off or terminate instances C(hard)
+    wait: ${10:True}                                                       # Wait for the instance to reach its desired state before returning  Keep in mind if you are waiting for instance to be in
+    wait_timeout: ${11:300}                                                # How long before wait gives up, in seconds
+    attributes: ${12:namespace()}                                          # A dictionary of key/value attributes to add to new instances, or for setting C(state) of instances with these attributes
+    labels: ${13:[]}                                                       # A list of labels to associate with new instances, or for setting C(state) of instances with these labels 
+    count_attributes: ${14:value}                                          # A dictionary of key/value attributes that can only be used with C(exact_count) to determine how many nodes based on a sp
+    count_labels: ${15:value}                                              # A list of labels that can only be used with C(exact_count) to determine how many nodes based on a specific labels criter
+    count: ${16:1}                                                         # Number of instances to launch
+    exact_count: ${17:value}                                               # Indicates how many instances that match C(count_attributes) and C(count_labels) parameters should be deployed  Instances
+    mode: ${18:value}                                                      # Set permission mode of the instance in octet format, e g  C(600) to give owner C(use) and C(manage) and nothing to group
+    owner_id: ${19:value}                                                  # ID of the user which will be set as the owner of the instance
+    group_id: ${20:value}                                                  # ID of the group which will be set as the group of the instance
+    memory: ${21:value}                                                    # The size of the memory for new instances (in MB, GB,    )
+    disk_size: ${22:value}                                                 # The size of the disk created for new instances (in MB, GB, TB,   )  NOTE':' This option can be used only if the VM templ
+    cpu: ${23:value}                                                       # Percentage of CPU divided by 100 required for the new instance  Half a processor is written 0 5 
+    vcpu: ${24:value}                                                      # Number of CPUs (cores) new VM will have 
+    networks: ${25:[]}                                                     # A list of dictionaries with network parameters  See examples for more details 
+    disk_saveas: ${26:value}                                               # Creates an image from a VM disk  It is a dictionary where you have to specify C(name) of the new image  Optionally you c

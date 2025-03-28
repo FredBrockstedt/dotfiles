@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Volume Pair
+# prefix: na_elementsw_volume_pair_snippet
+# key: mentsw_volume_pair
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Volume Pair}
+  na_elementsw_volume_pair:                                                
+    src_volume: ${1:Source volume name or volume ID}                       #
+    src_account: ${2:Source account name or ID}                            #
+    dest_volume: ${3:Destination volume name or volume ID}                 #
+    dest_account: ${4:Destination account name or ID}                      #
+    dest_mvip: ${5:Destination IP address of the paired cluster}           #
+    hostname: ${6:The hostname or IP address of the SolidFire cluster}     #
+    username: ${7:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${8:Password for the specified user}                         #
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified volume pair should exist or not 
+    mode: ${10$$(yas-choose-value '("async" "sync" "snapshotsonly"))}      # choices: async;sync;snapshotsonly  Mode to start the volume pairing
+    dest_username: ${11:value}                                             # Destination username for the paired cluster Optional if this is same as source cluster username 
+    dest_password: ${12:value}                                             # Destination password for the paired cluster Optional if this is same as source cluster password 

@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Scaleway compute management module
+# prefix: scaleway_compute_snippet
+# key: caleway_comput
+# group: ansible
+# --
+
+- name: ${0:Scaleway compute management module}
+  scaleway_compute:                                                        
+    image: ${1:Image identifier used to start the instance with}           #
+    organization: ${2:Organization identifier}                             #
+    region: ${3$$(yas-choose-value '("ams1" "EMEA-NL-EVS" "par1" "EMEA-FR-PAR1"))}# Scaleway compute zone
+    commercial_type: ${4:Commercial name of the compute node}              #
+    public_ip: ${5:absent}                                                 # Manage public IP on a Scaleway server Could be Scaleway IP address UUID C(dynamic) Means that IP is destroyed at the sam
+    enable_ipv6: ${6:False}                                                # Enable public IPv6 connectivity on the instance
+    name: ${7:value}                                                       # Name of the instance
+    state: ${8$$(yas-choose-value '("present" "absent" "running" "restarted" "stopped"))}# choices: present;absent;running;restarted;stopped  Indicate desired state of the instance 
+    tags: ${9:[]}                                                          # List of tags to apply to the instance (5 max)
+    wait: ${10:false}                                                      # Wait for the instance to reach its desired state before returning 
+    wait_timeout: ${11:300}                                                # Time to wait for the server to reach the expected state
+    wait_sleep_time: ${12:3}                                               # Time to wait before every attempt to check the state of the server
+    security_group: ${13:value}                                            # Security group unique identifier If no value provided, the default security group or current security group will be used
+    api_token: ${14:value}                                                 # Scaleway OAuth token 
+    api_url: ${{15:https://api}                                            #scaleway com} # not required  Scaleway API URL 
+    api_timeout: ${16:30}                                                  # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${17:namespace()}                                    # List of parameters passed to the query string 
+    validate_certs: ${18:True}                                             # Validate SSL certs of the Scaleway API 

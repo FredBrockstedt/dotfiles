@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Send a SMS via nexmo
+# prefix: nexmo_snippet
+# key: xmo
+# group: ansible
+# --
+
+- name: ${0:Send a SMS via nexmo}
+  nexmo:                                                                   
+    api_key: ${1:Nexmo API Key}                                            #
+    api_secret: ${2:Nexmo API Secret}                                      #
+    src: ${3:Nexmo Number to send from}                                    #
+    dest: ${4:Phone number(s) to send SMS message to}                      #
+    msg: ${5:Message to text to send}                                      # Messages longer than 160 characters will be split into multiple messages
+    validate_certs: ${6:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    url: ${7:value}                                                        # HTTP, HTTPS, or FTP URL in the form (http|https|ftp)://[user[:pass]]@host domain[:port]/path
+    force: ${8:False}                                                      # If C(yes) do not get a cached copy  Alias C(thirsty) has been deprecated and will be removed in 2 13 
+    http_agent: ${9:ansible-httpget}                                       # Header to identify as, generally appears in web server logs 
+    use_proxy: ${10:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    url_username: ${11:value}                                              # The username for use in HTTP basic authentication  This parameter can be used without I(url_password) for sites that all
+    url_password: ${12:value}                                              # The password for use in HTTP basic authentication  If the I(url_username) parameter is not specified, the I(url_password
+    force_basic_auth: ${13:False}                                          # Credentials specified with I(url_username) and I(url_password) should be passed in HTTP Header 
+    client_cert: ${14:value}                                               # PEM formatted certificate chain file to be used for SSL client authentication  This file can also include the key as wel
+    client_key: ${15:value}                                                # PEM formatted file that contains your private key to be used for SSL client authentication  If C(client_cert) contains b

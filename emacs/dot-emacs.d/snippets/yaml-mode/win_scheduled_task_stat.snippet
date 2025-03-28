@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Get information about Windows Scheduled Tasks
+# prefix: win_scheduled_task_stat_snippet
+# key: win_scheduled_task_stat
+# group: ansible
+# --
+
+- name: ${0:Get information about Windows Scheduled Tasks}
+  win_scheduled_task_stat:                                                 
+    path: ${1:\\}                                                          # T h e   f o l d e r   p a t h   w h e r e   t h e   t a s k   l i v e s  
+    name: ${2:value}                                                       # The name of the scheduled task to get information for  If C(name) is set and exists, will return information on the task

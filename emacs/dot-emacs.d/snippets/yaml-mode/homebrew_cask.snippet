@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Install/uninstall homebrew casks.
+# prefix: homebrew_cask_snippet
+# key: homebrew_cask
+# group: ansible
+# --
+
+- name: ${0:Install/uninstall homebrew casks.}
+  homebrew_cask:                                                           
+    name: ${1:name of cask to install/remove}                              #
+    path: ${2:/usr/local/bin}                                              # ':' separated list of paths to search for 'brew' executable 
+    state: ${3$$(yas-choose-value '("present" "absent" "upgraded"))}       # choices: present;absent;upgraded  state of the cask
+    sudo_password: ${4:value}                                              # The sudo password to be passed to SUDO_ASKPASS 
+    update_homebrew: ${5:false}                                            # update homebrew itself first  Note that C(brew cask update) is a synonym for C(brew update) 
+    install_options: ${6:value}                                            # options flags to install a package
+    accept_external_apps: ${7:false}                                       # allow external apps
+    upgrade_all: ${8:false}                                                # upgrade all casks (mutually exclusive with `upgrade`)
+    upgrade: ${9:false}                                                    # upgrade all casks (mutually exclusive with `upgrade_all`)
+    greedy: ${10:false}                                                    # upgrade casks that auto update; passes --greedy to brew cask outdated when checking if an installed cask has a newer ver

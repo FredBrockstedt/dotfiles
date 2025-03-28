@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Table
+# prefix: gcp_bigquery_table_snippet
+# key: gcp_bigquery_t
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Table}
+  gcp_bigquery_table:                                                      
+    auth_kind: ${1$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    table_reference: ${3:value}                                            # Reference describing the ID of this table 
+    clustering: ${4:value}                                                 # One or more fields on which data should be clustered  Only top-level, non-repeated, simple-type fields are supported  Wh
+    description: ${5:value}                                                # A user-friendly description of the dataset 
+    friendly_name: ${6:value}                                              # A descriptive name for this table 
+    labels: ${7:value}                                                     # The labels associated with this dataset  You can use these to organize and group your datasets  
+    name: ${8:value}                                                       # Name of the table 
+    num_rows: ${9:value}                                                   # The number of rows of data in this table, excluding any data in the streaming buffer 
+    view: ${10:value}                                                      # The view definition 
+    time_partitioning: ${11:value}                                         # If specified, configures time-based partitioning for this table 
+    schema: ${12:value}                                                    # Describes the schema of this table 
+    encryption_configuration: ${13:value}                                  # Custom encryption configuration 
+    expiration_time: ${14:value}                                           # The time when this table expires, in milliseconds since the epoch  If not present, the table will persist indefinitely 
+    external_data_configuration: ${15:value}                               # Describes the data format, location, and other properties of a table stored outside of BigQuery  By defining these prope
+    dataset: ${16:value}                                                   # Name of the dataset 
+    project: ${17:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${18:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${19:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${20:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${21:value}                                                    # Array of scopes to be used 
+    env_type: ${22:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

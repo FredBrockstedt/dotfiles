@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage export-policy
+# prefix: na_ontap_export_policy_snippet
+# key: ontap_export_policy
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage export-policy}
+  na_ontap_export_policy:                                                  
+    name: ${1:The name of the export-policy to manage}                     #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified export policy should exist or not 
+    from_name: ${6:value}                                                  # The name of the export-policy to be renamed 
+    vserver: ${7:value}                                                    # Name of the vserver to use 
+    https: ${8:False}                                                      # Enable and disable https
+    validate_certs: ${9:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${10:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${11:value}                                                    # The ontap api version to use
+    use_rest: ${12$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage network interfaces in a Pure Storage FlashBlade
+# prefix: purefb_network_snippet
+# key: purefb_network
+# group: ansible
+# --
+
+- name: ${0:Manage network interfaces in a Pure Storage FlashBlade}
+  purefb_network:                                                          
+    name: ${1:Interface Name}                                              #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create, delete or modifies a network interface 
+    address: ${3:value}                                                    # IP address of interface 
+    services: ${4$$(yas-choose-value '("data"))}                           # choices: data  Define which services are configured for the interfaces 
+    itype: ${5$$(yas-choose-value '("vip"))}                               # choices: vip  Type of interface 
+    fb_url: ${6:value}                                                     # FlashBlade management IP address or Hostname 
+    api_token: ${7:value}                                                  # FlashBlade API token for admin privileged user 

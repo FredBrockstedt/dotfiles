@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create/update/delete Zabbix screens
+# prefix: zabbix_screen_snippet
+# key: zabbix_scr
+# group: ansible
+# --
+
+- name: ${0:Create/update/delete Zabbix screens}
+  zabbix_screen:                                                           
+    screens: ${1:List of screens to be created/updated/deleted (see example)}#
+    server_url: ${2:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${3:Zabbix user name}                                      #
+    login_password: ${4:Zabbix user password}                              #
+    http_login_user: ${5:Basic Auth login}                                 #
+    http_login_password: ${6:value}                                        # Basic Auth password
+    timeout: ${7:10}                                                       # The timeout of API request (seconds) 
+    validate_certs: ${8:True}                                              # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

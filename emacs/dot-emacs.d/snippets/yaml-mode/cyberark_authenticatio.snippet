@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Module for CyberArk Vault Authentication using PAS Web Services SDK
+# prefix: cyberark_authentication_snippet
+# key: cyberark_authenticatio
+# group: ansible
+# --
+
+- name: ${0:Module for CyberArk Vault Authentication using PAS Web Services SDK}
+  cyberark_authentication:                                                 
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies if an authentication logon/logoff and a cyberark_session should be added/removed 
+    username: ${2:value}                                                   # The name of the user who will logon to the Vault 
+    password: ${3:value}                                                   # The password of the user 
+    new_password: ${4:value}                                               # The new password of the user  This parameter is optional, and enables you to change a password 
+    api_base_url: ${5:value}                                               # A string containing the base URL of the server hosting CyberArk's Privileged Account Security Web Services SDK 
+    validate_certs: ${6:true}                                              # If C(false), SSL certificates will not be validated   This should only set to C(false) used on personally controlled sit
+    use_shared_logon_authentication: ${7:false}                            # Whether or not Shared Logon Authentication will be used 
+    use_radius_authentication: ${8:false}                                  # Whether or not users will be authenticated via a RADIUS server  Valid values are true/false 
+    cyberark_session: ${9:value}                                           # Dictionary set by a CyberArk authentication containing the different values to perform actions on a logged-on CyberArk s

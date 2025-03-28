@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage Accounts
+# prefix: na_elementsw_account_snippet
+# key: mentsw_account
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage Accounts}
+  na_elementsw_account:                                                    
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified account should exist or not 
+    element_username: ${2:Unique username for this account}                # (May be 1 to 64 characters in length) 
+    hostname: ${3:The hostname or IP address of the SolidFire cluster}     #
+    username: ${4:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${5:Password for the specified user}                         #
+    from_name: ${6:value}                                                  # ID or Name of the account to rename  Required to create an account called 'element_username' by renaming 'from_name' 
+    initiator_secret: ${7:value}                                           # CHAP secret to use for the initiator  Should be 12-16 characters long and impenetrable  The CHAP initiator secrets must 
+    target_secret: ${8:value}                                              # CHAP secret to use for the target (mutual CHAP authentication)  Should be 12-16 characters long and impenetrable  The CH
+    attributes: ${9:value}                                                 # L i s t   o f   N a m e / V a l u e   p a i r s   i n   J S O N   o b j e c t   f o r m a t  
+    status: ${10:value}                                                    # Status of the account 

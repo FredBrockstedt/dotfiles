@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Configure Infoblox NIOS NAPTR records
+# prefix: nios_naptr_record_snippet
+# key: os_naptr_record
+# group: ansible
+# --
+
+- name: ${0:Configure Infoblox NIOS NAPTR records}
+  nios_naptr_record:                                                       
+    name: ${1:Specifies the fully qualified hostname to add or remove from the system}#
+    view: ${2:default}:Sets the DNS view to associate this a record with}  # The DNS view must already be configured on the system
+    order: ${3:Configures the order (0-65535) for this NAPTR record}       # This parameter specifies the order in which the NAPTR rules are applied when multiple rules are present 
+    preference: ${4:Configures the preference (0-65535) for this NAPTR record}# The preference field determines the order NAPTR records are processed when multiple records with the same order param
+    replacement: ${5:Configures the replacement field for this NAPTR record}# For nonterminal NAPTR records, this field specifies the next domain name to look up 
+    services: ${6:value}                                                   # Configures the services field (128 characters maximum) for this NAPTR record  The services field contains protocol and s
+    flags: ${7:value}                                                      # Configures the flags field for this NAPTR record  These control the interpretation of the fields for an NAPTR record obj
+    regexp: ${8:value}                                                     # Configures the regexp field for this NAPTR record  This is the regular expression-based rewriting rule of the NAPTR reco
+    ttl: ${9:value}                                                        # Configures the TTL to be associated with this NAPTR record
+    extattrs: ${10:value}                                                  # Allows for the configuration of Extensible Attributes on the instance of the object   This argument accepts a set of key
+    comment: ${11:value}                                                   # Configures a text string comment to be associated with the instance of this object   The provided text string will be co
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Configures the intended state of the instance of the object on the NIOS server   When this valu
+    provider: ${13:value}                                                  # A dict object containing connection details 

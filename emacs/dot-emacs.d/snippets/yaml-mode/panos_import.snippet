@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: import file on PAN-OS devices
+# prefix: panos_import_snippet
+# key: panos_import
+# group: ansible
+# --
+
+- name: ${0:import file on PAN-OS devices}
+  panos_import:                                                            
+    ip_address: ${1:IP address (or hostname) of PAN-OS device}             #
+    password: ${2:Password for authentication}                             #
+    category: ${3:software}                                                # Category of file uploaded  The default is software  See API > Import section of the API reference for category options 
+    file: ${4:value}                                                       # Location of the file to import into device 
+    url: ${5:value}                                                        # URL of the file that will be imported to device 
+    validate_certs: ${6:True}                                              # If C(no), SSL certificates will not be validated  Disabling certificate validation is not recommended 
+    username: ${7:admin}                                                   # Username for authentication 

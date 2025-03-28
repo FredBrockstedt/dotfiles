@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage protocol properties on Solaris/illumos systems.
+# prefix: ipadm_prop_snippet
+# key: padm_prop
+# group: ansible
+# --
+
+- name: ${0:Manage protocol properties on Solaris/illumos systems.}
+  ipadm_prop:                                                              
+    protocol: ${1:Specifies the protocol for which we want to manage properties}#
+    property: ${2:Specifies the name of property we want to manage}        #
+    value: ${3:value}                                                      # Specifies the value we want to set for the property 
+    temporary: ${4:False}                                                  # Specifies that the property value is temporary  Temporary property values do not persist across reboots 
+    state: ${5$$(yas-choose-value '("present" "absent" "reset"))}          # choices: present;absent;reset  Set or reset the property value 

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Retrieve information about one or more oVirt/RHV affinity labels
+# prefix: ovirt_affinity_label_info_snippet
+# key: ovirt_affinity_label_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information about one or more oVirt/RHV affinity labels}
+  ovirt_affinity_label_info:                                               
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt: C(username)[I(required)] - The name of the user, something like I(admin@internal)}# Default value is set by I(O
+    name: ${2:value}                                                       # Name of the affinity labels which should be listed 
+    vm: ${3:value}                                                         # Name of the VM, which affinity labels should be listed 
+    host: ${4:value}                                                       # Name of the host, which affinity labels should be listed 
+    fetch_nested: ${5:value}                                               # If I(yes) the module will fetch additional data from the API  It will fetch only IDs of nested entity  It doesn't fetch 
+    nested_attributes: ${6:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is

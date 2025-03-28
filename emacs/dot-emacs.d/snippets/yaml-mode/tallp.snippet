@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage packages on AIX
+# prefix: installp_snippet
+# key: tallp
+# group: ansible
+# --
+
+- name: ${0:Manage packages on AIX}
+  installp:                                                                
+    name: ${1:One or more packages to install or remove}                   # Use C(all) to install all packages available on informed C(repository_path) 
+    accept_license: ${2:False}                                             # Whether to accept the license for the package(s) 
+    repository_path: ${3:value}                                            # Path with AIX packages (required to install) 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the package needs to be present on or absent from the system 

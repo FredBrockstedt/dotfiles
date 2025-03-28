@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Object
+# prefix: gcp_storage_object_snippet
+# key: gcp_storage_object
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Object}
+  gcp_storage_object:                                                      
+    auth_kind: ${1$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    action: ${3:value}                                                     # Upload or download from the bucket  Some valid choices include: "download", "upload"
+    overwrite: ${4:value}                                                  # 'Overwrite the file on the bucket/local machine  If overwrite is false and a difference exists between GCS + local, modu
+    src: ${5:value}                                                        # Source location of file (may be local machine or cloud depending on action) 
+    dest: ${6:value}                                                       # Destination location of file (may be local machine or cloud depending on action) 
+    bucket: ${7:value}                                                     # The name of the bucket 
+    project: ${8:value}                                                    # The Google Cloud Platform project to use 
+    service_account_contents: ${9:value}                                   # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${10:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${11:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${12:value}                                                    # Array of scopes to be used 
+    env_type: ${13:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

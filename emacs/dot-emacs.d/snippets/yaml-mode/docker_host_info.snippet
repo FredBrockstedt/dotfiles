@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Retrieves facts about docker host and lists of objects of the services.
+# prefix: docker_host_info_snippet
+# key: docker_host_info
+# group: ansible
+# --
+
+- name: ${0:Retrieves facts about docker host and lists of objects of the services.}
+  docker_host_info:                                                        
+    containers: ${1:False}                                                 # Whether to list containers 
+    containers_filters: ${2:value}                                         # A dictionary of filter values used for selecting containers to delete  For example, C(until: 24h)  See L(the docker docu
+    images: ${3:False}                                                     # Whether to list images 
+    images_filters: ${4:value}                                             # A dictionary of filter values used for selecting images to delete  For example, C(dangling: true)  See L(the docker docu
+    networks: ${5:False}                                                   # Whether to list networks 
+    networks_filters: ${6:value}                                           # A dictionary of filter values used for selecting networks to delete  See L(the docker documentation,https://docs docker 
+    volumes: ${7:False}                                                    # Whether to list volumes 
+    volumes_filters: ${8:value}                                            # A dictionary of filter values used for selecting volumes to delete  See L(the docker documentation,https://docs docker c
+    disk_usage: ${9:False}                                                 # Summary information on used disk space by all Docker layers  The output is a sum of images, volumes, containers and buil
+    verbose_output: ${10:False}                                            # When set to C(yes) and I(networks), I(volumes), I(images), I(containers) or I(disk_usage) is set to C(yes) then output w
+    docker_host: ${{11:unix://var/run/docker}                              #sock} # not required  The URL or Unix socket path used to connect to the Docker API  To connect to a remote host, provide
+    tls_hostname: ${12:localhost}                                          # When verifying the authenticity of the Docker Host server, provide the expected name of the server  If the value is not 
+    api_version: ${13:auto}                                                # The version of the Docker API running on the Docker Host  Defaults to the latest version of the API supported by Docker 
+    timeout: ${14:60}                                                      # The maximum amount of time in seconds to wait on a response from the API  If the value is not specified in the task, the
+    ca_cert: ${15:value}                                                   # Use a CA certificate when performing server verification by providing the path to a CA certificate file  If the value is
+    client_cert: ${16:value}                                               # Path to the client's TLS certificate file  If the value is not specified in the task and the environment variable C(DOCK
+    client_key: ${17:value}                                                # Path to the client's TLS key file  If the value is not specified in the task and the environment variable C(DOCKER_CERT_
+    ssl_version: ${18:value}                                               # Provide a valid SSL version number  Default value determined by ssl py module  If the value is not specified in the task
+    tls: ${19:False}                                                       # Secure the connection to the API by using TLS without verifying the authenticity of the Docker host server  Note that if
+    validate_certs: ${20:False}                                            # Secure the connection to the API by using TLS and verifying the authenticity of the Docker host server  If the value is 
+    debug: ${21:False}                                                     # Debug mode

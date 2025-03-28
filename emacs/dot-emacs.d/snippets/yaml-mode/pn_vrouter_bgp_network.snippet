@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: CLI command to add/remove vrouter-bgp-network
+# prefix: pn_vrouter_bgp_network_snippet
+# key: pn_vrouter_bgp_network
+# group: ansible
+# --
+
+- name: ${0:CLI command to add/remove vrouter-bgp-network}
+  pn_vrouter_bgp_network:                                                  
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # State the action to perform  Use C(present) to add bgp network and C(absent) to remove bgp network 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_netmask: ${3:value}                                                 # BGP network mask 
+    pn_network: ${4:value}                                                 # IP address for BGP network 
+    pn_vrouter_name: ${5:value}                                            # name of service config 

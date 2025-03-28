@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage SolidFire snapshot schedules
+# prefix: sf_snapshot_schedule_manager_snippet
+# key: f_snapshot_schedule_manager
+# group: ansible
+# --
+
+- name: ${0:Manage SolidFire snapshot schedules}
+  sf_snapshot_schedule_manager:                                            
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified schedule should exist or not 
+    name: ${2:Name for the snapshot schedule}                              #
+    hostname: ${3:The hostname or IP address of the SolidFire cluster}     #
+    username: ${4:Please ensure that the user has the adequate permissions}# For more information, please read the official documentation U(https://mysupport netapp com/documentation/docweb/index h
+    password: ${5:Password for the specified user}                         #
+    paused: ${6:value}                                                     # Pause / Resume a schedule 
+    recurring: ${7:value}                                                  # Should the schedule recur?
+    time_interval_days: ${8:1}                                             # T i m e   i n t e r v a l   i n   d a y s  
+    time_interval_hours: ${9:0}                                            # T i m e   i n t e r v a l   i n   h o u r s  
+    time_interval_minutes: ${10:0}                                         # T i m e   i n t e r v a l   i n   m i n u t e s  
+    snapshot_name: ${11:value}                                             # Name for the created snapshots 
+    volumes: ${12:value}                                                   # Volume IDs that you want to set the snapshot schedule for  At least 1 volume ID is required for creating a new schedule 
+    retention: ${13:value}                                                 # Retention period for the snapshot  Format is 'HH:mm:ss' 
+    schedule_id: ${14:value}                                               # The schedule ID for the schedule that you want to update or delete 
+    starting_date: ${15:value}                                             # Starting date for the schedule  Required when C(state=present)  Please use two '-' in the above format, or you may see a

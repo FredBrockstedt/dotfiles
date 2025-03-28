@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Add and remove local groups
+# prefix: win_group_snippet
+# key: win_group
+# group: ansible
+# --
+
+- name: ${0:Add and remove local groups}
+  win_group:                                                               
+    name: ${1:Name of the group}                                           #
+    description: ${2:value}                                                # Description of the group 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or remove the group 

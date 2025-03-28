@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Add or remove device from FortiManager.
+# prefix: fmgr_device_snippet
+# key: fmgr_devic
+# group: ansible
+# --
+
+- name: ${0:Add or remove device from FortiManager.}
+  fmgr_device:                                                             
+    adom: ${1:root}:The ADOM the configuration should belong to}           #
+    mode: ${2$$(yas-choose-value '("add" "delete"))}                       # choices: add;delete  The desired mode of the specified object 
+    blind_add: ${3$$(yas-choose-value '("enable" "disable"))}              # choices: enable;disable  When adding a device, module will check if it exists, and skip if it does  If enabled, this opt
+    device_username: ${4:value}                                            # The username of the device being added to FortiManager 
+    device_password: ${5:value}                                            # The password of the device being added to FortiManager 
+    device_ip: ${6:value}                                                  # The IP of the device being added to FortiManager  Supports both IPv4 and IPv6 
+    device_unique_name: ${7:value}                                         # The desired "friendly" name of the device being added to FortiManager 
+    device_serial: ${8:value}                                              # The serial number of the device being added to FortiManager 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manages the Windows user profiles.
+# prefix: win_user_profile_snippet
+# key: win_user_prof
+# group: ansible
+# --
+
+- name: ${0:Manages the Windows user profiles.}
+  win_user_profile:                                                        
+    name: ${1:value}                                                       # Specifies the base name for the profile path  When I(state) is C(present) this is used to create the profile for I(usern
+    remove_multiple: ${2:False}                                            # When I(state) is C(absent) and the value for I(name) matches multiple profiles the module will fail  Set this value to C
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Will ensure the profile exists when set to C(present)  When creating a profile the I(username) 
+    username: ${4:value}                                                   # The account name of security identifier (SID) for the profile  This must be set when I(state) is C(present) and must be 

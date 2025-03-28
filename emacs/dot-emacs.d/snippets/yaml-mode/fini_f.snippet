@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create, Delete or Modify filesystems on Infinibox
+# prefix: infini_fs_snippet
+# key: fini_f
+# group: ansible
+# --
+
+- name: ${0:Create, Delete or Modify filesystems on Infinibox}
+  infini_fs:                                                               
+    name: ${1:File system name}                                            #
+    pool: ${2:Pool that will host file system}                             #
+    system: ${3:Infinibox Hostname or IPv4 Address}                        #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates/Modifies file system when present or removes when absent 
+    size: ${5:value}                                                       # File system size in MB, GB or TB units  See examples 
+    user: ${6:value}                                                       # Infinibox User username with sufficient priveledges ( see notes ) 
+    password: ${7:value}                                                   # Infinibox User password 

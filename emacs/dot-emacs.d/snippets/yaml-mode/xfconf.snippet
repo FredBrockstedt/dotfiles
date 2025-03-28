@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Edit XFCE4 Configurations
+# prefix: xfconf_snippet
+# key: xfconf
+# group: ansible
+# --
+
+- name: ${0:Edit XFCE4 Configurations}
+  xfconf:                                                                  
+    channel: ${1:A Xfconf preference channel is a top-level tree key, inside of the Xfconf repository that corresponds to the location for which all application properties/keys are stored}# See man
+    property: ${2:A Xfce preference key is an element in the Xfconf repository that corresponds to an application preference}# See man xfconf-query(1)
+    value: ${3:value}                                                      # Preference properties typically have simple values such as strings, integers, or lists of strings and integers  This is 
+    value_type: ${4$$(yas-choose-value '("int" "bool" "float" "string"))}  # choices: int;bool;float;string  The type of value being set  This is ignored if the state is "get" 
+    state: ${5$$(yas-choose-value '("get" "present" "absent"))}            # choices: get;present;absent  The action to take upon the property/value 

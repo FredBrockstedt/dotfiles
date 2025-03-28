@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Run TMSH and BASH commands on F5 devices
+# prefix: bigip_command_snippet
+# key: gip_command
+# group: ansible
+# --
+
+- name: ${0:Run TMSH and BASH commands on F5 devices}
+  bigip_command:                                                           
+    commands: ${1:The commands to send to the remote BIG-IP device over the configured provider}# The resulting output from the command is returned  If the I(wait_for) argument is provided, the mod
+    transport: ${2$$(yas-choose-value '("rest" "cli"))}                    # Configures the transport connection to use when connecting to the remote device  The transport argument supports connect
+    wait_for: ${3:value}                                                   # Specifies what to evaluate from the output of the command and what conditionals to apply   This argument will cause the 
+    match: ${4$$(yas-choose-value '("any" "all"))}                         # choices: any;all  The I(match) argument is used in conjunction with the I(wait_for) argument to specify the match policy
+    retries: ${5:10}                                                       # Specifies the number of retries a command should by tried before it is considered failed  The command is run on the targ
+    interval: ${6:1}                                                       # Configures the interval in seconds to wait between retries of the command  If the command does not pass the specified co
+    warn: ${7:True}                                                        # Whether the module should raise warnings related to command idempotency or not  Note that the F5 Ansible developers spec
+    chdir: ${8:value}                                                      # Change into this directory before running the command 
+    provider: ${9:value}                                                   # A dict object containing connection details 

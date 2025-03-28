@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage CloudWatch Event rules and targets
+# prefix: cloudwatchevent_rule_snippet
+# key: cloudwatchevent_ru
+# group: ansible
+# --
+
+- name: ${0:Manage CloudWatch Event rules and targets}
+  cloudwatchevent_rule:                                                    
+    name: ${1:The name of the rule you are creating, updating or deleting} # No spaces or special characters allowed (i e  must match C([\\ \\-_A-Za-z0-9]+))
+    schedule_expression: ${2:value}                                        # A cron or rate expression that defines the schedule the rule will trigger on  For example, C(cron(0 20 * * ? *)), C(rate
+    event_pattern: ${3:value}                                              # A string pattern (in valid JSON format) that is used to match against incoming events to determine if the rule should be
+    state: ${4$$(yas-choose-value '("present" "disabled" "absent"))}       # choices: present;disabled;absent  Whether the rule is present (and enabled), disabled, or absent
+    description: ${5:value}                                                # A description of the rule
+    role_arn: ${6:value}                                                   # The Amazon Resource Name (ARN) of the IAM role associated with the rule
+    targets: ${7:value}                                                    # A dictionary array of targets to add to or update for the rule, in the form C({ id: [string], arn: [string], role_arn: [
+    debug_botocore_endpoint_logs: ${8:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${9:value}                                                    # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${10:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${11:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${12:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${13:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${14:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${15:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

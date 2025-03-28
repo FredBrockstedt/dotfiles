@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manipulate Rackspace Cloud Block Storage Volume Attachments
+# prefix: rax_cbs_attachments_snippet
+# key: rax_cbs_attachment
+# group: ansible
+# --
+
+- name: ${0:Manipulate Rackspace Cloud Block Storage Volume Attachments}
+  rax_cbs_attachments:                                                     
+    volume: ${1:Name or id of the volume to attach/detach}                 #
+    server: ${2:Name or id of the server to attach/detach}                 #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # Indicate desired state of the resource
+    device: ${4:value}                                                     # The device path to attach the volume to, e g  /dev/xvde  Before 2 4 this was a required field  Now it can be left to nul
+    wait: ${5:false}                                                       # wait for the volume to be in 'in-use'/'available' state before returning
+    wait_timeout: ${6:300}                                                 # how long before wait gives up, in seconds
+    api_key: ${7:value}                                                    # Rackspace API key, overrides I(credentials) 
+    auth_endpoint: ${{8:https://identity}                                  #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    credentials: ${9:value}                                                # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${10:value}                                                       # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    identity_type: ${11:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    region: ${12:DFW}                                                      # Region to create an instance in 
+    tenant_id: ${13:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${14:value}                                               # The tenant name used for authentication 
+    username: ${15:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${16:value}                                            # Whether or not to require SSL validation of API endpoints 

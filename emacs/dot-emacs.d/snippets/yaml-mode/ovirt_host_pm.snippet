@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Module to manage power management of hosts in oVirt/RHV
+# prefix: ovirt_host_pm_snippet
+# key: ovirt_host_pm
+# group: ansible
+# --
+
+- name: ${0:Module to manage power management of hosts in oVirt/RHV}
+  ovirt_host_pm:                                                           
+    name: ${1:Name of the host to manage}                                  #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the host be present/absent 
+    address: ${4:value}                                                    # Address of the power management interface 
+    username: ${5:value}                                                   # Username to be used to connect to power management interface 
+    password: ${6:value}                                                   # Password of the user specified in C(username) parameter 
+    type: ${7:value}                                                       # Type of the power management  oVirt/RHV predefined values are I(drac5), I(ipmilan), I(rsa), I(bladecenter), I(alom), I(a
+    port: ${8:value}                                                       # Power management interface port 
+    options: ${9:value}                                                    # Dictionary of additional fence agent options (including Power Management slot)  Additional information about options can
+    encrypt_options: ${10:value}                                           # If I(true) options will be encrypted when send to agent 
+    order: ${11:value}                                                     # Integer value specifying, by default it's added at the end 
+    wait: ${12:True}                                                       # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${13:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${14:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${15:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${16:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

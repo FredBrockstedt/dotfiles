@@ -1,0 +1,114 @@
+# -*- mode: snippet -*-
+# name: Manage load balancing monitors
+# prefix: netscaler_lb_monitor_snippet
+# key: tscaler_lb_monitor
+# group: ansible
+# --
+
+- name: ${0:Manage load balancing monitors}
+  netscaler_lb_monitor:                                                    
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    monitorname: ${4:value}                                                # Name for the monitor  Must begin with an ASCII alphanumeric or underscore C(_) character, and must contain only ASCII al
+    type: ${5$$(yas-choose-value '("PING" "TCP" "HTTP" "TCP-ECV" "HTTP-ECV" "UDP-ECV" "DNS" "FTP" "LDNS-PING" "LDNS-TCP" "LDNS-DNS" "RADIUS" "USER" "HTTP-INLINE" "SIP-UDP" "SIP-TCP" "LOAD" "FTP-EXT
+    action: ${6$$(yas-choose-value '("NONE" "LOG" "DOWN"))}                # choices: NONE;LOG;DOWN  Action to perform when the response to an inline monitor (a monitor of type C(HTTP-INLINE)) indi
+    respcode: ${7:value}                                                   # Response codes for which to mark the service as UP  For any other response code, the action performed depends on the mon
+    httprequest: ${8:value}                                                # HTTP request to send to the server (for example, C("HEAD /file html")) 
+    rtsprequest: ${9:value}                                                # RTSP request to send to the server (for example, C("OPTIONS *")) 
+    customheaders: ${10:value}                                             # Custom header string to include in the monitoring probes 
+    maxforwards: ${11:value}                                               # Maximum number of hops that the SIP request used for monitoring can traverse to reach the server  Applicable only to mon
+    sipmethod: ${12$$(yas-choose-value '("OPTIONS" "INVITE" "REGISTER"))}  # choices: OPTIONS;INVITE;REGISTER  SIP method to use for the query  Applicable only to monitors of type C(SIP-UDP) 
+    sipuri: ${13:value}                                                    # SIP URI string to send to the service (for example, C(sip:sip test))  Applicable only to monitors of type C(SIP-UDP)  Mi
+    sipreguri: ${14:value}                                                 # SIP user to be registered  Applicable only if the monitor is of type C(SIP-UDP) and the SIP Method parameter is set to C
+    send: ${15:value}                                                      # String to send to the service  Applicable to C(TCP-ECV), C(HTTP-ECV), and C(UDP-ECV) monitors 
+    recv: ${16:value}                                                      # String expected from the server for the service to be marked as UP  Applicable to C(TCP-ECV), C(HTTP-ECV), and C(UDP-ECV
+    query: ${17:value}                                                     # Domain name to resolve as part of monitoring the DNS service (for example, C(example com)) 
+    querytype: ${18$$(yas-choose-value '("Address" "Zone" "AAAA"))}        # choices: Address;Zone;AAAA  Type of DNS record for which to send monitoring queries  Set to C(Address) for querying A re
+    scriptname: ${19:value}                                                # Path and name of the script to execute  The script must be available on the NetScaler appliance, in the /nsconfig/monito
+    scriptargs: ${20:value}                                                # String of arguments for the script  The string is copied verbatim into the request 
+    dispatcherip: ${21:value}                                              # IP address of the dispatcher to which to send the probe 
+    dispatcherport: ${22:value}                                            # Port number on which the dispatcher listens for the monitoring probe 
+    username: ${23:value}                                                  # User name with which to probe the C(RADIUS), C(NNTP), C(FTP), C(FTP-EXTENDED), C(MYSQL), C(MSSQL), C(POP3), C(CITRIX-AG)
+    password: ${24:value}                                                  # Password that is required for logging on to the C(RADIUS), C(NNTP), C(FTP), C(FTP-EXTENDED), C(MYSQL), C(MSSQL), C(POP3)
+    secondarypassword: ${25:value}                                         # Secondary password that users might have to provide to log on to the Access Gateway server  Applicable to C(CITRIX-AG) m
+    logonpointname: ${26:value}                                            # Name of the logon point that is configured for the Citrix Access Gateway Advanced Access Control software  Required if y
+    lasversion: ${27:value}                                                # Version number of the Citrix Advanced Access Control Logon Agent  Required by the C(CITRIX-AAC-LAS) monitor 
+    radkey: ${28:value}                                                    # Authentication key (shared secret text string) for RADIUS clients and servers to exchange  Applicable to monitors of typ
+    radnasid: ${29:value}                                                  # NAS-Identifier to send in the Access-Request packet  Applicable to monitors of type C(RADIUS)  Minimum length = 1
+    radnasip: ${30:value}                                                  # Network Access Server (NAS) IP address to use as the source IP address when monitoring a RADIUS server  Applicable to mo
+    radaccounttype: ${31:value}                                            # Account Type to be used in Account Request Packet  Applicable to monitors of type C(RADIUS_ACCOUNTING)  Minimum value = 
+    radframedip: ${32:value}                                               # Source ip with which the packet will go out   Applicable to monitors of type C(RADIUS_ACCOUNTING) 
+    radapn: ${33:value}                                                    # Called Station Id to be used in Account Request Packet  Applicable to monitors of type C(RADIUS_ACCOUNTING)  Minimum len
+    radmsisdn: ${34:value}                                                 # Calling Stations Id to be used in Account Request Packet  Applicable to monitors of type C(RADIUS_ACCOUNTING)  Minimum l
+    radaccountsession: ${35:value}                                         # Account Session ID to be used in Account Request Packet  Applicable to monitors of type C(RADIUS_ACCOUNTING)  Minimum le
+    lrtm: ${36$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  Calculate the least response times for bound services  If this parameter is not enabled, the 
+    deviation: ${37:value}                                                 # Time value added to the learned average response time in dynamic response time monitoring (DRTM)  When a deviation is sp
+    units1: ${38$$(yas-choose-value '("SEC" "MSEC" "MIN"))}                # choices: SEC;MSEC;MIN  Unit of measurement for the Deviation parameter  Cannot be changed after the monitor is created 
+    interval: ${39:value}                                                  # Time interval between two successive probes  Must be greater than the value of Response Time-out  Minimum value = C(1) M
+    units3: ${40$$(yas-choose-value '("SEC" "MSEC" "MIN"))}                # choices: SEC;MSEC;MIN  monitor interval units 
+    resptimeout: ${41:value}                                               # Amount of time for which the appliance must wait before it marks a probe as FAILED  Must be less than the value specifie
+    units4: ${42$$(yas-choose-value '("SEC" "MSEC" "MIN"))}                # choices: SEC;MSEC;MIN  monitor response timeout units 
+    resptimeoutthresh: ${43:value}                                         # Response time threshold, specified as a percentage of the Response Time-out parameter  If the response to a monitor prob
+    retries: ${44:value}                                                   # Maximum number of probes to send to establish the state of a service for which a monitoring probe failed  Minimum value 
+    failureretries: ${45:value}                                            # Number of retries that must fail, out of the number specified for the Retries parameter, for a service to be marked as D
+    alertretries: ${46:value}                                              # Number of consecutive probe failures after which the appliance generates an SNMP trap called monProbeFailed  Minimum val
+    successretries: ${47:value}                                            # Number of consecutive successful probes required to transition a service's state from DOWN to UP  Minimum value = C(1) M
+    downtime: ${48:value}                                                  # Time duration for which to wait before probing a service that has been marked as DOWN  Expressed in milliseconds, second
+    units2: ${49$$(yas-choose-value '("SEC" "MSEC" "MIN"))}                # choices: SEC;MSEC;MIN  Unit of measurement for the Down Time parameter  Cannot be changed after the monitor is created 
+    destip: ${50:value}                                                    # IP address of the service to which to send probes  If the parameter is set to 0, the IP address of the server to which t
+    destport: ${51:value}                                                  # TCP or UDP port to which to send the probe  If the parameter is set to 0, the port number of the service to which the mo
+    state: ${52$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  State of the monitor  The C(disabled) setting disables not only the monitor being configured,
+    reverse: ${53:value}                                                   # Mark a service as DOWN, instead of UP, when probe criteria are satisfied, and as UP instead of DOWN when probe criteria 
+    transparent: ${54:value}                                               # The monitor is bound to a transparent device such as a firewall or router  The state of a transparent device depends on 
+    iptunnel: ${55:value}                                                  # Send the monitoring probe to the service through an IP tunnel  A destination IP address must be specified 
+    tos: ${56:value}                                                       # Probe the service by encoding the destination IP address in the IP TOS (6) bits 
+    tosid: ${57:value}                                                     # The TOS ID of the specified destination IP  Applicable only when the TOS parameter is set  Minimum value = C(1) Maximum 
+    secure: ${58:value}                                                    # Use a secure SSL connection when monitoring a service  Applicable only to TCP based monitors  The secure option cannot b
+    validatecred: ${59:value}                                              # Validate the credentials of the Xen Desktop DDC server user  Applicable to monitors of type C(CITRIX-XD-DDC) 
+    domain: ${60:value}                                                    # Domain in which the XenDesktop Desktop Delivery Controller (DDC) servers or Web Interface servers are present  Required 
+    ipaddress: ${61:value}                                                 # Set of IP addresses expected in the monitoring response from the DNS server, if the record type is A or AAAA  Applicable
+    group: ${62:value}                                                     # Name of a newsgroup available on the NNTP service that is to be monitored  The appliance periodically generates an NNTP 
+    filename: ${63:value}                                                  # Name of a file on the FTP server  The appliance monitors the FTP service by periodically checking the existence of the f
+    basedn: ${64:value}                                                    # The base distinguished name of the LDAP service, from where the LDAP server can begin the search for the attributes in t
+    binddn: ${65:value}                                                    # The distinguished name with which an LDAP monitor can perform the Bind operation on the LDAP server  Optional  Applicabl
+    filter: ${66:value}                                                    # Filter criteria for the LDAP query  Optional  Minimum length = 1
+    attribute: ${67:value}                                                 # Attribute to evaluate when the LDAP server responds to the query  Success or failure of the monitoring probe depends on 
+    database: ${68:value}                                                  # Name of the database to connect to during authentication  Minimum length = 1
+    oraclesid: ${69:value}                                                 # Name of the service identifier that is used to connect to the Oracle database during authentication  Minimum length = 1
+    sqlquery: ${70:value}                                                  # SQL query for a C(MYSQL-ECV) or C(MSSQL-ECV) monitor  Sent to the database server after the server authenticates the con
+    evalrule: ${71:value}                                                  # Default syntax expression that evaluates the database server's response to a MYSQL-ECV or MSSQL-ECV monitoring query  Mu
+    mssqlprotocolversion: ${72$$(yas-choose-value '("70" "2000" "2000SP1" "2005" "2008" "2008R2" "2012" "2014"))}# choices: 70;2000;2000SP1;2005;2008;2008R2;2012;2014  Version of MSSQL server that 
+    Snmpoid: ${73:value}                                                   # SNMP OID for C(SNMP) monitors  Minimum length = 1
+    snmpcommunity: ${74:value}                                             # Community name for C(SNMP) monitors  Minimum length = 1
+    snmpthreshold: ${75:value}                                             # Threshold for C(SNMP) monitors  Minimum length = 1
+    snmpversion: ${76$$(yas-choose-value '("V1" "V2"))}                    # choices: V1;V2  SNMP version to be used for C(SNMP) monitors 
+    metrictable: ${77:value}                                               # Metric table to which to bind metrics  Minimum length = 1 Maximum length = 99
+    application: ${78:value}                                               # Name of the application used to determine the state of the service  Applicable to monitors of type C(CITRIX-XML-SERVICE)
+    sitepath: ${79:value}                                                  # URL of the logon page  For monitors of type C(CITRIX-WEB-INTERFACE), to monitor a dynamic page under the site path, term
+    storename: ${80:value}                                                 # Store Name  For monitors of type C(STOREFRONT), C(storename) is an optional argument defining storefront service store n
+    storefrontacctservice: ${81:value}                                     # Enable/Disable probing for Account Service  Applicable only to Store Front monitors  For multi-tenancy configuration use
+    hostname: ${82:value}                                                  # Hostname in the FQDN format (Example: C(porche cars org))  Applicable to C(STOREFRONT) monitors  Minimum length = 1
+    netprofile: ${83:value}                                                # Name of the network profile  Minimum length = 1 Maximum length = 127
+    originhost: ${84:value}                                                # Origin-Host value for the Capabilities-Exchange-Request (CER) message to use for monitoring Diameter servers  Minimum le
+    originrealm: ${85:value}                                               # Origin-Realm value for the Capabilities-Exchange-Request (CER) message to use for monitoring Diameter servers  Minimum l
+    hostipaddress: ${86:value}                                             # Host-IP-Address value for the Capabilities-Exchange-Request (CER) message to use for monitoring Diameter servers  If Hos
+    vendorid: ${87:value}                                                  # Vendor-Id value for the Capabilities-Exchange-Request (CER) message to use for monitoring Diameter servers 
+    productname: ${88:value}                                               # Product-Name value for the Capabilities-Exchange-Request (CER) message to use for monitoring Diameter servers  Minimum l
+    firmwarerevision: ${89:value}                                          # Firmware-Revision value for the Capabilities-Exchange-Request (CER) message to use for monitoring Diameter servers 
+    authapplicationid: ${90:value}                                         # List of Auth-Application-Id attribute value pairs (AVPs) for the Capabilities-Exchange-Request (CER) message to use for 
+    acctapplicationid: ${91:value}                                         # List of Acct-Application-Id attribute value pairs (AVPs) for the Capabilities-Exchange-Request (CER) message to use for 
+    inbandsecurityid: ${92$$(yas-choose-value '("NO_INBAND_SECURITY" "TLS"))}# choices: NO_INBAND_SECURITY;TLS  Inband-Security-Id for the Capabilities-Exchange-Request (CER) message to use for mon
+    supportedvendorids: ${93:value}                                        # List of Supported-Vendor-Id attribute value pairs (AVPs) for the Capabilities-Exchange-Request (CER) message to use for 
+    vendorspecificvendorid: ${94:value}                                    # Vendor-Id to use in the Vendor-Specific-Application-Id grouped attribute-value pair (AVP) in the monitoring CER message 
+    vendorspecificauthapplicationids: ${95:value}                          # List of Vendor-Specific-Auth-Application-Id attribute value pairs (AVPs) for the Capabilities-Exchange-Request (CER) mes
+    vendorspecificacctapplicationids: ${96:value}                          # List of Vendor-Specific-Acct-Application-Id attribute value pairs (AVPs) to use for monitoring Diameter servers  A maxim
+    kcdaccount: ${97:value}                                                # KCD Account used by C(MSSQL) monitor  Minimum length = 1 Maximum length = 32
+    storedb: ${98$$(yas-choose-value '("enabled" "disabled"))}             # choices: enabled;disabled  Store the database list populated with the responses to monitor probes  Used in database spec
+    storefrontcheckbackendservices: ${99:value}                            # This option will enable monitoring of services running on storefront server  Storefront services are monitored by probin
+    trofscode: ${100:value}                                                # Code expected when the server is under maintenance 
+    trofsstring: ${101:value}                                              # String expected from the server for the service to be marked as trofs  Applicable to HTTP-ECV/TCP-ECV monitors 
+    nitro_protocol: ${102$$(yas-choose-value '("http" "https"))}           # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${103:True}                                            # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${104:310}                                              # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    save_config: ${105:True}                                               # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Add or remove replication slots from a PostgreSQL database
+# prefix: postgresql_slot_snippet
+# key: postgresql_slot
+# group: ansible
+# --
+
+- name: ${0:Add or remove replication slots from a PostgreSQL database}
+  postgresql_slot:                                                         
+    name: ${1:Name of the replication slot to add or remove}               #
+    slot_type: ${2$$(yas-choose-value '("logical" "physical"))}            # choices: logical;physical  Slot type 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The slot state  I(state=present) implies the slot must be present in the system  I(state=absent
+    immediately_reserve: ${4:False}                                        # Optional parameter that when C(yes) specifies that the LSN for this replication slot be reserved immediately, otherwise 
+    output_plugin: ${5:test_decoding}                                      # All logical slots must indicate which output plugin decoder they're using  This parameter does not apply to physical slo
+    db: ${6:value}                                                         # Name of database to connect to 
+    session_role: ${7:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    login_user: ${8:postgres}                                              # The username used to authenticate with 
+    login_password: ${9:value}                                             # The password used to authenticate with 
+    login_host: ${10:value}                                                # Host running the database 
+    login_unix_socket: ${11:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${12:5432}                                                       # Database port to connect to 
+    ssl_mode: ${13$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${14:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

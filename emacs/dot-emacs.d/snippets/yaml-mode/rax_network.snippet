@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: create / delete an isolated network in Rackspace Public Cloud
+# prefix: rax_network_snippet
+# key: rax_network
+# group: ansible
+# --
+
+- name: ${0:create / delete an isolated network in Rackspace Public Cloud}
+  rax_network:                                                             
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource
+    label: ${2:value}                                                      # Label (name) to give the network
+    cidr: ${3:value}                                                       # cidr of the network being created
+    api_key: ${4:value}                                                    # Rackspace API key, overrides I(credentials) 
+    auth_endpoint: ${{5:https://identity}                                  #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    credentials: ${6:value}                                                # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${7:value}                                                        # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    identity_type: ${8:rackspace}                                          # Authentication mechanism to use, such as rackspace or keystone 
+    region: ${9:DFW}                                                       # Region to create an instance in 
+    tenant_id: ${10:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${11:value}                                               # The tenant name used for authentication 
+    username: ${12:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${13:value}                                            # Whether or not to require SSL validation of API endpoints 

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage link layer discovery protocol (LLDP) attributes on VyOS devices..
+# prefix: vyos_lldp_global_snippet
+# key: vyos_lldp_glo
+# group: ansible
+# --
+
+- name: ${0:Manage link layer discovery protocol (LLDP) attributes on VyOS devices..}
+  vyos_lldp_global:                                                        
+    config: ${1:value}                                                     # T h e   p r o v i d e d   l i n k   l a y e r   d i s c o v e r y   p r o t o c o l   ( L L D P )   c o n f i g u r a t 
+    state: ${2$$(yas-choose-value '("merged" "replaced" "deleted"))}       # choices: merged;replaced;deleted  The state of the configuration after module completion 

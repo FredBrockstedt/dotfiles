@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP tmm daemon log settings
+# prefix: bigip_sys_daemon_log_tmm_snippet
+# key: gip_sys_daemon_log_tmm
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP tmm daemon log settings}
+  bigip_sys_daemon_log_tmm:                                                
+    arp_log_level: ${1$$(yas-choose-value '("debug" "error" "informational" "notice" "warning"))}# choices: debug;error;informational;notice;warning  Specifies the lowest level of ARP messages from
+    http_compression_log_level: ${2$$(yas-choose-value '("debug" "error" "informational" "notice" "warning"))}# choices: debug;error;informational;notice;warning  Specifies the lowest level of HTTP
+    http_log_level: ${3$$(yas-choose-value '("debug" "error" "informational" "notice" "warning"))}# choices: debug;error;informational;notice;warning  Specifies the lowest level of HTTP messages fr
+    ip_log_level: ${4$$(yas-choose-value '("debug" "informational" "notice" "warning"))}# choices: debug;informational;notice;warning  Specifies the lowest level of IP address messages from the tmm
+    irule_log_level: ${5$$(yas-choose-value '("debug" "error" "informational" "notice" "warning"))}# choices: debug;error;informational;notice;warning  Specifies the lowest level of iRule messages 
+    layer4_log_level: ${6$$(yas-choose-value '("debug" "informational" "notice"))}# choices: debug;informational;notice  Specifies the lowest level of Layer 4 messages from the tmm daemon to includ
+    net_log_level: ${7$$(yas-choose-value '("critical" "debug" "error" "informational" "notice" "warning"))}# choices: critical;debug;error;informational;notice;warning  Specifies the lowest level 
+    os_log_level: ${8$$(yas-choose-value '("alert" "critical" "debug" "emergency" "error" "informational" "notice" "warning"))}# choices: alert;critical;debug;emergency;error;informational;notice;w
+    pva_log_level: ${9$$(yas-choose-value '("debug" "informational" "notice"))}# choices: debug;informational;notice  Specifies the lowest level of PVA messages from the tmm daemon to include in th
+    ssl_log_level: ${10$$(yas-choose-value '("alert" "critical" "debug" "emergency" "error" "informational" "notice" "warning"))}# choices: alert;critical;debug;emergency;error;informational;notice
+    state: ${11$$(yas-choose-value '("present"))}                          # choices: present  The state of the log level on the system  When C(present), guarantees that an existing log level is se
+    provider: ${12:value}                                                  # A dict object containing connection details 

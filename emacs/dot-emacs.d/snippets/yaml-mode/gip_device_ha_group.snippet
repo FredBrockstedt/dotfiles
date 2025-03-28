@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage HA group settings on a BIG-IP system
+# prefix: bigip_device_ha_group_snippet
+# key: gip_device_ha_group
+# group: ansible
+# --
+
+- name: ${0:Manage HA group settings on a BIG-IP system}
+  bigip_device_ha_group:                                                   
+    name: ${1:Name of the HA group to create/manage}                       #
+    enable: ${2:True}                                                      # When set to C(no) the system disables the ha score feature 
+    description: ${3:value}                                                # User created HA group description 
+    active_bonus: ${4:value}                                               # Specifies the extra value to be added to the active unit's ha score  When system creates HA group this value is set to C
+    pools: ${5:value}                                                      # Specifies pools to contribute to the ha score  The pools must exist on the BIG-IP otherwise the operation will fail 
+    trunks: ${6:value}                                                     # Specifies trunks to contribute to the ha score  The trunks must exist on the BIG-IP otherwise the operation will fail 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${8:value}                                                   # A dict object containing connection details 

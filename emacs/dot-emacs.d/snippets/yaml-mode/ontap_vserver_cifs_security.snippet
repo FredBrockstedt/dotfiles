@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP vserver CIFS security modification
+# prefix: na_ontap_vserver_cifs_security_snippet
+# key: ontap_vserver_cifs_security
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP vserver CIFS security modification}
+  na_ontap_vserver_cifs_security:                                          
+    vserver: ${1:name of the vserver}                                      #
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    kerberos_clock_skew: ${5:value}                                        # The clock skew in minutes is the tolerance for accepting tickets with time stamps that do not exactly match the host's s
+    kerberos_ticket_age: ${6:value}                                        # Determine the maximum amount of time in hours that a user's ticket may be used for the purpose of Kerberos authenticatio
+    kerberos_renew_age: ${7:value}                                         # Determine the maximum amount of time in days for which a ticket can be renewed 
+    kerberos_kdc_timeout: ${8:value}                                       # Determine the timeout value in seconds for KDC connections 
+    is_signing_required: ${9:value}                                        # Determine whether signing is required for incoming CIFS traffic 
+    is_password_complexity_required: ${10:value}                           # Determine whether password complexity is required for local users 
+    is_aes_encryption_enabled: ${11:value}                                 # Determine whether AES-128 and AES-256 encryption mechanisms are enabled for Kerberos-related CIFS communication 
+    is_smb_encryption_required: ${12:value}                                # Determine whether SMB encryption is required for incoming CIFS traffic 
+    lm_compatibility_level: ${13$$(yas-choose-value '("lm_ntlm_ntlmv2_krb" "ntlm_ntlmv2_krb" "ntlmv2_krb" "krb"))}# choices: lm_ntlm_ntlmv2_krb;ntlm_ntlmv2_krb;ntlmv2_krb;krb  Determine the LM comp
+    referral_enabled_for_ad_ldap: ${14:value}                              # Determine whether LDAP referral chasing is enabled or not for AD LDAP connections 
+    session_security_for_ad_ldap: ${15$$(yas-choose-value '("none" "sign" "seal"))}# choices: none;sign;seal  Determine the level of security required for LDAP communications 
+    smb1_enabled_for_dc_connections: ${16$$(yas-choose-value '("false" "true" "system_default"))}# choices: false;true;system_default  Determine if SMB version 1 is used for connections to domain c
+    smb2_enabled_for_dc_connections: ${17$$(yas-choose-value '("false" "true" "system_default"))}# choices: false;true;system_default  Determine if SMB version 2 is used for connections to domain c
+    use_start_tls_for_ad_ldap: ${18:value}                                 # Determine whether to use start_tls for AD LDAP connections 
+    https: ${19:False}                                                     # Enable and disable https
+    validate_certs: ${20:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${21:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${22:value}                                                    # The ontap api version to use
+    use_rest: ${23$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Installs and uninstalls Windows Features on Windows Server
+# prefix: win_feature_snippet
+# key: win_featur
+# group: ansible
+# --
+
+- name: ${0:Installs and uninstalls Windows Features on Windows Server}
+  win_feature:                                                             
+    name: ${1:Names of roles or features to install as a single feature or a comma-separated list of features}# To list all available features use the PowerShell command C(Get-WindowsFeature) 
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the features or roles on the system 
+    include_sub_features: ${3:False}                                       # Adds all subfeatures of the specified feature 
+    include_management_tools: ${4:False}                                   # Adds the corresponding management tools to the specified feature  Not supported in Windows 2008 R2 and will be ignored 
+    source: ${5:value}                                                     # Specify a source to install the feature from  Not supported in Windows 2008 R2 and will be ignored  Can either be C({dri

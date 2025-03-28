@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages base ACL configuration on HUAWEI CloudEngine switches.
+# prefix: ce_acl_snippet
+# key: ce_ac
+# group: ansible
+# --
+
+- name: ${0:Manages base ACL configuration on HUAWEI CloudEngine switches.}
+  ce_acl:                                                                  
+    acl_name: ${1:ACL number or name}                                      # For a numbered rule group, the value ranging from 2000 to 2999 indicates a basic ACL  For a named rule group, the value 
+    state: ${2$$(yas-choose-value '("present" "absent" "delete_acl"))}     # choices: present;absent;delete_acl  Specify desired state of the resource 
+    acl_num: ${3:value}                                                    # ACL number  The value is an integer ranging from 2000 to 2999 
+    acl_step: ${4:value}                                                   # ACL step  The value is an integer ranging from 1 to 20  The default value is 5 
+    acl_description: ${5:value}                                            # ACL description  The value is a string of 1 to 127 characters 
+    rule_name: ${6:value}                                                  # Name of a basic ACL rule  The value is a string of 1 to 32 characters  The value is case-insensitive, and cannot contain
+    rule_id: ${7:value}                                                    # ID of a basic ACL rule in configuration mode  The value is an integer ranging from 0 to 4294967294 
+    rule_action: ${8$$(yas-choose-value '("permit" "deny"))}               # choices: permit;deny  Matching mode of basic ACL rules 
+    source_ip: ${9:value}                                                  # Source IP address  The value is a string of 0 to 255 characters The default value is 0 0 0 0  The value is in dotted dec
+    src_mask: ${10:value}                                                  # Mask of a source IP address  The value is an integer ranging from 1 to 32 
+    frag_type: ${11$$(yas-choose-value '("fragment" "clear_fragment"))}    # choices: fragment;clear_fragment  Type of packet fragmentation 
+    vrf_name: ${12:value}                                                  # VPN instance name  The value is a string of 1 to 31 characters The default value is _public_ 
+    time_range: ${13:value}                                                # Name of a time range in which an ACL rule takes effect  The value is a string of 1 to 32 characters  The value is case-i
+    rule_description: ${14:value}                                          # Description about an ACL rule  The value is a string of 1 to 127 characters 
+    log_flag: ${15:false}                                                  # Flag of logging matched data packets 

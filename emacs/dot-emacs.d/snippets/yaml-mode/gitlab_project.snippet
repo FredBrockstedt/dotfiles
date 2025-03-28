@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Creates/updates/deletes GitLab Projects
+# prefix: gitlab_project_snippet
+# key: gitlab_project
+# group: ansible
+# --
+
+- name: ${0:Creates/updates/deletes GitLab Projects}
+  gitlab_project:                                                          
+    name: ${1:The name of the project}                                     #
+    server_url: ${2:value}                                                 # The URL of the GitLab server, with protocol (i e  http or https) 
+    login_user: ${3:value}                                                 # GitLab user name 
+    login_password: ${4:value}                                             # GitLab password for login_user
+    api_token: ${5:value}                                                  # GitLab token for logging in 
+    group: ${6:value}                                                      # Id or The full path of the group of which this projects belongs to 
+    path: ${7:value}                                                       # The path of the project you want to create, this will be server_url/<group>/path If not supplied, name will be used 
+    description: ${8:value}                                                # An description for the project 
+    issues_enabled: ${9:True}                                              # Whether you want to create issues or not  Possible values are true and false 
+    merge_requests_enabled: ${10:True}                                     # If merge requests can be made or not  Possible values are true and false 
+    wiki_enabled: ${11:True}                                               # If an wiki for this project should be available or not  Possible values are true and false 
+    snippets_enabled: ${12:True}                                           # If creating snippets should be available or not  Possible values are true and false 
+    visibility: ${13$$(yas-choose-value '("private" "internal" "public"))} # choices: private;internal;public  Private  Project access must be granted explicitly for each user  Internal  The projec
+    import_url: ${14:value}                                                # Git repository which will be imported into gitlab  GitLab server needs read access to this git repository 
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  create or delete project  Possible values are present and absent 
+    api_url: ${16:value}                                                   # The resolvable endpoint for the API
+    api_username: ${17:value}                                              # The username to use for authentication against the API
+    api_password: ${18:value}                                              # The password to use for authentication against the API
+    validate_certs: ${19:True}                                             # Whether or not to validate SSL certs when supplying a https endpoint 

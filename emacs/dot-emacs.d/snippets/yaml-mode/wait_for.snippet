@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Waits for a condition before continuing
+# prefix: wait_for_snippet
+# key: wait_for
+# group: ansible
+# --
+
+- name: ${0:Waits for a condition before continuing}
+  wait_for:                                                                
+    host: ${{1:127}                                                        #0 0 1} # not required  A resolvable hostname or IP address to wait for 
+    timeout: ${2:300}                                                      # Maximum number of seconds to wait for, when used with another condition it will force an error  When used without other 
+    connect_timeout: ${3:5}                                                # Maximum number of seconds to wait for a connection to happen before closing and retrying 
+    delay: ${4:0}                                                          # Number of seconds to wait before starting to poll 
+    port: ${5:value}                                                       # Port number to poll  C(path) and C(port) are mutually exclusive parameters 
+    active_connection_states: ${6:"['ESTABLISHED', 'FIN_WAIT1', 'FIN_WAIT2', 'SYN_RECV', 'SYN_SENT', 'TIME_WAIT']"}# The list of TCP connection states which are counted as active connections 
+    state: ${7$$(yas-choose-value '("absent" "drained" "present" "started" "stopped"))}# choices: absent;drained;present;started;stopped  Either C(present), C(started), or C(stopped), C(absent), or
+    path: ${8:value}                                                       # Path to a file on the filesystem that must exist before continuing  C(path) and C(port) are mutually exclusive parameter
+    search_regex: ${9:value}                                               # Can be used to match a string in either a file or a socket connection  Defaults to a multiline regex 
+    exclude_hosts: ${10:value}                                             # List of hosts or IPs to ignore when looking for active TCP connections for C(drained) state 
+    sleep: ${11:1}                                                         # Number of seconds to sleep between checks  Before Ansible 2 3 this was hardcoded to 1 second 
+    msg: ${12:value}                                                       # This overrides the normal error message from a failure to meet the required conditions 

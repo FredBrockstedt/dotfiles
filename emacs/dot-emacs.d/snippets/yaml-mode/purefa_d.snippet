@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Configure FlashArray Directory Service
+# prefix: purefa_ds_snippet
+# key: purefa_d
+# group: ansible
+# --
+
+- name: ${0:Configure FlashArray Directory Service}
+  purefa_ds:                                                               
+    base_dn: ${1:Sets the base of the Distinguished Name (DN) of the directory service groups}# The base should consist of only Domain Components (DCs)  The base_dn will populate with a default val
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Create or delete directory service configuration
+    enable: ${5:False}                                                     # Whether to enable or disable directory service support 
+    uri: ${6:value}                                                        # A list of up to 30 URIs of the directory servers  Each URI must include the scheme ldap:// or ldaps:// (for LDAP over SS
+    bind_password: ${7:value}                                              # Sets the password of the bind_user user name account 
+    bind_user: ${8:value}                                                  # Sets the user name that can be used to bind to and query the directory  For Active Directory, enter the username - often
+    group_base: ${9:value}                                                 # Specifies where the configured groups are located in the directory tree  This field consists of Organizational Units (OU
+    ro_group: ${10:value}                                                  # Sets the common Name (CN) of the configured directory service group containing users with read-only privileges on the Fl
+    sa_group: ${11:value}                                                  # Sets the common Name (CN) of the configured directory service group containing administrators with storage-related privi
+    aa_group: ${12:value}                                                  # Sets the common Name (CN) of the directory service group containing administrators with full privileges when managing th

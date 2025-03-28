@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Adds an audit rule to files, folders, or registry keys
+# prefix: win_audit_rule_snippet
+# key: win_audit_ru
+# group: ansible
+# --
+
+- name: ${0:Adds an audit rule to files, folders, or registry keys}
+  win_audit_rule:                                                          
+    path: ${1:Path to the file, folder, or registry key}                   # Registry paths should be in Powershell format, beginning with an abbreviation for the root such as, C(HKLM:\\Software) 
+    user: ${2:The user or group to adjust rules for}                       #
+    rights: ${3:Comma separated list of the rights desired}                # Only required for adding a rule  If I(path) is a file or directory, rights can be any right under MSDN FileSystemRights 
+    audit_flags: ${4$$(yas-choose-value '("Failure" "Success"))}           # Defines whether to log on failure, success, or both  To log both define as comma separated list "Success, Failure" 
+    inheritance_flags: ${5$$(yas-choose-value '("ContainerInherit" "ObjectInherit"))}# choices: ContainerInherit;ObjectInherit  Defines what objects inside of a folder or registry key will inherit 
+    propagation_flags: ${6$$(yas-choose-value '("None" "InherityOnly" "NoPropagateInherit"))}# choices: None;InherityOnly;NoPropagateInherit  Propagation flag on the audit rules  This value is igno
+    state: ${7$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Whether the rule should be C(present) or C(absent)  For absent, only I(path), I(user), and I(st

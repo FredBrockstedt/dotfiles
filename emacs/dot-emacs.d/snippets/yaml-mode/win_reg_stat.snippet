@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Get information about Windows registry keys
+# prefix: win_reg_stat_snippet
+# key: win_reg_stat
+# group: ansible
+# --
+
+- name: ${0:Get information about Windows registry keys}
+  win_reg_stat:                                                            
+    path: ${1:T h e   f u l l   r e g i s t r y   k e y   p a t h   i n c l u d i n g   t h e   h i v e   t o   s e a r c h   f o r }#
+    name: ${2:value}                                                       # The registry property name to get information for, the return json will not include the sub_keys and properties entries 

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Create a static address group.
+# prefix: panos_sag_snippet
+# key: panos_sag
+# group: ansible
+# --
+
+- name: ${0:Create a static address group.}
+  panos_sag:                                                               
+    sag_name: ${1:name of the dynamic address group}                       #
+    operation: ${2$$(yas-choose-value '("add" "list" "delete"))}           # The operation to perform Supported values are I(add)/I(list)/I(delete) 
+    ip_address: ${3:IP address (or hostname) of PAN-OS device}             #
+    password: ${4:Password for authentication}                             #
+    api_key: ${5:value}                                                    # API key that can be used instead of I(username)/I(password) credentials 
+    sag_match_filter: ${6:value}                                           # Static filter user by the address group
+    devicegroup: ${7:value}                                                # -   T h e   n a m e   o f   t h e   P a n o r a m a   d e v i c e   g r o u p     T h e   g r o u p   m u s t   e x i s 
+    description: ${8:value}                                                # The purpose / objective of the static Address Group
+    tags: ${9:value}                                                       # Tags to be associated with the address group
+    commit: ${10:true}                                                     # commit if changed
+    username: ${11:admin}                                                  # Username for authentication 

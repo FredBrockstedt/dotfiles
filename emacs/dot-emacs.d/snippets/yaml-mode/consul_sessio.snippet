@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manipulate consul sessions
+# prefix: consul_session_snippet
+# key: consul_sessio
+# group: ansible
+# --
+
+- name: ${0:Manipulate consul sessions}
+  consul_session:                                                          
+    id: ${1:value}                                                         # ID of the session, required when I(state) is either C(info) or C(remove) 
+    state: ${2$$(yas-choose-value '("absent" "info" "list" "node" "present"))}# choices: absent;info;list;node;present  Whether the session should be present i e  created if it doesn't exist, or ab
+    name: ${3:value}                                                       # The name that should be associated with the session  Required when I(state=node) is used 
+    delay: ${4:15}                                                         # The optional lock delay that can be attached to the session when it is created  Locks for invalidated sessions ar blocke
+    node: ${5:value}                                                       # The name of the node that with which the session will be associated  by default this is the name of the agent 
+    datacenter: ${6:value}                                                 # The name of the datacenter in which the session exists or should be created 
+    checks: ${7:value}                                                     # Checks that will be used to verify the session health  If all the checks fail, the session will be invalidated and any l
+    host: ${8:localhost}                                                   # The host of the consul agent defaults to localhost 
+    port: ${9:8500}                                                        # The port on which the consul agent is running 
+    scheme: ${10:http}                                                     # The protocol scheme on which the consul agent is running 
+    validate_certs: ${11:True}                                             # Whether to verify the TLS certificate of the consul agent 
+    behavior: ${12$$(yas-choose-value '("delete" "release"))}              # choices: delete;release  The optional behavior that can be attached to the session when it is created  This controls the

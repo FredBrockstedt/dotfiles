@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP CloudFunction
+# prefix: gcp_cloudfunctions_cloud_function_snippet
+# key: gcp_cloudfunctions_cloud_functio
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP CloudFunction}
+  gcp_cloudfunctions_cloud_function:                                       
+    name: ${1:A user-defined name of the function}                         # Function names must be unique globally and match pattern `projects/*/locations/*/functions/*` 
+    location: ${2:The location of this cloud function}                     #
+    auth_kind: ${3$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${5:value}                                                # User-provided description of a function 
+    entry_point: ${6:value}                                                # The name of the function (as defined in source code) that will be executed  Defaults to the resource name suffix, if not
+    runtime: ${7:value}                                                    # The runtime in which the function is going to run  If empty, defaults to Node js 6 
+    timeout: ${8:value}                                                    # The function execution timeout  Execution is considered failed and can be terminated if the function is not completed at
+    available_memory_mb: ${9:value}                                        # The amount of memory in MB available for a function 
+    labels: ${10:value}                                                    # A set of key/value label pairs associated with this Cloud Function 
+    environment_variables: ${11:value}                                     # Environment variables that shall be available during function execution 
+    source_archive_url: ${12:value}                                        # The Google Cloud Storage URL, starting with gs://, pointing to the zip archive which contains the function 
+    source_upload_url: ${13:value}                                         # The Google Cloud Storage signed URL used for source uploading 
+    source_repository: ${14:value}                                         # The source repository where a function is hosted 
+    https_trigger: ${15:value}                                             # An HTTPS endpoint type of source that can be triggered via URL 
+    event_trigger: ${16:value}                                             # An HTTPS endpoint type of source that can be triggered via URL 
+    trigger_http: ${17:value}                                              # Use HTTP to trigger this function 
+    project: ${18:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${19:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${20:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${21:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${22:value}                                                    # Array of scopes to be used 
+    env_type: ${23:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

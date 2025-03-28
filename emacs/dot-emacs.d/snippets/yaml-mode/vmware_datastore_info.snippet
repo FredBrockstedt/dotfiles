@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Gather info about datastores available in given vCenter
+# prefix: vmware_datastore_info_snippet
+# key: vmware_datastore_info
+# group: ansible
+# --
+
+- name: ${0:Gather info about datastores available in given vCenter}
+  vmware_datastore_info:                                                   
+    name: ${1:value}                                                       # Name of the datastore to match  If set, information of specific datastores are returned 
+    datacenter: ${2:value}                                                 # Datacenter to search for datastores  This parameter is required, if C(cluster) is not supplied 
+    cluster: ${3:value}                                                    # Cluster to search for datastores  If set, information of datastores belonging this clusters will be returned  This param
+    gather_nfs_mount_info: ${4:False}                                      # Gather mount information of NFS datastores  Disabled per default because this slows down the execution if you have a lot
+    gather_vmfs_mount_info: ${5:False}                                     # Gather mount information of VMFS datastores  Disabled per default because this slows down the execution if you have a lo
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${7:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${8:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${10:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${11:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${12:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

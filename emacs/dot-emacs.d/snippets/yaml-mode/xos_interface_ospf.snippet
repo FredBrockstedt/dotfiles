@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manages configuration of an OSPF interface instance.
+# prefix: nxos_interface_ospf_snippet
+# key: xos_interface_ospf
+# group: ansible
+# --
+
+- name: ${0:Manages configuration of an OSPF interface instance.}
+  nxos_interface_ospf:                                                     
+    interface: ${1:Name of this cisco_interface resource}                  # Valid value is a string 
+    ospf: ${2:Name of the ospf instance}                                   #
+    area: ${3:Ospf area associated with this cisco_interface_ospf instance}# Valid values are a string, formatted as an IP address (i e  "0 0 0 0") or as an integer 
+    bfd: ${4$$(yas-choose-value '("enable" "disable" "default"))}          # choices: enable;disable;default  Enables bfd at interface level  This overrides the bfd variable set at the ospf router 
+    cost: ${5:value}                                                       # The cost associated with this cisco_interface_ospf instance 
+    hello_interval: ${6:value}                                             # Time between sending successive hello packets  Valid values are an integer or the keyword 'default' 
+    dead_interval: ${7:value}                                              # Time interval an ospf neighbor waits for a hello packet before tearing down adjacencies  Valid values are an integer or 
+    passive_interface: ${8:value}                                          # Enable or disable passive-interface state on this interface  true - (enable) Prevent OSPF from establishing an adjacency
+    network: ${9$$(yas-choose-value '("point-to-point" "broadcast"))}      # choices: point-to-point;broadcast  Specifies interface ospf network type  Valid values are 'point-to-point' or 'broadcas
+    message_digest: ${10:value}                                            # Enables or disables the usage of message digest authentication 
+    message_digest_key_id: ${11:value}                                     # Md5 authentication key-id associated with the ospf instance  If this is present, message_digest_encryption_type, message
+    message_digest_algorithm_type: ${12$$(yas-choose-value '("md5" "default"))}# choices: md5;default  Algorithm used for authentication among neighboring routers within an area  Valid values are '
+    message_digest_encryption_type: ${13$$(yas-choose-value '("cisco_type_7" "3des" "default"))}# choices: cisco_type_7;3des;default  Specifies the scheme used for encrypting message_digest_passwor
+    message_digest_password: ${14:value}                                   # Specifies the message_digest password  Valid value is a string 
+    state: ${15$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${16:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

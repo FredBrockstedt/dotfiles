@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Adds or removes schedules from proxysql admin interface.
+# prefix: proxysql_scheduler_snippet
+# key: proxysql_scheduler
+# group: ansible
+# --
+
+- name: ${0:Adds or removes schedules from proxysql admin interface.}
+  proxysql_scheduler:                                                      
+    filename: ${1:Full path of the executable to be executed}              #
+    active: ${2:True}                                                      # A schedule with I(active) set to C(False) will be tracked in the database, but will be never loaded in the in-memory dat
+    interval_ms: ${3:10000}                                                # How often (in millisecond) the job will be started  The minimum value for I(interval_ms) is 100 milliseconds 
+    arg1: ${4:value}                                                       # Argument that can be passed to the job 
+    arg2: ${5:value}                                                       # Argument that can be passed to the job 
+    arg3: ${6:value}                                                       # Argument that can be passed to the job 
+    arg4: ${7:value}                                                       # Argument that can be passed to the job 
+    arg5: ${8:value}                                                       # Argument that can be passed to the job 
+    comment: ${9:value}                                                    # Text field that can be used for any purposed defined by the user 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present) - adds the schedule, when C(absent) - removes the schedule 
+    force_delete: ${11:False}                                              # By default we avoid deleting more than one schedule in a single batch, however if you need this behaviour and you're not
+    save_to_disk: ${12:true}                                               # Save config to sqlite db on disk to persist the configuration 
+    load_to_runtime: ${13:true}                                            # Dynamically load config to runtime memory 
+    login_user: ${14:value}                                                # The username used to authenticate to ProxySQL admin interface 
+    login_password: ${15:value}                                            # The password used to authenticate to ProxySQL admin interface 
+    login_host: ${{16:127}                                                 #0 0 1} # not required  The host used to connect to ProxySQL admin interface 
+    login_port: ${17:6032}                                                 # The port used to connect to ProxySQL admin interface 
+    config_file: ${18:}                                                    # Specify a config file from which I(login_user) and I(login_password) are to be read 

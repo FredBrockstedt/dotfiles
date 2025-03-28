@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create a DLP fingerprint database by allowing the FortiGate to access a file server containing files from which to create fingerprints in Fortinet's FortiOS and FortiGate.
+# prefix: fortios_dlp_fp_doc_source_snippet
+# key: fortios_dlp_fp_doc_sourc
+# group: ansible
+# --
+
+- name: ${0:Create a DLP fingerprint database by allowing the FortiGate to access a file server containing files from which to create fingerprints in Fortinet's FortiOS and FortiGate.}
+  fortios_dlp_fp_doc_source:                                               
+    host: ${1:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${2:value}                                                   # FortiOS or FortiGate username 
+    password: ${3:}                                                        # FortiOS or FortiGate password 
+    vdom: ${4:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${5:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${6:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicates whether to create or remove the object  This attribute was present already in previou
+    dlp_fp_doc_source: ${8:None}                                           # Create a DLP fingerprint database by allowing the FortiGate to access a file server containing files from which to creat

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage End Point (EP) retention protocol policies (fv:EpRetPol)
+# prefix: aci_tenant_ep_retention_policy_snippet
+# key: ci_tenant_ep_retention_policy
+# group: ansible
+# --
+
+- name: ${0:Manage End Point (EP) retention protocol policies (fv:EpRetPol)}
+  aci_tenant_ep_retention_policy:                                          
+    host: ${1:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${2:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${3:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    tenant: ${4:value}                                                     # The name of an existing tenant 
+    epr_policy: ${5:value}                                                 # The name of the end point retention policy 
+    bounce_age: ${6:value}                                                 # Bounce entry aging interval in seconds  Accepted values range between C(150) and C(65535); 0 is used for infinite  The A
+    bounce_trigger: ${7$$(yas-choose-value '("coop" "flood"))}             # choices: coop;flood  Determines if the bounce entries are installed by RARP Flood or COOP Protocol  The APIC defaults to
+    hold_interval: ${8:value}                                              # Hold interval in seconds  Accepted values range between C(5) and C(65535)  The APIC defaults to C(300) when unset during
+    local_ep_interval: ${9:value}                                          # Local end point aging interval in seconds  Accepted values range between C(120) and C(65535); 0 is used for infinite  Th
+    remote_ep_interval: ${10:value}                                        # Remote end point aging interval in seconds  Accepted values range between C(120) and C(65535); 0 is used for infinite  T
+    move_frequency: ${11:value}                                            # Move frequency per second  Accepted values range between C(0) and C(65535); 0 is used for none  The APIC defaults to C(2
+    description: ${12:value}                                               # Description for the End point retention policy 
+    state: ${13$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${14:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${15:admin}                                                  # The username to use for authentication 
+    certificate_name: ${16:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${17$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${18:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${19:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${20:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${21:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

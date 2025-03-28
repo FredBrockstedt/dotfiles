@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Creates or removes zones in Google Cloud DNS
+# prefix: gcdns_zone_snippet
+# key: gcdns_zo
+# group: ansible
+# --
+
+- name: ${0:Creates or removes zones in Google Cloud DNS}
+  gcdns_zone:                                                              
+    zone: ${1:The DNS domain name of the zone}                             # This is NOT the Google Cloud DNS zone ID (e g , example-com)  If you attempt to specify a zone ID, this module will atte
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given zone should or should not be present 
+    description: ${3:}                                                     # An arbitrary text string to use for the zone description 
+    service_account_email: ${4:value}                                      # The e-mail address for a service account with access to Google Cloud DNS 
+    pem_file: ${5:value}                                                   # The path to the PEM file associated with the service account email  This option is deprecated and may be removed in a fu
+    credentials_file: ${6:value}                                           # The path to the JSON file associated with the service account email 
+    project_id: ${7:value}                                                 # The Google Cloud Platform project ID to use 

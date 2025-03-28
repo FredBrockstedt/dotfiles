@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Retrieve information on Hetzner's failover IPs
+# prefix: hetzner_failover_ip_info_snippet
+# key: hetzner_failover_ip_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information on Hetzner's failover IPs}
+  hetzner_failover_ip_info:                                                
+    failover_ip: ${1:T h e   f a i l o v e r   I P   a d d r e s s }       #
+    hetzner_user: ${2:T h e   u s e r n a m e   f o r   t h e   R o b o t   w e b s e r v i c e   u s e r }#
+    hetzner_password: ${3:T h e   p a s s w o r d   f o r   t h e   R o b o t   w e b s e r v i c e   u s e r }#

@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: Manages access list entries for ACLs.
+# prefix: nxos_acl_snippet
+# key: xos_ac
+# group: ansible
+# --
+
+- name: ${0:Manages access list entries for ACLs.}
+  nxos_acl:                                                                
+    name: ${1:Case sensitive name of the access list (ACL)}                #
+    seq: ${2:value}                                                        # Sequence number of the entry (ACE) 
+    action: ${3$$(yas-choose-value '("permit" "deny" "remark"))}           # choices: permit;deny;remark  Action of the ACE 
+    remark: ${4:value}                                                     # If action is set to remark, this is the description 
+    proto: ${5:value}                                                      # Port number or protocol (as supported by the switch) 
+    src: ${6:value}                                                        # Source ip and mask using IP/MASK notation and supports keyword 'any' 
+    src_port_op: ${7$$(yas-choose-value '("any" "eq" "gt" "lt" "neq" "range"))}# choices: any;eq;gt;lt;neq;range  Source port operands such as eq, neq, gt, lt, range 
+    src_port1: ${8:value}                                                  # Port/protocol and also first (lower) port when using range operand 
+    src_port2: ${9:value}                                                  # Second (end) port when using range operand 
+    dest: ${10:value}                                                      # Destination ip and mask using IP/MASK notation and supports the keyword 'any' 
+    dest_port_op: ${11$$(yas-choose-value '("any" "eq" "gt" "lt" "neq" "range"))}# choices: any;eq;gt;lt;neq;range  Destination port operands such as eq, neq, gt, lt, range 
+    dest_port1: ${12:value}                                                # Port/protocol and also first (lower) port when using range operand 
+    dest_port2: ${13:value}                                                # Second (end) port when using range operand 
+    log: ${14$$(yas-choose-value '("enable"))}                             # choices: enable  Log matches against this entry 
+    urg: ${15$$(yas-choose-value '("enable"))}                             # choices: enable  Match on the URG bit 
+    ack: ${16$$(yas-choose-value '("enable"))}                             # choices: enable  Match on the ACK bit 
+    psh: ${17$$(yas-choose-value '("enable"))}                             # choices: enable  Match on the PSH bit 
+    rst: ${18$$(yas-choose-value '("enable"))}                             # choices: enable  Match on the RST bit 
+    syn: ${19$$(yas-choose-value '("enable"))}                             # choices: enable  Match on the SYN bit 
+    fin: ${20$$(yas-choose-value '("enable"))}                             # choices: enable  Match on the FIN bit 
+    established: ${21$$(yas-choose-value '("enable"))}                     # choices: enable  Match established connections 
+    fragments: ${22$$(yas-choose-value '("enable"))}                       # choices: enable  Check non-initial fragments 
+    time_range: ${23:value}                                                # Name of time-range to apply 
+    precedence: ${24$$(yas-choose-value '("critical" "flash" "flash-override" "immediate" "internet" "network" "priority" "routine"))}# choices: critical;flash;flash-override;immediate;internet;net
+    dscp: ${25$$(yas-choose-value '("af11" "af12" "af13" "af21" "af22" "af23" "af31" "af32" "af33" "af41" "af42" "af43" "cs1" "cs2" "cs3" "cs4" "cs5" "cs6" "cs7" "default" "ef"))}# choices: af11;af
+    state: ${26$$(yas-choose-value '("present" "absent" "delete_acl"))}    # choices: present;absent;delete_acl  Specify desired state of the resource 
+    provider: ${27:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

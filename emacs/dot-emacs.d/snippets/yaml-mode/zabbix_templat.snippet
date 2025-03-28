@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Create/update/delete/dump Zabbix template
+# prefix: zabbix_template_snippet
+# key: zabbix_templat
+# group: ansible
+# --
+
+- name: ${0:Create/update/delete/dump Zabbix template}
+  zabbix_template:                                                         
+    server_url: ${1:URL of Zabbix server, with protocol (http or https)}   # C(url) is an alias for C(server_url) 
+    login_user: ${2:Zabbix user name}                                      #
+    login_password: ${3:Zabbix user password}                              #
+    http_login_user: ${4:Basic Auth login}                                 #
+    template_name: ${5:value}                                              # Name of Zabbix template  Required when I(template_json) or I(template_xml) are not used  Mutually exclusive with I(templ
+    template_json: ${6:value}                                              # JSON dump of templates to import  Multiple templates can be imported this way  Mutually exclusive with I(template_name) 
+    template_xml: ${7:value}                                               # XML dump of templates to import  Multiple templates can be imported this way  You are advised to pass XML structure matc
+    template_groups: ${8:value}                                            # List of host groups to add template to when template is created  Replaces the current host groups the template belongs t
+    link_templates: ${9:value}                                             # List of template names to be linked to the template  Templates that are not specified and are linked to the existing tem
+    clear_templates: ${10:value}                                           # List of template names to be unlinked and cleared from the template  This option is ignored if template is being created
+    macros: ${11:value}                                                    # List of user macros to create for the template  Macros that are not specified and are present on the existing template w
+    dump_format: ${12$$(yas-choose-value '("json" "xml"))}                 # choices: json;xml  Format to use when dumping template with C(state=dump) 
+    state: ${13$$(yas-choose-value '("present" "absent" "dump"))}          # choices: present;absent;dump  Required state of the template  On C(state=present) template will be created/imported or u
+    http_login_password: ${14:value}                                       # Basic Auth password
+    timeout: ${15:10}                                                      # The timeout of API request (seconds) 
+    validate_certs: ${16:True}                                             # If set to False, SSL certificates will not be validated  This should only be used on personally controlled sites using s

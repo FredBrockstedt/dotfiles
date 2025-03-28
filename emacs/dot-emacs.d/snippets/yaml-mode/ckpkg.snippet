@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Package manager for Slackware >= 12.2
+# prefix: slackpkg_snippet
+# key: ckpkg
+# group: ansible
+# --
+
+- name: ${0:Package manager for Slackware >= 12.2}
+  slackpkg:                                                                
+    name: ${1:name of package to install/remove}                           #
+    state: ${2$$(yas-choose-value '("present" "absent" "latest"))}         # choices: present;absent;latest  state of the package, you can use "installed" as an alias for C(present) and removed as 
+    update_cache: ${3:False}                                               # update the package database first

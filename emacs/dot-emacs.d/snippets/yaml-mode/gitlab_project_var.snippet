@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Creates/updates/deletes GitLab Projects Variables
+# prefix: gitlab_project_variable_snippet
+# key: gitlab_project_var
+# group: ansible
+# --
+
+- name: ${0:Creates/updates/deletes GitLab Projects Variables}
+  gitlab_project_variable:                                                 
+    api_token: ${1:GitLab access token with API permissions}               #
+    project: ${2:The path and name of the project}                         #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or delete project variable  Possible values are present and absent 
+    purge: ${4:False}                                                      # When set to true, all variables which are not untouched in the task will be deleted 
+    vars: ${5:namespace()}                                                 # A list of key value pairs 
+    api_url: ${6:value}                                                    # The resolvable endpoint for the API
+    api_username: ${7:value}                                               # The username to use for authentication against the API
+    api_password: ${8:value}                                               # The password to use for authentication against the API
+    validate_certs: ${9:True}                                              # Whether or not to validate SSL certs when supplying a https endpoint 

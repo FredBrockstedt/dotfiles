@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Package manager for OpenWrt
+# prefix: opkg_snippet
+# key: opkg
+# group: ansible
+# --
+
+- name: ${0:Package manager for OpenWrt}
+  opkg:                                                                    
+    name: ${1:name of package to install/remove}                           #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  state of the package
+    force: ${3$$(yas-choose-value '("" "depends" "maintainer" "reinstall" "overwrite" "downgrade" "space" "postinstall" "remove" "checksum" "removal-of-dependent-packages"))}# choices: ;depends;mai
+    update_cache: ${4:false}                                               # update the package db first

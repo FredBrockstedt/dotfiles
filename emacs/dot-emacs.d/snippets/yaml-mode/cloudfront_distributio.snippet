@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: create, update and delete aws cloudfront distributions.
+# prefix: cloudfront_distribution_snippet
+# key: cloudfront_distributio
+# group: ansible
+# --
+
+- name: ${0:create, update and delete aws cloudfront distributions.}
+  cloudfront_distribution:                                                 
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The desired state of the distribution present - creates a new distribution or updates an existi
+    distribution_id: ${2:value}                                            # The id of the cloudfront distribution  This parameter can be exchanged with I(alias) or I(caller_reference) and is used 
+    e_tag: ${3:value}                                                      # A unique identifier of a modified or existing distribution  Used in conjunction with I(distribution_id)  Is determined a
+    caller_reference: ${4:value}                                           # A unique identifier for creating and updating cloudfront distributions  Each caller reference must be unique across all 
+    tags: ${5:value}                                                       # Should be input as a dict() of key-value pairs  Note that numeric keys or values must be wrapped in quotes  e g  "Priori
+    purge_tags: ${6:false}                                                 # Specifies whether existing tags will be removed before adding new tags  When I(purge_tags=yes), existing tags are remove
+    alias: ${7:value}                                                      # The name of an alias (CNAME) that is used in a distribution  This is used to effectively reference a distribution by its
+    aliases: ${8:value}                                                    # A I(list[]) of domain name aliases (CNAMEs) as strings to be used for the distribution  Each alias must be unique across
+    purge_aliases: ${9:false}                                              # Specifies whether existing aliases will be removed before adding new aliases  When I(purge_aliases=yes), existing aliase
+    default_root_object: ${10:value}                                       # A config element that specifies the path to request when the user requests the origin  e g  if specified as 'index html'
+    default_origin_domain_name: ${11:value}                                # The domain name to use for an origin if no I(origins) have been specified  Should only be used on a first run of generat
+    default_origin_path: ${12:value}                                       # The default origin path to specify for an origin if no I(origins) have been specified  Defaults to empty if not specifie
+    origins: ${13:value}                                                   # A config element that is a I(list[]) of complex origin objects to be specified for the distribution  Used for creating a
+    purge_origins: ${14:False}                                             # W h e t h e r   t o   r e m o v e   a n y   o r i g i n s   t h a t   a r e n ' t   l i s t e d   i n   I ( o r i g i n 
+    default_cache_behavior: ${15:value}                                    # A config element that is a complex object specifying the default cache behavior of the distribution  If not specified, t
+    cache_behaviors: ${16:value}                                           # A config element that is a I(list[]) of complex cache behavior objects to be specified for the distribution  The order o
+    purge_cache_behaviors: ${17:False}                                     # W h e t h e r   t o   r e m o v e   a n y   c a c h e   b e h a v i o r s   t h a t   a r e n ' t   l i s t e d   i n   
+    custom_error_responses: ${18:value}                                    # A config element that is a I(list[]) of complex custom error responses to be specified for the distribution  This attrib
+    purge_custom_error_responses: ${19:False}                              # W h e t h e r   t o   r e m o v e   a n y   c u s t o m   e r r o r   r e s p o n s e s   t h a t   a r e n ' t   l i s 
+    comment: ${20:value}                                                   # A comment that describes the cloudfront distribution  If not specified, it defaults to a generic message that it has bee
+    logging: ${21:value}                                                   # A config element that is a complex object that defines logging for the distribution  The logging object comprises the at
+    price_class: ${22$$(yas-choose-value '("PriceClass_100" "PriceClass_200" "PriceClass_All"))}# choices: PriceClass_100;PriceClass_200;PriceClass_All  A string that specifies the pricing class of
+    enabled: ${23:true}                                                    # A boolean value that specifies whether the distribution is enabled or disabled 
+    viewer_certificate: ${24:value}                                        # A config element that is a complex object that specifies the encryption details of the distribution  Comprises the follo
+    restrictions: ${25:value}                                              # A config element that is a complex object that describes how a distribution should restrict it's content  The restrictio
+    web_acl_id: ${26:value}                                                # The id of a Web Application Firewall (WAF) Access Control List (ACL) 
+    http_version: ${{27$$(yas-choose-value '("http1}                       #1,http2|} # not required  choices: http1 1;http2  The version of the http protocol to use for the distribution 
+    ipv6_enabled: ${28:false}                                              # Determines whether IPv6 support is enabled or not 
+    wait: ${29:false}                                                      # Specifies whether the module waits until the distribution has completed processing the creation or update 
+    wait_timeout: ${30:1800}                                               # Specifies the duration in seconds to wait for a timeout of a cloudfront create or update  Defaults to 1800 seconds (30 m
+    debug_botocore_endpoint_logs: ${31:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${32:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${33:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${34:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${35:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${36:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${37:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${38:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Read and write git configuration
+# prefix: git_config_snippet
+# key: git_config
+# group: ansible
+# --
+
+- name: ${0:Read and write git configuration}
+  git_config:                                                              
+    list_all: ${1:false}                                                   # List all settings (optionally limited to a given I(scope))
+    name: ${2:value}                                                       # The name of the setting  If no value is supplied, the value will be read from the config if it has been set 
+    repo: ${3:value}                                                       # Path to a git repository for reading and writing values from a specific repo 
+    scope: ${4$$(yas-choose-value '("local" "global" "system"))}           # choices: local;global;system  Specify which scope to read/set values from  This is required when setting config values  
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicates the setting should be set/unset  This parameter has higher precedence than I(value) p
+    value: ${6:value}                                                      # When specifying the name of a single setting, supply a value to set that setting to the given value 

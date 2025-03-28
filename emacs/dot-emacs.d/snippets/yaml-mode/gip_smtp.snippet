@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manages SMTP settings on the BIG-IP
+# prefix: bigip_smtp_snippet
+# key: gip_smtp
+# group: ansible
+# --
+
+- name: ${0:Manages SMTP settings on the BIG-IP}
+  bigip_smtp:                                                              
+    name: ${1:Specifies the name of the SMTP server configuration}         #
+    partition: ${2:Common}                                                 # Device partition to manage resources on 
+    smtp_server: ${3:value}                                                # SMTP server host name in the format of a fully qualified domain name  This value is required when create a new SMTP conf
+    smtp_server_port: ${4:value}                                           # Specifies the SMTP port number  When creating a new SMTP configuration, the default is C(25) when C(encryption) is C(non
+    local_host_name: ${5:value}                                            # Host name used in SMTP headers in the format of a fully qualified domain name  This setting does not refer to the BIG-IP
+    from_address: ${6:value}                                               # Email address that the email is being sent from  This is the "Reply-to" address that the recipient sees 
+    encryption: ${7$$(yas-choose-value '("none" "ssl" "tls"))}             # choices: none;ssl;tls  Specifies whether the SMTP server requires an encrypted connection in order to send mail 
+    authentication: ${8:value}                                             # Credentials can be set on an SMTP server's configuration even if that authentication is not used (think staging configs 
+    smtp_server_username: ${9:value}                                       # User name that the SMTP server requires when validating a user 
+    smtp_server_password: ${10:value}                                      # Password that the SMTP server requires when validating a user 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the SMTP configuration exists  When C(absent), ensures that the S
+    update_password: ${12$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  Passwords are stored encrypted, so the module cannot know if the supplied C(smtp_server_passw
+    provider: ${13:value}                                                  # A dict object containing connection details 

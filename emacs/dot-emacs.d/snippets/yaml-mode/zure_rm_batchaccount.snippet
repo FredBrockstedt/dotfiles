@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manages a Batch Account on Azure.
+# prefix: azure_rm_batchaccount_snippet
+# key: zure_rm_batchaccount
+# group: ansible
+# --
+
+- name: ${0:Manages a Batch Account on Azure.}
+  azure_rm_batchaccount:                                                   
+    resource_group: ${1:The name of the resource group in which to create the Batch Account}#
+    name: ${2:The name of the Batch Account}                               #
+    location: ${3:value}                                                   # Specifies the supported Azure location where the resource exists 
+    auto_storage_account: ${4:value}                                       # Existing storage account with which to associate the Batch Account  It can be the storage account name which is in the s
+    key_vault: ${5:value}                                                  # Existing key vault with which to associate the Batch Account  It can be the key vault name which is in the same resource
+    pool_allocation_mode: ${6$$(yas-choose-value '("batch_service" "user_subscription"))}# choices: batch_service;user_subscription  The pool acclocation mode of the Batch Account 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Assert the state of the Batch Account  Use 'present' to create or update a Batch Account and 'a
+    ad_user: ${8:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${9:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${10:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${11:value}                                           # Your Azure subscription Id 
+    client_id: ${12:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${13:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${14:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${15:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${16:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${17$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${18$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${19:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${20:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${21:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

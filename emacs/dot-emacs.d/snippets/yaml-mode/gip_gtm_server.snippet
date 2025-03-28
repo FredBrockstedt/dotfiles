@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manages F5 BIG-IP GTM servers
+# prefix: bigip_gtm_server_snippet
+# key: gip_gtm_server
+# group: ansible
+# --
+
+- name: ${0:Manages F5 BIG-IP GTM servers}
+  bigip_gtm_server:                                                        
+    name: ${1:The name of the server}                                      #
+    state: ${2$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  The server state  If C(absent), an attempt to delete the server will be mad
+    datacenter: ${3:value}                                                 # Data center the server belongs to  When creating a new GTM server, this value is required 
+    devices: ${4:value}                                                    # Lists the self IP addresses and translations for each device  When creating a new GTM server, this value is required  Th
+    server_type: ${{5$$(yas-choose-value '("alteon-ace-director" "cisco-css" "cisco-server-load-balancer" "generic-host" "radware-wsd" "windows-nt-4}#0,bigip,cisco-local-director-v2,extreme,generic
+    link_discovery: ${6$$(yas-choose-value '("enabled" "disabled" "enabled-no-delete"))}# choices: enabled;disabled;enabled-no-delete  Specifies whether the system auto-discovers the links for this
+    virtual_server_discovery: ${7$$(yas-choose-value '("enabled" "disabled" "enabled-no-delete"))}# choices: enabled;disabled;enabled-no-delete  Specifies whether the system auto-discovers the virt
+    partition: ${8:Common}                                                 # Device partition to manage resources on 
+    iquery_options: ${9:value}                                             # Specifies whether the Global Traffic Manager uses this BIG-IP system to conduct a variety of probes before delegating tr
+    monitors: ${10:value}                                                  # Specifies the health monitors that the system currently uses to monitor this resource  When C(availability_requirements 
+    availability_requirements: ${11:value}                                 # Specifies, if you activate more than one health monitor, the number of health monitors that must receive successful resp
+    prober_preference: ${12$$(yas-choose-value '("inside-datacenter" "outside-datacenter" "inherit" "pool"))}# choices: inside-datacenter;outside-datacenter;inherit;pool  Specifies the type of prob
+    prober_fallback: ${13$$(yas-choose-value '("any" "inside-datacenter" "outside-datacenter" "inherit" "pool" "none"))}# choices: any;inside-datacenter;outside-datacenter;inherit;pool;none  Specif
+    prober_pool: ${14:value}                                               # Specifies the name of the prober pool to use to monitor this server's resources  From C(TMOS) version C(13 x) and up, th
+    limits: ${15:value}                                                    # Specifies resource thresholds or limit requirements at the pool member level  When you enable one or more limit settings
+    provider: ${16:value}                                                  # A dict object containing connection details 

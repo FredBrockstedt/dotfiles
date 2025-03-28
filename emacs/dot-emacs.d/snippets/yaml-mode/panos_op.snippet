@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: execute arbitrary OP commands on PANW devices (e.g. show interface all)
+# prefix: panos_op_snippet
+# key: panos_op
+# group: ansible
+# --
+
+- name: ${0:execute arbitrary OP commands on PANW devices (e.g. show interface all)}
+  panos_op:                                                                
+    ip_address: ${1:IP address (or hostname) of PAN-OS device or Panorama management console being configured}#
+    password: ${2:Password credentials to use for authentication}          #
+    cmd: ${3:The OP command to be performed}                               #
+    username: ${4:admin}                                                   # Username credentials to use for authentication 
+    api_key: ${5:value}                                                    # API key that can be used instead of I(username)/I(password) credentials 

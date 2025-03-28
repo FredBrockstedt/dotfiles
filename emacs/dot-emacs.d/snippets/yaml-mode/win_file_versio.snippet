@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Get DLL or EXE file build version
+# prefix: win_file_version_snippet
+# key: win_file_versio
+# group: ansible
+# --
+
+- name: ${0:Get DLL or EXE file build version}
+  win_file_version:                                                        
+    path: ${1:File to get version}                                         # Always provide absolute path 

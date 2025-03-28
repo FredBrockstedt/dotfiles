@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: restart a device
+# prefix: panos_restart_snippet
+# key: panos_restart
+# group: ansible
+# --
+
+- name: ${0:restart a device}
+  panos_restart:                                                           
+    ip_address: ${1:IP address (or hostname) of PAN-OS device}             #
+    password: ${2:Password for authentication}                             #
+    username: ${3:admin}                                                   # Username for authentication 

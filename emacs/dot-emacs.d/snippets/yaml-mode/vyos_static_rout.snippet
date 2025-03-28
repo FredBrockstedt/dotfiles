@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage static IP routes on Vyatta VyOS network devices
+# prefix: vyos_static_route_snippet
+# key: vyos_static_rout
+# group: ansible
+# --
+
+- name: ${0:Manage static IP routes on Vyatta VyOS network devices}
+  vyos_static_route:                                                       
+    prefix: ${1:value}                                                     # Network prefix of the static route  C(mask) param should be ignored if C(prefix) is provided with C(mask) value C(prefix
+    mask: ${2:value}                                                       # Network prefix mask of the static route 
+    next_hop: ${3:value}                                                   # Next hop IP of the static route 
+    admin_distance: ${4:value}                                             # Admin distance of the static route 
+    aggregate: ${5:value}                                                  # L i s t   o f   s t a t i c   r o u t e   d e f i n i t i o n s
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the static route configuration 
+    provider: ${7:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages GTM Topology Records
+# prefix: bigip_gtm_topology_record_snippet
+# key: gip_gtm_topology_record
+# group: ansible
+# --
+
+- name: ${0:Manages GTM Topology Records}
+  bigip_gtm_topology_record:                                               
+    source: ${1:Specifies the origination of an incoming DNS request}      #
+    destination: ${2:Specifies where the system directs the incoming DNS request}#
+    weight: ${3:value}                                                     # Specifies the weight of the topology record  The system finds the weight of the first topology record that matches the s
+    partition: ${4:Common}                                                 # Device partition to manage resources on  Partition parameter is taken into account when used in conjunction with C(pool)
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(state) is C(present), ensures that the record exists  When C(state) is C(absent), ensure
+    provider: ${6:value}                                                   # A dict object containing connection details 

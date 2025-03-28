@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Image
+# prefix: gcp_compute_image_snippet
+# key: gcp_compute_imag
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Image}
+  gcp_compute_image:                                                       
+    name: ${1:Name of the resource; provided by the client when the resource is created}# The name must be 1-63 characters long, and comply with RFC1035  Specifically, the name must be 1-63 charact
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    description: ${4:value}                                                # An optional description of this resource  Provide this property when you create the resource 
+    disk_size_gb: ${5:value}                                               # Size of the image when restored onto a persistent disk (in GB) 
+    family: ${6:value}                                                     # The name of the image family to which this image belongs  You can create disks by specifying an image family instead of 
+    guest_os_features: ${7:value}                                          # A list of features to enable on the guest OS  Applicable for bootable images only  Currently, only one feature can be en
+    image_encryption_key: ${8:value}                                       # Encrypts the image using a customer-supplied encryption key  After you encrypt an image with a customer-supplied key, yo
+    labels: ${9:value}                                                     # Labels to apply to this Image 
+    licenses: ${10:value}                                                  # Any applicable license URI 
+    raw_disk: ${11:value}                                                  # The parameters of the raw disk image 
+    source_disk: ${12:value}                                               # The source disk to create this image based on  You must provide either this property or the rawDisk source property but 
+    source_disk_encryption_key: ${13:value}                                # The customer-supplied encryption key of the source disk  Required if the source disk is protected by a customer-supplied
+    source_disk_id: ${14:value}                                            # The ID value of the disk used to create this image  This value may be used to determine whether the image was taken from
+    source_type: ${15:value}                                               # The type of the image used to create this disk  The default and only value is RAW   Some valid choices include: "RAW"
+    project: ${16:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${17:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${18:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${19:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${20:value}                                                    # Array of scopes to be used 
+    env_type: ${21:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

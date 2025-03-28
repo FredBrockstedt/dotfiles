@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages VPN instance address family on HUAWEI CloudEngine switches.
+# prefix: ce_vrf_af_snippet
+# key: ce_vrf_af
+# group: ansible
+# --
+
+- name: ${0:Manages VPN instance address family on HUAWEI CloudEngine switches.}
+  ce_vrf_af:                                                               
+    vrf: ${1:VPN instance}                                                 #
+    vrf_aftype: ${2$$(yas-choose-value '("v4" "v6"))}                      # choices: v4;v6  VPN instance address family 
+    route_distinguisher: ${3:value}                                        # VPN instance route distinguisher,the RD used to distinguish same route prefix from different vpn  The RD must be setted 
+    vpn_target_state: ${4$$(yas-choose-value '("present" "absent"))}       # choices: present;absent  Manage the state of the vpn target 
+    vpn_target_type: ${5$$(yas-choose-value '("export_extcommunity" "import_extcommunity"))}# choices: export_extcommunity;import_extcommunity  VPN instance vpn target type 
+    vpn_target_value: ${6:value}                                           # VPN instance target value  Such as X X X X:number<0-65535> or number<0-65535>:number<0-4294967295> or number<0-65535> nu
+    evpn: ${7:false}                                                       # Is extend vpn or normal vpn 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the af 

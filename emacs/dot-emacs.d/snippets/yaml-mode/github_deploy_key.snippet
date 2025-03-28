@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages deploy keys for GitHub repositories.
+# prefix: github_deploy_key_snippet
+# key: github_deploy_key
+# group: ansible
+# --
+
+- name: ${0:Manages deploy keys for GitHub repositories.}
+  github_deploy_key:                                                       
+    owner: ${1:The name of the individual account or organization that owns the GitHub repository}#
+    repo: ${2:The name of the GitHub repository}                           #
+    name: ${3:The name for the deploy key}                                 #
+    key: ${4:The SSH public key to add to the repository as a deploy key}  #
+    read_only: ${5:true}                                                   # If C(true), the deploy key will only be able to read repository contents  Otherwise, the deploy key will be able to read
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state of the deploy key 
+    force: ${7:false}                                                      # If C(true), forcefully adds the deploy key by deleting any existing deploy key with the same public key or title 
+    username: ${8:value}                                                   # The username to authenticate with  Should not be set when using personal access token
+    password: ${9:value}                                                   # The password to authenticate with  Alternatively, a personal access token can be used instead of I(username) and I(passw
+    token: ${10:value}                                                     # The OAuth2 token or personal access token to authenticate with  Mutually exclusive with I(password) 
+    otp: ${11:value}                                                       # The 6 digit One Time Password for 2-Factor Authentication  Required together with I(username) and I(password) 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Scaleway user_data management module
+# prefix: scaleway_user_data_snippet
+# key: caleway_user_dat
+# group: ansible
+# --
+
+- name: ${0:Scaleway user_data management module}
+  scaleway_user_data:                                                      
+    server_id: ${1:Scaleway Compute instance ID of the server}             #
+    region: ${2$$(yas-choose-value '("ams1" "EMEA-NL-EVS" "par1" "EMEA-FR-PAR1"))}# Scaleway compute zone
+    user_data: ${3:value}                                                  # User defined data  Typically used with `cloud-init`  Pass your cloud-init script here as a string
+    api_token: ${4:value}                                                  # Scaleway OAuth token 
+    api_url: ${{5:https://api}                                             #scaleway com} # not required  Scaleway API URL 
+    api_timeout: ${6:30}                                                   # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${7:namespace()}                                     # List of parameters passed to the query string 
+    validate_certs: ${8:True}                                              # Validate SSL certs of the Scaleway API 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Add or remove host to stacki front-end
+# prefix: stacki_host_snippet
+# key: tacki_host
+# group: ansible
+# --
+
+- name: ${0:Add or remove host to stacki front-end}
+  stacki_host:                                                             
+    name: ${1:Name of the host to be added to Stacki}                      #
+    stacki_user: ${2:Username for authenticating with Stacki API, but if not specified, the environment variable C(stacki_user) is used instead}#
+    stacki_password: ${3:Password for authenticating with Stacki API, but if not specified, the environment variable C(stacki_password) is used instead}#
+    stacki_endpoint: ${4:URL for the Stacki API Endpoint}                  #
+    prim_intf_mac: ${5:value}                                              # MAC Address for the primary PXE boot network interface 
+    prim_intf_ip: ${6:value}                                               # IP Address for the primary network interface 
+    prim_intf: ${7:value}                                                  # Name of the primary network interface 
+    force_install: ${8:value}                                              # Set value to True to force node into install state if it already exists in stacki 

@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages ARP attributes of VXLAN on HUAWEI CloudEngine devices.
+# prefix: ce_vxlan_arp_snippet
+# key: ce_vxlan_arp
+# group: ansible
+# --
+
+- name: ${0:Manages ARP attributes of VXLAN on HUAWEI CloudEngine devices.}
+  ce_vxlan_arp:                                                            
+    evn_bgp: ${1$$(yas-choose-value '("enable" "disable"))}                # choices: enable;disable  Enables EVN BGP 
+    evn_source_ip: ${2:value}                                              # Specifies the source address of an EVN BGP peer  The value is in dotted decimal notation 
+    evn_peer_ip: ${3:value}                                                # Specifies the IP address of an EVN BGP peer  The value is in dotted decimal notation 
+    evn_server: ${4$$(yas-choose-value '("enable" "disable"))}             # choices: enable;disable  Configures the local device as the router reflector (RR) on the EVN network 
+    evn_reflect_client: ${5$$(yas-choose-value '("enable" "disable"))}     # choices: enable;disable  Configures the local device as the route reflector (RR) and its peer as the client 
+    vbdif_name: ${6:value}                                                 # Full name of VBDIF interface, i e  Vbdif100 
+    arp_collect_host: ${7$$(yas-choose-value '("enable" "disable"))}       # choices: enable;disable  Enables EVN BGP or BGP EVPN to collect host information 
+    host_collect_protocol: ${8$$(yas-choose-value '("bgp" "none"))}        # choices: bgp;none  Enables EVN BGP or BGP EVPN to advertise host information 
+    bridge_domain_id: ${9:value}                                           # Specifies a BD(bridge domain) ID  The value is an integer ranging from 1 to 16777215 
+    arp_suppress: ${10$$(yas-choose-value '("enable" "disable"))}          # choices: enable;disable  Enables ARP broadcast suppression in a BD 
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 

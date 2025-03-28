@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP users for monitoring.
+# prefix: nxos_snmp_user_snippet
+# key: xos_snmp_user
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP users for monitoring.}
+  nxos_snmp_user:                                                          
+    user: ${1:Name of the user}                                            #
+    group: ${2:value}                                                      # Group to which the user will belong to  If state = present, and the user is existing, the group is added to the user  If
+    authentication: ${3$$(yas-choose-value '("md5" "sha"))}                # choices: md5;sha  Authentication parameters for the user 
+    pwd: ${4:value}                                                        # Authentication password when using md5 or sha  This is not idempotent
+    privacy: ${5:value}                                                    # Privacy password for the user  This is not idempotent
+    encrypt: ${6:value}                                                    # Enables AES-128 bit encryption when using privacy password 
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 
+    provider: ${8:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

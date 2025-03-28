@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Configures IP address pools on Cisco UCS Manager
+# prefix: ucs_ip_pool_snippet
+# key: ucs_ip_poo
+# group: ansible
+# --
+
+- name: ${0:Configures IP address pools on Cisco UCS Manager}
+  ucs_ip_pool:                                                             
+    name: ${1:The name of the IP address pool}                             # This name can be between 1 and 32 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify IP pool is present and will create if needed  If C(absent), will ver
+    description: ${5:value}                                                # The user-defined description of the IP address pool  Enter up to 256 characters  You can use any characters or spaces ex
+    order: ${6$$(yas-choose-value '("default" "sequential"))}              # choices: default;sequential  The Assignment Order field  This can be one of the following: default - Cisco UCS Manager s
+    first_addr: ${7:value}                                                 # The first IPv4 address in the IPv4 addresses block  This is the From field in the UCS Manager Add IPv4 Blocks menu 
+    last_addr: ${8:value}                                                  # The last IPv4 address in the IPv4 addresses block  This is the To field in the UCS Manager Add IPv4 Blocks menu 
+    subnet_mask: ${{9:255}                                                 #255 255 0} # not required  The subnet mask associated with the IPv4 addresses in the block 
+    default_gw: ${{10:0}                                                   #0 0 0} # not required  The default gateway associated with the IPv4 addresses in the block 
+    primary_dns: ${{11:0}                                                  #0 0 0} # not required  The primary DNS server that this block of IPv4 addresses should access 
+    secondary_dns: ${{12:0}                                                #0 0 0} # not required  The secondary DNS server that this block of IPv4 addresses should access 
+    ipv6_first_addr: ${13:value}                                           # The first IPv6 address in the IPv6 addresses block  This is the From field in the UCS Manager Add IPv6 Blocks menu 
+    ipv6_last_addr: ${14:value}                                            # The last IPv6 address in the IPv6 addresses block  This is the To field in the UCS Manager Add IPv6 Blocks menu 
+    ipv6_prefix: ${15:64}                                                  # The network address prefix associated with the IPv6 addresses in the block 
+    ipv6_default_gw: ${16:::}                                              # The default gateway associated with the IPv6 addresses in the block 
+    ipv6_primary_dns: ${17:::}                                             # The primary DNS server that this block of IPv6 addresses should access 
+    ipv6_secondary_dns: ${18:::}                                           # The secondary DNS server that this block of IPv6 addresses should access 
+    org_dn: ${19:org-root}                                                 # Org dn (distinguished name)
+    username: ${20:admin}                                                  # Username for Cisco UCS Manager authentication 
+    port: ${21:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${22:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${23:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${24:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

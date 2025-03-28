@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Manage site-local EPG domains in schema template
+# prefix: mso_schema_site_anp_epg_domain_snippet
+# key: mso_schema_site_anp_epg_dom
+# group: ansible
+# --
+
+- name: ${0:Manage site-local EPG domains in schema template}
+  mso_schema_site_anp_epg_domain:                                          
+    schema: ${1:The name of the schema}                                    #
+    site: ${2:The name of the site}                                        #
+    template: ${3:The name of the template}                                #
+    host: ${4:IP Address or hostname of the ACI Multi Site Orchestrator host}#
+    password: ${5:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    anp: ${6:value}                                                        # The name of the ANP 
+    epg: ${7:value}                                                        # The name of the EPG 
+    domain_association_type: ${8$$(yas-choose-value '("vmmDomain" "l3ExtDomain" "l2ExtDomain" "physicalDomain" "fibreChannel"))}# choices: vmmDomain;l3ExtDomain;l2ExtDomain;physicalDomain;fibreChan
+    domain_profile: ${9:value}                                             # The domain profile name 
+    deployment_immediacy: ${10$$(yas-choose-value '("immediate" "lazy"))}  # choices: immediate;lazy  The deployment immediacy of the domain  C(immediate) means B(Deploy immediate)  C(lazy) means B
+    resolution_immediacy: ${11$$(yas-choose-value '("immediate" "lazy" "pre-provision"))}# choices: immediate;lazy;pre-provision  Determines when the policies should be resolved and available  Defa
+    micro_seg_vlan_type: ${12:value}                                       # Virtual LAN type for microsegmentation  This attribute can only be used with vmmDomain domain association 
+    micro_seg_vlan: ${13:value}                                            # Virtual LAN for microsegmentation  This attribute can only be used with vmmDomain domain association 
+    port_encap_vlan_type: ${14:value}                                      # Virtual LAN type for port encap  This attribute can only be used with vmmDomain domain association 
+    port_encap_vlan: ${15:value}                                           # Virtual LAN type for port encap  This attribute can only be used with vmmDomain domain association 
+    vlan_encap_mode: ${16$$(yas-choose-value '("static" "dynamic"))}       # choices: static;dynamic  Which VLAN enacap mode to use  This attribute can only be used with vmmDomain domain associatio
+    allow_micro_segmentation: ${17:value}                                  # Specifies microsegmentation is enabled or not  This attribute can only be used with vmmDomain domain association 
+    switch_type: ${18:value}                                               # Which switch type to use with this domain association  This attribute can only be used with vmmDomain domain association
+    switching_mode: ${19:value}                                            # Which switching mode to use with this domain association  This attribute can only be used with vmmDomain domain associat
+    enhanced_lagpolicy_name: ${20:value}                                   # EPG enhanced lagpolicy name  This attribute can only be used with vmmDomain domain association 
+    enhanced_lagpolicy_dn: ${21:value}                                     # Distinguished name of EPG lagpolicy  This attribute can only be used with vmmDomain domain association 
+    state: ${22$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${23:value}                                                      # Port number to be used for the REST connection  The default value depends on parameter `use_ssl` 
+    username: ${24:admin}                                                  # The username to use for authentication 
+    output_level: ${25$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${26:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${27:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${28:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${29:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

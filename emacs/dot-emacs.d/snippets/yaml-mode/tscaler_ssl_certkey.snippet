@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage ssl certificate keys.
+# prefix: netscaler_ssl_certkey_snippet
+# key: tscaler_ssl_certkey
+# group: ansible
+# --
+
+- name: ${0:Manage ssl certificate keys.}
+  netscaler_ssl_certkey:                                                   
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    certkey: ${4:value}                                                    # Name for the certificate and private-key pair  Must begin with an ASCII alphanumeric or underscore C(_) character, and m
+    cert: ${5:value}                                                       # Name of and, optionally, path to the X509 certificate file that is used to form the certificate-key pair  The certificat
+    key: ${6:value}                                                        # Name of and, optionally, path to the private-key file that is used to form the certificate-key pair  The certificate fil
+    password: ${7:value}                                                   # Passphrase that was used to encrypt the private-key  Use this option to load encrypted private-keys in PEM format 
+    inform: ${8$$(yas-choose-value '("DER" "PEM" "PFX"))}                  # choices: DER;PEM;PFX  Input format of the certificate and the private-key files  The three formats supported by the appl
+    passplain: ${9:value}                                                  # Pass phrase used to encrypt the private-key  Required when adding an encrypted private-key in PEM format  Minimum length
+    expirymonitor: ${10$$(yas-choose-value '("enabled" "disabled"))}       # choices: enabled;disabled  Issue an alert when the certificate is about to expire 
+    notificationperiod: ${11:value}                                        # Time, in number of days, before certificate expiration, at which to generate an alert that the certificate is about to e
+    nitro_protocol: ${12$$(yas-choose-value '("http" "https"))}            # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${13:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${14:310}                                               # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    state: ${15$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource being configured by the module on the netscaler node  When present th
+    save_config: ${16:True}                                                # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

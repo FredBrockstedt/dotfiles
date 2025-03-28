@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP service processor network
+# prefix: na_ontap_service_processor_network_snippet
+# key: ontap_service_processor_network
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP service processor network}
+  na_ontap_service_processor_network:                                      
+    address_type: ${1$$(yas-choose-value '("ipv4" "ipv6"))}                # Specify address class 
+    is_enabled: ${2:Specify whether to enable or disable the service processor network}#
+    node: ${3:The node where the service processor network should be enabled}#
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present"))}                           # choices: present  Whether the specified service processor network should exist or not 
+    dhcp: ${8$$(yas-choose-value '("v4" "none"))}                          # choices: v4;none  Specify dhcp type 
+    gateway_ip_address: ${9:value}                                         # Specify the gateway ip 
+    ip_address: ${10:value}                                                # Specify the service processor ip address 
+    netmask: ${11:value}                                                   # Specify the service processor netmask 
+    prefix_length: ${12:value}                                             # Specify the service processor prefix_length 
+    wait_for_completion: ${13:False}                                       # Set this parameter to 'true' for synchronous execution (wait until SP status is successfully updated) Set this parameter
+    https: ${14:False}                                                     # Enable and disable https
+    validate_certs: ${15:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${16:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${17:value}                                                    # The ontap api version to use
+    use_rest: ${18$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

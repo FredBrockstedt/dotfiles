@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Power management for machine
+# prefix: ipmi_power_snippet
+# key: pmi_power
+# group: ansible
+# --
+
+- name: ${0:Power management for machine}
+  ipmi_power:                                                              
+    name: ${1:Hostname or ip address of the BMC}                           #
+    user: ${2:Username to use to connect to the BMC}                       #
+    password: ${3:Password to connect to the BMC}                          #
+    state: ${4$$(yas-choose-value '("on -- Request system turn on" "off -- Request system turn off without waiting for OS to shutdown" "shutdown -- Have system request OS proper shutdown" "reset --
+    port: ${5:623}                                                         # Remote RMCP port 
+    timeout: ${6:300}                                                      # Maximum number of seconds before interrupt request 

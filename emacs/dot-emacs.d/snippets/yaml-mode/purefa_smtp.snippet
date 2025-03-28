@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Configure FlashArray SMTP settings
+# prefix: purefa_smtp_snippet
+# key: purefa_smtp
+# group: ansible
+# --
+
+- name: ${0:Configure FlashArray SMTP settings}
+  purefa_smtp:                                                             
+    fa_url: ${1:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${2:FlashArray API token for admin privileged user}         #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Set or delete SMTP configuration
+    password: ${4:value}                                                   # The SMTP password 
+    user: ${5:value}                                                       # The SMTP username 
+    relay_host: ${6:value}                                                 # IPv4 or IPv6 address or FQDN  A port number may be appended 
+    sender_domain: ${7:value}                                              # Domain name 

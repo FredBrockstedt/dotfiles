@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage Lenovo CNOS configuration sections
+# prefix: cnos_config_snippet
+# key: cnos_config
+# group: ansible
+# --
+
+- name: ${0:Manage Lenovo CNOS configuration sections}
+  cnos_config:                                                             
+    lines: ${1:value}                                                      # The ordered set of commands that should be configured in the section   The commands must be the exact same commands as f
+    parents: ${2:value}                                                    # The ordered set of parents that uniquely identify the section the commands should be checked against   If the parents ar
+    src: ${3:value}                                                        # Specifies the source path to the file that contains the configuration or configuration template to load   The path to th
+    before: ${4:value}                                                     # The ordered set of commands to push on to the command stack if a change needs to be made   This allows the playbook desi
+    after: ${5:value}                                                      # The ordered set of commands to append to the end of the command stack if a change needs to be made   Just like with I(be
+    match: ${6$$(yas-choose-value '("line" "strict" "exact" "none"))}      # choices: line;strict;exact;none  Instructs the module on the way to perform the matching of the set of commands against 
+    replace: ${7$$(yas-choose-value '("line" "block" "config"))}           # choices: line;block;config  Instructs the module on the way to perform the configuration on the device   If the replace 
+    config: ${8:value}                                                     # The module, by default, will connect to the remote device and retrieve the current running-config to use as a base for c
+    backup: ${9:false}                                                     # This argument will cause the module to create a full backup of the current C(running-config) from the remote device befo
+    comment: ${10:"configured by cnos_config"}                             # Allows a commit description to be specified to be included when the configuration is committed   If the configuration is
+    admin: ${11:false}                                                     # Enters into administration configuration mode for making config changes to the device 
+    backup_options: ${12:value}                                            # This is a dict object containing configurable options related to backup file path  The value of this option is read only

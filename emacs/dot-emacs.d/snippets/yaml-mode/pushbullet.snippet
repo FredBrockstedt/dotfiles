@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Sends notifications to Pushbullet
+# prefix: pushbullet_snippet
+# key: pushbullet
+# group: ansible
+# --
+
+- name: ${0:Sends notifications to Pushbullet}
+  pushbullet:                                                              
+    api_key: ${1:Push bullet API token}                                    #
+    title: ${2:Title of the notification}                                  #
+    channel: ${3:value}                                                    # The channel TAG you wish to broadcast a push notification, as seen on the "My Channels" > "Edit your channel" at Pushbul
+    device: ${4:value}                                                     # The device NAME you wish to send a push notification, as seen on the Pushbullet main page 
+    push_type: ${5$$(yas-choose-value '("note" "link"))}                   # choices: note;link  Thing you wish to push 
+    body: ${6:value}                                                       # Body of the notification, e g  Details of the fault you're alerting 

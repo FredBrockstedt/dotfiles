@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage the hostname of a BIG-IP
+# prefix: bigip_hostname_snippet
+# key: gip_hostnam
+# group: ansible
+# --
+
+- name: ${0:Manage the hostname of a BIG-IP}
+  bigip_hostname:                                                          
+    hostname: ${1:Hostname of the BIG-IP host}                             #
+    provider: ${2:value}                                                   # A dict object containing connection details 

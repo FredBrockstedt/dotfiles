@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages users for ejabberd servers
+# prefix: ejabberd_user_snippet
+# key: jabberd_user
+# group: ansible
+# --
+
+- name: ${0:Manages users for ejabberd servers}
+  ejabberd_user:                                                           
+    username: ${1:the name of the user to manage}                          #
+    host: ${2:the ejabberd host associated with this username}             #
+    password: ${3:value}                                                   # the password to assign to the username
+    logging: ${4:False}                                                    # enables or disables the local syslog facility for this module
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  describe the desired state of the user to be managed

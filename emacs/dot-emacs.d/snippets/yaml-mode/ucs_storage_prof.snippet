@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Configures storage profiles on Cisco UCS Manager
+# prefix: ucs_storage_profile_snippet
+# key: ucs_storage_prof
+# group: ansible
+# --
+
+- name: ${0:Configures storage profiles on Cisco UCS Manager}
+  ucs_storage_profile:                                                     
+    name: ${1:The name of the storage profile}                             # This name can be between 1 and 16 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If C(present), will verify that the storage profile is present and will create if needed  If C(
+    description: ${5:value}                                                # The user-defined description of the storage profile  Enter up to 256 characters  You can use any characters or spaces ex
+    local_luns: ${6:value}                                                 # List of Local LUNs used by the storage profile 
+    org_dn: ${7:org-root}                                                  # The distinguished name (dn) of the organization where the resource is assigned 
+    username: ${8:admin}                                                   # Username for Cisco UCS Manager authentication 
+    port: ${9:value}                                                       # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${10:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${11:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${12:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

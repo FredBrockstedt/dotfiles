@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Add or remove a host from distributed virtual switch
+# prefix: vmware_dvs_host_snippet
+# key: vmware_dvs_host
+# group: ansible
+# --
+
+- name: ${0:Add or remove a host from distributed virtual switch}
+  vmware_dvs_host:                                                         
+    esxi_hostname: ${1:The ESXi hostname}                                  #
+    switch_name: ${2:The name of the Distributed vSwitch}                  #
+    vmnics: ${3:The ESXi hosts vmnics to use with the Distributed vSwitch} #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # If the host should be present or absent attached to the vSwitch 
+    vendor_specific_config: ${5:value}                                     # List of key,value dictionaries for the Vendor Specific Configuration  Element attributes are: - C(key) (str): Key of set
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${7:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${8:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${10:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${11:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${12:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

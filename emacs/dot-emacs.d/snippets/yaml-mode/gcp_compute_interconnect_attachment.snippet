@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP InterconnectAttachment
+# prefix: gcp_compute_interconnect_attachment_snippet
+# key: gcp_compute_interconnect_attachment
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP InterconnectAttachment}
+  gcp_compute_interconnect_attachment:                                     
+    router: ${1:URL of the cloud router to be used for dynamic routing}    # This router must be in the same region as this InterconnectAttachment  The InterconnectAttachment will automatically con
+    name: ${2:Name of the resource}                                        # Provided by the client when the resource is created  The name must be 1-63 characters long, and comply with RFC1035  Spe
+    region: ${3:Region where the regional interconnect attachment resides} #
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    admin_enabled: ${6:value}                                              # Whether the VLAN attachment is enabled or disabled  When using PARTNER type this will Pre-Activate the interconnect atta
+    interconnect: ${7:value}                                               # URL of the underlying Interconnect object that this attachment's traffic will traverse through  Required if type is DEDI
+    description: ${8:value}                                                # An optional description of this resource 
+    bandwidth: ${9:value}                                                  # Provisioned bandwidth capacity for the interconnect attachment  For attachments of type DEDICATED, the user can set the 
+    edge_availability_domain: ${10:value}                                  # Desired availability domain for the attachment  Only available for type PARTNER, at creation time  For improved reliabil
+    type: ${11:value}                                                      # The type of InterconnectAttachment you wish to create  Defaults to DEDICATED  Some valid choices include: "DEDICATED", "
+    candidate_subnets: ${12:value}                                         # Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddr
+    vlan_tag8021q: ${13:value}                                             # The IEEE 802 1Q VLAN tag for this attachment, in the range 2-4094  When using PARTNER type this will be managed upstream
+    project: ${14:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${15:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${16:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${17:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${18:value}                                                    # Array of scopes to be used 
+    env_type: ${19:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

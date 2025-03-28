@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create, Delete and Modify Pools on Infinibox
+# prefix: infini_pool_snippet
+# key: fini_poo
+# group: ansible
+# --
+
+- name: ${0:Create, Delete and Modify Pools on Infinibox}
+  infini_pool:                                                             
+    name: ${1:Pool Name}                                                   #
+    system: ${2:Infinibox Hostname or IPv4 Address}                        #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates/Modifies Pool when present or removes when absent
+    size: ${4:value}                                                       # Pool Physical Capacity in MB, GB or TB units  If pool size is not set on pool creation, size will be equal to 1TB  See e
+    vsize: ${5:value}                                                      # Pool Virtual Capacity in MB, GB or TB units  If pool vsize is not set on pool creation, Virtual Capacity will be equal t
+    ssd_cache: ${6:True}                                                   # Enable/Disable SSD Cache on Pool
+    user: ${7:value}                                                       # Infinibox User username with sufficient priveledges ( see notes ) 
+    password: ${8:value}                                                   # Infinibox User password 

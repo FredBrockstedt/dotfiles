@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages VTP domain configuration.
+# prefix: nxos_vtp_domain_snippet
+# key: xos_vtp_dom
+# group: ansible
+# --
+
+- name: ${0:Manages VTP domain configuration.}
+  nxos_vtp_domain:                                                         
+    domain: ${1:VTP domain name}                                           #
+    provider: ${2:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

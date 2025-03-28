@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Save Netscaler configuration.
+# prefix: netscaler_save_config_snippet
+# key: tscaler_save_config
+# group: ansible
+# --
+
+- name: ${0:Save Netscaler configuration.}
+  netscaler_save_config:                                                   
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  C(192 168 1 1:555) 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    nitro_protocol: ${4$$(yas-choose-value '("http" "https"))}             # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${5:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${6:310}                                                # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler 

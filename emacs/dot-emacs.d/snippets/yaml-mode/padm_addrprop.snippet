@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage IP address properties on Solaris/illumos systems.
+# prefix: ipadm_addrprop_snippet
+# key: padm_addrprop
+# group: ansible
+# --
+
+- name: ${0:Manage IP address properties on Solaris/illumos systems.}
+  ipadm_addrprop:                                                          
+    addrobj: ${1:Specifies the address object we want to manage}           #
+    property: ${2:Specifies the name of the address property we want to manage}#
+    value: ${3:value}                                                      # Specifies the value we want to set for the address property 
+    temporary: ${4:False}                                                  # Specifies that the address property value is temporary  Temporary values do not persist across reboots 
+    state: ${5$$(yas-choose-value '("present" "absent" "reset"))}          # choices: present;absent;reset  Set or reset the property value 

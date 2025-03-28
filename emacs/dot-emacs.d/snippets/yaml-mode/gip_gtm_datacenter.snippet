@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage Datacenter configuration in BIG-IP
+# prefix: bigip_gtm_datacenter_snippet
+# key: gip_gtm_datacenter
+# group: ansible
+# --
+
+- name: ${0:Manage Datacenter configuration in BIG-IP}
+  bigip_gtm_datacenter:                                                    
+    name: ${1:The name of the data center}                                 #
+    contact: ${2:value}                                                    # The name of the contact for the data center 
+    description: ${3:value}                                                # The description of the data center 
+    location: ${4:value}                                                   # The location of the data center 
+    state: ${5$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  The virtual address state  If C(absent), an attempt to delete the virtual a
+    partition: ${6:Common}                                                 # Device partition to manage resources on 
+    provider: ${7:value}                                                   # A dict object containing connection details 

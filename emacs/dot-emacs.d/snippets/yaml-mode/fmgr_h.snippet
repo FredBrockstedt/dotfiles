@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages the High-Availability State of FortiManager Clusters and Nodes.
+# prefix: fmgr_ha_snippet
+# key: fmgr_h
+# group: ansible
+# --
+
+- name: ${0:Manages the High-Availability State of FortiManager Clusters and Nodes.}
+  fmgr_ha:                                                                 
+    fmgr_ha_mode: ${1$$(yas-choose-value '("standalone" "master" "slave"))}# choices: standalone;master;slave  Sets the role of the FortiManager host for HA 
+    fmgr_ha_peer_ipv4: ${2:value}                                          # Sets the IPv4 address of a HA peer 
+    fmgr_ha_peer_ipv6: ${3:value}                                          # Sets the IPv6 address of a HA peer 
+    fmgr_ha_peer_sn: ${4:value}                                            # Sets the HA Peer Serial Number 
+    fmgr_ha_peer_status: ${5$$(yas-choose-value '("enable" "disable"))}    # choices: enable;disable  Sets the peer status to enable or disable 
+    fmgr_ha_cluster_pw: ${6:value}                                         # Sets the password for the HA cluster  Only required once  System remembers between HA mode switches 
+    fmgr_ha_cluster_id: ${7:1}                                             # Sets the ID number of the HA cluster  Defaults to 1 
+    fmgr_ha_hb_threshold: ${8:3}                                           # Sets heartbeat lost threshold (1-255) 
+    fmgr_ha_hb_interval: ${9:5}                                            # Sets the heartbeat interval (1-255) 
+    fmgr_ha_file_quota: ${10:4096}                                         # Sets the File quota in MB (2048-20480) 

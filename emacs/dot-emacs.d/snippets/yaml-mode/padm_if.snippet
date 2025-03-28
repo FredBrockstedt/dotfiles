@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage IP interfaces  on Solaris/illumos systems.
+# prefix: ipadm_if_snippet
+# key: padm_if
+# group: ansible
+# --
+
+- name: ${0:Manage IP interfaces  on Solaris/illumos systems.}
+  ipadm_if:                                                                
+    name: ${1:IP interface name}                                           #
+    temporary: ${2:False}                                                  # Specifies that the IP interface is temporary  Temporary IP interfaces do not persist across reboots 
+    state: ${3$$(yas-choose-value '("present" "absent" "enabled" "disabled"))}# choices: present;absent;enabled;disabled  Create or delete Solaris/illumos IP interfaces 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Adds or removes Vertica database roles and assigns roles to them.
+# prefix: vertica_role_snippet
+# key: vertica_ro
+# group: ansible
+# --
+
+- name: ${0:Adds or removes Vertica database roles and assigns roles to them.}
+  vertica_role:                                                            
+    name: ${1:Name of the role to add or remove}                           #
+    assigned_roles: ${2:value}                                             # Comma separated list of roles to assign to the role 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether to create C(present), drop C(absent) or lock C(locked) a role 
+    db: ${4:value}                                                         # Name of the Vertica database 
+    cluster: ${5:localhost}                                                # Name of the Vertica cluster 
+    port: ${6:5433}                                                        # Vertica cluster port to connect to 
+    login_user: ${7:dbadmin}                                               # The username used to authenticate with 
+    login_password: ${8:value}                                             # The password used to authenticate with 

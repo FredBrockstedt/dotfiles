@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Copy a file from a network device to Ansible Controller
+# prefix: net_get_snippet
+# key: t_get
+# group: ansible
+# --
+
+- name: ${0:Copy a file from a network device to Ansible Controller}
+  net_get:                                                                 
+    src: ${1:Specifies the source file}                                    # The path to the source file can either be the full path on the network device or a relative path as per path supported b
+    protocol: ${2$$(yas-choose-value '("scp" "sftp"))}                     # choices: scp;sftp  Protocol used to transfer file 
+    dest: ${{3:"['Same filename as specified in I(src)}                    # The path will be playbook root or role root directory if playbook is part of a role ']"} # not required  Specifies the d

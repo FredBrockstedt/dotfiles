@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage Resource Authorization Policies (RAP) on a Remote Desktop Gateway server
+# prefix: win_rds_rap_snippet
+# key: win_rds_rap
+# group: ansible
+# --
+
+- name: ${0:Manage Resource Authorization Policies (RAP) on a Remote Desktop Gateway server}
+  win_rds_rap:                                                             
+    name: ${1:Name of the resource authorization policy}                   #
+    state: ${2$$(yas-choose-value '("absent" "disabled" "enabled" "present"))}# choices: absent;disabled;enabled;present  The state of resource authorization policy  If C(absent) will ensure the po
+    description: ${3:value}                                                # Optional description of the resource authorization policy 
+    user_groups: ${4:value}                                                # List of user groups that are associated with this resource authorization policy (RAP)  A user must belong to one of thes
+    allowed_ports: ${5:value}                                              # List of port numbers through which connections are allowed for this policy  To allow connections through any port, speci
+    computer_group_type: ${6$$(yas-choose-value '("rdg_group" "ad_network_resource_group" "allow_any"))}# choices: rdg_group;ad_network_resource_group;allow_any  The computer group type: C(rdg_grou
+    computer_group: ${7:value}                                             # The computer group name that is associated with this resource authorization policy (RAP)  This is required when I(comput

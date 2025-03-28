@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Create or destroy snapshots for GCE storage volumes
+# prefix: gce_snapshot_snippet
+# key: gce_snapshot
+# group: ansible
+# --
+
+- name: ${0:Create or destroy snapshots for GCE storage volumes}
+  gce_snapshot:                                                            
+    instance_name: ${1:The GCE instance to snapshot}                       #
+    service_account_email: ${2:GCP service account email for the project where the instance resides}#
+    credentials_file: ${3:The path to the credentials file associated with the service account}#
+    project_id: ${4:The GCP project ID to use}                             #
+    snapshot_name: ${5:value}                                              # The name of the snapshot to manage
+    disks: ${6:all}                                                        # A list of disks to create snapshots for  If none is provided, all of the volumes will be snapshotted
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether a snapshot should be C(present) or C(absent)

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Create or delete routers from OpenStack
+# prefix: os_router_snippet
+# key: os_router
+# group: ansible
+# --
+
+- name: ${0:Create or delete routers from OpenStack}
+  os_router:                                                               
+    name: ${1:Name to be give to the router}                               #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource
+    admin_state_up: ${3:true}                                              # Desired admin state of the created or existing router 
+    enable_snat: ${4:value}                                                # Enable Source NAT (SNAT) attribute 
+    network: ${5:value}                                                    # Unique name or ID of the external gateway network  required I(interfaces) or I(enable_snat) are provided 
+    project: ${6:value}                                                    # Unique name or ID of the project 
+    external_fixed_ips: ${7:value}                                         # The IP address parameters for the external gateway network  Each is a dictionary with the subnet name or ID (subnet) and
+    interfaces: ${8:value}                                                 # List of subnets to attach to the router internal interface  Default gateway associated with the subnet will be automatic
+    availability_zone: ${9:value}                                          # Ignored  Present for backwards compatibility
+    cloud: ${10:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${11:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${12:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${13:value}                                               # Name of the region 
+    wait: ${14:True}                                                       # Should ansible wait until the requested resource is complete 
+    timeout: ${15:180}                                                     # How long should ansible wait for the requested resource 
+    api_timeout: ${16:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${17:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${18:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${19:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${20:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${21$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

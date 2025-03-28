@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Gather info for GCP InstanceGroup
+# prefix: gcp_compute_instance_group_info_snippet
+# key: gcp_compute_instance_group_info
+# group: ansible
+# --
+
+- name: ${0:Gather info for GCP InstanceGroup}
+  gcp_compute_instance_group_info:                                         
+    zone: ${1:A reference to the zone where the instance group resides}    #
+    auth_kind: ${2$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    filters: ${3:value}                                                    # A list of filter value pairs  Available filters are listed here U(https://cloud google com/sdk/gcloud/reference/topic/fi
+    project: ${4:value}                                                    # The Google Cloud Platform project to use 
+    service_account_contents: ${5:value}                                   # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${6:value}                                       # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${7:value}                                      # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${8:value}                                                     # Array of scopes to be used 
+    env_type: ${9:value}                                                   # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

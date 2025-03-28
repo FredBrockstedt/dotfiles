@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: Manages disk offerings on Apache CloudStack based clouds.
+# prefix: cs_disk_offering_snippet
+# key: cs_disk_offering
+# group: ansible
+# --
+
+- name: ${0:Manages disk offerings on Apache CloudStack based clouds.}
+  cs_disk_offering:                                                        
+    name: ${1:Name of the disk offering}                                   #
+    disk_size: ${2:value}                                                  # Size of the disk offering in GB (1GB = 1,073,741,824 bytes) 
+    bytes_read_rate: ${3:value}                                            # Bytes read rate of the disk offering 
+    bytes_write_rate: ${4:value}                                           # Bytes write rate of the disk offering 
+    display_text: ${5:value}                                               # Display text of the disk offering  If not set, C(name) will be used as C(display_text) while creating 
+    domain: ${6:value}                                                     # Domain the disk offering is related to  Public for all domains and subdomains if not set 
+    hypervisor_snapshot_reserve: ${7:value}                                # Hypervisor snapshot reserve space as a percent of a volume  Only for managed storage using Xen or VMware 
+    customized: ${8:False}                                                 # Whether disk offering iops is custom or not 
+    iops_read_rate: ${9:value}                                             # IO requests read rate of the disk offering 
+    iops_write_rate: ${10:value}                                           # IO requests write rate of the disk offering 
+    iops_max: ${11:value}                                                  # Max  iops of the disk offering 
+    iops_min: ${12:value}                                                  # Min  iops of the disk offering 
+    provisioning_type: ${13$$(yas-choose-value '("thin" "sparse" "fat"))}  # choices: thin;sparse;fat  Provisioning type used to create volumes 
+    state: ${14$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the disk offering 
+    storage_type: ${15$$(yas-choose-value '("local" "shared"))}            # choices: local;shared  The storage type of the disk offering 
+    storage_tags: ${16:value}                                              # The storage tags for this disk offering 
+    display_offering: ${17:value}                                          # An optional field, whether to display the offering to the end user or not 
+    api_key: ${18:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${19:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${20:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${21$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${22:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${23:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

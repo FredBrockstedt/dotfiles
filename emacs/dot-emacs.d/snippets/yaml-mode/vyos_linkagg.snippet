@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage link aggregation groups on VyOS network devices
+# prefix: vyos_linkagg_snippet
+# key: vyos_linkagg
+# group: ansible
+# --
+
+- name: ${0:Manage link aggregation groups on VyOS network devices}
+  vyos_linkagg:                                                            
+    name: ${1:Name of the link aggregation group}                          #
+    mode: ${{2$$(yas-choose-value '("802}                                  #3ad,active-backup,broadcast,round-robin,transmit-load-balance,adaptive-load-balance,xor-hash,on|} # not required  choices
+    members: ${3:value}                                                    # List of members of the link aggregation group 
+    aggregate: ${4:value}                                                  # L i s t   o f   l i n k   a g g r e g a t i o n   d e f i n i t i o n s  
+    state: ${5$$(yas-choose-value '("present" "absent" "up" "down"))}      # choices: present;absent;up;down  State of the link aggregation group 
+    provider: ${6:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

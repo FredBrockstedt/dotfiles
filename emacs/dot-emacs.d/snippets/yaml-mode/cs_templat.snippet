@@ -1,0 +1,47 @@
+# -*- mode: snippet -*-
+# name: Manages templates on Apache CloudStack based clouds.
+# prefix: cs_template_snippet
+# key: cs_templat
+# group: ansible
+# --
+
+- name: ${0:Manages templates on Apache CloudStack based clouds.}
+  cs_template:                                                             
+    name: ${1:Name of the template}                                        #
+    url: ${2:value}                                                        # URL of where the template is hosted on I(state=present)  URL to which the template would be extracted on I(state=extract
+    vm: ${3:value}                                                         # VM name the template will be created from its volume or alternatively from a snapshot  VM must be in stopped state if cr
+    snapshot: ${4:value}                                                   # Name of the snapshot, created from the VM ROOT volume, the template will be created from  I(vm) is required together wit
+    os_type: ${5:value}                                                    # OS type that best represents the OS of this template 
+    checksum: ${6:value}                                                   # The MD5 checksum value of this template  If set, we search by checksum instead of name 
+    is_ready: ${7:value}                                                   # Note: this flag was not implemented and therefore marked as deprecated  Deprecated, will be removed in version 2 11 
+    is_public: ${8:value}                                                  # Register the template to be publicly available to all users  Only used if I(state) is C(present) 
+    is_featured: ${9:value}                                                # Register the template to be featured  Only used if I(state) is C(present) 
+    is_dynamically_scalable: ${10:value}                                   # Register the template having XS/VMware tools installed in order to support dynamic scaling of VM CPU/memory  Only used i
+    cross_zones: ${11:False}                                               # Whether the template should be synced or removed across zones  Only used if I(state) is C(present) or C(absent) 
+    mode: ${12$$(yas-choose-value '("http_download" "ftp_upload"))}        # choices: http_download;ftp_upload  Mode for the template extraction  Only used if I(state=extracted) 
+    domain: ${13:value}                                                    # Domain the template, snapshot or VM is related to 
+    account: ${14:value}                                                   # Account the template, snapshot or VM is related to 
+    project: ${15:value}                                                   # Name of the project the template to be registered in 
+    zone: ${16:value}                                                      # Name of the zone you wish the template to be registered or deleted from  If not specified, first found zone will be used
+    template_filter: ${17$$(yas-choose-value '("all" "featured" "self" "selfexecutable" "sharedexecutable" "executable" "community"))}# choices: all;featured;self;selfexecutable;sharedexecutable;ex
+    template_find_options: ${18$$(yas-choose-value '("display_text" "checksum" "cross_zones"))}# choices: display_text;checksum;cross_zones  Options to find a template uniquely  More than one allow
+    hypervisor: ${19:value}                                                # Name the hypervisor to be used for creating the new template  Relevant when using I(state=present)  Possible values are 
+    requires_hvm: ${20:value}                                              # Whether the template requires HVM or not  Only considered while creating the template 
+    password_enabled: ${21:value}                                          # Enable template password reset support 
+    template_tag: ${22:value}                                              # The tag for this template 
+    sshkey_enabled: ${23:value}                                            # True if the template supports the sshkey upload feature  Only considered if I(url) is used (API limitation) 
+    is_routing: ${24:value}                                                # Sets the template type to routing, i e  if template is used to deploy routers  Only considered if I(url) is used 
+    format: ${25$$(yas-choose-value '("QCOW2" "RAW" "VHD" "OVA"))}         # choices: QCOW2;RAW;VHD;OVA  The format for the template  Only considered if I(state=present) 
+    is_extractable: ${26:value}                                            # Allows the template or its derivatives to be extractable 
+    details: ${27:value}                                                   # Template details in key/value pairs 
+    bits: ${28$$(yas-choose-value '("32" "64"))}                           # choices: 32;64  32 or 64 bits support 
+    display_text: ${29:value}                                              # Display text of the template 
+    state: ${30$$(yas-choose-value '("present" "absent" "extracted"))}     # choices: present;absent;extracted  State of the template 
+    poll_async: ${31:True}                                                 # Poll async jobs until job has finished 
+    tags: ${32:value}                                                      # List of tags  Tags are a list of dictionaries having keys I(key) and I(value)  To delete all tags, set a empty list e g 
+    api_key: ${33:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${34:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${35:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${36$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${37:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${38:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

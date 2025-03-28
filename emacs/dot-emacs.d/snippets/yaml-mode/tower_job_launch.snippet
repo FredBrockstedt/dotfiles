@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Launch an Ansible Job.
+# prefix: tower_job_launch_snippet
+# key: tower_job_launch
+# group: ansible
+# --
+
+- name: ${0:Launch an Ansible Job.}
+  tower_job_launch:                                                        
+    job_template: ${1:Name of the job template to use}                     #
+    job_explanation: ${2:value}                                            # Job explanation field 
+    job_type: ${3$$(yas-choose-value '("run" "check" "scan"))}             # choices: run;check;scan  Job_type to use for the job, only used if prompt for job_type is set 
+    inventory: ${4:value}                                                  # Inventory to use for the job, only used if prompt for inventory is set 
+    credential: ${5:value}                                                 # Credential to use for job, only used if prompt for credential is set 
+    extra_vars: ${6:value}                                                 # Extra_vars to use for the job_template  Prepend C(@) if a file 
+    limit: ${7:value}                                                      # Limit to use for the I(job_template) 
+    tags: ${8:value}                                                       # Specific tags to use for from playbook 
+    use_job_endpoint: ${9:false}                                           # Disable launching jobs from job template 
+    tower_host: ${10:value}                                                # URL to your Tower instance 
+    tower_username: ${11:value}                                            # Username for your Tower instance 
+    tower_password: ${12:value}                                            # Password for your Tower instance 
+    validate_certs: ${13:value}                                            # Whether to allow insecure connections to Tower  If C(no), SSL certificates will not be validated  This should only be us
+    tower_config_file: ${14:value}                                         # Path to the Tower config file 

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Modify and read dconf database
+# prefix: dconf_snippet
+# key: dconf
+# group: ansible
+# --
+
+- name: ${0:Modify and read dconf database}
+  dconf:                                                                   
+    key: ${1:A dconf key to modify or read from the dconf database}        #
+    value: ${2:value}                                                      # Value to set for the specified dconf key  Value should be specified in GVariant format  Due to complexity of this format
+    state: ${3$$(yas-choose-value '("read" "present" "absent"))}           # choices: read;present;absent  The action to take upon the key/value 

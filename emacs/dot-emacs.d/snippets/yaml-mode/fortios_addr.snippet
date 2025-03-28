@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manage fortios firewall address objects
+# prefix: fortios_address_snippet
+# key: fortios_addr
+# group: ansible
+# --
+
+- name: ${0:Manage fortios firewall address objects}
+  fortios_address:                                                         
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Specifies if address need to be added or deleted 
+    name: ${2:Name of the address to add or delete}                        #
+    type: ${3$$(yas-choose-value '("iprange" "fqdn" "ipmask" "geography"))}# choices: iprange;fqdn;ipmask;geography  Type of the address 
+    value: ${4:value}                                                      # Address value, based on type  If type=fqdn, something like www google com  If type=ipmask, you can use simple ip (192 16
+    start_ip: ${5:value}                                                   # First ip in range (used only with type=iprange) 
+    end_ip: ${6:value}                                                     # Last ip in range (used only with type=iprange) 
+    country: ${7:value}                                                    # 2 letter country code (like FR) 
+    interface: ${8:any}                                                    # interface name the address apply to 
+    comment: ${9:value}                                                    # free text to describe address 
+    file_mode: ${10:False}                                                 # Don't connect to any device, only use I(config_file) as input and Output 
+    config_file: ${11:value}                                               # Path to configuration file  Required when I(file_mode) is True 
+    host: ${12:value}                                                      # Specifies the DNS hostname or IP address for connecting to the remote fortios device  Required when I(file_mode) is Fals
+    username: ${13:value}                                                  # Configures the username used to authenticate to the remote device  Required when I(file_mode) is True 
+    password: ${14:value}                                                  # Specifies the password used to authenticate to the remote device  Required when I(file_mode) is True 
+    timeout: ${15:60}                                                      # Timeout in seconds for connecting to the remote device 
+    vdom: ${16:value}                                                      # Specifies on which vdom to apply configuration
+    backup: ${17:False}                                                    # This argument will cause the module to create a backup of the current C(running-config) from the remote device before an
+    backup_path: ${18:value}                                               # Specifies where to store backup files  Required if I(backup=yes) 
+    backup_filename: ${19:value}                                           # Specifies the backup filename  If omitted filename will be formatted like HOST_config YYYY-MM-DD@HH:MM:SS

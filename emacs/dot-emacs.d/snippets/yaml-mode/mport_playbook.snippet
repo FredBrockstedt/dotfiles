@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Import a playbook
+# prefix: import_playbook_snippet
+# key: mport_playbook
+# group: ansible
+# --
+
+- name: ${0:Import a playbook}
+  import_playbook:                                                         
+    free-form: ${1:value}                                                  # The name of the imported playbook is specified directly without any other option 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: VDOM wireless controller configuration in Fortinet's FortiOS and FortiGate.
+# prefix: fortios_wireless_controller_setting_snippet
+# key: fortios_wireless_controller_setting
+# group: ansible
+# --
+
+- name: ${0:VDOM wireless controller configuration in Fortinet's FortiOS and FortiGate.}
+  fortios_wireless_controller_setting:                                     
+    host: ${1:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${2:value}                                                   # FortiOS or FortiGate username 
+    password: ${3:}                                                        # FortiOS or FortiGate password 
+    vdom: ${4:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${5:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${6:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 
+    wireless_controller_setting: ${7:None}                                 # VDOM wireless controller configuration 

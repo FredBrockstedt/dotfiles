@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: This module can be used to retrieve information about one or more oVirt/RHV events
+# prefix: ovirt_event_info_snippet
+# key: ovirt_event_info
+# group: ansible
+# --
+
+- name: ${0:This module can be used to retrieve information about one or more oVirt/RHV events}
+  ovirt_event_info:                                                        
+    auth: ${1:Dictionary with values needed to create HTTP/HTTPS connection to oVirt: C(username)[I(required)] - The name of the user, something like I(admin@internal)}# Default value is set by I(O
+    case_sensitive: ${2:True}                                              # Indicates if the search performed using the search parameter should be performed taking case into account  The default v
+    from_: ${3:value}                                                      # Indicates the event index after which events should be returned  The indexes of events are strictly increasing, so when 
+    max: ${4:value}                                                        # Sets the maximum number of events to return  If not specified all the events are returned 
+    search: ${5:value}                                                     # Search term which is accepted by the oVirt/RHV API  For example to search for events of severity alert use the following
+    headers: ${6:value}                                                    # Additional HTTP headers 
+    query: ${7:value}                                                      # Additional URL query parameters 
+    wait: ${8:True}                                                        # If True wait for the response 
+    fetch_nested: ${9:value}                                               # If I(yes) the module will fetch additional data from the API  It will fetch only IDs of nested entity  It doesn't fetch 
+    nested_attributes: ${10:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is

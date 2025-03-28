@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage VLANs on VyOS network devices
+# prefix: vyos_vlan_snippet
+# key: vyos_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLANs on VyOS network devices}
+  vyos_vlan:                                                               
+    vlan_id: ${1:ID of the VLAN}                                           # Range 0-4094 
+    interfaces: ${2:List of interfaces that should be associated to the VLAN}#
+    name: ${3:value}                                                       # Name of the VLAN 
+    address: ${4:value}                                                    # Configure Virtual interface address 
+    associated_interfaces: ${5:value}                                      # This is a intent option and checks the operational state of the for given vlan C(name) for associated interfaces  If the
+    delay: ${6:10}                                                         # Delay the play should wait to check for declarative intent params values 
+    aggregate: ${7:value}                                                  # L i s t   o f   V L A N s   d e f i n i t i o n s  
+    purge: ${8:False}                                                      # Purge VLANs not defined in the I(aggregate) parameter 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the VLAN configuration 
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

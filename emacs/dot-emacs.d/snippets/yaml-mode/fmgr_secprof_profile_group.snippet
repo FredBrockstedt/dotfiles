@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage security profiles within FortiManager
+# prefix: fmgr_secprof_profile_group_snippet
+# key: fmgr_secprof_profile_group
+# group: ansible
+# --
+
+- name: ${0:Manage security profiles within FortiManager}
+  fmgr_secprof_profile_group:                                              
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    webfilter_profile: ${3:value}                                          # Name of an existing Web filter profile 
+    waf_profile: ${4:value}                                                # Name of an existing Web application firewall profile 
+    voip_profile: ${5:value}                                               # Name of an existing VoIP profile 
+    ssl_ssh_profile: ${6:value}                                            # Name of an existing SSL SSH profile 
+    ssh_filter_profile: ${7:value}                                         # Name of an existing SSH filter profile 
+    spamfilter_profile: ${8:value}                                         # Name of an existing Spam filter profile 
+    profile_protocol_options: ${9:value}                                   # Name of an existing Protocol options profile 
+    name: ${10:value}                                                      # Profile group name 
+    mms_profile: ${11:value}                                               # Name of an existing MMS profile 
+    ips_sensor: ${12:value}                                                # Name of an existing IPS sensor 
+    icap_profile: ${13:value}                                              # Name of an existing ICAP profile 
+    dnsfilter_profile: ${14:value}                                         # Name of an existing DNS filter profile 
+    dlp_sensor: ${15:value}                                                # Name of an existing DLP sensor 
+    av_profile: ${16:value}                                                # Name of an existing Antivirus profile 
+    application_list: ${17:value}                                          # Name of an existing Application list 

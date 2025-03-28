@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Issue Nitro API requests to a Netscaler instance.
+# prefix: netscaler_nitro_request_snippet
+# key: tscaler_nitro_request
+# group: ansible
+# --
+
+- name: ${0:Issue Nitro API requests to a Netscaler instance.}
+  netscaler_nitro_request:                                                 
+    nitro_user: ${1:The username with which to authenticate to the Netscaler node}#
+    nitro_pass: ${2:The password with which to authenticate to the Netscaler node}#
+    expected_nitro_errorcode: ${3:[0]}:A list of numeric values that signify that the operation was successful}#
+    nsip: ${4:value}                                                       # The IP address of the Netscaler or MAS instance where the Nitro API calls will be made  The port can be specified with t
+    nitro_protocol: ${5$$(yas-choose-value '("http" "https"))}             # choices: http;https  Which protocol to use when accessing the Nitro API objects 
+    validate_certs: ${6:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_auth_token: ${7:value}                                           # The authentication token provided by the C(mas_login) operation  It is required when issuing Nitro API calls through a M
+    resource: ${8:value}                                                   # The type of resource we are operating on  It is required for all I(operation) values except C(mas_login) and C(save_conf
+    name: ${9:value}                                                       # The name of the resource we are operating on  It is required for the following I(operation) values: C(update), C(get), C
+    attributes: ${10:value}                                                # The attributes of the Nitro object we are operating on  It is required for the following I(operation) values: C(add), C(
+    args: ${11:value}                                                      # A dictionary which defines the key arguments by which we will select the Nitro object to operate on  It is required for 
+    filter: ${12:value}                                                    # A dictionary which defines the filter with which to refine the Nitro objects returned by the C(get_filtered) I(operation
+    operation: ${13$$(yas-choose-value '("add" "update" "get" "get_by_args" "get_filtered" "get_all" "delete" "delete_by_args" "count" "mas_login" "save_config" "action"))}# choices: add;update;get
+    action: ${14:value}                                                    # The action to perform when the I(operation) value is set to C(action)  Some common values for this parameter are C(enabl
+    instance_ip: ${15:value}                                               # The IP address of the target Netscaler instance when issuing a Nitro request through a MAS proxy 
+    instance_name: ${16:value}                                             # The name of the target Netscaler instance when issuing a Nitro request through a MAS proxy 
+    instance_id: ${17:value}                                               # The id of the target Netscaler instance when issuing a Nitro request through a MAS proxy 

@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Manage Application Gateway instance
+# prefix: azure_rm_appgateway_snippet
+# key: zure_rm_appgateway
+# group: ansible
+# --
+
+- name: ${0:Manage Application Gateway instance}
+  azure_rm_appgateway:                                                     
+    resource_group: ${1:The name of the resource group}                    #
+    name: ${2:The name of the application gateway}                         #
+    location: ${3:value}                                                   # Resource location  If not set, location from the resource group will be used as default 
+    sku: ${4:value}                                                        # SKU of the application gateway resource 
+    ssl_policy: ${5:value}                                                 # SSL policy of the application gateway resource 
+    gateway_ip_configurations: ${6:value}                                  # List of subnets used by the application gateway 
+    authentication_certificates: ${7:value}                                # Authentication certificates of the application gateway resource 
+    redirect_configurations: ${8:value}                                    # Redirect configurations of the application gateway resource 
+    ssl_certificates: ${9:value}                                           # SSL certificates of the application gateway resource 
+    frontend_ip_configurations: ${10:value}                                # Frontend IP addresses of the application gateway resource 
+    frontend_ports: ${11:value}                                            # List of frontend ports of the application gateway resource 
+    backend_address_pools: ${12:value}                                     # List of backend address pool of the application gateway resource 
+    probes: ${13:value}                                                    # Probes available to the application gateway resource 
+    backend_http_settings_collection: ${14:value}                          # Backend http settings of the application gateway resource 
+    http_listeners: ${15:value}                                            # List of HTTP listeners of the application gateway resource 
+    request_routing_rules: ${16:value}                                     # List of request routing rules of the application gateway resource 
+    state: ${17$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the Public IP  Use C(present) to create or update a and C(absent) to delete
+    ad_user: ${18:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${19:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${20:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${21:value}                                           # Your Azure subscription Id 
+    client_id: ${22:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${23:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${24:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${25:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${26:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${27$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${28$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${29:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${30:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${31:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

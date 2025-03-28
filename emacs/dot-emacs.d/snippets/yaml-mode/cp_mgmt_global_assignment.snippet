@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages global-assignment objects on Check Point over Web Services API
+# prefix: cp_mgmt_global_assignment_snippet
+# key: cp_mgmt_global_assignment
+# group: ansible
+# --
+
+- name: ${0:Manages global-assignment objects on Check Point over Web Services API}
+  cp_mgmt_global_assignment:                                               
+    dependent_domain: ${1:value}                                           # N/A
+    global_access_policy: ${2:value}                                       # Global domain access policy that is assigned to a dependent domain 
+    global_domain: ${3:value}                                              # N/A
+    global_threat_prevention_policy: ${4:value}                            # Global domain threat prevention policy that is assigned to a dependent domain 
+    manage_protection_actions: ${5:value}                                  # N/A
+    details_level: ${6$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    ignore_warnings: ${7:value}                                            # Apply changes ignoring warnings 
+    ignore_errors: ${8:value}                                              # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${10:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${11:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${12:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

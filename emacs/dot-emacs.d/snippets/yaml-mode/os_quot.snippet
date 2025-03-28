@@ -1,0 +1,56 @@
+# -*- mode: snippet -*-
+# name: Manage OpenStack Quotas
+# prefix: os_quota_snippet
+# key: os_quot
+# group: ansible
+# --
+
+- name: ${0:Manage OpenStack Quotas}
+  os_quota:                                                                
+    name: ${1:Name of the OpenStack Project to manage}                     #
+    state: ${2:present}                                                    # A value of present sets the quota and a value of absent resets the quota to system defaults 
+    backup_gigabytes: ${3:value}                                           # M a x i m u m   s i z e   o f   b a c k u p s   i n   G B ' s  
+    backups: ${4:value}                                                    # M a x i m u m   n u m b e r   o f   b a c k u p s   a l l o w e d  
+    cores: ${5:value}                                                      # M a x i m u m   n u m b e r   o f   C P U ' s   p e r   p r o j e c t  
+    fixed_ips: ${6:value}                                                  # N u m b e r   o f   f i x e d   I P ' s   t o   a l l o w  
+    floating_ips: ${7:value}                                               # N u m b e r   o f   f l o a t i n g   I P ' s   t o   a l l o w   i n   C o m p u t e  
+    floatingip: ${8:value}                                                 # N u m b e r   o f   f l o a t i n g   I P ' s   t o   a l l o w   i n   N e t w o r k  
+    gigabytes: ${9:value}                                                  # M a x i m u m   v o l u m e   s t o r a g e   a l l o w e d   f o r   p r o j e c t  
+    gigabytes_lvm: ${10:value}                                             # M a x i m u m   s i z e   i n   G B ' s   o f   i n d i v i d u a l   l v m   v o l u m e s  
+    injected_file_size: ${11:value}                                        # M a x i m u m   f i l e   s i z e   i n   b y t e s  
+    injected_files: ${12:value}                                            # N u m b e r   o f   i n j e c t e d   f i l e s   t o   a l l o w  
+    injected_path_size: ${13:value}                                        # M a x i m u m   p a t h   s i z e  
+    instances: ${14:value}                                                 # M a x i m u m   n u m b e r   o f   i n s t a n c e s   a l l o w e d  
+    key_pairs: ${15:value}                                                 # N u m b e r   o f   k e y   p a i r s   t o   a l l o w  
+    loadbalancer: ${16:value}                                              # N u m b e r   o f   l o a d   b a l a n c e r s   t o   a l l o w  
+    network: ${17:value}                                                   # N u m b e r   o f   n e t w o r k s   t o   a l l o w  
+    per_volume_gigabytes: ${18:value}                                      # M a x i m u m   s i z e   i n   G B ' s   o f   i n d i v i d u a l   v o l u m e s  
+    pool: ${19:value}                                                      # N u m b e r   o f   l o a d   b a l a n c e r   p o o l s   t o   a l l o w  
+    port: ${20:value}                                                      # N u m b e r   o f   N e t w o r k   p o r t s   t o   a l l o w ,   t h i s   n e e d s   t o   b e   g r e a t e r   t 
+    properties: ${21:value}                                                # N u m b e r   o f   p r o p e r t i e s   t o   a l l o w  
+    ram: ${22:value}                                                       # M a x i m u m   a m o u n t   o f   r a m   i n   M B   t o   a l l o w  
+    rbac_policy: ${23:value}                                               # N u m b e r   o f   p o l i c i e s   t o   a l l o w  
+    router: ${24:value}                                                    # N u m b e r   o f   r o u t e r s   t o   a l l o w  
+    security_group_rule: ${25:value}                                       # N u m b e r   o f   r u l e s   p e r   s e c u r i t y   g r o u p   t o   a l l o w  
+    security_group: ${26:value}                                            # N u m b e r   o f   s e c u r i t y   g r o u p s   t o   a l l o w  
+    server_group_members: ${27:value}                                      # N u m b e r   o f   s e r v e r   g r o u p   m e m b e r s   t o   a l l o w  
+    server_groups: ${28:value}                                             # N u m b e r   o f   s e r v e r   g r o u p s   t o   a l l o w  
+    snapshots: ${29:value}                                                 # N u m b e r   o f   s n a p s h o t s   t o   a l l o w  
+    snapshots_lvm: ${30:value}                                             # N u m b e r   o f   L V M   s n a p s h o t s   t o   a l l o w  
+    subnet: ${31:value}                                                    # N u m b e r   o f   s u b n e t s   t o   a l l o w  
+    subnetpool: ${32:value}                                                # N u m b e r   o f   s u b n e t   p o o l s   t o   a l l o w  
+    volumes: ${33:value}                                                   # N u m b e r   o f   v o l u m e s   t o   a l l o w  
+    volumes_lvm: ${34:value}                                               # N u m b e r   o f   L V M   v o l u m e s   t o   a l l o w  
+    availability_zone: ${35:value}                                         # Ignored  Present for backwards compatibility
+    cloud: ${36:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${37:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${38:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${39:value}                                               # Name of the region 
+    wait: ${40:True}                                                       # Should ansible wait until the requested resource is complete 
+    timeout: ${41:180}                                                     # How long should ansible wait for the requested resource 
+    api_timeout: ${42:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${43:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${44:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${45:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${46:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${47$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Manage Azure virtual network gateways
+# prefix: azure_rm_virtualnetworkgateway_snippet
+# key: zure_rm_virtualnetworkgateway
+# group: ansible
+# --
+
+- name: ${0:Manage Azure virtual network gateways}
+  azure_rm_virtualnetworkgateway:                                          
+    resource_group: ${1:Name of a resource group where VPN Gateway exists or will be created}#
+    name: ${2:Name of VPN Gateway}                                         #
+    virtual_network: ${3:An existing virtual network with which the VPN Gateway will be associated}# Required when creating a VPN Gateway  Can be the name of the virtual network  Must be in the sam
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  State of the VPN Gateway  Use C(present) to create or update VPN gateway and C(absent) to delet
+    location: ${5:value}                                                   # Valid Azure location  Defaults to location of the resource group 
+    ip_configurations: ${6:value}                                          # List of IP configurations 
+    gateway_type: ${7$$(yas-choose-value '("vpn" "express_route"))}        # choices: vpn;express_route  The type of this virtual network gateway 
+    vpn_type: ${8$$(yas-choose-value '("route_based" "policy_based"))}     # choices: route_based;policy_based  The type of this virtual private network 
+    enable_bgp: ${9:False}                                                 # Whether BGP is enabled for this virtual network gateway or not 
+    sku: ${10$$(yas-choose-value '("VpnGw1" "VpnGw2" "VpnGw3"))}           # choices: VpnGw1;VpnGw2;VpnGw3  The reference of the VirtualNetworkGatewaySku resource which represents the SKU selected 
+    bgp_settings: ${11:value}                                              # Virtual network gateway's BGP speaker settings 
+    ad_user: ${12:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${13:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${14:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${15:value}                                           # Your Azure subscription Id 
+    client_id: ${16:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${17:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${18:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${19:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${20:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${21$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${22$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${23:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${24:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${25:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

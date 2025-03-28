@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: modify servers in CenturyLink Cloud.
+# prefix: clc_modify_server_snippet
+# key: clc_modify_server
+# group: ansible
+# --
+
+- name: ${0:modify servers in CenturyLink Cloud.}
+  clc_modify_server:                                                       
+    server_ids: ${1:A list of server Ids to modify}                        #
+    cpu: ${2:value}                                                        # How many CPUs to update on the server
+    memory: ${3:value}                                                     # Memory (in GB) to set to the server 
+    anti_affinity_policy_id: ${4:value}                                    # The anti affinity policy id to be set for a hyper scale server  This is mutually exclusive with 'anti_affinity_policy_na
+    anti_affinity_policy_name: ${5:value}                                  # The anti affinity policy name to be set for a hyper scale server  This is mutually exclusive with 'anti_affinity_policy_
+    alert_policy_id: ${6:value}                                            # The alert policy id to be associated to the server  This is mutually exclusive with 'alert_policy_name'
+    alert_policy_name: ${7:value}                                          # The alert policy name to be associated to the server  This is mutually exclusive with 'alert_policy_id'
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state to insure that the provided resources are in 
+    wait: ${9:true}                                                        # Whether to wait for the provisioning tasks to finish before returning 

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Slurps a file from remote nodes
+# prefix: slurp_snippet
+# key: urp
+# group: ansible
+# --
+
+- name: ${0:Slurps a file from remote nodes}
+  slurp:                                                                   
+    src: ${1:The file on the remote system to fetch}                       # This I(must) be a file, not a directory 

@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Management of order of boot devices
+# prefix: ipmi_boot_snippet
+# key: pmi_boot
+# group: ansible
+# --
+
+- name: ${0:Management of order of boot devices}
+  ipmi_boot:                                                               
+    name: ${1:Hostname or ip address of the BMC}                           #
+    user: ${2:Username to use to connect to the BMC}                       #
+    password: ${3:Password to connect to the BMC}                          #
+    bootdev: ${4$$(yas-choose-value '("network -- Request network boot" "floppy -- Boot from floppy" "hd -- Boot from hard drive" "safe -- Boot from hard drive" " requesting 'safe mode'" "optical -
+    port: ${5:623}                                                         # Remote RMCP port 
+    state: ${6$$(yas-choose-value '("present -- Request system turn on" "absent -- Request system turn on"))}# choices: present -- Request system turn on;absent -- Request system turn on  Whether t
+    persistent: ${7:false}                                                 # If set, ask that system firmware uses this device beyond next boot  Be aware many systems do not honor this 
+    uefiboot: ${8:false}                                                   # If set, request UEFI boot explicitly  Strictly speaking, the spec suggests that if not set, the system should BIOS boot 

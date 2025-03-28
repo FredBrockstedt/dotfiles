@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: Manage SQL Database instance
+# prefix: azure_rm_sqldatabase_snippet
+# key: zure_rm_sqldat
+# group: ansible
+# --
+
+- name: ${0:Manage SQL Database instance}
+  azure_rm_sqldatabase:                                                    
+    resource_group: ${1:The name of the resource group that contains the resource}# You can obtain this value from the Azure Resource Manager API or the portal 
+    server_name: ${2:The name of the server}                               #
+    name: ${3:The name of the database to be operated on (updated or created)}#
+    location: ${4:value}                                                   # Resource location  If not set, location from the resource group will be used as default 
+    collation: ${5:value}                                                  # The collation of the database  If not I(create_mode=default), this value is ignored 
+    create_mode: ${6$$(yas-choose-value '("copy" "default" "non_readable_secondary" "online_secondary" "point_in_time_restore" "recovery" "restore" "restore_long_term_retention_backup"))}# choices:
+    source_database_id: ${7:value}                                         # Required unless I(create_mode=default) or I(create_mode=restore_long_term_retention_backup)  Specifies the resource ID o
+    source_database_deletion_date: ${8:value}                              # Required if I(create_mode=restore) and I(source_database_id) is the deleted database's original resource id when it exis
+    restore_point_in_time: ${9:value}                                      # Required if I(create_mode=point_in_time_restore), this value is required  If I(create_mode=restore), this value is optio
+    recovery_services_recovery_point_resource_id: ${10:value}              # Required if I(create_mode=restore_long_term_retention_backup), then this value is required  Specifies the resource ID of
+    edition: ${11$$(yas-choose-value '("web" "business" "basic" "standard" "premium" "free" "stretch" "data_warehouse" "system" "system2"))}# choices: web;business;basic;standard;premium;free;stret
+    max_size_bytes: ${12:value}                                            # The max size of the database expressed in bytes  If not I(create_mode=default), this value is ignored  To see possible v
+    elastic_pool_name: ${13:value}                                         # The name of the elastic pool the database is in  Not supported for I(edition=data_warehouse) 
+    read_scale: ${14:False}                                                # If the database is a geo-secondary, indicates whether read-only connections are allowed to this database or not  Not sup
+    sample_name: ${15$$(yas-choose-value '("adventure_works_lt"))}         # choices: adventure_works_lt  Indicates the name of the sample schema to apply when creating this database  If not I(crea
+    zone_redundant: ${16:False}                                            # Is this database is zone redundant? It means the replicas of this database will be spread across multiple availability z
+    force_update: ${17:value}                                              # SQL Database will be updated if given parameters differ from existing resource state  To force SQL Database update in an
+    state: ${18$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the SQL Database  Use C(present) to create or update an SQL Database and C(
+    ad_user: ${19:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${20:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${21:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${22:value}                                           # Your Azure subscription Id 
+    client_id: ${23:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${24:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${25:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${26:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${27:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${28$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${29$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${30:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${31:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${32:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

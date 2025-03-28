@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Manage filter entries (vz:Entry)
+# prefix: aci_filter_entry_snippet
+# key: ci_filter_entry
+# group: ansible
+# --
+
+- name: ${0:Manage filter entries (vz:Entry)}
+  aci_filter_entry:                                                        
+    host: ${1:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${2:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${3:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    arp_flag: ${4$$(yas-choose-value '("arp_reply" "arp_request" "unspecified"))}# choices: arp_reply;arp_request;unspecified  The arp flag to use when the ether_type is arp  The APIC defaults to C
+    description: ${5:value}                                                # Description for the Filter Entry 
+    dst_port: ${6:value}                                                   # Used to set both destination start and end ports to the same value when ip_protocol is tcp or udp  Accepted values are a
+    dst_port_end: ${7:value}                                               # Used to set the destination end port when ip_protocol is tcp or udp  Accepted values are any valid TCP/UDP port range  T
+    dst_port_start: ${8:value}                                             # Used to set the destination start port when ip_protocol is tcp or udp  Accepted values are any valid TCP/UDP port range 
+    entry: ${9:value}                                                      # Then name of the Filter Entry 
+    ether_type: ${10$$(yas-choose-value '("arp" "fcoe" "ip" "mac_security" "mpls_ucast" "trill" "unspecified"))}# choices: arp;fcoe;ip;mac_security;mpls_ucast;trill;unspecified  The Ethernet type  
+    filter: ${11:value}                                                    # The name of Filter that the entry should belong to 
+    icmp_msg_type: ${12$$(yas-choose-value '("dst_unreachable" "echo" "echo_reply" "src_quench" "time_exceeded" "unspecified"))}# choices: dst_unreachable;echo;echo_reply;src_quench;time_exceeded;u
+    icmp6_msg_type: ${13$$(yas-choose-value '("dst_unreachable" "echo_request" "echo_reply" "neighbor_advertisement" "neighbor_solicitation" "redirect" "time_exceeded" "unspecified"))}# choices: ds
+    ip_protocol: ${14$$(yas-choose-value '("eigrp" "egp" "icmp" "icmpv6" "igmp" "igp" "l2tp" "ospfigp" "pim" "tcp" "udp" "unspecified"))}# choices: eigrp;egp;icmp;icmpv6;igmp;igp;l2tp;ospfigp;pim;t
+    state: ${15$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  present, absent, query
+    stateful: ${16:value}                                                  # Determines the statefulness of the filter entry 
+    tenant: ${17:value}                                                    # The name of the tenant 
+    port: ${18:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${19:admin}                                                  # The username to use for authentication 
+    certificate_name: ${20:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${21$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${22:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${23:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${24:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${25:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

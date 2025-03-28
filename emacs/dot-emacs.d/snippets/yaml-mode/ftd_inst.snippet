@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Installs FTD pkg image on the firewall
+# prefix: ftd_install_snippet
+# key: ftd_inst
+# group: ansible
+# --
+
+- name: ${0:Installs FTD pkg image on the firewall}
+  ftd_install:                                                             
+    device_hostname: ${1:Hostname of the device as appears in the prompt (e}#g , 'firepower-5516') 
+    device_password: ${2:Password to login on the device}                  #
+    console_ip: ${3:IP address of a terminal server}                       # Used to set up an SSH connection with device's console port through the terminal server 
+    console_port: ${4:Device's port on a terminal server}                  #
+    console_username: ${5:Username to login on a terminal server}          #
+    console_password: ${6:Password to login on a terminal server}          #
+    rommon_file_location: ${7:Path to the boot (ROMMON) image on TFTP server}# Only TFTP is supported 
+    image_file_location: ${8:Path to the FTD pkg image on the server to be downloaded}# FTP, SCP, SFTP, TFTP, or HTTP protocols are usually supported, but may depend on the device model 
+    image_version: ${9:Version of FTD image to be installed}               # Helps to compare target and current FTD versions to prevent unnecessary reinstalls 
+    device_username: ${10:admin}                                           # Username to login on the device  Defaulted to 'admin' if not specified 
+    device_sudo_password: ${11:value}                                      # Root password for the device  If not specified, `device_password` is used 
+    device_new_password: ${12:value}                                       # New device password to set after image installation  If not specified, current password from `device_password` property 
+    device_ip: ${13:value}                                                 # Device IP address of management interface  If not specified and connection is 'httpapi`, the module tries to fetch the e
+    device_gateway: ${14:value}                                            # Device gateway of management interface  If not specified and connection is 'httpapi`, the module tries to fetch the exis
+    device_netmask: ${15:value}                                            # Device netmask of management interface  If not specified and connection is 'httpapi`, the module tries to fetch the exis
+    device_model: ${16$$(yas-choose-value '("Cisco ASA5506-X Threat Defense" "Cisco ASA5508-X Threat Defense" "Cisco ASA5516-X Threat Defense" "Cisco Firepower 2110 Threat Defense" "Cisco Firepower
+    dns_server: ${17:value}                                                # DNS IP address of management interface  If not specified and connection is 'httpapi`, the module tries to fetch the exis
+    force_install: ${18:False}                                             # Forces the FTD image to be installed even when the same version is already installed on the firewall  By default, the mo
+    search_domains: ${{19:cisco}                                           #com} # not required  Search domains delimited by comma  Defaulted to 'cisco com' if not specified 

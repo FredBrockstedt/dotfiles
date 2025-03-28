@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage certificates in DigitalOcean.
+# prefix: digital_ocean_certificate_snippet
+# key: digital_ocean_certificat
+# group: ansible
+# --
+
+- name: ${0:Manage certificates in DigitalOcean.}
+  digital_ocean_certificate:                                               
+    name: ${1:The name of the certificate}                                 #
+    private_key: ${2:value}                                                # A PEM-formatted private key content of SSL Certificate 
+    leaf_certificate: ${3:value}                                           # A PEM-formatted public SSL Certificate 
+    certificate_chain: ${4:value}                                          # The full PEM-formatted trust chain between the certificate authority's certificate and your domain's SSL certificate 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the certificate should be present or absent 
+    oauth_token: ${6:value}                                                # DigitalOcean OAuth token  There are several other environment variables which can be used to provide this value  i e , -
+    timeout: ${7:30}                                                       # The timeout in seconds used for polling DigitalOcean's API 
+    validate_certs: ${8:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled

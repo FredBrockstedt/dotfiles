@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Retrieve facts of cloud-init.
+# prefix: cloud_init_data_facts_snippet
+# key: cloud_init_data_fact
+# group: ansible
+# --
+
+- name: ${0:Retrieve facts of cloud-init.}
+  cloud_init_data_facts:                                                   
+    filter: ${1$$(yas-choose-value '("status" "result"))}                  # choices: status;result  Filter facts

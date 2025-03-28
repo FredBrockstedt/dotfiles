@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manage A10 Networks AX/SoftAX/Thunder/vThunder devices' service groups.
+# prefix: a10_service_group_snippet
+# key: 10_service_group
+# group: ansible
+# --
+
+- name: ${0:Manage A10 Networks AX/SoftAX/Thunder/vThunder devices' service groups.}
+  a10_service_group:                                                       
+    service_group: ${1:The SLB (Server Load Balancing) service-group name} #
+    host: ${2:Hostname or IP of the A10 Networks device}                   #
+    username: ${3:An account with administrator privileges}                #
+    password: ${4:Password for the C(username) account}                    #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If the specified service group should exists 
+    partition: ${6:value}                                                  # set active-partition
+    service_group_protocol: ${7$$(yas-choose-value '("tcp" "udp"))}        # choices: tcp;udp  The SLB service-group protocol of TCP or UDP 
+    service_group_method: ${8$$(yas-choose-value '("round-robin" "weighted-rr" "least-connection" "weighted-least-connection" "service-least-connection" "service-weighted-least-connection" "fastest
+    servers: ${9:value}                                                    # A list of servers to add to the service group  Each list item should be a dictionary which specifies the C(server:) and 
+    validate_certs: ${10:true}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled devices using self-s
+    write_config: ${11:False}                                              # If C(yes), any changes will cause a write of the running configuration to non-volatile memory  This will save I(all) con
+    url: ${12:value}                                                       # HTTP, HTTPS, or FTP URL in the form (http|https|ftp)://[user[:pass]]@host domain[:port]/path
+    force: ${13:False}                                                     # If C(yes) do not get a cached copy  Alias C(thirsty) has been deprecated and will be removed in 2 13 
+    http_agent: ${14:ansible-httpget}                                      # Header to identify as, generally appears in web server logs 
+    use_proxy: ${15:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    url_username: ${16:value}                                              # The username for use in HTTP basic authentication  This parameter can be used without I(url_password) for sites that all
+    url_password: ${17:value}                                              # The password for use in HTTP basic authentication  If the I(url_username) parameter is not specified, the I(url_password
+    force_basic_auth: ${18:False}                                          # Credentials specified with I(url_username) and I(url_password) should be passed in HTTP Header 
+    client_cert: ${19:value}                                               # PEM formatted certificate chain file to be used for SSL client authentication  This file can also include the key as wel
+    client_key: ${20:value}                                                # PEM formatted file that contains your private key to be used for SSL client authentication  If C(client_cert) contains b

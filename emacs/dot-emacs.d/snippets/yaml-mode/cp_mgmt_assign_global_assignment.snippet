@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: assign global assignment on Check Point over Web Services API
+# prefix: cp_mgmt_assign_global_assignment_snippet
+# key: cp_mgmt_assign_global_assignment
+# group: ansible
+# --
+
+- name: ${0:assign global assignment on Check Point over Web Services API}
+  cp_mgmt_assign_global_assignment:                                        
+    dependent_domains: ${1:value}                                          # N/A
+    global_domains: ${2:value}                                             # N/A
+    details_level: ${3$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    wait_for_task: ${4:True}                                               # Wait for the task to end  Such as publish task 
+    version: ${5:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

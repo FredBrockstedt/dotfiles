@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Create or delete a Rackspace Cloud Monitoring alarm.
+# prefix: rax_mon_alarm_snippet
+# key: rax_mon_alarm
+# group: ansible
+# --
+
+- name: ${0:Create or delete a Rackspace Cloud Monitoring alarm.}
+  rax_mon_alarm:                                                           
+    label: ${1:Friendly name for this alarm, used to achieve idempotence}  # Must be a String between 1 and 255 characters long 
+    entity_id: ${2:ID of the entity this alarm is attached to}             # May be acquired by registering the value of a rax_mon_entity task 
+    check_id: ${3:ID of the check that should be alerted on}               # May be acquired by registering the value of a rax_mon_check task 
+    notification_plan_id: ${4:ID of the notification plan to trigger if this alarm fires}# May be acquired by registering the value of a rax_mon_notification_plan task 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Ensure that the alarm with this C(label) exists or does not exist 
+    criteria: ${6:value}                                                   # Alarm DSL that describes alerting conditions and their output states  Must be between 1 and 16384 characters long  See h
+    disabled: ${7:value}                                                   # If yes, create this alarm, but leave it in an inactive state  Defaults to no 
+    metadata: ${8:value}                                                   # Arbitrary key/value pairs to accompany the alarm  Must be a hash of String keys and values between 1 and 255 characters 
+    api_key: ${9:value}                                                    # Rackspace API key, overrides I(credentials) 
+    auth_endpoint: ${{10:https://identity}                                 #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    credentials: ${11:value}                                               # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${12:value}                                                       # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    identity_type: ${13:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    region: ${14:DFW}                                                      # Region to create an instance in 
+    tenant_id: ${15:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${16:value}                                               # The tenant name used for authentication 
+    username: ${17:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${18:value}                                            # Whether or not to require SSL validation of API endpoints 

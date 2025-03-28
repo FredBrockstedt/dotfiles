@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage IP interface properties on Solaris/illumos systems.
+# prefix: ipadm_ifprop_snippet
+# key: padm_ifprop
+# group: ansible
+# --
+
+- name: ${0:Manage IP interface properties on Solaris/illumos systems.}
+  ipadm_ifprop:                                                            
+    interface: ${1:Specifies the IP interface we want to manage}           #
+    protocol: ${2:Specifies the protocol for which we want to manage properties}#
+    property: ${3:Specifies the name of the property we want to manage}    #
+    value: ${4:value}                                                      # Specifies the value we want to set for the property 
+    temporary: ${5:False}                                                  # Specifies that the property value is temporary  Temporary property values do not persist across reboots 
+    state: ${6$$(yas-choose-value '("present" "absent" "reset"))}          # choices: present;absent;reset  Set or reset the property value 

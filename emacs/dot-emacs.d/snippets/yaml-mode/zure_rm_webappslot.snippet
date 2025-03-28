@@ -1,0 +1,38 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Web App slot
+# prefix: azure_rm_webappslot_snippet
+# key: zure_rm_webappslot
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Web App slot}
+  azure_rm_webappslot:                                                     
+    resource_group: ${1:Name of the resource group to which the resource belongs}#
+    name: ${2:Unique name of the deployment slot to create or update}      #
+    webapp_name: ${3:Web app name which this deployment slot belongs to}   #
+    location: ${4:value}                                                   # Resource location  If not set, location from the resource group will be used as default 
+    configuration_source: ${5:value}                                       # Source slot to clone configurations from when creating slot  Use webapp's name to refer to the production slot 
+    auto_swap_slot_name: ${6:value}                                        # Used to configure target slot name to auto swap, or disable auto swap  Set it target slot name to auto swap  Set it to F
+    swap: ${7:value}                                                       # Swap deployment slots of a web app 
+    frameworks: ${8:value}                                                 # Set of run time framework settings  Each setting is a dictionary  See U(https://docs microsoft com/en-us/azure/app-servi
+    container_settings: ${9:value}                                         # Web app slot container settings 
+    startup_file: ${10:value}                                              # The slot startup file  This only applies for Linux web app slot 
+    app_settings: ${11:value}                                              # Configure web app slot application settings  Suboptions are in key value pair format 
+    purge_app_settings: ${12:value}                                        # Purge any existing application settings  Replace slot application settings with app_settings 
+    deployment_source: ${13:value}                                         # Deployment source for git 
+    app_state: ${14$$(yas-choose-value '("started" "stopped" "restarted"))}# choices: started;stopped;restarted  Start/Stop/Restart the slot 
+    state: ${15$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  State of the Web App deployment slot  Use C(present) to create or update a  slot and C(absent) 
+    ad_user: ${16:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${17:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${18:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${19:value}                                           # Your Azure subscription Id 
+    client_id: ${20:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${21:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${22:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${23:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${24:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${25$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${26$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${27:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${28:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${29:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

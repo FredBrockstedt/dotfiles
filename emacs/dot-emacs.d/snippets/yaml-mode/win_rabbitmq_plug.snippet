@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage RabbitMQ plugins
+# prefix: win_rabbitmq_plugin_snippet
+# key: win_rabbitmq_plug
+# group: ansible
+# --
+
+- name: ${0:Manage RabbitMQ plugins}
+  win_rabbitmq_plugin:                                                     
+    names: ${1:Comma-separated list of plugin names}                       #
+    new_only: ${2:False}                                                   # Only enable missing plugins  Does not disable plugins that are not in the names list 
+    state: ${3$$(yas-choose-value '("disabled" "enabled"))}                # choices: disabled;enabled  Specify if plugins are to be enabled or disabled 
+    prefix: ${4:value}                                                     # Specify a custom install prefix to a Rabbit 

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage OCSP configurations on BIG-IP
+# prefix: bigip_ssl_ocsp_snippet
+# key: gip_ssl_ocsp
+# group: ansible
+# --
+
+- name: ${0:Manage OCSP configurations on BIG-IP}
+  bigip_ssl_ocsp:                                                          
+    name: ${1:Specifies the name of the OCSP certificate validator}        #
+    cache_error_timeout: ${2:value}                                        # Specifies the lifetime of an error response in the cache, in seconds 
+    proxy_server_pool: ${3:value}                                          # Specifies the proxy server pool the BIG-IP system uses to fetch the OCSP response  This involves creating a pool with pr
+    cache_timeout: ${4:value}                                              # Specifies the lifetime of the OCSP response in the cache, in seconds 
+    clock_skew: ${5:value}                                                 # Specifies the tolerable absolute difference in the clocks of the responder and the BIG-IP system, in seconds 
+    connections_limit: ${6:value}                                          # Specifies the maximum number of connections per second allowed for the OCSP certificate validator 
+    dns_resolver: ${7:value}                                               # Specifies the internal DNS resolver the BIG-IP system uses to fetch the OCSP response  This involves specifying one or m
+    route_domain: ${8:value}                                               # Specifies the route domain for fetching an OCSP response using HTTP forward proxy 
+    hash_algorithm: ${9$$(yas-choose-value '("sha256" "sha1"))}            # choices: sha256;sha1  Specifies a hash algorithm used to sign an OCSP request 
+    certificate: ${10:value}                                               # Specifies a certificate used to sign an OCSP request 
+    key: ${11:value}                                                       # Specifies a key used to sign an OCSP request 
+    passphrase: ${12:value}                                                # Specifies a passphrase used to sign an OCSP request 
+    status_age: ${13:value}                                                # Specifies the maximum allowed lag time that the BIG-IP system accepts for the 'thisUpdate' time in the OCSP response 
+    strict_responder_checking: ${14:value}                                 # Specifies whether the responder's certificate is checked for an OCSP signing extension 
+    connection_timeout: ${15:value}                                        # Specifies the time interval that the BIG-IP system waits for before ending the connection to the OCSP responder, in seco
+    trusted_responders: ${16:value}                                        # Specifies the certificates used for validating the OCSP response when the responder's certificate has been omitted from 
+    responder_url: ${17:value}                                             # Specifies the absolute URL that overrides the OCSP responder URL obtained from the certificate's AIA extensions  This sh
+    update_password: ${18$$(yas-choose-value '("always" "on_create"))}     # choices: always;on_create  C(always) will allow to update passwords if the user chooses to do so  C(on_create) will only
+    partition: ${19:Common}                                                # Device partition to manage resources on 
+    state: ${20$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures that the resource do
+    provider: ${21:value}                                                  # A dict object containing connection details 

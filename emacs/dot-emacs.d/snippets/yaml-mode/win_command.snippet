@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Executes a command on a remote Windows node
+# prefix: win_command_snippet
+# key: win_command
+# group: ansible
+# --
+
+- name: ${0:Executes a command on a remote Windows node}
+  win_command:                                                             
+    free_form: ${1:The C(win_command) module takes a free form command to run}# There is no parameter actually named 'free form'  See the examples!
+    creates: ${2:value}                                                    # A path or path filter pattern; when the referenced path exists on the target host, the task will be skipped 
+    removes: ${3:value}                                                    # A path or path filter pattern; when the referenced path B(does not) exist on the target host, the task will be skipped 
+    chdir: ${4:value}                                                      # Set the specified path as the current working directory before executing a command 
+    stdin: ${5:value}                                                      # Set the stdin of the command directly to the specified value 

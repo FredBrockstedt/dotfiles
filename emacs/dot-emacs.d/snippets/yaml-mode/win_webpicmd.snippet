@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Installs packages using Web Platform Installer command-line
+# prefix: win_webpicmd_snippet
+# key: win_webpicmd
+# group: ansible
+# --
+
+- name: ${0:Installs packages using Web Platform Installer command-line}
+  win_webpicmd:                                                            
+    name: ${1:Name of the package to be installed}                         #

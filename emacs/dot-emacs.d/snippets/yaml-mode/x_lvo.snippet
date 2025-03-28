@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Configure AIX LVM logical volumes
+# prefix: aix_lvol_snippet
+# key: x_lvo
+# group: ansible
+# --
+
+- name: ${0:Configure AIX LVM logical volumes}
+  aix_lvol:                                                                
+    vg: ${1:The volume group this logical volume is part of}               #
+    lv: ${2:The name of the logical volume}                                #
+    lv_type: ${3:jfs2}                                                     # The type of the logical volume 
+    size: ${4:value}                                                       # The size of the logical volume with one of the [MGT] units 
+    copies: ${5:1}                                                         # The number of copies of the logical volume  Maximum copies are 3 
+    policy: ${6$$(yas-choose-value '("maximum" "minimum"))}                # choices: maximum;minimum  Sets the interphysical volume allocation policy  C(maximum) allocates logical partitions acros
+    state: ${7$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Control if the logical volume exists  If C(present) and the volume does not already exist then 
+    opts: ${8:value}                                                       # Free-form options to be passed to the mklv command 
+    pvs: ${9:value}                                                        # A list of physical volumes e g  C(hdisk1,hdisk2) 

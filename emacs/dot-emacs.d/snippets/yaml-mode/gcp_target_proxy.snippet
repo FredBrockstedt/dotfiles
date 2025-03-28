@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Create, Update or Destroy a Target_Proxy.
+# prefix: gcp_target_proxy_snippet
+# key: gcp_target_proxy
+# group: ansible
+# --
+
+- name: ${0:Create, Update or Destroy a Target_Proxy.}
+  gcp_target_proxy:                                                        
+    target_proxy_name: ${1:Name of the Target_Proxy}                       #
+    target_proxy_type: ${2:Type of Target_Proxy}                           # HTTP, HTTPS or SSL  Only HTTP is currently supported 
+    url_map_name: ${3:value}                                               # Name of the Url Map   Required if type is HTTP or HTTPS proxy 

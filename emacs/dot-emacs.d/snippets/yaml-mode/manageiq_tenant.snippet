@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Management of tenants in ManageIQ.
+# prefix: manageiq_tenant_snippet
+# key: manageiq_tenant
+# group: ansible
+# --
+
+- name: ${0:Management of tenants in ManageIQ.}
+  manageiq_tenant:                                                         
+    name: ${1:None}:The tenant name}                                       #
+    description: ${2:None}:The tenant description}                         #
+    manageiq_connection: ${3:ManageIQ connection configuration information}#
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  absent - tenant should not exist, present - tenant should be 
+    parent_id: ${5:None}                                                   # The id of the parent tenant  If not supplied the root tenant is used  The C(parent_id) takes president over C(parent) wh
+    parent: ${6:None}                                                      # The name of the parent tenant  If not supplied and no C(parent_id) is supplied the root tenant is used 
+    quotas: ${7:None}                                                      # The tenant quotas  All parameters case sensitive  Valid attributes are:  - C(cpu_allocated) (int): use null to remove th

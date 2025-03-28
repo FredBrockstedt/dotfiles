@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage the state of policies in RabbitMQ
+# prefix: rabbitmq_policy_snippet
+# key: rabbitmq_policy
+# group: ansible
+# --
+
+- name: ${0:Manage the state of policies in RabbitMQ}
+  rabbitmq_policy:                                                         
+    name: ${1:The name of the policy to manage}                            #
+    vhost: ${2:/}                                                          # The name of the vhost to apply to 
+    apply_to: ${3$$(yas-choose-value '("all" "exchanges" "queues"))}       # choices: all;exchanges;queues  What the policy applies to  Requires RabbitMQ 3 2 0 or later 
+    pattern: ${4:None}                                                     # A regex of queues to apply the policy to  Required when C(state=present)  This option is no longer required as of Ansibl
+    tags: ${5:None}                                                        # A dict or string describing the policy  Required when C(state=present)  This option is no longer required as of Ansible 
+    priority: ${6:0}                                                       # The priority of the policy 
+    node: ${7:rabbit}                                                      # Erlang node name of the rabbit we wish to configure 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The state of the policy 

@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage Interface on Ruckus ICX 7000 series switches
+# prefix: icx_interface_snippet
+# key: cx_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage Interface on Ruckus ICX 7000 series switches}
+  icx_interface:                                                           
+    name: ${1:value}                                                       # Name of the Interface 
+    description: ${2:value}                                                # Name of the description 
+    enabled: ${3:True}                                                     # Interface link status
+    speed: ${4$$(yas-choose-value '("10-full" "10-half" "100-full" "100-half" "1000-full" "1000-full-master" "1000-full-slave" "10g-full" "10g-full-master" "10g-full-slave" "2500-full" "2500-full-m
+    stp: ${5:value}                                                        # enable/disable stp for the interface
+    tx_rate: ${6:value}                                                    # Transmit rate in bits per second (bps)  This is state check parameter only  Supports conditionals, see L(Conditionals in
+    rx_rate: ${7:value}                                                    # Receiver rate in bits per second (bps)  This is state check parameter only  Supports conditionals, see L(Conditionals in
+    neighbors: ${8:value}                                                  # Check the operational state of given interface C(name) for CDP/LLDP neighbor  The following suboptions are available 
+    delay: ${9:10}                                                         # Time in seconds to wait before checking for the operational state on remote device  This wait is applicable for operatio
+    state: ${10$$(yas-choose-value '("present" "absent" "up" "down"))}     # choices: present;absent;up;down  State of the Interface configuration, C(up) means present and operationally up and C(do
+    power: ${11:value}                                                     # Inline power on Power over Ethernet (PoE) ports 
+    aggregate: ${12:value}                                                 # List of Interfaces definitions 
+    check_running_config: ${13:True}                                       # Check running configuration  This can be set as environment variable  Module will use environment variable value(default

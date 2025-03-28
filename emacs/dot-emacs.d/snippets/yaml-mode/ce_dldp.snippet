@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages global DLDP configuration on HUAWEI CloudEngine switches.
+# prefix: ce_dldp_snippet
+# key: ce_dldp
+# group: ansible
+# --
+
+- name: ${0:Manages global DLDP configuration on HUAWEI CloudEngine switches.}
+  ce_dldp:                                                                 
+    enable: ${1$$(yas-choose-value '("enable" "disable"))}                 # choices: enable;disable  Set global DLDP enable state 
+    work_mode: ${2$$(yas-choose-value '("enhance" "normal"))}              # choices: enhance;normal  Set global DLDP work-mode 
+    time_internal: ${3:value}                                              # Specifies the interval for sending Advertisement packets  The value is an integer ranging from 1 to 100, in seconds  The
+    auth_mode: ${4$$(yas-choose-value '("md5" "simple" "sha" "hmac-sha256" "none"))}# choices: md5;simple;sha;hmac-sha256;none  Specifies authentication algorithm of DLDP 
+    auth_pwd: ${5:value}                                                   # Specifies authentication password  The value is a string of 1 to 16 case-sensitive plaintexts or 24/32/48/108/128 case-s
+    reset: ${6$$(yas-choose-value '("enable" "disable"))}                  # choices: enable;disable  Specify whether reset DLDP state of disabled interfaces 

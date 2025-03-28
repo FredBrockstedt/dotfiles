@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Download and install Windows updates
+# prefix: win_updates_snippet
+# key: win_updat
+# group: ansible
+# --
+
+- name: ${0:Download and install Windows updates}
+  win_updates:                                                             
+    blacklist: ${1:value}                                                  # A list of update titles or KB numbers that can be used to specify which updates are to be excluded from installation  If
+    category_names: ${2:"['CriticalUpdates', 'SecurityUpdates', 'UpdateRollups']"}# A scalar or list of categories to install updates from  To get the list of categories, run the module with C(stat
+    reboot: ${3:False}                                                     # Ansible will automatically reboot the remote host if it is required and continue to install updates after the reboot  Th
+    reboot_timeout: ${4:1200}                                              # The time in seconds to wait until the host is back online from a reboot  This is only used if C(reboot=yes) and a reboot
+    server_selection: ${5$$(yas-choose-value '("default" "managed_server" "windows_update"))}# choices: default;managed_server;windows_update  Defines the Windows Update source catalog  C(default) 
+    state: ${6$$(yas-choose-value '("installed" "searched" "downloaded"))} # choices: installed;searched;downloaded  Controls whether found updates are downloaded or installed or listed This module
+    log_path: ${7:value}                                                   # If set, C(win_updates) will append update progress to the specified file  The directory must already exist 
+    whitelist: ${8:value}                                                  # A list of update titles or KB numbers that can be used to specify which updates are to be searched or installed  If an a
+    use_scheduled_task: ${9:False}                                         # Will not auto elevate the remote process with I(become) and use a scheduled task instead  Set this to C(yes) when using 

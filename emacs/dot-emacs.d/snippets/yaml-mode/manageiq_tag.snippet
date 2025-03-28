@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Management of resource tags in ManageIQ.
+# prefix: manageiq_tags_snippet
+# key: manageiq_tag
+# group: ansible
+# --
+
+- name: ${0:Management of resource tags in ManageIQ.}
+  manageiq_tags:                                                           
+    resource_type: ${1$$(yas-choose-value '("provider" "host" "vm" "blueprint" "category" "cluster" "data store" "group" "resource pool" "service" "service template" "template" "tenant" "user"))}# 
+    resource_name: ${2:the relevant resource name in manageiq}             #
+    manageiq_connection: ${3:ManageIQ connection configuration information}#
+    state: ${4$$(yas-choose-value '("absent" "present" "list"))}           # choices: absent;present;list  absent - tags should not exist, present - tags should exist, list - list current tags 
+    tags: ${5:value}                                                       # tags - list of dictionaries, each includes 'name' and 'category' keys  required if state is present or absent 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage bower packages with bower
+# prefix: bower_snippet
+# key: ower
+# group: ansible
+# --
+
+- name: ${0:Manage bower packages with bower}
+  bower:                                                                   
+    path: ${1:The base path where to install the bower packages}           #
+    name: ${2:value}                                                       # The name of a bower package to install
+    offline: ${3:false}                                                    # Install packages from local cache, if the packages were installed before
+    production: ${4:false}                                                 # Install with --production flag
+    relative_execpath: ${5:value}                                          # Relative path to bower executable from install path
+    state: ${6$$(yas-choose-value '("present" "absent" "latest"))}         # choices: present;absent;latest  The state of the bower package
+    version: ${7:value}                                                    # The version to be installed

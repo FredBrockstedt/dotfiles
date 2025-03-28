@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Send a magic Wake-on-LAN (WoL) broadcast packet
+# prefix: win_wakeonlan_snippet
+# key: win_wakeo
+# group: ansible
+# --
+
+- name: ${0:Send a magic Wake-on-LAN (WoL) broadcast packet}
+  win_wakeonlan:                                                           
+    mac: ${1:MAC address to send Wake-on-LAN broadcast packet for}         #
+    broadcast: ${{2:255}                                                   #255 255 255} # not required  Network broadcast address to use for broadcasting magic Wake-on-LAN packet 
+    port: ${3:7}                                                           # UDP port to use for magic Wake-on-LAN packet 

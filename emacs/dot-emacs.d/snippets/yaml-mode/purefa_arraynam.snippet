@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Configure Pure Storage FlashArray array name
+# prefix: purefa_arrayname_snippet
+# key: purefa_arraynam
+# group: ansible
+# --
+
+- name: ${0:Configure Pure Storage FlashArray array name}
+  purefa_arrayname:                                                        
+    name: ${1:Name of the array}                                           # Must conform to correct naming schema 
+    fa_url: ${2:FlashArray management IPv4 address or Hostname}            #
+    api_token: ${3:FlashArray API token for admin privileged user}         #
+    state: ${4$$(yas-choose-value '("present"))}                           # choices: present  S e t   t h e   a r r a y   n a m e

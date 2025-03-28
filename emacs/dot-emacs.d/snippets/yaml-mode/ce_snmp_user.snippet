@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP user configuration on HUAWEI CloudEngine switches.
+# prefix: ce_snmp_user_snippet
+# key: ce_snmp_user
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP user configuration on HUAWEI CloudEngine switches.}
+  ce_snmp_user:                                                            
+    acl_number: ${1:value}                                                 # Access control list number 
+    usm_user_name: ${2:value}                                              # Unique name to identify the USM user 
+    aaa_local_user: ${3:value}                                             # Unique name to identify the local user 
+    remote_engine_id: ${4:value}                                           # Remote engine id of the USM user 
+    user_group: ${5:value}                                                 # Name of the group where user belongs to 
+    auth_protocol: ${6$$(yas-choose-value '("noAuth" "md5" "sha"))}        # choices: noAuth;md5;sha  Authentication protocol 
+    auth_key: ${7:value}                                                   # The authentication password  Password length, 8-255 characters 
+    priv_protocol: ${8$$(yas-choose-value '("noPriv" "des56" "3des168" "aes128" "aes192" "aes256"))}# choices: noPriv;des56;3des168;aes128;aes192;aes256  Encryption protocol 
+    priv_key: ${9:value}                                                   # The encryption password  Password length 8-255 characters 

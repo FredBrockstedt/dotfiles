@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP add/remove ports
+# prefix: na_ontap_ports_snippet
+# key: ontap_port
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP add/remove ports}
+  na_ontap_ports:                                                          
+    names: ${1:List of ports}                                              #
+    resource_name: ${2:name of the portset or broadcast domain}            #
+    resource_type: ${3$$(yas-choose-value '("broadcast_domain" "portset"))}# type of the resource to add a port to or remove a port from 
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified port should be added or removed 
+    vserver: ${8:value}                                                    # Name of the SVM  Specify this option when operating on portset 
+    ipspace: ${9:value}                                                    # Specify the required ipspace for the broadcast domain  A domain ipspace can not be modified after the domain has been cr
+    portset_type: ${10$$(yas-choose-value '("fcp" "iscsi" "mixed"))}       # choices: fcp;iscsi;mixed  Protocols accepted for portset 
+    https: ${11:False}                                                     # Enable and disable https
+    validate_certs: ${12:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${13:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${14:value}                                                    # The ontap api version to use
+    use_rest: ${15$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Used to make changes to the system wide Audit Policy
+# prefix: win_audit_policy_system_snippet
+# key: win_audit_policy_system
+# group: ansible
+# --
+
+- name: ${0:Used to make changes to the system wide Audit Policy}
+  win_audit_policy_system:                                                 
+    audit_type: ${1$$(yas-choose-value '("failure" "none" "success"))}     # The type of event you would like to audit for  Accepts a list  See examples 
+    category: ${2:value}                                                   # Single string value for the category you would like to adjust the policy on  Cannot be used with I(subcategory)  You mus
+    subcategory: ${3:value}                                                # Single string value for the subcategory you would like to adjust the policy on  Cannot be used with I(category)  You mus

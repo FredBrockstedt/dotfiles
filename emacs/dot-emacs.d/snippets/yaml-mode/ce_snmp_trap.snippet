@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP traps configuration on HUAWEI CloudEngine switches.
+# prefix: ce_snmp_traps_snippet
+# key: ce_snmp_trap
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP traps configuration on HUAWEI CloudEngine switches.}
+  ce_snmp_traps:                                                           
+    feature_name: ${1$$(yas-choose-value '("aaa" "arp" "bfd" "bgp" "cfg" "configuration" "dad" "devm" "dhcpsnp" "dldp" "driver" "efm" "erps" "error-down" "fcoe" "fei" "fei_comm" "fm" "ifnet" "info"
+    trap_name: ${2:value}                                                  # Alarm trap name 
+    interface_type: ${3$$(yas-choose-value '("Ethernet" "Eth-Trunk" "Tunnel" "NULL" "LoopBack" "Vlanif" "100GE" "40GE" "MTunnel" "10GE" "GE" "MEth" "Vbdif" "Nve"))}# choices: Ethernet;Eth-Trunk;Tun
+    interface_number: ${4:value}                                           # Interface number 
+    port_number: ${5:value}                                                # Source port number 

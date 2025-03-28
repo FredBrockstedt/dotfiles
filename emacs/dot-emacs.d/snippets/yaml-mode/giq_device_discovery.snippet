@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP devices through BIG-IQ
+# prefix: bigiq_device_discovery_snippet
+# key: giq_device_discovery
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP devices through BIG-IQ}
+  bigiq_device_discovery:                                                  
+    device_address: ${1:The IP address of the BIG-IP device to be imported/managed}#
+    device_username: ${2:value}                                            # The administrator username for the BIG-IP device  This parameter is only required when adding a new BIG-IP device to be 
+    device_password: ${3:value}                                            # The administrator password for the BIG-IP device  This parameter is only required when adding a new BIG-IP device to be 
+    device_port: ${4:443}                                                  # The port on which a device trust setup between BIG-IQ and BIG-IP should happen 
+    ha_name: ${5:value}                                                    # DSC cluster name of the BIG-IP device to be managed  This is optional if the managed device is not a part of a cluster g
+    use_bigiq_sync: ${6:False}                                             # When set to true, BIG-IQ will manually synchronize configuration changes between members in a DSC cluster 
+    conflict_policy: ${7$$(yas-choose-value '("use_bigiq" "use_bigip"))}   # choices: use_bigiq;use_bigip  Sets the conflict resolution policy for shared objects across BIG-IP devices, except LTM p
+    versioned_conflict_policy: ${8$$(yas-choose-value '("use_bigiq" "use_bigip" "keep_version"))}# choices: use_bigiq;use_bigip;keep_version  Sets the conflict resolution policy for LTM profile and
+    device_conflict_policy: ${9$$(yas-choose-value '("use_bigiq" "use_bigip"))}# choices: use_bigiq;use_bigip  Sets the conflict resolution policy for objects that are specific to a particular to a
+    access_conflict_policy: ${10$$(yas-choose-value '("use_bigiq" "use_bigip" "keep_version"))}# choices: use_bigiq;use_bigip;keep_version  Sets the conflict resolution policy for Access module C(a
+    access_group_name: ${11:value}                                         # Access group name to import Access configuration for devices, once set it cannot be changed 
+    access_group_first_device: ${12:True}                                  # Specifies if the imported device is the first device in the access group to import shared configuration for that access 
+    force: ${13:False}                                                     # Forces rediscovery and import of existing modules on the managed BIG-IP
+    modules: ${14$$(yas-choose-value '("ltm" "asm" "apm" "afm" "dns" "websafe" "security_shared"))}# choices: ltm;asm;apm;afm;dns;websafe;security_shared  List of modules to be discovered and impor
+    statistics: ${15:value}                                                # Specify the statistics collection for discovered device 
+    state: ${16$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the managed device on the system  When C(present), enables new device addition as 
+    provider: ${17:value}                                                  # A dict object containing connection details 

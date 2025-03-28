@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Module to manage tags in oVirt/RHV
+# prefix: ovirt_tag_snippet
+# key: ovirt_tag
+# group: ansible
+# --
+
+- name: ${0:Module to manage tags in oVirt/RHV}
+  ovirt_tag:                                                               
+    name: ${1:Name of the tag to manage}                                   #
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    id: ${3:value}                                                         # ID of the tag to manage 
+    state: ${4$$(yas-choose-value '("present" "absent" "attached" "detached"))}# choices: present;absent;attached;detached  Should the tag be present/absent/attached/detached  C(Note): I(attached) 
+    description: ${5:value}                                                # Description of the tag to manage 
+    parent: ${6:value}                                                     # Name of the parent tag 
+    vms: ${7:value}                                                        # List of the VMs names, which should have assigned this tag 
+    hosts: ${8:value}                                                      # List of the hosts names, which should have assigned this tag 
+    wait: ${9:True}                                                        # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${10:value}                                              # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${11:value}                                         # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${12:180}                                                     # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${13:3}                                                 # Number of the seconds the module waits until another poll request on entity status is sent 

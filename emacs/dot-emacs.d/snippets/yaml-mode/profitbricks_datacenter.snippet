@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create or destroy a ProfitBricks Virtual Datacenter.
+# prefix: profitbricks_datacenter_snippet
+# key: profitbricks_datacenter
+# group: ansible
+# --
+
+- name: ${0:Create or destroy a ProfitBricks Virtual Datacenter.}
+  profitbricks_datacenter:                                                 
+    name: ${1:The name of the virtual datacenter}                          #
+    description: ${2:value}                                                # The description of the virtual datacenter 
+    location: ${3$$(yas-choose-value '("us/las" "de/fra" "de/fkb"))}       # choices: us/las;de/fra;de/fkb  The datacenter location 
+    subscription_user: ${4:value}                                          # The ProfitBricks username  Overrides the PB_SUBSCRIPTION_ID environment variable 
+    subscription_password: ${5:value}                                      # THe ProfitBricks password  Overrides the PB_PASSWORD environment variable 
+    wait: ${6:true}                                                        # wait for the datacenter to be created before returning
+    wait_timeout: ${7:600}                                                 # how long before wait gives up, in seconds
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  create or terminate datacenters

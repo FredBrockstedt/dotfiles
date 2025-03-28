@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manages sFlow configuration on HUAWEI CloudEngine switches.
+# prefix: ce_sflow_snippet
+# key: ce_sflow
+# group: ansible
+# --
+
+- name: ${0:Manages sFlow configuration on HUAWEI CloudEngine switches.}
+  ce_sflow:                                                                
+    agent_ip: ${1:value}                                                   # Specifies the IPv4/IPv6 address of an sFlow agent 
+    source_ip: ${2:value}                                                  # Specifies the source IPv4/IPv6 address of sFlow packets 
+    collector_id: ${3$$(yas-choose-value '("1" "2"))}                      # choices: 1;2  Specifies the ID of an sFlow collector  This ID is used when you specify the collector in subsequent sFlow
+    collector_ip: ${4:value}                                               # Specifies the IPv4/IPv6 address of the sFlow collector 
+    collector_ip_vpn: ${5:value}                                           # Specifies the name of a VPN instance  The value is a string of 1 to 31 case-sensitive characters, spaces not supported  
+    collector_datagram_size: ${6:value}                                    # Specifies the maximum length of sFlow packets sent from an sFlow agent to an sFlow collector  The value is an integer, i
+    collector_udp_port: ${7:value}                                         # Specifies the UDP destination port number of sFlow packets  The value is an integer that ranges from 1 to 65535  The def
+    collector_meth: ${8$$(yas-choose-value '("meth" "enhanced"))}          # choices: meth;enhanced  Configures the device to send sFlow packets through service interfaces, enhancing the sFlow pack
+    collector_description: ${9:value}                                      # Specifies the description of an sFlow collector  The value is a string of 1 to 255 case-sensitive characters without spa
+    sflow_interface: ${10:value}                                           # Full name of interface for Flow Sampling or Counter  It must be a physical interface, Eth-Trunk, or Layer 2 subinterface
+    sample_collector: ${11:value}                                          # Indicates the ID list of the collector 
+    sample_rate: ${12:value}                                               # Specifies the flow sampling rate in the format 1/rate  The value is an integer and ranges from 1 to 4294967295  The defa
+    sample_length: ${13:value}                                             # Specifies the maximum length of sampled packets  The value is an integer and ranges from 18 to 512, in bytes  The defaul
+    sample_direction: ${14$$(yas-choose-value '("inbound" "outbound" "both"))}# choices: inbound;outbound;both  Enables flow sampling in the inbound or outbound direction 
+    counter_collector: ${15:value}                                         # Indicates the ID list of the counter collector 
+    counter_interval: ${16:value}                                          # Indicates the counter sampling interval  The value is an integer that ranges from 10 to 4294967295, in seconds  The defa
+    export_route: ${17$$(yas-choose-value '("enable" "disable"))}          # choices: enable;disable  Configures the sFlow packets sent by the switch not to carry routing information 
+    rate_limit: ${18:value}                                                # Specifies the rate of sFlow packets sent from a card to the control plane  The value is an integer that ranges from 100 
+    rate_limit_slot: ${19:value}                                           # Specifies the slot where the rate of output sFlow packets is limited  If this parameter is not specified, the rate of sF
+    forward_enp_slot: ${20:value}                                          # Enable the Embedded Network Processor (ENP) chip function  The switch uses the ENP chip to perform sFlow sampling, and t
+    state: ${21$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 

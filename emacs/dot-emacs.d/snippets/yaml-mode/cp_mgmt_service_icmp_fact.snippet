@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Get service-icmp objects facts on Check Point over Web Services API
+# prefix: cp_mgmt_service_icmp_facts_snippet
+# key: cp_mgmt_service_icmp_fact
+# group: ansible
+# --
+
+- name: ${0:Get service-icmp objects facts on Check Point over Web Services API}
+  cp_mgmt_service_icmp_facts:                                              
+    name: ${1:value}                                                       # Object name  This parameter is relevant only for getting a specific object 
+    details_level: ${2$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    limit: ${3:value}                                                      # No more than that many results will be returned  This parameter is relevant only for getting few objects 
+    offset: ${4:value}                                                     # Skip that many results before beginning to return them  This parameter is relevant only for getting few objects 
+    order: ${5:value}                                                      # Sorts results by the given field  By default the results are sorted in the ascending order by name  This parameter is re
+    show_membership: ${6:value}                                            # Indicates whether to calculate and show "groups" field for every object in reply 
+    version: ${7:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

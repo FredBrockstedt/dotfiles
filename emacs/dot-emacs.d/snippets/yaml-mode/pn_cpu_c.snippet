@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/modify/delete cpu-class
+# prefix: pn_cpu_class_snippet
+# key: pn_cpu_c
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/modify/delete cpu-class}
+  pn_cpu_class:                                                            
+    state: ${1$$(yas-choose-value '("present" "absent" "update"))}         # State the action to perform  Use C(present) to create cpu-class and C(absent) to delete cpu-class C(update) to modify th
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_scope: ${3$$(yas-choose-value '("local" "fabric"))}                 # choices: local;fabric  scope for CPU class 
+    pn_hog_protect: ${4$$(yas-choose-value '("disable" "enable" "enable-and-drop"))}# choices: disable;enable;enable-and-drop  enable host-based hog protection 
+    pn_rate_limit: ${5:value}                                              # rate-limit for CPU class 
+    pn_name: ${6:value}                                                    # name for the CPU class 

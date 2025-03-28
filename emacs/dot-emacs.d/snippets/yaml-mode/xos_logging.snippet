@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage logging on network devices
+# prefix: nxos_logging_snippet
+# key: xos_logging
+# group: ansible
+# --
+
+- name: ${0:Manage logging on network devices}
+  nxos_logging:                                                            
+    dest: ${1$$(yas-choose-value '("console" "logfile" "module" "monitor" "server"))}# choices: console;logfile;module;monitor;server  Destination of the logs 
+    remote_server: ${2:value}                                              # Hostname or IP Address for remote logging (when dest is 'server') 
+    use_vrf: ${3:value}                                                    # VRF to be used while configuring remote logging (when dest is 'server') 
+    interface: ${4:value}                                                  # Interface to be used while configuring source-interface for logging (e g , 'Ethernet1/2', 'mgmt0')
+    name: ${5:value}                                                       # If value of C(dest) is I(logfile) it indicates file-name 
+    facility: ${6:value}                                                   # Facility name for logging 
+    dest_level: ${7:value}                                                 # Set logging severity levels 
+    facility_level: ${8:value}                                             # Set logging severity levels for facility based log messages 
+    aggregate: ${9:value}                                                  # L i s t   o f   l o g g i n g   d e f i n i t i o n s  
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the logging configuration 
+    event: ${11$$(yas-choose-value '("link-enable" "link-default" "trunk-enable" "trunk-default"))}# choices: link-enable;link-default;trunk-enable;trunk-default  Link/trunk enable/default interfac
+    interface_message: ${12$$(yas-choose-value '("add-interface-description"))}# choices: add-interface-description  Add interface description to interface syslogs  Does not work with version 6 0 i
+    file_size: ${13:value}                                                 # Set logfile size
+    facility_link_status: ${14$$(yas-choose-value '("link-down-notif" "link-down-error" "link-up-notif" "link-up-error"))}# choices: link-down-notif;link-down-error;link-up-notif;link-up-error  Set
+    timestamp: ${15$$(yas-choose-value '("microseconds" "milliseconds" "seconds"))}# choices: microseconds;milliseconds;seconds  Set logging timestamp format
+    purge: ${16:False}                                                     # Remove any switch logging configuration that does not match what has been configured Not supported for ansible_connectio
+    provider: ${17:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

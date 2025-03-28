@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage local roles on an ESXi host
+# prefix: vmware_local_role_manager_snippet
+# key: vmware_local_role_manager
+# group: ansible
+# --
+
+- name: ${0:Manage local roles on an ESXi host}
+  vmware_local_role_manager:                                               
+    local_role_name: ${1:The local role name to be managed}                #
+    local_privilege_ids: ${2:[]}                                           # The list of privileges that role needs to have  Please see U(https://docs vmware com/en/VMware-vSphere/6 0/com vmware vs
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the role  If the role already exists when C(state=present), the role 
+    force_remove: ${4:False}                                               # If set to C(False) then prevents the role from being removed if any permissions are using it 
+    action: ${5$$(yas-choose-value '("add" "remove" "set"))}               # choices: add;remove;set  This parameter is only valid while updating an existing role with privileges  C(add) will add t
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${7:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${8:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${10:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${11:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${12:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

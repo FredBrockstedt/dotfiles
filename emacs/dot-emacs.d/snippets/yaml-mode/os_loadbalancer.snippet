@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Add/Delete load balancer from OpenStack Cloud
+# prefix: os_loadbalancer_snippet
+# key: os_loadbalancer
+# group: ansible
+# --
+
+- name: ${0:Add/Delete load balancer from OpenStack Cloud}
+  os_loadbalancer:                                                         
+    name: ${1:Name that has to be given to the load balancer}              #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Should the resource be present or absent 
+    vip_network: ${3:value}                                                # The name or id of the network for the virtual IP of the load balancer  One of I(vip_network), I(vip_subnet), or I(vip_po
+    vip_subnet: ${4:value}                                                 # The name or id of the subnet for the virtual IP of the load balancer  One of I(vip_network), I(vip_subnet), or I(vip_por
+    vip_port: ${5:value}                                                   # The name or id of the load balancer virtual IP port  One of I(vip_network), I(vip_subnet), or I(vip_port) must be specif
+    vip_address: ${6:value}                                                # IP address of the load balancer virtual IP 
+    public_ip_address: ${7:value}                                          # Public IP address associated with the VIP 
+    auto_public_ip: ${8:false}                                             # Allocate a public IP address and associate with the VIP automatically 
+    public_network: ${9:value}                                             # The name or ID of a Neutron external network 
+    delete_public_ip: ${10:false}                                          # When C(state=absent) and this option is true, any public IP address associated with the VIP will be deleted along with t
+    listeners: ${11:value}                                                 # A list of listeners that attached to the load balancer 
+    wait: ${12:true}                                                       # If the module should wait for the load balancer to be created or deleted 
+    timeout: ${13:180}                                                     # The amount of time the module should wait 
+    availability_zone: ${14:value}                                         # Ignored  Present for backwards compatibility
+    cloud: ${15:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${16:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${17:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${18:value}                                               # Name of the region 
+    api_timeout: ${19:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${20:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${21:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${22:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${23:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${24$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

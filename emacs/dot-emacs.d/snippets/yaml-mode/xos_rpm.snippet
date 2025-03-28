@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Install patch or feature rpms on Cisco NX-OS devices.
+# prefix: nxos_rpm_snippet
+# key: xos_rpm
+# group: ansible
+# --
+
+- name: ${0:Install patch or feature rpms on Cisco NX-OS devices.}
+  nxos_rpm:                                                                
+    pkg: ${1:Name of the RPM package}                                      #
+    file_system: ${2:bootflash}                                            # The remote file system of the device  If omitted, devices that support a file_system parameter will use their default va
+    aggregate: ${3:value}                                                  # List of RPM/patch definitions 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If the state is present, the rpm will be installed, If the state is absent, it will be removed 
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

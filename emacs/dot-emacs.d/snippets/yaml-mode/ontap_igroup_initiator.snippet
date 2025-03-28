@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP igroup initiator configuration
+# prefix: na_ontap_igroup_initiator_snippet
+# key: ontap_igroup_initiator
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP igroup initiator configuration}
+  na_ontap_igroup_initiator:                                               
+    names: ${1:List of initiators to manage}                               #
+    initiator_group: ${2:Name of the initiator group to which the initiator belongs}#
+    vserver: ${3:The name of the vserver to use}                           #
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified initiator should exist or not in an igroup 
+    https: ${8:False}                                                      # Enable and disable https
+    validate_certs: ${9:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${10:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${11:value}                                                    # The ontap api version to use
+    use_rest: ${12$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

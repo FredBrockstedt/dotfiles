@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Enables/disables a module of the Apache2 webserver.
+# prefix: apache2_module_snippet
+# key: pache2_modu
+# group: ansible
+# --
+
+- name: ${0:Enables/disables a module of the Apache2 webserver.}
+  apache2_module:                                                          
+    name: ${1:Name of the module to enable/disable as given to C(a2enmod/a2dismod)}#
+    identifier: ${2:value}                                                 # Identifier of the module as listed by C(apache2ctl -M)  This is optional and usually determined automatically by the com
+    force: ${3:False}                                                      # Force disabling of default modules and override Debian warnings 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Desired state of the module 
+    ignore_configcheck: ${5:False}                                         # Ignore configuration checks about inconsistent module configuration  Especially for mpm_* modules 

@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Grant or revoke privileges on PostgreSQL database objects
+# prefix: postgresql_privs_snippet
+# key: postgresql_priv
+# group: ansible
+# --
+
+- name: ${0:Grant or revoke privileges on PostgreSQL database objects}
+  postgresql_privs:                                                        
+    database: ${1:Name of database to connect to}                          #
+    roles: ${2:Comma separated list of role (user/group) names to set permissions for}# The special value C(PUBLIC) can be provided instead to set permissions for the implicitly defined PUBLIC grou
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If C(present), the specified privileges are granted, if C(absent) they are revoked 
+    privs: ${4:value}                                                      # Comma separated list of privileges to grant/revoke 
+    type: ${5$$(yas-choose-value '("database" "default_privs" "foreign_data_wrapper" "foreign_server" "function" "group" "language" "table" "tablespace" "schema" "sequence"))}# choices: database;de
+    objs: ${6:value}                                                       # Comma separated list of database objects to set privileges on  If I(type) is C(table), C(partition table), C(sequence) o
+    schema: ${7:value}                                                     # Schema that contains the database objects specified via I(objs)  May only be provided if I(type) is C(table), C(sequence
+    fail_on_role: ${8:True}                                                # If C(yes), fail when target role (for whom privs need to be granted) does not exist  Otherwise just warn and continue 
+    session_role: ${9:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    target_roles: ${10:value}                                              # A list of existing role (user/group) names to set as the default permissions for database objects subsequently created b
+    grant_option: ${11:value}                                              # Whether C(role) may grant/revoke the specified privileges/group memberships to others  Set to C(no) to revoke GRANT OPTI
+    host: ${12:value}                                                      # Database host address  If unspecified, connect via Unix socket 
+    port: ${13:5432}                                                       # Database port to connect to 
+    unix_socket: ${14:value}                                               # Path to a Unix domain socket for local connections 
+    login: ${15:postgres}                                                  # The username to authenticate with 
+    password: ${16:value}                                                  # The password to authenticate with 
+    ssl_mode: ${17$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${18:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 
+    login_user: ${19:postgres}                                             # The username used to authenticate with 
+    login_password: ${20:value}                                            # The password used to authenticate with 
+    login_host: ${21:value}                                                # Host running the database 
+    login_unix_socket: ${22:value}                                         # Path to a Unix domain socket for local connections 

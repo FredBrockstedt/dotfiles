@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Get access rules objects facts on Check Point over Web Services API
+# prefix: checkpoint_access_rule_facts_snippet
+# key: checkpoint_access_rule_fact
+# group: ansible
+# --
+
+- name: ${0:Get access rules objects facts on Check Point over Web Services API}
+  checkpoint_access_rule_facts:                                            
+    layer: ${1:Layer the access rule is attached to}                       #
+    name: ${2:value}                                                       # Name of the access rule  If not provided, UID is required 
+    uid: ${3:value}                                                        # UID of the access rule  If not provided, name is required 

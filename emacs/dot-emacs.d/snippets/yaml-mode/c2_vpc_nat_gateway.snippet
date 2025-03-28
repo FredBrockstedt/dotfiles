@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage AWS VPC NAT Gateways.
+# prefix: ec2_vpc_nat_gateway_snippet
+# key: c2_vpc_nat_gateway
+# group: ansible
+# --
+
+- name: ${0:Manage AWS VPC NAT Gateways.}
+  ec2_vpc_nat_gateway:                                                     
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Ensure NAT Gateway is present or absent 
+    nat_gateway_id: ${2:value}                                             # The id AWS dynamically allocates to the NAT Gateway on creation  This is required when the absent option is present 
+    subnet_id: ${3:value}                                                  # The id of the subnet to create the NAT Gateway in  This is required with the present option 
+    allocation_id: ${4:value}                                              # The id of the elastic IP allocation  If this is not passed and the eip_address is not passed  An EIP is generated for th
+    eip_address: ${5:value}                                                # The elastic IP address of the EIP you want attached to this NAT Gateway  If this is not passed and the allocation_id is 
+    if_exist_do_not_create: ${6:False}                                     # if a NAT Gateway exists already in the subnet_id, then do not create a new one 
+    release_eip: ${7:true}                                                 # Deallocate the EIP from the VPC  Option is only valid with the absent state  You should use this with the wait option  S
+    wait: ${8:false}                                                       # Wait for operation to complete before returning 
+    wait_timeout: ${9:300}                                                 # How many seconds to wait for an operation to complete before timing out 
+    client_token: ${10:value}                                              # Optional unique token to be used during create to ensure idempotency  When specifying this option, ensure you specify th
+    debug_botocore_endpoint_logs: ${11:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${12:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${13:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${14:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${15:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${16:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${17:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${18:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

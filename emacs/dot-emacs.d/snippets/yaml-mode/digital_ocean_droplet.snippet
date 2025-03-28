@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Create and delete a DigitalOcean droplet
+# prefix: digital_ocean_droplet_snippet
+# key: digital_ocean_droplet
+# group: ansible
+# --
+
+- name: ${0:Create and delete a DigitalOcean droplet}
+  digital_ocean_droplet:                                                   
+    oauth_token: ${1:DigitalOcean OAuth token}                             # Can be specified in C(DO_API_KEY), C(DO_API_TOKEN), or C(DO_OAUTH_TOKEN) environment variables
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the target 
+    id: ${3:value}                                                         # Numeric, the droplet id you want to operate on 
+    name: ${4:value}                                                       # String, this is the name of the droplet - must be formatted by hostname rules 
+    unique_name: ${5:False}                                                # require unique hostnames   By default, DigitalOcean allows multiple hosts with the same name   Setting this to "yes" all
+    size: ${6:value}                                                       # This is the slug of the size you would like the droplet created with 
+    image: ${7:value}                                                      # This is the slug of the image you would like the droplet created with 
+    region: ${8:value}                                                     # This is the slug of the region you would like your server to be created in 
+    ssh_keys: ${9:value}                                                   # array of SSH key (numeric) ID that you would like to be added to the server 
+    private_networking: ${10:False}                                        # add an additional, private network interface to droplet for inter-droplet communication 
+    user_data: ${11:value}                                                 # opaque blob of data which is made available to the droplet
+    ipv6: ${12:False}                                                      # enable IPv6 for your droplet 
+    wait: ${13:True}                                                       # Wait for the droplet to be active before returning   If wait is "no" an ip_address may not be returned 
+    wait_timeout: ${14:120}                                                # How long before wait gives up, in seconds, when creating a droplet 
+    backups: ${15:False}                                                   # indicates whether automated backups should be enabled 
+    monitoring: ${16:False}                                                # indicates whether to install the DigitalOcean agent for monitoring 
+    tags: ${17:value}                                                      # List, A list of tag names as strings to apply to the Droplet after it is created  Tag names can either be existing or ne
+    volumes: ${18:value}                                                   # List, A list including the unique string identifier for each Block Storage volume to be attached to the Droplet 

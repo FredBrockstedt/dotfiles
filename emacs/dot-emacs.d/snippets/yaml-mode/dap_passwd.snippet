@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Set passwords in LDAP.
+# prefix: ldap_passwd_snippet
+# key: dap_passwd
+# group: ansible
+# --
+
+- name: ${0:Set passwords in LDAP.}
+  ldap_passwd:                                                             
+    passwd: ${1:The (plaintext) password to be set for I(dn)}              #
+    dn: ${2:The DN of the entry to add or remove}                          #
+    bind_dn: ${3:value}                                                    # A DN to bind with  If this is omitted, we'll try a SASL bind with the EXTERNAL mechanism  If this is blank, we'll use an
+    bind_pw: ${4:value}                                                    # The password to use with I(bind_dn) 
+    server_uri: ${5:ldapi:///}                                             # A URI to the LDAP server  The default value lets the underlying LDAP client library look for a UNIX domain socket in its
+    start_tls: ${6:False}                                                  # If true, we'll use the START_TLS LDAP extension 
+    validate_certs: ${7:True}                                              # If set to C(no), SSL certificates will not be validated  This should only be used on sites using self-signed certificate

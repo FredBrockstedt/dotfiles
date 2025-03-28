@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Module for setup of IpAddrGroup Avi RESTful Object
+# prefix: avi_ipaddrgroup_snippet
+# key: vi_ipaddrgroup
+# group: ansible
+# --
+
+- name: ${0:Module for setup of IpAddrGroup Avi RESTful Object}
+  avi_ipaddrgroup:                                                         
+    name: ${1:Name of the ip address group}                                #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    addrs: ${5:value}                                                      # Configure ip address(es) 
+    apic_epg_name: ${6:value}                                              # Populate ip addresses from members of this cisco apic epg 
+    country_codes: ${7:value}                                              # Populate the ip address ranges from the geo database for this country 
+    description: ${8:value}                                                # User defined description for the object 
+    ip_ports: ${9:value}                                                   # Configure (ip address, port) tuple(s) 
+    marathon_app_name: ${10:value}                                         # Populate ip addresses from tasks of this marathon app 
+    marathon_service_port: ${11:value}                                     # Task port associated with marathon service port  If marathon app has multiple service ports, this is required  Else, the
+    prefixes: ${12:value}                                                  # Configure ip address prefix(es) 
+    ranges: ${13:value}                                                    # Configure ip address range(s) 
+    tenant_ref: ${14:value}                                                # It is a reference to an object of type tenant 
+    url: ${15:value}                                                       # Avi controller URL of the object 
+    uuid: ${16:value}                                                      # Uuid of the ip address group 
+    controller: ${17:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${18:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${19:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${20:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${21:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{22:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${23:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${24:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${25:value}                         # It disables avi session information to be cached as a fact 

@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Retrieve information on nginx status.
+# prefix: nginx_status_info_snippet
+# key: ginx_status_info
+# group: ansible
+# --
+
+- name: ${0:Retrieve information on nginx status.}
+  nginx_status_info:                                                       
+    url: ${1:URL of the nginx status}                                      #
+    timeout: ${2:10}                                                       # HTTP connection timeout in seconds 

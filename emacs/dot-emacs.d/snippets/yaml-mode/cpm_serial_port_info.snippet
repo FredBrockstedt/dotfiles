@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Get Serial port parameters in WTI OOB and PDU devices
+# prefix: cpm_serial_port_info_snippet
+# key: cpm_serial_port_info
+# group: ansible
+# --
+
+- name: ${0:Get Serial port parameters in WTI OOB and PDU devices}
+  cpm_serial_port_info:                                                    
+    cpm_url: ${1:This is the URL of the WTI device to send the module}     #
+    cpm_username: ${2:This is the Username of the WTI device to send the module}#
+    cpm_password: ${3:This is the Password of the WTI device to send the module}#
+    port: ${4:['*']}:This is the serial port number that is getting retrieved}# It can include a single port number, multiple port numbers separated by commas, a list of port numbers, or an '*' cha
+    use_https: ${5:True}                                                   # Designates to use an https connection or http connection 
+    validate_certs: ${6:True}                                              # If false, SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    use_proxy: ${7:False}                                                  # F l a g   t o   c o n t r o l   i f   t h e   l o o k u p   w i l l   o b s e r v e   H T T P   p r o x y   e n v i r o 

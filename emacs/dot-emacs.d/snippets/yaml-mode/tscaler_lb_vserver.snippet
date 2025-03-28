@@ -1,0 +1,103 @@
+# -*- mode: snippet -*-
+# name: Manage load balancing vserver configuration
+# prefix: netscaler_lb_vserver_snippet
+# key: tscaler_lb_vserver
+# group: ansible
+# --
+
+- name: ${0:Manage load balancing vserver configuration}
+  netscaler_lb_vserver:                                                    
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    name: ${4:value}                                                       # Name for the virtual server  Must begin with an ASCII alphanumeric or underscore C(_) character, and must contain only A
+    servicetype: ${5$$(yas-choose-value '("HTTP" "FTP" "TCP" "UDP" "SSL" "SSL_BRIDGE" "SSL_TCP" "DTLS" "NNTP" "DNS" "DHCPRA" "ANY" "SIP_UDP" "SIP_TCP" "SIP_SSL" "DNS_TCP" "RTSP" "PUSH" "SSL_PUSH" "
+    ipv46: ${6:value}                                                      # IPv4 or IPv6 address to assign to the virtual server 
+    ippattern: ${7:value}                                                  # IP address pattern, in dotted decimal notation, for identifying packets to be accepted by the virtual server  The IP Mas
+    ipmask: ${8:value}                                                     # IP mask, in dotted decimal notation, for the IP Pattern parameter  Can have leading or trailing non-zero octets (for exa
+    port: ${9:value}                                                       # Port number for the virtual server  Range C(1) - C(65535) * in CLI is represented as C(65535) in NITRO API
+    range: ${10:value}                                                     # Number of IP addresses that the appliance must generate and assign to the virtual server  The virtual server then functi
+    persistencetype: ${11$$(yas-choose-value '("SOURCEIP" "COOKIEINSERT" "SSLSESSION" "RULE" "URLPASSIVE" "CUSTOMSERVERID" "DESTIP" "SRCIPDESTIP" "CALLID" "RTSPSID" "DIAMETER" "FIXSESSION" "NONE"))
+    timeout: ${12:value}                                                   # Time period for which a persistence session is in effect  Minimum value = C(0) Maximum value = C(1440)
+    persistencebackup: ${13$$(yas-choose-value '("SOURCEIP" "NONE"))}      # choices: SOURCEIP;NONE  Backup persistence type for the virtual server  Becomes operational if the primary persistence m
+    backuppersistencetimeout: ${14:value}                                  # Time period for which backup persistence is in effect  Minimum value = C(2) Maximum value = C(1440)
+    lbmethod: ${15$$(yas-choose-value '("ROUNDROBIN" "LEASTCONNECTION" "LEASTRESPONSETIME" "URLHASH" "DOMAINHASH" "DESTINATIONIPHASH" "SOURCEIPHASH" "SRCIPDESTIPHASH" "LEASTBANDWIDTH" "LEASTPACKETS
+    hashlength: ${16:value}                                                # Number of bytes to consider for the hash value used in the URLHASH and DOMAINHASH load balancing methods  Minimum value 
+    netmask: ${17:value}                                                   # IPv4 subnet mask to apply to the destination IP address or source IP address when the load balancing method is C(DESTINA
+    v6netmasklen: ${18:value}                                              # Number of bits to consider in an IPv6 destination or source IP address, for creating the hash that is required by the C(
+    backuplbmethod: ${19$$(yas-choose-value '("ROUNDROBIN" "LEASTCONNECTION" "LEASTRESPONSETIME" "SOURCEIPHASH" "LEASTBANDWIDTH" "LEASTPACKETS" "CUSTOMLOAD"))}# choices: ROUNDROBIN;LEASTCONNECTION;
+    cookiename: ${20:value}                                                # Use this parameter to specify the cookie name for C(COOKIE) persistence type  It specifies the name of cookie with a max
+    listenpolicy: ${21:value}                                              # Default syntax expression identifying traffic accepted by the virtual server  Can be either an expression (for example, 
+    listenpriority: ${22:value}                                            # Integer specifying the priority of the listen policy  A higher number specifies a lower priority  If a request matches t
+    resrule: ${23:value}                                                   # Default syntax expression specifying which part of a server's response to use for creating rule based persistence sessio
+    persistmask: ${24:value}                                               # Persistence mask for IP based persistence types, for IPv4 virtual servers  Minimum length = 1
+    v6persistmasklen: ${25:value}                                          # Persistence mask for IP based persistence types, for IPv6 virtual servers  Minimum value = C(1) Maximum value = C(128)
+    rtspnat: ${26:value}                                                   # Use network address translation (NAT) for RTSP data connections 
+    m: ${27$$(yas-choose-value '("IP" "MAC" "IPTUNNEL" "TOS"))}            # choices: IP;MAC;IPTUNNEL;TOS  Redirection mode for load balancing  Available settings function as follows: * C(IP) - Bef
+    tosid: ${28:value}                                                     # TOS ID of the virtual server  Applicable only when the load balancing redirection mode is set to TOS  Minimum value = C(
+    datalength: ${29:value}                                                # Length of the token to be extracted from the data segment of an incoming packet, for use in the token method of load bal
+    dataoffset: ${30:value}                                                # Offset to be considered when extracting a token from the TCP payload  Applicable to virtual servers, of type TCP, using 
+    sessionless: ${31$$(yas-choose-value '("enabled" "disabled"))}         # choices: enabled;disabled  Perform load balancing on a per-packet basis, without establishing sessions  Recommended for 
+    connfailover: ${32$$(yas-choose-value '("DISABLED" "STATEFUL" "STATELESS"))}# choices: DISABLED;STATEFUL;STATELESS  Mode in which the connection failover feature must operate for the virtual se
+    redirurl: ${33:value}                                                  # URL to which to redirect traffic if the virtual server becomes unavailable  WARNING! Make sure that the domain in the UR
+    cacheable: ${34:value}                                                 # Route cacheable requests to a cache redirection virtual server  The load balancing virtual server can forward requests o
+    clttimeout: ${35:value}                                                # Idle time, in seconds, after which a client connection is terminated  Minimum value = C(0) Maximum value = C(31536000)
+    somethod: ${36$$(yas-choose-value '("CONNECTION" "DYNAMICCONNECTION" "BANDWIDTH" "HEALTH" "NONE"))}# choices: CONNECTION;DYNAMICCONNECTION;BANDWIDTH;HEALTH;NONE  Type of threshold that, when ex
+    sopersistence: ${37$$(yas-choose-value '("enabled" "disabled"))}       # choices: enabled;disabled  If spillover occurs, maintain source IP address based persistence for both primary and backup
+    sopersistencetimeout: ${38:value}                                      # Timeout for spillover persistence, in minutes  Minimum value = C(2) Maximum value = C(1440)
+    healththreshold: ${39:value}                                           # Threshold in percent of active services below which vserver state is made down  If this threshold is 0, vserver state wi
+    sothreshold: ${40:value}                                               # Threshold at which spillover occurs  Specify an integer for the C(CONNECTION) spillover method, a bandwidth value in kil
+    sobackupaction: ${41$$(yas-choose-value '("DROP" "ACCEPT" "REDIRECT"))}# choices: DROP;ACCEPT;REDIRECT  Action to be performed if spillover is to take effect, but no backup chain to spillover i
+    redirectportrewrite: ${42$$(yas-choose-value '("enabled" "disabled"))} # choices: enabled;disabled  Rewrite the port and change the protocol to ensure successful HTTP redirects from services 
+    downstateflush: ${43$$(yas-choose-value '("enabled" "disabled"))}      # choices: enabled;disabled  Flush all active transactions associated with a virtual server whose state transitions from U
+    disableprimaryondown: ${44$$(yas-choose-value '("enabled" "disabled"))}# choices: enabled;disabled  If the primary virtual server goes down, do not allow it to return to primary status until ma
+    insertvserveripport: ${45$$(yas-choose-value '("OFF" "VIPADDR" "V6TOV4MAPPING"))}# choices: OFF;VIPADDR;V6TOV4MAPPING  Insert an HTTP header, whose value is the IP address and port number of th
+    vipheader: ${46:value}                                                 # Name for the inserted header  The default name is vip-header  Minimum length = 1
+    authenticationhost: ${47:value}                                        # Fully qualified domain name (FQDN) of the authentication virtual server to which the user must be redirected for authent
+    authentication: ${48:value}                                            # Enable or disable user authentication 
+    authn401: ${49:value}                                                  # Enable or disable user authentication with HTTP 401 responses 
+    authnvsname: ${50:value}                                               # Name of an authentication virtual server with which to authenticate users  Minimum length = 1 Maximum length = 252
+    push: ${51$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  Process traffic with the push virtual server that is bound to this load balancing virtual ser
+    pushvserver: ${52:value}                                               # Name of the load balancing virtual server, of type PUSH or SSL_PUSH, to which the server pushes updates received on the 
+    pushlabel: ${53:value}                                                 # Expression for extracting a label from the server's response  Can be either an expression or the name of a named express
+    pushmulticlients: ${54:value}                                          # Allow multiple Web 2 0 connections from the same client to connect to the virtual server and expect updates 
+    tcpprofilename: ${55:value}                                            # Name of the TCP profile whose settings are to be applied to the virtual server  Minimum length = 1 Maximum length = 127
+    httpprofilename: ${56:value}                                           # Name of the HTTP profile whose settings are to be applied to the virtual server  Minimum length = 1 Maximum length = 127
+    dbprofilename: ${57:value}                                             # Name of the DB profile whose settings are to be applied to the virtual server  Minimum length = 1 Maximum length = 127
+    comment: ${58:value}                                                   # Any comments that you might want to associate with the virtual server 
+    l2conn: ${59:value}                                                    # Use Layer 2 parameters (channel number, MAC address, and VLAN ID) in addition to the 4-tuple (<source IP>:<source port>:
+    oracleserverversion: ${60$$(yas-choose-value '("10G" "11G"))}          # choices: 10G;11G  Oracle server version 
+    mssqlserverversion: ${61$$(yas-choose-value '("70" "2000" "2000SP1" "2005" "2008" "2008R2" "2012" "2014"))}# choices: 70;2000;2000SP1;2005;2008;2008R2;2012;2014  For a load balancing virtual se
+    mysqlprotocolversion: ${62:value}                                      # MySQL protocol version that the virtual server advertises to clients 
+    mysqlserverversion: ${63:value}                                        # MySQL server version string that the virtual server advertises to clients  Minimum length = 1 Maximum length = 31
+    mysqlcharacterset: ${64:value}                                         # Character set that the virtual server advertises to clients 
+    mysqlservercapabilities: ${65:value}                                   # Server capabilities that the virtual server advertises to clients 
+    appflowlog: ${66$$(yas-choose-value '("enabled" "disabled"))}          # choices: enabled;disabled  Apply AppFlow logging to the virtual server 
+    netprofile: ${67:value}                                                # Name of the network profile to associate with the virtual server  If you set this parameter, the virtual server uses onl
+    icmpvsrresponse: ${68$$(yas-choose-value '("PASSIVE" "ACTIVE"))}       # choices: PASSIVE;ACTIVE  How the NetScaler appliance responds to ping requests received for an IP address that is common
+    rhistate: ${69$$(yas-choose-value '("PASSIVE" "ACTIVE"))}              # choices: PASSIVE;ACTIVE  Route Health Injection (RHI) functionality of the NetSaler appliance for advertising the route 
+    newservicerequest: ${70:value}                                         # Number of requests, or percentage of the load on existing services, by which to increase the load on a new service at ea
+    newservicerequestunit: ${71$$(yas-choose-value '("PER_SECOND" "PERCENT"))}# choices: PER_SECOND;PERCENT  Units in which to increment load at each interval in slow-start mode 
+    newservicerequestincrementinterval: ${72:value}                        # Interval, in seconds, between successive increments in the load on a new service or a service whose state has just chang
+    minautoscalemembers: ${73:value}                                       # Minimum number of members expected to be present when vserver is used in Autoscale  Minimum value = C(0) Maximum value =
+    maxautoscalemembers: ${74:value}                                       # Maximum number of members expected to be present when vserver is used in Autoscale  Minimum value = C(0) Maximum value =
+    persistavpno: ${75:value}                                              # Persist AVP number for Diameter Persistency  In case this AVP is not defined in Base RFC 3588 and it is nested inside a 
+    skippersistency: ${76$$(yas-choose-value '("Bypass" "ReLb" "None"))}   # choices: Bypass;ReLb;None  This argument decides the behavior incase the service which is selected from an existing pers
+    td: ${77:value}                                                        # Integer value that uniquely identifies the traffic domain in which you want to configure the entity  If you do not speci
+    authnprofile: ${78:value}                                              # Name of the authentication profile to be used when authentication is turned on 
+    macmoderetainvlan: ${79$$(yas-choose-value '("enabled" "disabled"))}   # choices: enabled;disabled  This option is used to retain vlan information of incoming packet when macmode is enabled 
+    dbslb: ${80$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  Enable database specific load balancing for MySQL and MSSQL service types 
+    dns64: ${81$$(yas-choose-value '("enabled" "disabled"))}               # choices: enabled;disabled  This argument is for enabling/disabling the C(dns64) on lbvserver 
+    bypassaaaa: ${82:value}                                                # If this option is enabled while resolving DNS64 query AAAA queries are not sent to back end dns server 
+    recursionavailable: ${83:value}                                        # When set to YES, this option causes the DNS replies from this vserver to have the RA bit turned on  Typically one would 
+    processlocal: ${84$$(yas-choose-value '("enabled" "disabled"))}        # choices: enabled;disabled  By turning on this option packets destined to a vserver in a cluster will not under go any st
+    dnsprofilename: ${85:value}                                            # Name of the DNS profile to be associated with the VServer  DNS profile properties will be applied to the transactions pr
+    servicebindings: ${86:value}                                           # List of services along with the weights that are load balanced  The following suboptions are available 
+    servicegroupbindings: ${87:value}                                      # List of service groups along with the weights that are load balanced  The following suboptions are available 
+    ssl_certkey: ${88:value}                                               # The name of the ssl certificate that is bound to this service  The ssl certificate must already exist  Creating the cert
+    disabled: ${89:false}                                                  # When set to C(yes) the lb vserver will be disabled  When set to C(no) the lb vserver will be enabled  Note that due to l
+    nitro_protocol: ${90$$(yas-choose-value '("http" "https"))}            # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${91:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${92:310}                                               # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    state: ${93$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource being configured by the module on the netscaler node  When present th
+    save_config: ${94:True}                                                # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Create or delete a Rackspace Cloud Monitoring notification plan.
+# prefix: rax_mon_notification_plan_snippet
+# key: rax_mon_notification_p
+# group: ansible
+# --
+
+- name: ${0:Create or delete a Rackspace Cloud Monitoring notification plan.}
+  rax_mon_notification_plan:                                               
+    label: ${1:Defines a friendly name for this notification plan}         # String between 1 and 255 characters long 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Ensure that the notification plan with this C(label) exists or does not exist 
+    critical_state: ${3:value}                                             # Notification list to use when the alarm state is CRITICAL  Must be an array of valid rax_mon_notification ids 
+    warning_state: ${4:value}                                              # Notification list to use when the alarm state is WARNING  Must be an array of valid rax_mon_notification ids 
+    ok_state: ${5:value}                                                   # Notification list to use when the alarm state is OK  Must be an array of valid rax_mon_notification ids 
+    api_key: ${6:value}                                                    # Rackspace API key, overrides I(credentials) 
+    auth_endpoint: ${{7:https://identity}                                  #api rackspacecloud com/v2 0/} # not required  The URI of the authentication service 
+    credentials: ${8:value}                                                # File to find the Rackspace credentials in  Ignored if I(api_key) and I(username) are provided 
+    env: ${9:value}                                                        # Environment as configured in I(~/ pyrax cfg), see U(https://github com/rackspace/pyrax/blob/master/docs/getting_started 
+    identity_type: ${10:rackspace}                                         # Authentication mechanism to use, such as rackspace or keystone 
+    region: ${11:DFW}                                                      # Region to create an instance in 
+    tenant_id: ${12:value}                                                 # The tenant ID used for authentication 
+    tenant_name: ${13:value}                                               # The tenant name used for authentication 
+    username: ${14:value}                                                  # Rackspace username, overrides I(credentials) 
+    validate_certs: ${15:value}                                            # Whether or not to require SSL validation of API endpoints 

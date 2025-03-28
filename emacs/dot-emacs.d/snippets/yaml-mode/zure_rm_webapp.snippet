@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: Manage Web App instances
+# prefix: azure_rm_webapp_snippet
+# key: zure_rm_webapp
+# group: ansible
+# --
+
+- name: ${0:Manage Web App instances}
+  azure_rm_webapp:                                                         
+    resource_group: ${1:Name of the resource group to which the resource belongs}#
+    name: ${2:Unique name of the app to create or update}                  # To create or update a deployment slot, use the {slot\} parameter 
+    location: ${3:value}                                                   # Resource location  If not set, location from the resource group will be used as default 
+    plan: ${4:value}                                                       # App service plan  Required for creation  Can be name of existing app service plan in same resource group as web app  Can
+    frameworks: ${5:value}                                                 # Set of run time framework settings  Each setting is a dictionary  See U(https://docs microsoft com/en-us/azure/app-servi
+    container_settings: ${6:value}                                         # Web app container settings 
+    scm_type: ${7:value}                                                   # Repository type of deployment source, for example C(LocalGit), C(GitHub)  List of supported values maintained at U(https
+    deployment_source: ${8:value}                                          # Deployment source for git 
+    startup_file: ${9:value}                                               # The web's startup file  Used only for Linux web apps 
+    client_affinity_enabled: ${10:True}                                    # Whether or not to send session affinity cookies, which route client requests in the same session to the same instance 
+    https_only: ${11:value}                                                # Configures web site to accept only https requests 
+    dns_registration: ${12:value}                                          # Whether or not the web app hostname is registered with DNS on creation  Set to C(false) to register 
+    skip_custom_domain_verification: ${13:value}                           # Whether or not to skip verification of custom (non * azurewebsites net) domains associated with web app  Set to C(true) 
+    ttl_in_seconds: ${14:value}                                            # Time to live in seconds for web app default domain name 
+    app_settings: ${15:value}                                              # Configure web app application settings  Suboptions are in key value pair format 
+    purge_app_settings: ${16:value}                                        # Purge any existing application settings  Replace web app application settings with app_settings 
+    app_state: ${17$$(yas-choose-value '("started" "stopped" "restarted"))}# choices: started;stopped;restarted  Start/Stop/Restart the web app 
+    state: ${18$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  State of the Web App  Use C(present) to create or update a Web App and C(absent) to delete it 
+    ad_user: ${19:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${20:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${21:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${22:value}                                           # Your Azure subscription Id 
+    client_id: ${23:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${24:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${25:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${26:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${27:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${28$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${29$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${30:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${31:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${32:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

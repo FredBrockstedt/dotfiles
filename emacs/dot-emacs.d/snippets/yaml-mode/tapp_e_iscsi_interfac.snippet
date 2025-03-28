@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage iSCSI interface configuration
+# prefix: netapp_e_iscsi_interface_snippet
+# key: tapp_e_iscsi_interfac
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage iSCSI interface configuration}
+  netapp_e_iscsi_interface:                                                
+    controller: ${1$$(yas-choose-value '("A" "B"))}                        # The controller that owns the port you want to configure  Controller names are presented alphabetically, with the first c
+    name: ${2:The channel of the port to modify the configuration of}      # The list of choices is not necessarily comprehensive  It depends on the number of ports that are available in the system
+    api_username: ${3:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${4:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${5:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    state: ${6$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  When enabled, the provided configuration will be utilized  When disabled, the IPv4 configurat
+    address: ${7:value}                                                    # The IPv4 address to assign to the interface  Should be specified in xx xx xx xx form  Mutually exclusive with I(config_m
+    subnet_mask: ${8:value}                                                # The subnet mask to utilize for the interface  Should be specified in xx xx xx xx form  Mutually exclusive with I(config_
+    gateway: ${9:value}                                                    # The IPv4 gateway address to utilize for the interface  Should be specified in xx xx xx xx form  Mutually exclusive with 
+    config_method: ${10$$(yas-choose-value '("dhcp" "static"))}            # choices: dhcp;static  The configuration method type to use for this interface  dhcp is mutually exclusive with I(address
+    mtu: ${11:1500}                                                        # The maximum transmission units (MTU), in bytes  This allows you to configure a larger value for the MTU, in order to ena
+    log_path: ${12:value}                                                  # A local path to a file to be used for debug logging
+    validate_certs: ${13:True}                                             # Should https certificates be validated?
+    ssid: ${14:1}                                                          # The ID of the array to manage  This value must be unique for each array 

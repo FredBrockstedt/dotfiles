@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Scaleway Security Group management module
+# prefix: scaleway_security_group_snippet
+# key: caleway_security_group
+# group: ansible
+# --
+
+- name: ${0:Scaleway Security Group management module}
+  scaleway_security_group:                                                 
+    organization: ${1:Organization identifier}                             #
+    region: ${2$$(yas-choose-value '("ams1" "EMEA-NL-EVS" "par1" "EMEA-FR-PAR1"))}# Scaleway region to use (for example C(par1)) 
+    name: ${3:Name of the Security Group}                                  #
+    stateful: ${4:Create a stateful security group which allows established connections in and out}#
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicate desired state of the Security Group 
+    description: ${6:value}                                                # Description of the Security Group 
+    inbound_default_policy: ${7$$(yas-choose-value '("accept" "drop"))}    # choices: accept;drop  Default policy for incoming traffic 
+    outbound_default_policy: ${8$$(yas-choose-value '("accept" "drop"))}   # choices: accept;drop  Default policy for outcoming traffic 
+    organization_default: ${9:value}                                       # Create security group to be the default one 
+    api_token: ${10:value}                                                 # Scaleway OAuth token 
+    api_url: ${{11:https://api}                                            #scaleway com} # not required  Scaleway API URL 
+    api_timeout: ${12:30}                                                  # HTTP timeout to Scaleway API in seconds 
+    query_parameters: ${13:namespace()}                                    # List of parameters passed to the query string 
+    validate_certs: ${14:True}                                             # Validate SSL certs of the Scaleway API 

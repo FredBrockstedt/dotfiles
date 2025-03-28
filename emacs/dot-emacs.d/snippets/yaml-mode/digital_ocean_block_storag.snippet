@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Create/destroy or attach/detach Block Storage volumes in DigitalOcean
+# prefix: digital_ocean_block_storage_snippet
+# key: digital_ocean_block_storag
+# group: ansible
+# --
+
+- name: ${0:Create/destroy or attach/detach Block Storage volumes in DigitalOcean}
+  digital_ocean_block_storage:                                             
+    command: ${1$$(yas-choose-value '("create" "attach"))}                 # Which operation do you want to perform 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Indicate desired state of the target 
+    volume_name: ${3:The name of the Block Storage volume}                 #
+    region: ${4:The slug of the region where your Block Storage volume should be located in}# If snapshot_id is included, this will be ignored 
+    block_size: ${5:value}                                                 # The size of the Block Storage volume in gigabytes  Required when command=create and state=present  If snapshot_id is inc
+    description: ${6:value}                                                # Description of the Block Storage volume 
+    snapshot_id: ${7:value}                                                # The snapshot id you would like the Block Storage volume created with  If included, region and block_size will be ignored
+    droplet_id: ${8:value}                                                 # The droplet id you want to operate on  Required when command=attach 
+    oauth_token: ${9:value}                                                # DigitalOcean OAuth token  There are several other environment variables which can be used to provide this value  i e , -
+    timeout: ${10:30}                                                      # The timeout in seconds used for polling DigitalOcean's API 
+    validate_certs: ${11:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled

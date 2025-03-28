@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage NetBIOS over TCP/IP settings on Windows.
+# prefix: win_netbios_snippet
+# key: win_netbio
+# group: ansible
+# --
+
+- name: ${0:Manage NetBIOS over TCP/IP settings on Windows.}
+  win_netbios:                                                             
+    state: ${1$$(yas-choose-value '("enabled" "disabled" "default"))}      # Whether NetBIOS should be enabled, disabled, or default (use setting from DHCP server or if static IP address is assigne
+    adapter_names: ${2:value}                                              # List of adapter names for which to manage NetBIOS settings  If this option is omitted then configuration is applied to a

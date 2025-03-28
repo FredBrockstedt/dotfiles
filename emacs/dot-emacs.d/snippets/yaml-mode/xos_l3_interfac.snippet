@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage L3 interfaces on Extreme Networks SLX-OS network devices.
+# prefix: slxos_l3_interface_snippet
+# key: xos_l3_interfac
+# group: ansible
+# --
+
+- name: ${0:Manage L3 interfaces on Extreme Networks SLX-OS network devices.}
+  slxos_l3_interface:                                                      
+    name: ${1:value}                                                       # Name of the L3 interface to be configured eg  Ethernet 0/2
+    ipv4: ${2:value}                                                       # IPv4 address to be set for the L3 interface mentioned in I(name) option  The address format is <ipv4 address>/<mask>, th
+    ipv6: ${3:value}                                                       # IPv6 address to be set for the L3 interface mentioned in I(name) option  The address format is <ipv6 address>/<mask>, th
+    aggregate: ${4:value}                                                  # List of L3 interfaces definitions  Each of the entry in aggregate list should define name of interface C(name) and a opt
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the L3 interface configuration  It indicates if the configuration should be present or

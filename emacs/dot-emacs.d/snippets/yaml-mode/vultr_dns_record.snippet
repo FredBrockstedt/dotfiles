@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages DNS records on Vultr.
+# prefix: vultr_dns_record_snippet
+# key: vultr_dns_record
+# group: ansible
+# --
+
+- name: ${0:Manages DNS records on Vultr.}
+  vultr_dns_record:                                                        
+    domain: ${1:The domain the record is related to}                       #
+    name: ${2:}                                                            # The record name (subrecord) 
+    record_type: ${3$$(yas-choose-value '("A" "AAAA" "CNAME" "MX" "SRV" "CAA" "TXT" "NS" "SSHFP"))}# choices: A;AAAA;CNAME;MX;SRV;CAA;TXT;NS;SSHFP  Type of the record 
+    data: ${4:value}                                                       # Data of the record  Required if C(state=present) or C(multiple=yes) 
+    ttl: ${5:300}                                                          # TTL of the record 
+    multiple: ${6:False}                                                   # Whether to use more than one record with similar C(name) including no name and C(record_type)  Only allowed for a few re
+    priority: ${7:0}                                                       # Priority of the record 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the DNS record 
+    api_key: ${9:value}                                                    # API key of the Vultr API  The ENV variable C(VULTR_API_KEY) is used as default, when defined 
+    api_timeout: ${10:value}                                               # HTTP timeout to Vultr API  The ENV variable C(VULTR_API_TIMEOUT) is used as default, when defined  Fallback value is 60 
+    api_retries: ${11:value}                                               # Amount of retries in case of the Vultr API retuns an HTTP 503 code  The ENV variable C(VULTR_API_RETRIES) is used as def
+    api_retry_max_delay: ${12:value}                                       # Retry backoff delay in seconds is exponential up to this max  value, in seconds  The ENV variable C(VULTR_API_RETRY_MAX_
+    api_account: ${13:default}                                             # Name of the ini section in the C(vultr ini) file  The ENV variable C(VULTR_API_ACCOUNT) is used as default, when defined
+    api_endpoint: ${14:value}                                              # URL to API endpint (without trailing slash)  The ENV variable C(VULTR_API_ENDPOINT) is used as default, when defined  Fa
+    validate_certs: ${15:True}                                             # Validate SSL certs of the Vultr API 

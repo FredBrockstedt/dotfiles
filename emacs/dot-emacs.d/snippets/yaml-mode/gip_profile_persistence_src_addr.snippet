@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage source address persistence profiles
+# prefix: bigip_profile_persistence_src_addr_snippet
+# key: gip_profile_persistence_src_addr
+# group: ansible
+# --
+
+- name: ${0:Manage source address persistence profiles}
+  bigip_profile_persistence_src_addr:                                      
+    name: ${1:Specifies the name of the profile}                           #
+    parent: ${2:value}                                                     # Specifies the profile from which this profile inherits settings  When creating a new profile, if this parameter is not s
+    match_across_services: ${3:value}                                      # When C(yes), specifies that all persistent connections from a client IP address that go to the same virtual IP address a
+    match_across_virtuals: ${4:value}                                      # When C(yes), specifies that all persistent connections from the same client IP address go to the same node  When creatin
+    match_across_pools: ${5:value}                                         # When C(yes), specifies that the system can use any pool that contains this persistence record  When creating a new profi
+    hash_algorithm: ${6$$(yas-choose-value '("default" "carp"))}           # choices: default;carp  Specifies the algorithm the system uses for hash persistence load balancing  The hash result is t
+    entry_timeout: ${7:value}                                              # Specifies the duration of the persistence entries  When creating a new profile, if this parameter is not specified, the 
+    override_connection_limit: ${8:value}                                  # When C(yes), specifies that the system allows you to specify that pool member connection limits will be overridden for p
+    partition: ${9:Common}                                                 # Device partition to manage resources on 
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the profile exists  When C(absent), ensures the profile is remove
+    provider: ${11:value}                                                  # A dict object containing connection details 

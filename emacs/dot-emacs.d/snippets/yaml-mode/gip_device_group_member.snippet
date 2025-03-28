@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manages members in a device group
+# prefix: bigip_device_group_member_snippet
+# key: gip_device_group_member
+# group: ansible
+# --
+
+- name: ${0:Manages members in a device group}
+  bigip_device_group_member:                                               
+    name: ${1:Specifies the name of the device that you want to add to the device group}# Often this will be the hostname of the device  This member must be trusted by the device already  Trusting 
+    device_group: ${2:The device group that you want to add the member to} #
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the device group member exists  When C(absent), ensures the devic
+    provider: ${4:value}                                                   # A dict object containing connection details 

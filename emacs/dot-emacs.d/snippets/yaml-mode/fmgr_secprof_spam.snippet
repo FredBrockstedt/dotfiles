@@ -1,0 +1,52 @@
+# -*- mode: snippet -*-
+# name: spam filter profile for FMG
+# prefix: fmgr_secprof_spam_snippet
+# key: fmgr_secprof_spam
+# group: ansible
+# --
+
+- name: ${0:spam filter profile for FMG}
+  fmgr_secprof_spam:                                                       
+    adom: ${1:root}                                                        # The ADOM the configuration should belong to 
+    mode: ${2$$(yas-choose-value '("add" "set" "delete" "update"))}        # choices: add;set;delete;update  Sets one of three modes for managing the object  Allows use of soft-adds instead of over
+    spam_rbl_table: ${3:value}                                             # Anti-spam DNSBL table ID 
+    spam_mheader_table: ${4:value}                                         # Anti-spam MIME header table ID 
+    spam_log_fortiguard_response: ${5$$(yas-choose-value '("disable" "enable"))}# choices: disable;enable  Enable/disable logging FortiGuard spam response 
+    spam_log: ${6$$(yas-choose-value '("disable" "enable"))}               # choices: disable;enable  Enable/disable spam logging for email filtering 
+    spam_iptrust_table: ${7:value}                                         # Anti-spam IP trust table ID 
+    spam_filtering: ${8$$(yas-choose-value '("disable" "enable"))}         # choices: disable;enable  Enable/disable spam filtering 
+    spam_bword_threshold: ${9:value}                                       # Spam banned word threshold 
+    spam_bword_table: ${10:value}                                          # Anti-spam banned word table ID 
+    spam_bwl_table: ${11:value}                                            # Anti-spam black/white list table ID 
+    replacemsg_group: ${12:value}                                          # Replacement message group 
+    options: ${13$$(yas-choose-value '("bannedword" "spamfsip" "spamfssubmit" "spamfschksum" "spamfsurl" "spamhelodns" "spamraddrdns" "spamrbl" "spamhdrcheck" "spamfsphish" "spambwl"))}# choices: b
+    name: ${14:value}                                                      # Profile name 
+    flow_based: ${15$$(yas-choose-value '("disable" "enable"))}            # choices: disable;enable  Enable/disable flow-based spam filtering 
+    external: ${16$$(yas-choose-value '("disable" "enable"))}              # choices: disable;enable  Enable/disable external Email inspection 
+    comment: ${17:value}                                                   # Comment 
+    gmail: ${18:value}                                                     # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    gmail_log: ${19$$(yas-choose-value '("disable" "enable"))}             # choices: disable;enable  Enable/disable logging 
+    imap: ${20:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    imap_action: ${21$$(yas-choose-value '("pass" "tag"))}                 # choices: pass;tag  Action for spam email 
+    imap_log: ${22$$(yas-choose-value '("disable" "enable"))}              # choices: disable;enable  Enable/disable logging 
+    imap_tag_msg: ${23:value}                                              # Subject text or header added to spam email 
+    imap_tag_type: ${24$$(yas-choose-value '("subject" "header" "spaminfo"))}# choices: subject;header;spaminfo  Tag subject or header for spam email  FLAG Based Options  Specify multiple in list f
+    mapi: ${25:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    mapi_action: ${26$$(yas-choose-value '("pass" "discard"))}             # choices: pass;discard  Action for spam email 
+    mapi_log: ${27$$(yas-choose-value '("disable" "enable"))}              # choices: disable;enable  Enable/disable logging 
+    msn_hotmail: ${28:value}                                               # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    msn_hotmail_log: ${29$$(yas-choose-value '("disable" "enable"))}       # choices: disable;enable  Enable/disable logging 
+    pop3: ${30:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    pop3_action: ${31$$(yas-choose-value '("pass" "tag"))}                 # choices: pass;tag  Action for spam email 
+    pop3_log: ${32$$(yas-choose-value '("disable" "enable"))}              # choices: disable;enable  Enable/disable logging 
+    pop3_tag_msg: ${33:value}                                              # Subject text or header added to spam email 
+    pop3_tag_type: ${34$$(yas-choose-value '("subject" "header" "spaminfo"))}# choices: subject;header;spaminfo  Tag subject or header for spam email  FLAG Based Options  Specify multiple in list f
+    smtp: ${35:value}                                                      # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    smtp_action: ${36$$(yas-choose-value '("pass" "tag" "discard"))}       # choices: pass;tag;discard  Action for spam email 
+    smtp_hdrip: ${37$$(yas-choose-value '("disable" "enable"))}            # choices: disable;enable  Enable/disable SMTP email header IP checks for spamfsip, spamrbl and spambwl filters 
+    smtp_local_override: ${38$$(yas-choose-value '("disable" "enable"))}   # choices: disable;enable  Enable/disable local filter to override SMTP remote check result 
+    smtp_log: ${39$$(yas-choose-value '("disable" "enable"))}              # choices: disable;enable  Enable/disable logging 
+    smtp_tag_msg: ${40:value}                                              # Subject text or header added to spam email 
+    smtp_tag_type: ${41$$(yas-choose-value '("subject" "header" "spaminfo"))}# choices: subject;header;spaminfo  Tag subject or header for spam email  FLAG Based Options  Specify multiple in list f
+    yahoo_mail: ${42:value}                                                # EXPERTS ONLY! KNOWLEDGE OF FMGR JSON API IS REQUIRED! List of multiple child objects to be added  Expects a list of dict
+    yahoo_mail_log: ${43$$(yas-choose-value '("disable" "enable"))}        # choices: disable;enable  Enable/disable logging 

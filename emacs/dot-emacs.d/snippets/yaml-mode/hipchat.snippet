@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Send a message to Hipchat.
+# prefix: hipchat_snippet
+# key: hipchat
+# group: ansible
+# --
+
+- name: ${0:Send a message to Hipchat.}
+  hipchat:                                                                 
+    token: ${1:API token}                                                  #
+    room: ${2:ID or name of the room}                                      #
+    msg: ${3:The message body}                                             #
+    from: ${4:Ansible}                                                     # Name the message will appear to be sent from  Max length is 15 characters - above this it will be truncated 
+    color: ${5$$(yas-choose-value '("yellow" "red" "green" "purple" "gray" "random"))}# choices: yellow;red;green;purple;gray;random  Background color for the message 
+    msg_format: ${6$$(yas-choose-value '("text" "html"))}                  # choices: text;html  Message format 
+    notify: ${7:true}                                                      # If true, a notification will be triggered for users in the room 
+    validate_certs: ${8:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    api: ${{9:https://api}                                                 #hipchat com/v1} # not required  API url if using a self-hosted hipchat server  For Hipchat API version 2 use the default 

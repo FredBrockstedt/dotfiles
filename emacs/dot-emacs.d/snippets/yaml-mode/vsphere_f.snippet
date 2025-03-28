@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage files on a vCenter datastore
+# prefix: vsphere_file_snippet
+# key: vsphere_f
+# group: ansible
+# --
+
+- name: ${0:Manage files on a vCenter datastore}
+  vsphere_file:                                                            
+    host: ${1:The vCenter server on which the datastore is available}      #
+    username: ${2:The user name to authenticate on the vCenter server}     #
+    password: ${3:The password to authenticate on the vCenter server}      #
+    datacenter: ${4:The datacenter on the vCenter server that holds the datastore}#
+    datastore: ${5:The datastore on the vCenter server to push files to}   #
+    path: ${6:The file or directory on the datastore on the vCenter server}#
+    validate_certs: ${7:True}                                              # If C(no), SSL certificates will not be validated  This should only be set to C(no) when no other option exists 
+    timeout: ${8:10}                                                       # The timeout in seconds for the upload to the datastore 
+    state: ${9$$(yas-choose-value '("absent" "directory" "file" "touch"))} # choices: absent;directory;file;touch  The state of or the action on the provided path  If C(absent), the file will be re

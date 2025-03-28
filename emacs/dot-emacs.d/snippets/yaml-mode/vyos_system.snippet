@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Run `set system` commands on VyOS devices
+# prefix: vyos_system_snippet
+# key: vyos_system
+# group: ansible
+# --
+
+- name: ${0:Run `set system` commands on VyOS devices}
+  vyos_system:                                                             
+    host_name: ${1:value}                                                  # Configure the device hostname parameter  This option takes an ASCII string value 
+    domain_name: ${2:value}                                                # The new domain name to apply to the device 
+    name_servers: ${3:value}                                               # A list of name servers to use with the device  Mutually exclusive with I(domain_search)
+    domain_search: ${4:value}                                              # A list of domain names to search  Mutually exclusive with I(name_server)
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether to apply (C(present)) or remove (C(absent)) the settings 
+    provider: ${6:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

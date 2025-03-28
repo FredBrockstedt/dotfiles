@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages GTM Topology Regions
+# prefix: bigip_gtm_topology_region_snippet
+# key: gip_gtm_topology_regio
+# group: ansible
+# --
+
+- name: ${0:Manages GTM Topology Regions}
+  bigip_gtm_topology_region:                                               
+    name: ${1:Specifies the name of the region}                            #
+    region_members: ${2:value}                                             # Specifies the list of region members  This list of members is all or nothing, in order to add or remove a member, you mu
+    partition: ${3:Common}                                                 # Device partition to manage resources on  Partition parameter is also taken into account when used in conjunction with C(
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(state) is C(present), ensures that the region exists  When C(state) is C(absent), ensure
+    provider: ${5:value}                                                   # A dict object containing connection details 

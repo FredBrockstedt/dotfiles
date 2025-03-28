@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Runs commands (remotely) as another (privileged) user
+# prefix: win_psexec_snippet
+# key: win_psexec
+# group: ansible
+# --
+
+- name: ${0:Runs commands (remotely) as another (privileged) user}
+  win_psexec:                                                              
+    command: ${1:The command line to run through PsExec (limited to 260 characters)}#
+    executable: ${{2:psexec}                                               #exe} # not required  The location of the PsExec utility (in case it is not located in your PATH) 
+    extra_opts: ${3:value}                                                 # Specify additional options to add onto the PsExec invocation  This module was undocumented in older releases and will be
+    hostnames: ${4:value}                                                  # The hostnames to run the command  If not provided, the command is run locally 
+    username: ${5:value}                                                   # The (remote) user to run the command as  If not provided, the current user is used 
+    password: ${6:value}                                                   # The password for the (remote) user to run the command as  This is mandatory in order authenticate yourself 
+    chdir: ${7:value}                                                      # Run the command from this (remote) directory 
+    nobanner: ${8:False}                                                   # Do not display the startup banner and copyright message  This only works for specific versions of the PsExec binary 
+    noprofile: ${9:False}                                                  # Run the command without loading the account's profile 
+    elevated: ${10:False}                                                  # Run the command with elevated privileges 
+    interactive: ${11:False}                                               # Run the program so that it interacts with the desktop on the remote system 
+    session: ${12:value}                                                   # Specifies the session ID to use  This parameter works in conjunction with I(interactive)  It has no effect when I(intera
+    limited: ${13:False}                                                   # Run the command as limited user (strips the Administrators group and allows only privileges assigned to the Users group)
+    system: ${14:False}                                                    # Run the remote command in the System account 
+    priority: ${15$$(yas-choose-value '("abovenormal" "background" "belownormal" "high" "low" "realtime"))}# choices: abovenormal;background;belownormal;high;low;realtime  Used to run the command a
+    timeout: ${16:value}                                                   # The connection timeout in seconds
+    wait: ${17:True}                                                       # Wait for the application to terminate  Only use for non-interactive applications 

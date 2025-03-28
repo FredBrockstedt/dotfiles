@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Import/Delete certificates from BIG-IP
+# prefix: bigip_ssl_certificate_snippet
+# key: gip_ssl_certificat
+# group: ansible
+# --
+
+- name: ${0:Import/Delete certificates from BIG-IP}
+  bigip_ssl_certificate:                                                   
+    name: ${1:SSL Certificate Name}                                        # This is the cert name used when importing a certificate into the F5  It also determines the filenames of the objects on 
+    content: ${2:value}                                                    # Sets the contents of a certificate directly to the specified value  This is used with lookup plugins or for anything wit
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Certificate state  This determines if the provided certificate and key is to be made C(present)
+    issuer_cert: ${4:value}                                                # Issuer certificate used for OCSP monitoring  This parameter is only valid on versions of BIG-IP 13 0 0 or above 
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    provider: ${6:value}                                                   # A dict object containing connection details 

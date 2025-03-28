@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage shortcuts on Windows
+# prefix: win_shortcut_snippet
+# key: win_shortcut
+# group: ansible
+# --
+
+- name: ${0:Manage shortcuts on Windows}
+  win_shortcut:                                                            
+    dest: ${1:Destination file for the shortcuting file}                   # File name should have a C( lnk) or C( url) extension 
+    src: ${2:value}                                                        # Executable or URL the shortcut points to  The executable needs to be in your PATH, or has to be an absolute path to the 
+    description: ${3:value}                                                # Description for the shortcut  This is usually shown when hoovering the icon 
+    arguments: ${4:value}                                                  # Additional arguments for the executable defined in C(src)  Was originally just C(args) but renamed in Ansible 2 8 
+    directory: ${5:value}                                                  # Working directory for executable defined in C(src) 
+    icon: ${6:value}                                                       # Icon used for the shortcut  File name should have a C( ico) extension  The file name is followed by a comma and the numb
+    hotkey: ${7:value}                                                     # Key combination for the shortcut  This is a combination of one or more modifiers and a key  Possible modifiers are Alt, 
+    windowstyle: ${8$$(yas-choose-value '("maximized" "minimized" "normal"))}# choices: maximized;minimized;normal  Influences how the application is displayed when it is launched 
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(absent), removes the shortcut if it exists  When C(present), creates or updates the shor
+    run_as_admin: ${10:False}                                              # When C(src) is an executable, this can control whether the shortcut will be opened as an administrator or not 

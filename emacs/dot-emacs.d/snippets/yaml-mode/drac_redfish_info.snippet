@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages servers through iDRAC using Dell Redfish APIs
+# prefix: idrac_redfish_info_snippet
+# key: drac_redfish_info
+# group: ansible
+# --
+
+- name: ${0:Manages servers through iDRAC using Dell Redfish APIs}
+  idrac_redfish_info:                                                      
+    category: ${1:Category to execute on iDRAC controller}                 #
+    command: ${2:List of commands to execute on iDRAC controller}          #
+    baseuri: ${3:Base URI of iDRAC controller}                             #
+    username: ${4:User for authentication with iDRAC controller}           #
+    password: ${5:Password for authentication with iDRAC controller}       #
+    timeout: ${6:10}                                                       # Timeout in seconds for URL requests to OOB controller

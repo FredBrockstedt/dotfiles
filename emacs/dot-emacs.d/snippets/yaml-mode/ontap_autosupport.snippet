@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Autosupport
+# prefix: na_ontap_autosupport_snippet
+# key: ontap_autosupport
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Autosupport}
+  na_ontap_autosupport:                                                    
+    node_name: ${1:The name of the filer that owns the AutoSupport Configuration}#
+    hostname: ${2:The hostname or IP address of the ONTAP instance}        #
+    username: ${3:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${4:Password for the specified user}                         #
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies whether the AutoSupport daemon is present or absent  When this setting is absent, del
+    transport: ${6$$(yas-choose-value '("http" "https" "smtp"))}           # choices: http;https;smtp  The name of the transport protocol used to deliver AutoSupport messages
+    noteto: ${7:value}                                                     # Specifies up to five recipients of short AutoSupport e-mail messages 
+    post_url: ${8:value}                                                   # The URL used to deliver AutoSupport messages via HTTP POST
+    mail_hosts: ${9:value}                                                 # List of mail server(s) used to deliver AutoSupport messages via SMTP  Both host names and IP addresses may be used as va
+    support: ${10:value}                                                   # Specifies whether AutoSupport notification to technical support is enabled 
+    from_address: ${11:value}                                              # specify the e-mail address from which the node sends AutoSupport messages
+    partner_addresses: ${12:value}                                         # Specifies up to five partner vendor recipients of full AutoSupport e-mail messages 
+    to_addresses: ${13:value}                                              # Specifies up to five recipients of full AutoSupport e-mail messages 
+    proxy_url: ${14:value}                                                 # specify an HTTP or HTTPS proxy if the 'transport' parameter is set to HTTP or HTTPS and your organization uses a proxy  
+    hostname_in_subject: ${15:value}                                       # Specify whether the hostname of the node is included in the subject line of the AutoSupport message 
+    https: ${16:False}                                                     # Enable and disable https
+    validate_certs: ${17:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${18:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${19:value}                                                    # The ontap api version to use
+    use_rest: ${20$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

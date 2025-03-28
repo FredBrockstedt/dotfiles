@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP manage LUNs
+# prefix: na_ontap_lun_snippet
+# key: ontap_lu
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP manage LUNs}
+  na_ontap_lun:                                                            
+    name: ${1:The name of the LUN to manage}                               #
+    flexvol_name: ${2:The name of the FlexVol the LUN should exist on}     #
+    vserver: ${3:The name of the vserver to use}                           #
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified LUN should exist or not 
+    size: ${8:value}                                                       # The size of the LUN in C(size_unit)  Required when C(state=present) 
+    size_unit: ${9$$(yas-choose-value '("bytes" "b" "kb" "mb" "gb" "tb" "pb" "eb" "zb" "yb"))}# choices: bytes;b;kb;mb;gb;tb;pb;eb;zb;yb  The unit used to interpret the size parameter 
+    force_resize: ${10:False}                                              # F o r c i b l y   r e d u c e   t h e   s i z e     T h i s   i s   r e q u i r e d   f o r   r e d u c i n g   t h e   
+    force_remove: ${11:False}                                              # If "true", override checks that prevent a LUN from being destroyed if it is online and mapped  If "false", destroying an
+    force_remove_fenced: ${12:False}                                       # If "true", override checks that prevent a LUN from being destroyed while it is fenced  If "false", attempting to destroy
+    ostype: ${13:image}                                                    # The os type for the LUN 
+    space_reserve: ${14:True}                                              # This can be set to "false" which will create a LUN without any space being reserved 
+    space_allocation: ${15:False}                                          # This enables support for the SCSI Thin Provisioning features   If the Host and file system do not support this do not en
+    https: ${16:False}                                                     # Enable and disable https
+    validate_certs: ${17:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${18:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${19:value}                                                    # The ontap api version to use
+    use_rest: ${20$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

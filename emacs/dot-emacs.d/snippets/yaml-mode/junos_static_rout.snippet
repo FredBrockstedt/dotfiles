@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage static IP routes on Juniper JUNOS network devices
+# prefix: junos_static_route_snippet
+# key: junos_static_rout
+# group: ansible
+# --
+
+- name: ${0:Manage static IP routes on Juniper JUNOS network devices}
+  junos_static_route:                                                      
+    address: ${1:Network address with prefix of the static route}          #
+    next_hop: ${2:Next hop IP of the static route}                         #
+    qualified_next_hop: ${3:value}                                         # Qualified next hop IP of the static route  Qualified next hops allow to associate preference with a particular next-hop 
+    preference: ${4:value}                                                 # Global admin preference of the static route 
+    qualified_preference: ${5:value}                                       # Assign preference for qualified next hop 
+    aggregate: ${6:value}                                                  # L i s t   o f   s t a t i c   r o u t e   d e f i n i t i o n s
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the static route configuration 
+    active: ${8:True}                                                      # Specifies whether or not the configuration is active or deactivated
+    provider: ${9:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

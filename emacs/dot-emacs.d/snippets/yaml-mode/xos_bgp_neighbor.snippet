@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: Manages BGP neighbors configurations.
+# prefix: nxos_bgp_neighbor_snippet
+# key: xos_bgp_neighbor
+# group: ansible
+# --
+
+- name: ${0:Manages BGP neighbors configurations.}
+  nxos_bgp_neighbor:                                                       
+    asn: ${1:BGP autonomous system number}                                 # Valid values are string, Integer in ASPLAIN or ASDOT notation 
+    neighbor: ${2:Neighbor Identifier}                                     # Valid values are string  Neighbors may use IPv4 or IPv6 notation, with or without prefix length 
+    vrf: ${3:default}                                                      # Name of the VRF  The name 'default' is a valid VRF representing the global bgp 
+    description: ${4:value}                                                # Description of the neighbor 
+    bfd: ${5$$(yas-choose-value '("enable" "disable"))}                    # choices: enable;disable  Enables/Disables BFD for a given neighbor  Dependency: 'feature bfd'
+    connected_check: ${6:value}                                            # Configure whether or not to check for directly connected peer 
+    capability_negotiation: ${7:value}                                     # Configure whether or not to negotiate capability with this neighbor 
+    dynamic_capability: ${8:value}                                         # Configure whether or not to enable dynamic capability 
+    ebgp_multihop: ${9:value}                                              # Specify multihop TTL for a remote peer  Valid values are integers between 2 and 255, or keyword 'default' to disable thi
+    local_as: ${10:value}                                                  # Specify the local-as number for the eBGP neighbor  Valid values are String or Integer in ASPLAIN or ASDOT notation, or '
+    log_neighbor_changes: ${11$$(yas-choose-value '("enable" "disable" "inherit"))}# choices: enable;disable;inherit  Specify whether or not to enable log messages for neighbor up/down event 
+    low_memory_exempt: ${12:value}                                         # Specify whether or not to shut down this neighbor under memory pressure 
+    maximum_peers: ${13:value}                                             # Specify Maximum number of peers for this neighbor prefix Valid values are between 1 and 1000, or 'default', which does n
+    pwd: ${14:value}                                                       # Specify the password for neighbor  Valid value is string 
+    pwd_type: ${15$$(yas-choose-value '("3des" "cisco_type_7" "default"))} # choices: 3des;cisco_type_7;default  Specify the encryption type the password will use  Valid values are '3des' or 'cisco
+    remote_as: ${16:value}                                                 # Specify Autonomous System Number of the neighbor  Valid values are String or Integer in ASPLAIN or ASDOT notation, or 'd
+    remove_private_as: ${17$$(yas-choose-value '("enable" "disable" "all" "replace-as"))}# choices: enable;disable;all;replace-as  Specify the config to remove private AS number from outbound updat
+    shutdown: ${18:value}                                                  # Configure to administratively shutdown this neighbor 
+    suppress_4_byte_as: ${19:value}                                        # Configure to suppress 4-byte AS Capability 
+    timers_keepalive: ${20:value}                                          # Specify keepalive timer value  Valid values are integers between 0 and 3600 in terms of seconds, or 'default', which is 
+    timers_holdtime: ${21:value}                                           # Specify holdtime timer value  Valid values are integers between 0 and 3600 in terms of seconds, or 'default', which is 1
+    transport_passive_only: ${22:value}                                    # Specify whether or not to only allow passive connection setup  Valid values are 'true', 'false', and 'default', which de
+    update_source: ${23:value}                                             # Specify source interface of BGP session and updates 
+    state: ${24$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${25:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Manage blob containers and blob objects
+# prefix: azure_rm_storageblob_snippet
+# key: zure_rm_storageblo
+# group: ansible
+# --
+
+- name: ${0:Manage blob containers and blob objects}
+  azure_rm_storageblob:                                                    
+    storage_account_name: ${1:Name of the storage account to use}          #
+    container: ${2:Name of a blob container within the storage account}    #
+    resource_group: ${3:Name of the resource group to use}                 #
+    blob: ${4:value}                                                       # Name of a blob object within the container 
+    blob_type: ${5$$(yas-choose-value '("block" "page"))}                  # choices: block;page  Type of blob object 
+    content_type: ${6:value}                                               # Set the blob content-type header  For example C(image/png) 
+    cache_control: ${7:value}                                              # Set the blob cache-control header 
+    content_disposition: ${8:value}                                        # Set the blob content-disposition header 
+    content_encoding: ${9:value}                                           # Set the blob encoding header 
+    content_language: ${10:value}                                          # Set the blob content-language header 
+    content_md5: ${11:value}                                               # Set the blob md5 hash value 
+    dest: ${12:value}                                                      # Destination file path  Use with state C(present) to download a blob 
+    force: ${13:False}                                                     # Overwrite existing blob or file when uploading or downloading  Force deletion of a container that contains blobs 
+    src: ${14:value}                                                       # Source file path  Use with state C(present) to upload a blob 
+    state: ${15$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  State of a container or blob  Use state C(absent) with a container value only to delete a conta
+    public_access: ${16$$(yas-choose-value '("container" "blob"))}         # choices: container;blob  A container's level of public access  By default containers are private  Can only be set at tim
+    ad_user: ${17:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${18:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${19:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${20:value}                                           # Your Azure subscription Id 
+    client_id: ${21:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${22:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${23:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${24:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${25:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${26$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${27$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${28:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${29:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${30:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

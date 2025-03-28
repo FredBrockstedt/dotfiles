@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: Manages BGP Address-family configuration.
+# prefix: nxos_bgp_af_snippet
+# key: xos_bgp_af
+# group: ansible
+# --
+
+- name: ${0:Manages BGP Address-family configuration.}
+  nxos_bgp_af:                                                             
+    asn: ${1:BGP autonomous system number}                                 # Valid values are String, Integer in ASPLAIN or ASDOT notation 
+    vrf: ${2:Name of the VRF}                                              # The name 'default' is a valid VRF representing the global bgp 
+    afi: ${3$$(yas-choose-value '("ipv4" "ipv6" "vpnv4" "vpnv6" "l2vpn"))} # Address Family Identifier 
+    safi: ${4$$(yas-choose-value '("unicast" "multicast" "evpn"))}         # Sub Address Family Identifier 
+    additional_paths_install: ${5:value}                                   # Install a backup path into the forwarding table and provide prefix independent convergence (PIC) in case of a PE-CE link
+    additional_paths_receive: ${6:value}                                   # Enables the receive capability of additional paths for all of the neighbors under this address family for which the capa
+    additional_paths_selection: ${7:value}                                 # Configures the capability of selecting additional paths for a prefix  Valid values are a string defining the name of the
+    additional_paths_send: ${8:value}                                      # Enables the send capability of additional paths for all of the neighbors under this address family for which the capabil
+    advertise_l2vpn_evpn: ${9:value}                                       # Advertise evpn routes 
+    client_to_client: ${10:value}                                          # Configure client-to-client route reflection 
+    dampen_igp_metric: ${11:value}                                         # Specify dampen value for IGP metric-related changes, in seconds  Valid values are integer and keyword 'default' 
+    dampening_state: ${12:value}                                           # Enable/disable route-flap dampening 
+    dampening_half_time: ${13:value}                                       # Specify decay half-life in minutes for route-flap dampening  Valid values are integer and keyword 'default' 
+    dampening_max_suppress_time: ${14:value}                               # Specify max suppress time for route-flap dampening stable route  Valid values are integer and keyword 'default' 
+    dampening_reuse_time: ${15:value}                                      # Specify route reuse time for route-flap dampening  Valid values are integer and keyword 'default' 
+    dampening_routemap: ${16:value}                                        # Specify route-map for route-flap dampening  Valid values are a string defining the name of the route-map 
+    dampening_suppress_time: ${17:value}                                   # Specify route suppress time for route-flap dampening  Valid values are integer and keyword 'default' 
+    default_information_originate: ${18:value}                             # Default information originate 
+    default_metric: ${19:value}                                            # Sets default metrics for routes redistributed into BGP  Valid values are Integer or keyword 'default'
+    distance_ebgp: ${20:value}                                             # Sets the administrative distance for eBGP routes  Valid values are Integer or keyword 'default' 
+    distance_ibgp: ${21:value}                                             # Sets the administrative distance for iBGP routes  Valid values are Integer or keyword 'default' 
+    distance_local: ${22:value}                                            # Sets the administrative distance for local BGP routes  Valid values are Integer or keyword 'default' 
+    inject_map: ${23:value}                                                # An array of route-map names which will specify prefixes to inject  Each array entry must first specify the inject-map na
+    maximum_paths: ${24:value}                                             # Configures the maximum number of equal-cost paths for load sharing  Valid value is an integer in the range 1-64 
+    maximum_paths_ibgp: ${25:value}                                        # Configures the maximum number of ibgp equal-cost paths for load sharing  Valid value is an integer in the range 1-64 
+    networks: ${26:value}                                                  # Networks to configure  Valid value is a list of network prefixes to advertise  The list must be in the form of an array 
+    next_hop_route_map: ${27:value}                                        # Configure a route-map for valid nexthops  Valid values are a string defining the name of the route-map 
+    redistribute: ${28:value}                                              # A list of redistribute directives  Multiple redistribute entries are allowed  The list must be in the form of a nested a
+    suppress_inactive: ${29:value}                                         # Advertises only active routes to peers 
+    table_map: ${30:value}                                                 # Apply table-map to filter routes downloaded into URIB  Valid values are a string 
+    table_map_filter: ${31:value}                                          # Filters routes rejected by the route-map and does not download them to the RIB 
+    state: ${32$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${33:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage zfs
+# prefix: zfs_snippet
+# key: zf
+# group: ansible
+# --
+
+- name: ${0:Manage zfs}
+  zfs:                                                                     
+    name: ${1:File system, snapshot or volume name e}                      #g  C(rpool/myfs) 
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # Whether to create (C(present)), or remove (C(absent)) a file system, snapshot or volume  All parents/children will be cr
+    origin: ${3:value}                                                     # Snapshot from which to create a clone 
+    extra_zfs_properties: ${4:value}                                       # A dictionary of zfs properties to be set  See the zfs(8) man page for more information 

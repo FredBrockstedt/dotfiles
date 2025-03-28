@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: put file on Check Point over Web Services API
+# prefix: cp_mgmt_put_file_snippet
+# key: cp_mgmt_put_f
+# group: ansible
+# --
+
+- name: ${0:put file on Check Point over Web Services API}
+  cp_mgmt_put_file:                                                        
+    targets: ${1:value}                                                    # On what targets to execute this command  Targets may be identified by their name, or object unique identifier 
+    file_content: ${2:value}                                               # N/A
+    file_name: ${3:value}                                                  # N/A
+    file_path: ${4:value}                                                  # N/A
+    comments: ${5:value}                                                   # Comments string 
+    wait_for_task: ${6:True}                                               # Wait for the task to end  Such as publish task 
+    version: ${7:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

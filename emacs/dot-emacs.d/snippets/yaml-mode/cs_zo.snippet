@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manages zones on Apache CloudStack based clouds.
+# prefix: cs_zone_snippet
+# key: cs_zo
+# group: ansible
+# --
+
+- name: ${0:Manages zones on Apache CloudStack based clouds.}
+  cs_zone:                                                                 
+    name: ${1:Name of the zone}                                            #
+    id: ${2:value}                                                         # uuid of the existing zone 
+    state: ${3$$(yas-choose-value '("present" "enabled" "disabled" "absent"))}# choices: present;enabled;disabled;absent  State of the zone 
+    domain: ${4:value}                                                     # Domain the zone is related to  Zone is a public zone if not set 
+    network_domain: ${5:value}                                             # Network domain for the zone 
+    network_type: ${6$$(yas-choose-value '("Basic" "Advanced"))}           # choices: Basic;Advanced  Network type of the zone 
+    dns1: ${7:value}                                                       # First DNS for the zone  Required if I(state=present)
+    dns2: ${8:value}                                                       # Second DNS for the zone 
+    internal_dns1: ${9:value}                                              # First internal DNS for the zone  If not set I(dns1) will be used on I(state=present) 
+    internal_dns2: ${10:value}                                             # Second internal DNS for the zone 
+    dns1_ipv6: ${11:value}                                                 # First DNS for IPv6 for the zone 
+    dns2_ipv6: ${12:value}                                                 # Second DNS for IPv6 for the zone 
+    guest_cidr_address: ${13:value}                                        # Guest CIDR address for the zone 
+    dhcp_provider: ${14:value}                                             # DHCP provider for the Zone 
+    local_storage_enabled: ${15:value}                                     # Whether to enable local storage for the zone or not  
+    securitygroups_enabled: ${16:value}                                    # Whether the zone is security group enabled or not 
+    api_key: ${17:value}                                                   # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${18:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${19:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${20$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${21:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${22:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

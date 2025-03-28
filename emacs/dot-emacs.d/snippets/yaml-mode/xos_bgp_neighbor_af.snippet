@@ -1,0 +1,45 @@
+# -*- mode: snippet -*-
+# name: Manages BGP address-family's neighbors configuration.
+# prefix: nxos_bgp_neighbor_af_snippet
+# key: xos_bgp_neighbor_af
+# group: ansible
+# --
+
+- name: ${0:Manages BGP address-family's neighbors configuration.}
+  nxos_bgp_neighbor_af:                                                    
+    asn: ${1:BGP autonomous system number}                                 # Valid values are String, Integer in ASPLAIN or ASDOT notation 
+    neighbor: ${2:Neighbor Identifier}                                     # Valid values are string  Neighbors may use IPv4 or IPv6 notation, with or without prefix length 
+    afi: ${3$$(yas-choose-value '("ipv4" "ipv6" "vpnv4" "vpnv6" "l2vpn"))} # Address Family Identifier 
+    safi: ${4$$(yas-choose-value '("unicast" "multicast" "evpn"))}         # Sub Address Family Identifier 
+    vrf: ${5:default}                                                      # Name of the VRF  The name 'default' is a valid VRF representing the global bgp 
+    additional_paths_receive: ${6$$(yas-choose-value '("enable" "disable" "inherit"))}# choices: enable;disable;inherit  Valid values are enable for basic command enablement; disable for disabling 
+    additional_paths_send: ${7$$(yas-choose-value '("enable" "disable" "inherit"))}# choices: enable;disable;inherit  Valid values are enable for basic command enablement; disable for disabling the
+    advertise_map_exist: ${8:value}                                        # Conditional route advertisement  This property requires two route maps, an advertise-map and an exist-map  Valid values 
+    advertise_map_non_exist: ${9:value}                                    # Conditional route advertisement  This property requires two route maps, an advertise-map and an exist-map  Valid values 
+    allowas_in: ${10:value}                                                # Activate allowas-in property
+    allowas_in_max: ${11:value}                                            # Max-occurrences value for allowas_in  Valid values are an integer value or 'default'  This is mutually exclusive with al
+    as_override: ${12:value}                                               # Activate the as-override feature 
+    default_originate: ${13:value}                                         # Activate the default-originate feature 
+    default_originate_route_map: ${14:value}                               # Route-map for the default_originate property  Valid values are a string defining a route-map name, or 'default'  This is
+    disable_peer_as_check: ${15:value}                                     # Disable checking of peer AS-number while advertising
+    filter_list_in: ${16:value}                                            # Valid values are a string defining a filter-list name, or 'default' 
+    filter_list_out: ${17:value}                                           # Valid values are a string defining a filter-list name, or 'default' 
+    max_prefix_limit: ${18:value}                                          # maximum-prefix limit value  Valid values are an integer value or 'default' 
+    max_prefix_interval: ${19:value}                                       # Optional restart interval  Valid values are an integer  Requires max_prefix_limit  May not be combined with max_prefix_w
+    max_prefix_threshold: ${20:value}                                      # Optional threshold percentage at which to generate a warning  Valid values are an integer value  Requires max_prefix_lim
+    max_prefix_warning: ${21:value}                                        # Optional warning-only keyword  Requires max_prefix_limit  May not be combined with max_prefix_interval 
+    next_hop_self: ${22:value}                                             # Activate the next-hop-self feature 
+    next_hop_third_party: ${23:value}                                      # Activate the next-hop-third-party feature 
+    prefix_list_in: ${24:value}                                            # Valid values are a string defining a prefix-list name, or 'default' 
+    prefix_list_out: ${25:value}                                           # Valid values are a string defining a prefix-list name, or 'default' 
+    route_map_in: ${26:value}                                              # Valid values are a string defining a route-map name, or 'default' 
+    route_map_out: ${27:value}                                             # Valid values are a string defining a route-map name, or 'default' 
+    route_reflector_client: ${28:value}                                    # Router reflector client 
+    send_community: ${29$$(yas-choose-value '("none" "both" "extended" "standard" "default"))}# choices: none;both;extended;standard;default  send-community attribute 
+    soft_reconfiguration_in: ${30$$(yas-choose-value '("enable" "always" "inherit"))}# choices: enable;always;inherit  Valid values are 'enable' for basic command enablement; 'always' to add the al
+    soo: ${31:value}                                                       # Site-of-origin  Valid values are a string defining a VPN extcommunity or 'default' 
+    suppress_inactive: ${32:value}                                         # suppress-inactive feature 
+    unsuppress_map: ${33:value}                                            # unsuppress-map  Valid values are a string defining a route-map name or 'default' 
+    weight: ${34:value}                                                    # Weight value  Valid values are an integer value or 'default' 
+    state: ${35$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${36:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

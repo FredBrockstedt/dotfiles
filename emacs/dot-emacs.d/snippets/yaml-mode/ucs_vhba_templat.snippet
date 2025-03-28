@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Configures vHBA templates on Cisco UCS Manager
+# prefix: ucs_vhba_template_snippet
+# key: ucs_vhba_templat
+# group: ansible
+# --
+
+- name: ${0:Configures vHBA templates on Cisco UCS Manager}
+  ucs_vhba_template:                                                       
+    name: ${1:The name of the virtual HBA template}                        # This name can be between 1 and 16 alphanumeric characters  You cannot use spaces or any special characters other than - 
+    hostname: ${2:IP address or hostname of Cisco UCS Manager}             #
+    password: ${3:Password for Cisco UCS Manager authentication}           #
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If C(present), will verify vHBA templates are present and will create if needed  If C(absent), 
+    description: ${5:value}                                                # A user-defined description of the template  Enter up to 256 characters  You can use any characters or spaces except the 
+    fabric: ${6$$(yas-choose-value '("A" "B"))}                            # choices: A;B  The Fabric ID field  The name of the fabric interconnect that vHBAs created with this template are associa
+    redundancy_type: ${7$$(yas-choose-value '("none" "primary" "secondary"))}# choices: none;primary;secondary  The Redundancy Type used for template pairing from the Primary or Secondary redundanc
+    vsan: ${8:default}                                                     # The VSAN to associate with vHBAs created from this template 
+    template_type: ${9$$(yas-choose-value '("initial-template" "updating-template"))}# choices: initial-template;updating-template  The Template Type field  This can be one of the following: initia
+    max_data: ${10:2048}                                                   # The Max Data Field Size field  The maximum size of the Fibre Channel frame payload bytes that the vHBA supports  Enter a
+    wwpn_pool: ${11:default}                                               # The WWPN pool that a vHBA created from this template uses to derive its WWPN address 
+    qos_policy: ${12:value}                                                # The QoS policy that is associated with vHBAs created from this template 
+    pin_group: ${13:value}                                                 # The SAN pin group that is associated with vHBAs created from this template 
+    stats_policy: ${14:default}                                            # The statistics collection policy that is associated with vHBAs created from this template 
+    org_dn: ${15:org-root}                                                 # Org dn (distinguished name)
+    username: ${16:admin}                                                  # Username for Cisco UCS Manager authentication 
+    port: ${17:value}                                                      # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${18:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${19:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${20:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

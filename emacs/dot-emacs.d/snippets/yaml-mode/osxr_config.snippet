@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: Manage Cisco IOS XR configuration sections
+# prefix: iosxr_config_snippet
+# key: osxr_config
+# group: ansible
+# --
+
+- name: ${0:Manage Cisco IOS XR configuration sections}
+  iosxr_config:                                                            
+    lines: ${1:value}                                                      # The ordered set of commands that should be configured in the section   The commands must be the exact same commands as f
+    parents: ${2:value}                                                    # The ordered set of parents that uniquely identify the section or hierarchy the commands should be checked against   If t
+    src: ${3:value}                                                        # Specifies the source path to the file that contains the configuration or configuration template to load   The path to th
+    before: ${4:value}                                                     # The ordered set of commands to push on to the command stack if a change needs to be made   This allows the playbook desi
+    after: ${5:value}                                                      # The ordered set of commands to append to the end of the command stack if a change needs to be made   Just like with I(be
+    match: ${6$$(yas-choose-value '("line" "strict" "exact" "none"))}      # choices: line;strict;exact;none  Instructs the module on the way to perform the matching of the set of commands against 
+    replace: ${7$$(yas-choose-value '("line" "block" "config"))}           # choices: line;block;config  Instructs the module on the way to perform the configuration on the device   If the replace 
+    force: ${8:false}                                                      # The force argument instructs the module to not consider the current devices running-config   When set to true, this will
+    config: ${9:value}                                                     # The module, by default, will connect to the remote device and retrieve the current running-config to use as a base for c
+    backup: ${10:false}                                                    # This argument will cause the module to create a full backup of the current C(running-config) from the remote device befo
+    comment: ${11:"configured by iosxr_config"}                            # Allows a commit description to be specified to be included when the configuration is committed   If the configuration is
+    admin: ${12:false}                                                     # Enters into administration configuration mode for making config changes to the device 
+    label: ${13:value}                                                     # Allows a commit label to be specified to be included when the configuration is committed  A valid label must begin with 
+    backup_options: ${14:value}                                            # This is a dict object containing configurable options related to backup file path  The value of this option is read only
+    exclusive: ${15:False}                                                 # Enters into exclusive configuration mode that locks out all users from committing configuration changes until the exclus
+    provider: ${16:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

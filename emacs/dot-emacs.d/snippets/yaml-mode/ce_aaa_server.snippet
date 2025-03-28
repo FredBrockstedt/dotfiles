@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages AAA server global configuration on HUAWEI CloudEngine switches.
+# prefix: ce_aaa_server_snippet
+# key: ce_aaa_server
+# group: ansible
+# --
+
+- name: ${0:Manages AAA server global configuration on HUAWEI CloudEngine switches.}
+  ce_aaa_server:                                                           
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Specify desired state of the resource 
+    authen_scheme_name: ${2:value}                                         # Name of an authentication scheme  The value is a string of 1 to 32 characters 
+    first_authen_mode: ${3$$(yas-choose-value '("invalid" "local" "hwtacacs" "radius" "none"))}# choices: invalid;local;hwtacacs;radius;none  Preferred authentication mode 
+    author_scheme_name: ${4:value}                                         # Name of an authorization scheme  The value is a string of 1 to 32 characters 
+    first_author_mode: ${5$$(yas-choose-value '("invalid" "local" "hwtacacs" "if-authenticated" "none"))}# choices: invalid;local;hwtacacs;if-authenticated;none  Preferred authorization mode 
+    acct_scheme_name: ${6:value}                                           # Accounting scheme name  The value is a string of 1 to 32 characters 
+    accounting_mode: ${7$$(yas-choose-value '("invalid" "hwtacacs" "radius" "none"))}# choices: invalid;hwtacacs;radius;none  Accounting Mode 
+    domain_name: ${8:value}                                                # Name of a domain  The value is a string of 1 to 64 characters 
+    radius_server_group: ${9:value}                                        # RADIUS server group's name  The value is a string of 1 to 32 case-insensitive characters 
+    hwtacas_template: ${10:value}                                          # Name of a HWTACACS template  The value is a string of 1 to 32 case-insensitive characters 
+    local_user_group: ${11:value}                                          # Name of the user group where the user belongs  The user inherits all the rights of the user group  The value is a string

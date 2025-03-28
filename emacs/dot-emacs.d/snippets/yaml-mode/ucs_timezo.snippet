@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Configures timezone on Cisco UCS Manager
+# prefix: ucs_timezone_snippet
+# key: ucs_timezo
+# group: ansible
+# --
+
+- name: ${0:Configures timezone on Cisco UCS Manager}
+  ucs_timezone:                                                            
+    hostname: ${1:IP address or hostname of Cisco UCS Manager}             #
+    password: ${2:Password for Cisco UCS Manager authentication}           #
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If C(absent), will unset timezone  If C(present), will set or update timezone 
+    admin_state: ${4$$(yas-choose-value '("disabled" "enabled"))}          # choices: disabled;enabled  The admin_state setting The enabled admin_state indicates the timezone configuration is utili
+    description: ${5:}                                                     # A user-defined description of the timezone  Enter up to 256 characters  You can use any characters or spaces except the 
+    timezone: ${6:value}                                                   # The timezone name  Time zone names are from the L(tz database,https://en wikipedia org/wiki/List_of_tz_database_time_zon
+    username: ${7:admin}                                                   # Username for Cisco UCS Manager authentication 
+    port: ${8:value}                                                       # Port number to be used during connection (by default uses 443 for https and 80 for http connection) 
+    use_ssl: ${9:True}                                                     # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    use_proxy: ${10:True}                                                  # If C(no), will not use the proxy as defined by system environment variable 
+    proxy: ${11:value}                                                     # If use_proxy is no, specfies proxy to be used for connection  e g  'http://proxy xy z:8080'

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Manage remote roles on a BIG-IP
+# prefix: bigip_remote_role_snippet
+# key: gip_remote_ro
+# group: ansible
+# --
+
+- name: ${0:Manage remote roles on a BIG-IP}
+  bigip_remote_role:                                                       
+    name: ${1:Specifies the name of the remote role}                       #
+    line_order: ${2:value}                                                 # Specifies the order of the line in the file C(/config/bigip/auth/remoterole)  The LDAP and Active Directory servers read
+    attribute_string: ${3:value}                                           # Specifies the user account attributes saved in the group, in the format C(cn=, ou=, dc=)  When creating a new remote rol
+    remote_access: ${4:value}                                              # Enables or disables remote access for the specified group of remotely authenticated users  When creating a new remote ro
+    assigned_role: ${5:value}                                              # Specifies the authorization (level of access) for the account  When creating a new remote role, if this parameter is not
+    partition_access: ${6:value}                                           # Specifies the accessible partitions for the account  This parameter supports the reserved names C(all) and C(Common), as
+    terminal_access: ${7:value}                                            # Specifies terminal-based accessibility for remote accounts not already explicitly assigned a user role  Common values fo
+    state: ${8$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  When C(present), guarantees that the remote role exists  When C(absent), removes the remote rol
+    provider: ${9:value}                                                   # A dict object containing connection details 

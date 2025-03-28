@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: All the changes done by this user will be seen by all users only after publish is called.
+# prefix: cp_mgmt_publish_snippet
+# key: cp_mgmt_publish
+# group: ansible
+# --
+
+- name: ${0:All the changes done by this user will be seen by all users only after publish is called.}
+  cp_mgmt_publish:                                                         
+    uid: ${1:value}                                                        # Session unique identifier  Specify it to publish a different session than the one you currently use 
+    wait_for_task: ${2:True}                                               # Wait for the task to end  Such as publish task 
+    version: ${3:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

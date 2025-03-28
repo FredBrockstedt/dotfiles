@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Load variables from files, dynamically within a task
+# prefix: include_vars_snippet
+# key: clude_var
+# group: ansible
+# --
+
+- name: ${0:Load variables from files, dynamically within a task}
+  include_vars:                                                            
+    file: ${1:value}                                                       # The file name from which variables should be loaded  If the path is relative, it will look for the file in vars/ subdire
+    dir: ${2:value}                                                        # The directory name from which the variables should be loaded  If the path is relative and the task is inside a role, it 
+    name: ${3:value}                                                       # The name of a variable into which assign the included vars  If omitted (null) they will be made top level vars 
+    depth: ${4:0}                                                          # When using C(dir), this module will, by default, recursively go through each sub directory and load up the variables  By
+    files_matching: ${5:value}                                             # Limit the files that are loaded within any directory to this regular expression 
+    ignore_files: ${6:value}                                               # List of file names to ignore 
+    extensions: ${7:"['json', 'yaml', 'yml']"}                             # List of file extensions to read when using C(dir) 
+    ignore_unknown_extensions: ${8:False}                                  # Ignore unknown file extensions within the directory  This allows users to specify a directory containing vars files that
+    free-form: ${9:value}                                                  # This module allows you to specify the 'file' option directly without any other options  There is no 'free-form' option, 

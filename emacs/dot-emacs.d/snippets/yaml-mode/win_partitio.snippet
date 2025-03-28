@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Creates, changes and removes partitions on Windows Server
+# prefix: win_partition_snippet
+# key: win_partitio
+# group: ansible
+# --
+
+- name: ${0:Creates, changes and removes partitions on Windows Server}
+  win_partition:                                                           
+    state: ${1$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Used to specify the state of the partition  Use C(absent) to specify if a partition should be r
+    drive_letter: ${2:value}                                               # Used for accessing partitions if I(disk_number) and I(partition_number) are not provided  Use C(auto) for automatically 
+    disk_number: ${3:value}                                                # Disk number is mandatory for creating new partitions  A combination of I(disk_number) and I(partition_number) can be use
+    partition_number: ${4:value}                                           # Used in conjunction with I(disk_number) to uniquely identify a partition 
+    partition_size: ${5:value}                                             # Specify size of the partition in B, KB, KiB, MB, MiB, GB, GiB, TB or TiB  Use -1 to specify maximum supported size  Part
+    read_only: ${6:value}                                                  # Make the partition read only, restricting changes from being made to the partition 
+    active: ${7:value}                                                     # Specifies if the partition is active and can be used to start the system  This property is only valid when the disk's pa
+    hidden: ${8:value}                                                     # Hides the target partition, making it undetectable by the mount manager 
+    offline: ${9:value}                                                    # Sets the partition offline  Adding a mount point (such as a drive letter) will cause the partition to go online again 
+    mbr_type: ${10$$(yas-choose-value '("fat12" "fat16" "extended" "huge" "ifs" "fat32"))}# choices: fat12;fat16;extended;huge;ifs;fat32  Specify the partition's MBR type if the disk's partition st
+    gpt_type: ${11$$(yas-choose-value '("system_partition" "microsoft_reserved" "basic_data" "microsoft_recovery"))}# choices: system_partition;microsoft_reserved;basic_data;microsoft_recovery  Spe

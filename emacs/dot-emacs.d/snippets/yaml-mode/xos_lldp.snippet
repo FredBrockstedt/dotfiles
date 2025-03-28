@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Manage LLDP configuration on Extreme Networks SLX-OS network devices.
+# prefix: slxos_lldp_snippet
+# key: xos_lldp
+# group: ansible
+# --
+
+- name: ${0:Manage LLDP configuration on Extreme Networks SLX-OS network devices.}
+  slxos_lldp:                                                              
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the LLDP configuration  If value is I(present) lldp will be enabled else if it is I(ab

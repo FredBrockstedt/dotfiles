@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP user configuration and management
+# prefix: na_ontap_user_snippet
+# key: ontap_user
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP user configuration and management}
+  na_ontap_user:                                                           
+    name: ${1:The name of the user to manage}                              #
+    applications: ${2$$(yas-choose-value '("console" "http" "ontapi" "rsh" "snmp" "service-processor" "sp" "ssh" "telnet"))}# List of application to grant access to 
+    authentication_method: ${3$$(yas-choose-value '("community" "password" "publickey" "domain" "nsswitch" "usm" "cert"))}# Authentication method for the application  Not all authentication methods
+    vserver: ${4:The name of the vserver to use}                           #
+    hostname: ${5:The hostname or IP address of the ONTAP instance}        #
+    username: ${6:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${7:Password for the specified user}                         #
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified user should exist or not 
+    set_password: ${9:value}                                               # Password for the user account  It is ignored for creating snmp users, but is required for creating non-snmp users  For a
+    role_name: ${10:value}                                                 # The name of the role  Required when C(state=present)
+    lock_user: ${11:value}                                                 # Whether the specified user account is locked 
+    https: ${12:False}                                                     # Enable and disable https
+    validate_certs: ${13:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${14:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${15:value}                                                    # The ontap api version to use
+    use_rest: ${16$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

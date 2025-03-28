@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Complete certificate chain given a set of untrusted and root certificates
+# prefix: certificate_complete_chain_snippet
+# key: certificate_complete_ch
+# group: ansible
+# --
+
+- name: ${0:Complete certificate chain given a set of untrusted and root certificates}
+  certificate_complete_chain:                                              
+    input_chain: ${1:A concatenated set of certificates in PEM format forming a chain}# The module will try to complete this chain 
+    root_certificates: ${2:A list of filenames or directories}             # A filename is assumed to point to a file containing one or more certificates in PEM format  All certificates in this fil
+    intermediate_certificates: ${3:[]}                                     # A list of filenames or directories  A filename is assumed to point to a file containing one or more certificates in PEM 

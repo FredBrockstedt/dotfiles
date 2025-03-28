@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage timer policies on a BIG-IP
+# prefix: bigip_timer_policy_snippet
+# key: gip_timer_policy
+# group: ansible
+# --
+
+- name: ${0:Manage timer policies on a BIG-IP}
+  bigip_timer_policy:                                                      
+    name: ${1:Specifies the name of the timer policy}                      #
+    description: ${2:value}                                                # Specifies descriptive text that identifies the timer policy 
+    rules: ${3:value}                                                      # Rules that you want assigned to the timer policy
+    partition: ${4:Common}                                                 # Device partition to manage resources on 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${6:value}                                                   # A dict object containing connection details 

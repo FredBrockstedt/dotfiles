@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Handle volumes on IBM Spectrum Accelerate Family storage systems.
+# prefix: ibm_sa_vol_snippet
+# key: m_sa_vo
+# group: ansible
+# --
+
+- name: ${0:Handle volumes on IBM Spectrum Accelerate Family storage systems.}
+  ibm_sa_vol:                                                              
+    vol: ${1:Volume name}                                                  #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Volume state 
+    username: ${3:Management user on the spectrum accelerate storage system}#
+    password: ${4:Password for username on the spectrum accelerate storage system}#
+    endpoints: ${5:The hostname or management IP of Spectrum Accelerate storage system}#
+    pool: ${6:value}                                                       # Volume pool 
+    size: ${7:value}                                                       # Volume size 

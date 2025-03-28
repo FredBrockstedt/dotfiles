@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage trunks on a BIG-IP
+# prefix: bigip_trunk_snippet
+# key: gip_trunk
+# group: ansible
+# --
+
+- name: ${0:Manage trunks on a BIG-IP}
+  bigip_trunk:                                                             
+    name: ${1:Specifies the name of the trunk}                             #
+    interfaces: ${2:value}                                                 # The interfaces that are part of the trunk  To clear the list of interfaces, specify an empty list 
+    description: ${3:value}                                                # Description of the trunk 
+    link_selection_policy: ${4$$(yas-choose-value '("auto" "maximum-bandwidth"))}# choices: auto;maximum-bandwidth  Specifies, once the trunk is configured, the policy that the trunk uses to determ
+    frame_distribution_hash: ${5$$(yas-choose-value '("destination-mac" "source-destination-ip" "source-destination-mac"))}# choices: destination-mac;source-destination-ip;source-destination-mac  S
+    lacp_enabled: ${6:value}                                               # When C(yes), specifies that the system supports the link aggregation control protocol (LACP), which monitors the trunk b
+    lacp_mode: ${7$$(yas-choose-value '("active" "passive"))}              # choices: active;passive  Specifies the operation mode for link aggregation control protocol (LACP), if LACP is enabled f
+    lacp_timeout: ${8$$(yas-choose-value '("long" "short"))}               # choices: long;short  Specifies the rate at which the system sends the LACP control packets  When creating a new trunk, i
+    qinq_ethertype: ${9:value}                                             # Specifies the ether-type value used for the packets handled on this trunk when it is a member in a QinQ vlan  The ether-
+    state: ${10$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${11:value}                                                  # A dict object containing connection details 

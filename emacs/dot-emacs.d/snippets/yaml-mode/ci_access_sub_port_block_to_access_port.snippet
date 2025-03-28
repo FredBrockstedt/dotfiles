@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: Manage sub port blocks of Fabric interface policy leaf profile interface selectors (infra:HPortS, infra:SubPortBlk)
+# prefix: aci_access_sub_port_block_to_access_port_snippet
+# key: ci_access_sub_port_block_to_access_port
+# group: ansible
+# --
+
+- name: ${0:Manage sub port blocks of Fabric interface policy leaf profile interface selectors (infra:HPortS, infra:SubPortBlk)}
+  aci_access_sub_port_block_to_access_port:                                
+    leaf_interface_profile: ${1:The name of the Fabric access policy leaf interface profile}#
+    access_port_selector: ${2:The name of the Fabric access policy leaf interface profile access port selector}#
+    leaf_port_blk: ${3:The name of the Fabric access policy leaf interface profile access port block}#
+    from_port: ${4:The beginning (from-range) of the port range block for the leaf access port block}#
+    to_port: ${5:The end (to-range) of the port range block for the leaf access port block}#
+    from_sub_port: ${6:The beginning (from-range) of the sub port range block for the leaf access port block}#
+    to_sub_port: ${7:The end (to-range) of the sub port range block for the leaf access port block}#
+    host: ${8:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${9:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${10:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is
+    leaf_port_blk_description: ${11:value}                                 # The description to assign to the C(leaf_port_blk) 
+    from_card: ${12:value}                                                 # The beginning (from-range) of the card range block for the leaf access port block 
+    to_card: ${13:value}                                                   # The end (to-range) of the card range block for the leaf access port block 
+    state: ${14$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${15:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${16:admin}                                                  # The username to use for authentication 
+    certificate_name: ${17:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${18$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${19:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${20:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${21:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${22:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

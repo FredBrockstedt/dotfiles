@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Print statements during execution
+# prefix: debug_snippet
+# key: debug
+# group: ansible
+# --
+
+- name: ${0:Print statements during execution}
+  debug:                                                                   
+    msg: ${1:"Hello world!"}                                               # The customized message that is printed  If omitted, prints a generic message 
+    var: ${2:value}                                                        # A variable name to debug  Mutually exclusive with the C(msg) option  Be aware that this option already runs in Jinja2 co
+    verbosity: ${3:0}                                                      # A number that controls when the debug is run, if you set to 3 it will only run debug when -vvv or above

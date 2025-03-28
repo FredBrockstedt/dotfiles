@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Configures the Junos Netconf system service
+# prefix: junos_netconf_snippet
+# key: junos_netconf
+# group: ansible
+# --
+
+- name: ${0:Configures the Junos Netconf system service}
+  junos_netconf:                                                           
+    netconf_port: ${1:830}                                                 # This argument specifies the port the netconf service should listen on for SSH connections   The default port as defined 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Specifies the state of the C(junos_netconf) resource on the remote device   If the I(state) arg
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Add or remove Jenkins plugin
+# prefix: jenkins_plugin_snippet
+# key: jenkins_plug
+# group: ansible
+# --
+
+- name: ${0:Add or remove Jenkins plugin}
+  jenkins_plugin:                                                          
+    name: ${1:Plugin name}                                                 #
+    group: ${2:jenkins}                                                    # Name of the Jenkins group on the OS 
+    jenkins_home: ${3:/var/lib/jenkins}                                    # Home directory of the Jenkins user 
+    mode: ${4:0644}                                                        # File mode applied on versioned plugins 
+    owner: ${5:jenkins}                                                    # Name of the Jenkins user on the OS 
+    state: ${6$$(yas-choose-value '("absent" "present" "pinned" "unpinned" "enabled" "disabled" "latest"))}# choices: absent;present;pinned;unpinned;enabled;disabled;latest  Desired plugin state  I
+    timeout: ${7:30}                                                       # Server connection timeout in secs 
+    updates_expiration: ${8:86400}                                         # Number of seconds after which a new copy of the I(update-center json) file is downloaded  This is used to avoid the need
+    updates_url: ${{9:https://updates}                                     #jenkins io} # not required  URL of the Update Centre  Used as the base URL to download the plugins and the I(update-cente
+    url: ${10:http://localhost:8080}                                       # URL of the Jenkins server 
+    version: ${11:value}                                                   # Plugin version number  If this option is specified, all plugin dependencies must be installed manually  It might take lo
+    with_dependencies: ${12:True}                                          # Defines whether to install plugin dependencies  This option takes effect only if the I(version) is not defined 
+    force: ${13:False}                                                     # If C(yes) do not get a cached copy  Alias C(thirsty) has been deprecated and will be removed in 2 13 
+    http_agent: ${14:ansible-httpget}                                      # Header to identify as, generally appears in web server logs 
+    use_proxy: ${15:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    validate_certs: ${16:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    url_username: ${17:value}                                              # The username for use in HTTP basic authentication  This parameter can be used without I(url_password) for sites that all
+    url_password: ${18:value}                                              # The password for use in HTTP basic authentication  If the I(url_username) parameter is not specified, the I(url_password
+    force_basic_auth: ${19:False}                                          # Credentials specified with I(url_username) and I(url_password) should be passed in HTTP Header 
+    client_cert: ${20:value}                                               # PEM formatted certificate chain file to be used for SSL client authentication  This file can also include the key as wel
+    client_key: ${21:value}                                                # PEM formatted file that contains your private key to be used for SSL client authentication  If C(client_cert) contains b

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Provide information for OpenSSL private keys
+# prefix: openssl_privatekey_info_snippet
+# key: openssl_privatekey_info
+# group: ansible
+# --
+
+- name: ${0:Provide information for OpenSSL private keys}
+  openssl_privatekey_info:                                                 
+    path: ${1:Remote absolute path where the private key file is loaded from}#
+    passphrase: ${2:value}                                                 # The passphrase for the private key 
+    return_private_key_data: ${3:False}                                    # Whether to return private key data  Only set this to C(yes) when you want private information about this key to leave th
+    select_crypto_backend: ${4$$(yas-choose-value '("auto" "cryptography" "pyopenssl"))}# choices: auto;cryptography;pyopenssl  Determines which crypto backend to use  The default choice is C(auto)

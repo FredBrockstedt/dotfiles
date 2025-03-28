@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage configuration on devices running Juniper JUNOS
+# prefix: junos_config_snippet
+# key: junos_config
+# group: ansible
+# --
+
+- name: ${0:Manage configuration on devices running Juniper JUNOS}
+  junos_config:                                                            
+    lines: ${1:value}                                                      # This argument takes a list of C(set) or C(delete) configuration lines to push into the remote device   Each line must st
+    src: ${2:value}                                                        # The I(src) argument provides a path to the configuration file to load into the remote system  The path can either be a f
+    src_format: ${3$$(yas-choose-value '("xml" "set" "text" "json"))}      # choices: xml;set;text;json  The I(src_format) argument specifies the format of the configuration found int I(src)   If t
+    rollback: ${4:value}                                                   # The C(rollback) argument instructs the module to rollback the current configuration to the identifier specified in the a
+    zeroize: ${5:value}                                                    # The C(zeroize) argument is used to completely sanitize the remote device configuration back to initial defaults   This a
+    confirm: ${6:0}                                                        # The C(confirm) argument will configure a time out value in minutes for the commit to be confirmed before it is automatic
+    comment: ${7:"configured by junos_config"}                             # The C(comment) argument specifies a text string to be used when committing the configuration   If the C(confirm) argumen
+    replace: ${8:false}                                                    # The C(replace) argument will instruct the remote device to replace the current configuration hierarchy with the one spec
+    backup: ${9:false}                                                     # This argument will cause the module to create a full backup of the current C(running-config) from the remote device befo
+    update: ${10$$(yas-choose-value '("merge" "override" "replace" "update"))}# choices: merge;override;replace;update  This argument will decide how to load the configuration data particularly whe
+    confirm_commit: ${11:false}                                            # This argument will execute commit operation on remote device  It can be used to confirm a previous commit 
+    check_commit: ${12:false}                                              # This argument will check correctness of syntax; do not apply changes  Note that this argument can be used to confirm ver
+    backup_options: ${13:value}                                            # This is a dict object containing configurable options related to backup file path  The value of this option is read only
+    provider: ${14:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) or C(connection: netconf)  For mor

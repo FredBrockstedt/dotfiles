@@ -1,0 +1,40 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Cache for Redis instance
+# prefix: azure_rm_rediscache_snippet
+# key: zure_rm_rediscach
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Cache for Redis instance}
+  azure_rm_rediscache:                                                     
+    resource_group: ${1:Name of the resource group to which the resource belongs}#
+    name: ${2:Unique name of the Azure Cache for Redis to create or update}#
+    location: ${3:value}                                                   # Resource location  If not set, location from the resource group will be used as default 
+    sku: ${4:value}                                                        # SKU info of Azure Cache for Redis 
+    enable_non_ssl_port: ${5:False}                                        # When set I(enable_non_ssl_port=true), the non-ssl Redis server port 6379 will be enabled 
+    maxfragmentationmemory_reserved: ${6:value}                            # Configures the amount of memory in MB that is reserved to accommodate for memory fragmentation  Please see U(https://doc
+    maxmemory_reserved: ${7:value}                                         # Configures the amount of memory in MB that is reserved for non-cache operations  Please see U(https://docs microsoft com
+    maxmemory_policy: ${8$$(yas-choose-value '("volatile_lru" "allkeys_lru" "volatile_random" "allkeys_random" "volatile_ttl" "noeviction"))}# choices: volatile_lru;allkeys_lru;volatile_random;allk
+    notify_keyspace_events: ${9:value}                                     # Allows clients to receive notifications when certain events occur  Please see U(https://docs microsoft com/en-us/azure/r
+    shard_count: ${10:value}                                               # The number of shards to be created when I(sku=premium) 
+    static_ip: ${11:value}                                                 # Static IP address  Required when deploying an Azure Cache for Redis inside an existing Azure virtual network 
+    subnet: ${12:value}                                                    # Subnet in a virtual network to deploy the Azure Cache for Redis in  It can be resource id of subnet, for example /subscr
+    tenant_settings: ${13:value}                                           # Dict of tenant settings 
+    reboot: ${14:value}                                                    # Reboot specified Redis node(s)  There can be potential data loss 
+    regenerate_key: ${15:value}                                            # Regenerate Redis cache's access keys 
+    wait_for_provisioning: ${16:True}                                      # Wait till the Azure Cache for Redis instance provisioning_state is Succeeded  It takes several minutes for Azure Cache f
+    state: ${17$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  Assert the state of the Azure Cache for Redis  Use C(present) to create or update an Azure Cach
+    ad_user: ${18:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${19:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${20:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${21:value}                                           # Your Azure subscription Id 
+    client_id: ${22:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${23:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${24:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${25:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${26:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${27$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${28$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${29:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${30:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${31:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage files in datastores on a BIG-IP
+# prefix: bigip_file_copy_snippet
+# key: gip_file_copy
+# group: ansible
+# --
+
+- name: ${0:Manage files in datastores on a BIG-IP}
+  bigip_file_copy:                                                         
+    name: ${1:value}                                                       # The name of the file as it should reside on the BIG-IP  If this is not specified, then the filename provided in the C(so
+    source: ${2:value}                                                     # Specifies the path of the file to upload  This parameter is required if C(state) is C(present) 
+    datastore: ${3$$(yas-choose-value '("external-monitor" "ifile" "lw4o6-table"))}# choices: external-monitor;ifile;lw4o6-table  Specifies the datastore to put the file in  There are several diffe
+    force: ${4:value}                                                      # Force overwrite a file  By default, files will only be overwritten if the SHA of the file is different for the given fil
+    partition: ${5:Common}                                                 # Device partition to manage resources on 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  When C(present), ensures that the resource exists  When C(absent), ensures the resource is remo
+    provider: ${7:value}                                                   # A dict object containing connection details 

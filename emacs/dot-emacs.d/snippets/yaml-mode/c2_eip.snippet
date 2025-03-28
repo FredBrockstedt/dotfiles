@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: manages EC2 elastic IP (EIP) addresses.
+# prefix: ec2_eip_snippet
+# key: c2_eip
+# group: ansible
+# --
+
+- name: ${0:manages EC2 elastic IP (EIP) addresses.}
+  ec2_eip:                                                                 
+    device_id: ${1:value}                                                  # The id of the device for the EIP  Can be an EC2 Instance id or Elastic Network Interface (ENI) id 
+    public_ip: ${2:value}                                                  # The IP address of a previously allocated EIP  If present and device is specified, the EIP is associated with the device 
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  If present, allocate an EIP or associate an existing EIP with a device  If absent, disassociate
+    in_vpc: ${4:false}                                                     # Allocate an EIP inside a VPC or not  Required if specifying an ENI 
+    reuse_existing_ip_allowed: ${5:false}                                  # Reuse an EIP that is not associated to a device (when available), instead of allocating a new one 
+    release_on_disassociation: ${6:false}                                  # whether or not to automatically release the EIP when it is disassociated
+    private_ip_address: ${7:value}                                         # The primary or secondary private IP address to associate with the Elastic IP address 
+    allow_reassociation: ${8:false}                                        # Specify this option to allow an Elastic IP address that is already associated with another network interface or instance
+    tag_name: ${9:false}                                                   # When reuse_existing_ip_allowed is true, supplement with this option to only reuse an Elastic IP if it is tagged with tag
+    tag_value: ${10:false}                                                 # Supplements tag_name but also checks that the value of the tag provided in tag_name matches tag_value  matches the tag_v
+    public_ipv4_pool: ${11:false}                                          # Allocates the new Elastic IP from the provided public IPv4 pool (BYOIP) only applies to newly allocated Elastic IPs, isn
+    debug_botocore_endpoint_logs: ${12:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${13:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${14:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${15:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${16:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${17:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${18:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${19:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

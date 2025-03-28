@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Avi API Module
+# prefix: avi_gslbservice_patch_member_snippet
+# key: vi_gslbservice_patch_member
+# group: ansible
+# --
+
+- name: ${0:Avi API Module}
+  avi_gslbservice_patch_member:                                            
+    name: ${1:Name of the GSLB Service}                                    #
+    data: ${2:value}                                                       # HTTP body of GSLB Service Member in YAML or JSON format 
+    params: ${3:value}                                                     # Query parameters passed to the HTTP API 
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied to the member  Member is identified using field member ip addr
+    controller: ${5:}                                                      # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${6:}                                                        # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${7:}                                                        # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${8:admin}                                                     # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${9:}                                                     # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{10:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${11:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${12:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${13:value}                         # It disables avi session information to be cached as a fact 

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: NetApp ONTAP Create, delete, modify network subnets.
+# prefix: na_ontap_net_subnet_snippet
+# key: ontap_net_subnet
+# group: ansible
+# --
+
+- name: ${0:NetApp ONTAP Create, delete, modify network subnets.}
+  na_ontap_net_subnet:                                                     
+    broadcast_domain: ${1:Specify the required broadcast_domain name for the subnet}# A broadcast domain can not be modified after the subnet has been created
+    name: ${2:Specify the subnet name}                                     #
+    subnet: ${3:Specify the subnet (ip and mask)}                          #
+    hostname: ${4:The hostname or IP address of the ONTAP instance}        #
+    username: ${5:This can be a Cluster-scoped or SVM-scoped account, depending on whether a Cluster-level or SVM-level API is required}# For more information, please read the documentation U(https
+    password: ${6:Password for the specified user}                         #
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the specified network interface group should exist or not 
+    from_name: ${8:value}                                                  # Name of the subnet to be renamed
+    gateway: ${9:value}                                                    # Specify the gateway for the default route of the subnet 
+    ipspace: ${10:value}                                                   # Specify the ipspace for the subnet  The default value for this parameter is the default IPspace, named 'Default' 
+    ip_ranges: ${11:value}                                                 # Specify the list of IP address ranges associated with the subnet 
+    https: ${12:False}                                                     # Enable and disable https
+    validate_certs: ${13:True}                                             # If set to C(no), the SSL certificates will not be validated  This should only set to C(False) used on personally control
+    http_port: ${14:value}                                                 # Override the default port (80 or 443) with this port
+    ontapi: ${15:value}                                                    # The ontap api version to use
+    use_rest: ${16$$(yas-choose-value '("Never" "Always" "Auto"))}         # choices: Never;Always;Auto  REST API if supported by the target system for all the resources and attributes the module r

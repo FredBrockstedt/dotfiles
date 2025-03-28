@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manage packages with swdepot package manager (HP-UX)
+# prefix: swdepot_snippet
+# key: wdepot
+# group: ansible
+# --
+
+- name: ${0:Manage packages with swdepot package manager (HP-UX)}
+  swdepot:                                                                 
+    name: ${1:package name}                                                #
+    state: ${2$$(yas-choose-value '("present" "latest" "absent"))}         # whether to install (C(present), C(latest)), or remove (C(absent)) a package 
+    depot: ${3:value}                                                      # The source repository from which install or upgrade a package 

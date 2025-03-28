@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: NetApp Element Software Manage Volumes
+# prefix: na_elementsw_volume_snippet
+# key: mentsw_volum
+# group: ansible
+# --
+
+- name: ${0:NetApp Element Software Manage Volumes}
+  na_elementsw_volume:                                                     
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Whether the specified volume should exist or not 
+    name: ${2:The name of the volume to manage}                            # It accepts volume_name or volume_id
+    account_id: ${3:Account ID for the owner of this volume}               # It accepts Account_id or Account_name
+    password: ${4:ElementSW access account password}                       #
+    username: ${5:ElementSW access account user-name}                      #
+    hostname: ${6:The hostname or IP address of the SolidFire cluster}     #
+    enable512e: ${7:value}                                                 # Required when C(state=present) Should the volume provide 512-byte sector emulation?
+    qos: ${8:value}                                                        # I n i t i a l   q u a l i t y   o f   s e r v i c e   s e t t i n g s   f o r   t h i s   v o l u m e     C o n f i g u 
+    attributes: ${9:value}                                                 # A   Y A M L   d i c t i o n a r y   o f   a t t r i b u t e s   t h a t   y o u   w o u l d   l i k e   t o   a p p l y 
+    size: ${10:value}                                                      # The size of the volume in (size_unit)  Required when C(state = present) 
+    size_unit: ${11$$(yas-choose-value '("bytes" "b" "kb" "mb" "gb" "tb" "pb" "eb" "zb" "yb"))}# choices: bytes;b;kb;mb;gb;tb;pb;eb;zb;yb  The unit used to interpret the size parameter 
+    access: ${12$$(yas-choose-value '("readOnly" "readWrite" "locked" "replicationTarget"))}# choices: readOnly;readWrite;locked;replicationTarget  Access allowed for the volume  readOnly          

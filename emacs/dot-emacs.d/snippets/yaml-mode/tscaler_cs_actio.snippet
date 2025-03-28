@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Manage content switching actions
+# prefix: netscaler_cs_action_snippet
+# key: tscaler_cs_actio
+# group: ansible
+# --
+
+- name: ${0:Manage content switching actions}
+  netscaler_cs_action:                                                     
+    nsip: ${1:The ip address of the netscaler appliance where the nitro API calls will be made}# The port can be specified with the colon (:)  E g  192 168 1 1:555 
+    nitro_user: ${2:The username with which to authenticate to the netscaler node}#
+    nitro_pass: ${3:The password with which to authenticate to the netscaler node}#
+    name: ${4:value}                                                       # Name for the content switching action  Must begin with an ASCII alphanumeric or underscore C(_) character, and must cont
+    targetlbvserver: ${5:value}                                            # Name of the load balancing virtual server to which the content is switched 
+    targetvserver: ${6:value}                                              # Name of the VPN virtual server to which the content is switched 
+    targetvserverexpr: ${7:value}                                          # Information about this content switching action 
+    comment: ${8:value}                                                    # Comments associated with this cs action 
+    nitro_protocol: ${9$$(yas-choose-value '("http" "https"))}             # choices: http;https  Which protocol to use when accessing the nitro API objects 
+    validate_certs: ${10:True}                                             # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig
+    nitro_timeout: ${11:310}                                               # Time in seconds until a timeout error is thrown when establishing a new session with Netscaler
+    state: ${12$$(yas-choose-value '("absent" "present"))}                 # choices: absent;present  The state of the resource being configured by the module on the netscaler node  When present th
+    save_config: ${13:True}                                                # If C(yes) the module will save the configuration on the netscaler node if it makes any changes  The module will not save

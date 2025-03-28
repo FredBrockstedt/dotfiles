@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Get Azure Key Vault key facts.
+# prefix: azure_rm_keyvaultkey_info_snippet
+# key: zure_rm_keyvaultkey_info
+# group: ansible
+# --
+
+- name: ${0:Get Azure Key Vault key facts.}
+  azure_rm_keyvaultkey_info:                                               
+    vault_uri: ${1:Vault uri where the key stored in}                      #
+    name: ${2:value}                                                       # Key name  If not set, will list all keys in vault_uri 
+    version: ${3:current}                                                  # Key version  Set it to C(current) to show latest version of a key  Set it to C(all) to list all versions of a key  Set i
+    show_deleted_key: ${4:False}                                           # Set to true to show deleted keys  Set to False to show not deleted keys 
+    tags: ${5:value}                                                       # Limit results by providing a list of tags  Format tags as 'key' or 'key:value' 
+    ad_user: ${6:value}                                                    # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${7:value}                                                   # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${8:value}                                                    # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${9:value}                                            # Your Azure subscription Id 
+    client_id: ${10:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${11:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${12:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${13:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${14:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${15$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${16$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${17:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ

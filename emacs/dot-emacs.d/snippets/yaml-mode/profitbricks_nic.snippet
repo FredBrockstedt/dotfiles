@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Create or Remove a NIC.
+# prefix: profitbricks_nic_snippet
+# key: profitbricks_nic
+# group: ansible
+# --
+
+- name: ${0:Create or Remove a NIC.}
+  profitbricks_nic:                                                        
+    datacenter: ${1:The datacenter in which to operate}                    #
+    server: ${2:The server name or ID}                                     #
+    name: ${3:The name or ID of the NIC}                                   # This is only required on deletes, but not on create 
+    lan: ${4:The LAN to place the NIC on}                                  # You can pass a LAN that doesn't exist and it will be created  Required on create 
+    subscription_user: ${5:value}                                          # The ProfitBricks username  Overrides the PB_SUBSCRIPTION_ID environment variable 
+    subscription_password: ${6:value}                                      # THe ProfitBricks password  Overrides the PB_PASSWORD environment variable 
+    wait: ${7:true}                                                        # wait for the operation to complete before returning
+    wait_timeout: ${8:600}                                                 # how long before wait gives up, in seconds
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource

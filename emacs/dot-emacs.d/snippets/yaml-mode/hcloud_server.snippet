@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Create and manage cloud servers on the Hetzner Cloud.
+# prefix: hcloud_server_snippet
+# key: hcloud_server
+# group: ansible
+# --
+
+- name: ${0:Create and manage cloud servers on the Hetzner Cloud.}
+  hcloud_server:                                                           
+    api_token: ${1:This is the API Token for the Hetzner Cloud}            #
+    id: ${2:value}                                                         # The ID of the Hetzner Cloud server to manage  Only required if no server I(name) is given
+    name: ${3:value}                                                       # The Name of the Hetzner Cloud server to manage  Only required if no server I(id) is given or a server does not exists 
+    server_type: ${4:value}                                                # The Server Type of the Hetzner Cloud server to manage  Required if server does not exists 
+    ssh_keys: ${5:value}                                                   # List of SSH key names The key names correspond to the SSH keys configured for your Hetzner Cloud account access 
+    volumes: ${6:value}                                                    # List of Volumes IDs that should be attached to the server on server creation 
+    image: ${7:value}                                                      # Image the server should be created from  Required if server does not exists 
+    location: ${8:value}                                                   # Location of Server  Required if no I(datacenter) is given and server does not exists 
+    datacenter: ${9:value}                                                 # Datacenter of Server  Required of no I(location) is given and server does not exists 
+    backups: ${10:False}                                                   # Enable or disable Backups for the given Server 
+    upgrade_disk: ${11:False}                                              # Resize the disk size, when resizing a server  If you want to downgrade the server later, this value should be False 
+    force_upgrade: ${12:False}                                             # Force the upgrade of the server  Power off the server if it is running on upgrade 
+    user_data: ${13:value}                                                 # User Data to be passed to the server on creation  Only used if server does not exists 
+    rescue_mode: ${14:value}                                               # Add the Hetzner rescue system type you want the server to be booted into 
+    labels: ${15:value}                                                    # User-defined labels (key-value pairs) 
+    state: ${16$$(yas-choose-value '("absent" "present" "restarted" "started" "stopped" "rebuild"))}# choices: absent;present;restarted;started;stopped;rebuild  State of the server 
+    endpoint: ${{17:https://api}                                           #hetzner cloud/v1} # not required  This is the API Endpoint for the Hetzner Cloud 

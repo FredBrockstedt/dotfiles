@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Retrieves process IDs list if the process is running otherwise return empty list
+# prefix: pids_snippet
+# key: pid
+# group: ansible
+# --
+
+- name: ${0:Retrieves process IDs list if the process is running otherwise return empty list}
+  pids:                                                                    
+    name: ${1:t h e   n a m e   o f   t h e   p r o c e s s   y o u   w a n t   t o   g e t   P I D   f o r }#

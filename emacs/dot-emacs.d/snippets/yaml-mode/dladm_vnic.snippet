@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage VNICs on Solaris/illumos systems.
+# prefix: dladm_vnic_snippet
+# key: dladm_vnic
+# group: ansible
+# --
+
+- name: ${0:Manage VNICs on Solaris/illumos systems.}
+  dladm_vnic:                                                              
+    name: ${1:VNIC name}                                                   #
+    link: ${2:VNIC underlying link name}                                   #
+    temporary: ${3:False}                                                  # Specifies that the VNIC is temporary  Temporary VNICs do not persist across reboots 
+    mac: ${4:False}                                                        # Sets the VNIC's MAC address  Must be valid unicast MAC address 
+    vlan: ${5:False}                                                       # Enable VLAN tagging for this VNIC  The VLAN tag will have id I(vlan) 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Create or delete Solaris/illumos VNIC 

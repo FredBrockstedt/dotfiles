@@ -1,0 +1,69 @@
+# -*- mode: snippet -*-
+# name: Create, update or delete Spotinst AWS Elastigroups
+# prefix: spotinst_aws_elastigroup_snippet
+# key: potinst_aws_elastigroup
+# group: ansible
+# --
+
+- name: ${0:Create, update or delete Spotinst AWS Elastigroups}
+  spotinst_aws_elastigroup:                                                
+    availability_vs_cost: ${1$$(yas-choose-value '("availabilityOriented" "costOriented" "balanced"))}# (String) The strategy orientation 
+    availability_zones: ${2:(List of Objects) a list of hash/dictionaries of Availability Zones that are configured in the elastigroup; '[{"key":"value", "key":"value"\}]'; keys allowed are name (S
+    image_id: ${3:(String) The image Id used to launch the instance}       #; In case of conflict between Instance type and image type, an error will be returned
+    key_pair: ${4:(String) Specify a Key Pair to attach to the instances}  #
+    max_size: ${5:(Integer) The upper limit number of instances that you can scale up to}#
+    min_size: ${6:(Integer) The lower limit number of instances that you can scale down to}#
+    monitoring: ${7:(Boolean) Describes whether instance Enhanced Monitoring is enabled}#
+    name: ${8:(String) Unique name for elastigroup to be created, updated or deleted}#
+    on_demand_instance_type: ${9:(String) On-demand instance type that will be provisioned}#
+    product: ${10$$(yas-choose-value '("Linux/UNIX" "SUSE Linux" "Windows" "Linux/UNIX (Amazon VPC)" "SUSE Linux (Amazon VPC)" "Windows"))}# (String) Operation system type _
+    security_group_ids: ${11:(List of Strings) One or more security group IDs}# ; In case of update it will override the existing Security Group with the new given array
+    spot_instance_types: ${12:(List of Strings) Spot instance type that will be provisioned}#
+    target: ${13:(Integer) The number of instances to launch}              #
+    unit: ${14$$(yas-choose-value '("instance" "weight"))}                 # (String) The capacity unit to launch instances by 
+    credentials_path: ${15:value}                                          # (String) Optional parameter that allows to set a non-default credentials path  Default is ~/ spotinst/credentials
+    account_id: ${16:value}                                                # (String) Optional parameter that allows to set an account-id inside the module configuration By default this is retrieve
+    block_device_mappings: ${17:value}                                     # (List of Objects) a list of hash/dictionaries of Block Device Mappings for elastigroup instances; You can specify virtua
+    chef: ${18:value}                                                      # (Object) The Chef integration configuration ; Expects the following keys - chef_server (String), organization (String), 
+    draining_timeout: ${19:value}                                          # (Integer) Time for instance to be drained from incoming requests and deregistered from ELB before termination 
+    ebs_optimized: ${20:value}                                             # (Boolean) Enable EBS optimization for supported instances which are not enabled by default ; Note - additional charges w
+    ebs_volume_pool: ${21:value}                                           # (List of Objects) a list of hash/dictionaries of EBS devices to reattach to the elastigroup when available; '[{"key":"va
+    ecs: ${22:value}                                                       # (Object) The ECS integration configuration ; Expects the following key - cluster_name (String)
+    elastic_ips: ${23:value}                                               # (List of Strings) List of ElasticIps Allocation Ids (Example C(eipalloc-9d4e16f8)) to associate to the group instances
+    fallback_to_od: ${24:value}                                            # (Boolean) In case of no spots available, Elastigroup will launch an On-demand instance instead
+    health_check_grace_period: ${25:300}                                   # (Integer) The amount of time, in seconds, after the instance has launched to start and check its health 
+    health_check_unhealthy_duration_before_replacement: ${26:value}        # (Integer) Minimal mount of time instance should be unhealthy for us to consider it unhealthy 
+    health_check_type: ${27$$(yas-choose-value '("ELB" "HCS" "TARGET_GROUP" "MLB" "EC2"))}# choices: ELB;HCS;TARGET_GROUP;MLB;EC2  (String) The service to use for the health check 
+    iam_role_name: ${28:value}                                             # (String) The instance profile iamRole name Only use iam_role_arn, or iam_role_name
+    iam_role_arn: ${29:value}                                              # (String) The instance profile iamRole arn Only use iam_role_arn, or iam_role_name
+    id: ${30:value}                                                        # (String) The group id if it already exists and you want to update, or delete it  This will not work unless the uniquenes
+    ignore_changes: ${31$$(yas-choose-value '("image_id" "target"))}       # choices: image_id;target  (List of Strings) list of fields on which changes should be ignored when updating
+    kubernetes: ${32:value}                                                # (Object) The Kubernetes integration configuration  Expects the following keys - api_server (String), token (String)
+    lifetime_period: ${33:value}                                           # (String) lifetime period
+    load_balancers: ${34:value}                                            # (List of Strings) List of classic ELB names
+    mesosphere: ${35:value}                                                # (Object) The Mesosphere integration configuration  Expects the following key - api_server (String)
+    network_interfaces: ${36:value}                                        # (List of Objects) a list of hash/dictionaries of network interfaces to add to the elastigroup; '[{"key":"value", "key":"
+    on_demand_count: ${37:value}                                           # (Integer) Required if risk is not set Number of on demand instances to launch  All other instances will be spot instance
+    opsworks: ${38:value}                                                  # (Object) The elastigroup OpsWorks integration configration ; Expects the following key - layer_id (String)
+    persistence: ${39:value}                                               # (Object) The Stateful elastigroup configration ; Accepts the following keys - should_persist_root_device (Boolean), shou
+    rancher: ${40:value}                                                   # (Object) The Rancher integration configuration ; Expects the following keys - version (String), access_key (String), sec
+    right_scale: ${41:value}                                               # (Object) The Rightscale integration configuration ; Expects the following keys - account_id (String), refresh_token (Str
+    risk: ${42:value}                                                      # (Integer) required if on demand is not set  The percentage of Spot instances to launch (0 - 100) 
+    roll_config: ${43:value}                                               # (Object) Roll configuration ; If you would like the group to roll after updating, please use this feature  Accepts the f
+    scheduled_tasks: ${44:value}                                           # (List of Objects) a list of hash/dictionaries of scheduled tasks to configure in the elastigroup; '[{"key":"value", "key
+    shutdown_script: ${45:value}                                           # (String) The Base64-encoded shutdown script that executes prior to instance termination  Encode before setting 
+    signals: ${46:value}                                                   # (List of Objects) a list of hash/dictionaries of signals to configure in the elastigroup; keys allowed are - name (Strin
+    spin_up_time: ${47:value}                                              # (Integer) spin up time, in seconds, for the instance
+    state: ${48$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  (String) create or delete the elastigroup
+    tags: ${49:value}                                                      # (List of tagKey:tagValue paris) a list of tags to configure in the elastigroup  Please specify list of keys and values (
+    target_group_arns: ${50:value}                                         # (List of Strings) List of target group arns instances should be registered to
+    tenancy: ${51$$(yas-choose-value '("default" "dedicated"))}            # choices: default;dedicated  (String) dedicated vs shared tenancy
+    terminate_at_end_of_billing_hour: ${52:value}                          # (Boolean) terminate at the end of billing hour
+    up_scaling_policies: ${53:value}                                       # (List of Objects) a list of hash/dictionaries of scaling policies to configure in the elastigroup; '[{"key":"value", "ke
+    down_scaling_policies: ${54:value}                                     # (List of Objects) a list of hash/dictionaries of scaling policies to configure in the elastigroup; '[{"key":"value", "ke
+    target_tracking_policies: ${55:value}                                  # (List of Objects) a list of hash/dictionaries of target tracking policies to configure in the elastigroup; '[{"key":"val
+    uniqueness_by: ${56$$(yas-choose-value '("id" "name"))}                # choices: id;name  (String) If your group names are not unique, you may use this feature to update or delete a specific g
+    user_data: ${57:value}                                                 # (String) Base64-encoded MIME user data  Encode before setting the value 
+    utilize_reserved_instances: ${58:value}                                # (Boolean) In case of any available Reserved Instances, Elastigroup will utilize your reservations before purchasing Spot
+    wait_for_instances: ${59:value}                                        # (Boolean) Whether or not the elastigroup creation / update actions should wait for the instances to spin
+    wait_timeout: ${60:value}                                              # (Integer) How long the module should wait for instances before failing the action ; Only works if wait_for_instances is 

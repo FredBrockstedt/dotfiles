@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Add or remove device
+# prefix: faz_device_snippet
+# key: faz_devic
+# group: ansible
+# --
+
+- name: ${0:Add or remove device}
+  faz_device:                                                              
+    adom: ${1:root}:The ADOM the configuration should belong to}           #
+    os_type: ${2$$(yas-choose-value '("unknown" "fos" "fsw" "foc" "fml" "faz" "fwb" "fch" "fct" "log" "fmg" "fsa" "fdd" "fac"))}# The os type of the device being added (default 0) 
+    mgmt_mode: ${3$$(yas-choose-value '("unreg" "fmg" "faz" "fmgfaz"))}    # Management Mode of the device you are adding 
+    os_minor_vers: ${4:Minor OS rev of the device}                         #
+    os_ver: ${{5$$(yas-choose-value '("unknown" "0}                        #0,1 0,2 0,3 0,4 0,5 0,6 0|}:choices: unknown;0 0;1 0;2 0;3 0;4 0;5 0;6 0  Major OS rev of the device
+    mode: ${6$$(yas-choose-value '("add" "delete" "promote"))}             # choices: add;delete;promote  Add or delete devices  Or promote unregistered devices that are in the FortiAnalyzer "waiti
+    device_username: ${7:value}                                            # The username of the device being added to FortiAnalyzer 
+    device_password: ${8:value}                                            # The password of the device being added to FortiAnalyzer 
+    device_ip: ${9:value}                                                  # The IP of the device being added to FortiAnalyzer 
+    device_unique_name: ${10:value}                                        # The desired "friendly" name of the device being added to FortiAnalyzer 
+    device_serial: ${11:value}                                             # The serial number of the device being added to FortiAnalyzer 
+    platform_str: ${12:value}                                              # Required for determine the platform for VM platforms  ie FortiGate-VM64
+    faz_quota: ${13:value}                                                 # Specifies the quota for the device in FAZ

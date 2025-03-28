@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage HPE StoreServ 3PAR CPG
+# prefix: ss_3par_cpg_snippet
+# key: 3par_cpg
+# group: ansible
+# --
+
+- name: ${0:Manage HPE StoreServ 3PAR CPG}
+  ss_3par_cpg:                                                             
+    cpg_name: ${1:Name of the CPG}                                         #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # Whether the specified CPG should exist or not 
+    storage_system_ip: ${3:The storage system IP address}                  #
+    storage_system_password: ${4:The storage system password}              #
+    storage_system_username: ${5:The storage system user name}             #
+    disk_type: ${6$$(yas-choose-value '("FC" "NL" "SSD"))}                 # choices: FC;NL;SSD  Specifies that physical disks must have the specified device type 
+    domain: ${7:value}                                                     # Specifies the name of the domain in which the object will reside 
+    growth_increment: ${8:value}                                           # Specifies the growth increment(in MiB, GiB or TiB) the amount of logical disk storage created on each auto-grow operatio
+    growth_limit: ${9:value}                                               # Specifies that the autogrow operation is limited to the specified storage amount that sets the growth limit(in MiB, GiB 
+    growth_warning: ${10:value}                                            # Specifies that the threshold(in MiB, GiB or TiB) of used logical disk space when exceeded results in a warning alert 
+    high_availability: ${11$$(yas-choose-value '("PORT" "CAGE" "MAG"))}    # choices: PORT;CAGE;MAG  Specifies that the layout must support the failure of one port pair, one cage, or one magazine 
+    raid_type: ${12$$(yas-choose-value '("R0" "R1" "R5" "R6"))}            # choices: R0;R1;R5;R6  Specifies the RAID type for the logical disk 
+    set_size: ${13:value}                                                  # Specifies the set size in the number of chunklets 
+    secure: ${14:False}                                                    # Specifies whether the certificate needs to be validated while communicating 

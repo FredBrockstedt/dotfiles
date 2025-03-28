@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages VXLAN Network Virtualization Endpoint (NVE).
+# prefix: nxos_vxlan_vtep_snippet
+# key: xos_vxlan_vtep
+# group: ansible
+# --
+
+- name: ${0:Manages VXLAN Network Virtualization Endpoint (NVE).}
+  nxos_vxlan_vtep:                                                         
+    interface: ${1:Interface name for the VXLAN Network Virtualization Endpoint}#
+    description: ${2:value}                                                # Description of the NVE interface 
+    host_reachability: ${3:value}                                          # Specify mechanism for host reachability advertisement 
+    shutdown: ${4:value}                                                   # Administratively shutdown the NVE interface 
+    source_interface: ${5:value}                                           # Specify the loopback interface whose IP address should be used for the NVE interface 
+    source_interface_hold_down_time: ${6:value}                            # Suppresses advertisement of the NVE loopback address until the overlay has converged 
+    global_mcast_group_L3: ${7:value}                                      # Global multicast ip prefix for L3 VNIs or the keyword 'default' This is available on NX-OS 9K series running 9 2 x or hi
+    global_mcast_group_L2: ${8:value}                                      # Global multicast ip prefix for L2 VNIs or the keyword 'default' This is available on NX-OS 9K series running 9 2 x or hi
+    global_suppress_arp: ${9:value}                                        # Enables ARP suppression for all VNIs This is available on NX-OS 9K series running 9 2 x or higher 
+    global_ingress_replication_bgp: ${10:value}                            # Configures ingress replication protocol as bgp for all VNIs This is available on NX-OS 9K series running 9 2 x or higher
+    state: ${11$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 
+    provider: ${12:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

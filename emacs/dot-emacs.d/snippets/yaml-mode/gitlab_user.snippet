@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Creates/updates/deletes GitLab Users
+# prefix: gitlab_user_snippet
+# key: gitlab_user
+# group: ansible
+# --
+
+- name: ${0:Creates/updates/deletes GitLab Users}
+  gitlab_user:                                                             
+    name: ${1:Name of the user you want to create}                         #
+    username: ${2:The username of the user}                                #
+    password: ${3:The password of the user}                                # GitLab server enforces minimum password length to 8, set this value with 8 or more characters 
+    email: ${4:The email that belongs to the user}                         #
+    server_url: ${5:value}                                                 # The URL of the GitLab server, with protocol (i e  http or https) 
+    login_user: ${6:value}                                                 # GitLab user name 
+    login_password: ${7:value}                                             # GitLab password for login_user
+    api_token: ${8:value}                                                  # GitLab token for logging in 
+    sshkey_name: ${9:value}                                                # The name of the sshkey
+    sshkey_file: ${10:value}                                               # The ssh key itself 
+    group: ${11:value}                                                     # Id or Full path of parent group in the form of group/name Add user as an member to this group 
+    access_level: ${12$$(yas-choose-value '("guest" "reporter" "developer" "master" "maintainer" "owner"))}# choices: guest;reporter;developer;master;maintainer;owner  The access level to the group
+    state: ${13$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  create or delete group  Possible values are present and absent 
+    confirm: ${14:True}                                                    # Require confirmation 
+    isadmin: ${15:False}                                                   # Grant admin privileges to the user
+    external: ${16:False}                                                  # Define external parameter for this user
+    api_url: ${17:value}                                                   # The resolvable endpoint for the API
+    api_username: ${18:value}                                              # The username to use for authentication against the API
+    api_password: ${19:value}                                              # The password to use for authentication against the API
+    validate_certs: ${20:True}                                             # Whether or not to validate SSL certs when supplying a https endpoint 

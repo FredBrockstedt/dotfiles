@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Create and manage VLAN configurations on Junos OS
+# prefix: junos_vlans_snippet
+# key: junos_v
+# group: ansible
+# --
+
+- name: ${0:Create and manage VLAN configurations on Junos OS}
+  junos_vlans:                                                             
+    config: ${1:value}                                                     # A   d i c t i o n a r y   o f   V l a n   o p t i o n s
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Manage the system attributes on Lenovo CNOS devices
+# prefix: cnos_system_snippet
+# key: cnos_system
+# group: ansible
+# --
+
+- name: ${0:Manage the system attributes on Lenovo CNOS devices}
+  cnos_system:                                                             
+    hostname: ${1:value}                                                   # Configure the device hostname parameter  This option takes an ASCII string value or keyword 'default'
+    domain_name: ${2:value}                                                # Configures the default domain name suffix to be used when referencing this node by its FQDN   This argument accepts eith
+    lookup_enabled: ${3:value}                                             # Administrative control for enabling or disabling DNS lookups  When this argument is set to True, lookups are performed a
+    domain_search: ${4:value}                                              # Configures a list of domain name suffixes to search when performing DNS name resolution  This argument accepts either a 
+    name_servers: ${5:value}                                               # List of DNS name servers by IP address to use to perform name resolution lookups   This argument accepts either a list o
+    lookup_source: ${6:value}                                              # Provides one or more source interfaces to use for performing DNS lookups  The interface must be a valid interface config
+    state: ${7$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the configuration values in the device's current active configuration   When set to I(

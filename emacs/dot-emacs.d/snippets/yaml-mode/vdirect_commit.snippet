@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Commits pending configuration changes on Radware devices
+# prefix: vdirect_commit_snippet
+# key: vdirect_commit
+# group: ansible
+# --
+
+- name: ${0:Commits pending configuration changes on Radware devices}
+  vdirect_commit:                                                          
+    vdirect_ip: ${1:Primary vDirect server IP address, may be set as C(VDIRECT_IP) environment variable}#
+    vdirect_user: ${2:vDirect server username, may be set as C(VDIRECT_USER) environment variable}#
+    vdirect_password: ${3:vDirect server password, may be set as C(VDIRECT_PASSWORD) environment variable}#
+    devices: ${4:List of Radware Alteon device names for commit operations}#
+    vdirect_secondary_ip: ${5:value}                                       # Secondary vDirect server IP address, may be set as C(VDIRECT_SECONDARY_IP) environment variable 
+    vdirect_wait: ${6:true}                                                # Wait for async operation to complete, may be set as C(VDIRECT_WAIT) environment variable 
+    vdirect_https_port: ${7:2189}                                          # vDirect server HTTPS port number, may be set as C(VDIRECT_HTTPS_PORT) environment variable 
+    vdirect_http_port: ${8:2188}                                           # vDirect server HTTP port number, may be set as C(VDIRECT_HTTP_PORT) environment variable 
+    vdirect_timeout: ${9:60}                                               # Amount of time to wait for async operation completion [seconds], may be set as C(VDIRECT_TIMEOUT) environment variable 
+    vdirect_use_ssl: ${10:true}                                            # If C(no), an HTTP connection will be used instead of the default HTTPS connection, may be set as C(VDIRECT_HTTPS) or C(V
+    validate_certs: ${11:true}                                             # If C(no), SSL certificates will not be validated, may be set as C(VDIRECT_VALIDATE_CERTS) or C(VDIRECT_VERIFY) environme
+    apply: ${12:true}                                                      # If C(no), apply action will not be performed  Relevant for ADC devices only 
+    save: ${13:true}                                                       # If C(no), save action will not be performed  Relevant for ADC devices only 
+    sync: ${14:true}                                                       # If C(no), sync action will not be performed  Relevant for ADC devices only 

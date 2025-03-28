@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage APT repositories via apt-repo
+# prefix: apt_repo_snippet
+# key: pt_repo
+# group: ansible
+# --
+
+- name: ${0:Manage APT repositories via apt-repo}
+  apt_repo:                                                                
+    repo: ${1:Name of the repository to add or remove}                     #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Indicates the desired repository state 
+    remove_others: ${3:false}                                              # Remove other then added repositories Used if I(state=present)
+    update: ${4:false}                                                     # Update the package database after changing repositories 

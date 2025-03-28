@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manages vCMP guests on a BIG-IP
+# prefix: bigip_vcmp_guest_snippet
+# key: gip_vcmp_guest
+# group: ansible
+# --
+
+- name: ${0:Manages vCMP guests on a BIG-IP}
+  bigip_vcmp_guest:                                                        
+    name: ${1:The name of the vCMP guest to manage}                        #
+    vlans: ${2:value}                                                      # VLANs that the guest uses to communicate with other guests, the host, and with the external network  The available VLANs
+    initial_image: ${3:value}                                              # Specifies the base software release ISO image file for installing the TMOS hypervisor instance and any licensed BIG-IP m
+    initial_hotfix: ${4:value}                                             # Specifies the hotfix ISO image file which will be applied on top of the base image 
+    mgmt_network: ${5$$(yas-choose-value '("bridged" "isolated" "host only"))}# choices: bridged;isolated;host only  Specifies the method by which the management address is used in the vCMP guest  
+    delete_virtual_disk: ${6:False}                                        # When C(state) is C(absent), will additionally delete the virtual disk associated with the vCMP guest  By default, this v
+    mgmt_address: ${7:value}                                               # Specifies the IP address, and subnet or subnet mask that you use to access the guest when you want to manage a module ru
+    mgmt_route: ${8:value}                                                 # Specifies the gateway address for the C(mgmt_address)  If this value is not specified when creating a new guest, it is s
+    state: ${9$$(yas-choose-value '("configured" "disabled" "provisioned" "present" "absent"))}# choices: configured;disabled;provisioned;present;absent  The state of the vCMP guest on the system  
+    cores_per_slot: ${10:value}                                            # Specifies the number of cores that the system allocates to the guest  Each core represents a portion of CPU and memory  
+    partition: ${11:Common}                                                # Device partition to manage resources on 
+    number_of_slots: ${12:value}                                           # Specifies the number of slots for the system to use for creating the guest  This value dictates how many cores a guest i
+    min_number_of_slots: ${13:value}                                       # Specifies the minimum number of slots that the guest must be assigned to in order to deploy  This field dictates the num
+    allowed_slots: ${14:value}                                             # Contains those slots that the guest is allowed to be assigned to  When the host determines which slots this guest should
+    provider: ${15:value}                                                  # A dict object containing connection details 

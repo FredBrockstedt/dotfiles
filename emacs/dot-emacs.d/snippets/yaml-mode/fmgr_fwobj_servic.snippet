@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Manages FortiManager Firewall Service Objects.
+# prefix: fmgr_fwobj_service_snippet
+# key: fmgr_fwobj_servic
+# group: ansible
+# --
+
+- name: ${0:Manages FortiManager Firewall Service Objects.}
+  fmgr_fwobj_service:                                                      
+    adom: ${1:root}                                                        # - T h e   A D O M   t h e   c o n f i g u r a t i o n   s h o u l d   b e l o n g   t o  
+    app_category: ${2:value}                                               # Application category ID 
+    app_service_type: ${3:value}                                           # Application service type 
+    application: ${4:value}                                                # Application ID 
+    category: ${5:value}                                                   # Service category 
+    check_reset_range: ${6:value}                                          # Enable disable RST check 
+    color: ${7:22}                                                         # GUI icon color 
+    comment: ${8:value}                                                    # Comment 
+    custom_type: ${9$$(yas-choose-value '("tcp_udp_sctp" "icmp" "icmp6" "ip" "http" "ftp" "connect" "socks_tcp" "socks_udp" "all"))}# choices: tcp_udp_sctp;icmp;icmp6;ip;http;ftp;connect;socks_tcp;
+    explicit_proxy: ${10$$(yas-choose-value '("enable" "disable"))}        # choices: enable;disable  Enable/disable explicit web proxy service 
+    fqdn: ${11:}                                                           # Fully qualified domain name 
+    group_name: ${12:value}                                                # Name of the Service Group 
+    group_member: ${13:value}                                              # Comma-Seperated list of members' names 
+    icmp_code: ${14:value}                                                 # ICMP code 
+    icmp_type: ${15:value}                                                 # ICMP type 
+    iprange: ${{16:0}                                                      #0 0 0} # not required  Start IP-End IP 
+    name: ${17:value}                                                      # Custom service name 
+    mode: ${18$$(yas-choose-value '("add" "set" "delete"))}                # choices: add;set;delete  Sets one of three modes for managing the object 
+    object_type: ${19$$(yas-choose-value '("custom" "group" "category"))}  # choices: custom;group;category  Tells module if we are adding a custom service, category, or group 
+    protocol: ${20:value}                                                  # Protocol type 
+    protocol_number: ${21:value}                                           # IP protocol number 
+    sctp_portrange: ${22:value}                                            # Multiple SCTP port ranges  Comma separated list of destination ports to add (i e  '443,80')  Syntax is <destPort:sourceP
+    session_ttl: ${23:0}                                                   # Session TTL (300 - 604800, 0 = default) 
+    tcp_halfclose_timer: ${24:0}                                           # TCP half close timeout (1 - 86400 sec, 0 = default) 
+    tcp_halfopen_timer: ${25:0}                                            # TCP half close timeout (1 - 86400 sec, 0 = default) 
+    tcp_portrange: ${26:value}                                             # Comma separated list of destination ports to add (i e  '443,80')  Syntax is <destPort:sourcePort> If no sourcePort is de
+    tcp_timewait_timer: ${27:0}                                            # TCP half close timeout (1 - 300 sec, 0 = default) 
+    udp_idle_timer: ${28:0}                                                # TCP half close timeout (0 - 86400 sec, 0 = default) 
+    udp_portrange: ${29:value}                                             # Comma separated list of destination ports to add (i e  '443,80')  Syntax is <destPort:sourcePort> If no sourcePort is de
+    visibility: ${30$$(yas-choose-value '("enable" "disable"))}            # choices: enable;disable  Enable/disable service visibility 

@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Perform firmware upgrade on FortiGate or FortiOS (FOS) device.
+# prefix: fortios_system_firmware_upgrade_snippet
+# key: fortios_system_firmware_upgrad
+# group: ansible
+# --
+
+- name: ${0:Perform firmware upgrade on FortiGate or FortiOS (FOS) device.}
+  fortios_system_firmware_upgrade:                                         
+    system_firmware: ${1:None}:Possible parameters to go in the body for the request}# Specify firmware upgrade source, filename and whether format boot partition before upgrade
+    host: ${2:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${3:value}                                                   # FortiOS or FortiGate username 
+    password: ${4:}                                                        # FortiOS or FortiGate password 
+    vdom: ${5:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${6:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${7:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 

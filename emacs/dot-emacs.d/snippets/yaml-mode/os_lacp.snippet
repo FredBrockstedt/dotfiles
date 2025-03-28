@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Global Link Aggregation Control Protocol (LACP) on Cisco IOS devices.
+# prefix: ios_lacp_snippet
+# key: os_lacp
+# group: ansible
+# --
+
+- name: ${0:Manage Global Link Aggregation Control Protocol (LACP) on Cisco IOS devices.}
+  ios_lacp:                                                                
+    config: ${1:value}                                                     # T h e   p r o v i d e d   c o n f i g u r a t i o n s  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "deleted"))}       # choices: merged;replaced;deleted  The state of the configuration after module completion

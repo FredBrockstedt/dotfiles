@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: deploys a blue print package on a set of servers in CenturyLink Cloud.
+# prefix: clc_blueprint_package_snippet
+# key: clc_blueprint_packag
+# group: ansible
+# --
+
+- name: ${0:deploys a blue print package on a set of servers in CenturyLink Cloud.}
+  clc_blueprint_package:                                                   
+    server_ids: ${1:A list of server Ids to deploy the blue print package} #
+    package_id: ${2:The package id of the blue print}                      #
+    package_params: ${3:namespace()}                                       # The dictionary of arguments required to deploy the blue print 
+    state: ${4$$(yas-choose-value '("present"))}                           # choices: present  Whether to install or uninstall the package  Currently it supports only "present" for install action 
+    wait: ${5:True}                                                        # Whether to wait for the tasks to finish before returning 

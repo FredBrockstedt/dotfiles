@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Publish a message to a RabbitMQ queue.
+# prefix: rabbitmq_publish_snippet
+# key: rabbitmq_publish
+# group: ansible
+# --
+
+- name: ${0:Publish a message to a RabbitMQ queue.}
+  rabbitmq_publish:                                                        
+    url: ${1:value}                                                        # An URL connection string to connect to the RabbitMQ server  I(url) and I(host)/I(port)/I(user)/I(pass)/I(vhost) are mutu
+    proto: ${2$$(yas-choose-value '("amqps" "amqp"))}                      # choices: amqps;amqp  The protocol to use 
+    host: ${3:value}                                                       # The RabbitMQ server hostname or IP 
+    port: ${4:value}                                                       # The RabbitMQ server port 
+    username: ${5:value}                                                   # The RabbitMQ username 
+    password: ${6:value}                                                   # The RabbitMQ password 
+    vhost: ${7:value}                                                      # The virtual host to target  If default vhost is required, use C('%2F') 
+    queue: ${8:value}                                                      # The queue to publish a message to   If no queue is specified, RabbitMQ will return a random queue name 
+    exchange: ${9:value}                                                   # The exchange to publish a message to 
+    routing_key: ${10:value}                                               # The routing key 
+    body: ${11:value}                                                      # The body of the message  A C(body) cannot be provided if a C(src) is specified 
+    src: ${12:value}                                                       # A file to upload to the queue   Automatic mime type detection is attempted if content_type is not defined (left as defau
+    content_type: ${13:text/plain}                                         # The content type of the body 
+    durable: ${14:False}                                                   # Set the queue to be durable 
+    exclusive: ${15:False}                                                 # Set the queue to be exclusive 
+    auto_delete: ${16:False}                                               # Set the queue to auto delete 
+    headers: ${17:namespace()}                                             # A dictionary of headers to post with the message 

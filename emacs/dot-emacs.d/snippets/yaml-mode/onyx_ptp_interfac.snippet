@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Configures PTP on interface
+# prefix: onyx_ptp_interface_snippet
+# key: onyx_ptp_interfac
+# group: ansible
+# --
+
+- name: ${0:Configures PTP on interface}
+  onyx_ptp_interface:                                                      
+    name: ${1:ethernet or vlan interface name that we want to configure PTP on it}#
+    state: ${2$$(yas-choose-value '("enabled" "disabled"))}                # choices: enabled;disabled  Enable/Disable PTP on Interface
+    delay_request: ${3:value}                                              # configure PTP delay request interval, Range 0-5
+    announce_interval: ${4:value}                                          # configure PTP announce setting for interval, Range -3-1
+    announce_timeout: ${5:value}                                           # configure PTP announce setting for timeout, Range 2-10
+    sync_interval: ${6:value}                                              # configure PTP sync interval, Range -7--1

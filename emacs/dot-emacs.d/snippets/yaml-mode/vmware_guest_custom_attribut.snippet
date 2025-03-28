@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Manage custom attributes from VMware for the given virtual machine
+# prefix: vmware_guest_custom_attributes_snippet
+# key: vmware_guest_custom_attribut
+# group: ansible
+# --
+
+- name: ${0:Manage custom attributes from VMware for the given virtual machine}
+  vmware_guest_custom_attributes:                                          
+    name: ${1:Name of the virtual machine to work with}                    # This is required parameter, if C(uuid) or C(moid) is not supplied 
+    datacenter: ${2:Datacenter name where the virtual machine is located in}#
+    state: ${3$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  The action to take  If set to C(present), then custom attribute is added or updated  If set to 
+    uuid: ${4:value}                                                       # UUID of the virtual machine to manage if known  This is VMware's unique identifier  This is required parameter, if C(nam
+    moid: ${5:value}                                                       # Managed Object ID of the instance to manage if known, this is a unique identifier only within a single vCenter instance 
+    use_instance_uuid: ${6:False}                                          # Whether to use the VMware instance UUID rather than the BIOS UUID 
+    folder: ${7:value}                                                     # Absolute path to find an existing guest  This is required parameter, if C(name) is supplied and multiple virtual machine
+    attributes: ${8:[]}                                                    # A list of name and value of custom attributes that needs to be manage  Value of custom attribute is not required and wil
+    hostname: ${9:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${10:value}                                                  # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${11:value}                                                  # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${12:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${13:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${14:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${15:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

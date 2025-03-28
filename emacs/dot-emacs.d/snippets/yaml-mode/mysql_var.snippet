@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manage MySQL global variables
+# prefix: mysql_variables_snippet
+# key: mysql_var
+# group: ansible
+# --
+
+- name: ${0:Manage MySQL global variables}
+  mysql_variables:                                                         
+    variable: ${1:Variable name to operate}                                #
+    value: ${2:value}                                                      # If set, then sets variable value to this
+    login_user: ${3:value}                                                 # The username used to authenticate with 
+    login_password: ${4:value}                                             # The password used to authenticate with 
+    login_host: ${5:localhost}                                             # Host running the database 
+    login_port: ${6:3306}                                                  # Port of the MySQL server  Requires I(login_host) be defined as other than localhost if login_port is used 
+    login_unix_socket: ${7:value}                                          # The path to a Unix domain socket for local connections 
+    connect_timeout: ${8:30}                                               # The connection timeout when connecting to the MySQL server 
+    config_file: ${{9:~/}                                                  #my cnf} # not required  Specify a config file from which user and password are to be read 
+    ca_cert: ${10:value}                                                   # The path to a Certificate Authority (CA) certificate  This option, if used, must specify the same certificate as used by
+    client_cert: ${11:value}                                               # The path to a client public key certificate 
+    client_key: ${12:value}                                                # The path to the client private key 

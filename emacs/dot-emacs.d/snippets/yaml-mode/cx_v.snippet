@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manage VLANs on Ruckus ICX 7000 series switches
+# prefix: icx_vlan_snippet
+# key: cx_v
+# group: ansible
+# --
+
+- name: ${0:Manage VLANs on Ruckus ICX 7000 series switches}
+  icx_vlan:                                                                
+    vlan_id: ${1:ID of the VLAN}                                           # Range 1-4094 
+    name: ${2:value}                                                       # Name of the VLAN 
+    interfaces: ${3:value}                                                 # List of ethernet ports or LAGS to be added as access(untagged) ports to the vlan  To add a range of ports use 'to' keywo
+    tagged: ${4:value}                                                     # List of ethernet ports or LAGS to be added as trunk(tagged) ports to the vlan  To add a range of ports use 'to' keyword 
+    ip_dhcp_snooping: ${5:value}                                           # Enables DHCP snooping on a VLAN 
+    ip_arp_inspection: ${6:value}                                          # Enables dynamic ARP inspection on a VLAN 
+    associated_interfaces: ${7:value}                                      # This is a intent option and checks the operational state of the for given vlan C(name) for associated interfaces  If the
+    associated_tagged: ${8:value}                                          # This is a intent option and checks the operational state of  given vlan C(name) for associated tagged ports and lags  If
+    delay: ${9:10}                                                         # Delay the play should wait to check for declarative intent params values 
+    stp: ${10:value}                                                       # Enable spanning-tree 802-1w/rstp for this vlan 
+    aggregate: ${11:value}                                                 # List of VLANs definitions 
+    purge: ${12:False}                                                     # Purge VLANs not defined in the I(aggregate) parameter 
+    state: ${13$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the VLAN configuration 
+    check_running_config: ${14:True}                                       # Check running configuration  This can be set as environment variable  Module will use environment variable value(default

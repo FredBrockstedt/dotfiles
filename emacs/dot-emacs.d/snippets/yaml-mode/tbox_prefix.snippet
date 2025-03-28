@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Creates or removes prefixes from Netbox
+# prefix: netbox_prefix_snippet
+# key: tbox_prefix
+# group: ansible
+# --
+
+- name: ${0:Creates or removes prefixes from Netbox}
+  netbox_prefix:                                                           
+    netbox_url: ${1:URL of the Netbox instance resolvable by Ansible control host}#
+    netbox_token: ${2:The token created within Netbox to authorize API access}#
+    data: ${3:Defines the prefix configuration}                            #
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Use C(present) or C(absent) for adding or removing 
+    first_available: ${5:false}                                            # If C(yes) and state C(present), if an parent is given, it will get the first available prefix of the given prefix_length
+    validate_certs: ${6:true}                                              # If C(no), SSL certificates will not be validated  This should only be used on personally controlled sites using self-sig

@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: PubNub blocks management module.
+# prefix: pubnub_blocks_snippet
+# key: pubnub_block
+# group: ansible
+# --
+
+- name: ${0:PubNub blocks management module.}
+  pubnub_blocks:                                                           
+    application: ${1:Name of target PubNub application for which blocks configuration on specific C(keyset) will be done}#
+    keyset: ${2:Name of application's keys set which is bound to managed blocks}#
+    name: ${3:Name of managed block which will be later visible on admin}  #pubnub com 
+    email: ${4:value}                                                      # Email from account for which new session should be started  Not required if C(cache) contains result of previous module 
+    password: ${5:value}                                                   # Password which match to account to which specified C(email) belong  Not required if C(cache) contains result of previous
+    cache: ${6:namespace()}                                                # I n   c a s e   i f   s i n g l e   p l a y   u s e   b l o c k s   m a n a g e m e n t   m o d u l e   f e w   t i m e 
+    account: ${7:value}                                                    # Name of PubNub account for from which C(application) will be used to manage blocks  User's account will be used if value
+    state: ${8$$(yas-choose-value '("started" "stopped" "present" "absent"))}# choices: started;stopped;present;absent  Intended block state after event handlers creation / update process will be c
+    description: ${9:"New block"}                                          # Short block description which will be later visible on admin pubnub com  Used only if block doesn't exists and won't cha
+    event_handlers: ${10:[]}                                               # List of event handlers which should be updated for specified block C(name)  Each entry for new event handler should cont
+    changes: ${11:namespace()}                                             # List of fields which should be changed by block itself (doesn't affect any event handlers)  Possible options for change 
+    validate_certs: ${12:True}                                             # This key allow to try skip certificates check when performing REST API calls  Sometimes host may have issues with certif

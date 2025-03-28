@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Module to manage jobs in oVirt/RHV
+# prefix: ovirt_job_snippet
+# key: ovirt_jo
+# group: ansible
+# --
+
+- name: ${0:Module to manage jobs in oVirt/RHV}
+  ovirt_job:                                                               
+    description: ${1:Description of the job}                               # When task with same description has already finished and you rerun taks it will create new job 
+    auth: ${2:Dictionary with values needed to create HTTP/HTTPS connection to oVirt:}#
+    state: ${3$$(yas-choose-value '("present" "absent" "started" "finished" "failed"))}# choices: present;absent;started;finished;failed  Should the job be C(present)/C(absent)/C(failed)  C(started
+    steps: ${4:value}                                                      # The steps of the job 
+    wait: ${5:True}                                                        # C(yes) if the module should wait for the entity to get into desired state 
+    fetch_nested: ${6:value}                                               # If I(True) the module will fetch additional data from the API  It will fetch IDs of the VMs disks, snapshots, etc  User 
+    nested_attributes: ${7:value}                                          # Specifies list of the attributes which should be fetched from the API  This parameter apply only when C(fetch_nested) is
+    timeout: ${8:180}                                                      # The amount of time in seconds the module should wait for the instance to get into desired state 
+    poll_interval: ${9:3}                                                  # Number of the seconds the module waits until another poll request on entity status is sent 

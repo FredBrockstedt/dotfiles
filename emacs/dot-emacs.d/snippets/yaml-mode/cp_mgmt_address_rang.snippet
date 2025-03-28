@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manages address-range objects on Check Point over Web Services API
+# prefix: cp_mgmt_address_range_snippet
+# key: cp_mgmt_address_rang
+# group: ansible
+# --
+
+- name: ${0:Manages address-range objects on Check Point over Web Services API}
+  cp_mgmt_address_range:                                                   
+    name: ${1:Object name}                                                 #
+    ip_address_first: ${2:value}                                           # First IP address in the range  If both IPv4 and IPv6 address ranges are required, use the ipv4-address-first and the ipv
+    ipv4_address_first: ${3:value}                                         # First IPv4 address in the range 
+    ipv6_address_first: ${4:value}                                         # First IPv6 address in the range 
+    ip_address_last: ${5:value}                                            # Last IP address in the range  If both IPv4 and IPv6 address ranges are required, use the ipv4-address-first and the ipv6
+    ipv4_address_last: ${6:value}                                          # Last IPv4 address in the range 
+    ipv6_address_last: ${7:value}                                          # Last IPv6 address in the range 
+    nat_settings: ${8:value}                                               # NAT settings 
+    tags: ${9:value}                                                       # Collection of tag identifiers 
+    color: ${10$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${11:value}                                                  # Comments string 
+    details_level: ${12$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    groups: ${13:value}                                                    # Collection of group identifiers 
+    ignore_warnings: ${14:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${15:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${16$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${17:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${18:True}                                              # Wait for the task to end  Such as publish task 
+    version: ${19:value}                                                   # Version of checkpoint  If not given one, the latest version taken 

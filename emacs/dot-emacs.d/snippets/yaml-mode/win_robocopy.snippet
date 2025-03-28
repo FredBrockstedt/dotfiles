@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Synchronizes the contents of two directories using Robocopy
+# prefix: win_robocopy_snippet
+# key: win_robocopy
+# group: ansible
+# --
+
+- name: ${0:Synchronizes the contents of two directories using Robocopy}
+  win_robocopy:                                                            
+    src: ${1:Source file/directory to sync}                                #
+    dest: ${2:Destination file/directory to sync (Will receive contents of src)}#
+    recurse: ${3:False}                                                    # Includes all subdirectories (Toggles the C(/e) flag to RoboCopy)  If C(flags) is set, this will be ignored 
+    purge: ${4:False}                                                      # Deletes any files/directories found in the destination that do not exist in the source  Toggles the C(/purge) flag to Ro
+    flags: ${5:value}                                                      # Directly supply Robocopy flags  If set, C(purge) and C(recurse) will be ignored 

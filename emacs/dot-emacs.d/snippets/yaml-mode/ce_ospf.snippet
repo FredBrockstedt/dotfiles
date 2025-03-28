@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Manages configuration of an OSPF instance on HUAWEI CloudEngine switches.
+# prefix: ce_ospf_snippet
+# key: ce_ospf
+# group: ansible
+# --
+
+- name: ${0:Manages configuration of an OSPF instance on HUAWEI CloudEngine switches.}
+  ce_ospf:                                                                 
+    process_id: ${1:Specifies a process ID}                                # The value is an integer ranging from 1 to 4294967295 
+    area: ${2:value}                                                       # Specifies the area ID  The area with the area-id being 0 is a backbone area  Valid values are a string, formatted as an 
+    addr: ${3:value}                                                       # Specifies the address of the network segment where the interface resides  The value is in dotted decimal notation 
+    mask: ${4:value}                                                       # IP network wildcard bits in decimal format between 0 and 32 
+    auth_mode: ${5$$(yas-choose-value '("none" "hmac-sha256" "md5" "hmac-md5" "simple"))}# choices: none;hmac-sha256;md5;hmac-md5;simple  Specifies the authentication type 
+    auth_text_simple: ${6:value}                                           # Specifies a password for simple authentication  The value is a string of 1 to 8 characters 
+    auth_key_id: ${7:value}                                                # Authentication key id when C(auth_mode) is 'hmac-sha256', 'md5' or 'hmac-md5  Valid value is an integer is in the range 
+    auth_text_md5: ${8:value}                                              # Specifies a password for MD5, HMAC-MD5, or HMAC-SHA256 authentication  The value is a string of 1 to 255 case-sensitive 
+    nexthop_addr: ${9:value}                                               # IPv4 address for configure next-hop address's weight  Valid values are a string, formatted as an IP address 
+    nexthop_weight: ${10:value}                                            # Indicates the weight of the next hop  The smaller the value is, the higher the preference of the route is  It is an inte
+    max_load_balance: ${11:value}                                          # The maximum number of paths for forward packets over multiple paths  Valid value is an integer in the range from 1 to 64
+    state: ${12$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  Determines whether the config should be present or not on the device 

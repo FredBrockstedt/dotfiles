@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Joins an ESXi host system to an Active Directory domain or leaves it
+# prefix: vmware_host_active_directory_snippet
+# key: vmware_host_active_directory
+# group: ansible
+# --
+
+- name: ${0:Joins an ESXi host system to an Active Directory domain or leaves it}
+  vmware_host_active_directory:                                            
+    ad_domain: ${1:value}                                                  # AD Domain to join 
+    ad_user: ${2:value}                                                    # Username for AD domain join 
+    ad_password: ${3:value}                                                # Password for AD domain join 
+    ad_state: ${4$$(yas-choose-value '("present" "absent"))}               # choices: present;absent  Whether the ESXi host is joined to an AD domain or not 
+    esxi_hostname: ${5:value}                                              # Name of the host system to work with  This parameter is required if C(cluster_name) is not specified 
+    cluster_name: ${6:value}                                               # Name of the cluster from which all host systems will be used  This parameter is required if C(esxi_hostname) is not spec
+    hostname: ${7:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${8:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${9:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${10:True}                                             # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${11:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${12:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${13:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

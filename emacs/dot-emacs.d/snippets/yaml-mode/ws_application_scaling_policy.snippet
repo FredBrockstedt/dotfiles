@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage Application Auto Scaling Scaling Policies
+# prefix: aws_application_scaling_policy_snippet
+# key: ws_application_scaling_policy
+# group: ansible
+# --
+
+- name: ${0:Manage Application Auto Scaling Scaling Policies}
+  aws_application_scaling_policy:                                          
+    policy_name: ${1:T h e   n a m e   o f   t h e   s c a l i n g   p o l i c y }#
+    service_namespace: ${2$$(yas-choose-value '("ecs" "elasticmapreduce" "ec2" "appstream" "dynamodb"))}# T h e   n a m e s p a c e   o f   t h e   A W S   s e r v i c e  
+    resource_id: ${3:T h e   i d e n t i f i e r   o f   t h e   r e s o u r c e   a s s o c i a t e d   w i t h   t h e   s c a l a b l e   t a r g e t }#
+    scalable_dimension: ${4$$(yas-choose-value '("ecs:service:DesiredCount" "ec2:spot-fleet-request:TargetCapacity" "elasticmapreduce:instancegroup:InstanceCount" "appstream:fleet:DesiredCapacity" 
+    policy_type: ${5$$(yas-choose-value '("StepScaling" "TargetTrackingScaling"))}# T h e   p o l i c y   t y p e  
+    step_scaling_policy_configuration: ${6:value}                          # A   s t e p   s c a l i n g   p o l i c y     T h i s   p a r a m e t e r   i s   r e q u i r e d   i f   y o u   a r e 
+    target_tracking_scaling_policy_configuration: ${7:value}               # A   t a r g e t   t r a c k i n g   p o l i c y     T h i s   p a r a m e t e r   i s   r e q u i r e d   i f   y o u   
+    minimum_tasks: ${8:value}                                              # T h e   m i n i m u m   v a l u e   t o   s c a l e   t o   i n   r e s p o n s e   t o   a   s c a l e   i n   e v e n 
+    maximum_tasks: ${9:value}                                              # T h e   m a x i m u m   v a l u e   t o   s c a l e   t o   i n   r e s p o n s e   t o   a   s c a l e   o u t   e v e 
+    override_task_capacity: ${10:False}                                    # W h e t h e r   o r   n o t   t o   o v e r r i d e   v a l u e s   o f   m i n i m u m   a n d / o r   m a x i m u m   
+    debug_botocore_endpoint_logs: ${11:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${12:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${13:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${14:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${15:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${16:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${17:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${18:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

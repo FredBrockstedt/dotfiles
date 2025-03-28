@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages licenses in a BIG-IQ registration key pool
+# prefix: bigiq_regkey_license_snippet
+# key: giq_regkey_lic
+# group: ansible
+# --
+
+- name: ${0:Manages licenses in a BIG-IQ registration key pool}
+  bigiq_regkey_license:                                                    
+    regkey_pool: ${1:The registration key pool that you want to place the license in}# You must be mindful to name your registration pools unique names  While BIG-IQ does not require this, this mod
+    license_key: ${2:The license key to put in the pool}                   #
+    description: ${3:value}                                                # Description of the license 
+    accept_eula: ${4:value}                                                # A key that signifies that you accept the F5 EULA for this license  A copy of the EULA can be found here https://askf5 f5
+    state: ${5$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state of the regkey license in the pool on the system  When C(present), guarantees that the
+    provider: ${6:value}                                                   # A dict object containing connection details 

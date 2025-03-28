@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manage bandwidth resource control and priority for protocols, services and zones on Solaris/illumos systems
+# prefix: flowadm_snippet
+# key: flowadm
+# group: ansible
+# --
+
+- name: ${0:Manage bandwidth resource control and priority for protocols, services and zones on Solaris/illumos systems}
+  flowadm:                                                                 
+    name: ${1:-   A   f l o w   i s   d e f i n e d   a s   a   s e t   o f   a t t r i b u t e s   b a s e d   o n   L a y e r   3   a n d   L a y e r   4   h e a d e r s ,   w h i c h   c a n   b
+    link: ${2:value}                                                       # Specifiies a link to configure flow on 
+    local_ip: ${3:value}                                                   # Identifies a network flow by the local IP address 
+    remote_ip: ${4:value}                                                  # Identifies a network flow by the remote IP address 
+    transport: ${5:value}                                                  # -   S p e c i f i e s   a   L a y e r   4   p r o t o c o l   t o   b e   u s e d     I t   i s   t y p i c a l l y   u 
+    local_port: ${6:value}                                                 # Identifies a service specified by the local port 
+    dsfield: ${7:value}                                                    # -   I d e n t i f i e s   t h e   8 - b i t   d i f f e r e n t i a t e d   s e r v i c e s   f i e l d   ( a s   d e f 
+    maxbw: ${8:value}                                                      # -   S e t s   t h e   f u l l   d u p l e x   b a n d w i d t h   f o r   t h e   f l o w     T h e   b a n d w i d t h 
+    priority: ${9$$(yas-choose-value '("low" "medium" "high"))}            # choices: low;medium;high  Sets the relative priority for the flow 
+    temporary: ${10:False}                                                 # Specifies that the configured flow is temporary  Temporary flows do not persist across reboots 
+    state: ${11$$(yas-choose-value '("absent" "present" "resetted"))}      # choices: absent;present;resetted  Create/delete/enable/disable an IP address on the network interface 

@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: add or delete health-checks in Amazons Route53 DNS service
+# prefix: route53_health_check_snippet
+# key: route53_health_check
+# group: ansible
+# --
+
+- name: ${0:add or delete health-checks in Amazons Route53 DNS service}
+  route53_health_check:                                                    
+    state: ${1$$(yas-choose-value '("present" "absent"))}                  # Specifies the action to take 
+    type: ${2$$(yas-choose-value '("HTTP" "HTTPS" "HTTP_STR_MATCH" "HTTPS_STR_MATCH" "TCP"))}# The type of health check that you want to create, which indicates how Amazon Route 53 determines wheth
+    request_interval: ${3$$(yas-choose-value '("10" "30"))}                # The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it send
+    failure_threshold: ${4$$(yas-choose-value '("1" "2" "3" "4" "5" "6" "7" "8" "9" "10"))}# The number of consecutive health checks that an endpoint must pass or fail for Amazon Route 53 to change
+    ip_address: ${5:value}                                                 # IP address of the end-point to check  Either this or `fqdn` has to be provided 
+    port: ${6:value}                                                       # The port on the endpoint on which you want Amazon Route 53 to perform health checks  Required for TCP checks 
+    resource_path: ${7:value}                                              # The path that you want Amazon Route 53 to request when performing health checks  The path can be any value for which you
+    fqdn: ${8:value}                                                       # Domain name of the endpoint to check  Either this or `ip_address` has to be provided  When both are given the `fqdn` is 
+    string_match: ${9:value}                                               # If the check type is HTTP_STR_MATCH or HTTP_STR_MATCH, the string that you want Amazon Route 53 to search for in the res
+    debug_botocore_endpoint_logs: ${10:false}                              # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${11:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${12:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${13:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${14:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${15:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${16:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${17:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

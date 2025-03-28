@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Gathers facts about remote hosts
+# prefix: setup_snippet
+# key: tup
+# group: ansible
+# --
+
+- name: ${0:Gathers facts about remote hosts}
+  setup:                                                                   
+    gather_subset: ${1:all}                                                # If supplied, restrict the additional facts collected to the given subset  Possible values: C(all), C(min), C(hardware), 
+    gather_timeout: ${2:10}                                                # Set the default timeout in seconds for individual fact gathering 
+    filter: ${3:*}                                                         # If supplied, only return facts that match this shell-style (fnmatch) wildcard 
+    fact_path: ${{4:/etc/ansible/facts}                                    #d} # not required  Path used for local ansible facts (C(* fact)) - files in this dir will be run (if executable) and thei

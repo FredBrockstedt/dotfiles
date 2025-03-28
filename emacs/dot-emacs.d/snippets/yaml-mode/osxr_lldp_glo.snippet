@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manage Global Link Layer Discovery Protocol (LLDP) settings on IOS-XR devices.
+# prefix: iosxr_lldp_global_snippet
+# key: osxr_lldp_glo
+# group: ansible
+# --
+
+- name: ${0:Manage Global Link Layer Discovery Protocol (LLDP) settings on IOS-XR devices.}
+  iosxr_lldp_global:                                                       
+    config: ${1:value}                                                     # T h e   p r o v i d e d   g l o b a l   L L D P   c o n f i g u r a t i o n  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "deleted"))}       # choices: merged;replaced;deleted  The state of the configuration after module completion 

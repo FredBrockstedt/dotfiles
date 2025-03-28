@@ -1,0 +1,44 @@
+# -*- mode: snippet -*-
+# name: Manages simple-gateway objects on Check Point over Web Services API
+# prefix: cp_mgmt_simple_gateway_snippet
+# key: cp_mgmt_simple_gateway
+# group: ansible
+# --
+
+- name: ${0:Manages simple-gateway objects on Check Point over Web Services API}
+  cp_mgmt_simple_gateway:                                                  
+    name: ${1:Object name}                                                 #
+    ip_address: ${2:value}                                                 # IPv4 or IPv6 address  If both addresses are required use ipv4-address and ipv6-address fields explicitly 
+    ipv4_address: ${3:value}                                               # IPv4 address 
+    ipv6_address: ${4:value}                                               # IPv6 address 
+    anti_bot: ${5:value}                                                   # Anti-Bot blade enabled 
+    anti_virus: ${6:value}                                                 # Anti-Virus blade enabled 
+    application_control: ${7:value}                                        # Application Control blade enabled 
+    content_awareness: ${8:value}                                          # Content Awareness blade enabled 
+    firewall: ${9:value}                                                   # Firewall blade enabled 
+    firewall_settings: ${10:value}                                         # N/A
+    interfaces: ${11:value}                                                # Network interfaces  When a gateway is updated with a new interfaces, the existing interfaces are removed 
+    ips: ${12:value}                                                       # Intrusion Prevention System blade enabled 
+    logs_settings: ${13:value}                                             # N/A
+    one_time_password: ${14:value}                                         # N/A
+    os_name: ${15:value}                                                   # Gateway platform operating system 
+    save_logs_locally: ${16:value}                                         # Save logs locally on the gateway 
+    send_alerts_to_server: ${17:value}                                     # Server(s) to send alerts to 
+    send_logs_to_backup_server: ${18:value}                                # Backup server(s) to send logs to 
+    send_logs_to_server: ${19:value}                                       # Server(s) to send logs to 
+    tags: ${20:value}                                                      # Collection of tag identifiers 
+    threat_emulation: ${21:value}                                          # Threat Emulation blade enabled 
+    threat_extraction: ${22:value}                                         # Threat Extraction blade enabled 
+    url_filtering: ${23:value}                                             # URL Filtering blade enabled 
+    version: ${24:value}                                                   # Gateway platform version 
+    vpn: ${25:value}                                                       # VPN blade enabled 
+    vpn_settings: ${26:value}                                              # Gateway VPN settings 
+    color: ${27$$(yas-choose-value '("aquamarine" "black" "blue" "crete blue" "burlywood" "cyan" "dark green" "khaki" "orchid" "dark orange" "dark sea green" "pink" "turquoise" "dark blue" "firebri
+    comments: ${28:value}                                                  # Comments string 
+    details_level: ${29$$(yas-choose-value '("uid" "standard" "full"))}    # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    groups: ${30:value}                                                    # Collection of group identifiers 
+    ignore_warnings: ${31:value}                                           # Apply changes ignoring warnings 
+    ignore_errors: ${32:value}                                             # Apply changes ignoring errors  You won't be able to publish such a changes  If ignore-warnings flag was omitted - warnin
+    state: ${33$$(yas-choose-value '("present" "absent"))}                 # choices: present;absent  State of the access rule (present or absent)  Defaults to present 
+    auto_publish_session: ${34:value}                                      # Publish the current session if changes have been performed after task completes 
+    wait_for_task: ${35:True}                                              # Wait for the task to end  Such as publish task 

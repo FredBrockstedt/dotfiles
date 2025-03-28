@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Configure sFlow per VDOM to add or change the IP address and UDP port that FortiGate sFlow agents in this VDOM use to send sFlow datagrams to an sFlow collector in Fortinet's FortiOS and FortiGate.
+# prefix: fortios_system_vdom_sflow_snippet
+# key: fortios_system_vdom_sflow
+# group: ansible
+# --
+
+- name: ${0:Configure sFlow per VDOM to add or change the IP address and UDP port that FortiGate sFlow agents in this VDOM use to send sFlow datagrams to an sFlow collector in Fortinet's FortiOS and FortiGate.}
+  fortios_system_vdom_sflow:                                               
+    host: ${1:value}                                                       # FortiOS or FortiGate IP address 
+    username: ${2:value}                                                   # FortiOS or FortiGate username 
+    password: ${3:}                                                        # FortiOS or FortiGate password 
+    vdom: ${4:root}                                                        # Virtual domain, among those defined previously  A vdom is a virtual instance of the FortiGate that can be configured and
+    https: ${5:True}                                                       # Indicates if the requests towards FortiGate must use HTTPS protocol 
+    ssl_verify: ${6:True}                                                  # Ensures FortiGate certificate must be verified by a proper CA 
+    system_vdom_sflow: ${7:None}                                           # Configure sFlow per VDOM to add or change the IP address and UDP port that FortiGate sFlow agents in this VDOM use to se

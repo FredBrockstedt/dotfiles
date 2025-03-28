@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: NetApp E-Series manage LDAP integration to use for authentication
+# prefix: netapp_e_ldap_snippet
+# key: tapp_e_ldap
+# group: ansible
+# --
+
+- name: ${0:NetApp E-Series manage LDAP integration to use for authentication}
+  netapp_e_ldap:                                                           
+    username: ${1:This is the user account that will be used for querying the LDAP server}# Example: CN=MyBindAcct,OU=ServiceAccounts,DC=example,DC=com
+    password: ${2:This is the password for the bind user account}          #
+    server: ${3:This is the LDAP server url}                               # The connection string should be specified as using the ldap or ldaps protocol along with the port information 
+    search_base: ${4:The search base is used to find group memberships of the user}# Example: ou=users,dc=example,dc=com
+    role_mappings: ${5:This is where you specify which groups should have access to what permissions for the storage-system}# For example, all users in group A will be assigned all 4 available role
+    api_username: ${6:The username to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_password: ${7:The password to authenticate with the SANtricity Web Services Proxy or Embedded Web Services API}#
+    api_url: ${8:The url to the SANtricity Web Services Proxy or Embedded Web Services API}# Example https://prod-1 wahoo acme com/devmgr/v2
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Enable/disable LDAP support on the system  Disabling will clear out any existing defined domain
+    identifier: ${10:value}                                                # This is a unique identifier for the configuration (for cases where there are multiple domains configured)  If this is no
+    attributes: ${11:memberOf}                                             # The user attributes that should be considered for the group to role mapping  Typically this is used with something like 
+    name: ${12:value}                                                      # The domain name[s] that will be utilized when authenticating to identify which domain to utilize  Default to use the DNS
+    user_attribute: ${13:sAMAccountName}                                   # This is the attribute we will use to match the provided username when a user attempts to authenticate 
+    log_path: ${14:value}                                                  # A local path to a file to be used for debug logging
+    validate_certs: ${15:True}                                             # Should https certificates be validated?
+    ssid: ${16:1}                                                          # The ID of the array to manage  This value must be unique for each array 

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Send a message to logentries.
+# prefix: logentries_msg_snippet
+# key: ogentries_msg
+# group: ansible
+# --
+
+- name: ${0:Send a message to logentries.}
+  logentries_msg:                                                          
+    token: ${1:Log token}                                                  #
+    msg: ${2:The message body}                                             #
+    api: ${{3:data}                                                        #logentries com} # not required  API endpoint
+    port: ${4:80}                                                          # API endpoint port

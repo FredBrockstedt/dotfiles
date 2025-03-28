@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Manages BIG-IQ HTTPS offload applications
+# prefix: bigiq_application_https_offload_snippet
+# key: giq_application_https_offload
+# group: ansible
+# --
+
+- name: ${0:Manages BIG-IQ HTTPS offload applications}
+  bigiq_application_https_offload:                                         
+    name: ${1:Name of the new application}                                 #
+    description: ${2:value}                                                # Description of the application 
+    servers: ${3:value}                                                    # A list of servers that the application is hosted on  If you are familiar with other BIG-IP setting, you might also refer
+    inbound_virtual: ${4:value}                                            # Settings to configure the virtual which will receive the inbound connection  This virtual will be used to host the HTTPS
+    redirect_virtual: ${5:value}                                           # Settings to configure the virtual which will receive the connection to be redirected  This virtual will be used to host 
+    client_ssl_profile: ${6:value}                                         # Specifies the SSL profile for managing client-side SSL traffic 
+    service_environment: ${7:value}                                        # Specifies the name of service environment or the hostname of the BIG-IP that the application will be deployed to  When c
+    add_analytics: ${8:False}                                              # Collects statistics of the BIG-IP that the application is deployed to  This parameter is only relevant when specifying a
+    state: ${9$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state of the resource on the system  When C(present), guarantees that the resource exists w
+    wait: ${10:True}                                                       # If the module should wait for the application to be created, deleted or updated 
+    provider: ${11:value}                                                  # A dict object containing connection details 

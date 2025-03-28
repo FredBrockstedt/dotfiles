@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: Manages SNMP location information.
+# prefix: nxos_snmp_location_snippet
+# key: xos_snmp_locatio
+# group: ansible
+# --
+
+- name: ${0:Manages SNMP location information.}
+  nxos_snmp_location:                                                      
+    location: ${1:Location information}                                    #
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 
+    provider: ${3:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

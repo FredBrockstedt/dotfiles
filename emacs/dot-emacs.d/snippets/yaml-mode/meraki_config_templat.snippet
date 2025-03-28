@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Manage configuration templates in the Meraki cloud
+# prefix: meraki_config_template_snippet
+# key: meraki_config_templat
+# group: ansible
+# --
+
+- name: ${0:Manage configuration templates in the Meraki cloud}
+  meraki_config_template:                                                  
+    auth_key: ${1:Authentication key provided by the dashboard}            # Required if environmental variable C(MERAKI_KEY) is not set 
+    state: ${2$$(yas-choose-value '("absent" "query" "present"))}          # choices: absent;query;present  Specifies whether configuration template information should be queried, modified, or dele
+    org_name: ${3:value}                                                   # Name of organization containing the configuration template 
+    org_id: ${4:value}                                                     # ID of organization associated to a configuration template 
+    config_template: ${5:value}                                            # Name of the configuration template within an organization to manipulate 
+    net_name: ${6:value}                                                   # Name of the network to bind or unbind configuration template to 
+    net_id: ${7:value}                                                     # ID of the network to bind or unbind configuration template to 
+    auto_bind: ${8:value}                                                  # Optional boolean indicating whether the network's switches should automatically bind to profiles of the same model  This
+    host: ${{9:api}                                                        #meraki com} # not required  Hostname for Meraki dashboard  Can be used to access regional Meraki environments, such as Ch
+    use_proxy: ${10:value}                                                 # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_https: ${11:True}                                                  # If C(no), it will use HTTP  Otherwise it will use HTTPS  Only useful for internal Meraki developers 
+    output_format: ${12$$(yas-choose-value '("snakecase" "camelcase"))}    # choices: snakecase;camelcase  Instructs module whether response keys should be snake case (ex  C(net_id)) or camel case 
+    output_level: ${13$$(yas-choose-value '("debug" "normal"))}            # choices: debug;normal  Set amount of debug output during module execution 
+    timeout: ${14:30}                                                      # Time to timeout for HTTP requests 
+    validate_certs: ${15:True}                                             # Whether to validate HTTP certificates 
+    rate_limit_retry_time: ${16:165}                                       # Number of seconds to retry if rate limiter is triggered 
+    internal_error_retry_time: ${17:60}                                    # Number of seconds to retry if server returns an internal server error 

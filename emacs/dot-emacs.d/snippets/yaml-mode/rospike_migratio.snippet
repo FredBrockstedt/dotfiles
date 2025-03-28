@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Check or wait for migrations between nodes
+# prefix: aerospike_migrations_snippet
+# key: rospike_migratio
+# group: ansible
+# --
+
+- name: ${0:Check or wait for migrations between nodes}
+  aerospike_migrations:                                                    
+    local_only: ${1:Do you wish to only check for migrations on the local node before returning, or do you want all nodes in the cluster to finish before returning?}#
+    host: ${2:localhost}                                                   # Which host do we use as seed for info connection
+    port: ${3:3000}                                                        # Which port to connect to Aerospike on (service port)
+    connect_timeout: ${4:1000}                                             # How long to try to connect before giving up (milliseconds)
+    consecutive_good_checks: ${5:3}                                        # How many times should the cluster report "no migrations" consecutively before returning OK back to ansible?
+    sleep_between_checks: ${6:60}                                          # How long to sleep between each check (seconds) 
+    tries_limit: ${7:300}                                                  # How many times do we poll before giving up and failing?
+    min_cluster_size: ${8:1}                                               # Check will return bad until cluster size is met or until tries is exhausted
+    fail_on_cluster_change: ${9:True}                                      # Fail if the cluster key changes if something else is changing the cluster, we may want to fail
+    migrate_tx_key: ${10:migrate_tx_partitions_remaining}                  # The metric key used to determine if we have tx migrations remaining  Changeable due to backwards compatibility 
+    migrate_rx_key: ${11:migrate_rx_partitions_remaining}                  # The metric key used to determine if we have rx migrations remaining  Changeable due to backwards compatibility 
+    target_cluster_size: ${12:value}                                       # When all aerospike builds in the cluster are greater than version 4 3, then the C(cluster-stable) info command will be u

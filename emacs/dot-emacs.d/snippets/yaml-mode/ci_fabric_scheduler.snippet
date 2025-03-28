@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: This modules creates ACI schedulers.
+# prefix: aci_fabric_scheduler_snippet
+# key: ci_fabric_scheduler
+# group: ansible
+# --
+
+- name: ${0:This modules creates ACI schedulers.}
+  aci_fabric_scheduler:                                                    
+    name: ${1:The name of the Scheduler}                                   #
+    host: ${2:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${4:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    description: ${5:value}                                                # Description for the Scheduler 
+    recurring: ${6:false}                                                  # If you want to make the Scheduler a recurring it would be a "True" and for a oneTime execution it would be "False"  For 
+    windowname: ${7:value}                                                 # This is the name for your what recurring or oneTime execution
+    concurCap: ${8:value}                                                  # This is the amount of devices that can be executed on at a time
+    maxTime: ${9:value}                                                    # This is the amount MAX amount of time a process can be executed
+    date: ${10:value}                                                      # This is the date and time that the scheduler will execute
+    hour: ${11:value}                                                      # This set the hour of execution
+    minute: ${12:value}                                                    # This sets the minute of execution, used in conjunction with hour
+    day: ${13$$(yas-choose-value '("Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" "Sunday" "even-day" "odd-day" "every-day"))}# choices: Monday;Tuesday;Wednesday;Thursday;Friday;Satu
+    state: ${14$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${15:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${16:admin}                                                  # The username to use for authentication 
+    certificate_name: ${17:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${18$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${19:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${20:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${21:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${22:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

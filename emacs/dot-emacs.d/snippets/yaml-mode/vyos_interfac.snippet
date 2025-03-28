@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: Manages interface attributes of VyOS network devices.
+# prefix: vyos_interfaces_snippet
+# key: vyos_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages interface attributes of VyOS network devices.}
+  vyos_interfaces:                                                         
+    config: ${1:value}                                                     # T h e   p r o v i d e d   i n t e r f a c e s   c o n f i g u r a t i o n  
+    state: ${2$$(yas-choose-value '("merged" "replaced" "overridden" "deleted"))}# choices: merged;replaced;overridden;deleted  The state of the configuration after module completion 

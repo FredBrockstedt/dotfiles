@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Execute shell commands on targets
+# prefix: shell_snippet
+# key: h
+# group: ansible
+# --
+
+- name: ${0:Execute shell commands on targets}
+  shell:                                                                   
+    free_form: ${1:value}                                                  # The shell module takes a free form command to run, as a string  There is no actual parameter named 'free form'  See the 
+    cmd: ${2:value}                                                        # The command to run followed by optional arguments 
+    creates: ${3:value}                                                    # A filename, when it already exists, this step will B(not) be run 
+    removes: ${4:value}                                                    # A filename, when it does not exist, this step will B(not) be run 
+    chdir: ${5:value}                                                      # Change into this directory before running the command 
+    executable: ${6:value}                                                 # Change the shell used to execute the command  This expects an absolute path to the executable 
+    warn: ${7:True}                                                        # Whether to enable task warnings 
+    stdin: ${8:value}                                                      # Set the stdin of the command directly to the specified value 
+    stdin_add_newline: ${9:True}                                           # Whether to append a newline to stdin data 

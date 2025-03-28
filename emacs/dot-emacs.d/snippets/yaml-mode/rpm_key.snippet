@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Adds or removes a gpg key from the rpm db
+# prefix: rpm_key_snippet
+# key: rpm_key
+# group: ansible
+# --
+
+- name: ${0:Adds or removes a gpg key from the rpm db}
+  rpm_key:                                                                 
+    key: ${1:Key that will be modified}                                    # Can be a url, a file on the managed node, or a keyid if the key already exists in the database 
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  If the key will be imported or removed from the rpm db 
+    validate_certs: ${3:true}                                              # If C(no) and the C(key) is a url starting with https, SSL certificates will not be validated  This should only be used o
+    fingerprint: ${4:value}                                                # The long-form fingerprint of the key being imported  This will be used to verify the specified key 

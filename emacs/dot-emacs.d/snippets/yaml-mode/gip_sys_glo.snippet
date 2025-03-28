@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP global settings
+# prefix: bigip_sys_global_snippet
+# key: gip_sys_glo
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP global settings}
+  bigip_sys_global:                                                        
+    banner_text: ${1:value}                                                # Specifies the text to present in the advisory banner 
+    console_timeout: ${2:value}                                            # Specifies the number of seconds of inactivity before the system logs off a user that is logged on 
+    gui_setup: ${3:value}                                                  # C(yes) or C(no) the Setup utility in the browser-based Configuration utility 
+    lcd_display: ${4:value}                                                # Specifies, when C(yes), that the system menu displays on the LCD screen on the front of the unit  This setting has no ef
+    mgmt_dhcp: ${5:value}                                                  # Specifies whether or not to enable DHCP client on the management interface
+    net_reboot: ${6:value}                                                 # Specifies, when C(yes), that the next time you reboot the system, the system boots to an ISO image on the network, rathe
+    quiet_boot: ${7:value}                                                 # Specifies, when C(yes), that the system suppresses informational text on the console during the boot cycle  When C(no), 
+    security_banner: ${8:value}                                            # Specifies whether the system displays an advisory message on the login screen 
+    state: ${9$$(yas-choose-value '("present"))}                           # choices: present  The state of the variable on the system  When C(present), guarantees that an existing variable is set 
+    provider: ${10:value}                                                  # A dict object containing connection details 

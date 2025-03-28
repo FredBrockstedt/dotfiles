@@ -1,0 +1,28 @@
+# -*- mode: snippet -*-
+# name: Manages F5 BIG-IP LTM nodes
+# prefix: bigip_node_snippet
+# key: gip_nod
+# group: ansible
+# --
+
+- name: ${0:Manages F5 BIG-IP LTM nodes}
+  bigip_node:                                                              
+    name: ${1:Specifies the name of the node}                              #
+    state: ${2$$(yas-choose-value '("present" "absent" "enabled" "disabled" "offline"))}# choices: present;absent;enabled;disabled;offline  Specifies the current state of the node  C(enabled) (All 
+    monitor_type: ${3$$(yas-choose-value '("and_list" "m_of_n" "single"))} # choices: and_list;m_of_n;single  Monitor rule type when C(monitors) is specified  When creating a new pool, if this valu
+    quorum: ${4:value}                                                     # Monitor quorum value when C(monitor_type) is C(m_of_n) 
+    monitors: ${5:value}                                                   # Specifies the health monitors that the system currently uses to monitor this node 
+    address: ${6:value}                                                    # IP address of the node  This can be either IPv4 or IPv6  When creating a new node, one of either C(address) or C(fqdn) m
+    fqdn: ${7:value}                                                       # FQDN name of the node  This can be any name that is a valid RFC 1123 DNS name  Therefore, the only characters that can b
+    fqdn_address_type: ${8$$(yas-choose-value '("ipv4" "ipv6" "all"))}     # choices: ipv4;ipv6;all  Specifies whether the FQDN of the node resolves to an IPv4 or IPv6 address  When creating a new 
+    fqdn_auto_populate: ${9:value}                                         # Specifies whether the system automatically creates ephemeral nodes using the IP addresses returned by the resolution of 
+    fqdn_up_interval: ${10:value}                                          # Specifies the interval in which a query occurs, when the DNS server is up  The associated monitor attempts to probe thre
+    fqdn_down_interval: ${11:value}                                        # Specifies the interval in which a query occurs, when the DNS server is down  The associated monitor continues polling as
+    description: ${12:value}                                               # Specifies descriptive text that identifies the node  You can remove a description by either specifying an empty string, 
+    connection_limit: ${13:value}                                          # Node connection limit  Setting this to 0 disables the limit 
+    rate_limit: ${14:value}                                                # Node rate limit (connections-per-second)  Setting this to 0 disables the limit 
+    ratio: ${15:value}                                                     # Node ratio weight  Valid values range from 1 through 100  When creating a new node, if this parameter is not specified, 
+    dynamic_ratio: ${16:value}                                             # The dynamic ratio number for the node  Used for dynamic ratio load balancing  When creating a new node, if this paramete
+    availability_requirements: ${17:value}                                 # Specifies, if you activate more than one health monitor, the number of health monitors that must receive successful resp
+    partition: ${18:Common}                                                # Device partition to manage resources on 
+    provider: ${19:value}                                                  # A dict object containing connection details 

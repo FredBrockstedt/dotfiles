@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Manages IGMP interface configuration.
+# prefix: nxos_igmp_interface_snippet
+# key: xos_igmp_interfac
+# group: ansible
+# --
+
+- name: ${0:Manages IGMP interface configuration.}
+  nxos_igmp_interface:                                                     
+    interface: ${1:The full interface name for IGMP configuration}         # e g  I(Ethernet1/2) 
+    version: ${2$$(yas-choose-value '("2" "3" "default"))}                 # choices: 2;3;default  IGMP version  It can be 2 or 3 or keyword 'default' 
+    startup_query_interval: ${3:value}                                     # Query interval used when the IGMP process starts up  The range is from 1 to 18000 or keyword 'default'  The default is 3
+    startup_query_count: ${4:value}                                        # Query count used when the IGMP process starts up  The range is from 1 to 10 or keyword 'default'  The default is 2 
+    robustness: ${5:value}                                                 # Sets the robustness variable  Values can range from 1 to 7 or keyword 'default'  The default is 2 
+    querier_timeout: ${6:value}                                            # Sets the querier timeout that the software uses when deciding to take over as the querier  Values can range from 1 to 65
+    query_mrt: ${7:value}                                                  # Sets the response time advertised in IGMP queries  Values can range from 1 to 25 seconds or keyword 'default'  The defau
+    query_interval: ${8:value}                                             # Sets the frequency at which the software sends IGMP host query messages  Values can range from 1 to 18000 seconds or key
+    last_member_qrt: ${9:value}                                            # Sets the query interval waited after sending membership reports before the software deletes the group state  Values can 
+    last_member_query_count: ${10:value}                                   # Sets the number of times that the software sends an IGMP query in response to a host leave message  Values can range fro
+    group_timeout: ${11:value}                                             # Sets the group membership timeout for IGMPv2  Values can range from 3 to 65,535 seconds or keyword 'default'  The defaul
+    report_llg: ${12:value}                                                # Configures report-link-local-groups  Enables sending reports for groups in 224 0 0 0/24  Reports are always sent for non
+    immediate_leave: ${13:value}                                           # Enables the device to remove the group entry from the multicast routing table immediately upon receiving a leave message
+    oif_routemap: ${14:value}                                              # Configure a routemap for static outgoing interface (OIF) or keyword 'default' 
+    oif_prefix: ${15:value}                                                # This argument is deprecated, please use oif_ps instead  Configure a prefix for static outgoing interface (OIF) 
+    oif_source: ${16:value}                                                # This argument is deprecated, please use oif_ps instead  Configure a source for static outgoing interface (OIF) 
+    oif_ps: ${17:value}                                                    # Configure prefixes and sources for static outgoing interface (OIF)  This is a list of dict where each dict has source an
+    restart: ${18:False}                                                   # Restart IGMP  This is NOT idempotent as this is action only 
+    state: ${19$$(yas-choose-value '("present" "absent" "default"))}       # choices: present;absent;default  Manages desired state of the resource 
+    provider: ${20:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

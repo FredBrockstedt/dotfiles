@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manage runit services
+# prefix: runit_snippet
+# key: runit
+# group: ansible
+# --
+
+- name: ${0:Manage runit services}
+  runit:                                                                   
+    name: ${1:Name of the service to manage}                               #
+    state: ${2$$(yas-choose-value '("killed" "once" "reloaded" "restarted" "started" "stopped"))}# choices: killed;once;reloaded;restarted;started;stopped  C(started)/C(stopped) are idempotent acti
+    enabled: ${3:value}                                                    # Whether the service is enabled or not, if disabled it also implies stopped 
+    service_dir: ${4:/var/service}                                         # directory runsv watches for services
+    service_src: ${5:/etc/sv}                                              # directory where services are defined, the source of symlinks to service_dir 

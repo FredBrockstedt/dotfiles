@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: Add and remove Zypper repositories
+# prefix: zypper_repository_snippet
+# key: zypper_repository
+# group: ansible
+# --
+
+- name: ${0:Add and remove Zypper repositories}
+  zypper_repository:                                                       
+    name: ${1:value}                                                       # A name for the repository  Not required when adding repofiles 
+    repo: ${2:value}                                                       # URI of the repository or  repo file  Required when state=present 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  A source string state 
+    description: ${4:value}                                                # A description of the repository
+    disable_gpg_check: ${5:false}                                          # Whether to disable GPG signature checking of all packages  Has an effect only if state is I(present)  Needs zypper versi
+    autorefresh: ${6:true}                                                 # Enable autorefresh of the repository 
+    priority: ${7:value}                                                   # Set priority of repository  Packages will always be installed from the repository with the smallest priority number  Nee
+    overwrite_multiple: ${8:false}                                         # Overwrite multiple repository entries, if repositories with both name and URL already exist 
+    auto_import_keys: ${9:false}                                           # Automatically import the gpg signing key of the new or changed repository  Has an effect only if state is I(present)  Ha
+    runrefresh: ${10:false}                                                # Refresh the package list of the given repository  Can be used with repo=* to refresh all repositories 
+    enabled: ${11:true}                                                    # Set repository to enabled (or disabled) 

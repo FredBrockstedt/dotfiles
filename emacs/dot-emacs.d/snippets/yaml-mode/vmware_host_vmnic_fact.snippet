@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: Gathers facts about vmnics available on the given ESXi host
+# prefix: vmware_host_vmnic_facts_snippet
+# key: vmware_host_vmnic_fact
+# group: ansible
+# --
+
+- name: ${0:Gathers facts about vmnics available on the given ESXi host}
+  vmware_host_vmnic_facts:                                                 
+    capabilities: ${1:False}                                               # Gather facts about general capabilities (Auto negotiation, Wake On LAN, and Network I/O Control) 
+    directpath_io: ${2:False}                                              # Gather facts about DirectPath I/O capabilities and configuration 
+    sriov: ${3:False}                                                      # Gather facts about SR-IOV capabilities and configuration 
+    esxi_hostname: ${4:value}                                              # Name of the host system to work with  Vmnic facts about this ESXi server will be returned  This parameter is required if
+    cluster_name: ${5:value}                                               # Name of the cluster from which all host systems will be used  Vmnic facts about each ESXi server will be returned for th
+    hostname: ${6:value}                                                   # The hostname or IP address of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value o
+    username: ${7:value}                                                   # The username of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    password: ${8:value}                                                   # The password of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environment 
+    validate_certs: ${9:True}                                              # Allows connection when SSL certificates are not valid  Set to C(false) when certificates are not trusted  If the value i
+    port: ${10:443}                                                        # The port number of the vSphere vCenter or ESXi server  If the value is not specified in the task, the value of environme
+    proxy_host: ${11:value}                                                # Address of a proxy that will receive all HTTPS requests and relay them  The format is a hostname or a IP  If the value i
+    proxy_port: ${12:value}                                                # Port of the HTTP proxy that will receive all HTTPS requests and relay them  If the value is not specified in the task, t

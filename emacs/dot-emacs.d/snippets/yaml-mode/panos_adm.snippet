@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: Add or modify PAN-OS user accounts password.
+# prefix: panos_admin_snippet
+# key: panos_adm
+# group: ansible
+# --
+
+- name: ${0:Add or modify PAN-OS user accounts password.}
+  panos_admin:                                                             
+    admin_password: ${1:password for admin user}                           #
+    ip_address: ${2:IP address (or hostname) of PAN-OS device}             #
+    password: ${3:Password for authentication}                             #
+    admin_username: ${4:admin}                                             # username for admin user
+    role: ${5:value}                                                       # role for admin user
+    commit: ${6:true}                                                      # commit if changed
+    username: ${7:admin}                                                   # Username for authentication 

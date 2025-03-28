@@ -1,0 +1,30 @@
+# -*- mode: snippet -*-
+# name: Manage the collection of VRF definitions on Cisco IOS devices
+# prefix: ios_vrf_snippet
+# key: os_vrf
+# group: ansible
+# --
+
+- name: ${0:Manage the collection of VRF definitions on Cisco IOS devices}
+  ios_vrf:                                                                 
+    vrfs: ${1:value}                                                       # The set of VRF definition objects to be configured on the remote IOS device   Ths list entries can either be the VRF nam
+    name: ${2:value}                                                       # The name of the VRF definition to be managed on the remote IOS device   The VRF definition name is an ASCII string name 
+    description: ${3:value}                                                # Provides a short description of the VRF definition in the current active configuration   The VRF definition value accept
+    rd: ${4:value}                                                         # The router-distinguisher value uniquely identifies the VRF to routing processes on the remote IOS system   The RD value 
+    interfaces: ${5:value}                                                 # Identifies the set of interfaces that should be configured in the VRF   Interfaces must be routed interfaces in order to
+    associated_interfaces: ${6:value}                                      # This is a intent option and checks the operational state of the for given vrf C(name) for associated interfaces  If the 
+    delay: ${7:10}                                                         # Time in seconds to wait before checking for the operational state on remote device 
+    purge: ${8:False}                                                      # Instructs the module to consider the VRF definition absolute   It will remove any previously configured VRFs on the devi
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Configures the state of the VRF definition as it relates to the device operational configuratio
+    route_both: ${10:value}                                                # Adds an export and import list of extended route target communities to the VRF 
+    route_export: ${11:value}                                              # Adds an export list of extended route target communities to the VRF 
+    route_import: ${12:value}                                              # Adds an import list of extended route target communities to the VRF 
+    route_both_ipv4: ${13:value}                                           # Adds an export and import list of extended route target communities in address-family configuration submode to the VRF 
+    route_export_ipv4: ${14:value}                                         # Adds an export list of extended route target communities in address-family configuration submode to the VRF 
+    route_import_ipv4: ${15:value}                                         # Adds an import list of extended route target communities in address-family configuration submode to the VRF 
+    route_both_ipv6: ${16:value}                                           # Adds an export and import list of extended route target communities in address-family configuration submode to the VRF 
+    route_export_ipv6: ${17:value}                                         # Adds an export list of extended route target communities in address-family configuration submode to the VRF 
+    route_import_ipv6: ${18:value}                                         # Adds an import list of extended route target communities in address-family configuration submode to the VRF 
+    authorize: ${19:False}                                                 # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes)  For more infor
+    auth_pass: ${20:value}                                                 # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli) and C(become: yes) with C(become_p
+    provider: ${21:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  For more information please see t

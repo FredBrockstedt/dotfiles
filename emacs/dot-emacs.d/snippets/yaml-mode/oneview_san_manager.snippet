@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Manage OneView SAN Manager resources
+# prefix: oneview_san_manager_snippet
+# key: oneview_san_manager
+# group: ansible
+# --
+
+- name: ${0:Manage OneView SAN Manager resources}
+  oneview_san_manager:                                                     
+    data: ${1:List with SAN Manager properties}                            #
+    state: ${2$$(yas-choose-value '("present" "absent" "connection_information_set"))}# choices: present;absent;connection_information_set  Indicates the desired state for the Uplink Set resource  
+    config: ${3:value}                                                     # Path to a  json configuration file containing the OneView client configuration  The configuration file is optional and w
+    validate_etag: ${4:True}                                               # When the ETag Validation is enabled, the request will be conditionally processed only if the current ETag for the resour

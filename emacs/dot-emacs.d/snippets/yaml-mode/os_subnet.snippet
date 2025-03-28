@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: Add/Remove subnet to an OpenStack network
+# prefix: os_subnet_snippet
+# key: os_subnet
+# group: ansible
+# --
+
+- name: ${0:Add/Remove subnet to an OpenStack network}
+  os_subnet:                                                               
+    name: ${1:The name of the subnet that should be created}               # Although Neutron allows for non-unique subnet names, this module enforces subnet name uniqueness 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Indicate desired state of the resource
+    network_name: ${3:value}                                               # Name of the network to which the subnet should be attached Required when I(state) is 'present'
+    cidr: ${4:value}                                                       # The CIDR representation of the subnet that should be assigned to the subnet  Required when I(state) is 'present' and a s
+    ip_version: ${5:4}                                                     # The IP version of the subnet 4 or 6
+    enable_dhcp: ${6:true}                                                 # Whether DHCP should be enabled for this subnet 
+    gateway_ip: ${7:value}                                                 # The ip that would be assigned to the gateway for this subnet
+    no_gateway_ip: ${8:false}                                              # The gateway IP would not be assigned for this subnet
+    dns_nameservers: ${9:value}                                            # List of DNS nameservers for this subnet 
+    allocation_pool_start: ${10:value}                                     # From the subnet pool the starting address from which the IP should be allocated 
+    allocation_pool_end: ${11:value}                                       # From the subnet pool the last IP that should be assigned to the virtual machines 
+    host_routes: ${12:value}                                               # A list of host route dictionaries for the subnet 
+    ipv6_ra_mode: ${13$$(yas-choose-value '("dhcpv6-stateful" "dhcpv6-stateless" "slaac"))}# choices: dhcpv6-stateful;dhcpv6-stateless;slaac  IPv6 router advertisement mode
+    ipv6_address_mode: ${14$$(yas-choose-value '("dhcpv6-stateful" "dhcpv6-stateless" "slaac"))}# choices: dhcpv6-stateful;dhcpv6-stateless;slaac  IPv6 address mode
+    use_default_subnetpool: ${15:false}                                    # Use the default subnetpool for I(ip_version) to obtain a CIDR 
+    project: ${16:value}                                                   # Project name or ID containing the subnet (name admin-only)
+    availability_zone: ${17:value}                                         # Ignored  Present for backwards compatibility
+    extra_specs: ${18:namespace()}                                         # Dictionary with extra key/value pairs passed to the API
+    cloud: ${19:value}                                                     # Named cloud or cloud config to operate against  If I(cloud) is a string, it references a named cloud config as defined i
+    auth: ${20:value}                                                      # Dictionary containing auth information as needed by the cloud's auth plugin strategy  For the default I(password) plugin
+    auth_type: ${21:value}                                                 # Name of the auth plugin to use  If the cloud uses something other than password authentication, the name of the plugin s
+    region_name: ${22:value}                                               # Name of the region 
+    wait: ${23:True}                                                       # Should ansible wait until the requested resource is complete 
+    timeout: ${24:180}                                                     # How long should ansible wait for the requested resource 
+    api_timeout: ${25:value}                                               # How long should the socket layer wait before timing out for API calls  If this is omitted, nothing will be passed to the
+    validate_certs: ${26:False}                                            # Whether or not SSL API requests should be verified  Before Ansible 2 3 this defaulted to C(yes) 
+    ca_cert: ${27:value}                                                   # A path to a CA Cert bundle that can be used as part of verifying SSL API requests 
+    client_cert: ${28:value}                                               # A path to a client certificate to use as part of the SSL transaction 
+    client_key: ${29:value}                                                # A path to a client key to use as part of the SSL transaction 
+    interface: ${30$$(yas-choose-value '("admin" "internal" "public"))}    # choices: admin;internal;public  Endpoint URL type to fetch from the service catalog 

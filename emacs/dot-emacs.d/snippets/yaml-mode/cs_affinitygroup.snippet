@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: Manages affinity groups on Apache CloudStack based clouds.
+# prefix: cs_affinitygroup_snippet
+# key: cs_affinitygroup
+# group: ansible
+# --
+
+- name: ${0:Manages affinity groups on Apache CloudStack based clouds.}
+  cs_affinitygroup:                                                        
+    name: ${1:Name of the affinity group}                                  #
+    affinity_type: ${2:value}                                              # Type of the affinity group  If not specified, first found affinity type is used 
+    description: ${3:value}                                                # Description of the affinity group 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State of the affinity group 
+    domain: ${5:value}                                                     # Domain the affinity group is related to 
+    account: ${6:value}                                                    # Account the affinity group is related to 
+    project: ${7:value}                                                    # Name of the project the affinity group is related to 
+    poll_async: ${8:True}                                                  # Poll async jobs until job has finished 
+    api_key: ${9:value}                                                    # API key of the CloudStack API  If not given, the C(CLOUDSTACK_KEY) env variable is considered  As the last option, the v
+    api_secret: ${10:value}                                                # Secret key of the CloudStack API  If not set, the C(CLOUDSTACK_SECRET) env variable is considered  As the last option, t
+    api_url: ${11:value}                                                   # URL of the CloudStack API e g  https://cloud example com/client/api  If not given, the C(CLOUDSTACK_ENDPOINT) env variab
+    api_http_method: ${12$$(yas-choose-value '("get" "post"))}             # choices: get;post  HTTP method used to query the API endpoint  If not given, the C(CLOUDSTACK_METHOD) env variable is co
+    api_timeout: ${13:value}                                               # HTTP timeout in seconds  If not given, the C(CLOUDSTACK_TIMEOUT) env variable is considered  As the last option, the val
+    api_region: ${14:cloudstack}                                           # Name of the ini section in the C(cloustack ini) file  If not given, the C(CLOUDSTACK_REGION) env variable is considered 

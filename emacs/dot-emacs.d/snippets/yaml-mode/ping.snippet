@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Try to connect to host, verify a usable python and return C(pong) on success
+# prefix: ping_snippet
+# key: ping
+# group: ansible
+# --
+
+- name: ${0:Try to connect to host, verify a usable python and return C(pong) on success}
+  ping:                                                                    
+    data: ${1:pong}                                                        # Data to return for the C(ping) return value  If this parameter is set to C(crash), the module will cause an exception 

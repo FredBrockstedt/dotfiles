@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: create and delete Network ACLs.
+# prefix: ec2_vpc_nacl_snippet
+# key: c2_vpc_nac
+# group: ansible
+# --
+
+- name: ${0:create and delete Network ACLs.}
+  ec2_vpc_nacl:                                                            
+    name: ${1:value}                                                       # Tagged name identifying a network ACL  One and only one of the I(name) or I(nacl_id) is required 
+    nacl_id: ${2:value}                                                    # NACL id identifying a network ACL  One and only one of the I(name) or I(nacl_id) is required 
+    vpc_id: ${3:value}                                                     # VPC id of the requesting VPC  Required when state present 
+    subnets: ${4:value}                                                    # The list of subnets that should be associated with the network ACL  Must be specified as a list Each subnet can be speci
+    egress: ${5:[]}                                                        # A list of rules for outgoing traffic  Each rule must be specified as a list  Each rule may contain the rule number (inte
+    ingress: ${6:[]}                                                       # List of rules for incoming traffic  Each rule must be specified as a list  Each rule may contain the rule number (intege
+    tags: ${7:value}                                                       # Dictionary of tags to look for and apply when creating a network ACL 
+    state: ${8$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Creates or modifies an existing NACL Deletes a NACL and reassociates subnets to the default NAC
+    debug_botocore_endpoint_logs: ${9:false}                               # Use a botocore endpoint logger to parse the unique (rather than total) "resource:action" API calls made during a task, o
+    ec2_url: ${10:value}                                                   # Url to use to connect to EC2 or your Eucalyptus cloud (by default the module will use EC2 endpoints)  Ignored for module
+    aws_secret_key: ${11:value}                                            # AWS secret key  If not set then the value of the AWS_SECRET_ACCESS_KEY, AWS_SECRET_KEY, or EC2_SECRET_KEY environment va
+    aws_access_key: ${12:value}                                            # AWS access key  If not set then the value of the AWS_ACCESS_KEY_ID, AWS_ACCESS_KEY or EC2_ACCESS_KEY environment variabl
+    security_token: ${13:value}                                            # AWS STS security token  If not set then the value of the AWS_SECURITY_TOKEN or EC2_SECURITY_TOKEN environment variable i
+    validate_certs: ${14:True}                                             # When set to "no", SSL certificates will not be validated for boto versions >= 2 6 0 
+    profile: ${15:value}                                                   # Uses a boto profile  Only works with boto >= 2 24 0 
+    region: ${16:value}                                                    # The AWS region to use  If not specified then the value of the AWS_REGION or EC2_REGION environment variable, if any, is 

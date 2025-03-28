@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: Get service-group objects facts on Check Point over Web Services API
+# prefix: cp_mgmt_service_group_facts_snippet
+# key: cp_mgmt_service_group_fact
+# group: ansible
+# --
+
+- name: ${0:Get service-group objects facts on Check Point over Web Services API}
+  cp_mgmt_service_group_facts:                                             
+    name: ${1:value}                                                       # Object name  This parameter is relevant only for getting a specific object 
+    show_as_ranges: ${2:value}                                             # When true, the service group's matched content is displayed as ranges of port numbers rather than service objects <br />
+    details_level: ${3$$(yas-choose-value '("uid" "standard" "full"))}     # choices: uid;standard;full  The level of detail for some of the fields in the response can vary from showing only the UI
+    limit: ${4:value}                                                      # No more than that many results will be returned  This parameter is relevant only for getting few objects 
+    offset: ${5:value}                                                     # Skip that many results before beginning to return them  This parameter is relevant only for getting few objects 
+    order: ${6:value}                                                      # Sorts results by the given field  By default the results are sorted in the ascending order by name  This parameter is re
+    dereference_group_members: ${7:value}                                  # Indicates whether to dereference "members" field by details level for every object in reply 
+    show_membership: ${8:value}                                            # Indicates whether to calculate and show "groups" field for every object in reply 
+    version: ${9:value}                                                    # Version of checkpoint  If not given one, the latest version taken 

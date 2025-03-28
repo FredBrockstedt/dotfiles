@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: CLI command to create/delete an audit exception
+# prefix: pn_log_audit_exception_snippet
+# key: pn_log_audit_exceptio
+# group: ansible
+# --
+
+- name: ${0:CLI command to create/delete an audit exception}
+  pn_log_audit_exception:                                                  
+    pn_access: ${1$$(yas-choose-value '("any" "read-only" "read-write"))}  # Specify the access type to match exceptions 
+    pn_cliswitch: ${2:value}                                               # Target switch to run the CLI on 
+    pn_audit_type: ${3$$(yas-choose-value '("cli" "shell" "vtysh"))}       # choices: cli;shell;vtysh  Specify the type of audit exception 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  State the action to perform  Use 'present' to create audit-exception and 'absent' to delete aud
+    pn_pattern: ${5:value}                                                 # Specify a regular expression to match exceptions 
+    pn_scope: ${6$$(yas-choose-value '("local" "fabric"))}                 # choices: local;fabric  scope - local or fabric 

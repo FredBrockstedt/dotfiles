@@ -1,0 +1,22 @@
+# -*- mode: snippet -*-
+# name: Query data points from InfluxDB.
+# prefix: influxdb_query_snippet
+# key: fluxdb_query
+# group: ansible
+# --
+
+- name: ${0:Query data points from InfluxDB.}
+  influxdb_query:                                                          
+    query: ${1:Query to be executed}                                       #
+    database_name: ${2:Name of the database}                               #
+    hostname: ${3:localhost}                                               # The hostname or IP address on which InfluxDB server is listening  Since Ansible 2 5, defaulted to localhost 
+    username: ${4:root}                                                    # Username that will be used to authenticate against InfluxDB server  Alias C(login_username) added in Ansible 2 5 
+    password: ${5:root}                                                    # Password that will be used to authenticate against InfluxDB server  Alias C(login_password) added in Ansible 2 5 
+    port: ${6:8086}                                                        # The port on which InfluxDB server is listening
+    validate_certs: ${7:True}                                              # If set to C(no), the SSL certificates will not be validated  This should only set to C(no) used on personally controlled
+    ssl: ${8:value}                                                        # Use https instead of http to connect to InfluxDB server 
+    timeout: ${9:value}                                                    # Number of seconds Requests will wait for client to establish a connection 
+    retries: ${10:3}                                                       # Number of retries client will try before aborting  C(0) indicates try until success 
+    use_udp: ${11:value}                                                   # Use UDP to connect to InfluxDB server 
+    udp_port: ${12:4444}                                                   # UDP port to connect to InfluxDB server 
+    proxies: ${13:value}                                                   # HTTP(S) proxy to use for Requests to connect to InfluxDB server 

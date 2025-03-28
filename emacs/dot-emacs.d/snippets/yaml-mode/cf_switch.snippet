@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Create and remove a bcf switch.
+# prefix: bcf_switch_snippet
+# key: cf_switch
+# group: ansible
+# --
+
+- name: ${0:Create and remove a bcf switch.}
+  bcf_switch:                                                              
+    name: ${1:The name of the switch}                                      #
+    fabric_role: ${2$$(yas-choose-value '("spine" "leaf"))}                # Fabric role of the switch 
+    mac: ${3:The MAC address of the switch}                                #
+    controller: ${4:The controller IP address}                             #
+    leaf_group: ${5:value}                                                 # The leaf group of the switch if the switch is a leaf 
+    state: ${6$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the switch should be present or absent 
+    validate_certs: ${7:True}                                              # If C(false), SSL certificates will not be validated  This should only be used on personally controlled devices using sel
+    access_token: ${8:value}                                               # Big Cloud Fabric access token  If this isn't set then the environment variable C(BIGSWITCH_ACCESS_TOKEN) is used 

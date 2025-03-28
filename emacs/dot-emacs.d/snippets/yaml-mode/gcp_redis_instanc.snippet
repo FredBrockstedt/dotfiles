@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Instance
+# prefix: gcp_redis_instance_snippet
+# key: gcp_redis_instanc
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Instance}
+  gcp_redis_instance:                                                      
+    name: ${1:The ID of the instance or a fully qualified identifier for the instance}#  
+    memory_size_gb: ${2:Redis memory size in GiB}                          #
+    region: ${3:The name of the Redis region of the instance}              #
+    auth_kind: ${4$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    alternative_location_id: ${6:value}                                    # Only applicable to STANDARD_HA tier which protects the instance against zonal failures by provisioning it across two zon
+    authorized_network: ${7:value}                                         # The full name of the Google Compute Engine network to which the instance is connected  If left unspecified, the default 
+    display_name: ${8:value}                                               # An arbitrary and optional user-provided name for the instance 
+    labels: ${9:value}                                                     # Resource labels to represent user provided metadata 
+    redis_configs: ${10:value}                                             # Redis configuration parameters, according to U(http://redis io/topics/config)  Please check Memorystore documentation fo
+    location_id: ${11:value}                                               # The zone where the instance will be provisioned  If not provided, the service will choose a zone for the instance  For S
+    redis_version: ${12:value}                                             # The version of Redis software  If not provided, latest supported version will be used  Currently, the supported values a
+    reserved_ip_range: ${13:value}                                         # The CIDR range of internal addresses that are reserved for this instance  If not provided, the service will choose an un
+    tier: ${14:BASIC}                                                      # The service tier of the instance  Must be one of these values: - BASIC: standalone instance - STANDARD_HA: highly availa
+    project: ${15:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${16:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${17:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${18:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${19:value}                                                    # Array of scopes to be used 
+    env_type: ${20:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

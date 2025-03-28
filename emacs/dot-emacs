@@ -90,6 +90,10 @@
 (straight-use-package 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
 
+;; yasnippet
+(straight-use-package 'yasnippet)
+(straight-use-package 'yasnippet-snippets)
+(yas-global-mode)
 
 ;; open default org-file
 (find-file "~/todo.org")

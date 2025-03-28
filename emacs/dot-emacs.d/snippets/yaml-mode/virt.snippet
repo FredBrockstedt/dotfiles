@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manages virtual machines supported by libvirt
+# prefix: virt_snippet
+# key: virt
+# group: ansible
+# --
+
+- name: ${0:Manages virtual machines supported by libvirt}
+  virt:                                                                    
+    name: ${1:value}                                                       # name of the guest VM being managed  Note that VM must be previously defined with xml  This option is required unless I(c
+    state: ${2$$(yas-choose-value '("destroyed" "paused" "running" "shutdown"))}# choices: destroyed;paused;running;shutdown  Note that there may be some lag for state requests like C(shutdown) sin
+    command: ${3$$(yas-choose-value '("create" "define" "destroy" "freemem" "get_xml" "info" "list_vms" "nodeinfo" "pause" "shutdown" "start" "status" "stop" "undefine" "unpause" "virttype"))}# cho
+    autostart: ${4:value}                                                  # start VM at host startup 
+    uri: ${5:qemu:///system}                                               # libvirt connection uri 
+    xml: ${6:value}                                                        # XML document used with the define command  Must be raw XML content using C(lookup)  XML cannot be reference to a file 

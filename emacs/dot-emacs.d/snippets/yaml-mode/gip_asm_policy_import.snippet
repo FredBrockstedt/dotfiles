@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage BIG-IP ASM policy imports
+# prefix: bigip_asm_policy_import_snippet
+# key: gip_asm_policy_import
+# group: ansible
+# --
+
+- name: ${0:Manage BIG-IP ASM policy imports}
+  bigip_asm_policy_import:                                                 
+    name: ${1:The ASM policy to create or override}                        #
+    inline: ${2:value}                                                     # When specified the ASM policy is created from a provided string  Content needs to be provided in a valid XML format othe
+    source: ${3:value}                                                     # Full path to a policy file to be imported into the BIG-IP ASM  Policy files exported from newer versions of BIG-IP canno
+    force: ${4:False}                                                      # When set to C(yes) any existing policy with the same name will be overwritten by the new import  Works for both inline a
+    partition: ${5:Common}                                                 # Device partition to create policy on 
+    provider: ${6:value}                                                   # A dict object containing connection details 

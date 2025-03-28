@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: Creates a GCP Trigger
+# prefix: gcp_cloudbuild_trigger_snippet
+# key: gcp_cloudbuild_trigger
+# group: ansible
+# --
+
+- name: ${0:Creates a GCP Trigger}
+  gcp_cloudbuild_trigger:                                                  
+    auth_kind: ${1$$(yas-choose-value '("application" "machineaccount" "serviceaccount"))}# The type of credential used 
+    state: ${2$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Whether the given object should exist in GCP
+    id: ${3:value}                                                         # The unique identifier for the trigger 
+    description: ${4:value}                                                # Human-readable description of the trigger 
+    disabled: ${5:value}                                                   # Whether the trigger is disabled or not  If true, the trigger will never result in a build 
+    substitutions: ${6:value}                                              # Substitutions data for Build resource 
+    filename: ${7:value}                                                   # Path, from the source root, to a file whose contents is used for the template  Either a filename or build template must 
+    ignored_files: ${8:value}                                              # ignoredFiles and includedFiles are file glob matches using http://godoc/pkg/path/filepath#Match extended with support fo
+    included_files: ${9:value}                                             # ignoredFiles and includedFiles are file glob matches using http://godoc/pkg/path/filepath#Match extended with support fo
+    trigger_template: ${10:value}                                          # Template describing the types of source changes to trigger a build  Branch and tag names in trigger templates are interp
+    build: ${11:value}                                                     # Contents of the build template  Either a filename or build template must be provided 
+    project: ${12:value}                                                   # The Google Cloud Platform project to use 
+    service_account_contents: ${13:value}                                  # The contents of a Service Account JSON file, either in a dictionary or as a JSON string that represents it 
+    service_account_file: ${14:value}                                      # The path of a Service Account JSON file if serviceaccount is selected as type 
+    service_account_email: ${15:value}                                     # An optional service account email address if machineaccount is selected and the user does not wish to use the default em
+    scopes: ${16:value}                                                    # Array of scopes to be used 
+    env_type: ${17:value}                                                  # Specifies which Ansible environment you're running this module within  This should not be set unless you know what you'r

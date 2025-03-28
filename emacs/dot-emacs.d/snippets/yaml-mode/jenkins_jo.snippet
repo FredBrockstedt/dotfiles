@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Manage jenkins jobs
+# prefix: jenkins_job_snippet
+# key: jenkins_jo
+# group: ansible
+# --
+
+- name: ${0:Manage jenkins jobs}
+  jenkins_job:                                                             
+    name: ${1:Name of the Jenkins job}                                     #
+    config: ${2:value}                                                     # config in XML format  Required if job does not yet exist  Mutually exclusive with C(enabled)  Considered if C(state=pres
+    enabled: ${3:value}                                                    # Whether the job should be enabled or disabled  Mutually exclusive with C(config)  Considered if C(state=present) 
+    password: ${4:value}                                                   # Password to authenticate with the Jenkins server 
+    state: ${5$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Attribute that specifies if the job has to be created or deleted 
+    token: ${6:value}                                                      # API token used to authenticate alternatively to password 
+    url: ${7:http://localhost:8080}                                        # URL where the Jenkins server is accessible 
+    user: ${8:value}                                                       # User to authenticate with the Jenkins server 

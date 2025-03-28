@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Manages static route configuration
+# prefix: nxos_static_route_snippet
+# key: xos_static_rout
+# group: ansible
+# --
+
+- name: ${0:Manages static route configuration}
+  nxos_static_route:                                                       
+    prefix: ${1:Destination prefix of static route}                        #
+    next_hop: ${2:Next hop address or interface of static route}           # If interface, it must be the fully-qualified interface name 
+    vrf: ${3:default}                                                      # VRF for static route 
+    tag: ${4:value}                                                        # Route tag value (numeric) or keyword 'default' 
+    route_name: ${5:value}                                                 # Name of the route or keyword 'default'  Used with the name parameter on the CLI 
+    pref: ${6:value}                                                       # Preference or administrative difference of route (range 1-255) or keyword 'default' 
+    aggregate: ${7:value}                                                  # L i s t   o f   s t a t i c   r o u t e   d e f i n i t i o n s
+    track: ${8:value}                                                      # Track value (range 1 - 512)  Track must already be configured on the device before adding the route 
+    state: ${9$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource 
+    provider: ${10:value}                                                  # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

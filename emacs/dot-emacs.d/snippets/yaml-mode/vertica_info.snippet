@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Gathers Vertica database facts.
+# prefix: vertica_info_snippet
+# key: vertica_info
+# group: ansible
+# --
+
+- name: ${0:Gathers Vertica database facts.}
+  vertica_info:                                                            
+    cluster: ${1:localhost}                                                # Name of the cluster running the schema 
+    port: ${2:5433}                                                        # D a t a b a s e   p o r t   t o   c o n n e c t   t o  
+    db: ${3:value}                                                         # Name of the database running the schema 
+    login_user: ${4:dbadmin}                                               # The username used to authenticate with 
+    login_password: ${5:value}                                             # The password used to authenticate with 

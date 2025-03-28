@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: Manage firmware image sources (firmware:OSource)
+# prefix: aci_firmware_source_snippet
+# key: ci_firmware_sourc
+# group: ansible
+# --
+
+- name: ${0:Manage firmware image sources (firmware:OSource)}
+  aci_firmware_source:                                                     
+    source: ${1:The identifying name for the outside source of images, such as an HTTP or SCP server}#
+    host: ${2:IP Address or hostname of APIC resolvable by Ansible control host}#
+    password: ${3:The password to use for authentication}                  # This option is mutual exclusive with C(private_key)  If C(private_key) is provided too, it will be used instead 
+    private_key: ${4:Either a PEM-formatted private key file or the private key content used for signature-based authentication}# This value also influences the default C(certificate_name) that is 
+    polling_interval: ${5:value}                                           # Polling interval in minutes 
+    url_protocol: ${6$$(yas-choose-value '("http" "local" "scp" "usbkey"))}# choices: http;local;scp;usbkey  The Firmware download protocol 
+    url: ${7:value}                                                        # T h e   f i r m w a r e   U R L   f o r   t h e   i m a g e ( s )   o n   t h e   s o u r c e  
+    url_password: ${8:value}                                               # T h e   F i r m w a r e   p a s s w o r d   o r   k e y   s t r i n g  
+    url_username: ${9:value}                                               # T h e   u s e r n a m e   f o r   t h e   s o u r c e  
+    state: ${10$$(yas-choose-value '("absent" "present" "query"))}         # choices: absent;present;query  Use C(present) or C(absent) for adding or removing  Use C(query) for listing an object or
+    port: ${11:value}                                                      # Port number to be used for REST connection  The default value depends on parameter C(use_ssl) 
+    username: ${12:admin}                                                  # The username to use for authentication 
+    certificate_name: ${13:value}                                          # The X 509 certificate name attached to the APIC AAA user used for signature-based authentication  If a C(private_key) fi
+    output_level: ${14$$(yas-choose-value '("debug" "info" "normal"))}     # choices: debug;info;normal  Influence the output of this ACI module  C(normal) means the standard output, incl  C(curren
+    timeout: ${15:30}                                                      # The socket level timeout in seconds 
+    use_proxy: ${16:True}                                                  # If C(no), it will not use a proxy, even if one is defined in an environment variable on the target hosts 
+    use_ssl: ${17:True}                                                    # If C(no), an HTTP connection will be used instead of the default HTTPS connection 
+    validate_certs: ${18:True}                                             # If C(no), SSL certificates will not be validated  This should only set to C(no) when used on personally controlled sites

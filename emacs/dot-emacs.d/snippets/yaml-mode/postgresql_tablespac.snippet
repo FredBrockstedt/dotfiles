@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Add or remove PostgreSQL tablespaces from remote hosts
+# prefix: postgresql_tablespace_snippet
+# key: postgresql_tablespac
+# group: ansible
+# --
+
+- name: ${0:Add or remove PostgreSQL tablespaces from remote hosts}
+  postgresql_tablespace:                                                   
+    tablespace: ${1:Name of the tablespace to add or remove}               #
+    location: ${2:value}                                                   # Path to the tablespace directory in the file system  Ensure that the location exists and has right privileges 
+    state: ${3$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Tablespace state  I(state=present) implies the tablespace must be created if it doesn't exist  
+    owner: ${4:value}                                                      # Name of the role to set as an owner of the tablespace  If this option is not specified, the tablespace owner is a role t
+    set: ${5:value}                                                        # Dict of tablespace options to set  Supported from PostgreSQL 9 0  For more information see U(https://www postgresql org/
+    rename_to: ${6:value}                                                  # New name of the tablespace  The new name cannot begin with pg_, as such names are reserved for system tablespaces 
+    session_role: ${7:value}                                               # Switch to session_role after connecting  The specified session_role must be a role that the current login_user is a memb
+    db: ${8:value}                                                         # Name of database to connect to and run queries against 
+    login_user: ${9:postgres}                                              # The username used to authenticate with 
+    login_password: ${10:value}                                            # The password used to authenticate with 
+    login_host: ${11:value}                                                # Host running the database 
+    login_unix_socket: ${12:value}                                         # Path to a Unix domain socket for local connections 
+    port: ${13:5432}                                                       # Database port to connect to 
+    ssl_mode: ${14$$(yas-choose-value '("allow" "disable" "prefer" "require" "verify-ca" "verify-full"))}# choices: allow;disable;prefer;require;verify-ca;verify-full  Determines whether or with wh
+    ca_cert: ${15:value}                                                   # Specifies the name of a file containing SSL certificate authority (CA) certificate(s)  If the file exists, the server's 

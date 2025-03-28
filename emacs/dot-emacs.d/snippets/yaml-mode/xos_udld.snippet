@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Manages UDLD global configuration params.
+# prefix: nxos_udld_snippet
+# key: xos_udld
+# group: ansible
+# --
+
+- name: ${0:Manages UDLD global configuration params.}
+  nxos_udld:                                                               
+    aggressive: ${1$$(yas-choose-value '("enabled" "disabled"))}           # choices: enabled;disabled  Toggles aggressive mode 
+    msg_time: ${2:value}                                                   # Message time in seconds for UDLD packets or keyword 'default' 
+    reset: ${3:false}                                                      # Ability to reset all ports shut down by UDLD  'state' parameter cannot be 'absent' when this is present 
+    state: ${4$$(yas-choose-value '("present" "absent"))}                  # choices: present;absent  Manage the state of the resource  When set to 'absent', aggressive and msg_time are set to thei
+    provider: ${5:value}                                                   # B(Deprecated) Starting with Ansible 2 5 we recommend using C(connection: network_cli)  This option is only required if y

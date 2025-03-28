@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: Module for setup of PoolGroupDeploymentPolicy Avi RESTful Object
+# prefix: avi_poolgroupdeploymentpolicy_snippet
+# key: vi_poolgroupdeploymentpolicy
+# group: ansible
+# --
+
+- name: ${0:Module for setup of PoolGroupDeploymentPolicy Avi RESTful Object}
+  avi_poolgroupdeploymentpolicy:                                           
+    name: ${1:The name of the pool group deployment policy}                #
+    state: ${2$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  The state that should be applied on the entity 
+    avi_api_update_method: ${3$$(yas-choose-value '("put" "patch"))}       # choices: put;patch  Default method for object update is HTTP PUT  Setting to patch will override that behavior to use HT
+    avi_api_patch_op: ${4$$(yas-choose-value '("add" "replace" "delete"))} # choices: add;replace;delete  Patch operation to use when using avi_api_update_method as patch 
+    auto_disable_old_prod_pools: ${5:value}                                # It will automatically disable old production pools once there is a new production candidate  Default value when not spec
+    description: ${6:value}                                                # User defined description for the object 
+    evaluation_duration: ${7:value}                                        # Duration of evaluation period for automatic deployment  Allowed values are 60-86400  Default value when not specified in
+    rules: ${8:value}                                                      # List of pgdeploymentrule 
+    scheme: ${9:value}                                                     # Deployment scheme  Enum options - BLUE_GREEN, CANARY  Default value when not specified in API or module is interpreted b
+    target_test_traffic_ratio: ${10:value}                                 # Target traffic ratio before pool is made production  Allowed values are 1-100  Default value when not specified in API o
+    tenant_ref: ${11:value}                                                # It is a reference to an object of type tenant 
+    test_traffic_ratio_rampup: ${12:value}                                 # Ratio of the traffic that is sent to the pool under test  Test ratio of 100 means blue green  Allowed values are 1-100  
+    url: ${13:value}                                                       # Avi controller URL of the object 
+    uuid: ${14:value}                                                      # Uuid of the pool group deployment policy 
+    webhook_ref: ${15:value}                                               # Webhook configured with url that avi controller will pass back information about pool group, old and new pool informatio
+    controller: ${16:}                                                     # IP address or hostname of the controller  The default value is the environment variable C(AVI_CONTROLLER) 
+    username: ${17:}                                                       # Username used for accessing Avi controller  The default value is the environment variable C(AVI_USERNAME) 
+    password: ${18:}                                                       # Password of Avi user in Avi controller  The default value is the environment variable C(AVI_PASSWORD) 
+    tenant: ${19:admin}                                                    # Name of tenant used for all Avi API calls and context of object 
+    tenant_uuid: ${20:}                                                    # UUID of tenant used for all Avi API calls and context of object 
+    api_version: ${{21:16}                                                 #4 4} # not required  Avi API version of to use for Avi API and objects 
+    avi_credentials: ${22:value}                                           # Avi Credentials dictionary which can be used in lieu of enumerating Avi Controller login details 
+    api_context: ${23:value}                                               # Avi API context that includes current session ID and CSRF Token  This allows user to perform single login and re-use the
+    avi_disable_session_cache_as_fact: ${24:value}                         # It disables avi session information to be cached as a fact 

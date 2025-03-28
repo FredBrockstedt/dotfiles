@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: Manage LVM volume groups on AIX
+# prefix: aix_lvg_snippet
+# key: x_lvg
+# group: ansible
+# --
+
+- name: ${0:Manage LVM volume groups on AIX}
+  aix_lvg:                                                                 
+    vg: ${1:The name of the volume group}                                  #
+    force: ${2:False}                                                      # Force volume group creation 
+    pp_size: ${3:value}                                                    # The size of the physical partition in megabytes 
+    pvs: ${4:value}                                                        # List of comma-separated devices to use as physical devices in this volume group  Required when creating or extending (C(
+    state: ${5$$(yas-choose-value '("absent" "present" "varyoff" "varyon"))}# choices: absent;present;varyoff;varyon  Control if the volume group exists and volume group AIX state varyonvg C(varyon
+    vg_type: ${6$$(yas-choose-value '("big" "normal" "scalable"))}         # choices: big;normal;scalable  The type of the volume group 

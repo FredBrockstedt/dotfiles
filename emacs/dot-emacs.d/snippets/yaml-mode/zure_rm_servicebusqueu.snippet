@@ -1,0 +1,42 @@
+# -*- mode: snippet -*-
+# name: Manage Azure Service Bus queue
+# prefix: azure_rm_servicebusqueue_snippet
+# key: zure_rm_servicebusqueu
+# group: ansible
+# --
+
+- name: ${0:Manage Azure Service Bus queue}
+  azure_rm_servicebusqueue:                                                
+    resource_group: ${1:Name of resource group}                            #
+    name: ${2:Name of the queue}                                           #
+    namespace: ${3:Servicebus namespace name}                              # A namespace is a scoping container for all messaging components  Multiple queues and topics can reside within a single n
+    state: ${4$$(yas-choose-value '("absent" "present"))}                  # choices: absent;present  Assert the state of the queue  Use C(present) to create or update and use C(absent) to delete 
+    auto_delete_on_idle_in_seconds: ${5:value}                             # Time idle interval after which a queue is automatically deleted  The minimum duration is 5 minutes 
+    dead_lettering_on_message_expiration: ${6:value}                       # A value that indicates whether a queue has dead letter support when a message expires 
+    default_message_time_to_live_seconds: ${7:value}                       # Default message timespan to live value  This is the duration after which the message expires, starting from when the mes
+    enable_batched_operations: ${8:value}                                  # Value that indicates whether server-side batched operations are enabled 
+    enable_express: ${9:value}                                             # Value that indicates whether Express Entities are enabled  An express topic or queue holds a message in memory temporari
+    enable_partitioning: ${10:value}                                       # A value that indicates whether the topic or queue is to be partitioned across multiple message brokers 
+    forward_dead_lettered_messages_to: ${11:value}                         # Queue or topic name to forward the Dead Letter message for a queue 
+    forward_to: ${12:value}                                                # Queue or topic name to forward the messages for a queue 
+    lock_duration_in_seconds: ${13:value}                                  # Timespan duration of a peek-lock  The amount of time that the message is locked for other receivers  The maximum value f
+    max_delivery_count: ${14:value}                                        # The maximum delivery count  A message is automatically deadlettered after this number of deliveries 
+    max_size_in_mb: ${15:value}                                            # The maximum size of the queue in megabytes, which is the size of memory allocated for the queue 
+    requires_duplicate_detection: ${16:value}                              # A value indicating if this queue or topic requires duplicate detection 
+    duplicate_detection_time_in_seconds: ${17:value}                       # TimeSpan structure that defines the duration of the duplicate detection history 
+    requires_session: ${18:value}                                          # A value that indicates whether the queue supports the concept of sessions 
+    status: ${19$$(yas-choose-value '("active" "disabled" "send_disabled" "receive_disabled"))}# choices: active;disabled;send_disabled;receive_disabled  Status of the entity 
+    ad_user: ${20:value}                                                   # Active Directory username  Use when authenticating with an Active Directory user rather than service principal 
+    password: ${21:value}                                                  # Active Directory user password  Use when authenticating with an Active Directory user rather than service principal 
+    profile: ${22:value}                                                   # Security profile found in ~/ azure/credentials file 
+    subscription_id: ${23:value}                                           # Your Azure subscription Id 
+    client_id: ${24:value}                                                 # Azure client ID  Use when authenticating with a Service Principal 
+    secret: ${25:value}                                                    # Azure client secret  Use when authenticating with a Service Principal 
+    tenant: ${26:value}                                                    # Azure tenant ID  Use when authenticating with a Service Principal 
+    cloud_environment: ${27:AzureCloud}                                    # For cloud environments other than the US public cloud, the environment name (as defined by Azure Python SDK, eg, C(Azure
+    adfs_authority_url: ${28:value}                                        # Azure AD authority url  Use when authenticating with Username/password, and has your own ADFS authority 
+    cert_validation_mode: ${29$$(yas-choose-value '("ignore" "validate"))} # choices: ignore;validate  Controls the certificate validation behavior for Azure endpoints  By default, all modules will
+    auth_source: ${30$$(yas-choose-value '("auto" "cli" "credential_file" "env" "msi"))}# choices: auto;cli;credential_file;env;msi  Controls the source of the credentials to use for authentication
+    api_profile: ${31:latest}                                              # Selects an API profile to use when communicating with Azure services  Default value of C(latest) is appropriate for publ
+    tags: ${32:value}                                                      # Dictionary of string:string pairs to assign as metadata to the object  Metadata tags on the object will be updated with 
+    append_tags: ${33:True}                                                # Use to control if tags field is canonical or just appends to existing tags  When canonical, any tags not found in the ta
