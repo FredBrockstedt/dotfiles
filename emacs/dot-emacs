@@ -42,7 +42,8 @@
 ;; Automatically enable lisp-mode for dot-emacs files
 (add-to-list 'auto-mode-alist '("dot-emacs" . lisp-mode))
 
-;; Package management
+;; Package management with straight.el
+;; see: https://github.com/radian-software/straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -58,6 +59,9 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+;; packages
+(straight-use-package 'ace-window)
 
 ;; open default org-file
 (find-file "~/todo.org")
