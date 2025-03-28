@@ -137,7 +137,15 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-;; TODO: eglot, smartparens
+;; parenthesis
+(straight-use-package 'smartparens)
+(smartparens-global-mode)
+(global-set-key (kbd "M-)") 'sp-unwrap-sexp)
+(global-set-key (kbd "M-(") 'sp-wrap-round)
+(global-set-key (kbd "M-[") 'sp-wrap-square)
+(global-set-key (kbd "M-<dead-diaresis>") 'sp-wrap-mark)
+
+;; TODO: eglot
 
 ;; open default org-file
 (find-file "~/todo.org")
