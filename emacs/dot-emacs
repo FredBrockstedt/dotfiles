@@ -70,7 +70,15 @@
 
 ;; expand-region
 (straight-use-package 'expand-region)
-(global-set-key (kbd "M-SPC") 'er/expand-region) 
+(global-set-key (kbd "M-SPC") 'er/expand-region)
+
+;; emmet mode for HTML
+(straight-use-package 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+(add-hook 'html-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook  'emmet-mode)
+
+
 
 ;; open default org-file
 (find-file "~/todo.org")
