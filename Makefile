@@ -38,7 +38,6 @@ zsh: update_submodules
 
 emacs: update_submodules
 	$(call my_stow)	
-	(cd emacs/dot-emacs.d/extensions/avy && git checkout 0.5.0)
 
 update_submodules:
 	@git submodule update --init --recursive
