@@ -120,6 +120,11 @@
 (straight-use-package 'sudo-edit)
 (global-set-key (kbd "C-c C-r") 'sudo-edit)
 
+;; hcl-mode
+(straight-use-package 'hcl-mode)
+
+
+;; TODO: eglot, smartparens
 
 ;; open default org-file
 (find-file "~/todo.org")
