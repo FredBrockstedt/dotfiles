@@ -68,5 +68,9 @@
 (straight-use-package 'avy)
 (global-set-key (kbd "M-s") 'avy-goto-char)
 
+;; expand-region
+(straight-use-package 'expand-region)
+(global-set-key (kbd "M-SPC") 'er/expand-region) 
+
 ;; open default org-file
 (find-file "~/todo.org")
