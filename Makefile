@@ -20,7 +20,7 @@ endef
 # this is what is run when you call make
 default: git bash emacs vim tmux config
 
-# actually mpv.conf
+# actually mpv and cava
 config:
 	stow --verbose \
 	     --restow \

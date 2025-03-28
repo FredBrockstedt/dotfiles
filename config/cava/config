@@ -1,0 +1,7 @@
+# Freds Dotfiles 2025
+# the full BSD 2-Clause License can be found in the LICENSE file
+
+[color]
+# Colors can be one of seven predefined: black, blue, cyan, green, magenta, red, white, yellow.
+; background = default
+foreground = yellow
