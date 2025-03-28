@@ -116,5 +116,10 @@
 ;; restclient
 (straight-use-package 'restclient)
 
+;; sudo-edit
+(straight-use-package 'sudo-edit)
+(global-set-key (kbd "C-c C-r") 'sudo-edit)
+
+
 ;; open default org-file
 (find-file "~/todo.org")
