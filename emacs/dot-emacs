@@ -110,6 +110,9 @@
 ;; kanban
 (straight-use-package 'kanban)
 
+;; magit
+(straight-use-package 'magit)
+
 
 ;; open default org-file
 (find-file "~/todo.org")
