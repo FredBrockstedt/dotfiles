@@ -103,6 +103,13 @@
 (global-company-mode)
 (global-set-key (kbd "C-c .") 'company-complete)
 
+;; treemacs
+(straight-use-package 'treemacs)
+(global-set-key (kbd "<f8>") 'treemacs-select-window)
+
+;; kanban
+(straight-use-package 'kanban)
+
 
 ;; open default org-file
 (find-file "~/todo.org")
