@@ -60,8 +60,13 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
-;; packages
+;; ace-window
 (straight-use-package 'ace-window)
+(global-set-key (kbd "M-o") 'ace-window)
+
+;; avy - quick cursor movement
+(straight-use-package 'avy)
+(global-set-key (kbd "M-s") 'avy-goto-char)
 
 ;; open default org-file
 (find-file "~/todo.org")
