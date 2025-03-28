@@ -23,16 +23,6 @@
 ;; Spellchecking
 (setenv "DICTIONARY" "de_DE")
 
-;; package repositorie
-(require 'package)
-(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
-
-;; load extensions
-(let ((default-directory (expand-file-name "~/.emacs.d/extensions")))
-  (normal-top-level-add-subdirs-to-load-path))
-
 ;; backups to backup folder
 (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
 
@@ -43,11 +33,6 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; matrix zone
-;;(require 'zone-matrix)
-;;(setq zone-programs [zone-matrix])
-;;(zone-when-idle 300)
-
 ;; ido mode
 (ido-mode t)
 
@@ -57,13 +42,6 @@
 ;; Automatically enable lisp-mode for dot-emacs files
 (add-to-list 'auto-mode-alist '("dot-emacs" . lisp-mode))
 
-;; avy - quick cursor movement
-(require 'avy)
-(global-set-key (kbd "M-s") 'avy-goto-char)
-
-;; ace-window
-(require 'ace-window)
-(global-set-key (kbd "M-o") 'ace-window)
 
 ;; open default org-file
 (find-file "~/todo.org")
