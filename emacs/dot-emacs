@@ -54,6 +54,9 @@
 ;; org-mode
 (global-set-key (kbd "C-c o a") 'org-agenda)
 
+;; Automatically enable lisp-mode for dot-emacs files
+(add-to-list 'auto-mode-alist '("dot-emacs" . lisp-mode))
+
 ;; avy - quick cursor movement
 (require 'avy)
 (global-set-key (kbd "M-s") 'avy-goto-char)
