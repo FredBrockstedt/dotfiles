@@ -41,6 +41,8 @@
 
 ;; org-mode
 (global-set-key (kbd "C-c o a") 'org-agenda)
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 
 ;; Automatically enable lisp-mode for dot-emacs files
 (add-to-list 'auto-mode-alist '("dot-emacs" . lisp-mode))
@@ -123,6 +125,17 @@
 ;; hcl-mode
 (straight-use-package 'hcl-mode)
 
+;; shell-here
+(straight-use-package 'shell-here)
+(define-key (current-global-map) "\C-c!" 'shell-here)
+
+;; smex
+(straight-use-package 'smex) 
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; This is your old M-x.
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; TODO: eglot, smartparens
 
