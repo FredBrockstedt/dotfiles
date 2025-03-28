@@ -95,5 +95,11 @@
 (straight-use-package 'yasnippet-snippets)
 (yas-global-mode)
 
+;; company-mode
+(straight-use-package 'company)
+(global-company-mode)
+(global-set-key (kbd "C-c .") 'company-complete)
+
+
 ;; open default org-file
 (find-file "~/todo.org")
