@@ -15,7 +15,7 @@ define my_stow
 	     "$@"
 endef
 
-.PHONY: default config git bash vim tmux emacs zsh zsh_submodule 
+.PHONY: default config git bash vim tmux emacs zsh zsh_submodule clean
 
 # this is what is run when you call make
 default: git bash emacs vim tmux config
@@ -59,6 +59,11 @@ delete:
 		 ${HOME}/.oh-my-zsh \
 		 ${HOME}/oh-my-zsh
 
+# Test the dotfiles configuration in a container
+# check the file Dockerfile on what system is used
 test:
 	time podman build .
 
+# Clean up old podman images
+clean:
+	podman images prune
