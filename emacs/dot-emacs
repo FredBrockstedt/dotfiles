@@ -113,6 +113,8 @@
 ;; magit
 (straight-use-package 'magit)
 
+;; restclient
+(straight-use-package 'restclient)
 
 ;; open default org-file
 (find-file "~/todo.org")
