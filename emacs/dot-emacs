@@ -147,5 +147,9 @@
 
 ;; TODO: eglot
 
+
+;; Gopher support
+(straight-use-package 'elpher) 
+
 ;; open default org-file
 (find-file "~/todo.org")
