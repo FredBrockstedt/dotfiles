@@ -149,7 +149,10 @@
 
 
 ;; Gopher support
-(straight-use-package 'elpher) 
+(straight-use-package 'elpher)
+
+;; Graphiviz Diagrams
+(straight-use-package 'graphviz-dot-mode)
 
 ;; open default org-file
 (find-file "~/todo.org")
