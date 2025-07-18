@@ -154,5 +154,8 @@
 ;; Graphiviz Diagrams
 (straight-use-package 'graphviz-dot-mode)
 
+;; Dockerfiles
+(straight-use-package 'dockerfile-mode)
+
 ;; open default org-file
 (find-file "~/todo.org")
