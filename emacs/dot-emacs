@@ -39,11 +39,6 @@
 ;; ido mode
 (ido-mode t)
 
-;; org-mode
-(global-set-key (kbd "C-c o a") 'org-agenda)
-(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
-(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
-
 ;; Automatically enable lisp-mode for dot-emacs files
 (add-to-list 'auto-mode-alist '("dot-emacs" . lisp-mode))
 
@@ -64,6 +59,15 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+;; org-mode
+(straight-use-package 'ob-restclient)
+
+(global-set-key (kbd "C-c o a") 'org-agenda)
+
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+(org-babel-do-load-languages 'org-babel-load-languages '((restclient . t)))
 
 ;; ace-window
 (straight-use-package 'ace-window)
