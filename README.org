@@ -40,7 +40,7 @@ Add the following configurations to the dot files
 - [X] tmux
 - [X] git
 - [X] mpv
-- [ ] emacs
+- [X] emacs
 
 * License
 For further information on the terms and conditions of the license, please refer to the LICENSE file provided along side this project.
