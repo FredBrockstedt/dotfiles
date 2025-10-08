@@ -13,7 +13,7 @@ The following software packages are required to setup the dotfiles:
 To setup the dotfiles run
 
 #+begin_src bash
-  git clone https://github.com/FredBrockstedt/dotfiles.git
+  git clone git@github.com:FredBrockstedt/dotfiles.git
   cd dotfiles
   make
 #+end_src
