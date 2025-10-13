@@ -171,6 +171,16 @@
 			:host github
 			:repo "skuro/plantuml-mode"))
 
+;; Enable plantuml-mode for PlantUML files
+(add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode))
+
+;; Configure PlantUML to use java jar file and its localtion
+(setq plantuml-default-exec-mode 'jar)
+(setq plantuml-jar-path "~/plantuml.jar")
+    (setq plantuml-default-exec-mode 'jar)
+(setq plantuml-server-url "localhost")
+
+
 ;; Dockerfiles
 (straight-use-package 'dockerfile-mode)
 
