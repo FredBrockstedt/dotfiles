@@ -149,6 +149,12 @@
 (global-set-key (kbd "M-[") 'sp-wrap-square)
 (global-set-key (kbd "M-<dead-diaresis>") 'sp-wrap-mark)
 
+;; don't expand ' in lisp modes
+(with-eval-after-load 'smartparens
+  (sp-local-pair 'emacs-lisp-mode "'" nil :actions nil)
+  (sp-local-pair 'lisp-mode "'" nil :actions nil)
+  (sp-local-pair 'scheme-mode "'" nil :actions nil))
+
 ;; TODO: eglot
 
 
@@ -157,6 +163,13 @@
 
 ;; Graphiviz Diagrams
 (straight-use-package 'graphviz-dot-mode)
+
+;; PlantUML see:
+;; - https://plantuml.com/
+;(straight-use-package '(plantuml-mode
+;			:type git
+;			:host github
+;			:repo "https://github.com/skuro/plantuml-mode"))
 
 ;; Dockerfiles
 (straight-use-package 'dockerfile-mode)
