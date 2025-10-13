@@ -166,10 +166,10 @@
 
 ;; PlantUML see:
 ;; - https://plantuml.com/
-;(straight-use-package '(plantuml-mode
-;			:type git
-;			:host github
-;			:repo "https://github.com/skuro/plantuml-mode"))
+(straight-use-package '(plantuml-mode
+			:type git
+			:host github
+			:repo "skuro/plantuml-mode"))
 
 ;; Dockerfiles
 (straight-use-package 'dockerfile-mode)
