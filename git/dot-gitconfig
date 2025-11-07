@@ -6,3 +6,7 @@
 # Please adapt and uncomment the following lines:
 name = fred
 email = code@fwbro.de
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
