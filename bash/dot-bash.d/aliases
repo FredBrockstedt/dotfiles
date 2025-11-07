@@ -21,5 +21,5 @@ alias rm="rm -frv"
 alias less="less -r"
 
 # searching
-alias locate="localte -i"
+alias locate="locate -i"
 alias grep="grep --color"
