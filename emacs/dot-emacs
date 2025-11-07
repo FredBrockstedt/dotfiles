@@ -180,6 +180,8 @@
     (setq plantuml-default-exec-mode 'jar)
 (setq plantuml-server-url "localhost")
 
+;; Jinja2 templateing files, used in python and ansible
+(straight-use-package 'jinja2-mode)
 
 ;; Dockerfiles
 (straight-use-package 'dockerfile-mode)
