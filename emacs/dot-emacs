@@ -81,6 +81,11 @@
 
 ;; ace-window - jump from one window to the other by numers
 (straight-use-package 'ace-window)
+
+;; Set custom key bindings for homerow letters
+(setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l ?\;)
+      aw-dispatch-always nil)
+
 (global-set-key (kbd "M-o") 'ace-window)
 
 ;; avy - quick cursor movement
