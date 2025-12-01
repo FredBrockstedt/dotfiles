@@ -36,7 +36,7 @@
 (set-selection-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
-;; ido mode
+;; interactive completion in minibuffer
 (ido-mode t)
 
 ;; Automatically enable lisp-mode for dot-emacs files
@@ -61,6 +61,12 @@
   (load bootstrap-file nil 'nomessage))
 
 ;; org-mode
+;; Note taking and project planing 
+
+;; add the following line to your todo.org file
+;; #+PROPERTY: header-args:shell :results output :async yes :session async-todo
+;; to enable async code execution
+
 (straight-use-package 'org)
 (straight-use-package 'ob-restclient)
 (straight-use-package 'ob-async)
@@ -70,13 +76,10 @@
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((restclient . t)))
-(setq org-babel-default-header-args:python '((:async . "yes")))
-(setq org-babel-default-header-args:shell '((:async . "yes")))
 
 (setq org-confirm-babel-evaluate nil)
 
-
-;; ace-window
+;; ace-window - jump from one window to the other by numers
 (straight-use-package 'ace-window)
 (global-set-key (kbd "M-o") 'ace-window)
 
