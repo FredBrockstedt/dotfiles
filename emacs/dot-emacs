@@ -61,15 +61,20 @@
   (load bootstrap-file nil 'nomessage))
 
 ;; org-mode
+(straight-use-package 'org)
 (straight-use-package 'ob-restclient)
+(straight-use-package 'ob-async)
 
 (global-set-key (kbd "C-c o a") 'org-agenda)
 
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((restclient . t)))
+(setq org-babel-default-header-args:python '((:async . "yes")))
+(setq org-babel-default-header-args:shell '((:async . "yes")))
 
 (setq org-confirm-babel-evaluate nil)
+
 
 ;; ace-window
 (straight-use-package 'ace-window)
