@@ -25,6 +25,12 @@ alias locate="locate -i"
 alias grep="grep --color"
 
 # Git helpers
+# Project status
+alias gs="git status"
+
+# Add stuff to git
+alias ga="git add"
+
 gcp() {
 # gcp: Git Commit and Push
 #
@@ -53,9 +59,6 @@ gcp() {
   git commit -m "$1"
   git push
 }
-
-# Add stuff to git
-alias ga="git add"
 
 # Somebody touched my branch
 alias glr="git pull --rebase"
