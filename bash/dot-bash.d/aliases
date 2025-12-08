@@ -23,3 +23,42 @@ alias less="less -r"
 # searching
 alias locate="locate -i"
 alias grep="grep --color"
+
+# Git helpers
+gcp() {
+# gcp: Git Commit and Push
+#
+# Usage:
+#   gcp "commit message"
+#
+# Description:
+#   Adds all changes in the current repository, commits them with the
+#   provided commit message, and pushes to the current branch's remote.
+#
+# Arguments:
+#   $1: commit message -  The commit message to use for the commit.
+#
+# Notes:
+#   - If no commit message is provided, the function prints usage instructions.
+#     And returns code 1
+#
+# Example:
+#   gcp "Fix bug in user login flow"
+  
+  if [ -z "$1" ]; then
+    echo "Usage: gcp \"commit message\""
+    return 1
+  fi
+
+  git commit -m "$1"
+  git push
+}
+
+# Add stuff to git
+alias ga="git add"
+
+# Somebody touched my branch
+alias glr="git pull --rebase"
+
+# After rebaseing, I get mad messages...
+alias gra="git rebase --abort"
