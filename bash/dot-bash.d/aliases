@@ -18,7 +18,7 @@ alias mv="mv -v"
 alias rm="rm -frv"
 
 # less in color
-alias less="less -r"
+alias less="less -R"
 
 # searching
 alias locate="locate -i"
