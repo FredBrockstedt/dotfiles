@@ -42,6 +42,9 @@
 ;; Automatically enable lisp-mode for dot-emacs files
 (add-to-list 'auto-mode-alist '("dot-emacs" . lisp-mode))
 
+;; I don't like lock files as they trigger my test watcher tools
+(setq create-lockfiles nil)
+
 ;; Package management with straight.el
 ;; see: https://github.com/radian-software/straight.el
 (defvar bootstrap-version)
