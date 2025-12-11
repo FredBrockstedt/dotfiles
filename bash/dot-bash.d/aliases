@@ -6,7 +6,9 @@ alias ls='ls --color=auto'
 alias ll='ls -lAh --color=auto'
 
 # reproduce the open command from macos
-alias open=xdg-open
+if command -v xdg-open; then
+  alias open=xdg-open
+fi
 
 # copying
 alias rsync="rsync --no-i-r"
@@ -27,6 +29,9 @@ alias grep="grep --color"
 # Git helpers
 # Project status
 alias gs="git status"
+
+# Git pull
+alias gp="git pull"
 
 # Add stuff to git
 alias ga="git add"
@@ -61,7 +66,7 @@ gcp() {
 }
 
 # Somebody touched my branch
-alias glr="git pull --rebase"
+alias gpr="git pull --rebase"
 
 # After rebaseing, I get mad messages...
 alias gra="git rebase --abort"
