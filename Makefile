@@ -56,6 +56,19 @@ add_submodules:
 	@git submodule add --force 'https://github.com/ohmyzsh/ohmyzsh.git' zsh/dot-oh-my-zsh 
 	@git submodule update --init --recursive
 
+# Preinstall software on a MacOS system
+#
+# requirements:
+#   - homebrew (package management system)
+#     https://brew.sh/
+#   - Brewfile 
+#
+# Install MacOS software
+macos:
+	@echo "* Installing software with homebrew..."
+	@#brew bundle check
+	@brew bundle install
+
 # Remove files commonly found on a blank install
 delete:
 	@rm -fvr ${HOME}/.bashrc \
