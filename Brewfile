@@ -15,6 +15,7 @@ cask "emacs-app"
 cask "firefox"
 cask "freetube"
 cask "netnewswire"
+cask "discord"
 
 # Utilities
 cask "iterm2"
