@@ -17,10 +17,20 @@ endef
 
 .PHONY: default config git bash vim tmux emacs zsh zsh_submodule clean
 
-# this is what is run when you call make
+# Help Message
+#   see: https://stackoverflow.com/questions/35730218/how-to-automatically-generate-a-makefile-help-command
+#
+# Display help information
+help:
+	@echo "Usage: make <target>"
+	@echo ""
+	@awk '/^#/{c=substr($$0,3);next}c&&/^[[:alpha:]][[:alnum:]_-]+:/{print substr($$1,1,index($$1,":")),c}1{c=0}' $(MAKEFILE_LIST) | column -s: -t
+	@echo ""
+
+# Apply the default configuration
 default: git bash emacs vim tmux config
 
-# actually mpv and cava
+# Stow anything placed in the .config folder of your homedirectory
 config:
 	stow --verbose \
 	     --restow \
@@ -28,7 +38,7 @@ config:
 	     --target ${HOME}/.config \
 	     config
 
-# individual programs
+# Configure the respective application
 git bash vim tmux: 
 	$(call my_stow)
 
@@ -46,7 +56,7 @@ add_submodules:
 	@git submodule add --force 'https://github.com/ohmyzsh/ohmyzsh.git' zsh/dot-oh-my-zsh 
 	@git submodule update --init --recursive
 
-# remove files commonly found on a blank install
+# Remove files commonly found on a blank install
 delete:
 	@rm -fvr ${HOME}/.bashrc \
 	         ${HOME}/.vimrc \
@@ -57,8 +67,7 @@ delete:
 		 ${HOME}/.oh-my-zsh \
 		 ${HOME}/oh-my-zsh
 
-# Test the dotfiles configuration in a container
-# check the file Dockerfile on what system is used
+# Test the dotfiles configuration in a container check the file Dockerfile on what system is used
 test:
 	time podman build .
 
