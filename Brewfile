@@ -15,7 +15,7 @@ cask "emacs-app"
 cask "firefox"
 cask "freetube"
 cask "netnewswire"
-cask "discord"
+#cask "discord"
 
 # Utilities
 cask "iterm2"
@@ -44,6 +44,7 @@ brew "tmux"
 brew "midnight-commander"
 brew "dialog"
 brew "ncdu"
+brew "superfile"
 
 ## Command line programs
 # bash utlities
@@ -79,7 +80,7 @@ brew "git"
 brew "glow"
 brew "jq"
 brew "yq"
-brew "tree-sitter"
+#brew "tree-sitter"
 
 # Python
 brew "uv"
