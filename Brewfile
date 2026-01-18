@@ -15,7 +15,7 @@ cask "emacs-app"
 cask "firefox"
 cask "freetube"
 cask "netnewswire"
-#cask "discord"
+cask "discord"
 
 # Utilities
 cask "iterm2"
@@ -23,6 +23,7 @@ cask "freelens"
 cask "android-file-transfer"
 cask "the-unarchiver"
 cask "turbovnc-viewer"
+cask "simple-comic"
 
 # Music
 cask "deadbeef@nightly"
