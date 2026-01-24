@@ -173,8 +173,9 @@
   (sp-local-pair 'lisp-mode "'" nil :actions nil)
   (sp-local-pair 'scheme-mode "'" nil :actions nil))
 
-;; TODO: eglot
-
+;; eglot - language server support for emacs
+;; python in eglot
+(straight-use-package 'pyvenv)
 
 ;; Gopher support
 (straight-use-package 'elpher)
@@ -201,8 +202,21 @@
 ;; Jinja2 templateing files, used in python and ansible
 (straight-use-package 'jinja2-mode)
 
+
 ;; Dockerfiles
 (straight-use-package 'dockerfile-mode)
 
 ;; open default org-file
 (find-file "~/todo.org")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values '((eval venv-workon "./venv") (eval venv-workon "venv"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
