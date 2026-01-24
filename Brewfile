@@ -102,6 +102,7 @@ brew "k9s"
 brew "kind"
 brew "krew"
 #brew "minikube"
+brew "hadolint"
 
 # Internet / Network
 brew "wget"
