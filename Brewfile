@@ -103,6 +103,7 @@ brew "kind"
 brew "krew"
 #brew "minikube"
 brew "hadolint"
+brew "lazydocker"
 
 # Internet / Network
 brew "wget"
