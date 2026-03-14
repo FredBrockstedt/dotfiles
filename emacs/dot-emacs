@@ -22,6 +22,7 @@
 (windmove-default-keybindings)
 ;; make forward word behave more like vim
 (global-set-key  (kbd "M-f") 'forward-to-word)
+(global-set-key  (kbd "M-b") 'backward-word)
 
 ;; Spellchecking
 (setenv "DICTIONARY" "de_DE")
