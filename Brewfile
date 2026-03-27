@@ -13,7 +13,7 @@ cask "emacs-app"
 
 # Internet related
 cask "firefox"
-cask "freetube"
+#cask "freetube"
 cask "netnewswire"
 cask "discord"
 
