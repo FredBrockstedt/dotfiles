@@ -15,7 +15,8 @@ cask "emacs-app"
 cask "firefox"
 #cask "freetube"
 cask "netnewswire"
-cask "discord"
+#cask "discord"
+cask "signal"
 
 # Utilities
 cask "iterm2"
@@ -46,6 +47,7 @@ brew "midnight-commander"
 brew "dialog"
 brew "ncdu"
 brew "superfile"
+brew "mplayer"
 
 ## Command line programs
 # bash utlities
@@ -59,6 +61,7 @@ brew "pstree"
 brew "pwgen"
 brew "stow"
 brew "tree"
+brew "ddate"
 
 # Security
 brew "clamav"
