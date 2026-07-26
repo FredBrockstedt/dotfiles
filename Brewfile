@@ -30,7 +30,7 @@ cask "simple-comic"
 cask "deadbeef@nightly"
 
 # Office
-cask "openoffice"
+cask "libreoffice"
 
 # Graphics programs
 cask "gimp"
@@ -70,6 +70,7 @@ brew "gpg-tui"
 
 # Video
 brew "ffmpeg"
+brew "mpv"
 
 # Graphics
 brew "figlet"
