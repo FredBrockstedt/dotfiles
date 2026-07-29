@@ -72,14 +72,12 @@
 ;; to enable async code execution
 
 (straight-use-package 'org)
-(straight-use-package 'ob-restclient)
 (straight-use-package 'ob-async)
 
 (global-set-key (kbd "C-c o a") 'org-agenda)
 
 (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
-(org-babel-do-load-languages 'org-babel-load-languages '((restclient . t)))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -138,8 +136,8 @@
 ;; magit
 (straight-use-package 'magit)
 
-;; restclient
-(straight-use-package 'restclient)
+;; verb
+(straight-use-package 'verb)
 
 ;; sudo-edit
 (straight-use-package 'sudo-edit)
