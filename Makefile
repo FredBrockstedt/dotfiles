@@ -78,7 +78,8 @@ delete:
 		 ${HOME}/.zshrc \
 		 ${HOME}/.config/mpv/mpv.conf \
 		 ${HOME}/.oh-my-zsh \
-		 ${HOME}/oh-my-zsh
+		 ${HOME}/oh-my-zsh \
+		 ${HOME}/.inputrc
 
 # Test the dotfiles configuration in a container check the file Dockerfile on what system is used
 test:
