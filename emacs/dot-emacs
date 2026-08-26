@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Freds Dotfiles 2025
 ;; the full BSD 2-Clause License can be found in the LICENSE file
 
@@ -38,7 +40,7 @@
 (prefer-coding-system 'utf-8)
 
 ;; interactive completion in minibuffer
-(ido-mode t)
+(fido-mode t)
 
 ;; Automatically enable lisp-mode for dot-emacs files
 (add-to-list 'auto-mode-alist '("dot-emacs" . lisp-mode))
@@ -149,14 +151,6 @@
 ;; shell-here
 (straight-use-package 'shell-here)
 (define-key (current-global-map) "\C-c!" 'shell-here)
-
-;; smex
-(straight-use-package 'smex) 
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;; This is your old M-x.
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; parenthesis
 (straight-use-package 'smartparens)
