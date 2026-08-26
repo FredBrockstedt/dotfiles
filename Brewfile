@@ -13,10 +13,9 @@ cask "emacs-app"
 
 # Internet related
 cask "firefox"
-#cask "freetube"
 cask "netnewswire"
-#cask "discord"
 cask "signal"
+#cask "freetube"
 
 # Utilities
 cask "iterm2"
@@ -75,7 +74,6 @@ brew "mpv"
 # Graphics
 brew "figlet"
 brew "graphviz"
-#brew "tesseract"
 
 # Texteditors
 #brew "neovim"
@@ -85,7 +83,6 @@ brew "git"
 brew "glow"
 brew "jq"
 brew "yq"
-#brew "tree-sitter"
 
 # Python
 brew "uv"
@@ -105,7 +102,6 @@ brew "helm"
 brew "k9s"
 brew "kind"
 brew "krew"
-#brew "minikube"
 brew "hadolint"
 brew "lazydocker"
 
@@ -124,6 +120,7 @@ brew "markdown"
 # Work related
 #brew "qemu"
 #brew "rhino"
+cask "gcloud-cli"
 
 # Database tools
 brew "sqlite"
