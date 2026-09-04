@@ -121,6 +121,8 @@ brew "markdown"
 #brew "qemu"
 #brew "rhino"
 cask "gcloud-cli"
+brew "sshuttle" 
+brew "freerdp"
 
 # Database tools
 brew "sqlite"
