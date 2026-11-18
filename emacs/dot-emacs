@@ -205,6 +205,9 @@
 (straight-use-package 'transpose-frame)
 (global-set-key  (kbd "C-c t") 'transpose-frame)
 
+;; TI-83 Basic
+(straight-use-package 'basic-mode)
+
 ;; open default org-file
 (find-file "~/todo.org")
 (custom-set-variables
